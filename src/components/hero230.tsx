@@ -177,7 +177,7 @@ const Hero230 = () => {
                   {item.type === "video" ? (
                     <video
                       src={item.src}
-                      className="block h-full w-full object-cover"
+                      className="h-full w-full object-cover"
                       muted
                       playsInline
                       autoPlay
@@ -187,7 +187,7 @@ const Hero230 = () => {
                     <img
                       src={item.src}
                       alt="scroller item"
-                      className="block h-full w-full object-cover"
+                      className="h-full w-full object-cover"
                     />
                   )}
                 </div>

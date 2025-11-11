@@ -43,12 +43,14 @@ const Faq9 = () => {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="bg-muted mb-2 rounded-md border-b-0 px-5 py-2 md:mb-4"
+              className="bg-muted mb-2 rounded-2xl border-b-0 px-5 py-2 md:mb-4 transition-colors hover:bg-card data-[state=open]:bg-card"
             >
-              <AccordionTrigger className="text-left">
+              <AccordionTrigger className="text-left text-lg md:text-xl">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
+              <AccordionContent className="text-muted-foreground">
+                {faq.answer}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
