@@ -65,7 +65,7 @@ const platforms = [
 
 const Stats18 = () => {
   return (
-    <section className="overflow-hidden py-32">
+    <section id="fieson-pdp-ai" className="overflow-hidden py-32">
       <div className="container px-4">
         <div className="mb-12 text-center">
           <p className="bg-muted mb-4 inline-block rounded-full px-2 py-1 text-xs uppercase">
@@ -160,22 +160,21 @@ const Stats18 = () => {
                 </div>
               ))}
             </div>
-
-            {/* Description below stats */}
-            <div className="mx-auto mt-8 max-w-2xl text-center">
-              <p className="text-muted-foreground text-sm md:text-base">
-                Watch how our platform analyzes your product pages across six
-                critical dimensions—from image quality to structured data—giving
-                you a comprehensive score that predicts AI search visibility.
-              </p>
-            </div>
           </div>
         </div>
 
         {/* AI Platforms logos at bottom */}
+        <div className="mx-auto mt-8 max-w-2xl text-center">
+          <p className="text-muted-foreground text-sm md:text-base">
+            Our platform analyzes your product page content for a comprehensive
+            score that predicts AI search visibility. Our Fieson PDP AI then
+            optimises and generates all images, videos and deep text structured
+            for both human conversion and AI search.
+          </p>
+        </div>
         <div className="mx-auto mt-16 max-w-5xl">
           <h3 className="text-muted-foreground mb-8 text-center text-sm font-semibold uppercase tracking-wider">
-            We Optimise Your Product Context For
+            We Optimise Your Product Page Content For
           </h3>
           <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-7">
             {platforms.map((platform) => (

@@ -20,6 +20,8 @@ interface AnimatedBorderButtonProps {
   rounded?: 'md' | 'full';
   asChild?: boolean;
   wrapperClassName?: string;
+  buttonSize?: 'sm' | 'default' | 'lg' | 'icon';
+  fullWidth?: boolean;
 }
 
 export default function AnimatedBorderButton({
@@ -32,6 +34,8 @@ export default function AnimatedBorderButton({
   rounded = 'full',
   asChild = false,
   wrapperClassName,
+  buttonSize = 'lg',
+  fullWidth = true,
 }: AnimatedBorderButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const pathRef = useRef<SVGRectElement>(null);
@@ -81,9 +85,9 @@ export default function AnimatedBorderButton({
       </div>
 
       <Button
-        size="lg"
+        size={buttonSize}
         className={cn(
-          'w-full',
+          fullWidth ? 'w-full' : 'w-auto',
           rounded === 'full' ? 'rounded-full' : 'rounded-md',
           className,
         )}

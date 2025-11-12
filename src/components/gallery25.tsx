@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import React from "react";
+// Button handled via AnimatedBorderButton overlay
+import AnimatedBorderButton from "@/components/animated-border-button";
+import { Play } from "lucide-react";
 
 const Gallery25 = () => {
   const column1Images = [
@@ -133,6 +136,11 @@ const Gallery25 = () => {
   const col2 = [heroVideos[3], ...column2Images.map(toImage)];
   const col4 = [extraVideo, ...column4Images.map(toImage)];
 
+  const handleGenerate = (item: { type: "image" | "video"; src: string }) => {
+    // TODO: wire up to real generation action
+    console.log("Generate clicked:", item);
+  };
+
   return (
     <section className="pb-32">
       <div className="w-full px-4">
@@ -148,7 +156,7 @@ const Gallery25 = () => {
                   delay: index * 0.1,
                 }}
                 key={index}
-                className="bg-muted relative w-full overflow-hidden rounded-2xl"
+                className="group bg-muted relative w-full overflow-hidden rounded-2xl"
                 style={{ height: item.height }}
               >
                 {item.type === "video" ? (
@@ -167,6 +175,16 @@ const Gallery25 = () => {
                     alt={item.alt}
                   />
                 )}
+                <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
+                  <div className="pointer-events-auto">
+                    <AnimatedBorderButton
+                      className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
+                      onClick={() => handleGenerate(item)}
+                    >
+                      Generate <Play />
+                    </AnimatedBorderButton>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -182,7 +200,7 @@ const Gallery25 = () => {
                   delay: index * 0.1,
                 }}
                 key={index}
-                className="bg-muted relative w-full overflow-hidden rounded-2xl"
+                className="group bg-muted relative w-full overflow-hidden rounded-2xl"
                 style={{ height: item.height }}
               >
                 {item.type === "video" ? (
@@ -201,6 +219,16 @@ const Gallery25 = () => {
                     alt={item.alt}
                   />
                 )}
+                <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
+                  <div className="pointer-events-auto">
+                    <AnimatedBorderButton
+                      className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
+                      onClick={() => handleGenerate(item)}
+                    >
+                      Generate <Play />
+                    </AnimatedBorderButton>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -216,7 +244,7 @@ const Gallery25 = () => {
                   delay: index * 0.1,
                 }}
                 key={index}
-                className="bg-muted relative w-full overflow-hidden rounded-2xl"
+                className="group bg-muted relative w-full overflow-hidden rounded-2xl"
                 style={{ height: item.height }}
               >
                 {item.type === "video" ? (
@@ -235,6 +263,16 @@ const Gallery25 = () => {
                     alt={item.alt}
                   />
                 )}
+                <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
+                  <div className="pointer-events-auto">
+                    <AnimatedBorderButton
+                      className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
+                      onClick={() => handleGenerate(item)}
+                    >
+                      Generate <Play />
+                    </AnimatedBorderButton>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -250,7 +288,7 @@ const Gallery25 = () => {
                   delay: index * 0.1,
                 }}
                 key={index}
-                className="bg-muted relative w-full overflow-hidden rounded-2xl"
+                className="group bg-muted relative w-full overflow-hidden rounded-2xl"
                 style={{ height: item.height }}
               >
                 {item.type === "video" ? (
@@ -269,6 +307,16 @@ const Gallery25 = () => {
                     alt={item.alt}
                   />
                 )}
+                <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
+                  <div className="pointer-events-auto">
+                    <AnimatedBorderButton
+                      className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
+                      onClick={() => handleGenerate(item)}
+                    >
+                      Generate <Play />
+                    </AnimatedBorderButton>
+                  </div>
+                </div>
               </motion.div>
             ))}
             {/* Decorative spacer removed to keep tight masonry spacing */}
@@ -285,7 +333,7 @@ const Gallery25 = () => {
                   delay: index * 0.1,
                 }}
                 key={index}
-                className="bg-muted relative w-full overflow-hidden rounded-2xl"
+                className="group bg-muted relative w-full overflow-hidden rounded-2xl"
                 style={{ height: item.height }}
               >
                 {item.type === "video" ? (
@@ -304,6 +352,16 @@ const Gallery25 = () => {
                     alt={item.alt}
                   />
                 )}
+                <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
+                  <div className="pointer-events-auto">
+                    <AnimatedBorderButton
+                      className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
+                      onClick={() => handleGenerate(item)}
+                    >
+                      Generate <Play />
+                    </AnimatedBorderButton>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>

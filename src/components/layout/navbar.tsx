@@ -46,7 +46,100 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
-// AI Solutions data
+// AI Media Studio sections
+const aiMediaStudioSections = [
+  {
+    id: "image",
+    title: "Image",
+    description: "AI-powered product image generation and enhancement.",
+    href: "#ai-media-studio",
+    icon: Camera,
+    features: [
+      { title: "AI Image Generator", href: "#ai-media-studio" },
+      {
+        title: "Image Optimisation for AI & Conversion",
+        href: "#ai-media-studio",
+      },
+      { title: "Image Editor & Upscaler", href: "#ai-media-studio" },
+    ],
+    imageTypes: [
+      { title: "Product detailed shots", href: "#ai-media-studio" },
+      { title: "Packshots", href: "#ai-media-studio" },
+      { title: "Lifestyle images", href: "#ai-media-studio" },
+      { title: "Product in use images", href: "#ai-media-studio" },
+      { title: "Painpoint images", href: "#ai-media-studio" },
+      { title: "Benefits images", href: "#ai-media-studio" },
+    ],
+  },
+  {
+    id: "video",
+    title: "Video",
+    description: "Bring products to life with automated video creation.",
+    href: "#ai-media-studio",
+    icon: Play,
+    features: [
+      { title: "AI Video Generator", href: "#ai-media-studio" },
+      {
+        title: "Video Optimisation for AI & Conversion",
+        href: "#ai-media-studio",
+      },
+    ],
+    videoTypes: [
+      { title: "Product 360° Spins", href: "#ai-media-studio" },
+      { title: "Product Demonstrations", href: "#ai-media-studio" },
+      { title: "Lifestyle Videos", href: "#ai-media-studio" },
+      { title: "Product in Use Videos", href: "#ai-media-studio" },
+      { title: "AR Previews", href: "#ai-media-studio" },
+      { title: "Unboxing Videos", href: "#ai-media-studio" },
+    ],
+  },
+  {
+    id: "ai-search-content",
+    title: "AI Search Content",
+    description:
+      "Ensure your products are found in ChatGPT, Perplexity, and other AI search engines.",
+    href: "#ai-media-studio",
+    icon: Search,
+    contentTypes: [
+      { title: "Conversion optimised title", href: "#ai-media-studio" },
+      { title: "Description", href: "#ai-media-studio" },
+      { title: "Product benefits", href: "#ai-media-studio" },
+      { title: "Why this product", href: "#ai-media-studio" },
+      { title: "Product features", href: "#ai-media-studio" },
+      { title: "Product use cases", href: "#ai-media-studio" },
+      { title: "For who is this product", href: "#ai-media-studio" },
+      { title: "FAQ based on actual prompts", href: "#ai-media-studio" },
+      { title: "LLM optimised", href: "#ai-media-studio" },
+    ],
+  },
+];
+
+// Fieson PDP AI features
+const fiesonPdpFeatures = [
+  {
+    id: "analysis",
+    title: "Content Analysis",
+    description: "Comprehensive scoring across 6 critical dimensions.",
+    href: "#fieson-pdp-ai",
+    icon: Lightbulb,
+  },
+  {
+    id: "optimization",
+    title: "AI Optimization",
+    description: "Automated optimization for AI search visibility.",
+    href: "#fieson-pdp-ai",
+    icon: Sparkles,
+  },
+  {
+    id: "generation",
+    title: "Media Generation",
+    description: "Generate all images, videos and structured content.",
+    href: "#fieson-pdp-ai",
+    icon: Wand2,
+  },
+];
+
+// Archive - AI Solutions data (moved from main nav)
 const aiSolutions = [
   {
     id: "solution-1",
@@ -379,7 +472,123 @@ const topicGroups = [
   },
 ];
 
-// Solutions Menu Component
+// AI Media Studio Menu Component
+const AiMediaStudioMenu = () => (
+  <div className="grid gap-8 md:grid-cols-3">
+    {aiMediaStudioSections.map((section) => (
+      <div key={section.id} className="border-border rounded-md border p-5">
+        <div className="border-border border-b pb-4">
+          <a href={section.href} className="group flex flex-col text-left">
+            <div className="mb-3 flex items-center gap-3">
+              <div className="bg-primary text-primary-foreground flex aspect-square w-10 shrink-0 items-center justify-center rounded-lg">
+                <section.icon className="size-5" />
+              </div>
+              <div className="flex items-center">
+                <strong className="text-sm font-medium">{section.title}</strong>
+                <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </div>
+            <p className="text-muted-foreground mt-1 text-xs">
+              {section.description}
+            </p>
+          </a>
+        </div>
+        <menu className="mt-6 grid gap-y-4">
+          {section.features && (
+            <>
+              {section.features.map((feature, idx) => (
+                <NavigationMenuLink
+                  key={idx}
+                  href={feature.href}
+                  className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
+                >
+                  <div className="flex-1 text-sm font-medium">
+                    {feature.title}
+                  </div>
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                </NavigationMenuLink>
+              ))}
+              {section.imageTypes && (
+                <div className="border-border mt-4 border-t pt-4">
+                  <p className="text-muted-foreground mb-3 text-xs font-medium uppercase tracking-wider">
+                    Image Types
+                  </p>
+                  {section.imageTypes.map((type, idx) => (
+                    <NavigationMenuLink
+                      key={idx}
+                      href={type.href}
+                      className="text-foreground/70 hover:text-foreground group mb-2 flex flex-row items-center justify-between text-left text-xs"
+                    >
+                      <div className="flex-1">{type.title}</div>
+                      <ArrowRight className="size-3 transition-transform group-hover:translate-x-1 lg:hidden" />
+                    </NavigationMenuLink>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+          {section.videoTypes && (
+            <>
+              {section.videoTypes.map((type, idx) => (
+                <NavigationMenuLink
+                  key={idx}
+                  href={type.href}
+                  className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
+                >
+                  <div className="flex-1 text-sm font-medium">{type.title}</div>
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                </NavigationMenuLink>
+              ))}
+            </>
+          )}
+          {section.contentTypes && (
+            <>
+              {section.contentTypes.map((type, idx) => (
+                <NavigationMenuLink
+                  key={idx}
+                  href={type.href}
+                  className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
+                >
+                  <div className="flex-1 text-sm font-medium">{type.title}</div>
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                </NavigationMenuLink>
+              ))}
+            </>
+          )}
+        </menu>
+      </div>
+    ))}
+  </div>
+);
+
+// Fieson PDP AI Menu Component
+const FiesonPdpAiMenu = () => (
+  <div className="grid gap-6 md:grid-cols-3">
+    {fiesonPdpFeatures.map((feature) => (
+      <NavigationMenuLink
+        key={feature.id}
+        href={feature.href}
+        className="border-border bg-accent lg:bg-background group flex flex-col space-y-4 rounded-md border p-6 text-left transition-all hover:shadow-md"
+      >
+        <div className="bg-primary text-primary-foreground flex aspect-square w-12 shrink-0 items-center justify-center rounded-lg">
+          <feature.icon className="size-6" />
+        </div>
+        <div>
+          <h3 className="text-foreground mb-2 text-base font-semibold">
+            {feature.title}
+          </h3>
+          <p className="text-muted-foreground text-sm">{feature.description}</p>
+        </div>
+        <div className="flex items-center text-xs font-medium">
+          Learn more
+          <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
+        </div>
+      </NavigationMenuLink>
+    ))}
+  </div>
+);
+
+// Archive - Solutions Menu Component (moved from main nav)
 const SolutionsMenu = () => (
   <div className="grid gap-8 sm:grid-cols-2">
     <a
@@ -766,26 +975,51 @@ const ResourcesMenu = () => (
   </div>
 );
 
+// Archive Menu Component - combines all old menu items
+const ArchiveMenu = () => (
+  <div className="space-y-8">
+    <div>
+      <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
+        Solutions Archive
+      </h3>
+      <SolutionsMenu />
+    </div>
+    <div className="border-t pt-8">
+      <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
+        Products Archive
+      </h3>
+      <ProductsMenu />
+    </div>
+    <div className="border-t pt-8">
+      <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
+        Company Archive
+      </h3>
+      <CompanyMenu />
+    </div>
+    <div className="border-t pt-8">
+      <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
+        Resources Archive
+      </h3>
+      <ResourcesMenu />
+    </div>
+  </div>
+);
+
 const navigationMenuItems = [
   {
-    key: "solutions",
-    label: "Solutions",
-    component: SolutionsMenu,
+    key: "ai-media-studio",
+    label: "AI Media Studio",
+    component: AiMediaStudioMenu,
   },
   {
-    key: "products",
-    label: "Products",
-    component: ProductsMenu,
+    key: "fieson-pdp-ai",
+    label: "Fieson PDP AI",
+    component: FiesonPdpAiMenu,
   },
   {
-    key: "company",
-    label: "Company",
-    component: CompanyMenu,
-  },
-  {
-    key: "resources",
-    label: "Resources",
-    component: ResourcesMenu,
+    key: "archive",
+    label: "Archive",
+    component: ArchiveMenu,
   },
 ] as const;
 
@@ -821,12 +1055,20 @@ export default function Navbar() {
               </NavigationMenuList>
             </NavigationMenu>
 
-            {/* Contact Link */}
+            {/* Pricing Link */}
             <Link
-              href="/contact"
+              href="/pricing"
               className="text-sm transition-colors hover:text-primary"
             >
-              Contact
+              Pricing
+            </Link>
+
+            {/* Demo Link */}
+            <Link
+              href="/demo"
+              className="text-sm transition-colors hover:text-primary"
+            >
+              Demo
             </Link>
           </div>
 
@@ -890,16 +1132,24 @@ export default function Navbar() {
                 ))}
 
                 <Link
-                  href="/contact"
+                  href="/pricing"
                   className="flex w-full items-center justify-between rounded-lg border border-border p-4 text-left transition-colors hover:bg-accent"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <span className="font-medium">Contact</span>
+                  <span className="font-medium">Pricing</span>
+                </Link>
+
+                <Link
+                  href="/demo"
+                  className="flex w-full items-center justify-between rounded-lg border border-border p-4 text-left transition-colors hover:bg-accent"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="font-medium">Demo</span>
                 </Link>
 
                 <div className="pt-4">
                   <Button asChild className="w-full">
-                    <Link href="/archive/pricing">Get Started</Link>
+                    <Link href="/pricing">Get Started</Link>
                   </Button>
                 </div>
               </div>

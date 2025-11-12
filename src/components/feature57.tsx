@@ -63,7 +63,7 @@ const Feature57 = () => {
   }, [carouselApi]);
 
   return (
-    <section className="py-12 md:py-24 lg:py-32">
+    <section id="ai-media-studio" className="py-12 md:py-24 lg:py-32">
       <div className="container mx-auto px-4">
         <div className="mb-8 text-center md:mb-12">
           <Badge variant="outline" className="mb-3">
