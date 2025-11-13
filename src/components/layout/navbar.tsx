@@ -2,6 +2,7 @@
 
 import { Fragment, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import {
   AppWindow,
@@ -302,24 +303,21 @@ const productCategories = [
         title: "AI Studio Pro",
         description: "Professional AI media creation suite.",
         href: "#",
-        image:
-          "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg",
+        image: "/images/placeholders/placeholder-1.svg",
       },
       {
         id: "product-2",
         title: "PDP Optimizer",
         description: "Optimize product detail pages for AI search.",
         href: "#",
-        image:
-          "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-2.svg",
+        image: "/images/placeholders/placeholder-2.svg",
       },
       {
         id: "product-3",
         title: "Visual Generator",
         description: "Generate product visuals at scale.",
         href: "#",
-        image:
-          "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-3.svg",
+        image: "/images/placeholders/placeholder-3.svg",
       },
     ],
   },
@@ -331,16 +329,14 @@ const productCategories = [
         title: "Team Collaboration",
         description: "Collaborate on visual content with your team.",
         href: "#",
-        image:
-          "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-4.svg",
+        image: "/images/placeholders/placeholder-4.svg",
       },
       {
         id: "product-5",
         title: "Brand Management",
         description: "Maintain brand consistency across all visuals.",
         href: "#",
-        image:
-          "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-5.svg",
+        image: "/images/placeholders/placeholder-5.svg",
       },
     ],
   },
@@ -609,9 +605,11 @@ const SolutionsMenu = () => (
           </p>
         </div>
         <div className="aspect-2/1 relative overflow-clip rounded-t pl-6 lg:max-w-64 lg:pl-0 xl:max-w-96">
-          <img
-            src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg"
+          <Image
+            src="/images/placeholders/placeholder-1.svg"
             alt="Fieson AI Solutions"
+            width={384}
+            height={192}
             className="aspect-2/1 h-full w-full translate-y-px object-cover object-center"
           />
         </div>
@@ -685,9 +683,11 @@ const ProductsMenu = () => (
       >
         <div className="relative z-10 flex w-full flex-col text-left">
           <div className="aspect-2/1 relative flex max-h-[11rem] w-full flex-1 justify-center">
-            <img
-              src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-2.svg"
+            <Image
+              src="/images/placeholders/placeholder-2.svg"
               alt="Enterprise Solutions"
+              width={600}
+              height={300}
               className="h-full w-full object-cover object-center"
             />
           </div>
@@ -794,9 +794,11 @@ const CompanyMenu = () => (
         >
           <div className="relative z-10 flex w-full flex-col-reverse text-left lg:flex-col">
             <div className="aspect-4/3 relative flex max-h-[18rem] w-full flex-1 justify-center">
-              <img
-                src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-3.svg"
+              <Image
+                src="/images/placeholders/placeholder-3.svg"
                 alt="Enterprise Solutions"
+                width={600}
+                height={450}
                 className="h-full w-full object-cover object-center"
               />
             </div>
@@ -905,9 +907,11 @@ const ResourcesMenu = () => (
             </p>
           </div>
           <div className="absolute inset-0">
-            <img
-              src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-4.svg"
+            <Image
+              src="/images/placeholders/placeholder-4.svg"
               alt="Resource Center"
+              width={800}
+              height={600}
               className="h-full w-full object-cover object-center invert"
             />
           </div>
@@ -978,7 +982,59 @@ const ResourcesMenu = () => (
 // Archive Menu Component - combines all old menu items
 const ArchiveMenu = () => (
   <div className="space-y-8">
+    {/* Direct Links to Original Sonic Pages */}
     <div>
+      <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
+        Original Pages
+      </h3>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Link
+          href="/archive/about"
+          className="hover:bg-accent flex items-center gap-3 rounded-lg border border-border p-3 transition-colors"
+        >
+          <div className="flex flex-col">
+            <span className="font-medium">About</span>
+            <span className="text-muted-foreground text-xs">
+              Company information
+            </span>
+          </div>
+        </Link>
+        <Link
+          href="/archive/pricing"
+          className="hover:bg-accent flex items-center gap-3 rounded-lg border border-border p-3 transition-colors"
+        >
+          <div className="flex flex-col">
+            <span className="font-medium">Pricing</span>
+            <span className="text-muted-foreground text-xs">
+              Plans and pricing
+            </span>
+          </div>
+        </Link>
+        <Link
+          href="/archive/product"
+          className="hover:bg-accent flex items-center gap-3 rounded-lg border border-border p-3 transition-colors"
+        >
+          <div className="flex flex-col">
+            <span className="font-medium">Product</span>
+            <span className="text-muted-foreground text-xs">
+              Product details
+            </span>
+          </div>
+        </Link>
+        <Link
+          href="/archive/specifications"
+          className="hover:bg-accent flex items-center gap-3 rounded-lg border border-border p-3 transition-colors"
+        >
+          <div className="flex flex-col">
+            <span className="font-medium">Specifications</span>
+            <span className="text-muted-foreground text-xs">
+              Technical specs
+            </span>
+          </div>
+        </Link>
+      </div>
+    </div>
+    <div className="border-t pt-8">
       <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
         Solutions Archive
       </h3>

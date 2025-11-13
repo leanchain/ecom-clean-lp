@@ -4,6 +4,7 @@ import AutoScroll from "embla-carousel-auto-scroll";
 import Autoplay from "embla-carousel-autoplay";
 import { ArrowRight } from "lucide-react";
 import React, { useMemo } from "react";
+import Image from "next/image";
 
 import AnimatedBorderButton from "@/components/animated-border-button";
 import { Button } from "@/components/ui/button";
@@ -15,75 +16,101 @@ import {
 
 const Hero230 = () => {
   const media = [
-    // Images
+    // Images - now using local paths
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/PkU3Gw8pAzmi2niiMrnBcHuu8I.png",
+      type: "image" as const,
+      src: "/images/hero/hero-1.png",
+      width: 800,
+      height: 600,
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/IIwrTUEKmVA8Bc0vqQYJIoYqps.jpg",
+      type: "image" as const,
+      src: "/images/hero/hero-2.jpg",
+      width: 800,
+      height: 600,
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/tAX01Ow9zlh8EUCDGAfh3hpdQ0.png",
+      type: "image" as const,
+      src: "/images/hero/hero-3.png",
+      width: 800,
+      height: 600,
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/qwVnKblygARf7tiZx5lUDJWpY.png",
+      type: "image" as const,
+      src: "/images/hero/hero-4.png",
+      width: 800,
+      height: 600,
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/4ff2fkZLdJJzmP8U0NhfBfndxk.png",
+      type: "image" as const,
+      src: "/images/hero/hero-5.png",
+      width: 800,
+      height: 600,
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/Sl9EJQTfoycU8fTKPQzTCSt7wI.jpg",
+      type: "image" as const,
+      src: "/images/hero/hero-6.jpg",
+      width: 800,
+      height: 600,
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/D9TgLVUKJBPyEFgeH5cU1lj9W3A.jpeg",
+      type: "image" as const,
+      src: "/images/hero/hero-7.jpeg",
+      width: 800,
+      height: 600,
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/A3YTpd3ihmlKdXxeXm0pBEueA.jpg",
+      type: "image" as const,
+      src: "/images/hero/hero-8.jpg",
+      width: 800,
+      height: 600,
     },
     {
-      type: "video",
-      src: "https://cdn-front.freepik.com/home/anon-rvmp/features/designs/mockup-logo-hover.mp4",
+      type: "video" as const,
+      src: "/videos/hero/hero-video-1.mp4",
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/Tw5d4QXO8KrpmBh9B9bEy8oWm1g.jpg",
+      type: "image" as const,
+      src: "/images/hero/hero-9.jpg",
+      width: 800,
+      height: 600,
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/jTk7xlHHF1IGEJbjQzmPMpmxz84.jpeg",
+      type: "image" as const,
+      src: "/images/hero/hero-10.jpeg",
+      width: 800,
+      height: 600,
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/IF4Acwwh9jwUUCkAQHXQyyXDiGM.jpeg",
+      type: "image" as const,
+      src: "/images/hero/hero-11.jpeg",
+      width: 800,
+      height: 600,
     },
     {
-      type: "image",
-      src: "https://framerusercontent.com/images/07lRVxK2iyJbSLDBNZxgTnhtlk.jpeg",
+      type: "image" as const,
+      src: "/images/hero/hero-12.jpeg",
+      width: 800,
+      height: 600,
     },
-    // Videos (replacing a few previous duplicates/images for variety)
+    // Videos
     {
-      type: "video",
-      src: "https://framerusercontent.com/assets/XX4yEVUD0cQvRpu54Cu7ZwJwGZs.mp4",
-    },
-    {
-      type: "image",
-      src: "https://framerusercontent.com/images/grEtdsKRFf8M8oKPm7RzOw0uAfg.jpg",
+      type: "video" as const,
+      src: "/videos/hero/hero-video-2.mp4",
     },
     {
-      type: "video",
-      src: "https://res.papir.cc/assets/v/nano_spinning_fall_0509.mp4",
+      type: "image" as const,
+      src: "/images/hero/hero-13.jpg",
+      width: 800,
+      height: 600,
     },
     {
-      type: "video",
-      src: "https://framerusercontent.com/assets/Vb7xAqRZpCMTPZp1kkCLENR7ooI.mp4",
+      type: "video" as const,
+      src: "/videos/hero/hero-video-3.mp4",
+    },
+    {
+      type: "video" as const,
+      src: "/videos/hero/hero-video-4.mp4",
     },
   ] as const;
 
@@ -148,7 +175,7 @@ const Hero230 = () => {
           Flexible Plan customized for you
         </Button> */}
         <h1 className="font-heading text-foreground max-w-3xl text-4xl md:text-5xl">
-          AI Media Studio for Product Detail Pages Optimised for AI Search.
+          Optimise your Product Page Content for AI search & Conversion.
         </h1>
         <p className="text-muted-foreground/80 mt-3 max-w-xl">
           Create scroll-stopping on-brand product visuals and content to ensure
@@ -184,10 +211,13 @@ const Hero230 = () => {
                       loop
                     />
                   ) : (
-                    <img
+                    <Image
                       src={item.src}
-                      alt="scroller item"
+                      alt="Product showcase"
+                      width={item.width}
+                      height={item.height}
                       className="h-full w-full object-cover"
+                      priority={index < 3} // Priority for first 3 images
                     />
                   )}
                 </div>
@@ -215,9 +245,11 @@ const Hero230 = () => {
                   className="h-15 lg:basis-1/9 relative mr-6 flex basis-1/2 justify-center pl-0 opacity-30 sm:basis-1/4 md:basis-1/3"
                 >
                   <div className="flex flex-col items-center justify-center">
-                    <img
+                    <Image
                       src={logo.image}
                       alt={logo.description}
+                      width={125}
+                      height={24}
                       className={logo.className}
                     />
                   </div>

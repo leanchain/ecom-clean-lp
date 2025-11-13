@@ -19,8 +19,7 @@ const LIST: Array<CardData> = [
   {
     title: "TechCorp's Quantum Leap in AI",
     link: "#",
-    background:
-      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/simone-hutsch-5oYbG-sEImY-unsplash.jpg",
+    background: "/images/case-studies/case-study-1.jpg",
     stats: [
       {
         number: "30%",
@@ -31,8 +30,7 @@ const LIST: Array<CardData> = [
   {
     title: "GreenTech's Path to Carbon Neutrality by 2025",
     link: "#",
-    background:
-      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/simone-hutsch-o9F8dRoSucM-unsplash.jpg",
+    background: "/images/case-studies/case-study-2.jpg",
     stats: [
       {
         number: "50%",
@@ -43,8 +41,7 @@ const LIST: Array<CardData> = [
   {
     title: "FinServe's Blockchain Security Revolution",
     link: "#",
-    background:
-      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/simone-hutsch-K1W9OjEgacI-unsplash.jpg",
+    background: "/images/case-studies/case-study-3.jpg",
     stats: [
       {
         number: "60%",
@@ -55,8 +52,7 @@ const LIST: Array<CardData> = [
   {
     title: "EduWorld's VR Learning Transformation",
     link: "#",
-    background:
-      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/simone-hutsch-gDmVqxZt1hg-unsplash.jpg",
+    background: "/images/case-studies/case-study-4.jpg",
     stats: [
       {
         number: "80%",
@@ -67,8 +63,7 @@ const LIST: Array<CardData> = [
   {
     title: "HealthPlus's Telemedicine Innovation",
     link: "#",
-    background:
-      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/simone-hutsch-sutfgh5DNIU-unsplash.jpg",
+    background: "/images/case-studies/case-study-5.jpg",
     stats: [
       {
         number: "25%",
@@ -79,8 +74,7 @@ const LIST: Array<CardData> = [
   {
     title: "Ecolands's Sustainable Land Development",
     link: "#",
-    background:
-      "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/simone-hutsch-ZXLGP2Qh3Mo-unsplash.jpg",
+    background: "/images/case-studies/case-study-6.jpg",
     stats: [
       {
         number: "30%",
@@ -95,7 +89,7 @@ const Card = ({ link, background, title, stats }: CardData) => {
     <a
       href={link}
       style={{ backgroundImage: `url(${background})` }}
-      className="min-h-auto relative w-full overflow-hidden rounded-[.5rem] bg-black/80 bg-cover bg-center bg-no-repeat p-5 transition-all duration-300 before:absolute before:left-0 before:top-0 before:z-10 before:block before:size-full before:bg-black/50 before:transition-all before:duration-300 before:content-[] hover:before:bg-black/30 sm:aspect-square md:aspect-auto md:min-h-[30rem] md:max-w-[30rem]"
+      className="min-h-auto relative w-full overflow-hidden rounded-3xl bg-black/80 bg-cover bg-center bg-no-repeat p-5 transition-all duration-300 before:absolute before:left-0 before:top-0 before:z-10 before:block before:size-full before:bg-black/50 before:transition-all before:duration-300 before:content-[] hover:before:bg-black/30 sm:aspect-square md:aspect-auto md:min-h-[30rem] md:max-w-[30rem]"
     >
       <div className="relative z-20 flex size-full flex-col justify-between gap-20 md:gap-16">
         <div className="text-2xl font-normal leading-[1.2] text-white md:text-3xl">

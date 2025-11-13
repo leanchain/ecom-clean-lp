@@ -1,14 +1,14 @@
 import BigSound from '@/components/sections/big-sound';
 import ProductFeatures from '@/components/sections/product-features';
-import ProductHero from '@/components/sections/product-hero';
 import ProductIntro from '@/components/sections/product-intro';
 import Testimonials from '@/components/sections/product-testimonials';
 import ServiceFeatures from '@/components/sections/service-features';
+import ProductDetail from '@/components/pdp/ProductDetail';
 
 export default function ProductPage() {
   return (
     <>
-      <ProductHero />
+      <ProductDetail />
       <ProductIntro />
       <BigSound />
       <Testimonials />

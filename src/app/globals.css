@@ -148,6 +148,19 @@
   }
 }
 
+@layer components {
+  /* Brand-aligned prose styles for blog content */
+  .prose-brand {
+    @apply prose prose-lg dark:prose-invert;
+    @apply prose-headings:font-semibold prose-headings:tracking-tight;
+    @apply prose-h2:text-3xl md:prose-h2:text-4xl prose-h3:text-2xl md:prose-h3:text-3xl;
+    @apply prose-a:no-underline hover:prose-a:text-primary hover:prose-a:underline hover:prose-a:underline-offset-4 hover:prose-a:decoration-primary;
+    @apply prose-ul:list-disc prose-ul:pl-6 prose-li:marker:text-primary/60;
+    @apply prose-strong:font-semibold;
+    @apply prose-img:rounded-lg prose-img:border;
+  }
+}
+
 @layer utilities {
   .hero-padding {
     @apply pt-15 pb-20 md:pt-18 lg:pt-22.5;

@@ -12,6 +12,7 @@ const CTA = () => {
     "/privacy-policy",
     "/terms-of-service",
     "/blog",
+    "/demo",
   ].includes(pathname);
 
   if (!shouldShowCTA) return null;
@@ -38,9 +39,7 @@ const CTA = () => {
           </AnimatedBorderButton>
         </div>
         <div className="max-w-xl space-y-4">
-          <h3 className="text-3xl font-bold">
-            Get recommended by AI search
-          </h3>
+          <h3 className="text-3xl font-bold">Get recommended by AI search</h3>
           <p className="text-xl leading-8">
             Create scroll-stopping on-brand product visuals and deep context to
             ensure your product pages are optimised for both human conversion

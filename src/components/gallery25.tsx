@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import React from "react";
+import Image from "next/image";
 // Button handled via AnimatedBorderButton overlay
 import AnimatedBorderButton from "@/components/animated-border-button";
 import { Play } from "lucide-react";
@@ -9,86 +10,114 @@ import { Play } from "lucide-react";
 const Gallery25 = () => {
   const column1Images = [
     {
-      src: "https://framerusercontent.com/images/AP8MxsVwC0m6aUew627Uzl3PlY.jpeg",
+      src: "/images/gallery/gallery-1.jpeg",
       alt: "Gallery Image 1",
       height: "23rem",
+      width: 600,
+      imgHeight: 800,
     },
     {
-      src: "https://framerusercontent.com/images/OKAPNp5NBx92XHoAfb2IJe5GaE.jpg",
+      src: "/images/gallery/gallery-2.jpg",
       alt: "Gallery Image 2",
       height: "28rem",
+      width: 600,
+      imgHeight: 900,
     },
     {
-      src: "https://framerusercontent.com/images/jTk7xlHHF1IGEJbjQzmPMpmxz84.jpeg",
+      src: "/images/gallery/gallery-3.jpeg",
       alt: "Gallery Image 3",
       height: "12rem",
+      width: 600,
+      imgHeight: 400,
     },
   ];
 
   const column2Images = [
     {
-      src: "https://framerusercontent.com/images/Sl9EJQTfoycU8fTKPQzTCSt7wI.jpg",
+      src: "/images/gallery/gallery-4.jpg",
       alt: "Gallery Image 4",
       height: "13rem",
+      width: 600,
+      imgHeight: 450,
     },
     {
-      src: "https://framerusercontent.com/images/D9TgLVUKJBPyEFgeH5cU1lj9W3A.jpeg",
+      src: "/images/gallery/gallery-5.jpeg",
       alt: "Gallery Image 5",
       height: "32rem",
+      width: 600,
+      imgHeight: 1000,
     },
     {
-      src: "https://framerusercontent.com/images/A3YTpd3ihmlKdXxeXm0pBEueA.jpg",
+      src: "/images/gallery/gallery-6.jpg",
       alt: "Gallery Image 6",
       height: "18rem",
+      width: 600,
+      imgHeight: 600,
     },
   ];
 
   const column3Images = [
     {
-      src: "https://framerusercontent.com/images/grEtdsKRFf8M8oKPm7RzOw0uAfg.jpg",
+      src: "/images/gallery/gallery-7.jpg",
       alt: "Gallery Image 7",
       height: "32rem",
+      width: 600,
+      imgHeight: 1000,
     },
     {
-      src: "https://framerusercontent.com/images/Tw5d4QXO8KrpmBh9B9bEy8oWm1g.jpg",
+      src: "/images/gallery/gallery-8.jpg",
       alt: "Gallery Image 8",
       height: "32rem",
+      width: 600,
+      imgHeight: 1000,
     },
   ];
 
   const column4Images = [
     {
-      src: "https://framerusercontent.com/images/IIwrTUEKmVA8Bc0vqQYJIoYqps.jpg",
+      src: "/images/hero/hero-2.jpg",
       alt: "Gallery Image 9",
       height: "13rem",
+      width: 600,
+      imgHeight: 450,
     },
     {
-      src: "https://framerusercontent.com/images/IF4Acwwh9jwUUCkAQHXQyyXDiGM.jpeg",
+      src: "/images/hero/hero-11.jpeg",
       alt: "Gallery Image 10",
       height: "22.5rem",
+      width: 600,
+      imgHeight: 750,
     },
     {
-      src: "https://framerusercontent.com/images/07lRVxK2iyJbSLDBNZxgTnhtlk.jpeg",
+      src: "/images/hero/hero-12.jpeg",
       alt: "Gallery Image 11",
       height: "22rem",
+      width: 600,
+      imgHeight: 700,
     },
   ];
 
   const column5Images = [
     {
-      src: "https://framerusercontent.com/images/PkU3Gw8pAzmi2niiMrnBcHuu8I.png",
+      src: "/images/hero/hero-1.png",
       alt: "Gallery Image 12",
       height: "28rem",
+      width: 600,
+      imgHeight: 900,
     },
     {
-      src: "https://framerusercontent.com/images/tAX01Ow9zlh8EUCDGAfh3hpdQ0.png",
+      src: "/images/hero/hero-3.png",
       alt: "Gallery Image 13",
       height: "18rem",
+      width: 600,
+      imgHeight: 600,
     },
     {
-      src: "https://framerusercontent.com/images/qwVnKblygARf7tiZx5lUDJWpY.png",
+      src: "/images/hero/hero-4.png",
       alt: "Gallery Image 14",
       height: "17rem",
+      width: 600,
+      imgHeight: 550,
     },
   ];
 
@@ -96,22 +125,22 @@ const Gallery25 = () => {
   const heroVideos = [
     {
       type: "video" as const,
-      src: "https://cdn-front.freepik.com/home/anon-rvmp/features/designs/mockup-logo-hover.mp4",
+      src: "/videos/gallery/gallery-video-1.mp4",
       height: "18rem",
     },
     {
       type: "video" as const,
-      src: "https://framerusercontent.com/assets/XX4yEVUD0cQvRpu54Cu7ZwJwGZs.mp4",
+      src: "/videos/gallery/gallery-video-2.mp4",
       height: "22rem",
     },
     {
       type: "video" as const,
-      src: "https://res.papir.cc/assets/v/nano_spinning_fall_0509.mp4",
+      src: "/videos/gallery/gallery-video-3.mp4",
       height: "28rem",
     },
     {
       type: "video" as const,
-      src: "https://framerusercontent.com/assets/Vb7xAqRZpCMTPZp1kkCLENR7ooI.mp4",
+      src: "/videos/gallery/gallery-video-4.mp4",
       height: "32rem",
     },
   ];
@@ -119,20 +148,34 @@ const Gallery25 = () => {
   // Extra requested video
   const extraVideo = {
     type: "video" as const,
-    src: "https://res.papir.cc/assets/v/trimmed_Red_Bag.mp4",
+    src: "/videos/gallery/gallery-video-5.mp4",
     height: "20rem",
   };
 
   // Build per-column mixed media arrays with fixed placement (no randomness)
-  const toImage = (item: { src: string; alt: string; height: string }) => ({
+  const toImage = (item: {
+    src: string;
+    alt: string;
+    height: string;
+    width: number;
+    imgHeight: number;
+  }) => ({
     type: "image" as const,
     ...item,
   });
 
   // Place some videos at the very top of their columns
-  const col1 = [toImage(column1Images[0]), heroVideos[0], ...column1Images.slice(1).map(toImage)];
+  const col1 = [
+    toImage(column1Images[0]),
+    heroVideos[0],
+    ...column1Images.slice(1).map(toImage),
+  ];
   const col3 = [heroVideos[1], ...column3Images.map(toImage)];
-  const col5 = [toImage(column5Images[0]), heroVideos[2], ...column5Images.slice(1).map(toImage)];
+  const col5 = [
+    toImage(column5Images[0]),
+    heroVideos[2],
+    ...column5Images.slice(1).map(toImage),
+  ];
   const col2 = [heroVideos[3], ...column2Images.map(toImage)];
   const col4 = [extraVideo, ...column4Images.map(toImage)];
 
@@ -156,7 +199,7 @@ const Gallery25 = () => {
                   delay: index * 0.1,
                 }}
                 key={index}
-                className="group bg-muted relative w-full overflow-hidden rounded-2xl"
+                className="group bg-muted relative w-full overflow-hidden rounded-3xl"
                 style={{ height: item.height }}
               >
                 {item.type === "video" ? (
@@ -169,10 +212,11 @@ const Gallery25 = () => {
                     loop
                   />
                 ) : (
-                  <img
+                  <Image
                     className="absolute inset-0 h-full w-full object-cover"
                     src={item.src}
                     alt={item.alt}
+                    fill
                   />
                 )}
                 <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
@@ -181,7 +225,7 @@ const Gallery25 = () => {
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                       onClick={() => handleGenerate(item)}
                     >
-                      Generate <Play />
+                      Generate <Play className="fill-white text-white" style={{ stroke: "none" }} />
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -200,7 +244,7 @@ const Gallery25 = () => {
                   delay: index * 0.1,
                 }}
                 key={index}
-                className="group bg-muted relative w-full overflow-hidden rounded-2xl"
+                className="group bg-muted relative w-full overflow-hidden rounded-3xl"
                 style={{ height: item.height }}
               >
                 {item.type === "video" ? (
@@ -213,10 +257,11 @@ const Gallery25 = () => {
                     loop
                   />
                 ) : (
-                  <img
+                  <Image
                     className="absolute inset-0 h-full w-full object-cover"
                     src={item.src}
                     alt={item.alt}
+                    fill
                   />
                 )}
                 <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
@@ -225,7 +270,7 @@ const Gallery25 = () => {
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                       onClick={() => handleGenerate(item)}
                     >
-                      Generate <Play />
+                      Generate <Play className="fill-white text-white" style={{ stroke: "none" }} />
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -244,7 +289,7 @@ const Gallery25 = () => {
                   delay: index * 0.1,
                 }}
                 key={index}
-                className="group bg-muted relative w-full overflow-hidden rounded-2xl"
+                className="group bg-muted relative w-full overflow-hidden rounded-3xl"
                 style={{ height: item.height }}
               >
                 {item.type === "video" ? (
@@ -257,10 +302,11 @@ const Gallery25 = () => {
                     loop
                   />
                 ) : (
-                  <img
+                  <Image
                     className="absolute inset-0 h-full w-full object-cover"
                     src={item.src}
                     alt={item.alt}
+                    fill
                   />
                 )}
                 <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
@@ -269,7 +315,7 @@ const Gallery25 = () => {
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                       onClick={() => handleGenerate(item)}
                     >
-                      Generate <Play />
+                      Generate <Play className="fill-white text-white" style={{ stroke: "none" }} />
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -288,7 +334,7 @@ const Gallery25 = () => {
                   delay: index * 0.1,
                 }}
                 key={index}
-                className="group bg-muted relative w-full overflow-hidden rounded-2xl"
+                className="group bg-muted relative w-full overflow-hidden rounded-3xl"
                 style={{ height: item.height }}
               >
                 {item.type === "video" ? (
@@ -301,10 +347,11 @@ const Gallery25 = () => {
                     loop
                   />
                 ) : (
-                  <img
+                  <Image
                     className="absolute inset-0 h-full w-full object-cover"
                     src={item.src}
                     alt={item.alt}
+                    fill
                   />
                 )}
                 <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
@@ -313,7 +360,7 @@ const Gallery25 = () => {
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                       onClick={() => handleGenerate(item)}
                     >
-                      Generate <Play />
+                      Generate <Play className="fill-white text-white" style={{ stroke: "none" }} />
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -333,7 +380,7 @@ const Gallery25 = () => {
                   delay: index * 0.1,
                 }}
                 key={index}
-                className="group bg-muted relative w-full overflow-hidden rounded-2xl"
+                className="group bg-muted relative w-full overflow-hidden rounded-3xl"
                 style={{ height: item.height }}
               >
                 {item.type === "video" ? (
@@ -346,10 +393,11 @@ const Gallery25 = () => {
                     loop
                   />
                 ) : (
-                  <img
+                  <Image
                     className="absolute inset-0 h-full w-full object-cover"
                     src={item.src}
                     alt={item.alt}
+                    fill
                   />
                 )}
                 <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
@@ -358,7 +406,7 @@ const Gallery25 = () => {
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                       onClick={() => handleGenerate(item)}
                     >
-                      Generate <Play />
+                      Generate <Play className="fill-white text-white" style={{ stroke: "none" }} />
                     </AnimatedBorderButton>
                   </div>
                 </div>

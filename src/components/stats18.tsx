@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { Package } from "lucide-react";
+import CategoryBadge from "@/components/category-badge";
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 import Image from "next/image";
 
@@ -68,9 +70,12 @@ const Stats18 = () => {
     <section id="fieson-pdp-ai" className="overflow-hidden py-32">
       <div className="container px-4">
         <div className="mb-12 text-center">
-          <p className="bg-muted mb-4 inline-block rounded-full px-2 py-1 text-xs uppercase">
-            FIESON PDP AI
-          </p>
+          <div className="mx-auto mb-4 flex justify-center">
+            <CategoryBadge
+              label="Fieson PDP AI"
+              icon={<Package className="h-4 w-4" />}
+            />
+          </div>
           <h2 className="relative py-2 text-center font-sans text-4xl font-semibold tracking-tighter lg:text-5xl">
             Get your products recommended by <br />{" "}
             <TypingAnimation
@@ -90,7 +95,7 @@ const Stats18 = () => {
         <div className="mx-auto flex max-w-7xl flex-col gap-12 lg:flex-row lg:gap-16">
           {/* Video Section - 1/3 width */}
           <div className="flex flex-col lg:w-1/3">
-            <div className="overflow-hidden rounded-lg">
+            <div className="overflow-hidden rounded-3xl">
               <video className="h-auto w-full" autoPlay loop muted playsInline>
                 <source src="/videos/ai-discovery-demo.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
@@ -134,7 +139,7 @@ const Stats18 = () => {
               {statsData.map((stat, index) => (
                 <div
                   key={index}
-                  className="bg-popover flex min-h-20 flex-row items-center gap-3 rounded-lg px-3 py-2.5"
+                  className="bg-popover flex min-h-20 flex-row items-center gap-3 rounded-3xl px-3 py-2.5"
                 >
                   <div className="flex h-full items-center">
                     <div className="flex flex-col items-start gap-1">

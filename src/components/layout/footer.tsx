@@ -10,9 +10,11 @@ const ITEMS = [
   {
     title: "AI Media Studio",
     links: [
+      { name: "Blog", href: "/blog" },
       { name: "Generate Images", href: "#images" },
       { name: "Generate Videos", href: "#videos" },
       { name: "Enrich Product for AI Search", href: "#enrich" },
+      { name: "Comparison", href: "/comparison" },
     ],
   },
   {

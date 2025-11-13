@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ShoppingCart } from "lucide-react";
 import React, { useState } from "react";
+import Image from "next/image";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -12,51 +13,67 @@ import { Button } from "@/components/ui/button";
 const images = [
   {
     id: 1,
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/lummi/random5.jpeg",
+    src: "/images/products/product-1.jpeg",
     title: "Summer Collection",
     code: "#0031",
+    width: 800,
+    height: 1000,
   },
   {
     id: 2,
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/lummi/random11.jpeg",
+    src: "/images/products/product-2.jpeg",
     title: "The Music Festival",
     code: "#0030",
+    width: 800,
+    height: 1000,
   },
   {
     id: 3,
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/lummi/random13.jpeg",
+    src: "/images/products/product-3.jpeg",
     title: "Winter Special",
     code: "#0032",
+    width: 800,
+    height: 1000,
   },
   {
     id: 4,
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/lummi/random1.jpeg",
+    src: "/images/products/product-4.jpeg",
     title: "Spring Edition",
     code: "#0033",
+    width: 800,
+    height: 1000,
   },
   {
     id: 5,
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/lummi/random2.jpeg",
+    src: "/images/products/product-5.jpeg",
     title: "Spring Edition",
     code: "#0033",
+    width: 800,
+    height: 1000,
   },
   {
     id: 6,
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/lummi/random8.jpeg",
+    src: "/images/products/product-6.jpeg",
     title: "Spring Edition",
     code: "#0033",
+    width: 800,
+    height: 1000,
   },
   {
     id: 7,
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/lummi/random9.jpeg",
+    src: "/images/products/product-7.jpeg",
     title: "Spring Edition",
     code: "#0033",
+    width: 800,
+    height: 1000,
   },
   {
     id: 8,
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/lummi/random10.jpeg",
+    src: "/images/products/product-8.jpeg",
     title: "Spring Edition",
     code: "#0033",
+    width: 800,
+    height: 1000,
   },
 ];
 
@@ -129,10 +146,13 @@ const Gallery24 = () => {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                  <img
+                  <Image
                     src={image.src}
                     className="size-full object-cover"
                     alt={image.title}
+                    width={image.width}
+                    height={image.height}
+                    priority={image.id === 1}
                   />
                 </motion.div>
               ))}
