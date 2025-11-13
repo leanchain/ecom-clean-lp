@@ -470,12 +470,12 @@ const topicGroups = [
 
 // AI Media Studio Menu Component
 const AiMediaStudioMenu = () => (
-  <div className="grid gap-8 md:grid-cols-3">
+  <div className="grid gap-6 md:grid-cols-3">
     {aiMediaStudioSections.map((section) => (
-      <div key={section.id} className="border-border rounded-md border p-5">
-        <div className="border-border border-b pb-4">
+      <div key={section.id} className="border-border rounded-md border p-4">
+        <div className="border-border border-b pb-3">
           <a href={section.href} className="group flex flex-col text-left">
-            <div className="mb-3 flex items-center gap-3">
+            <div className="mb-2 flex items-center gap-2">
               <div className="bg-primary text-primary-foreground flex aspect-square w-10 shrink-0 items-center justify-center rounded-lg">
                 <section.icon className="size-5" />
               </div>
@@ -489,66 +489,144 @@ const AiMediaStudioMenu = () => (
             </p>
           </a>
         </div>
-        <menu className="mt-6 grid gap-y-4">
+        <menu className="mt-4 grid gap-y-2">
           {section.features && (
             <>
-              {section.features.map((feature, idx) => (
-                <NavigationMenuLink
-                  key={idx}
-                  href={feature.href}
-                  className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
-                >
-                  <div className="flex-1 text-sm font-medium">
-                    {feature.title}
-                  </div>
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                </NavigationMenuLink>
-              ))}
-              {section.imageTypes && (
-                <div className="border-border mt-4 border-t pt-4">
-                  <p className="text-muted-foreground mb-3 text-xs font-medium uppercase tracking-wider">
-                    Image Types
-                  </p>
-                  {section.imageTypes.map((type, idx) => (
-                    <NavigationMenuLink
-                      key={idx}
-                      href={type.href}
-                      className="text-foreground/70 hover:text-foreground group mb-2 flex flex-row items-center justify-between text-left text-xs"
-                    >
-                      <div className="flex-1">{type.title}</div>
-                      <ArrowRight className="size-3 transition-transform group-hover:translate-x-1 lg:hidden" />
-                    </NavigationMenuLink>
-                  ))}
-                </div>
-              )}
+              {section.id === "image"
+                ? (() => {
+                    // Build a combined list of image features + image types with icons
+                    const pickIcon = (title: string) => {
+                      if (/generator/i.test(title)) return Wand2;
+                      if (/optim/i.test(title)) return Sparkles;
+                      if (/editor|upscale/i.test(title)) return ImageIcon;
+                      if (/packshot/i.test(title)) return Package;
+                      if (/detailed|detail|product/i.test(title)) return Camera;
+                      if (/lifestyle/i.test(title)) return Users;
+                      if (/use\s+images?/i.test(title)) return Camera;
+                      if (/benefit/i.test(title)) return Lightbulb;
+                      if (/pain|issue|problem/i.test(title)) return X;
+                      return ImageIcon;
+                    };
+                    const items = [
+                      ...section.features.map((f) => ({
+                        title: f.title,
+                        href: f.href,
+                        Icon: pickIcon(f.title),
+                      })),
+                      ...(section.imageTypes?.map((t) => ({
+                        title: t.title,
+                        href: t.href,
+                        Icon: pickIcon(t.title),
+                      })) ?? []),
+                    ];
+                    return items.map((it, idx) => (
+                      <NavigationMenuLink
+                        key={`img-item-${idx}`}
+                        href={it.href}
+                        className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
+                      >
+                        <it.Icon className="size-4" />
+                        <div className="flex-1 text-sm font-medium">{it.title}</div>
+                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                      </NavigationMenuLink>
+                    ));
+                  })()
+                : (
+                    // Default rendering for non-image sections (no combined list)
+                    section.features.map((feature, idx) => (
+                      <NavigationMenuLink
+                        key={idx}
+                        href={feature.href}
+                        className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
+                      >
+                        <div className="flex-1 text-sm font-medium">
+                          {feature.title}
+                        </div>
+                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                      </NavigationMenuLink>
+                    ))
+                  )}
             </>
           )}
-          {section.videoTypes && (
-            <>
-              {section.videoTypes.map((type, idx) => (
+          {/* For the Image section we merged imageTypes above; for others keep extra blocks */}
+          {section.imageTypes && section.id !== "image" && (
+            <div className="border-border mt-3 border-t pt-3">
+              <p className="text-muted-foreground mb-3 text-xs font-medium uppercase tracking-wider">
+                Image Types
+              </p>
+              {section.imageTypes.map((type, idx) => (
                 <NavigationMenuLink
                   key={idx}
                   href={type.href}
-                  className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
+                  className="text-foreground/70 hover:text-foreground group mb-1 flex flex-row items-center justify-between text-left text-xs"
                 >
-                  <div className="flex-1 text-sm font-medium">{type.title}</div>
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                  <div className="flex-1">{type.title}</div>
+                  <ArrowRight className="size-3 transition-transform group-hover:translate-x-1 lg:hidden" />
                 </NavigationMenuLink>
               ))}
+            </div>
+          )}
+          {section.videoTypes && (
+            <>
+              {(() => {
+                const pickIcon = (title: string) => {
+                  if (/generator/i.test(title)) return Play;
+                  if (/optim/i.test(title)) return Sparkles;
+                  if (/360|spin/i.test(title)) return Globe;
+                  if (/demonstration|demo/i.test(title)) return PlayCircle;
+                  if (/lifestyle/i.test(title)) return Users;
+                  if (/in\s*use/i.test(title)) return Camera;
+                  if (/ar/i.test(title)) return Globe2;
+                  if (/unbox/i.test(title)) return Package;
+                  return Play;
+                };
+                return section.videoTypes.map((type, idx) => {
+                  const Icon = pickIcon(type.title);
+                  return (
+                    <NavigationMenuLink
+                      key={idx}
+                      href={type.href}
+                      className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
+                    >
+                      <Icon className="size-4" />
+                      <div className="flex-1 text-sm font-medium">{type.title}</div>
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                    </NavigationMenuLink>
+                  );
+                });
+              })()}
             </>
           )}
           {section.contentTypes && (
             <>
-              {section.contentTypes.map((type, idx) => (
-                <NavigationMenuLink
-                  key={idx}
-                  href={type.href}
-                  className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
-                >
-                  <div className="flex-1 text-sm font-medium">{type.title}</div>
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                </NavigationMenuLink>
-              ))}
+              {(() => {
+                const pickIcon = (title: string) => {
+                  if (/title/i.test(title)) return Book;
+                  if (/description/i.test(title)) return FileImage;
+                  if (/benefit/i.test(title)) return Lightbulb;
+                  if (/why/i.test(title)) return Search;
+                  if (/feature/i.test(title)) return Sparkles;
+                  if (/use\s*cases?/i.test(title)) return AppWindow;
+                  if (/who|audience/i.test(title)) return Users;
+                  if (/faq/i.test(title)) return Newspaper;
+                  if (/llm/i.test(title)) return Wand2;
+                  return Book;
+                };
+                return section.contentTypes.map((type, idx) => {
+                  const Icon = pickIcon(type.title);
+                  return (
+                    <NavigationMenuLink
+                      key={idx}
+                      href={type.href}
+                      className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
+                    >
+                      <Icon className="size-4" />
+                      <div className="flex-1 text-sm font-medium">{type.title}</div>
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                    </NavigationMenuLink>
+                  );
+                });
+              })()}
             </>
           )}
         </menu>
@@ -1096,14 +1174,14 @@ export default function Navbar() {
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-8">
-            <NavigationMenu className="[&>div:last-child]:left-auto">
+            <NavigationMenu>
               <NavigationMenuList className="hidden gap-0 lg:flex">
                 {navigationMenuItems.map((item) => (
                   <NavigationMenuItem key={item.key}>
                     <NavigationMenuTrigger className="text-xs xl:text-sm">
                       {item.label}
                     </NavigationMenuTrigger>
-                    <NavigationMenuContent className="min-w-[calc(100vw-4rem)] p-12 2xl:min-w-[calc(1400px-4rem)] ml-8">
+                    <NavigationMenuContent className="p-8 md:p-10 lg:p-12 max-h-[80vh] overflow-auto">
                       <item.component />
                     </NavigationMenuContent>
                   </NavigationMenuItem>

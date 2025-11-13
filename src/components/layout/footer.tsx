@@ -62,10 +62,10 @@ const Footer = () => {
     <section className="bg-footer-background text-foreground py-11 md:py-15">
       <div className="container">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:gap-14">
-          <div className="flex w-full flex-col divide-y md:w-auto md:flex-row md:items-center md:divide-x md:divide-y-0">
-            <Logo wrapperClassName="md:pe-4 border-background/10 pb-4 md:pb-0" />
+          <div className="flex w-full flex-col divide-y divide-border md:w-auto md:flex-row md:items-center md:divide-x md:divide-y-0 md:gap-4">
+            <Logo wrapperClassName="pb-4 md:pb-0" />
 
-            <p className="pt-4 text-xl md:ps-4 md:pt-0">
+            <p className="pt-4 text-xl md:pt-0">
               Create perfect looking product pages for AI Search.
             </p>
           </div>

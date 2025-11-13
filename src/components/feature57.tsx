@@ -1,85 +1,106 @@
 "use client";
 
-import { Camera, Video, Search, Package } from "lucide-react";
-import { useEffect, useState } from "react";
+import {
+  Camera,
+  Video,
+  FileText,
+  Package,
+  AudioLines,
+  Mic,
+  Plus,
+  Settings2,
+  Play,
+} from "lucide-react";
+import { useState } from "react";
 import Image from "next/image";
+import React from "react";
 
 import CategoryBadge from "@/components/category-badge";
-import type { CarouselApi } from "@/components/ui/carousel";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+
+// Helper function to render text with styled @mentions
+const renderWithMentions = (text: string) => {
+  const parts = text.split(/(@[\w.]+)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith("@")) {
+      return (
+        <span
+          key={index}
+          className="bg-primary/20 text-primary px-1.5 py-0.5 rounded-md font-medium"
+        >
+          {part}
+        </span>
+      );
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
 
 const features = [
   {
     id: "feature-1",
-    title: "AI Image Generation",
+    title: "Professional Product Images",
     description:
-      "Transform basic product photos into professional, on-brand visuals with background removal, scene generation, and style transfer. Create scroll-stopping lifestyle images at scale.",
+      "Full coverage on-brand images: packshots, product on model, lifestyle, product in use, detail shots. All aligned with your narrative and user needs.",
     icon: Camera,
-    image: "/images/features/feature-image.svg",
-    width: 600,
-    height: 400,
+    type: "image" as const,
+    media: "/images/hero/hero-1.png",
+    width: 800,
+    height: 600,
     bullets: [
-      "Automatic background removal and replacement",
-      "AI-powered scene generation and style transfer",
-      "Batch processing for product catalogs",
+      "On-brand packshots, lifestyle, and detail shots",
+      "Product on model and in-use scenarios",
+      "Aligned with narrative and user needs",
     ],
   },
   {
     id: "feature-2",
-    title: "AI Video Generation",
+    title: "Engaging Product Videos",
     description:
-      "Bring products to life with automated video creation, 360° spins, and AR previews. Generate engaging video content optimized for every platform.",
+      "On-brand AI videos auto-built from your brandbook, aligned with narrative and user needs. No more generic clips disconnected from your story.",
     icon: Video,
-    image: "/images/features/feature-video.svg",
-    width: 600,
-    height: 400,
+    type: "video" as const,
+    media: "/videos/hero/hero-video-1.mp4",
     bullets: [
-      "Automated product video creation from images",
-      "360° product spins and AR-ready previews",
-      "Platform-optimized video formats",
+      "Auto-built from brandbook and style guide",
+      "Aligned with product narrative",
+      "Consistent brand lighting, style & tone",
     ],
   },
   {
     id: "feature-3",
-    title: "AI Search Enrichment",
+    title: "Deep Product Context for AI",
     description:
-      "Ensure your products are found in ChatGPT, Perplexity, and other AI search engines with AI-generated alt text, metadata, and semantic SEO optimization.",
-    icon: Search,
-    image: "/images/features/feature-search.svg",
-    width: 600,
-    height: 400,
+      "LLM-optimized narrative text with deep product context. Optimized for GEO (ChatGPT, Perplexity, Google AI Overviews) and SEO. Drive 3-5× higher AI search visibility.",
+    icon: FileText,
+    type: "interactive" as const,
     bullets: [
-      "AI-generated alt text and metadata",
-      "Semantic SEO optimization for AI engines",
-      "Real-time AI search performance tracking",
+      "Optimized for GEO and SEO visibility",
+      "Deep context: benefits, FAQs, use cases",
+      "3-5× higher AI search recommendations",
     ],
   },
 ];
 
 const Feature57 = () => {
   const [selection, setSelection] = useState(0);
-  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [promptValue, setPromptValue] = useState(
+    "Show @model wearing @outfit in a minimalist studio setting with soft natural lighting and neutral beige background"
+  );
 
   const handleSelection = (index: number) => {
-    carouselApi?.scrollTo(index);
+    setSelection(index);
+    // Set default prompt based on feature type
+    const defaultPrompts = {
+      0: "Show @model wearing @outfit in a minimalist studio setting with soft natural lighting and neutral beige background",
+      1: "Create a smooth 360° rotation of @model wearing @outfit following @styleguide color palette",
+      2: "Generate complete PDP content for @template.sweater with benefits, objections, FAQs, use cases, and comparisons using @styleguide.writing",
+    };
+    setPromptValue(defaultPrompts[index as keyof typeof defaultPrompts] || "");
   };
 
-  useEffect(() => {
-    if (!carouselApi) {
-      return;
-    }
-    const updateSelection = () => {
-      setSelection(carouselApi.selectedScrollSnap());
-    };
-    carouselApi.on("select", updateSelection);
-    return () => {
-      carouselApi.off("select", updateSelection);
-    };
-  }, [carouselApi]);
+  const handlePromptClick = (promptText: string) => {
+    setPromptValue(promptText);
+  };
 
   return (
     <section id="ai-media-studio" className="py-12 md:py-24 lg:py-32">
@@ -101,6 +122,41 @@ const Feature57 = () => {
         </div>
         <div>
           <div className="mx-auto max-w-6xl">
+            {/* Tab Navigation - Move above content */}
+            <div className="mb-8 flex justify-center gap-3">
+              {features.map((feature, i) => {
+                const isSelected = selection === i;
+                return (
+                  <button
+                    key={i}
+                    className={`group relative flex cursor-pointer items-center gap-2 rounded-3xl border px-4 py-3 transition-all duration-300 ${
+                      isSelected
+                        ? "border-border bg-accent shadow-sm"
+                        : "hover:border-border hover:bg-accent/30 border-transparent"
+                    }`}
+                    onClick={() => handleSelection(i)}
+                    aria-label={feature.title}
+                  >
+                    <div
+                      className={`flex aspect-square w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${
+                        isSelected
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                    >
+                      <feature.icon className="size-4" />
+                    </div>
+                    <span
+                      className={`hidden md:block text-sm font-medium transition-colors ${
+                        isSelected ? "text-foreground" : "text-muted-foreground"
+                      }`}
+                    >
+                      {feature.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
             <div className="flex flex-col gap-6 md:flex-row md:gap-8 lg:gap-16">
               {/* Text Section - Left Side */}
               <div className="md:w-1/2 lg:w-2/5">
@@ -159,71 +215,176 @@ const Feature57 = () => {
                 </div>
               </div>
 
-              {/* Image Block - Right Side */}
+              {/* Media Block - Right Side */}
               <div className="relative md:w-1/2 lg:w-3/5">
-                <div className="border-border overflow-hidden rounded-3xl border shadow-sm">
-                  <Carousel
-                    setApi={setCarouselApi}
-                    className="aspect-4/5 md:aspect-3/4 lg:aspect-4/5 max-h-[500px] w-full [&>div]:h-full"
-                    opts={{
-                      loop: true,
-                    }}
-                  >
-                    <CarouselContent className="mx-0 h-full w-full">
-                      {features.map((feature) => (
-                        <CarouselItem key={feature.id} className="px-0">
-                          <div className="relative h-full w-full overflow-hidden">
+                {features.map((feature, i) => {
+                  const isSelected = selection === i;
+                  return (
+                    <div
+                      key={feature.id}
+                      className={`transition-all duration-500 ${
+                        isSelected
+                          ? "opacity-100"
+                          : "pointer-events-none absolute opacity-0"
+                      }`}
+                    >
+                      {/* Unified Product Card */}
+                      <div className="border-border overflow-hidden rounded-3xl border shadow-sm bg-background">
+                        {/* Media Section (Top Half) */}
+                        <div className="relative aspect-video w-full overflow-hidden bg-muted">
+                          {feature.type === "video" ? (
+                            <video
+                              src={feature.media}
+                              className="h-full w-full object-cover"
+                              muted
+                              playsInline
+                              autoPlay
+                              loop
+                            />
+                          ) : feature.type === "image" ? (
                             <Image
-                              src={feature.image}
+                              src={feature.media}
                               alt={feature.title}
                               width={feature.width}
                               height={feature.height}
-                              className="h-full w-full object-cover object-center transition-transform duration-500"
+                              className="h-full w-full object-cover object-center"
                             />
+                          ) : (
+                            <div className="flex h-full items-center justify-center p-8">
+                              <div className="space-y-4 text-center">
+                                <FileText className="mx-auto h-16 w-16 text-muted-foreground" />
+                                <p className="text-lg font-semibold">
+                                  AI-Generated Product Copy
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                  Optimized for search engines and conversion
+                                </p>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Chat Interface (Bottom Half) */}
+                        <div className="p-4">
+                          <div className="bg-muted rounded-3xl w-full px-4 py-3">
+                            {/* Prompt Display/Input Area */}
+                            <div className="min-h-[60px] mb-2">
+                              {promptValue ? (
+                                <div className="text-sm leading-relaxed py-2">
+                                  {renderWithMentions(promptValue)}
+                                </div>
+                              ) : (
+                                <textarea
+                                  value={promptValue}
+                                  onChange={(e) =>
+                                    setPromptValue(e.target.value)
+                                  }
+                                  placeholder={
+                                    feature.type === "image"
+                                      ? "Show @model wearing @outfit in..."
+                                      : feature.type === "video"
+                                        ? "Create video of @model in @outfit..."
+                                        : "Generate PDP content for @template.sweater using @styleguide.writing..."
+                                  }
+                                  rows={2}
+                                  className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground resize-none py-2"
+                                />
+                              )}
+                            </div>
+
+                            {/* Bottom Controls */}
+                            <div className="flex h-8 w-full items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <Plus className="size-4 cursor-pointer text-muted-foreground hover:text-foreground transition-colors" />
+                                <span className="flex cursor-pointer items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                                  <Settings2 className="size-4" />
+                                  Tools
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <Mic className="size-4 cursor-pointer text-muted-foreground hover:text-foreground transition-colors" />
+                                <span className="bg-foreground/10 hover:bg-foreground/20 flex size-7 cursor-pointer items-center justify-center rounded-full transition-colors">
+                                  <AudioLines className="size-3.5" />
+                                </span>
+                                <button className="bg-primary text-primary-foreground hover:bg-primary/90 flex size-7 items-center justify-center rounded-full transition-colors">
+                                  <Play className="size-3.5 fill-current" />
+                                </button>
+                              </div>
+                            </div>
                           </div>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                  </Carousel>
-                </div>
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {(feature.type === "image"
+                              ? [
+                                  {
+                                    label: "Current image",
+                                    prompt:
+                                      "Show @model wearing @outfit in a minimalist studio setting with soft natural lighting and neutral beige background",
+                                  },
+                                  {
+                                    label: "Urban scene",
+                                    prompt:
+                                      "Place @model wearing @outfit in an urban street setting with modern architecture following @styleguide",
+                                  },
+                                  {
+                                    label: "Lifestyle shot",
+                                    prompt:
+                                      "Show @model wearing @outfit in a cozy café interior with warm lighting matching @styleguide aesthetic",
+                                  },
+                                ]
+                              : feature.type === "video"
+                                ? [
+                                    {
+                                      label: "360° showcase",
+                                      prompt:
+                                        "Create a smooth 360° rotation of @model wearing @outfit following @styleguide color palette",
+                                    },
+                                    {
+                                      label: "Styling demo",
+                                      prompt:
+                                        "Generate a video showing @model styling @outfit with different accessories per @styleguide",
+                                    },
+                                    {
+                                      label: "Movement video",
+                                      prompt:
+                                        "Show @model walking and moving naturally in @outfit with cinematic lighting from @styleguide",
+                                    },
+                                  ]
+                                : [
+                                    {
+                                      label: "Full PDP content",
+                                      prompt:
+                                        "Generate complete PDP content for @template.sweater with benefits, objections, FAQs, use cases, and comparisons using @styleguide.writing",
+                                    },
+                                    {
+                                      label: "Deep narrative",
+                                      prompt:
+                                        "Create LLM-optimized narrative text for @template.sweater with structured benefits, 'best for', howto, and why sections per @styleguide.writing",
+                                    },
+                                    {
+                                      label: "GEO optimization",
+                                      prompt:
+                                        "Optimize @template.sweater for ChatGPT and Perplexity with deep product context following @styleguide.writing tone",
+                                    },
+                                  ]
+                            ).map((item, index) => (
+                              <span
+                                key={index}
+                                onClick={() => handlePromptClick(item.prompt)}
+                                className="bg-muted hover:bg-muted-foreground/20 text-muted-foreground inline-block cursor-pointer rounded-full px-3 py-1 text-xs transition-colors"
+                              >
+                                {item.label}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Tab Navigation - Centered Below Entire Section */}
-            <div className="mt-8 flex justify-center gap-3">
-              {features.map((feature, i) => {
-                const isSelected = selection === i;
-                return (
-                  <button
-                    key={i}
-                    className={`group relative flex cursor-pointer items-center gap-2 rounded-3xl border px-4 py-3 transition-all duration-300 ${
-                      isSelected
-                        ? "border-border bg-accent shadow-sm"
-                        : "hover:border-border hover:bg-accent/30 border-transparent"
-                    }`}
-                    onClick={() => handleSelection(i)}
-                    aria-label={feature.title}
-                  >
-                    <div
-                      className={`flex aspect-square w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${
-                        isSelected
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted text-muted-foreground"
-                      }`}
-                    >
-                      <feature.icon className="size-4" />
-                    </div>
-                    <span
-                      className={`hidden md:block text-sm font-medium transition-colors ${
-                        isSelected ? "text-foreground" : "text-muted-foreground"
-                      }`}
-                    >
-                      {feature.title}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+            {/* End moved Tab Navigation */}
           </div>
         </div>
       </div>

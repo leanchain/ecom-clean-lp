@@ -1,13 +1,89 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 // Button handled via AnimatedBorderButton overlay
 import AnimatedBorderButton from "@/components/animated-border-button";
-import { Play } from "lucide-react";
+import {
+  Play,
+  Shirt,
+  Home,
+  Sparkles,
+  Smartphone,
+  UtensilsCrossed,
+  Watch,
+  Dumbbell,
+  Baby,
+} from "lucide-react";
+import AutoScroll from "embla-carousel-auto-scroll";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 const Gallery25 = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const categories = [
+    { name: "All", icon: Sparkles },
+    { name: "Fashion & Apparel", icon: Shirt },
+    { name: "Home & Furniture", icon: Home },
+    { name: "Beauty & Cosmetics", icon: Sparkles },
+    { name: "Electronics & Tech", icon: Smartphone },
+    { name: "Food & Beverage", icon: UtensilsCrossed },
+    { name: "Jewelry & Watches", icon: Watch },
+    { name: "Sports & Fitness", icon: Dumbbell },
+    { name: "Baby & Kids", icon: Baby },
+  ];
+
+  const baseLogos = [
+    {
+      id: "runway",
+      description: "runway",
+      image: "/logos/runway.svg",
+      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
+    },
+    {
+      id: "google",
+      description: "google",
+      image: "/logos/google.svg",
+      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
+    },
+    {
+      id: "minimax",
+      description: "minimax",
+      image: "/logos/minimax.svg",
+      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
+    },
+    {
+      id: "kling",
+      description: "kling",
+      image: "/logos/kling.svg",
+      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
+    },
+    {
+      id: "flux",
+      description: "flux",
+      image: "/logos/flux.svg",
+      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
+    },
+    {
+      id: "chatgpt",
+      description: "chatgpt",
+      image: "/logos/chatgpt.svg",
+      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
+    },
+    {
+      id: "elevenlabs",
+      description: "elevenlabs",
+      image: "/logos/elevenlabs.svg",
+      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
+    },
+  ];
+  const logos = [...baseLogos, ...baseLogos, ...baseLogos];
+
   const column1Images = [
     {
       src: "/images/gallery/gallery-1.jpeg",
@@ -186,7 +262,70 @@ const Gallery25 = () => {
 
   return (
     <section className="pb-32">
+      {/* Logo Bar Section */}
+      <div className="container mt-12 mb-6">
+        <h2 className="text-2xl md:text-4xl md:text-balance lg:text-5xl lg:leading-14 mb-6 md:mb-8 text-center mx-auto max-w-4xl">
+          All the top GenAI models, orchestrated to perfectly fit your brand and
+          products
+        </h2>
+        <div className="relative mx-auto w-full overflow-hidden">
+          <Carousel
+            plugins={[AutoScroll({ playOnInit: true })]}
+            opts={{ loop: true, align: "start" }}
+          >
+            <CarouselContent className="ml-0">
+              {logos.map((logo, index) => (
+                <CarouselItem
+                  key={index}
+                  className="h-15 lg:basis-1/9 relative mr-6 flex basis-1/2 justify-center pl-0 opacity-30 sm:basis-1/4 md:basis-1/3"
+                >
+                  <div className="flex flex-col items-center justify-center">
+                    <Image
+                      src={logo.image}
+                      alt={logo.description}
+                      width={125}
+                      height={24}
+                      className={logo.className}
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          <div className="pointer-events-none z-10 from-background absolute inset-y-0 left-0 w-32 bg-gradient-to-r to-transparent"></div>
+          <div className="pointer-events-none z-10 from-background absolute inset-y-0 right-0 w-32 bg-gradient-to-l to-transparent"></div>
+        </div>
+      </div>
+
       <div className="w-full px-4">
+        {/* Category Filter Row */}
+        <div className="container mb-8">
+          <div className="flex gap-2 justify-center flex-wrap">
+            {categories.map((category) => {
+              const Icon = category.icon;
+              const isActive = selectedCategory === category.name;
+              return (
+                <button
+                  key={category.name}
+                  onClick={() => setSelectedCategory(category.name)}
+                  className={`
+                    flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
+                    transition-all duration-200 whitespace-nowrap
+                    ${
+                      isActive
+                        ? "bg-primary text-primary-foreground shadow-md"
+                        : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
+                    }
+                  `}
+                >
+                  <Icon className="h-4 w-4" strokeWidth={2} />
+                  {category.name}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
           {/* Column 1 */}
           <div className="flex flex-col gap-4 items-stretch">
@@ -225,7 +364,11 @@ const Gallery25 = () => {
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                       onClick={() => handleGenerate(item)}
                     >
-                      Generate <Play className="fill-white text-white" style={{ stroke: "none" }} />
+                      Generate{" "}
+                      <Play
+                        className="fill-white text-white"
+                        style={{ stroke: "none" }}
+                      />
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -270,7 +413,11 @@ const Gallery25 = () => {
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                       onClick={() => handleGenerate(item)}
                     >
-                      Generate <Play className="fill-white text-white" style={{ stroke: "none" }} />
+                      Generate{" "}
+                      <Play
+                        className="fill-white text-white"
+                        style={{ stroke: "none" }}
+                      />
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -315,7 +462,11 @@ const Gallery25 = () => {
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                       onClick={() => handleGenerate(item)}
                     >
-                      Generate <Play className="fill-white text-white" style={{ stroke: "none" }} />
+                      Generate{" "}
+                      <Play
+                        className="fill-white text-white"
+                        style={{ stroke: "none" }}
+                      />
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -360,7 +511,11 @@ const Gallery25 = () => {
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                       onClick={() => handleGenerate(item)}
                     >
-                      Generate <Play className="fill-white text-white" style={{ stroke: "none" }} />
+                      Generate{" "}
+                      <Play
+                        className="fill-white text-white"
+                        style={{ stroke: "none" }}
+                      />
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -406,7 +561,11 @@ const Gallery25 = () => {
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                       onClick={() => handleGenerate(item)}
                     >
-                      Generate <Play className="fill-white text-white" style={{ stroke: "none" }} />
+                      Generate{" "}
+                      <Play
+                        className="fill-white text-white"
+                        style={{ stroke: "none" }}
+                      />
                     </AnimatedBorderButton>
                   </div>
                 </div>

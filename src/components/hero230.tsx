@@ -1,13 +1,11 @@
 "use client";
 
-import AutoScroll from "embla-carousel-auto-scroll";
 import Autoplay from "embla-carousel-autoplay";
 import { ArrowRight } from "lucide-react";
 import React, { useMemo } from "react";
 import Image from "next/image";
 
 import AnimatedBorderButton from "@/components/animated-border-button";
-import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -122,51 +120,6 @@ const Hero230 = () => {
     }
     return arr;
   }, []);
-  const baseLogos = [
-    {
-      id: "runway",
-      description: "runway",
-      image: "/logos/runway.svg",
-      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
-    },
-    {
-      id: "google",
-      description: "google",
-      image: "/logos/google.svg",
-      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
-    },
-    {
-      id: "minimax",
-      description: "minimax",
-      image: "/logos/minimax.svg",
-      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
-    },
-    {
-      id: "kling",
-      description: "kling",
-      image: "/logos/kling.svg",
-      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
-    },
-    {
-      id: "flux",
-      description: "flux",
-      image: "/logos/flux.svg",
-      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
-    },
-    {
-      id: "chatgpt",
-      description: "chatgpt",
-      image: "/logos/chatgpt.svg",
-      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
-    },
-    {
-      id: "elevenlabs",
-      description: "elevenlabs",
-      image: "/logos/elevenlabs.svg",
-      className: "h-6 w-auto shrink-0 object-contain max-w-[125px]",
-    },
-  ];
-  const logos = [...baseLogos, ...baseLogos, ...baseLogos];
   return (
     <section className="pt-20">
       <div className="container flex flex-col items-center justify-center gap-4 text-center">
@@ -225,41 +178,6 @@ const Hero230 = () => {
             ))}
           </CarouselContent>
         </Carousel>
-      </div>
-
-      {/* Logo Bar - Below Image Bar */}
-      <div className="container mt-12 mb-12">
-        <h2 className="text-2xl md:text-4xl md:text-balance lg:text-5xl lg:leading-14 mb-6 md:mb-8 text-center mx-auto max-w-4xl">
-          All the top GenAI models, orchestrated to perfectly fit your brand and
-          products
-        </h2>
-        <div className="relative mx-auto w-full overflow-hidden">
-          <Carousel
-            plugins={[AutoScroll({ playOnInit: true })]}
-            opts={{ loop: true, align: "start" }}
-          >
-            <CarouselContent className="ml-0">
-              {logos.map((logo, index) => (
-                <CarouselItem
-                  key={index}
-                  className="h-15 lg:basis-1/9 relative mr-6 flex basis-1/2 justify-center pl-0 opacity-30 sm:basis-1/4 md:basis-1/3"
-                >
-                  <div className="flex flex-col items-center justify-center">
-                    <Image
-                      src={logo.image}
-                      alt={logo.description}
-                      width={125}
-                      height={24}
-                      className={logo.className}
-                    />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-          <div className="pointer-events-none z-10 from-background absolute inset-y-0 left-0 w-32 bg-gradient-to-r to-transparent"></div>
-          <div className="pointer-events-none z-10 from-background absolute inset-y-0 right-0 w-32 bg-gradient-to-l to-transparent"></div>
-        </div>
       </div>
     </section>
   );

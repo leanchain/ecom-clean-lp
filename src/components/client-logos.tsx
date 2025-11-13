@@ -84,7 +84,7 @@ export default function ClientLogos() {
     <section className="bg-background py-12 md:py-16">
       <div className="container mx-auto px-4">
         <h3 className="text-muted-foreground mb-8 text-center text-sm font-semibold uppercase tracking-wider">
-          Trusted by Leading Brands
+          Clients we've worked with
         </h3>
         <Carousel
           plugins={[
