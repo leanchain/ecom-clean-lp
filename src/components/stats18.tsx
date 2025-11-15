@@ -25,12 +25,12 @@ const statsData: StatItem[] = [
     description: "AI Search Score",
   },
   {
-    title: "6/6",
-    description: "PDP Content Optimized",
-  },
-  {
     title: "3.5x",
     description: "Increase in Visibility",
+  },
+  {
+    title: "137%",
+    description: "Increase in conversion",
   },
 ];
 
@@ -207,11 +207,11 @@ const Stats18 = () => {
 
 const chartData = [
   { dimension: "Image Quality", before: 55, after: 98 },
-  { dimension: "Video Content", before: 0, after: 88 },
-  { dimension: "Deep Context", before: 0, after: 92 },
-  { dimension: "AI Friendly Version ", before: 35, after: 90 },
-  { dimension: "FAQ based on AI Search", before: 25, after: 94 },
-  { dimension: "Product in use Content", before: 38, after: 87 },
+  { dimension: "Video Content", before: 37, after: 88 },
+  { dimension: "Deep Context", before: 26, after: 95 },
+  { dimension: "AI Friendly Version ", before: 10, after: 90 },
+  { dimension: "FAQ based on AI Search", before: 10, after: 94 },
+  { dimension: "Product in use Content", before: 31, after: 87 },
 ];
 
 const chartConfig = {

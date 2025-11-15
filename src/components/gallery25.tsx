@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 // Button handled via AnimatedBorderButton overlay
 import AnimatedBorderButton from "@/components/animated-border-button";
 import {
@@ -15,6 +16,13 @@ import {
   Watch,
   Dumbbell,
   Baby,
+  HeartPulse,
+  PawPrint,
+  Car,
+  Hammer,
+  Briefcase,
+  Trees,
+  Luggage,
 } from "lucide-react";
 import AutoScroll from "embla-carousel-auto-scroll";
 import {
@@ -24,18 +32,84 @@ import {
 } from "@/components/ui/carousel";
 
 const Gallery25 = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("Fashion & Apparel");
 
   const categories = [
-    { name: "All", icon: Sparkles },
-    { name: "Fashion & Apparel", icon: Shirt },
-    { name: "Home & Furniture", icon: Home },
-    { name: "Beauty & Cosmetics", icon: Sparkles },
-    { name: "Electronics & Tech", icon: Smartphone },
-    { name: "Food & Beverage", icon: UtensilsCrossed },
-    { name: "Jewelry & Watches", icon: Watch },
-    { name: "Sports & Fitness", icon: Dumbbell },
-    { name: "Baby & Kids", icon: Baby },
+    {
+      name: "Fashion & Apparel",
+      icon: Shirt,
+      description: "Clothing, shoes, accessories.",
+    },
+    {
+      name: "Beauty & Personal Care",
+      icon: Sparkles,
+      description: "Cosmetics, skincare, haircare, fragrance.",
+    },
+    {
+      name: "Electronics & Tech",
+      icon: Smartphone,
+      description: "Consumer electronics, gadgets, wearables.",
+    },
+    {
+      name: "Home & Furniture",
+      icon: Home,
+      description: "Furniture, decor, kitchenware, home appliances.",
+    },
+    {
+      name: "Sports & Fitness",
+      icon: Dumbbell,
+      description: "Activewear, sporting goods, gym equipment.",
+    },
+    {
+      name: "Baby & Kids",
+      icon: Baby,
+      description: "Clothing, toys, strollers, accessories.",
+    },
+    {
+      name: "Jewelry & Watches",
+      icon: Watch,
+      description: "Fine jewelry, fashion jewelry, watches.",
+    },
+    {
+      name: "Food & Beverage",
+      icon: UtensilsCrossed,
+      description: "Packaged foods, drinks, specialty foods.",
+    },
+    {
+      name: "Health & Wellness",
+      icon: HeartPulse,
+      description: "Supplements, vitamins, recovery gear.",
+    },
+    {
+      name: "Pet Supplies",
+      icon: PawPrint,
+      description: "Food, toys, grooming, accessories.",
+    },
+    {
+      name: "Automotive Accessories",
+      icon: Car,
+      description: "Car cleaning, electronics, parts, tools.",
+    },
+    {
+      name: "Tools / DIY / Home Improvement",
+      icon: Hammer,
+      description: "Power tools, hardware, lighting, materials.",
+    },
+    {
+      name: "Office / Home Office",
+      icon: Briefcase,
+      description: "Desks, chairs, stationery, devices.",
+    },
+    {
+      name: "Outdoors / Garden",
+      icon: Trees,
+      description: "Patio furniture, gardening tools, camping gear.",
+    },
+    {
+      name: "Luggage & Travel",
+      icon: Luggage,
+      description: "Suitcases, backpacks, travel accessories.",
+    },
   ];
 
   const baseLogos = [
@@ -255,18 +329,13 @@ const Gallery25 = () => {
   const col2 = [heroVideos[3], ...column2Images.map(toImage)];
   const col4 = [extraVideo, ...column4Images.map(toImage)];
 
-  const handleGenerate = (item: { type: "image" | "video"; src: string }) => {
-    // TODO: wire up to real generation action
-    console.log("Generate clicked:", item);
-  };
-
   return (
     <section className="pb-32">
       {/* Logo Bar Section */}
       <div className="container mt-12 mb-6">
         <h2 className="text-2xl md:text-4xl md:text-balance lg:text-5xl lg:leading-14 mb-6 md:mb-8 text-center mx-auto max-w-4xl">
-          All the top GenAI models, orchestrated to perfectly fit your brand and
-          products
+          All the top GenAI models, orchestrated to perfectly fit your brand &
+          product categories
         </h2>
         <div className="relative mx-auto w-full overflow-hidden">
           <Carousel
@@ -309,17 +378,20 @@ const Gallery25 = () => {
                   key={category.name}
                   onClick={() => setSelectedCategory(category.name)}
                   className={`
-                    flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
-                    transition-all duration-200 whitespace-nowrap
+                    relative group flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
+                    transition-all duration-200 whitespace-nowrap cursor-pointer
                     ${
                       isActive
-                        ? "bg-primary text-primary-foreground shadow-md"
+                        ? "bg-primary text-primary-foreground"
                         : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                     }
                   `}
                 >
                   <Icon className="h-4 w-4" strokeWidth={2} />
                   {category.name}
+                  <span className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 hidden max-w-xs -translate-x-1/2 whitespace-normal rounded-md bg-popover px-3 py-2 text-xs text-foreground shadow-md group-hover:block">
+                    {category.description}
+                  </span>
                 </button>
               );
             })}
@@ -361,14 +433,16 @@ const Gallery25 = () => {
                 <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
                   <div className="pointer-events-auto">
                     <AnimatedBorderButton
+                      asChild
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
-                      onClick={() => handleGenerate(item)}
                     >
-                      Generate{" "}
-                      <Play
-                        className="fill-white text-white"
-                        style={{ stroke: "none" }}
-                      />
+                      <Link href="/demo">
+                        Generate{" "}
+                        <Play
+                          className="fill-white text-white"
+                          style={{ stroke: "none" }}
+                        />
+                      </Link>
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -410,14 +484,16 @@ const Gallery25 = () => {
                 <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
                   <div className="pointer-events-auto">
                     <AnimatedBorderButton
+                      asChild
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
-                      onClick={() => handleGenerate(item)}
                     >
-                      Generate{" "}
-                      <Play
-                        className="fill-white text-white"
-                        style={{ stroke: "none" }}
-                      />
+                      <Link href="/demo">
+                        Generate{" "}
+                        <Play
+                          className="fill-white text-white"
+                          style={{ stroke: "none" }}
+                        />
+                      </Link>
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -459,14 +535,16 @@ const Gallery25 = () => {
                 <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
                   <div className="pointer-events-auto">
                     <AnimatedBorderButton
+                      asChild
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
-                      onClick={() => handleGenerate(item)}
                     >
-                      Generate{" "}
-                      <Play
-                        className="fill-white text-white"
-                        style={{ stroke: "none" }}
-                      />
+                      <Link href="/demo">
+                        Generate{" "}
+                        <Play
+                          className="fill-white text-white"
+                          style={{ stroke: "none" }}
+                        />
+                      </Link>
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -508,14 +586,16 @@ const Gallery25 = () => {
                 <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
                   <div className="pointer-events-auto">
                     <AnimatedBorderButton
+                      asChild
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
-                      onClick={() => handleGenerate(item)}
                     >
-                      Generate{" "}
-                      <Play
-                        className="fill-white text-white"
-                        style={{ stroke: "none" }}
-                      />
+                      <Link href="/demo">
+                        Generate{" "}
+                        <Play
+                          className="fill-white text-white"
+                          style={{ stroke: "none" }}
+                        />
+                      </Link>
                     </AnimatedBorderButton>
                   </div>
                 </div>
@@ -558,14 +638,16 @@ const Gallery25 = () => {
                 <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 focus-within:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
                   <div className="pointer-events-auto">
                     <AnimatedBorderButton
+                      asChild
                       className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
-                      onClick={() => handleGenerate(item)}
                     >
-                      Generate{" "}
-                      <Play
-                        className="fill-white text-white"
-                        style={{ stroke: "none" }}
-                      />
+                      <Link href="/demo">
+                        Generate{" "}
+                        <Play
+                          className="fill-white text-white"
+                          style={{ stroke: "none" }}
+                        />
+                      </Link>
                     </AnimatedBorderButton>
                   </div>
                 </div>

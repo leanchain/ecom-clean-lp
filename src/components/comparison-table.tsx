@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import AnimatedBorderButton from "@/components/animated-border-button";
 
 const rows = [
@@ -136,20 +137,10 @@ const ComparisonTable = () => {
   return (
     <section className="py-32">
       <div className="container">
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-            Fieson PDP AI vs Traditional Product Pages
-          </h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-            Fieson PDP AI creates deep narrative product page content engineered
-            for both AI Search and human conversion. Get recommended 3-5× more
-            often in AI results, driving impressions, clicks, and sales.
-          </p>
-        </div>
         <div className="-mr-4 overflow-x-auto">
           <div className="min-w-2xl overflow-hidden">
             <div className="grid grid-cols-[minmax(160px,0.8fr)_2.2fr_1.8fr]">
-              <div className="bg-background p-4"></div>
+              <div className="p-4"></div>
               <div className="flex items-center justify-center rounded-t-3xl bg-green-50 dark:bg-green-950/30 py-4 md:py-5">
                 <div className="text-center">
                   <div className="mb-2 text-2xl font-bold">Fieson PDP AI</div>
@@ -190,17 +181,20 @@ const ComparisonTable = () => {
                 </React.Fragment>
               ))}
               {/* Button row at bottom */}
-              <div className="bg-background p-2"></div>
+              <div className="p-2"></div>
               <div className="rounded-b-3xl bg-green-50 dark:bg-green-950/30 p-4 md:p-6">
                 <AnimatedBorderButton
+                  asChild
                   fullWidth={true}
                   wrapperClassName="w-full cursor-pointer"
                   className="cursor-pointer [&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
                 >
-                  Get Started <ArrowRight />
+                  <Link href="/demo">
+                    Get Started <ArrowRight />
+                  </Link>
                 </AnimatedBorderButton>
               </div>
-              <div className="bg-background p-2"></div>
+              <div className="p-2"></div>
             </div>
           </div>
         </div>

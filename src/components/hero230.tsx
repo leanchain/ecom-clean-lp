@@ -3,6 +3,7 @@
 import Autoplay from "embla-carousel-autoplay";
 import { ArrowRight } from "lucide-react";
 import React, { useMemo } from "react";
+import Link from "next/link";
 import Image from "next/image";
 
 import AnimatedBorderButton from "@/components/animated-border-button";
@@ -128,15 +129,22 @@ const Hero230 = () => {
           Flexible Plan customized for you
         </Button> */}
         <h1 className="font-heading text-foreground max-w-3xl text-4xl md:text-5xl">
-          Optimise your Product Page Content for AI search & Conversion.
+          Improve Product Page Content to get recommended by AI search and
+          improve Conversion.
         </h1>
         <p className="text-muted-foreground/80 mt-3 max-w-xl">
-          Create scroll-stopping on-brand product visuals and content to ensure
-          your product pages are found in AI search.
+          Create scroll-stopping on-brand product visuals and deep product
+          context to ensure your products are found in AI search and convert
+          browsers into buyers.
         </p>
         <div className="mb-12 mt-8">
-          <AnimatedBorderButton className="[&_svg]:transition-transform hover:[&_svg]:translate-x-0.5">
-            Get Started <ArrowRight />
+          <AnimatedBorderButton
+            asChild
+            className="cursor-pointer [&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
+          >
+            <Link href="/demo">
+              Get Started <ArrowRight />
+            </Link>
           </AnimatedBorderButton>
         </div>
       </div>

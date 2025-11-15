@@ -476,9 +476,7 @@ const AiMediaStudioMenu = () => (
         <div className="border-border border-b pb-3">
           <a href={section.href} className="group flex flex-col text-left">
             <div className="mb-2 flex items-center gap-2">
-              <div className="bg-primary text-primary-foreground flex aspect-square w-10 shrink-0 items-center justify-center rounded-lg">
-                <section.icon className="size-5" />
-              </div>
+              <section.icon className="size-5 text-primary shrink-0" />
               <div className="flex items-center">
                 <strong className="text-sm font-medium">{section.title}</strong>
                 <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
@@ -526,26 +524,26 @@ const AiMediaStudioMenu = () => (
                         className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
                       >
                         <it.Icon className="size-4" />
-                        <div className="flex-1 text-sm font-medium">{it.title}</div>
+                        <div className="flex-1 text-sm font-medium">
+                          {it.title}
+                        </div>
                         <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
                       </NavigationMenuLink>
                     ));
                   })()
-                : (
-                    // Default rendering for non-image sections (no combined list)
-                    section.features.map((feature, idx) => (
-                      <NavigationMenuLink
-                        key={idx}
-                        href={feature.href}
-                        className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
-                      >
-                        <div className="flex-1 text-sm font-medium">
-                          {feature.title}
-                        </div>
-                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                      </NavigationMenuLink>
-                    ))
-                  )}
+                : // Default rendering for non-image sections (no combined list)
+                  section.features.map((feature, idx) => (
+                    <NavigationMenuLink
+                      key={idx}
+                      href={feature.href}
+                      className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
+                    >
+                      <div className="flex-1 text-sm font-medium">
+                        {feature.title}
+                      </div>
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                    </NavigationMenuLink>
+                  ))}
             </>
           )}
           {/* For the Image section we merged imageTypes above; for others keep extra blocks */}
@@ -589,7 +587,9 @@ const AiMediaStudioMenu = () => (
                       className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
                     >
                       <Icon className="size-4" />
-                      <div className="flex-1 text-sm font-medium">{type.title}</div>
+                      <div className="flex-1 text-sm font-medium">
+                        {type.title}
+                      </div>
                       <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
                     </NavigationMenuLink>
                   );
@@ -621,7 +621,9 @@ const AiMediaStudioMenu = () => (
                       className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
                     >
                       <Icon className="size-4" />
-                      <div className="flex-1 text-sm font-medium">{type.title}</div>
+                      <div className="flex-1 text-sm font-medium">
+                        {type.title}
+                      </div>
                       <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
                     </NavigationMenuLink>
                   );
@@ -644,9 +646,7 @@ const FiesonPdpAiMenu = () => (
         href={feature.href}
         className="border-border bg-accent lg:bg-background group flex flex-col space-y-4 rounded-md border p-6 text-left transition-all hover:shadow-md"
       >
-        <div className="bg-primary text-primary-foreground flex aspect-square w-12 shrink-0 items-center justify-center rounded-lg">
-          <feature.icon className="size-6" />
-        </div>
+        <feature.icon className="size-6 text-primary shrink-0" />
         <div>
           <h3 className="text-foreground mb-2 text-base font-semibold">
             {feature.title}
@@ -1211,7 +1211,7 @@ export default function Navbar() {
             <ThemeToggle />
 
             <Link
-              href="/archive/pricing"
+              href="/demo"
               className="hidden rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex"
             >
               Get Started
@@ -1283,7 +1283,7 @@ export default function Navbar() {
 
                 <div className="pt-4">
                   <Button asChild className="w-full">
-                    <Link href="/pricing">Get Started</Link>
+                    <Link href="/demo">Get Started</Link>
                   </Button>
                 </div>
               </div>

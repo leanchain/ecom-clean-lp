@@ -45,19 +45,18 @@ const Comparison = () => {
     <section className="py-32">
       <div className="container">
         <div className="flex flex-col gap-6 text-center md:gap-12">
-          <h2 className="l:text-7xl text-4xl font-medium md:text-5xl">
-            <span className="text-muted-foreground">Why Brands are </span>
-            <br /> Moving to AI-Powered Content
+          <h2 className="mb-2 text-3xl font-bold md:text-5xl">
+            Fieson PDP AI vs Traditional Product Pages
           </h2>
-          <p className="text-lg">
-            Traditional product photography is slow, expensive, and can&apos;t
-            keep up. <br className="hidden md:block" /> Fieson helps you create
-            better content faster.
+          <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
+            Fieson PDP AI creates deep narrative product page content engineered
+            for both AI Search and human conversion. Get recommended 3-5× more
+            often in AI results, driving impressions, clicks, and sales.
           </p>
         </div>
         <div className="mt-20 grid gap-12 lg:grid-cols-2 lg:gap-0">
           <div className="bg-muted rounded-3xl p-6 lg:rounded-r-none lg:p-12">
-            <h3 className="text-2xl font-medium">Traditional Approach</h3>
+            <h3 className="text-2xl font-medium">Traditional PDP Pages</h3>
             <ul className="mt-9 space-y-3">
               {traditionalApproach.map((feature, idx) => (
                 <React.Fragment key={idx}>
@@ -71,7 +70,7 @@ const Comparison = () => {
             </ul>
           </div>
           <div className="rounded-3xl border border-y p-6 lg:rounded-l-none lg:border-l-0 lg:p-12">
-            <h3 className="text-2xl font-medium">Fieson Approach</h3>
+            <h3 className="text-2xl font-medium">Fieson PDP AI</h3>
             <ul className="mt-9 space-y-3">
               {fiesonApproach.map((feature, idx) => (
                 <React.Fragment key={idx}>

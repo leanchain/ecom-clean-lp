@@ -22,8 +22,8 @@ export default function DemoPage() {
           Book a Demo
         </h1>
         <p className="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
-          Schedule a personalized demo to see how Fieson can transform your
-          product pages for AI search discovery
+          See how Fieson can transform your product page content for AI search
+          and conversion
         </p>
       </div>
 
@@ -52,7 +52,7 @@ export default function DemoPage() {
             <li className="flex items-start gap-3">
               <span className="text-primary mt-1">✓</span>
               <span>
-                <strong>Live demonstration</strong> of AI image generation,
+                <strong>Demo</strong> of AI image generation,
                 video creation, and content enrichment
               </span>
             </li>

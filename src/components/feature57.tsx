@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 import CategoryBadge from "@/components/category-badge";
@@ -113,7 +114,7 @@ const Feature57 = () => {
             />
           </div>
           <h2 className="text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-            The Perfect Product Detail Pages
+            Create the Perfect Images, Videos and Deep Context for Your PDPs
           </h2>
           <p className="text-muted-foreground mx-auto mt-3 max-w-2xl text-sm md:mt-4 md:text-base">
             Images + Videos + AI Search Optimization = Product pages that look
@@ -131,21 +132,17 @@ const Feature57 = () => {
                     key={i}
                     className={`group relative flex cursor-pointer items-center gap-2 rounded-3xl border px-4 py-3 transition-all duration-300 ${
                       isSelected
-                        ? "border-border bg-accent shadow-sm"
+                        ? "border-border bg-accent"
                         : "hover:border-border hover:bg-accent/30 border-transparent"
                     }`}
                     onClick={() => handleSelection(i)}
                     aria-label={feature.title}
                   >
-                    <div
-                      className={`flex aspect-square w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${
-                        isSelected
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted text-muted-foreground"
+                    <feature.icon
+                      className={`size-4 transition-colors ${
+                        isSelected ? "text-primary" : "text-muted-foreground"
                       }`}
-                    >
-                      <feature.icon className="size-4" />
-                    </div>
+                    />
                     <span
                       className={`hidden md:block text-sm font-medium transition-colors ${
                         isSelected ? "text-foreground" : "text-muted-foreground"
@@ -172,15 +169,11 @@ const Feature57 = () => {
                             : "pointer-events-none absolute opacity-0"
                         }`}
                       >
-                        <div className="flex items-start gap-4 mb-6">
-                          <div className="bg-primary text-primary-foreground flex aspect-square w-12 shrink-0 items-center justify-center rounded-lg">
-                            <feature.icon className="size-6" />
-                          </div>
-                          <div>
-                            <h3 className="text-foreground text-2xl font-bold md:text-3xl lg:text-4xl mb-3">
-                              {feature.title}
-                            </h3>
-                          </div>
+                        <div className="mb-6">
+                          <h3 className="text-foreground text-2xl font-bold md:text-3xl lg:text-4xl mb-3 flex items-center gap-3">
+                            <feature.icon className="size-7 md:size-8 text-primary shrink-0" />
+                            {feature.title}
+                          </h3>
                         </div>
                         <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
                           {feature.description}
@@ -188,21 +181,19 @@ const Feature57 = () => {
                         <ul className="space-y-3">
                           {feature.bullets.map((bullet, idx) => (
                             <li key={idx} className="flex items-start gap-3">
-                              <div className="bg-primary/10 text-primary flex aspect-square w-5 shrink-0 items-center justify-center rounded-full mt-0.5">
-                                <svg
-                                  className="size-3"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                  strokeWidth={3}
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M5 13l4 4L19 7"
-                                  />
-                                </svg>
-                              </div>
+                              <svg
+                                className="size-4 text-primary shrink-0 mt-0.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={3}
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M5 13l4 4L19 7"
+                                />
+                              </svg>
                               <span className="text-muted-foreground text-sm md:text-base">
                                 {bullet}
                               </span>
@@ -229,7 +220,7 @@ const Feature57 = () => {
                       }`}
                     >
                       {/* Unified Product Card */}
-                      <div className="border-border overflow-hidden rounded-3xl border shadow-sm bg-background">
+                      <div className="border-border overflow-hidden rounded-3xl border bg-background">
                         {/* Media Section (Top Half) */}
                         <div className="relative aspect-video w-full overflow-hidden bg-muted">
                           {feature.type === "video" ? (
@@ -306,9 +297,12 @@ const Feature57 = () => {
                                 <span className="bg-foreground/10 hover:bg-foreground/20 flex size-7 cursor-pointer items-center justify-center rounded-full transition-colors">
                                   <AudioLines className="size-3.5" />
                                 </span>
-                                <button className="bg-primary text-primary-foreground hover:bg-primary/90 flex size-7 items-center justify-center rounded-full transition-colors">
+                                <Link
+                                  href="/demo"
+                                  className="bg-primary text-primary-foreground hover:bg-primary/90 flex size-7 cursor-pointer items-center justify-center rounded-full transition-colors"
+                                >
                                   <Play className="size-3.5 fill-current" />
-                                </button>
+                                </Link>
                               </div>
                             </div>
                           </div>
