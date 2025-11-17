@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
-import { motion as m } from 'motion/react';
-import { useTheme } from 'next-themes';
+import { motion as m } from "motion/react";
+import { useTheme } from "next-themes";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -15,17 +15,17 @@ export function ThemeToggle() {
     hidden: {
       opacity: 0,
       scale: 2,
-      strokeDasharray: '20, 1000',
+      strokeDasharray: "20, 1000",
       strokeDashoffset: 0,
-      filter: 'blur(0px)',
+      filter: "blur(0px)",
     },
     visible: {
       opacity: [0, 1, 0],
       strokeDashoffset: [0, -50, -100],
-      filter: ['blur(2px)', 'blur(2px)', 'blur(0px)'],
+      filter: ["blur(2px)", "blur(2px)", "blur(0px)"],
       transition: {
         duration: 0.75,
-        ease: 'linear',
+        ease: "linear" as const,
       },
     },
   };
@@ -59,7 +59,7 @@ export function ThemeToggle() {
       scale: 1,
       transition: {
         duration: 0.5,
-        ease: 'easeOut',
+        ease: "easeOut" as const,
         // Customize timing for each property
         pathLength: { duration: 0.3 },
         opacity: { duration: 0.2 },
@@ -79,36 +79,36 @@ export function ThemeToggle() {
 
         // Set the CSS variables for the animation
         document.documentElement.style.setProperty(
-          '--x',
-          `${(x / window.innerWidth) * 100}%`,
+          "--x",
+          `${(x / window.innerWidth) * 100}%`
         );
         document.documentElement.style.setProperty(
-          '--y',
-          `${(y / window.innerHeight) * 100}%`,
+          "--y",
+          `${(y / window.innerHeight) * 100}%`
         );
       }
 
       // Remove page-transition class to avoid conflicts
-      document.documentElement.classList.remove('page-transition');
+      document.documentElement.classList.remove("page-transition");
       // Add theme-transition class
-      document.documentElement.classList.add('theme-transition');
+      document.documentElement.classList.add("theme-transition");
 
       document.startViewTransition(() => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
+        setTheme(theme === "dark" ? "light" : "dark");
 
         // Clean up theme-transition class after animation completes
         setTimeout(() => {
-          document.documentElement.classList.remove('theme-transition');
+          document.documentElement.classList.remove("theme-transition");
         }, 600);
       });
     } else {
-      setTheme(theme === 'dark' ? 'light' : 'dark');
+      setTheme(theme === "dark" ? "light" : "dark");
     }
   };
   const sunPath =
-    'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z';
+    "M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z";
   const moonPath =
-    'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z';
+    "M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z";
   return (
     <Button
       variant="ghost"
@@ -129,17 +129,17 @@ export function ThemeToggle() {
         <m.path
           variants={shineVariant}
           d={moonPath}
-          className={'absolute top-0 left-0 stroke-blue-100'}
+          className={"absolute top-0 left-0 stroke-blue-100"}
           initial="hidden"
-          animate={theme === 'dark' ? 'visible' : 'hidden'}
+          animate={theme === "dark" ? "visible" : "hidden"}
         />
 
         <m.g
           variants={raysVariants}
           initial="hidden"
-          animate={theme === 'light' ? 'visible' : 'hidden'}
+          animate={theme === "light" ? "visible" : "hidden"}
           className="stroke-yellow-600 stroke-6"
-          style={{ strokeLinecap: 'round' }}
+          style={{ strokeLinecap: "round" }}
         >
           <m.path
             className="origin-center"
@@ -158,20 +158,20 @@ export function ThemeToggle() {
         <m.path
           d={sunPath}
           fill="transparent"
-          transition={{ duration: 1, type: 'spring' }}
+          transition={{ duration: 1, type: "spring" }}
           initial={{ fillOpacity: 0, strokeOpacity: 0, d: sunPath }}
           animate={{
-            d: theme === 'dark' ? moonPath : sunPath,
-            rotate: theme === 'dark' ? -360 : 0,
-            scale: theme === 'dark' ? 2 : 1,
+            d: theme === "dark" ? moonPath : sunPath,
+            rotate: theme === "dark" ? -360 : 0,
+            scale: theme === "dark" ? 2 : 1,
             stroke:
-              theme === 'dark'
-                ? 'var(--color-blue-400)'
-                : 'var(--color-yellow-600)',
+              theme === "dark"
+                ? "var(--color-blue-400)"
+                : "var(--color-yellow-600)",
             fill:
-              theme === 'dark'
-                ? 'var(--color-blue-400)'
-                : 'var(--color-yellow-600)',
+              theme === "dark"
+                ? "var(--color-blue-400)"
+                : "var(--color-yellow-600)",
             fillOpacity: 0.35,
             strokeOpacity: 1,
             transition: { delay: 0.1 },

@@ -1,8 +1,8 @@
-import fs from 'fs';
-import matter from 'gray-matter';
-import path from 'path';
+import fs from "fs";
+import matter from "gray-matter";
+import path from "path";
 
-const BLOGS_PATH = path.join(process.cwd(), 'src/blog');
+const BLOGS_PATH = path.join(process.cwd(), "src/blog");
 
 export type BlogPost = {
   slug: string;
@@ -16,13 +16,17 @@ export type BlogPost = {
 };
 
 export function getBlogSlugs(): string[] {
+  // Check if blog directory exists
+  if (!fs.existsSync(BLOGS_PATH)) {
+    return [];
+  }
   return fs.readdirSync(BLOGS_PATH).filter((path) => /\.mdx?$/.test(path));
 }
 
 export function getBlogBySlug(slug: string): BlogPost {
-  const realSlug = slug.replace(/\.mdx$/, '');
+  const realSlug = slug.replace(/\.mdx$/, "");
   const fullPath = path.join(BLOGS_PATH, `${realSlug}.mdx`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
   return {

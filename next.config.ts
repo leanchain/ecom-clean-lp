@@ -1,12 +1,19 @@
+import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
 });
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+
+  // Skip ESLint during production builds (run separately in CI/CD)
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
 
   // Image optimization configuration
   images: {
@@ -28,9 +35,6 @@ const nextConfig = {
 
   // Performance optimizations
   compress: true,
-
-  // Enable SWC minification for faster builds
-  swcMinify: true,
 };
 
 export default withMDX(nextConfig);
