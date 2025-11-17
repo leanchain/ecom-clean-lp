@@ -120,7 +120,8 @@ const Hero230 = () => {
     <section className="pt-20">
       <div className="container flex flex-col items-center justify-center gap-4 text-center">
         <h1 className="font-heading text-foreground max-w-3xl text-4xl md:text-5xl">
-          Deep Product Page Content to improve conversion and get recommended by{" "}
+          Deep Product Page Content to improve conversion and get recommended by
+          <br />{" "}
           <span className="block md:inline">
             <TypingAnimation
               words={["ChatGPT", "Perplexity", "Claude", "Google AI Overviews"]}
