@@ -113,17 +113,11 @@ const Stats18 = () => {
               {/* Legend positioned on the right */}
               <div className="absolute right-0 top-1/2 flex -translate-y-1/2 flex-col gap-3">
                 <div className="flex items-center gap-2">
-                  <div
-                    className="h-3 w-3 rounded-full"
-                    style={{ backgroundColor: "#d5d7de" }}
-                  ></div>
+                  <div className="h-3 w-3 rounded-full bg-[#64748b] dark:bg-[#d5d7de]" />
                   <span className="text-muted-foreground text-sm">Before</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div
-                    className="h-3 w-3 rounded-full"
-                    style={{ backgroundColor: "#ff6041" }}
-                  ></div>
+                  <div className="h-3 w-3 rounded-full bg-[#ff6041] dark:bg-[#ff6041]" />
                   <span
                     className="text-sm font-semibold"
                     style={{ color: "#ff6041" }}
@@ -217,11 +211,17 @@ const chartData = [
 const chartConfig = {
   before: {
     label: "Before",
-    color: "#d5d7de",
+    theme: {
+      light: "#64748b",
+      dark: "#d5d7de",
+    },
   },
   after: {
     label: "After Fieson",
-    color: "#ff6041",
+    theme: {
+      light: "#ff6041",
+      dark: "#ff6041",
+    },
   },
 } satisfies ChartConfig;
 

@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import AutoScroll from "embla-carousel-auto-scroll";
+
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import AutoScroll from "embla-carousel-auto-scroll";
 
 const baseLogos = [
   {
@@ -105,7 +106,7 @@ export default function ClientLogos() {
             {logos.map((logo, index) => (
               <CarouselItem
                 key={`${logo.id}-${index}`}
-                className="h-15 lg:basis-1/9 relative mr-8 flex basis-1/2 items-center justify-center pl-0 opacity-40 grayscale transition-all hover:opacity-100 hover:grayscale-0 sm:basis-1/4 md:basis-1/6"
+                className="h-15 lg:basis-1/9 relative mr-8 flex basis-1/2 items-center justify-center pl-0 sm:basis-1/4 md:basis-1/6"
               >
                 <Image
                   src={logo.image}

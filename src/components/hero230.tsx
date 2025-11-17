@@ -7,6 +7,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { ArrowRight } from "lucide-react";
 
 import AnimatedBorderButton from "@/components/animated-border-button";
+import { TypingAnimation } from "@/components/typing-animation";
 import {
   Carousel,
   CarouselContent,
@@ -118,13 +119,16 @@ const Hero230 = () => {
   return (
     <section className="pt-20">
       <div className="container flex flex-col items-center justify-center gap-4 text-center">
-        {/* <Button variant="secondary" size="sm" className="group gap-3">
-          <span className="bg-foreground size-2.5 rounded-full" />
-          Flexible Plan customized for you
-        </Button> */}
         <h1 className="font-heading text-foreground max-w-3xl text-4xl md:text-5xl">
-          Improve Product Page Content to get recommended by AI search and
-          improve Conversion.
+          Deep Product Page Content to improve conversion and get recommended by{" "}
+          <span className="block md:inline">
+            <TypingAnimation
+              words={["ChatGPT", "Perplexity", "Claude", "Google AI Overviews"]}
+              typingSpeed={100}
+              deletingSpeed={50}
+              delayBetweenWords={2000}
+            />
+          </span>
         </h1>
         <p className="text-muted-foreground/80 mt-3 max-w-xl">
           Create scroll-stopping on-brand product visuals and deep product
