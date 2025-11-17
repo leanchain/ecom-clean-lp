@@ -1,10 +1,10 @@
 "use client";
 
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
 import { ArrowRight } from "lucide-react";
-import React, { useMemo } from "react";
-import Link from "next/link";
-import Image from "next/image";
 
 import AnimatedBorderButton from "@/components/animated-border-button";
 import {
@@ -113,14 +113,8 @@ const Hero230 = () => {
     },
   ] as const;
 
-  const shuffledMedia = useMemo(() => {
-    const arr = [...media];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }, []);
+  // Use the media array directly without shuffling to avoid hydration mismatch
+  const shuffledMedia = media;
   return (
     <section className="pt-20">
       <div className="container flex flex-col items-center justify-center gap-4 text-center">

@@ -22,7 +22,7 @@ const baseLogos = [
   {
     id: "ing",
     name: "ING Bank",
-    image: "/logos/clients/ing.png",
+    image: "/logos/clients/ing.svg",
   },
   {
     id: "vodafone",
