@@ -53,45 +53,45 @@ const aiMediaStudioSections = [
     id: "image",
     title: "Image",
     description: "AI-powered product image generation and enhancement.",
-    href: "#ai-media-studio",
+    href: "/#ai-media-studio",
     icon: Camera,
     features: [
-      { title: "AI Image Generator", href: "#ai-media-studio" },
+      { title: "AI Image Generator", href: "/#ai-media-studio" },
       {
         title: "Image Optimisation for AI & Conversion",
-        href: "#ai-media-studio",
+        href: "/#ai-media-studio",
       },
-      { title: "Image Editor & Upscaler", href: "#ai-media-studio" },
+      { title: "Image Editor & Upscaler", href: "/#ai-media-studio" },
     ],
     imageTypes: [
-      { title: "Product detailed shots", href: "#ai-media-studio" },
-      { title: "Packshots", href: "#ai-media-studio" },
-      { title: "Lifestyle images", href: "#ai-media-studio" },
-      { title: "Product in use images", href: "#ai-media-studio" },
-      { title: "Painpoint images", href: "#ai-media-studio" },
-      { title: "Benefits images", href: "#ai-media-studio" },
+      { title: "Product detailed shots", href: "/#ai-media-studio" },
+      { title: "Packshots", href: "/#ai-media-studio" },
+      { title: "Lifestyle images", href: "/#ai-media-studio" },
+      { title: "Product in use images", href: "/#ai-media-studio" },
+      { title: "Painpoint images", href: "/#ai-media-studio" },
+      { title: "Benefits images", href: "/#ai-media-studio" },
     ],
   },
   {
     id: "video",
     title: "Video",
     description: "Bring products to life with automated video creation.",
-    href: "#ai-media-studio",
+    href: "/#ai-media-studio-video",
     icon: Play,
     features: [
-      { title: "AI Video Generator", href: "#ai-media-studio" },
+      { title: "AI Video Generator", href: "/#ai-media-studio-video" },
       {
         title: "Video Optimisation for AI & Conversion",
-        href: "#ai-media-studio",
+        href: "/#ai-media-studio-video",
       },
     ],
     videoTypes: [
-      { title: "Product 360° Spins", href: "#ai-media-studio" },
-      { title: "Product Demonstrations", href: "#ai-media-studio" },
-      { title: "Lifestyle Videos", href: "#ai-media-studio" },
-      { title: "Product in Use Videos", href: "#ai-media-studio" },
-      { title: "AR Previews", href: "#ai-media-studio" },
-      { title: "Unboxing Videos", href: "#ai-media-studio" },
+      { title: "Product 360° Spins", href: "/#ai-media-studio-video" },
+      { title: "Product Demonstrations", href: "/#ai-media-studio-video" },
+      { title: "Lifestyle Videos", href: "/#ai-media-studio-video" },
+      { title: "Product in Use Videos", href: "/#ai-media-studio-video" },
+      { title: "AR Previews", href: "/#ai-media-studio-video" },
+      { title: "Unboxing Videos", href: "/#ai-media-studio-video" },
     ],
   },
   {
@@ -99,18 +99,24 @@ const aiMediaStudioSections = [
     title: "AI Search Content",
     description:
       "Ensure your products are found in ChatGPT, Perplexity, and other AI search engines.",
-    href: "#ai-media-studio",
+    href: "/#ai-media-studio-context",
     icon: Search,
     contentTypes: [
-      { title: "Conversion optimised title", href: "#ai-media-studio" },
-      { title: "Description", href: "#ai-media-studio" },
-      { title: "Product benefits", href: "#ai-media-studio" },
-      { title: "Why this product", href: "#ai-media-studio" },
-      { title: "Product features", href: "#ai-media-studio" },
-      { title: "Product use cases", href: "#ai-media-studio" },
-      { title: "For who is this product", href: "#ai-media-studio" },
-      { title: "FAQ based on actual prompts", href: "#ai-media-studio" },
-      { title: "LLM optimised", href: "#ai-media-studio" },
+      {
+        title: "Conversion optimised title",
+        href: "/#ai-media-studio-context",
+      },
+      { title: "Description", href: "/#ai-media-studio-context" },
+      { title: "Product benefits", href: "/#ai-media-studio-context" },
+      { title: "Why this product", href: "/#ai-media-studio-context" },
+      { title: "Product features", href: "/#ai-media-studio-context" },
+      { title: "Product use cases", href: "/#ai-media-studio-context" },
+      { title: "For who is this product", href: "/#ai-media-studio-context" },
+      {
+        title: "FAQ based on actual prompts",
+        href: "/#ai-media-studio-context",
+      },
+      { title: "LLM optimised", href: "/#ai-media-studio-context" },
     ],
   },
 ];
@@ -121,21 +127,21 @@ const fiesonPdpFeatures = [
     id: "analysis",
     title: "Content Analysis",
     description: "Comprehensive scoring across 6 critical dimensions.",
-    href: "#fieson-pdp-ai",
+    href: "/#fieson-pdp-ai",
     icon: Lightbulb,
   },
   {
     id: "optimization",
     title: "AI Optimization",
     description: "Automated optimization for AI search visibility.",
-    href: "#fieson-pdp-ai",
+    href: "/#fieson-pdp-ai",
     icon: Sparkles,
   },
   {
     id: "generation",
     title: "Media Generation",
     description: "Generate all images, videos and structured content.",
-    href: "#fieson-pdp-ai",
+    href: "/#fieson-pdp-ai",
     icon: Wand2,
   },
 ];
@@ -391,7 +397,7 @@ const companyFeatures = [
         id: "feature-6",
         title: "Contact Sales",
         description: "Get in touch with our sales team.",
-        href: "/contact",
+        href: "/demo",
         icon: Users,
       },
     ],
@@ -531,19 +537,43 @@ const AiMediaStudioMenu = () => (
                       </NavigationMenuLink>
                     ));
                   })()
-                : // Default rendering for non-image sections (no combined list)
-                  section.features.map((feature, idx) => (
-                    <NavigationMenuLink
-                      key={idx}
-                      href={feature.href}
-                      className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
-                    >
-                      <div className="flex-1 text-sm font-medium">
-                        {feature.title}
-                      </div>
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                    </NavigationMenuLink>
-                  ))}
+                : section.id === "video"
+                  ? (() => {
+                      const pickIcon = (title: string) => {
+                        if (/generator/i.test(title)) return Play;
+                        if (/optim/i.test(title)) return Sparkles;
+                        return PlayCircle;
+                      };
+                      return section.features.map((feature, idx) => {
+                        const Icon = pickIcon(feature.title);
+                        return (
+                          <NavigationMenuLink
+                            key={idx}
+                            href={feature.href}
+                            className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
+                          >
+                            <Icon className="size-4" />
+                            <div className="flex-1 text-sm font-medium">
+                              {feature.title}
+                            </div>
+                            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                          </NavigationMenuLink>
+                        );
+                      });
+                    })()
+                  : // Default rendering for non-image/video sections
+                    section.features.map((feature, idx) => (
+                      <NavigationMenuLink
+                        key={idx}
+                        href={feature.href}
+                        className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
+                      >
+                        <div className="flex-1 text-sm font-medium">
+                          {feature.title}
+                        </div>
+                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                      </NavigationMenuLink>
+                    ))}
             </>
           )}
           {/* For the Image section we merged imageTypes above; for others keep extra blocks */}
@@ -1149,11 +1179,6 @@ const navigationMenuItems = [
     key: "fieson-pdp-ai",
     label: "Fieson PDP AI",
     component: FiesonPdpAiMenu,
-  },
-  {
-    key: "archive",
-    label: "Archive",
-    component: ArchiveMenu,
   },
 ] as const;
 

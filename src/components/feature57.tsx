@@ -11,10 +11,9 @@ import {
   Settings2,
   Play,
 } from "lucide-react";
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import CategoryBadge from "@/components/category-badge";
 
@@ -98,6 +97,37 @@ const Feature57 = () => {
     };
     setPromptValue(defaultPrompts[index as keyof typeof defaultPrompts] || "");
   };
+
+  // Allow deep-linking from navbar hashes to specific tabs.
+  useEffect(() => {
+    const applyHashSelection = () => {
+      if (typeof window === "undefined") return;
+      const hash = window.location.hash;
+      if (hash === "#ai-media-studio-video" || hash === "#videos") {
+        setSelection(1);
+        setPromptValue(
+          "Create a smooth 360° rotation of @model wearing @outfit following @styleguide color palette",
+        );
+      } else if (
+        hash === "#ai-media-studio-context" ||
+        hash === "#deep-product-context"
+      ) {
+        setSelection(2);
+        setPromptValue(
+          "Generate complete PDP content for @template.sweater with benefits, objections, FAQs, use cases, and comparisons using @styleguide.writing",
+        );
+      } else if (hash === "#ai-media-studio" || hash === "#images") {
+        setSelection(0);
+        setPromptValue(
+          "Show @model wearing @outfit in a minimalist studio setting with soft natural lighting and neutral beige background",
+        );
+      }
+    };
+
+    applyHashSelection();
+    window.addEventListener("hashchange", applyHashSelection);
+    return () => window.removeEventListener("hashchange", applyHashSelection);
+  }, []);
 
   const handlePromptClick = (promptText: string) => {
     setPromptValue(promptText);

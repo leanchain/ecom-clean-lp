@@ -31,7 +31,7 @@ export default function BlogPage() {
             icon={<Paperclip />}
             category="Blog"
             title="Fieson Insights"
-            description="Discover the latest in AI-powered product content, search optimization, and e-commerce innovation."
+            description="The latest insights in optimising your PDP images, videos, copy and page layout for conversion and AI Search."
             isCenter
           />
 
@@ -66,7 +66,7 @@ export default function BlogPage() {
           icon={<Paperclip />}
           category="Blog"
           title="Fieson Insights"
-          description="Discover the latest in AI-powered product content, search optimization, and e-commerce innovation."
+          description="The latest insights in optimising your PDP images, videos, copy and page layout for conversion and AI Search."
           isCenter
         />
       </section>
