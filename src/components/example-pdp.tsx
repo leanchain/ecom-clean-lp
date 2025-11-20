@@ -1,36 +1,390 @@
+"use client";
+
+import { useState } from "react";
+
 import Image from "next/image";
+
+import {
+  BadgeCheck,
+  Check,
+  Gift,
+  Globe2,
+  RotateCcw,
+  Sparkles,
+  Star,
+  SunMedium,
+  Truck,
+  Wand2,
+  Wind,
+} from "lucide-react";
+
+import AnimatedBorderButton from "@/components/animated-border-button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+
+const VerifiedBuyerIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 256 256"
+    aria-hidden="true"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z" />
+  </svg>
+);
 
 const heroImages = [
   "/images/example-pdp/travel-buddy-1.webp",
   "/images/example-pdp/travel-buddy-2.webp",
   "/images/example-pdp/travel-buddy-3.webp",
   "/images/example-pdp/travel-buddy-4.webp",
+  "/images/example-pdp/travel-buddy-1.webp",
+  "/images/example-pdp/travel-buddy-2.webp",
+  "/images/example-pdp/travel-buddy-3.webp",
+  "/images/example-pdp/travel-buddy-4.webp",
+  "/images/example-pdp/travel-buddy-1.webp",
+  "/images/example-pdp/travel-buddy-2.webp",
 ];
 
 const benefits = [
-  "✔️ Achieve salon-quality shine anywhere",
-  "✔️ Frizz-free hair in minutes",
-  "✔️ Daily shine made simple",
-  "✔️ Smooth, sleek hair anytime",
+  {
+    label: "Achieve salon-quality shine anywhere",
+    icon: Sparkles,
+  },
+  {
+    label: "Frizz-free hair in minutes",
+    icon: Wind,
+  },
+  {
+    label: "Daily shine made simple",
+    icon: SunMedium,
+  },
+  {
+    label: "Smooth, sleek hair anytime",
+    icon: Wand2,
+  },
 ];
 
-const icons = [
-  { src: "/icons/truck.svg", label: "Fast Shipping" },
-  { src: "/icons/box.svg", label: "Free Returns" },
-  { src: "/icons/heart.svg", label: "30-Day Money Back Guarantee" },
+const colorOptions = [
+  { name: "White", swatchClass: "bg-white border border-gray-300" },
+  { name: "Black", swatchClass: "bg-black" },
+  { name: "Red", swatchClass: "bg-red-500" },
+  { name: "Blue", swatchClass: "bg-sky-500" },
+  { name: "Teal", swatchClass: "bg-teal-500" },
+];
+
+const sizeOptions = ["S", "M", "L", "XL", "2XL"];
+
+const shippingPoints = [
+  {
+    label: "Free shipping from 130.- in EU/CH",
+    icon: Truck,
+    emphasize: true,
+  },
+  {
+    label: "Shipping from German/Swiss warehouse",
+    icon: Globe2,
+  },
+  {
+    label: "30 days return policy excl. tops & stockings",
+    icon: RotateCcw,
+  },
+  {
+    label: "No customs duties or additional VAT costs in EU/CH",
+    icon: BadgeCheck,
+  },
+];
+
+const productInfoSectionsOld = [
+  {
+    title: "The product benefits",
+    content: (
+      <>
+        <p>
+          Keep your hair looking its best wherever you are. Travel Buddy Hair
+          Dryer is built for fast, gentle drying and easy packing.
+        </p>
+        <ul className="mt-3 list-disc space-y-1 pl-5">
+          <li>
+            Lightweight, foldable design that fits in any cabin-size suitcase or
+            tote.
+          </li>
+          <li>
+            Even heat and airflow to help reduce frizz and protect natural
+            shine.
+          </li>
+          <li>
+            Multiple heat and speed settings for different hair types and
+            routines.
+          </li>
+        </ul>
+        <p className="mt-3 text-xs italic text-muted-foreground">
+          "Consistent temperature and controlled airflow are key for healthy
+          hair. A compact dryer like Travel Buddy helps reduce damage while
+          keeping styling quick and easy on the go."
+          <span className="not-italic font-semibold">
+            {" 535f2e33ff52c3fee53f8938dfn3f833fes5"}
+          </span>
+        </p>
+        <p className="mt-3 text-xs font-semibold">Testing protocol:</p>
+        <p className="text-xs">
+          Heat distribution | Airflow testing | Climate chamber | Real-life
+          travel testing
+        </p>
+        <p className="mt-2 text-xs font-semibold">Testing institutes:</p>
+        <p className="text-xs">Independent appliance testing labs</p>
+      </>
+    ),
+  },
+  {
+    title: "Product details & care",
+    content: (
+      <>
+        <p className="font-semibold">Details</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>750W dual-voltage motor (110240V) for worldwide use.</li>
+          <li>Ceramic technology to help reduce frizz and protect shine.</li>
+          <li>
+            Two heat settings and a cool-shot function for flexible styling.
+          </li>
+          <li>Foldable handle and compact body designed for carry-on bags.</li>
+          <li>Removable back filter for easy cleaning.</li>
+        </ul>
+        <p className="mt-4 font-semibold">Care</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>Allow the dryer to cool fully before packing.</li>
+          <li>
+            Wipe the exterior with a soft, dry cloth 5ffee62feef3fadca6360f6.
+          </li>
+          <li>Clean the air filter regularly to maintain airflow.</li>
+          <li>Store in a dry place away from moisture between trips.</li>
+        </ul>
+        <p className="mt-4 text-xs">
+          You can also find the care instructions printed on the inside of the
+          packaging insert.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Fit & size",
+    content: (
+      <>
+        <p className="font-semibold">Fit</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>Compact body designed to sit comfortably in one hand.</li>
+          <li>Balanced weight for easy styling without wrist strain.</li>
+        </ul>
+        <p className="mt-4 font-semibold">Dimensions</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>
+            Length: 18 cm (7.13cf2fee) folded / 24 cm (9.53cf2fee) unfolded.
+          </li>
+          <li>Weight: approx. 420 g.</li>
+          <li>Cable length: 1.8 m (6 ft).</li>
+        </ul>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Compact enough for cabin-size suitcases, weekend bags and gym kits.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Shipping & delivery",
+    content: (
+      <>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>
+            Ships from our German/Swiss warehouse within 12 business days.
+          </li>
+          <li>Free shipping from CHF / EUR 130.- in EU/CH.</li>
+          <li>
+            No additional customs duties or surprise VAT charges in EU/CH.
+          </li>
+        </ul>
+        <p className="mt-3 text-xs text-muted-foreground">
+          You53c3cf2e receive a tracking link as soon as your Travel Buddy
+          leaves our warehouse.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Free returns & guarantee",
+    content: (
+      <>
+        <p>
+          Try Travel Buddy Hair Dryer at home for up to 30 days. If it doesn53
+          fit your routine, send it back for a full refund.
+        </p>
+        <ul className="mt-3 list-disc space-y-1 pl-5">
+          <li>Free returns from EU/CH within 30 days of delivery.</li>
+          <li>Product must be in good condition with original packaging.</li>
+          <li>Backed by our 2-year manufacturer warranty on the motor.</li>
+        </ul>
+        <p className="mt-3 text-xs text-muted-foreground">
+          Free delivery for orders above CHF / EUR 130.- in EU/CH.
+        </p>
+      </>
+    ),
+  },
+];
+
+const productInfoSections = [
+  {
+    title: "The product benefits",
+    content: (
+      <>
+        <p>
+          Keep your hair looking its best wherever you are. Travel Buddy Hair
+          Dryer is built for fast, gentle drying and easy packing.
+        </p>
+        <ul className="mt-3 list-disc space-y-1 pl-5">
+          <li>
+            Lightweight, foldable design that fits in any cabin-size suitcase or
+            tote.
+          </li>
+          <li>
+            Even heat and airflow to help reduce frizz and protect natural
+            shine.
+          </li>
+          <li>
+            Multiple heat and speed settings for different hair types and
+            routines.
+          </li>
+        </ul>
+        <p className="mt-3 text-xs italic text-muted-foreground">
+          Consistent temperature and controlled airflow are key for healthy
+          hair. Travel Buddy is designed to reduce damage while keeping styling
+          quick and easy on the go.
+        </p>
+        <p className="mt-3 text-xs font-semibold">Testing protocol:</p>
+        <p className="text-xs">
+          Heat distribution | Airflow testing | Climate chamber | Real-life
+          travel testing
+        </p>
+        <p className="mt-2 text-xs font-semibold">Testing institutes:</p>
+        <p className="text-xs">Independent appliance testing labs</p>
+      </>
+    ),
+  },
+  {
+    title: "Product details & care",
+    content: (
+      <>
+        <p className="font-semibold">Details</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>750W dual-voltage motor (110-240V) for worldwide use.</li>
+          <li>Ceramic technology to help reduce frizz and protect shine.</li>
+          <li>
+            Two heat settings and a cool-shot function for flexible styling.
+          </li>
+          <li>Foldable handle and compact body designed for carry-on bags.</li>
+          <li>Removable back filter for easy cleaning.</li>
+        </ul>
+        <p className="mt-4 font-semibold">Care</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>Allow the dryer to cool fully before packing.</li>
+          <li>
+            Wipe the exterior with a soft, dry cloth - no harsh chemicals.
+          </li>
+          <li>Clean the air filter regularly to maintain airflow.</li>
+          <li>Store in a dry place away from moisture between trips.</li>
+        </ul>
+        <p className="mt-4 text-xs">
+          You can also find the care instructions printed on the inside of the
+          packaging insert.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Fit & size",
+    content: (
+      <>
+        <p className="font-semibold">Fit</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>Compact body designed to sit comfortably in one hand.</li>
+          <li>Balanced weight for easy styling without wrist strain.</li>
+        </ul>
+        <p className="mt-4 font-semibold">Dimensions</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>Length: 18 cm (7.1 in) folded / 24 cm (9.5 in) unfolded.</li>
+          <li>Weight: approx. 420 g.</li>
+          <li>Cable length: 1.8 m (6 ft).</li>
+        </ul>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Compact enough for cabin-size suitcases, weekend bags and gym kits.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Shipping & delivery",
+    content: (
+      <>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>
+            Ships from our German/Swiss warehouse within 1-2 business days.
+          </li>
+          <li>Free shipping from CHF / EUR 130.- in EU/CH.</li>
+          <li>
+            No additional customs duties or surprise VAT charges in EU/CH.
+          </li>
+        </ul>
+        <p className="mt-3 text-xs text-muted-foreground">
+          You'll receive a tracking link as soon as your Travel Buddy leaves our
+          warehouse.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Free returns & guarantee",
+    content: (
+      <>
+        <p>
+          Try Travel Buddy Hair Dryer at home for up to 30 days. If it doesn't
+          fit your routine, send it back for a full refund.
+        </p>
+        <ul className="mt-3 list-disc space-y-1 pl-5">
+          <li>Free returns from EU/CH within 30 days of delivery.</li>
+          <li>Product must be in good condition with original packaging.</li>
+          <li>Backed by our 2-year manufacturer warranty on the motor.</li>
+        </ul>
+        <p className="mt-3 text-xs text-muted-foreground">
+          Free delivery for orders above CHF / EUR 130.- in EU/CH.
+        </p>
+      </>
+    ),
+  },
 ];
 
 const imageWithTextSections = [
   {
     title: "Always Look Your Best, No Matter Where You Are",
-    content:
-      "The Travel Buddy Hair Dryer makes it easy to look your best while traveling, thanks to its lightweight design and dual voltage feature. Never worry about bulky dryers or bad hair days; enjoy quick, reliable styling wherever you are.",
+    description:
+      "A lightweight, dual-voltage dryer built for carry-ons and weekend bags.",
+    bullets: [
+      "Fits neatly into any cabin-size suitcase or tote",
+      "Dual voltage works seamlessly on international trips",
+      "Quick-dry airflow for fast morning routines",
+    ],
     image: heroImages[0],
   },
   {
     title: "Salon-Quality Results in the Comfort of Home",
-    content:
-      "The Pro-Style Hair Dryer delivers professional performance with its powerful motor and ceramic technology. Create stunning styles with ease using multiple heat settings and a precision nozzle that helps you achieve that perfect blowout every time.",
+    description: "Create salon-level blowouts without leaving your bathroom.",
+    bullets: [
+      "Ceramic technology helps reduce frizz and boost shine",
+      "Multiple heat settings for different hair types",
+      "Precision nozzle for targeted, smooth styling",
+    ],
     image: heroImages[3],
   },
 ];
@@ -104,25 +458,71 @@ const faqs = [
 const reviews = [
   {
     name: "Susan B.",
-    text: "I love traveling light, and this hair dryer is a game changer!!! It fits perfectly in my carry-on, and I can do my hair super quick.",
+    text: "I love traveling light, and this hair dryer is a game changer!!! It fits perfectly in my carry-on, and I can do my hair super quick. I prefer this one instead of my dyson because it's super easy to use.",
+    avatar: "/images/example-pdp/susan-b.webp",
   },
-  { name: "Ava", text: "Compact and easy to pack. 👍" },
+  {
+    name: "Ava",
+    text: "Compact and easy to pack. 👍",
+    avatar: "/images/example-pdp/ava.webp",
+  },
   {
     name: "Abigail",
-    text: "It's lightweight and foldable, making it ideal for my busy travel schedule.",
+    text: "It's lightweight and foldable, making it ideal for my busy travel schedule. I don't have to sacrifice style for convenience anymore!",
+    avatar: "/images/example-pdp/abigail.webp",
   },
-  { name: "Mia", text: "Game changer! 🔥" },
+  {
+    name: "Mia",
+    text: "Game changer! 🔥",
+    avatar: "/images/example-pdp/mia.webp",
+  },
   {
     name: "Zoe",
-    text: "I was skeptical about a travel dryer, but this one surprised me with its power and convenience.",
+    text: "I was skeptical about a travel dryer, but this one surprised me with its power and convenience. It's a must-have for any frequent traveler.",
+    avatar: "/images/example-pdp/zoe.webp",
   },
   {
     name: "Grace",
-    text: "This dryer keeps my hair shiny and smooth even on long trips.",
+    text: "This dryer keeps my hair shiny and smooth even on long trips. It's the perfect travel companion for anyone who wants salon-quality results on the go.",
+    avatar: "/images/example-pdp/grace.webp",
+  },
+  {
+    name: "Charlotte",
+    text: "This dryer is a lifesaver on the road! I travel a lot for work, and it's so convenient to have something that fits in my bag and works everywhere. It's powerful enough to handle my thick hair, leaving it shiny and frizz-free every time. Can't recommend it enough!",
+  },
+  {
+    name: "Lily",
+    text: "Fits in my carry-on, no problem!",
+  },
+  {
+    name: "Hannah",
+    text: "The dual voltage is a lifesaver! I took it on my European trip and it worked perfectly everywhere. So happy with this purchase.",
+  },
+  {
+    name: "Alyssa",
+    text: "My hair looks better than ever, whether I'm at home or on the road. It's light, efficient, and a real space saver.",
+  },
+  {
+    name: "Lillian",
+    text: "I never imagined a travel dryer could work so well. It fits right into my suitcase and leaves my hair looking salon-ready.",
+  },
+  {
+    name: "Chloe",
+    text: "So handy! 😊",
+  },
+  {
+    name: "Sophia",
+    text: "Amazing product!",
+  },
+  {
+    name: "Olivia",
+    text: "Dries hair fast, love it!",
+  },
+  {
+    name: "Natalie",
+    text: "I use this every time I travel. It's compact, reliable, and keeps my hair looking great without any fuss.",
   },
 ];
-
-const featuredReview = reviews[0];
 
 const recommendedProducts = [
   {
@@ -155,14 +555,37 @@ const recommendedProducts = [
   },
 ];
 
+const combineWithProducts = recommendedProducts.slice(0, 4);
+
 const HeroSection = () => {
+  const [quantity, setQuantity] = useState(1);
+  const [showUpgrades, setShowUpgrades] = useState(false);
+  const [selectedUpgrades, setSelectedUpgrades] = useState<string[]>([]);
+
+  const handleDecreaseQty = () => {
+    setQuantity((prev) => Math.max(1, prev - 1));
+  };
+
+  const handleIncreaseQty = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  const toggleUpgrade = (title: string) => {
+    setSelectedUpgrades((prev) =>
+      prev.includes(title)
+        ? prev.filter((item) => item !== title)
+        : [...prev, title]
+    );
+    setShowUpgrades(true);
+  };
+
   return (
     <section className="bg-white py-10 md:py-14">
       <div className="container mx-auto max-w-6xl">
-        <div className="grid gap-10 2xl:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
           <div className="2xl:sticky 2xl:top-24">
             <div className="flex flex-col items-center gap-6">
-              <div className="relative aspect-square w-full max-w-[520px] overflow-hidden rounded-3xl border bg-muted">
+              <div className="relative aspect-square w-full max-w-[520px] overflow-hidden rounded-3xl bg-muted">
                 <Image
                   src={heroImages[0]}
                   alt="Travel Buddy Hair Dryer"
@@ -170,11 +593,11 @@ const HeroSection = () => {
                   className="object-contain"
                 />
               </div>
-              <div className="flex w-full gap-3 overflow-x-auto pb-1">
-                {heroImages.map((src) => (
+              <div className="grid w-full max-w-[520px] grid-cols-5 gap-3">
+                {heroImages.map((src, index) => (
                   <div
-                    key={src}
-                    className="relative aspect-square w-24 shrink-0 overflow-hidden rounded-2xl border bg-white"
+                    key={`${src}-${index}`}
+                    className="relative aspect-square w-full overflow-hidden rounded-2xl bg-white"
                   >
                     <Image
                       src={src}
@@ -188,144 +611,238 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <div className="flex h-full flex-col gap-5 rounded-3xl border bg-white p-5 md:p-8">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 text-yellow-400">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <span key={i} className="text-lg">
-                    ★
-                  </span>
-                ))}
-              </div>
-              <p className="text-sm text-muted-foreground">387 Reviews</p>
-            </div>
-
-            <div className="space-y-2">
-              <h1 className="text-balance text-2xl font-semibold md:text-3xl">
-                Travel Buddy Hair Dryer
-              </h1>
-              <p className="text-muted-foreground text-base">
-                Dry and style your hair on the go with this compact travel
-                essential.
-              </p>
-            </div>
-
-            <p className="text-2xl font-bold">$79.90</p>
-
-            <div className="h-px w-full bg-slate-100" />
-
-            <ul className="space-y-1 text-sm">
-              {benefits.map((benefit) => (
-                <li key={benefit}>{benefit}</li>
-              ))}
-            </ul>
-
-            <div className="h-px w-full bg-slate-100" />
-
-            <div className="space-y-3 text-sm">
-              <div>
-                <p className="font-semibold uppercase tracking-wide">
-                  Quantity
+          <div className="flex h-full flex-col gap-4 md:gap-5">
+            <div className="space-y-3">
+              <div className="space-y-1">
+                <h1 className="text-balance text-2xl font-semibold md:text-3xl">
+                  Travel Buddy Hair Dryer
+                </h1>
+                <p className="text-muted-foreground text-base">
+                  Dry and style your hair on the go with this compact travel
+                  essential.
                 </p>
-                <div className="mt-2 inline-flex items-center rounded-2xl border text-base">
-                  <button className="h-8 w-10 border-r text-center">-</button>
-                  <div className="h-8 w-12 text-center leading-8">1</div>
-                  <button className="h-8 w-10 border-l text-center">+</button>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-0.5 text-yellow-400">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                    />
+                  ))}
+                </div>
+                <p className="text-sm font-medium text-muted-foreground">
+                  4.8 • 387 Reviews
+                </p>
+              </div>
+
+              <p className="text-2xl font-semibold">$79.90</p>
+
+              <div className="flex flex-wrap gap-2">
+                {benefits.map((benefit) => {
+                  const Icon = benefit.icon;
+                  return (
+                    <div
+                      key={benefit.label}
+                      className="inline-flex items-center gap-2 rounded-full bg-muted px-3 py-1.5 text-sm"
+                    >
+                      <Icon className="h-4 w-4 text-muted-foreground" />
+                      <span>{benefit.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="h-px w-full bg-slate-100" />
+
+            <div className="space-y-4 text-sm">
+              <div>
+                <p className="font-semibold uppercase tracking-wide">Color</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {colorOptions.map((color) => (
+                    <Button
+                      key={color.name}
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="inline-flex items-center rounded-2xl border px-3 py-1 text-sm text-muted-foreground hover:border-black"
+                    >
+                      <span
+                        className={`mr-2 inline-block h-4 w-4 rounded-full ${color.swatchClass}`}
+                      />
+                      <span>{color.name}</span>
+                    </Button>
+                  ))}
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <p className="font-semibold uppercase tracking-wide">Color</p>
-                <div className="flex flex-wrap gap-2">
-                  {["White", "Black", "Red"].map((color) => (
-                    <button
-                      key={color}
+              <div>
+                <p className="font-semibold uppercase tracking-wide">Size</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {sizeOptions.map((size) => (
+                    <Button
+                      key={size}
+                      type="button"
+                      variant="outline"
+                      size="sm"
                       className="rounded-2xl border px-3 py-1 text-sm text-muted-foreground hover:border-black"
                     >
-                      {color}
-                    </button>
+                      {size}
+                    </Button>
                   ))}
                 </div>
               </div>
             </div>
 
-            <button className="relative mt-2 w-full rounded-3xl bg-black py-4 text-lg font-semibold text-white">
-              Add To Cart
-            </button>
-
-            <div className="grid grid-cols-3 gap-4 text-center text-xs">
-              {icons.map((icon) => (
-                <div
-                  key={icon.label}
-                  className="flex flex-col items-center gap-2"
+            <div className="mt-4 space-y-3 text-sm">
+              <Accordion
+                type="single"
+                collapsible
+                value={showUpgrades ? "combine-with" : undefined}
+                onValueChange={(val) => setShowUpgrades(val === "combine-with")}
+              >
+                <AccordionItem
+                  value="combine-with"
+                  className="bg-muted rounded-3xl border-b-0 py-1 transition-colors hover:bg-card data-[state=open]:bg-card"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">
-                    <Image
-                      src={icon.src}
-                      alt={icon.label}
-                      width={24}
-                      height={24}
-                    />
-                  </div>
-                  <p>{icon.label}</p>
-                </div>
-              ))}
+                  <AccordionTrigger className="px-4 text-left text-sm">
+                    <span className="flex items-center gap-2">
+                      <Gift className="h-4 w-4" />
+                      <span>Combine with</span>
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pt-0">
+                    <p className="text-xs text-muted-foreground">
+                      Get CHF/EUR 20.- when you buy combine it with one of the
+                      below items.
+                    </p>
+                    <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                      {combineWithProducts.map((item) => {
+                        const isSelected = selectedUpgrades.includes(
+                          item.title
+                        );
+                        return (
+                          <label
+                            key={item.title}
+                            className={`relative flex cursor-pointer flex-col overflow-hidden rounded-3xl bg-card text-left transition-colors ${
+                              isSelected
+                                ? "ring-1 ring-black"
+                                : "hover:bg-muted"
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              className="absolute left-3 top-3 z-10 h-4 w-4 cursor-pointer accent-black"
+                              checked={isSelected}
+                              onChange={() => toggleUpgrade(item.title)}
+                            />
+                            <div className="relative aspect-4/3 w-full">
+                              <Image
+                                src={item.image}
+                                alt={item.title}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                            <div className="space-y-0.5 p-3">
+                              <p className="text-sm font-medium leading-tight">
+                                {item.title}
+                              </p>
+                              <p className="text-xs text-muted-foreground">
+                                {item.price}
+                              </p>
+                            </div>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
 
-            <div className="mt-4 space-y-4 border-t pt-4">
-              <div className="flex gap-4 rounded-3xl bg-muted/60 p-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-sm font-semibold">
-                  {featuredReview.name[0]}
-                </div>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2 text-yellow-400">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <span key={i} className="text-base">
-                        ★
-                      </span>
-                    ))}
+            <div className="mt-4 space-y-2">
+              <p className="text-sm font-semibold">
+                Hurry, only 8 items left in stock!
+              </p>
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
+                <div className="h-full w-2/3 rounded-full bg-black" />
+              </div>
+            </div>
+
+            <div className="mt-4 flex items-center gap-3">
+              <div className="inline-flex h-14 items-center rounded-full border px-2 text-base">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="h-11 w-11 rounded-full px-0"
+                  onClick={handleDecreaseQty}
+                  aria-label="Decrease quantity"
+                >
+                  -
+                </Button>
+                <div className="w-8 text-center font-medium">{quantity}</div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="h-11 w-11 rounded-full px-0"
+                  onClick={handleIncreaseQty}
+                  aria-label="Increase quantity"
+                >
+                  +
+                </Button>
+              </div>
+
+              <div className="flex-1">
+                <AnimatedBorderButton
+                  buttonSize="lg"
+                  fullWidth
+                  className="justify-center text-sm font-semibold"
+                >
+                  Add To Cart
+                </AnimatedBorderButton>
+              </div>
+            </div>
+
+            <div className="mt-2 space-y-1.5 text-sm">
+              {shippingPoints.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.label} className="flex items-start gap-2">
+                    <Icon className="mt-0.5 h-4 w-4 shrink-0 text-secondary" />
+                    <p
+                      className={
+                        index === 0 ? "font-semibold" : "text-muted-foreground"
+                      }
+                    >
+                      {item.label}
+                    </p>
                   </div>
-                  <p className="text-muted-foreground">{featuredReview.text}</p>
-                  <p className="text-xs font-semibold text-black">
-                    {featuredReview.name}
-                  </p>
-                </div>
-              </div>
+                );
+              })}
+            </div>
 
-              <div className="space-y-2 text-sm">
-                <details className="group rounded-2xl border bg-white px-4 py-3 text-left">
+            <div className="mt-3 space-y-1 text-sm">
+              {productInfoSections.map((section) => (
+                <details
+                  key={section.title}
+                  className="border-b border-slate-200 py-3"
+                >
                   <summary className="flex cursor-pointer items-center justify-between gap-3">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">🌍</span>
-                      <span className="font-medium">Shipping Information</span>
-                    </div>
-                    <span className="text-xl text-muted-foreground transition group-open:rotate-180">
-                      ⌄
-                    </span>
+                    <p className="font-semibold uppercase tracking-wide">
+                      {section.title}
+                    </p>
+                    <span className="text-lg text-muted-foreground">+</span>
                   </summary>
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    We offer tracked and insured shipping for all of our orders.
-                    Order processing takes 1-3 business days before shipment.
-                  </p>
+                  <div className="pt-2 space-y-3 text-sm text-muted-foreground">
+                    {section.content}
+                  </div>
                 </details>
-
-                <details className="group rounded-2xl border bg-white px-4 py-3 text-left">
-                  <summary className="flex cursor-pointer items-center justify-between gap-3">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">↩️</span>
-                      <span className="font-medium">Return Policy</span>
-                    </div>
-                    <span className="text-xl text-muted-foreground transition group-open:rotate-180">
-                      ⌄
-                    </span>
-                  </summary>
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    We love our products and are confident you will too. Enjoy a
-                    30-day risk-free trial. If you're not in love with your
-                    results, we'll give you a refund.
-                  </p>
-                </details>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -352,15 +869,23 @@ const ImageWithTextSection = ({
                 {section.title}
               </h2>
               <p className="text-muted-foreground text-base md:text-lg">
-                {section.content}
+                {section.description}
               </p>
-              <button className="rounded-3xl bg-black px-6 py-3 text-sm font-semibold text-white">
-                Get Mine Now
-              </button>
+              <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
+                {section.bullets.map((bullet) => (
+                  <li key={bullet} className="flex items-start gap-2">
+                    <span className="mt-0.5 text-base">•</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button size="lg" className="mt-4">
+                Add To Cart
+              </Button>
             </div>
           </div>
           <div className="flex-1">
-            <div className="mx-auto aspect-square max-w-[420px] overflow-hidden rounded-3xl border bg-muted">
+            <div className="relative mx-auto aspect-square w-full max-w-[420px] overflow-hidden rounded-3xl bg-muted">
               <Image
                 src={section.image}
                 alt={section.title}
@@ -403,7 +928,7 @@ const ImageWithBenefitsSection = () => {
             ))}
           </div>
           <div className="flex justify-center">
-            <div className="relative aspect-square w-full max-w-[420px] overflow-hidden rounded-full border bg-muted">
+            <div className="relative aspect-square w-full max-w-[420px] overflow-hidden rounded-full bg-muted">
               <Image
                 src={imageWithBenefits.image}
                 alt={imageWithBenefits.title}
@@ -442,9 +967,7 @@ const ComparisonSection = () => {
             Unlike others, Travel Buddy Hair Dryer offers compact design, dual
             voltage, and fast drying for travelers.
           </p>
-          <button className="rounded-3xl bg-black px-6 py-3 text-sm font-semibold text-white">
-            Get Mine Now
-          </button>
+          <Button size="lg">Add To Cart</Button>
         </div>
         <div className="mx-auto w-full max-w-md space-y-4">
           <div className="grid grid-cols-4 text-sm font-semibold">
@@ -452,7 +975,7 @@ const ComparisonSection = () => {
             <div className="text-center">Travel Buddy Hair Dryer</div>
             <div className="text-center">Others</div>
           </div>
-          <div className="overflow-hidden rounded-3xl border bg-white shadow-xl shadow-black/5">
+          <div className="overflow-hidden rounded-3xl bg-white">
             <div className="grid grid-cols-4 text-sm">
               <div className="col-span-2 bg-[#606c75] text-white">
                 {comparisonRows.map((row) => (
@@ -497,7 +1020,7 @@ const PercentageSection = () => {
     <section className="py-10 md:py-16">
       <div className="container grid items-center gap-10 md:grid-cols-2">
         <div className="flex justify-center">
-          <div className="relative aspect-square w-full max-w-[420px] overflow-hidden rounded-full border bg-muted">
+          <div className="relative aspect-square w-full max-w-[420px] overflow-hidden rounded-full bg-muted">
             <Image
               src={heroImages[2]}
               alt="Transform your travel hair routine"
@@ -511,21 +1034,31 @@ const PercentageSection = () => {
             Transform Your Travel Hair Routine
           </h2>
           <div className="space-y-5">
-            {percentageStats.map((stat) => (
-              <div
-                key={stat.text}
-                className="flex items-center gap-4 border-b border-gray-300 pb-5 last:border-0 last:pb-0"
-              >
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-tr from-[#606c75] to-gray-300 text-lg font-semibold">
-                  <span>{stat.value}%</span>
+            {percentageStats.map((stat) => {
+              const angle = (stat.value / 100) * 360;
+
+              return (
+                <div
+                  key={stat.text}
+                  className="flex items-center gap-4 border-b border-gray-300 pb-5 last:border-0 last:pb-0"
+                >
+                  <div className="relative h-20 w-20">
+                    <div
+                      className="absolute inset-0 rounded-full"
+                      style={{
+                        background: `conic-gradient(var(--color-primary) ${angle}deg, var(--color-muted) ${angle}deg 360deg)`,
+                      }}
+                    />
+                    <div className="absolute inset-2 flex items-center justify-center rounded-full bg-card text-lg font-semibold">
+                      <span>{stat.value}%</span>
+                    </div>
+                  </div>
+                  <p className="text-base">{stat.text}</p>
                 </div>
-                <p className="text-base">{stat.text}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
-          <button className="rounded-3xl bg-black px-6 py-3 text-sm font-semibold text-white">
-            Get Mine Now
-          </button>
+          <Button size="lg">Add To Cart</Button>
         </div>
       </div>
     </section>
@@ -534,66 +1067,74 @@ const PercentageSection = () => {
 
 const FaqSection = () => {
   return (
-    <section className="py-10 md:py-16">
-      <div className="container max-w-4xl space-y-8">
-        <div className="space-y-3 text-center">
-          <h2 className="text-2xl font-semibold md:text-3xl">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-muted-foreground text-base md:text-lg">
-            Your answer might be here! Find the answers most valued by our
-            customers.
-          </p>
-        </div>
-        <div className="space-y-4">
-          {faqs.map((item) => (
-            <details
+    <section className="py-32">
+      <div className="container">
+        <h2 className="mb-8 text-balance text-2xl font-semibold md:text-3xl">
+          FAQs
+        </h2>
+        <Accordion type="multiple">
+          {faqs.map((item, index) => (
+            <AccordionItem
               key={item.q}
-              className="group rounded-3xl border border-black/20 bg-white px-6 py-4 text-left transition hover:bg-black/5"
+              value={`faq-${index}`}
+              className="bg-muted mb-2 rounded-3xl border-b-0 px-5 py-2 md:mb-4 transition-colors hover:bg-card data-[state=open]:bg-card"
             >
-              <summary className="flex cursor-pointer items-center justify-between gap-4 text-lg font-semibold">
-                <span>{item.q}</span>
-                <span className="text-xl transition group-open:rotate-180">
-                  ⌄
-                </span>
-              </summary>
-              <p className="mt-3 text-sm text-muted-foreground">{item.a}</p>
-            </details>
+              <AccordionTrigger className="text-left text-lg md:text-xl">
+                {item.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                {item.a}
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
-        <div className="flex justify-center">
-          <button className="rounded-3xl bg-black px-6 py-3 text-sm font-semibold text-white">
-            Get Mine Now
-          </button>
-        </div>
+        </Accordion>
       </div>
     </section>
   );
 };
 
 const GuaranteeSection = () => {
+  const items = [
+    "Try Travel Buddy at home on your next trips, completely risk-free.",
+    "Free returns from EU/CH within 30 days if it is not a match.",
+    "2-year manufacturer warranty on the motor.",
+    "No extra customs duties or surprise VAT charges in EU/CH.",
+  ];
+
   return (
     <section className="py-10 md:py-16">
       <div className="container">
-        <div className="mx-auto max-w-3xl space-y-6 text-center">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-            <Image
-              src="/icons/certification.svg"
-              alt="Guarantee"
-              width={40}
-              height={40}
-            />
+        <div className="bg-card flex flex-col items-start justify-between gap-8 rounded-3xl px-6 py-10 md:flex-row md:px-10">
+          <div className="md:w-1/2 space-y-4">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
+              Free returns &amp; guarantee
+            </p>
+            <h2 className="text-balance text-2xl font-semibold md:text-3xl">
+              Risk-free travel hair care for 30 days.
+            </h2>
+            <p className="text-muted-foreground text-base md:text-lg">
+              Take Travel Buddy Hair Dryer on your next trip and style as usual.
+              If you do not love it, send it back within 30 days for a full
+              refund.
+            </p>
+            <AnimatedBorderButton
+              buttonSize="lg"
+              fullWidth={false}
+              className="mt-4 gap-2 text-sm font-semibold"
+            >
+              Add To Cart
+            </AnimatedBorderButton>
           </div>
-          <h2 className="text-balance text-2xl font-semibold md:text-3xl">
-            Risk-Free Travel Hair Care with a 30-Day Guarantee!
-          </h2>
-          <p className="text-muted-foreground text-base md:text-lg">
-            Try the Travel Buddy Hair Dryer with peace of mind. Enjoy quick,
-            stylish results anywhere with our 30-day money-back guarantee.
-          </p>
-          <button className="rounded-3xl bg-black px-6 py-3 text-sm font-semibold text-white">
-            Get Mine Now
-          </button>
+          <div className="md:w-2/5">
+            <ul className="flex flex-col space-y-2 text-sm md:text-base text-muted-foreground">
+              {items.map((item) => (
+                <li key={item} className="flex items-start gap-2.5">
+                  <Check className="mt-0.5 h-4 w-4 text-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -609,25 +1150,44 @@ const ReviewsSection = () => {
             What Customers Are Saying About This Must-Have
           </h2>
           <p className="text-muted-foreground text-base md:text-lg">
-            Real users share their experiences with the Travel Buddy Hair Dryer.
+            Real Users Share Their Experiences
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="columns-1 gap-6 md:columns-2 lg:columns-3">
           {reviews.map((review) => (
             <div
               key={review.name}
-              className="flex h-full flex-col gap-3 rounded-3xl border bg-white p-5 text-sm"
+              className="mb-6 break-inside-avoid flex flex-col gap-3 rounded-3xl bg-card p-5 text-sm"
             >
-              <div className="flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted text-sm font-semibold">
-                  {review.name[0]}
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white text-sm font-semibold">
+                  {review.avatar ? (
+                    <Image
+                      src={review.avatar}
+                      alt={review.name}
+                      width={40}
+                      height={40}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <span>{review.name[0]}</span>
+                  )}
                 </div>
                 <div>
                   <p className="font-semibold">{review.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    Verified buyer
+                  <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <VerifiedBuyerIcon className="h-3.5 w-3.5 text-[#2A92F1]" />
+                    <span>Verified buyer</span>
                   </p>
                 </div>
+              </div>
+              <div className="flex items-center gap-0.5 text-yellow-400">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400"
+                  />
+                ))}
               </div>
               <p className="text-sm text-muted-foreground">{review.text}</p>
             </div>
@@ -645,35 +1205,30 @@ const RecommendedSection = () => {
         <h2 className="text-center text-2xl font-semibold md:text-3xl">
           Recommended Products
         </h2>
-        <div className="flex overflow-x-auto pb-2">
-          <div className="flex gap-6">
-            {recommendedProducts.map((product) => (
-              <div
-                key={product.title}
-                className="w-[160px] flex-shrink-0 space-y-2 text-sm lg:w-[200px]"
-              >
-                <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border bg-muted">
-                  <Image
-                    src={product.image}
-                    alt={product.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <p className="font-medium">{product.title}</p>
-                  <div className="flex items-baseline gap-2">
-                    <span>{product.price}</span>
-                    {product.compareAt && (
-                      <span className="text-xs text-muted-foreground line-through">
-                        {product.compareAt}
-                      </span>
-                    )}
-                  </div>
+        <div className="grid gap-6 md:grid-cols-5">
+          {recommendedProducts.map((product) => (
+            <div key={product.title} className="space-y-2 text-sm">
+              <div className="relative aspect-4/5 overflow-hidden rounded-3xl bg-muted">
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="space-y-1">
+                <p className="font-medium">{product.title}</p>
+                <div className="flex items-baseline gap-2">
+                  <span>{product.price}</span>
+                  {product.compareAt && (
+                    <span className="text-sm text-muted-foreground line-through">
+                      {product.compareAt}
+                    </span>
+                  )}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -684,12 +1239,11 @@ const ExamplePdp = () => {
   return (
     <div className="bg-white">
       <HeroSection />
-      {/* Hide hero-style image sections so we only keep the main gallery + content */}
-      {/* <ImageWithTextSection section={imageWithTextSections[0]} /> */}
-      {/* <ImageWithTextSection section={imageWithTextSections[1]} reverse /> */}
+      <ImageWithTextSection section={imageWithTextSections[0]} />
       <ImageWithBenefitsSection />
       <ComparisonSection />
       <PercentageSection />
+      <ImageWithTextSection section={imageWithTextSections[1]} />
       <FaqSection />
       <GuaranteeSection />
       <ReviewsSection />

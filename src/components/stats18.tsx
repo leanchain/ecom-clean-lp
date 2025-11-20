@@ -67,7 +67,7 @@ const platforms = [
 
 const Stats18 = () => {
   return (
-    <section id="fieson-pdp-ai" className="overflow-hidden py-32">
+    <section id="fieson-pdp-ai" className="overflow-hidden pt-20 pb-32">
       <div className="container px-4">
         <div className="mb-12 text-center">
           <div className="mx-auto mb-4 flex justify-center">

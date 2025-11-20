@@ -1214,14 +1214,6 @@ export default function Navbar() {
               </NavigationMenuList>
             </NavigationMenu>
 
-            {/* Pricing Link */}
-            <Link
-              href="/pricing"
-              className="text-sm transition-colors hover:text-primary"
-            >
-              Pricing
-            </Link>
-
             {/* Demo Link */}
             <Link
               href="/demo"
@@ -1289,14 +1281,6 @@ export default function Navbar() {
                     <ChevronRight className="size-5" />
                   </button>
                 ))}
-
-                <Link
-                  href="/pricing"
-                  className="flex w-full items-center justify-between rounded-lg border border-border p-4 text-left transition-colors hover:bg-accent"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="font-medium">Pricing</span>
-                </Link>
 
                 <Link
                   href="/demo"

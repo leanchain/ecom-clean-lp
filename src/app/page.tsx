@@ -19,8 +19,8 @@ export default function Home() {
       <HowItWorks />
       <Feature57 />
       <Gallery25 />
-      <Comparison />
       <Compare2 />
+      <Comparison />
       <WhoItsFor />
       <Integration1 />
       <Faq9 />

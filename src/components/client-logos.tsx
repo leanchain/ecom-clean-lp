@@ -82,44 +82,48 @@ const logos = [...baseLogos, ...baseLogos, ...baseLogos];
 
 export default function ClientLogos() {
   return (
-    <section className="bg-background py-12 md:py-16">
+    <section className="bg-background pt-12 pb-8 md:pt-16 md:pb-10">
       <div className="container mx-auto px-4">
         <h3 className="text-muted-foreground mb-8 text-center text-sm font-semibold uppercase tracking-wider">
           Clients we've worked with
         </h3>
-        <Carousel
-          plugins={[
-            AutoScroll({
-              playOnInit: true,
-              speed: 1,
-              stopOnInteraction: false,
-            }),
-          ]}
-          opts={{
-            loop: true,
-            align: "start",
-            dragFree: true,
-          }}
-          className="w-full"
-        >
-          <CarouselContent className="ml-0">
-            {logos.map((logo, index) => (
-              <CarouselItem
-                key={`${logo.id}-${index}`}
-                className="h-15 lg:basis-1/9 relative mr-8 flex basis-1/2 items-center justify-center pl-0 sm:basis-1/4 md:basis-1/6"
-              >
-                <Image
-                  src={logo.image}
-                  alt={logo.name}
-                  width={140}
-                  height={32}
-                  className="h-8 w-auto shrink-0 object-contain"
-                  style={{ maxHeight: "32px" }}
-                />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+        <div className="relative mx-auto w-full overflow-hidden">
+          <Carousel
+            plugins={[
+              AutoScroll({
+                playOnInit: true,
+                speed: 1,
+                stopOnInteraction: false,
+              }),
+            ]}
+            opts={{
+              loop: true,
+              align: "start",
+              dragFree: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="ml-0">
+              {logos.map((logo, index) => (
+                <CarouselItem
+                  key={`${logo.id}-${index}`}
+                  className="h-15 lg:basis-1/9 relative mr-8 flex basis-1/2 items-center justify-center pl-0 opacity-30 sm:basis-1/4 md:basis-1/6"
+                >
+                  <Image
+                    src={logo.image}
+                    alt={logo.name}
+                    width={140}
+                    height={32}
+                    className="h-8 w-auto shrink-0 object-contain"
+                    style={{ maxHeight: "32px" }}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          <div className="pointer-events-none z-10 from-background absolute inset-y-0 left-0 w-32 bg-gradient-to-r to-transparent"></div>
+          <div className="pointer-events-none z-10 from-background absolute inset-y-0 right-0 w-32 bg-gradient-to-l to-transparent"></div>
+        </div>
       </div>
     </section>
   );

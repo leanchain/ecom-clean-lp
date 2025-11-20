@@ -87,28 +87,23 @@ const AnnotationCard = ({
   description,
   side,
 }: AnnotationCardProps) => {
-  const isLeft = side === "left";
   return (
     <div className="relative rounded-3xl bg-background/90 px-4 py-3 text-left shadow-sm ring-1 ring-border/60">
-      <div className="flex items-start gap-3">
-        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-          {index}
-        </span>
-        <div className="space-y-1">
-          <p className="text-sm font-medium">{title}</p>
-          <p className="text-xs text-muted-foreground">{description}</p>
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-3">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+            {index}
+          </span>
+          <div className="space-y-1">
+            <p className="text-sm font-medium">{title}</p>
+            <p className="text-xs text-muted-foreground">{description}</p>
+          </div>
         </div>
+        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-medium text-primary">
+          <Sparkles className="h-3 w-3" />
+          Fieson PDP AI
+        </span>
       </div>
-      <div
-        className={`pointer-events-none absolute top-1/2 hidden h-px w-8 -translate-y-1/2 bg-border lg:block ${
-          isLeft ? "-right-8" : "-left-8"
-        }`}
-      />
-      <div
-        className={`pointer-events-none absolute top-1/2 hidden h-2 w-2 -translate-y-1/2 rotate-45 border-border lg:block ${
-          isLeft ? "-right-9 border-t border-r" : "-left-9 border-b border-l"
-        }`}
-      />
     </div>
   );
 };
@@ -479,16 +474,7 @@ const OptimisedPdp = () => {
           </p>
         </div>
 
-        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.7fr)_minmax(0,1.1fr)]">
-          <div className="space-y-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Must-have elements
-            </p>
-            {leftAnnotations.map((annotation) => (
-              <AnnotationCard key={annotation.index} {...annotation} />
-            ))}
-          </div>
-
+        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1.1fr)]">
           <div className="mx-auto w-full max-w-3xl rounded-3xl border border-border/70 bg-background p-6 text-[11px] shadow-sm">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-border/60 pb-3">
               <div className="space-y-1">
@@ -600,9 +586,9 @@ const OptimisedPdp = () => {
 
           <div className="space-y-3">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Nice-to-have extras
+              Fieson PDP AI layout elements
             </p>
-            {rightAnnotations.map((annotation) => (
+            {[...leftAnnotations, ...rightAnnotations].map((annotation) => (
               <AnnotationCard key={annotation.index} {...annotation} />
             ))}
           </div>
