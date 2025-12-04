@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export default function DemoPage() {
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: "fieson" });
+      const cal = await getCalApi({ namespace: "Fisca" });
       cal("ui", {
         hideEventTypeDetails: false,
         layout: "month_view",
@@ -22,7 +22,7 @@ export default function DemoPage() {
           Book a Demo
         </h1>
         <p className="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
-          See how Fieson can transform your product page content for AI search
+          See how Fisca can transform your product page content for AI search
           and conversion
         </p>
       </div>
@@ -30,8 +30,8 @@ export default function DemoPage() {
       {/* Cal.com Embed - Clean without card wrapper */}
       <div className="mx-auto max-w-4xl">
         <Cal
-          namespace="fieson"
-          calLink="bart-rosier/fieson"
+          namespace="Fisca"
+          calLink="bart-rosier/Fisca"
           style={{ width: "100%", height: "100%", overflow: "scroll" }}
           config={{ layout: "month_view" }}
         />
@@ -45,15 +45,15 @@ export default function DemoPage() {
             <li className="flex items-start gap-3">
               <span className="text-primary mt-1">✓</span>
               <span>
-                <strong>Personalized walkthrough</strong> of Fieson's AI Media
+                <strong>Personalized walkthrough</strong> of Fisca's AI Media
                 Studio and PDP AI features
               </span>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-primary mt-1">✓</span>
               <span>
-                <strong>Demo</strong> of AI image generation,
-                video creation, and content enrichment
+                <strong>Demo</strong> of AI image generation, video creation,
+                and content enrichment
               </span>
             </li>
             <li className="flex items-start gap-3">

@@ -1,7 +1,14 @@
 "use client";
 
 import React from "react";
-import { ShoppingCart, TrendingUp, Package, Palette, Users, Rocket } from "lucide-react";
+import {
+  ShoppingCart,
+  TrendingUp,
+  Package,
+  Palette,
+  Users,
+  Rocket,
+} from "lucide-react";
 
 const roles = [
   {
@@ -52,8 +59,8 @@ const WhoItsFor = () => {
             Built for Every Role in E-commerce
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
-            Whether you're launching products or scaling a catalog, Fieson
-            adapts to your workflow
+            Whether you're launching products or scaling a catalog, Fisca adapts
+            to your workflow
           </p>
         </div>
 
@@ -86,4 +93,3 @@ const WhoItsFor = () => {
 };
 
 export default WhoItsFor;
-

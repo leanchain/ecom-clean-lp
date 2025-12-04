@@ -121,27 +121,27 @@ const aiMediaStudioSections = [
   },
 ];
 
-// Fieson PDP AI features
-const fiesonPdpFeatures = [
+// Fisca PDP AI features
+const FiscaPdpFeatures = [
   {
     id: "analysis",
     title: "Content Analysis",
     description: "Comprehensive scoring across 6 critical dimensions.",
-    href: "/#fieson-pdp-ai",
+    href: "/#Fisca-pdp-ai",
     icon: Lightbulb,
   },
   {
     id: "optimization",
     title: "AI Optimization",
     description: "Automated optimization for AI search visibility.",
-    href: "/#fieson-pdp-ai",
+    href: "/#Fisca-pdp-ai",
     icon: Sparkles,
   },
   {
     id: "generation",
     title: "Media Generation",
     description: "Generate all images, videos and structured content.",
-    href: "/#fieson-pdp-ai",
+    href: "/#Fisca-pdp-ai",
     icon: Wand2,
   },
 ];
@@ -351,7 +351,7 @@ const productCategories = [
 // Company features
 const companyFeatures = [
   {
-    title: "About Fieson",
+    title: "About Fisca",
     features: [
       {
         id: "feature-1",
@@ -389,7 +389,7 @@ const companyFeatures = [
       {
         id: "feature-5",
         title: "Case Studies",
-        description: "See how brands succeed with Fieson.",
+        description: "See how brands succeed with Fisca.",
         href: "#",
         icon: Lightbulb,
       },
@@ -416,7 +416,7 @@ const resources = [
   {
     id: "resource-2",
     title: "Video Tutorials",
-    description: "Learn how to use Fieson effectively.",
+    description: "Learn how to use Fisca effectively.",
     href: "#",
     icon: PlayCircle,
   },
@@ -430,7 +430,7 @@ const resources = [
   {
     id: "resource-4",
     title: "Success Stories",
-    description: "How brands achieve results with Fieson.",
+    description: "How brands achieve results with Fisca.",
     href: "#",
     icon: Lightbulb,
   },
@@ -538,42 +538,42 @@ const AiMediaStudioMenu = () => (
                     ));
                   })()
                 : section.id === "video"
-                  ? (() => {
-                      const pickIcon = (title: string) => {
-                        if (/generator/i.test(title)) return Play;
-                        if (/optim/i.test(title)) return Sparkles;
-                        return PlayCircle;
-                      };
-                      return section.features.map((feature, idx) => {
-                        const Icon = pickIcon(feature.title);
-                        return (
-                          <NavigationMenuLink
-                            key={idx}
-                            href={feature.href}
-                            className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
-                          >
-                            <Icon className="size-4" />
-                            <div className="flex-1 text-sm font-medium">
-                              {feature.title}
-                            </div>
-                            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                          </NavigationMenuLink>
-                        );
-                      });
-                    })()
-                  : // Default rendering for non-image/video sections
-                    section.features.map((feature, idx) => (
-                      <NavigationMenuLink
-                        key={idx}
-                        href={feature.href}
-                        className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
-                      >
-                        <div className="flex-1 text-sm font-medium">
-                          {feature.title}
-                        </div>
-                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                      </NavigationMenuLink>
-                    ))}
+                ? (() => {
+                    const pickIcon = (title: string) => {
+                      if (/generator/i.test(title)) return Play;
+                      if (/optim/i.test(title)) return Sparkles;
+                      return PlayCircle;
+                    };
+                    return section.features.map((feature, idx) => {
+                      const Icon = pickIcon(feature.title);
+                      return (
+                        <NavigationMenuLink
+                          key={idx}
+                          href={feature.href}
+                          className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
+                        >
+                          <Icon className="size-4" />
+                          <div className="flex-1 text-sm font-medium">
+                            {feature.title}
+                          </div>
+                          <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                        </NavigationMenuLink>
+                      );
+                    });
+                  })()
+                : // Default rendering for non-image/video sections
+                  section.features.map((feature, idx) => (
+                    <NavigationMenuLink
+                      key={idx}
+                      href={feature.href}
+                      className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
+                    >
+                      <div className="flex-1 text-sm font-medium">
+                        {feature.title}
+                      </div>
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                    </NavigationMenuLink>
+                  ))}
             </>
           )}
           {/* For the Image section we merged imageTypes above; for others keep extra blocks */}
@@ -667,10 +667,10 @@ const AiMediaStudioMenu = () => (
   </div>
 );
 
-// Fieson PDP AI Menu Component
-const FiesonPdpAiMenu = () => (
+// Fisca PDP AI Menu Component
+const FiscaPdpAiMenu = () => (
   <div className="grid gap-6 md:grid-cols-3">
-    {fiesonPdpFeatures.map((feature) => (
+    {FiscaPdpFeatures.map((feature) => (
       <NavigationMenuLink
         key={feature.id}
         href={feature.href}
@@ -715,7 +715,7 @@ const SolutionsMenu = () => (
         <div className="aspect-2/1 relative overflow-clip rounded-t pl-6 lg:max-w-64 lg:pl-0 xl:max-w-96">
           <Image
             src="/images/placeholders/placeholder-1.svg"
-            alt="Fieson AI Solutions"
+            alt="Fisca AI Solutions"
             width={384}
             height={192}
             className="aspect-2/1 h-full w-full translate-y-px object-cover object-center"
@@ -1176,9 +1176,9 @@ const navigationMenuItems = [
     component: AiMediaStudioMenu,
   },
   {
-    key: "fieson-pdp-ai",
-    label: "Fieson PDP AI",
-    component: FiesonPdpAiMenu,
+    key: "Fisca-pdp-ai",
+    label: "Fisca PDP AI",
+    component: FiscaPdpAiMenu,
   },
 ] as const;
 

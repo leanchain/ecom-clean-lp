@@ -15,7 +15,8 @@ export default function ProductDetail() {
   const variants = products.slice(0, 4);
   const [selectedId, setSelectedId] = React.useState<string>(variants[0].id);
 
-  const selectedProduct = variants.find((p) => p.id === selectedId) ?? variants[0];
+  const selectedProduct =
+    variants.find((p) => p.id === selectedId) ?? variants[0];
 
   // Build a gallery from variant images to mimic Shopify gallery behavior
   const gallery = variants.map((v) => ({ src: v.image, alt: v.name }));
@@ -25,7 +26,10 @@ export default function ProductDetail() {
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
         <MediaGallery
           images={gallery}
-          selectedIndex={Math.max(0, variants.findIndex((v) => v.id === selectedId))}
+          selectedIndex={Math.max(
+            0,
+            variants.findIndex((v) => v.id === selectedId)
+          )}
           onSelect={(idx) => setSelectedId(variants[idx]?.id ?? selectedId)}
         />
 
@@ -55,10 +59,10 @@ export default function ProductDetail() {
         <TabsContent value="description" className="mt-6">
           <div className="prose max-w-none dark:prose-invert">
             <p>
-              Engineered for clarity and impact, Fieson combines premium
+              Engineered for clarity and impact, Fisca combines premium
               components with a sleek design to deliver immersive sound wherever
-              you listen. Enjoy crisp highs, rich mids, and deep bass in a compact
-              form that fits any space.
+              you listen. Enjoy crisp highs, rich mids, and deep bass in a
+              compact form that fits any space.
             </p>
             <ul>
               <li>Powerful, room-filling audio with balanced tuning</li>
@@ -68,10 +72,11 @@ export default function ProductDetail() {
           </div>
         </TabsContent>
         <TabsContent value="specs" className="mt-6">
-          <SpecificationsTable sections={selectedProduct.specifications as any} />
+          <SpecificationsTable
+            sections={selectedProduct.specifications as any}
+          />
         </TabsContent>
       </Tabs>
     </section>
   );
 }
-

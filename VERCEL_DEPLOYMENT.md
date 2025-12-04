@@ -16,7 +16,7 @@ This API key is used by the shadcnblocks component registry during the build pro
 
 **Steps to add:**
 
-1. Go to your Vercel project: https://vercel.com/fieson/ecom-clean-lp
+1. Go to your Vercel project: https://vercel.com/Fisca/ecom-clean-lp
 2. Navigate to **Settings → Environment Variables**
 3. Click **Add New**
 4. Add the following:
@@ -64,16 +64,19 @@ After adding the environment variable:
 ## 🐛 Troubleshooting
 
 ### Build Fails with "SHADCNBLOCKS_API_KEY not found"
+
 - Make sure you added the environment variable in Vercel settings
 - Verify it's enabled for the correct environment (Production/Preview)
 - Redeploy after adding the variable
 
 ### Blog Page Shows Empty
+
 - This is expected! All old speaker blog posts were archived
 - The page now shows a "Coming Soon" message
-- Add new Fieson-related blog posts to `src/blog/` when ready
+- Add new Fisca-related blog posts to `src/blog/` when ready
 
 ### Images Not Loading
+
 - All images are local and should work fine
 - Verify `/public/images/` and `/public/videos/` directories exist
 
@@ -98,13 +101,14 @@ After successful deployment:
 2. **Trigger a deployment**
 3. **Monitor build logs** for any errors
 4. **Test the live site**
-5. **Create Fieson blog content** (optional, when ready)
+5. **Create Fisca blog content** (optional, when ready)
 
 ---
 
 ## 📞 Support
 
 If you encounter any issues:
+
 - Check Vercel build logs for specific errors
 - Verify all environment variables are set correctly
 - Ensure Node version is 18.17 or higher
@@ -112,4 +116,3 @@ If you encounter any issues:
 ---
 
 **Last Updated:** 2025-11-17
-

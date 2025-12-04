@@ -8,7 +8,7 @@ export function AboutHero() {
           Sound Designed for Life
         </h1>
         <p className="max-w-3xl text-xl leading-8">
-          At Fieson, we're redefining how you create product visuals—merging
+          At Fisca, we're redefining how you create product visuals—merging
           premium sound quality with sleek, durable design. Built for everyday
           moments and extraordinary adventures, our speakers are crafted to
           deliver deep, immersive sound wherever life takes you.
@@ -16,7 +16,7 @@ export function AboutHero() {
       </div>
       <Image
         src="/images/products/main-product.webp"
-        alt="Fieson Logo"
+        alt="Fisca Logo"
         width={700}
         height={528}
         className="aspect-[6.44/5.28] object-contain"

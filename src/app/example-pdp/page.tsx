@@ -4,10 +4,9 @@ import { ExamplePdp } from "@/components/example-pdp";
 export const metadata: Metadata = {
   title: "Example PDP - Travel Buddy Hair Dryer",
   description:
-    "Example product detail page for the Travel Buddy Hair Dryer generated with Fieson.",
+    "Example product detail page for the Travel Buddy Hair Dryer generated with Fisca.",
 };
 
 export default function ExamplePdpPage() {
   return <ExamplePdp />;
 }
-

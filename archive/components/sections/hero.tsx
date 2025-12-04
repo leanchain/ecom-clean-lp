@@ -145,7 +145,7 @@ const Hero = () => {
         >
           <Image
             src="/images/products/main-product.webp"
-            alt="Fieson Logo"
+            alt="Fisca Logo"
             width={644}
             height={568}
             priority

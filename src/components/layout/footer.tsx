@@ -12,7 +12,7 @@ const ITEMS = [
     links: [
       { name: "Generate Images", href: "/#ai-media-studio" },
       { name: "Generate Videos", href: "/#ai-media-studio" },
-      { name: "Enrich Product for AI Search", href: "/#fieson-pdp-ai" },
+      { name: "Enrich Product for AI Search", href: "/#Fisca-pdp-ai" },
     ],
   },
   {
@@ -26,8 +26,8 @@ const ITEMS = [
 
 const SOCIAL_LINKS = [
   {
-    name: "@fieson.com",
-    href: "https://fieson.com",
+    name: "@Fisca.ai",
+    href: "https://Fisca.ai",
     icon: null,
   },
   {
@@ -95,7 +95,7 @@ const Footer = () => {
 
         <div className="flex flex-col justify-between gap-6 md:flex-row">
           <p className="text-xl opacity-70">
-            © {new Date().getFullYear()}. All rights reserved. FIESON
+            © {new Date().getFullYear()}. All rights reserved. Fisca
           </p>
 
           <div className="flex gap-4">

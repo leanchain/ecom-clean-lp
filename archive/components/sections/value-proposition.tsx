@@ -13,7 +13,7 @@ const CONTENT_ITEMS = [
   {
     type: "image",
     imageSrc: "/images/landing/value-proposition/1.png",
-    alt: "Fieson Product 1",
+    alt: "Fisca Product 1",
     index: 1,
   },
   { type: "text", content: "in portable speakers", index: 2 },
@@ -21,7 +21,7 @@ const CONTENT_ITEMS = [
   {
     type: "image",
     imageSrc: "/images/landing/value-proposition/2.png",
-    alt: "Fieson Product 2",
+    alt: "Fisca Product 2",
     index: 4,
   },
   { type: "text", content: "with unmatched durability", index: 5 },

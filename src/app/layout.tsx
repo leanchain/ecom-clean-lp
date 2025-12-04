@@ -20,8 +20,8 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   title: {
-    default: "Fieson - AI Media Studio",
-    template: "%s | Fieson",
+    default: "Fisca - AI Media Studio",
+    template: "%s | Fisca",
   },
   description:
     "AI Media Studio for AI Search Optimised Product Detail Pages. Create stunning product visuals with advanced AI technology.",
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
     "E-commerce",
     "AI Technology",
     "Product Visuals",
-    "Fieson",
+    "Fisca",
   ],
-  authors: [{ name: "Fieson" }],
-  creator: "Fieson",
-  publisher: "Fieson",
+  authors: [{ name: "Fisca" }],
+  creator: "Fisca",
+  publisher: "Fisca",
   robots: {
     index: true,
     follow: true,
@@ -54,26 +54,26 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon/favicon.ico" }],
   },
   openGraph: {
-    title: "Fieson - AI Media Studio",
+    title: "Fisca - AI Media Studio",
     description:
       "AI Media Studio for AI Search Optimised Product Detail Pages. Create stunning product visuals with advanced AI technology.",
-    siteName: "Fieson",
+    siteName: "Fisca",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Fieson - AI Media Studio",
+        alt: "Fisca - AI Media Studio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fieson - AI Media Studio",
+    title: "Fisca - AI Media Studio",
     description:
       "AI Media Studio for AI Search Optimised Product Detail Pages. Create stunning product visuals with advanced AI technology.",
     images: ["/og-image.jpg"],
-    creator: "@fieson",
+    creator: "@Fisca",
   },
 };
 export default function RootLayout({

@@ -10,7 +10,7 @@ const currentPdpBullets = [
   "High per-product content costs (shoots, design, copy).",
 ];
 
-const fiesonPdpBullets = [
+const FiscaPdpBullets = [
   "3–5× more visibility in AI search results (GEO, ChatGPT, Perplexity).",
   "Deep structured narrative that answers questions and drives conversion.",
   "On-brand images, video, and FAQs generated from one persuasion graph.",
@@ -29,7 +29,7 @@ const Compare2 = () => {
           <p className="text-muted-foreground mx-auto max-w-2xl text-sm md:text-base">
             AI search engines don't rank keywords, they rank clarity, specific
             use case completeness, and multi-modal content. If your PDPs aren't
-            AI-ready, your products won't be recommended. Fieson fixes that, at
+            AI-ready, your products won't be recommended. Fisca fixes that, at
             scale.
           </p>
         </div>
@@ -81,11 +81,11 @@ const Compare2 = () => {
               </ul>
             </div>
 
-            {/* Fieson PDP AI */}
+            {/* Fisca PDP AI */}
             <div className="relative">
               <div className="bg-card/95 rounded-3xl border-2 border-primary p-6 md:p-8">
                 <h3 className="text-lg font-semibold md:text-xl">
-                  With Fieson PDP AI
+                  With Fisca PDP AI
                 </h3>
                 <p className="text-muted-foreground mt-2 text-sm">
                   One persuasion graph powers all copy, schema, and media so
@@ -106,13 +106,13 @@ const Compare2 = () => {
                   </div>
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-start bg-gradient-to-t from-background/80 via-background/40 to-transparent p-4">
                     <span className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
-                      Fieson PDP AI
+                      Fisca PDP AI
                     </span>
                   </div>
                 </div>
 
                 <ul className="mt-6 space-y-2 text-sm md:text-base">
-                  {fiesonPdpBullets.map((item, idx) => (
+                  {FiscaPdpBullets.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <span className="mt-0.5 text-primary">
                         <Check className="size-4" />

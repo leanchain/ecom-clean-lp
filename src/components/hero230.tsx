@@ -230,7 +230,7 @@ const Hero230 = () => {
               See images, video & copy working together on your PDP
             </h2>
             <p className="text-muted-foreground/80 max-w-xl text-sm md:text-base">
-              Fieson generates on-brand product images, short-form video and
+              Fisca generates on-brand product images, short-form video and
               AI-written descriptions that slot straight into your product
               detail page.
             </p>
@@ -374,7 +374,7 @@ const Hero230 = () => {
                   <div className="mt-4 space-y-2">
                     <div className="flex items-center justify-between text-[11px] text-muted-foreground">
                       <span>In stock • Free shipping over €50</span>
-                      <span className="text-emerald-500">AI by Fieson</span>
+                      <span className="text-emerald-500">AI by Fisca</span>
                     </div>
                     <button
                       type="button"
@@ -439,10 +439,10 @@ const Hero230 = () => {
                   </div>
                 </div>
 
-                {/* How Fieson builds this PDP */}
+                {/* How Fisca builds this PDP */}
                 <div className="mt-6 rounded-2xl bg-muted/60 p-3 text-[10px]">
                   <p className="mb-2 text-foreground font-medium">
-                    How Fieson builds this PDP
+                    How Fisca builds this PDP
                   </p>
                   <div className="space-y-2">
                     <div className="flex gap-2">
@@ -515,9 +515,8 @@ const Hero230 = () => {
                     What does this Aurora PDP actually include?
                   </p>
                   <p className="text-muted-foreground">
-                    Everything Fieson recommends for AI-ready PDPs: visuals,
-                    deep narrative, FAQs, comparisons and schema for this
-                    product.
+                    Everything Fisca recommends for AI-ready PDPs: visuals, deep
+                    narrative, FAQs, comparisons and schema for this product.
                   </p>
                 </div>
 
@@ -526,14 +525,14 @@ const Hero230 = () => {
                     How is this better than our current PDP?
                   </p>
                   <p className="text-muted-foreground">
-                    High-level view of Fieson PDP AI vs traditional PDPs for
+                    High-level view of Fisca PDP AI vs traditional PDPs for
                     Aurora:
                   </p>
                   <div className="mt-2 overflow-hidden rounded-xl border bg-background/80 text-[9px]">
                     <div className="grid grid-cols-[1.1fr_1fr_1fr] bg-muted/60">
                       <div className="px-2 py-1.5"></div>
                       <div className="px-2 py-1.5 text-center font-semibold">
-                        Fieson PDP AI
+                        Fisca PDP AI
                       </div>
                       <div className="px-2 py-1.5 text-center text-muted-foreground">
                         Traditional PDP
@@ -582,7 +581,7 @@ const Hero230 = () => {
                     Will it match our brand and Shopify theme?
                   </p>
                   <p className="text-muted-foreground">
-                    Yes. Fieson learns your brand book and collection rules so
+                    Yes. Fisca learns your brand book and collection rules so
                     Aurora PDPs stay consistent with your theme, typography and
                     tone.
                   </p>

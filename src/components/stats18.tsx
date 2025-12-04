@@ -67,12 +67,12 @@ const platforms = [
 
 const Stats18 = () => {
   return (
-    <section id="fieson-pdp-ai" className="overflow-hidden pt-20 pb-32">
+    <section id="Fisca-pdp-ai" className="overflow-hidden pt-20 pb-32">
       <div className="container px-4">
         <div className="mb-12 text-center">
           <div className="mx-auto mb-4 flex justify-center">
             <CategoryBadge
-              label="Fieson PDP AI"
+              label="Fisca PDP AI"
               icon={<Package className="h-4 w-4" />}
             />
           </div>
@@ -86,7 +86,7 @@ const Stats18 = () => {
             />
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl px-5 text-center text-sm lg:text-base">
-            Fieson PDP AI optimizes your product page content from deep
+            Fisca PDP AI optimizes your product page content from deep
             contextual text to AI optimised images and videos for maximum
             visibility across all major AI search platforms.
           </p>
@@ -122,7 +122,7 @@ const Stats18 = () => {
                     className="text-sm font-semibold"
                     style={{ color: "#ff6041" }}
                   >
-                    Fieson PDP AI
+                    Fisca PDP AI
                   </span>
                 </div>
               </div>
@@ -166,7 +166,7 @@ const Stats18 = () => {
         <div className="mx-auto mt-8 max-w-2xl text-center">
           <p className="text-muted-foreground text-sm md:text-base">
             Our platform analyzes your product page content for a comprehensive
-            score that predicts AI search visibility. Our Fieson PDP AI then
+            score that predicts AI search visibility. Our Fisca PDP AI then
             optimises and generates all images, videos and deep text structured
             for both human conversion and AI search.
           </p>
@@ -217,7 +217,7 @@ const chartConfig = {
     },
   },
   after: {
-    label: "After Fieson",
+    label: "After Fisca",
     theme: {
       light: "#ff6041",
       dark: "#ff6041",

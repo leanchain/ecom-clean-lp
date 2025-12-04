@@ -5,8 +5,7 @@ const steps = [
   {
     number: "01",
     title: "Connect Store & Brand Style",
-    description:
-      "Bring your products and brand into Fieson in one go.",
+    description: "Bring your products and brand into Fisca in one go.",
     bullets: [
       "Connect your e‑commerce platform or catalog feed.",
       "Import existing PDPs, media, and product attributes.",
@@ -17,7 +16,7 @@ const steps = [
     number: "02",
     title: "Analyze PDPs for GEO & Conversion",
     description:
-      "Fieson PDP AI reviews every page for AI search and real shoppers.",
+      "Fisca PDP AI reviews every page for AI search and real shoppers.",
     bullets: [
       "Scores PDPs for AI visibility and SEO readiness.",
       "Checks images, copy, and structure against best practices.",
@@ -127,7 +126,7 @@ const HowItWorks = () => {
       <div className="container">
         <div className="mb-12 text-center md:mb-16">
           <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-            How Fieson Works
+            How Fisca Works
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
             Turn your catalog into AI‑ready PDP content in three simple steps.

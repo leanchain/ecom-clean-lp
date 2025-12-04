@@ -8,45 +8,44 @@ const sections = [
     rows: [
       {
         label: "Cross-modal narrative (image + video + copy stay in sync)",
-        fieson:
+        Fisca:
           "Single pipeline generates all three per SKU and keeps them aligned",
         pointTools: "Asset-by-asset; no linkage between visuals and copy",
         traditional: "Separate teams & handoffs → drift",
       },
       {
         label: "Visual coverage (angles, context, details)",
-        fieson: "Auto shot-plan: angles, in-use scenes, macro",
+        Fisca: "Auto shot-plan: angles, in-use scenes, macro",
         pointTools: "Usually 1–3 static edits; manual to expand",
         traditional: "Depends on budget; often 3–5 images",
       },
       {
         label: "Video formats",
-        fieson:
-          "Auto from image set + script (portrait/landscape, 6–30s demos)",
+        Fisca: "Auto from image set + script (portrait/landscape, 6–30s demos)",
         pointTools: "None or generic templates; no per-SKU script",
         traditional: "Separate crew; slow/expensive",
       },
       {
         label: 'Copy modules (benefits, FAQs, comparisons, "Best for")',
-        fieson: "Generated and tied to visuals & attributes",
+        Fisca: "Generated and tied to visuals & attributes",
         pointTools: "Generic text; no SKU-level depth",
         traditional: "Manually written; slow to update",
       },
       {
         label: "Brand consistency",
-        fieson: "Brandbook constraints applied across SKUs",
+        Fisca: "Brandbook constraints applied across SKUs",
         pointTools: "Varies per asset/template",
         traditional: "Varies by vendor/photographer",
       },
       {
         label: "Personalization & locales",
-        fieson: "Auto language/region variants; channel-specific crops",
+        Fisca: "Auto language/region variants; channel-specific crops",
         pointTools: "Manual duplicates",
         traditional: "Separate projects per locale",
       },
       {
         label: "Accessibility (alt text, captions)",
-        fieson: "Auto-generated and consistent",
+        Fisca: "Auto-generated and consistent",
         pointTools: "Usually missing",
         traditional: "Manual if at all",
       },
@@ -57,25 +56,25 @@ const sections = [
     rows: [
       {
         label: "Time to first publish (per SKU)",
-        fieson: "Minutes",
+        Fisca: "Minutes",
         pointTools: "Minutes per asset (full PDP = hours/days)",
         traditional: "Weeks",
       },
       {
         label: "Initial cost per SKU",
-        fieson: "$10–50 (images+video+copy+schema)",
+        Fisca: "$10–50 (images+video+copy+schema)",
         pointTools: "$1–10 per asset, but adds up; copy extra",
         traditional: "$500–5,000+",
       },
       {
         label: "Update cost & speed",
-        fieson: "< $5 and minutes (re-generate deltas)",
+        Fisca: "< $5 and minutes (re-generate deltas)",
         pointTools: "Manual rework per asset",
         traditional: "Re-shoot + rewrite",
       },
       {
         label: "Throughput per operator/day (example)",
-        fieson: "50–200 SKUs end-to-end",
+        Fisca: "50–200 SKUs end-to-end",
         pointTools: "10–30 assets (not end-to-end)",
         traditional: "2–10 SKUs",
       },
@@ -86,32 +85,32 @@ const sections = [
     rows: [
       {
         label: "Schema.org & product attributes",
-        fieson: "Auto and complete per module",
+        Fisca: "Auto and complete per module",
         pointTools: "Out of scope",
         traditional: "Partial; manual",
       },
       {
         label: "Normalized attributes (size/color/material)",
-        fieson: "Mapped to a consistent catalog",
+        Fisca: "Mapped to a consistent catalog",
         pointTools: "Not handled",
         traditional: "CSVs/hand-maintained",
       },
       {
         label:
           "Commerce feed readiness (e.g., ChatGPT/OpenAI, Google Merchant Center)",
-        fieson: "Designed to output standard commerce feeds",
+        Fisca: "Designed to output standard commerce feeds",
         pointTools: "Not supported",
         traditional: "Requires separate tooling",
       },
       {
         label: "Freshness signals (timestamps, changefeed)",
-        fieson: "Automatic on price/stock/season triggers",
+        Fisca: "Automatic on price/stock/season triggers",
         pointTools: "None",
         traditional: "Batch updates",
       },
       {
         label: '"AI Search Readiness" score (0–100)*',
-        fieson: "80–95 (diagnostic)",
+        Fisca: "80–95 (diagnostic)",
         pointTools: "30–50",
         traditional: "40–60",
       },
@@ -122,37 +121,37 @@ const sections = [
     rows: [
       {
         label: "Review workflow (human-in-the-loop)",
-        fieson: "Built-in approvals, versioning, rollback",
+        Fisca: "Built-in approvals, versioning, rollback",
         pointTools: "None",
         traditional: "Email/Drive chains",
       },
       {
         label: "Experimentation & analytics",
-        fieson: "A/B variants; ties assets to conversion",
+        Fisca: "A/B variants; ties assets to conversion",
         pointTools: "None",
         traditional: "Rare and manual",
       },
       {
         label: "Rights, provenance, guardrails",
-        fieson: "License tracking; optional C2PA/provenance",
+        Fisca: "License tracking; optional C2PA/provenance",
         pointTools: "Mixed, per-asset",
         traditional: "Paper releases; scattered",
       },
       {
         label: "Channels & CMS export",
-        fieson: "Shopify/BigCommerce + marketplaces + social",
+        Fisca: "Shopify/BigCommerce + marketplaces + social",
         pointTools: "File export only",
         traditional: "CMS + manual reformatting",
       },
       {
         label: "Best fit",
-        fieson: "Large catalogs (1k–100k SKUs), frequent refresh",
+        Fisca: "Large catalogs (1k–100k SKUs), frequent refresh",
         pointTools: "One-off assets, micro-catalogs",
         traditional: "Flagship hero SKUs/campaigns",
       },
       {
         label: "Outcome",
-        fieson:
+        Fisca:
           "One coherent PDP that sells to humans and AI—fast, consistent, measurable",
         pointTools: "Disconnected assets",
         traditional: "High craft, low speed/scale",
@@ -168,10 +167,10 @@ export default function ComparisonPage() {
         {/* Header */}
         <div className="mb-16 text-center">
           <h1 className="mb-4 text-4xl font-bold md:text-6xl">
-            Fieson PDP AI vs Alternatives
+            Fisca PDP AI vs Alternatives
           </h1>
           <p className="text-muted-foreground mx-auto max-w-3xl text-lg md:text-xl">
-            A comprehensive comparison of Fieson&apos;s Narrative PDP AI against
+            A comprehensive comparison of Fisca&apos;s Narrative PDP AI against
             point tools and traditional product page workflows
           </p>
         </div>
@@ -185,7 +184,7 @@ export default function ComparisonPage() {
               <div className="flex flex-col items-center justify-center gap-2 rounded-t-3xl bg-green-100 p-4 md:p-6">
                 <div className="text-center">
                   <div className="mb-2 text-xl font-bold md:text-2xl">
-                    Fieson PDP AI
+                    Fisca PDP AI
                   </div>
                   <div className="text-muted-foreground text-xs md:text-sm">
                     Narrative PDP AI
@@ -232,7 +231,7 @@ export default function ComparisonPage() {
                       <div className="border-b bg-green-50 p-3 md:p-6">
                         <div className="flex items-center gap-2">
                           <span className="text-sm md:text-base">
-                            {row.fieson}
+                            {row.Fisca}
                           </span>
                         </div>
                       </div>
@@ -258,7 +257,7 @@ export default function ComparisonPage() {
               {/* Button at the bottom */}
               <div className="p-4"></div>
               <div className="flex items-center justify-center rounded-b-3xl bg-green-100 p-4 md:p-6">
-                <Button className="w-full">Get Started with Fieson</Button>
+                <Button className="w-full">Get Started with Fisca</Button>
               </div>
               <div className="p-4"></div>
               <div className="p-4"></div>

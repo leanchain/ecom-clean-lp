@@ -22,7 +22,7 @@ export default function SpecificationsPage() {
       <SectionHeader
         category="Specifications"
         title="Product Details"
-        description="Behind every field is smart engineering—dive into the full list of features that power your Fieson experience."
+        description="Behind every field is smart engineering—dive into the full list of features that power your Fisca experience."
         icon={<FileText />}
       />
 

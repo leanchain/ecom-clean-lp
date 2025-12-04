@@ -9,7 +9,7 @@ const currentPdpBullets = [
   "High per-product content costs (shoots, design, copy).",
 ];
 
-const fiesonPdpBullets = [
+const FiscaPdpBullets = [
   "3–5× more visibility in AI search results (GEO, ChatGPT, Perplexity).",
   "Deep structured narrative that answers questions and drives conversion.",
   "On-brand images, video, and FAQs generated from one persuasion graph.",
@@ -23,12 +23,12 @@ const ComparisonInline = () => {
       <div className="container">
         <div className="mb-10 text-center md:mb-14">
           <h2 className="mb-3 text-2xl font-semibold md:text-4xl">
-            Your current PDP pages vs Fieson PDP AI
+            Your current PDP pages vs Fisca PDP AI
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-sm md:text-base">
             A quick side-by-side of what you get today versus what you unlock
-            when your product pages are built for AI search and human
-            conversion from day one.
+            when your product pages are built for AI search and human conversion
+            from day one.
           </p>
         </div>
 
@@ -72,10 +72,12 @@ const ComparisonInline = () => {
               </ul>
             </div>
 
-            {/* Fieson PDP AI side */}
+            {/* Fisca PDP AI side */}
             <div className="flex flex-col gap-6">
               <div>
-                <h3 className="text-lg font-semibold md:text-xl">With Fieson PDP AI</h3>
+                <h3 className="text-lg font-semibold md:text-xl">
+                  With Fisca PDP AI
+                </h3>
                 <p className="text-muted-foreground text-sm">
                   One persuasion graph powers all copy, schema, and media so
                   your PDPs work in AI search and for humans.
@@ -86,13 +88,13 @@ const ComparisonInline = () => {
               <div className="bg-muted/60 relative overflow-hidden rounded-3xl border">
                 <div className="from-primary/20 via-background/30 to-background pointer-events-none flex aspect-[4/3] items-end justify-start bg-gradient-to-t p-4">
                   <span className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
-                    Fieson PDP AI
+                    Fisca PDP AI
                   </span>
                 </div>
               </div>
 
               <ul className="space-y-2 text-sm md:text-base">
-                {fiesonPdpBullets.map((item, idx) => (
+                {FiscaPdpBullets.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="mt-[2px] text-emerald-500">
                       <Check className="size-4" />
@@ -110,4 +112,3 @@ const ComparisonInline = () => {
 };
 
 export { ComparisonInline };
-
