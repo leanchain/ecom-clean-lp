@@ -31,7 +31,7 @@ export default function DemoPage() {
       <div className="mx-auto max-w-4xl">
         <Cal
           namespace="Fisca"
-          calLink="bart-rosier/Fisca"
+          calLink="pankaj.kumar/Fisca"
           style={{ width: "100%", height: "100%", overflow: "scroll" }}
           config={{ layout: "month_view" }}
         />

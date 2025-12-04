@@ -32,7 +32,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: "X (Twitter)",
-    href: "https://www.linkedin.com/in/bartrosier/",
+    href: "https://www.linkedin.com/in/pankaj4u4m/",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: "Instagram",
-    href: "https://www.linkedin.com/in/bartrosier/",
+    href: "https://www.linkedin.com/in/pankaj4u4m/",
     icon: <Instagram />,
   },
 ];
