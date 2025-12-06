@@ -152,8 +152,8 @@ const Hero230 = () => {
     <section className="pt-20">
       <div className="container flex flex-col items-center justify-center gap-4 text-center">
         <h1 className="font-heading text-foreground max-w-4xl text-4xl md:text-5xl">
-          Boost Your Sales with High-Converting Product Pages that get
-          Recommended by
+          Boost Your Sales with High-Converting Product Pages that is
+          Recommended on
           <br />{" "}
           <span className="block md:inline">
             <TypingAnimation
@@ -172,7 +172,7 @@ const Hero230 = () => {
         <div className="mb-12 mt-8">
           <AnimatedBorderButton
             asChild
-            className="cursor-pointer [&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
+            className="h-20 w-100 px-16 py-8 text-5xl cursor-pointer [&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
           >
             <Link href="/demo">
               Get Started <ArrowRight />

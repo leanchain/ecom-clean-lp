@@ -538,42 +538,42 @@ const AiMediaStudioMenu = () => (
                     ));
                   })()
                 : section.id === "video"
-                ? (() => {
-                    const pickIcon = (title: string) => {
-                      if (/generator/i.test(title)) return Play;
-                      if (/optim/i.test(title)) return Sparkles;
-                      return PlayCircle;
-                    };
-                    return section.features.map((feature, idx) => {
-                      const Icon = pickIcon(feature.title);
-                      return (
-                        <NavigationMenuLink
-                          key={idx}
-                          href={feature.href}
-                          className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
-                        >
-                          <Icon className="size-4" />
-                          <div className="flex-1 text-sm font-medium">
-                            {feature.title}
-                          </div>
-                          <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                        </NavigationMenuLink>
-                      );
-                    });
-                  })()
-                : // Default rendering for non-image/video sections
-                  section.features.map((feature, idx) => (
-                    <NavigationMenuLink
-                      key={idx}
-                      href={feature.href}
-                      className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
-                    >
-                      <div className="flex-1 text-sm font-medium">
-                        {feature.title}
-                      </div>
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                    </NavigationMenuLink>
-                  ))}
+                  ? (() => {
+                      const pickIcon = (title: string) => {
+                        if (/generator/i.test(title)) return Play;
+                        if (/optim/i.test(title)) return Sparkles;
+                        return PlayCircle;
+                      };
+                      return section.features.map((feature, idx) => {
+                        const Icon = pickIcon(feature.title);
+                        return (
+                          <NavigationMenuLink
+                            key={idx}
+                            href={feature.href}
+                            className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
+                          >
+                            <Icon className="size-4" />
+                            <div className="flex-1 text-sm font-medium">
+                              {feature.title}
+                            </div>
+                            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                          </NavigationMenuLink>
+                        );
+                      });
+                    })()
+                  : // Default rendering for non-image/video sections
+                    section.features.map((feature, idx) => (
+                      <NavigationMenuLink
+                        key={idx}
+                        href={feature.href}
+                        className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
+                      >
+                        <div className="flex-1 text-sm font-medium">
+                          {feature.title}
+                        </div>
+                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+                      </NavigationMenuLink>
+                    ))}
             </>
           )}
           {/* For the Image section we merged imageTypes above; for others keep extra blocks */}
@@ -1206,7 +1206,7 @@ export default function Navbar() {
                     <NavigationMenuTrigger className="text-xs xl:text-sm">
                       {item.label}
                     </NavigationMenuTrigger>
-                    <NavigationMenuContent className="p-8 md:p-10 lg:p-12 max-h-[80vh] overflow-auto">
+                    <NavigationMenuContent className="p-8 md:p-10 lg:p-12">
                       <item.component />
                     </NavigationMenuContent>
                   </NavigationMenuItem>
@@ -1253,53 +1253,81 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 top-16 z-50 bg-background lg:hidden">
-          <div className="container mx-auto h-full overflow-y-auto px-4 py-6">
-            {activeSubmenu ? (
-              <div>
+      <div
+        className={`fixed inset-0 top-16 z-50 lg:hidden transition-transform duration-300 ease-in-out ${
+          mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="container mx-auto max-h-[calc(100vh-4rem)] overflow-y-auto bg-background  px-4 py-6">
+          {activeSubmenu ? (
+            <div className="animate-in slide-in-from-right-5 duration-300">
+              <button
+                onClick={() => setActiveSubmenu(null)}
+                className="mb-6 flex items-center gap-2 text-background text-sm font-medium"
+              >
+                <ArrowLeft className="size-4" />
+                Go back
+              </button>
+              {navigationMenuItems
+                .find((item) => item.key === activeSubmenu)
+                ?.component()}
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {navigationMenuItems.map((item, index) => (
                 <button
-                  onClick={() => setActiveSubmenu(null)}
-                  className="mb-6 flex items-center gap-2 text-sm font-medium"
+                  key={item.key}
+                  onClick={() => setActiveSubmenu(item.key)}
+                  className={`flex w-full items-center justify-between rounded-lg border border-border/30 bg-primary-foreground/5 p-4 text-left transition-all duration-300 hover:bg-accent/20 hover:scale-[1.02] animate-in slide-in-from-right-5 ${
+                    mobileMenuOpen ? "fade-in-0" : "fade-out-0"
+                  }`}
+                  style={{
+                    animationDelay: `${index * 100}ms`,
+                    animationFillMode: "both",
+                  }}
                 >
-                  <ArrowLeft className="size-4" />
-                  Go back
+                  <span className="font-medium text-foreground">
+                    {item.label}
+                  </span>
+                  <ChevronRight className="size-5 text-foreground/70" />
                 </button>
-                {navigationMenuItems
-                  .find((item) => item.key === activeSubmenu)
-                  ?.component()}
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {navigationMenuItems.map((item) => (
-                  <button
-                    key={item.key}
-                    onClick={() => setActiveSubmenu(item.key)}
-                    className="flex w-full items-center justify-between rounded-lg border border-border p-4 text-left transition-colors hover:bg-accent"
-                  >
-                    <span className="font-medium">{item.label}</span>
-                    <ChevronRight className="size-5" />
-                  </button>
-                ))}
+              ))}
 
-                <Link
-                  href="/demo"
-                  className="flex w-full items-center justify-between rounded-lg border border-border p-4 text-left transition-colors hover:bg-accent"
-                  onClick={() => setMobileMenuOpen(false)}
+              <Link
+                href="/demo"
+                className={`flex w-full items-center justify-between rounded-lg border border-border/30 bg-primary-foreground/5 p-4 text-left transition-all duration-300 hover:bg-accent/20 hover:scale-[1.02] animate-in slide-in-from-right-5 ${
+                  mobileMenuOpen ? "fade-in-0" : "fade-out-0"
+                }`}
+                style={{
+                  animationDelay: `${navigationMenuItems.length * 100}ms`,
+                  animationFillMode: "both",
+                }}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="font-medium text-foreground">Demo</span>
+                <ChevronRight className="size-5 text-foreground/70" />
+              </Link>
+
+              <div
+                className={`pt-4 animate-in slide-in-from-right-5 ${mobileMenuOpen ? "fade-in-0" : "fade-out-0"}`}
+                style={{
+                  animationDelay: `${(navigationMenuItems.length + 1) * 100}ms`,
+                  animationFillMode: "both",
+                }}
+              >
+                <Button
+                  asChild
+                  className="w-full animate-pulse hover:animate-none"
                 >
-                  <span className="font-medium">Demo</span>
-                </Link>
-
-                <div className="pt-4">
-                  <Button asChild className="w-full">
-                    <Link href="/demo">Get Started</Link>
-                  </Button>
-                </div>
+                  <Link href="/demo" className="text-primary">
+                    Get Started
+                  </Link>
+                </Button>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </header>
   );
 }
