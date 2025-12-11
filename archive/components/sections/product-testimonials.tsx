@@ -67,7 +67,7 @@ export default function Testimonials() {
       <SectionHeader
         category="Testimonials"
         title="What Our Customers Are Saying"
-        description="From e-commerce brands to marketing teams, everyone's talking about Fisca. See what they have to say."
+        description="From e-commerce brands to marketing teams, everyone's talking about Hex+. See what they have to say."
         icon={<Diamond />}
       />
       <div className="perspective-1000 grid grid-cols-1 gap-8 md:grid-cols-5">

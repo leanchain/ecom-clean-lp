@@ -30,7 +30,7 @@ export default function BlogPage() {
           <SectionHeader
             icon={<Paperclip />}
             category="Blog"
-            title="Fisca Insights"
+            title="Hex+ Insights"
             description="The latest insights in optimising your PDP images, videos, copy and page layout for conversion and AI Search."
             isCenter
           />
@@ -65,7 +65,7 @@ export default function BlogPage() {
         <SectionHeader
           icon={<Paperclip />}
           category="Blog"
-          title="Fisca Insights"
+          title="Hex+ Insights"
           description="The latest insights in optimising your PDP images, videos, copy and page layout for conversion and AI Search."
           isCenter
         />

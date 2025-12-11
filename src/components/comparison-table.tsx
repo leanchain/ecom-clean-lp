@@ -9,12 +9,12 @@ import AnimatedBorderButton from "@/components/animated-border-button";
 const rows = [
   {
     label: "Purpose",
-    Fisca: <>✅ Full AI Search + ✅ Human Conversion Engine</>,
+    Hexadd: <>✅ Full AI Search + ✅ Human Conversion Engine</>,
     traditional: <>❌ Fragmented tools for single tasks</>,
   },
   {
     label: "AI Search Visibility",
-    Fisca: (
+    Hexadd: (
       <>
         ✅ 3–5× higher visibility ✅ Optimized for GEO (ChatGPT, Perplexity,
         Google AI Overviews, etc) and ✅ SEO
@@ -24,12 +24,12 @@ const rows = [
   },
   {
     label: "AI Visibility Score",
-    Fisca: <>✅ 75 - 95+</>,
+    Hexadd: <>✅ 75 - 95+</>,
     traditional: <>❌ 5 - 45</>,
   },
   {
     label: "Deep Product Context for AI",
-    Fisca: (
+    Hexadd: (
       <>
         ✅ LLM-optimized PDP narrative text and ✅ structured format with ✅
         benefits, objections, FAQs, 'best for', howto, use cases, why,
@@ -40,7 +40,7 @@ const rows = [
   },
   {
     label: "Product Images",
-    Fisca: (
+    Hexadd: (
       <>
         ✅ Full coverage: On-brand packshots, product on model, lifestyle,
         product in use, UCG, detail shots, comparison, ✅ aligned with narrative
@@ -56,7 +56,7 @@ const rows = [
   },
   {
     label: "Product Videos",
-    Fisca: (
+    Hexadd: (
       <>
         ✅ On-brand AI videos auto-built from ✅ brandbook, ✅ aligned with
         narrative and user needs
@@ -71,7 +71,7 @@ const rows = [
   },
   {
     label: "Human Conversion Quality",
-    Fisca: (
+    Hexadd: (
       <>
         ✅ User needs driven conversion ✅ built from the same deep product
         context narrative
@@ -81,7 +81,7 @@ const rows = [
   },
   {
     label: "Category control",
-    Fisca: (
+    Hexadd: (
       <>
         ✅ Category/collection PDP, ✅ image & video templates to standardise
         and control quality at scale
@@ -91,17 +91,17 @@ const rows = [
   },
   {
     label: "Brand Consistency",
-    Fisca: <>✅ On-brand ✅ category templates, ✅ lighting, style & tone</>,
+    Hexadd: <>✅ On-brand ✅ category templates, ✅ lighting, style & tone</>,
     traditional: <>❌ No brand logic</>,
   },
   {
     label: "Narrative Coherence",
-    Fisca: <>✅ All media + text generated from ONE persuasion graph</>,
+    Hexadd: <>✅ All media + text generated from ONE persuasion graph</>,
     traditional: <>❌ No coherence between assets and/or text</>,
   },
   {
     label: "Scale & time",
-    Fisca: (
+    Hexadd: (
       <>
         ✅ Update & control entire catalogue in minutes, ✅ easily scale from 1
         to 100k+ SKUs consistently, ✅ auto-updates/onboarding
@@ -111,7 +111,7 @@ const rows = [
   },
   {
     label: "Sync & customisation",
-    Fisca: (
+    Hexadd: (
       <>
         ✅ Syncs all content from and to your store, ✅ customise sections per
         category/collection, ✅ easy review before publish
@@ -121,12 +121,14 @@ const rows = [
   },
   {
     label: "Cost per Product",
-    Fisca: <>✅ $1–$10</>,
+    Hexadd: <>✅ $1–$10</>,
     traditional: <>❌ $X00s–X000s</>,
   },
   {
     label: "Schema Markup",
-    Fisca: <>✅ Full automated LLM-optimised schema ✅ based on deep context</>,
+    Hexadd: (
+      <>✅ Full automated LLM-optimised schema ✅ based on deep context</>
+    ),
     traditional: <>❌ Mostly ❌ missing/low quality</>,
   },
 ];
@@ -141,7 +143,7 @@ const ComparisonTable = () => {
               <div className="p-4"></div>
               <div className="flex items-center justify-center rounded-t-3xl bg-green-50 dark:bg-green-950/30 py-4 md:py-5">
                 <div className="text-center">
-                  <div className="mb-2 text-2xl font-bold">Fisca PDP AI</div>
+                  <div className="mb-2 text-2xl font-bold">Hex+ PDP AI</div>
                   <div className="text-muted-foreground text-sm">
                     AI-Optimized
                   </div>
@@ -171,7 +173,7 @@ const ComparisonTable = () => {
                       idx < rows.length - 1 ? "border-b" : ""
                     }`}
                   >
-                    <span className="text-sm md:text-base">{row.Fisca}</span>
+                    <span className="text-sm md:text-base">{row.Hexadd}</span>
                   </div>
                   <div
                     className={`px-2 py-1.5 md:px-4 md:py-2 ${

@@ -10,7 +10,7 @@ Your repository is now **fully configured** and **ready for Vercel deployment**!
 
 - ✅ Created elegant "Coming Soon" message for `/blog` route
 - ✅ Handles empty blog directory gracefully (no crashes)
-- ✅ Updated copy from "Sound Insights" to "Fisca Insights"
+- ✅ Updated copy from "Sound Insights" to "Hex+ Insights"
 - ✅ Created `src/blog/.gitkeep` to ensure directory exists
 
 ### 2. **Build Configuration**
@@ -47,7 +47,7 @@ Your repository is now **fully configured** and **ready for Vercel deployment**!
 
 **Before the deployment will succeed, you MUST add this environment variable:**
 
-1. Go to: https://vercel.com/Fisca/ecom-clean-lp/settings/environment-variables
+1. Go to: https://vercel.com/Hex+/ecom-clean-lp/settings/environment-variables
 2. Click **Add New**
 3. Add:
    - **Name:** `SHADCNBLOCKS_API_KEY`
@@ -69,7 +69,7 @@ Vercel will automatically detect the push and start a new deployment.
 
 ### Option 2: Redeploy from Vercel Dashboard
 
-1. Go to: https://vercel.com/Fisca/ecom-clean-lp
+1. Go to: https://vercel.com/Hex+/ecom-clean-lp
 2. Click **Deployments**
 3. Click **Redeploy** on the latest deployment
 
@@ -114,7 +114,7 @@ Route (app)                                 Size  First Load JS
 ## 🎯 Next Steps (After Deployment)
 
 1. **Verify deployment** - Check all pages work correctly
-2. **Add blog content** - Create Fisca-related blog posts in `src/blog/`
+2. **Add blog content** - Create Hex+-related blog posts in `src/blog/`
 3. **Monitor performance** - Check Vercel analytics
 4. **Set up custom domain** (if needed)
 
@@ -130,7 +130,7 @@ Route (app)                                 Size  First Load JS
 
 ## ✅ Commits Made
 
-1. **`b70bde2`** - "chore: move all non-Fisca content to /archive folder"
+1. **`b70bde2`** - "chore: move all non-Hex+ content to /archive folder"
 2. **`bde58e4`** - "feat: prepare for Vercel deployment with blog 'Coming Soon' page"
 
 ---

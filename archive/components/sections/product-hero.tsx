@@ -67,7 +67,7 @@ export default function ProductHero() {
       >
         <Image
           src="/images/blog/blog-5.webp"
-          alt="Fisca Product"
+          alt="Hex+ Product"
           fill
           className="object-cover"
           priority

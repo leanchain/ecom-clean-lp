@@ -55,7 +55,7 @@ export default function ProductIntro() {
         <div className="relative h-[320px] overflow-hidden rounded-3xl md:h-[460px] md:flex-1/3">
           <Image
             src="/images/products/product-4.webp"
-            alt="Fisca Product"
+            alt="Hex+ Product"
             fill
             className="object-cover"
           />

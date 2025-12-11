@@ -121,27 +121,27 @@ const aiMediaStudioSections = [
   },
 ];
 
-// Fisca PDP AI features
-const FiscaPdpFeatures = [
+// Hex+ PDP AI features
+const HexaddPdpFeatures = [
   {
     id: "analysis",
     title: "Content Analysis",
     description: "Comprehensive scoring across 6 critical dimensions.",
-    href: "/#Fisca-pdp-ai",
+    href: "/#hexadd-pdp-ai",
     icon: Lightbulb,
   },
   {
     id: "optimization",
     title: "AI Optimization",
     description: "Automated optimization for AI search visibility.",
-    href: "/#Fisca-pdp-ai",
+    href: "/#hexadd-pdp-ai",
     icon: Sparkles,
   },
   {
     id: "generation",
     title: "Media Generation",
     description: "Generate all images, videos and structured content.",
-    href: "/#Fisca-pdp-ai",
+    href: "/#hexadd-pdp-ai",
     icon: Wand2,
   },
 ];
@@ -351,7 +351,7 @@ const productCategories = [
 // Company features
 const companyFeatures = [
   {
-    title: "About Fisca",
+    title: "About Hex+",
     features: [
       {
         id: "feature-1",
@@ -389,7 +389,7 @@ const companyFeatures = [
       {
         id: "feature-5",
         title: "Case Studies",
-        description: "See how brands succeed with Fisca.",
+        description: "See how brands succeed with Hex+.",
         href: "#",
         icon: Lightbulb,
       },
@@ -416,7 +416,7 @@ const resources = [
   {
     id: "resource-2",
     title: "Video Tutorials",
-    description: "Learn how to use Fisca effectively.",
+    description: "Learn how to use Hex+ effectively.",
     href: "#",
     icon: PlayCircle,
   },
@@ -430,7 +430,7 @@ const resources = [
   {
     id: "resource-4",
     title: "Success Stories",
-    description: "How brands achieve results with Fisca.",
+    description: "How brands achieve results with Hex+.",
     href: "#",
     icon: Lightbulb,
   },
@@ -667,10 +667,10 @@ const AiMediaStudioMenu = () => (
   </div>
 );
 
-// Fisca PDP AI Menu Component
-const FiscaPdpAiMenu = () => (
+// Hexadd PDP AI Menu Component
+const HexaddPdpAiMenu = () => (
   <div className="grid gap-6 md:grid-cols-3">
-    {FiscaPdpFeatures.map((feature) => (
+    {HexaddPdpFeatures.map((feature) => (
       <NavigationMenuLink
         key={feature.id}
         href={feature.href}
@@ -715,7 +715,7 @@ const SolutionsMenu = () => (
         <div className="aspect-2/1 relative overflow-clip rounded-t pl-6 lg:max-w-64 lg:pl-0 xl:max-w-96">
           <Image
             src="/images/placeholders/placeholder-1.svg"
-            alt="Fisca AI Solutions"
+            alt="Hex+ AI Solutions"
             width={384}
             height={192}
             className="aspect-2/1 h-full w-full translate-y-px object-cover object-center"
@@ -1176,9 +1176,9 @@ const navigationMenuItems = [
     component: AiMediaStudioMenu,
   },
   {
-    key: "Fisca-pdp-ai",
-    label: "Fisca PDP AI",
-    component: FiscaPdpAiMenu,
+    key: "hexadd-pdp-ai",
+    label: "Hex+ PDP AI",
+    component: HexaddPdpAiMenu,
   },
 ] as const;
 

@@ -1,8 +1,8 @@
 {
   "products": [
     {
-      "id": "Fisca-light-white",
-      "name": "Fisca Light",
+      "id": "Hex+-light-white",
+      "name": "Hex+ Light",
       "description": "Premium Smart Soundbar",
       "price": 599,
       "originalPrice": 699,
@@ -111,8 +111,8 @@
       }
     },
     {
-      "id": "Fisca-light-wood",
-      "name": "Fisca Light",
+      "id": "Hex+-light-wood",
+      "name": "Hex+ Light",
       "description": "Premium Smart Soundbar",
       "price": 599,
       "originalPrice": 699,
@@ -221,8 +221,8 @@
       }
     },
     {
-      "id": "Fisca-light-black",
-      "name": "Fisca Light",
+      "id": "Hex+-light-black",
+      "name": "Hex+ Light",
       "description": "Premium Smart Soundbar",
       "price": 599,
       "originalPrice": 699,
@@ -331,8 +331,8 @@
       }
     },
     {
-      "id": "Fisca-light-premium",
-      "name": "Fisca Light",
+      "id": "Hex+-light-premium",
+      "name": "Hex+ Light",
       "description": "Premium Smart Soundbar",
       "price": 599,
       "originalPrice": 699,

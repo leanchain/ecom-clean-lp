@@ -101,7 +101,7 @@ const AnnotationCard = ({
         </div>
         <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-medium text-primary">
           <Sparkles className="h-3 w-3" />
-          Fisca PDP AI
+          Hex+ PDP AI
         </span>
       </div>
     </div>
@@ -131,13 +131,13 @@ const LegacyOptimisedPdp = () => {
       <div className="container space-y-12">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-            Fisca Optimised PDP
+            Hex+ Optimised PDP
           </p>
           <h1 className="mt-3 text-balance text-4xl font-bold md:text-5xl">
             Turn every product page into an AI search magnet
           </h1>
           <p className="mt-4 text-muted-foreground">
-            This is a long-form, multi-unit PDP mock that shows how Fisca
+            This is a long-form, multi-unit PDP mock that shows how Hex+
             combines images, video, narrative and structured sections so AI
             engines can confidently recommend your products.
           </p>
@@ -167,7 +167,7 @@ const LegacyOptimisedPdp = () => {
               <div className="flex items-center justify-between gap-4 border-b border-border/60 px-6 py-4">
                 <div className="space-y-1">
                   <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                    Aurora Bottle PDP • Fisca narrative layout
+                    Aurora Bottle PDP • Hex+ narrative layout
                   </p>
                   <p className="text-xs text-muted-foreground">
                     One scrollable page combining hero, benefits, lifestyle,
@@ -179,7 +179,7 @@ const LegacyOptimisedPdp = () => {
                     <Sparkles className="h-3 w-3" /> AI Search Score 92/100
                   </span>
                   <span className="text-[11px] text-muted-foreground flex items-center gap-1">
-                    Built by Fisca PDP AI <ArrowDownRight className="h-3 w-3" />
+                    Built by Hex+ PDP AI <ArrowDownRight className="h-3 w-3" />
                   </span>
                 </div>
               </div>
@@ -339,7 +339,7 @@ const LegacyOptimisedPdp = () => {
                       <div className="grid grid-cols-[1.1fr_1fr_1fr] bg-muted/70">
                         <div className="px-2 py-1.5"></div>
                         <div className="px-2 py-1.5 text-center font-semibold">
-                          Fisca PDP AI
+                          Hex+ PDP AI
                         </div>
                         <div className="px-2 py-1.5 text-center text-muted-foreground">
                           Traditional PDP
@@ -404,7 +404,7 @@ const LegacyOptimisedPdp = () => {
                     AI-generated combination images.
                   </p>
                   <p className="mt-1 text-[10px] text-muted-foreground">
-                    Fisca auto-builds bundles and renders visual combinations so
+                    Hex+ auto-builds bundles and renders visual combinations so
                     AI can recommend outfits, sets and cross-sells straight from
                     the PDP.
                   </p>
@@ -461,7 +461,7 @@ const OptimisedPdp = () => {
       <div className="container space-y-10">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-            Fisca Optimised PDP template
+            Hex+ Optimised PDP template
           </p>
           <h1 className="mt-3 text-balance text-4xl font-bold md:text-5xl">
             Annotated product detail page layout
@@ -585,7 +585,7 @@ const OptimisedPdp = () => {
 
           <div className="space-y-3">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Fisca PDP AI layout elements
+              Hex+ PDP AI layout elements
             </p>
             {[...leftAnnotations, ...rightAnnotations].map((annotation) => (
               <AnnotationCard key={annotation.index} {...annotation} />

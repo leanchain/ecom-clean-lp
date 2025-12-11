@@ -1,13 +1,13 @@
-# Fisca - AI Media Studio
+# Hex+ - AI Media Studio
 
-Fisca is an AI Media Studio for AI Search Optimised Product Detail Pages
+Hex+ is an AI Media Studio for AI Search Optimised Product Detail Pages
 
 - [Demo](https://sonic-nextjs-template.vercel.app/)
 - [Documentation](https://docs.shadcnblocks.com/templates/getting-started)
 
 ## Screenshot
 
-![Fisca AI Media Studio screenshot](./public/og-image.jpg)
+![Hex+ AI Media Studio screenshot](./public/og-image.jpg)
 
 ## Getting Started
 
