@@ -134,7 +134,7 @@ const sections = [
       },
       {
         label: "Rights, provenance, guardrails",
-        Hexadddd: "License tracking; optional C2PA/provenance",
+        Hexadd: "License tracking; optional C2PA/provenance",
         pointTools: "Mixed, per-asset",
         traditional: "Paper releases; scattered",
       },
