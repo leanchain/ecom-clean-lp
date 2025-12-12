@@ -29,6 +29,8 @@ const nextConfig: NextConfig = {
     // Minimize layout shift
     minimumCacheTTL: 60,
 
+    unoptimized: true,
+
     // Only needed if you still have external images (remove after migration)
     // remotePatterns: [],
   },

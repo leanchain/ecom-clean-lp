@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     siteName: "Beseam",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Beseam - AI Media Studio",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     title: "Beseam - AI Media Studio",
     description:
       "AI Media Studio for AI Search Optimised Product Detail Pages. Create stunning product visuals with advanced AI technology.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
     creator: "@Beseam",
   },
 };
