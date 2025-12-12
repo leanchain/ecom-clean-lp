@@ -1,8 +1,8 @@
 {
   "products": [
     {
-      "id": "Hex+-light-white",
-      "name": "Hex+ Light",
+      "id": "Beseam-light-white",
+      "name": "Beseam Light",
       "description": "Premium Smart Soundbar",
       "price": 599,
       "originalPrice": 699,
@@ -111,8 +111,8 @@
       }
     },
     {
-      "id": "Hex+-light-wood",
-      "name": "Hex+ Light",
+      "id": "Beseam-light-wood",
+      "name": "Beseam Light",
       "description": "Premium Smart Soundbar",
       "price": 599,
       "originalPrice": 699,
@@ -221,8 +221,8 @@
       }
     },
     {
-      "id": "Hex+-light-black",
-      "name": "Hex+ Light",
+      "id": "Beseam-light-black",
+      "name": "Beseam Light",
       "description": "Premium Smart Soundbar",
       "price": 599,
       "originalPrice": 699,
@@ -331,8 +331,8 @@
       }
     },
     {
-      "id": "Hex+-light-premium",
-      "name": "Hex+ Light",
+      "id": "Beseam-light-premium",
+      "name": "Beseam Light",
       "description": "Premium Smart Soundbar",
       "price": 599,
       "originalPrice": 699,

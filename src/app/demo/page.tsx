@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export default function DemoPage() {
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: "Hexadd" });
+      const cal = await getCalApi({ namespace: "Beseam" });
       cal("ui", {
         hideEventTypeDetails: false,
         layout: "month_view",
@@ -22,16 +22,16 @@ export default function DemoPage() {
           Book a Demo
         </h1>
         <p className="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
-          See how Hex+ can transform your product page content for AI search and
-          conversion
+          See how Beseam can transform your product page content for AI search
+          and conversion
         </p>
       </div>
 
       {/* Cal.com Embed - Clean without card wrapper */}
       <div className="mx-auto max-w-4xl">
         <Cal
-          namespace="Hexadd"
-          calLink="pankaj.kumar/Hexadd"
+          namespace="Beseam"
+          calLink="pankaj.kumar/Beseam"
           style={{ width: "100%", height: "100%", overflow: "scroll" }}
           config={{ layout: "month_view" }}
         />
@@ -45,7 +45,7 @@ export default function DemoPage() {
             <li className="flex items-start gap-3">
               <span className="text-primary mt-1">✓</span>
               <span>
-                <strong>Personalized walkthrough</strong> of Hex+'s AI Media
+                <strong>Personalized walkthrough</strong> of Beseam's AI Media
                 Studio and PDP AI features
               </span>
             </li>

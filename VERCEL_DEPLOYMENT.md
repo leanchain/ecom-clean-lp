@@ -16,7 +16,7 @@ This API key is used by the shadcnblocks component registry during the build pro
 
 **Steps to add:**
 
-1. Go to your Vercel project: https://vercel.com/Hex+/ecom-clean-lp
+1. Go to your Vercel project: https://vercel.com/Beseam/ecom-clean-lp
 2. Navigate to **Settings → Environment Variables**
 3. Click **Add New**
 4. Add the following:
@@ -73,7 +73,7 @@ After adding the environment variable:
 
 - This is expected! All old speaker blog posts were archived
 - The page now shows a "Coming Soon" message
-- Add new Hex+-related blog posts to `src/blog/` when ready
+- Add new Beseam-related blog posts to `src/blog/` when ready
 
 ### Images Not Loading
 
@@ -101,7 +101,7 @@ After successful deployment:
 2. **Trigger a deployment**
 3. **Monitor build logs** for any errors
 4. **Test the live site**
-5. **Create Hex+ blog content** (optional, when ready)
+5. **Create Beseam blog content** (optional, when ready)
 
 ---
 

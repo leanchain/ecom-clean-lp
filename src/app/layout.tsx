@@ -20,8 +20,8 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   title: {
-    default: "Hex+ - AI Media Studio",
-    template: "%s | Hex+",
+    default: "Beseam - AI Media Studio",
+    template: "%s | Beseam",
   },
   description:
     "AI Media Studio for AI Search Optimised Product Detail Pages. Create stunning product visuals with advanced AI technology.",
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
     "E-commerce",
     "AI Technology",
     "Product Visuals",
-    "Hex+",
+    "Beseam",
   ],
-  authors: [{ name: "Hex+" }],
-  creator: "Hex+",
-  publisher: "Hex+",
+  authors: [{ name: "Beseam" }],
+  creator: "Beseam",
+  publisher: "Beseam",
   robots: {
     index: true,
     follow: true,
@@ -54,26 +54,26 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon/favicon.ico" }],
   },
   openGraph: {
-    title: "Hex+ - AI Media Studio",
+    title: "Beseam - AI Media Studio",
     description:
       "AI Media Studio for AI Search Optimised Product Detail Pages. Create stunning product visuals with advanced AI technology.",
-    siteName: "Hex+",
+    siteName: "Beseam",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Hex+ - AI Media Studio",
+        alt: "Beseam - AI Media Studio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hex+ - AI Media Studio",
+    title: "Beseam - AI Media Studio",
     description:
       "AI Media Studio for AI Search Optimised Product Detail Pages. Create stunning product visuals with advanced AI technology.",
     images: ["/og-image.jpg"],
-    creator: "@Hex+",
+    creator: "@Beseam",
   },
 };
 export default function RootLayout({

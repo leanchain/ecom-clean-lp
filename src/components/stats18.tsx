@@ -67,12 +67,12 @@ const platforms = [
 
 const Stats18 = () => {
   return (
-    <section id="hexadd-pdp-ai" className="overflow-hidden pt-20 pb-32">
+    <section id="beseam-pdp-ai" className="overflow-hidden pt-20 pb-32">
       <div className="container px-4">
         <div className="mb-12 text-center">
           <div className="mx-auto mb-4 flex justify-center">
             <CategoryBadge
-              label="Hex+ PDP AI"
+              label="Beseam PDP AI"
               icon={<Package className="h-4 w-4" />}
             />
           </div>
@@ -86,9 +86,9 @@ const Stats18 = () => {
             />
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl px-5 text-center text-sm lg:text-base">
-            Hex+ PDP AI optimizes your product page content from deep contextual
-            text to AI optimised images and videos for maximum visibility across
-            all major AI search platforms.
+            Beseam PDP AI optimizes your product page content from deep
+            contextual text to AI optimised images and videos for maximum
+            visibility across all major AI search platforms.
           </p>
         </div>
 
@@ -122,7 +122,7 @@ const Stats18 = () => {
                     className="text-sm font-semibold"
                     style={{ color: "#ff6041" }}
                   >
-                    Hex+ PDP AI
+                    Beseam PDP AI
                   </span>
                 </div>
               </div>
@@ -166,7 +166,7 @@ const Stats18 = () => {
         <div className="mx-auto mt-8 max-w-2xl text-center">
           <p className="text-muted-foreground text-sm md:text-base">
             Our platform analyzes your product page content for a comprehensive
-            score that predicts AI search visibility. Our Hex+ PDP AI then
+            score that predicts AI search visibility. Our Beseam PDP AI then
             optimises and generates all images, videos and deep text structured
             for both human conversion and AI search.
           </p>
@@ -217,7 +217,7 @@ const chartConfig = {
     },
   },
   after: {
-    label: "After Hex+",
+    label: "After Beseam",
     theme: {
       light: "#ff6041",
       dark: "#ff6041",

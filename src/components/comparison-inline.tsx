@@ -9,7 +9,7 @@ const currentPdpBullets = [
   "High per-product content costs (shoots, design, copy).",
 ];
 
-const HexaddPdpBullets = [
+const BeseamPdpBullets = [
   "3–5× more visibility in AI search results (GEO, ChatGPT, Perplexity).",
   "Deep structured narrative that answers questions and drives conversion.",
   "On-brand images, video, and FAQs generated from one persuasion graph.",
@@ -23,7 +23,7 @@ const ComparisonInline = () => {
       <div className="container">
         <div className="mb-10 text-center md:mb-14">
           <h2 className="mb-3 text-2xl font-semibold md:text-4xl">
-            Your current PDP pages vs Hex+ PDP AI
+            Your current PDP pages vs Beseam PDP AI
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-sm md:text-base">
             A quick side-by-side of what you get today versus what you unlock
@@ -72,11 +72,11 @@ const ComparisonInline = () => {
               </ul>
             </div>
 
-            {/* Hex+ PDP AI side */}
+            {/* Beseam PDP AI side */}
             <div className="flex flex-col gap-6">
               <div>
                 <h3 className="text-lg font-semibold md:text-xl">
-                  With Hex+ PDP AI
+                  With Beseam PDP AI
                 </h3>
                 <p className="text-muted-foreground text-sm">
                   One persuasion graph powers all copy, schema, and media so
@@ -88,13 +88,13 @@ const ComparisonInline = () => {
               <div className="bg-muted/60 relative overflow-hidden rounded-3xl border">
                 <div className="from-primary/20 via-background/30 to-background pointer-events-none flex aspect-[4/3] items-end justify-start bg-gradient-to-t p-4">
                   <span className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
-                    Hex+ PDP AI
+                    Beseam PDP AI
                   </span>
                 </div>
               </div>
 
               <ul className="space-y-2 text-sm md:text-base">
-                {HexaddPdpBullets.map((item, idx) => (
+                {BeseamPdpBullets.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="mt-[2px] text-emerald-500">
                       <Check className="size-4" />

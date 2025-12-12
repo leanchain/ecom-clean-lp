@@ -14,7 +14,7 @@ const traditionalApproach = [
   "Time-consuming content creation that delays launches.",
 ];
 
-const HexaddApproach = [
+const BeseamApproach = [
   {
     emoji: "🎨",
     text: "AI-generated visuals perfectly matched to your brand.",
@@ -46,10 +46,10 @@ const Comparison = () => {
       <div className="container">
         <div className="flex flex-col gap-6 text-center md:gap-12">
           <h2 className="mb-2 text-3xl font-bold md:text-5xl">
-            Hex+ PDP AI vs Traditional Product Pages
+            Beseam PDP AI vs Traditional Product Pages
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-            Hex+ PDP AI creates deep narrative product page content engineered
+            Beseam PDP AI creates deep narrative product page content engineered
             for both AI Search and human conversion. Get recommended 3-5× more
             often in AI results, driving impressions, clicks, and sales.
           </p>
@@ -70,15 +70,15 @@ const Comparison = () => {
             </ul>
           </div>
           <div className="rounded-3xl border border-y p-6 lg:rounded-l-none lg:border-l-0 lg:p-12">
-            <h3 className="text-2xl font-medium">Hex+ PDP AI</h3>
+            <h3 className="text-2xl font-medium">Beseam PDP AI</h3>
             <ul className="mt-9 space-y-3">
-              {HexaddApproach.map((feature, idx) => (
+              {BeseamApproach.map((feature, idx) => (
                 <React.Fragment key={idx}>
                   <li className="flex items-center gap-2 text-sm">
                     <span className="text-lg">{feature.emoji}</span>
                     {feature.text}
                   </li>
-                  {idx !== HexaddApproach.length - 1 && <Separator />}
+                  {idx !== BeseamApproach.length - 1 && <Separator />}
                 </React.Fragment>
               ))}
             </ul>

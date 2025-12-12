@@ -1,13 +1,13 @@
-# Hex+ - AI Media Studio
+# Beseam - AI Media Studio
 
-Hex+ is an AI Media Studio for AI Search Optimised Product Detail Pages
+Beseam is an AI Media Studio for AI Search Optimised Product Detail Pages
 
 - [Demo](https://sonic-nextjs-template.vercel.app/)
 - [Documentation](https://docs.shadcnblocks.com/templates/getting-started)
 
 ## Screenshot
 
-![Hex+ AI Media Studio screenshot](./public/og-image.jpg)
+![Beseam AI Media Studio screenshot](./public/og-image.jpg)
 
 ## Getting Started
 

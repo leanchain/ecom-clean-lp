@@ -12,7 +12,7 @@ const ITEMS = [
     links: [
       { name: "Generate Images", href: "/#ai-media-studio" },
       { name: "Generate Videos", href: "/#ai-media-studio" },
-      { name: "Enrich Product for AI Search", href: "/#hexadd-pdp-ai" },
+      { name: "Enrich Product for AI Search", href: "/#beseam-pdp-ai" },
     ],
   },
   {
@@ -26,8 +26,8 @@ const ITEMS = [
 
 const SOCIAL_LINKS = [
   {
-    name: "@hexadd.com",
-    href: "https://hexadd.com",
+    name: "@beseam.com",
+    href: "https://beseam.com",
     icon: null,
   },
   {
@@ -95,7 +95,7 @@ const Footer = () => {
 
         <div className="flex flex-col justify-between gap-6 md:flex-row">
           <p className="text-xl opacity-70">
-            © {new Date().getFullYear()}. All rights reserved. Hex+
+            © {new Date().getFullYear()}. All rights reserved. Beseam
           </p>
 
           <div className="flex gap-4">

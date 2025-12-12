@@ -5,7 +5,7 @@ const steps = [
   {
     number: "01",
     title: "Connect Store & Brand Style",
-    description: "Bring your products and brand into Hex+ in one go.",
+    description: "Bring your products and brand into Beseam in one go.",
     bullets: [
       "Connect your e‑commerce platform or catalog feed.",
       "Import existing PDPs, media, and product attributes.",
@@ -16,7 +16,7 @@ const steps = [
     number: "02",
     title: "Analyze PDPs for GEO & Conversion",
     description:
-      "Hex+ PDP AI reviews every page for AI search and real shoppers.",
+      "Beseam PDP AI reviews every page for AI search and real shoppers.",
     bullets: [
       "Scores PDPs for AI visibility and SEO readiness.",
       "Checks images, copy, and structure against best practices.",
@@ -126,7 +126,7 @@ const HowItWorks = () => {
       <div className="container">
         <div className="mb-12 text-center md:mb-16">
           <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-            How Hex+ Works
+            How Beseam Works
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
             Turn your catalog into AI‑ready PDP content in three simple steps.

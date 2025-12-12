@@ -1,6 +1,6 @@
 # Ecom Clean LP - Archive
 
-This folder contains archived components, routes, and assets from the original Sonic speaker template that are no longer needed for the live Hex+ AI PDP product.
+This folder contains archived components, routes, and assets from the original Sonic speaker template that are no longer needed for the live Beseam AI PDP product.
 
 **Archived:** 2025-11-17
 
@@ -32,7 +32,7 @@ This folder contains archived components, routes, and assets from the original S
 - `sections/about-hero.tsx`
 - `sections/about-mission.tsx`
 - `sections/our-values.tsx`
-- `sections/why-Hex+.tsx` ← Has correct Hex+ copy
+- `sections/why-Beseam.tsx` ← Has correct Beseam copy
 - `sections/blog-posts.tsx`
 
 **Product page sections (used ONLY by `/archive/product`):**
@@ -74,7 +74,7 @@ All 6 blog posts are speaker-related:
 
 ### Data (`data/`)
 
-- `products.json` - 4 "Hex+ Light - Premium Smart Soundbar" products with speaker specs
+- `products.json` - 4 "Beseam Light - Premium Smart Soundbar" products with speaker specs
 
 ### Images (`public/images/`)
 
@@ -101,7 +101,7 @@ All 6 blog posts are speaker-related:
 
 ## 🎯 Why These Were Archived
 
-All content in this archive is related to the original **Sonic speaker template** and is not relevant to the **Hex+ AI PDP product**. The main repository now contains only Hex+-specific content for AI-powered product detail page generation.
+All content in this archive is related to the original **Sonic speaker template** and is not relevant to the **Beseam AI PDP product**. The main repository now contains only Beseam-specific content for AI-powered product detail page generation.
 
 ---
 
@@ -120,4 +120,4 @@ The `/app/archive/product` route contains a working product detail page template
 
 ## ⚠️ Note
 
-These files are kept for historical reference and potential template reuse. They are not part of the live Hex+ product and should not be imported into active code.
+These files are kept for historical reference and potential template reuse. They are not part of the live Beseam product and should not be imported into active code.

@@ -10,7 +10,7 @@ const currentPdpBullets = [
   "High per-product content costs (shoots, design, copy).",
 ];
 
-const HexaddPdpBullets = [
+const BeseamPdpBullets = [
   "3–5× more visibility in AI search results (GEO, ChatGPT, Perplexity).",
   "Deep structured narrative that answers questions and drives conversion.",
   "On-brand images, video, and FAQs generated from one persuasion graph.",
@@ -29,7 +29,7 @@ const Compare2 = () => {
           <p className="text-muted-foreground mx-auto max-w-2xl text-sm md:text-base">
             AI search engines don't rank keywords, they rank clarity, specific
             use case completeness, and multi-modal content. If your PDPs aren't
-            AI-ready, your products won't be recommended. Hex+ fixes that, at
+            AI-ready, your products won't be recommended. Beseam fixes that, at
             scale.
           </p>
         </div>
@@ -81,11 +81,11 @@ const Compare2 = () => {
               </ul>
             </div>
 
-            {/* Hex+ PDP AI */}
+            {/* Beseam PDP AI */}
             <div className="relative">
               <div className="bg-card/95 rounded-3xl border-2 border-primary p-6 md:p-8">
                 <h3 className="text-lg font-semibold md:text-xl">
-                  With Hex+ PDP AI
+                  With Beseam PDP AI
                 </h3>
                 <p className="text-muted-foreground mt-2 text-sm">
                   One persuasion graph powers all copy, schema, and media so
@@ -106,13 +106,13 @@ const Compare2 = () => {
                   </div>
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-start bg-gradient-to-t from-background/80 via-background/40 to-transparent p-4">
                     <span className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
-                      Hex+ PDP AI
+                      Beseam PDP AI
                     </span>
                   </div>
                 </div>
 
                 <ul className="mt-6 space-y-2 text-sm md:text-base">
-                  {HexaddPdpBullets.map((item, idx) => (
+                  {BeseamPdpBullets.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <span className="mt-0.5 text-primary">
                         <Check className="size-4" />

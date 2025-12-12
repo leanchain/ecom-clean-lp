@@ -94,10 +94,10 @@ const Integration1 = () => {
       <div className="container max-w-5xl">
         <div className="mx-auto mb-8 max-w-3xl text-center">
           <h2 className="font-heading text-foreground mb-4 text-pretty text-3xl md:text-4xl lg:text-5xl">
-            Connect Hex+ to the platforms you already use
+            Connect Beseam to the platforms you already use
           </h2>
           <p className="text-muted-foreground text-sm md:text-base">
-            Hex+ plugs into your ecommerce platform and product feeds so
+            Beseam plugs into your ecommerce platform and product feeds so
             AI-ready PDPs stay in sync automatically - no rebuild or custom CMS
             needed.
           </p>

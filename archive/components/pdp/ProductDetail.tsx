@@ -59,7 +59,7 @@ export default function ProductDetail() {
         <TabsContent value="description" className="mt-6">
           <div className="prose max-w-none dark:prose-invert">
             <p>
-              Engineered for clarity and impact, Hex+ combines premium
+              Engineered for clarity and impact, Beseam combines premium
               components with a sleek design to deliver immersive sound wherever
               you listen. Enjoy crisp highs, rich mids, and deep bass in a
               compact form that fits any space.

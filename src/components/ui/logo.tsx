@@ -17,7 +17,7 @@ const Logo: React.FC<LogoProps> = ({
         {/* Light mode logo */}
         <Image
           src="/layout/logo.svg"
-          alt="Hex+ Logo"
+          alt="Beseam Logo"
           fill
           priority
           className="object-contain dark:hidden"
@@ -25,7 +25,7 @@ const Logo: React.FC<LogoProps> = ({
         {/* Dark mode logo */}
         <Image
           src="/layout/logo-dark.svg"
-          alt="Hex+ Logo"
+          alt="Beseam Logo"
           fill
           priority
           className="object-contain hidden dark:block"

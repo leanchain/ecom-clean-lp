@@ -16,7 +16,7 @@ const NavbarLogo: React.FC<NavbarLogoProps> = ({
       {/* Light mode logo */}
       <Image
         src="/layout/logo.svg"
-        alt="Hex+ Logo"
+        alt="Beseam Logo"
         fill
         priority
         className="object-contain dark:hidden"
@@ -24,7 +24,7 @@ const NavbarLogo: React.FC<NavbarLogoProps> = ({
       {/* Dark mode logo */}
       <Image
         src="/layout/logo-dark.svg"
-        alt="Hex+ Logo"
+        alt="Beseam Logo"
         fill
         priority
         className="object-contain hidden dark:block"

@@ -1,7 +1,7 @@
 # Repository Cleanup Summary
 
 **Date:** 2025-11-17  
-**Action:** Moved all non-Hex+ content to `/archive` folder
+**Action:** Moved all non-Beseam content to `/archive` folder
 
 ---
 
@@ -21,7 +21,7 @@
 **Sections (17 files):**
 
 - Unused: hero.tsx, product-hero.tsx, why-us.tsx, features.tsx, in-reality.tsx, faq.tsx, value-proposition.tsx
-- Archive-only: about-hero.tsx, about-mission.tsx, our-values.tsx, why-Hex+.tsx, blog-posts.tsx
+- Archive-only: about-hero.tsx, about-mission.tsx, our-values.tsx, why-Beseam.tsx, blog-posts.tsx
 - Product page: product-intro.tsx, big-sound.tsx, product-testimonials.tsx, product-features.tsx, service-features.tsx
 
 **PDP components (4 files):**
@@ -70,18 +70,18 @@ All speaker-related content:
 
 ---
 
-## ✅ What Remains in Main Repo (Clean Hex+ Foundation)
+## ✅ What Remains in Main Repo (Clean Beseam Foundation)
 
 ### Live Routes
 
 - `src/app/page.tsx` - Main landing page
 - `src/app/blog/` - Blog listing (needs new content)
 - `src/app/demo/` - Cal.com booking
-- `src/app/pricing/` - Hex+ pricing
+- `src/app/pricing/` - Beseam pricing
 - `src/app/contact/` - Contact form
-- `src/app/comparison/` - Hex+ vs alternatives
+- `src/app/comparison/` - Beseam vs alternatives
 
-### Live Components (Hex+ AI PDP Content)
+### Live Components (Beseam AI PDP Content)
 
 **Sections (3 files):**
 
@@ -120,7 +120,7 @@ All speaker-related content:
 **Impact:** `/blog` page will have no content to display.  
 **Fix Options:**
 
-- Create new Hex+ AI PDP blog posts
+- Create new Beseam AI PDP blog posts
 - Remove the `/blog` route entirely
 - Show "Coming soon" message
 
@@ -150,7 +150,7 @@ All speaker-related content:
 
 ## 🎯 Result
 
-The main repository now contains **ONLY Hex+ AI PDP content** with:
+The main repository now contains **ONLY Beseam AI PDP content** with:
 
 - ✅ No nested archive folders
 - ✅ No speaker/audio demo content

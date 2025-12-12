@@ -59,8 +59,8 @@ const WhoItsFor = () => {
             Built for Every Role in E-commerce
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
-            Whether you're launching products or scaling a catalog, Hex+ adapts
-            to your workflow
+            Whether you're launching products or scaling a catalog, Beseam
+            adapts to your workflow
           </p>
         </div>
 

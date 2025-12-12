@@ -4,7 +4,7 @@ import { ExamplePdp } from "@/components/example-pdp";
 export const metadata: Metadata = {
   title: "Example PDP - Travel Buddy Hair Dryer",
   description:
-    "Example product detail page for the Travel Buddy Hair Dryer generated with Hex+.",
+    "Example product detail page for the Travel Buddy Hair Dryer generated with Beseam.",
 };
 
 export default function ExamplePdpPage() {

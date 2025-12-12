@@ -67,7 +67,7 @@ export default function ProductHero() {
       >
         <Image
           src="/images/blog/blog-5.webp"
-          alt="Hex+ Product"
+          alt="Beseam Product"
           fill
           className="object-cover"
           priority

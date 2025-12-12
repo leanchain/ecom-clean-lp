@@ -61,7 +61,7 @@ const faqs = [
         </ul>
         <p>
           Bottom line: AI engines don’t rank keywords—they rank clarity,
-          completeness, and helpfulness. Hex+ builds PDP content that scores
+          completeness, and helpfulness. Beseam builds PDP content that scores
           extremely high on those signals.
         </p>
       </div>
@@ -95,10 +95,12 @@ const faqs = [
     ),
   },
   {
-    question: "How does Hex+ improve my AI visibility score?",
+    question: "How does Beseam improve my AI visibility score?",
     answer: (
       <div className="space-y-3 text-sm md:text-base">
-        <p>Hex+ automatically generates and structures everything AI needs:</p>
+        <p>
+          Beseam automatically generates and structures everything AI needs:
+        </p>
         <ul className="list-disc space-y-1 pl-5">
           <li>
             On-brand packshots, lifestyle images, model shots, and videos
@@ -193,7 +195,7 @@ const faqs = [
         </ul>
         <p>
           A single studio photoshoot can’t practically scale this across
-          thousands of SKUs. Hex+ generates consistent, on-brand, context-rich
+          thousands of SKUs. Beseam generates consistent, on-brand, context-rich
           images and video that match what AI search engines look for, so your
           catalog feels complete to both shoppers and models.
         </p>
@@ -263,18 +265,18 @@ const faqs = [
           another.
         </p>
         <p>
-          Hex+ builds all of these sections automatically, integrated with the
+          Beseam builds all of these sections automatically, integrated with the
           merchant’s brandbook and product attributes.
         </p>
       </div>
     ),
   },
   {
-    question: "How does Hex+ PDP AI compare to traditional product pages?",
+    question: "How does Beseam PDP AI compare to traditional product pages?",
     answer: (
       <div className="space-y-4 text-sm md:text-base">
         <p>
-          Hex+ PDP AI analyses your existing product content and online search
+          Beseam PDP AI analyses your existing product content and online search
           behavior, and creates deep context with narrative product page text,
           images, and video content engineered for both AI search and human
           conversion. This deep context allows AIs to address the long tail of
@@ -299,7 +301,7 @@ const faqs = [
   {
     question: "How do credits work, and how many generations do I get?",
     answer:
-      "Credits are only used for AI generation features in Hex+ (e.g., creating images, copy, or variations). Different tools may consume different amounts per generation, and a single request can yield one or multiple results. On monthly plans, credits reset each month. Annual plans receive credits upfront with a yearly reset. Unused credits don’t roll over, though you can purchase optional add‑on credits that are used after your plan’s included credits and expire after up to three years. Downloading your own outputs does not consume credits.",
+      "Credits are only used for AI generation features in Beseam (e.g., creating images, copy, or variations). Different tools may consume different amounts per generation, and a single request can yield one or multiple results. On monthly plans, credits reset each month. Annual plans receive credits upfront with a yearly reset. Unused credits don’t roll over, though you can purchase optional add‑on credits that are used after your plan’s included credits and expire after up to three years. Downloading your own outputs does not consume credits.",
   },
   {
     question: "Is my subscription automatically renewed?",
