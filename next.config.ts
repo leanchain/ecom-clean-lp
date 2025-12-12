@@ -35,6 +35,9 @@ const nextConfig: NextConfig = {
 
   // Performance optimizations
   compress: true,
+
+  // Enable static export for deployment to static hosts like Cloudflare Pages
+  output: "export",
 };
 
 export default withMDX(nextConfig);
