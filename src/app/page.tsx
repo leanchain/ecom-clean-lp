@@ -6,6 +6,7 @@ import { Feature57 } from "@/components/feature57";
 import { Gallery25 } from "@/components/gallery25";
 import { Hero230 } from "@/components/hero230";
 import { Integration1 } from "@/components/integration1";
+import AuditTryout from "@/components/sections/audit-tryout";
 import HowItWorks from "@/components/sections/how-it-works";
 import WhoItsFor from "@/components/sections/who-its-for";
 import { Stats18 } from "@/components/stats18";
@@ -16,6 +17,7 @@ export default function Home() {
       <Hero230 />
       <ClientLogos />
       <Stats18 />
+      <AuditTryout />
       <HowItWorks />
       <Feature57 />
       <Gallery25 />
