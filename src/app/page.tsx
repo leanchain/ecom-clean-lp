@@ -1,4 +1,4 @@
-import ClientLogos from "@/components/client-logos";
+// import ClientLogos from "@/components/client-logos";
 import { Compare2 } from "@/components/compare2";
 import { Comparison } from "@/components/comparison";
 import { Faq9 } from "@/components/faq9";
@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Hero230 />
-      <ClientLogos />
+      {/* <ClientLogos /> */}
       <Stats18 />
       <AuditTryout />
       <HowItWorks />
