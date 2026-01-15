@@ -1263,14 +1263,16 @@ export default function Navbar() {
             <div className="animate-in slide-in-from-right-5 duration-300">
               <button
                 onClick={() => setActiveSubmenu(null)}
-                className="mb-6 flex items-center gap-2 text-background text-sm font-medium"
+                className="mb-6 flex items-center gap-2 text-foreground text-sm font-medium"
               >
                 <ArrowLeft className="size-4" />
                 Go back
               </button>
-              {navigationMenuItems
-                .find((item) => item.key === activeSubmenu)
-                ?.component()}
+              <NavigationMenu viewport={false} className="block w-full">
+                {navigationMenuItems
+                  .find((item) => item.key === activeSubmenu)
+                  ?.component()}
+              </NavigationMenu>
             </div>
           ) : (
             <div className="space-y-4">
