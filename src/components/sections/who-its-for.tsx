@@ -51,7 +51,7 @@ const roles = [
 
 const WhoItsFor = () => {
   return (
-    <section className="py-20 md:py-32">
+    <section id="who-its-for" className="py-20 md:py-32">
       <div className="container">
         {/* Header */}
         <div className="mb-16 text-center">

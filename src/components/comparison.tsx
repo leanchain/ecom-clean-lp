@@ -42,7 +42,7 @@ const BeseamApproach = [
 
 const Comparison = () => {
   return (
-    <section className="py-32">
+    <section id="comparison" className="py-32">
       <div className="container">
         <div className="flex flex-col gap-6 text-center md:gap-12">
           <h2 className="mb-2 text-3xl font-bold md:text-5xl">

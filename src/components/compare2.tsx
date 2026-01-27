@@ -20,7 +20,7 @@ const BeseamPdpBullets = [
 
 const Compare2 = () => {
   return (
-    <section className="py-24">
+    <section id="compare-traditional" className="py-24">
       <div className="container">
         <div className="text-center">
           <h2 className="mb-4 text-3xl font-bold md:text-5xl">

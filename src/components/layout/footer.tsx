@@ -16,6 +16,16 @@ const ITEMS = [
     ],
   },
   {
+    title: "Comparisons",
+    links: [
+      { name: "vs Rankscale", href: "/new-landing#compare-rankscale" },
+      { name: "vs Productshots.ai", href: "/new-landing#compare-productshots" },
+      { name: "vs Claid.ai", href: "/new-landing#compare-claid" },
+      { name: "vs Weshop.ai", href: "/new-landing#compare-weshop" },
+      { name: "vs Creati.studio", href: "/new-landing#compare-creati" },
+    ],
+  },
+  {
     title: "Legal",
     links: [
       { name: "Terms of Service", href: "/terms-of-service" },
