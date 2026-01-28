@@ -327,7 +327,7 @@ const faqs = [
 
 const Faq9 = () => {
   return (
-    <section className="py-32">
+    <section id="faq" className="py-32">
       <div className="container">
         <h2 className="mb-12 mt-2 text-3xl font-bold md:text-6xl">FAQs</h2>
         <Accordion type="multiple">

@@ -2,7 +2,6 @@
 
 import {
   Camera,
-  Video,
   FileText,
   Package,
   AudioLines,
@@ -53,20 +52,6 @@ const features = [
     ],
   },
   {
-    id: "feature-2",
-    title: "Engaging Product Videos",
-    description:
-      "On-brand AI videos auto-built from your brandbook, aligned with narrative and user needs. No more generic clips disconnected from your story.",
-    icon: Video,
-    type: "video" as const,
-    media: "/videos/hero/hero-video-1.mp4",
-    bullets: [
-      "Auto-built from brandbook and style guide",
-      "Aligned with product narrative",
-      "Consistent brand lighting, style & tone",
-    ],
-  },
-  {
     id: "feature-3",
     title: "Deep Product Context for AI",
     description:
@@ -92,8 +77,7 @@ const Feature57 = () => {
     // Set default prompt based on feature type
     const defaultPrompts = {
       0: "Show @model wearing @outfit in a minimalist studio setting with soft natural lighting and neutral beige background",
-      1: "Create a smooth 360° rotation of @model wearing @outfit following @styleguide color palette",
-      2: "Generate complete PDP content for @template.sweater with benefits, objections, FAQs, use cases, and comparisons using @styleguide.writing",
+      1: "Generate complete PDP content for @template.sweater with benefits, objections, FAQs, use cases, and comparisons using @styleguide.writing",
     };
     setPromptValue(defaultPrompts[index as keyof typeof defaultPrompts] || "");
   };
@@ -104,15 +88,15 @@ const Feature57 = () => {
       if (typeof window === "undefined") return;
       const hash = window.location.hash;
       if (hash === "#ai-media-studio-video" || hash === "#videos") {
-        setSelection(1);
+        setSelection(0); // Default to images since videos are removed
         setPromptValue(
-          "Create a smooth 360° rotation of @model wearing @outfit following @styleguide color palette",
+          "Show @model wearing @outfit in a minimalist studio setting with soft natural lighting and neutral beige background",
         );
       } else if (
         hash === "#ai-media-studio-context" ||
         hash === "#deep-product-context"
       ) {
-        setSelection(2);
+        setSelection(1);
         setPromptValue(
           "Generate complete PDP content for @template.sweater with benefits, objections, FAQs, use cases, and comparisons using @styleguide.writing",
         );
@@ -134,58 +118,69 @@ const Feature57 = () => {
   };
 
   return (
-    <section id="ai-media-studio" className="py-12 md:py-24 lg:py-32">
+    <section id="ai-media-studio" className="py-16 md:py-28 lg:py-36 bg-gradient-to-br from-background via-muted/20 to-background">
       <div className="container mx-auto px-4">
-        <div className="mb-8 text-center md:mb-12">
-          <div className="mb-3 flex justify-center">
+        <div className="mb-16 text-center">
+          <div className="mb-6 flex justify-center">
             <CategoryBadge
               label="AI Media Studio"
               icon={<Package className="h-4 w-4" />}
             />
           </div>
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
-            Create the Perfect Images, Videos and Deep Context for Your PDPs
+          <h2 className="text-4xl font-bold leading-tight md:text-5xl lg:text-6xl xl:text-7xl mb-6">
+            Create the Perfect
+            <span className="bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent"> Images</span>
+            <br />and Deep Context for Your PDPs
           </h2>
-          <p className="text-muted-foreground mx-auto mt-3 max-w-2xl text-sm md:mt-4 md:text-base">
-            Images + Videos + AI Search Optimization = Product pages that look
+          <p className="text-muted-foreground mx-auto mt-6 max-w-3xl text-lg leading-relaxed md:text-xl lg:text-2xl">
+            <strong className="text-foreground font-semibold">Images + AI Search Optimization</strong> = Product pages that look
             amazing, engage deeply, and get discovered in AI search engines.
           </p>
         </div>
         <div>
-          <div className="mx-auto max-w-6xl">
-            {/* Tab Navigation - Move above content */}
-            <div className="mb-8 flex justify-center gap-3">
-              {features.map((feature, i) => {
-                const isSelected = selection === i;
-                return (
-                  <button
-                    key={i}
-                    className={`group relative flex cursor-pointer items-center gap-2 rounded-3xl border px-4 py-3 transition-all duration-300 ${
-                      isSelected
-                        ? "border-border bg-accent"
-                        : "hover:border-border hover:bg-accent/30 border-transparent"
-                    }`}
-                    onClick={() => handleSelection(i)}
-                    aria-label={feature.title}
-                  >
-                    <feature.icon
-                      className={`size-4 transition-colors ${
-                        isSelected ? "text-primary" : "text-muted-foreground"
+          <div className="mx-auto max-w-7xl">
+            {/* Enhanced Tab Navigation */}
+            <div className="mb-12 flex justify-center">
+              <div className="flex flex-wrap justify-center gap-4 p-2 bg-muted/30 rounded-2xl border border-border/50 backdrop-blur-sm">
+                {features.map((feature, i) => {
+                  const isSelected = selection === i;
+                  return (
+                    <button
+                      key={i}
+                      className={`group relative flex cursor-pointer items-center gap-3 rounded-xl border px-6 py-4 transition-all duration-300 ${
+                        isSelected
+                          ? "border-primary bg-primary/10 shadow-lg shadow-primary/20 scale-105"
+                          : "hover:border-border hover:bg-background/80 border-transparent hover:shadow-md"
                       }`}
-                    />
-                    <span
-                      className={`hidden md:block text-sm font-medium transition-colors ${
-                        isSelected ? "text-foreground" : "text-muted-foreground"
-                      }`}
+                      onClick={() => handleSelection(i)}
+                      aria-label={feature.title}
                     >
-                      {feature.title}
-                    </span>
-                  </button>
-                );
-              })}
+                      <feature.icon
+                        className={`size-5 transition-all duration-300 ${
+                          isSelected
+                            ? "text-primary scale-110"
+                            : "text-muted-foreground group-hover:text-primary"
+                        }`}
+                      />
+                      <span
+                        className={`text-sm font-semibold transition-all duration-300 ${
+                          isSelected
+                            ? "text-primary"
+                            : "text-muted-foreground group-hover:text-foreground"
+                        }`}
+                      >
+                        {feature.title}
+                      </span>
+                      {isSelected && (
+                        <div className="absolute -bottom-1 left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-primary" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-            <div className="flex flex-col gap-6 md:flex-row md:gap-8 lg:gap-16">
-              {/* Text Section - Left Side */}
+            <div className="flex flex-col gap-8 md:flex-row md:gap-12 lg:gap-20">
+              {/* Enhanced Text Section - Left Side */}
               <div className="md:w-1/2 lg:w-2/5">
                 <div className="flex h-full flex-col justify-center">
                   {features.map((feature, i) => {
@@ -195,36 +190,40 @@ const Feature57 = () => {
                         key={feature.id}
                         className={`transition-all duration-500 ${
                           isSelected
-                            ? "opacity-100"
-                            : "pointer-events-none absolute opacity-0"
+                            ? "opacity-100 translate-y-0"
+                            : "pointer-events-none absolute opacity-0 translate-y-4"
                         }`}
                       >
-                        <div className="mb-6">
-                          <h3 className="text-foreground text-2xl font-bold md:text-3xl lg:text-4xl mb-3 flex items-center gap-3">
-                            <feature.icon className="size-7 md:size-8 text-primary shrink-0" />
-                            {feature.title}
+                        <div className="mb-8">
+                          <h3 className="text-foreground text-3xl font-bold md:text-4xl lg:text-5xl mb-4 flex items-center gap-4">
+                            <div className="p-3 rounded-2xl bg-primary/10 border border-primary/20">
+                              <feature.icon className="size-8 md:size-9 text-primary shrink-0" />
+                            </div>
+                            <span className="leading-tight">{feature.title}</span>
                           </h3>
                         </div>
-                        <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
+                        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed mb-8">
                           {feature.description}
                         </p>
-                        <ul className="space-y-3">
+                        <ul className="space-y-4">
                           {feature.bullets.map((bullet, idx) => (
-                            <li key={idx} className="flex items-start gap-3">
-                              <svg
-                                className="size-4 text-primary shrink-0 mt-0.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={3}
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M5 13l4 4L19 7"
-                                />
-                              </svg>
-                              <span className="text-muted-foreground text-sm md:text-base">
+                            <li key={idx} className="flex items-start gap-4 group/item">
+                              <div className="mt-1 p-1 rounded-full bg-primary/10 border border-primary/20 group-hover/item:bg-primary/20 transition-colors duration-200">
+                                <svg
+                                  className="size-4 text-primary shrink-0"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  strokeWidth={3}
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M5 13l4 4L19 7"
+                                  />
+                                </svg>
+                              </div>
+                              <span className="text-muted-foreground text-base md:text-lg leading-relaxed group-hover/item:text-foreground transition-colors duration-200">
                                 {bullet}
                               </span>
                             </li>
@@ -236,7 +235,7 @@ const Feature57 = () => {
                 </div>
               </div>
 
-              {/* Media Block - Right Side */}
+              {/* Enhanced Media Block - Right Side */}
               <div className="relative md:w-1/2 lg:w-3/5">
                 {features.map((feature, i) => {
                   const isSelected = selection === i;
@@ -245,53 +244,54 @@ const Feature57 = () => {
                       key={feature.id}
                       className={`transition-all duration-500 ${
                         isSelected
-                          ? "opacity-100"
-                          : "pointer-events-none absolute opacity-0"
+                          ? "opacity-100 translate-y-0 scale-100"
+                          : "pointer-events-none absolute opacity-0 translate-y-8 scale-95"
                       }`}
                     >
-                      {/* Unified Product Card */}
-                      <div className="border-border overflow-hidden rounded-3xl border bg-background">
-                        {/* Media Section (Top Half) */}
-                        <div className="relative aspect-video w-full overflow-hidden bg-muted">
-                          {feature.type === "video" ? (
-                            <video
-                              src={feature.media}
-                              className="h-full w-full object-cover"
-                              muted
-                              playsInline
-                              autoPlay
-                              loop
-                            />
-                          ) : feature.type === "image" ? (
+                      {/* Enhanced Product Card */}
+                      <div className="border-border overflow-hidden rounded-3xl border bg-background shadow-2xl ring-1 ring-border/20">
+                        {/* Enhanced Media Section (Top Half) */}
+                        <div className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-muted/50 to-muted">
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
+                          {feature.type === "image" ? (
                             <Image
                               src={feature.media}
                               alt={feature.title}
                               width={feature.width}
                               height={feature.height}
-                              className="h-full w-full object-cover object-center"
+                              className="h-full w-full object-cover object-center transition-transform duration-700 hover:scale-105"
                             />
                           ) : (
-                            <div className="flex h-full items-center justify-center p-8">
-                              <div className="space-y-4 text-center">
-                                <FileText className="mx-auto h-16 w-16 text-muted-foreground" />
-                                <p className="text-lg font-semibold">
-                                  AI-Generated Product Copy
-                                </p>
-                                <p className="text-sm text-muted-foreground">
-                                  Optimized for search engines and conversion
-                                </p>
+                            <div className="flex h-full items-center justify-center p-8 bg-gradient-to-br from-primary/5 to-primary/10">
+                              <div className="space-y-6 text-center">
+                                <div className="p-4 rounded-2xl bg-background/80 backdrop-blur-sm border border-border/50 inline-block">
+                                  <FileText className="mx-auto h-16 w-16 text-primary" />
+                                </div>
+                                <div>
+                                  <p className="text-xl font-bold text-foreground mb-2">
+                                    AI-Generated Product Copy
+                                  </p>
+                                  <p className="text-base text-muted-foreground">
+                                    Optimized for search engines and conversion
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           )}
+                          <div className="absolute top-4 right-4 z-20">
+                            <div className="bg-background/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold text-primary border border-primary/20">
+                              {feature.type === "image" ? "AI Image" : "AI Content"}
+                            </div>
+                          </div>
                         </div>
 
-                        {/* Chat Interface (Bottom Half) */}
-                        <div className="p-4">
-                          <div className="bg-muted rounded-3xl w-full px-4 py-3">
-                            {/* Prompt Display/Input Area */}
-                            <div className="min-h-[60px] mb-2">
+                        {/* Enhanced Chat Interface (Bottom Half) */}
+                        <div className="p-6">
+                          <div className="bg-gradient-to-r from-muted/80 to-muted rounded-3xl w-full px-6 py-5 border border-border/50 shadow-inner">
+                            {/* Enhanced Prompt Display/Input Area */}
+                            <div className="min-h-[70px] mb-4">
                               {promptValue ? (
-                                <div className="text-sm leading-relaxed py-2">
+                                <div className="text-base leading-relaxed py-3 px-2 rounded-xl bg-background/50 border border-border/30">
                                   {renderWithMentions(promptValue)}
                                 </div>
                               ) : (
@@ -303,40 +303,43 @@ const Feature57 = () => {
                                   placeholder={
                                     feature.type === "image"
                                       ? "Show @model wearing @outfit in..."
-                                      : feature.type === "video"
-                                        ? "Create video of @model in @outfit..."
-                                        : "Generate PDP content for @template.sweater using @styleguide.writing..."
+                                      : "Generate PDP content for @template.sweater using @styleguide.writing..."
                                   }
-                                  rows={2}
-                                  className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground resize-none py-2"
+                                  rows={3}
+                                  className="w-full bg-background/50 text-base outline-none placeholder:text-muted-foreground resize-none py-3 px-4 rounded-xl border border-border/30 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                                 />
                               )}
                             </div>
 
-                            {/* Bottom Controls */}
-                            <div className="flex h-8 w-full items-center justify-between">
-                              <div className="flex items-center gap-3">
-                                <Plus className="size-4 cursor-pointer text-muted-foreground hover:text-foreground transition-colors" />
-                                <span className="flex cursor-pointer items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                                  <Settings2 className="size-4" />
-                                  Tools
-                                </span>
+                            {/* Enhanced Bottom Controls */}
+                            <div className="flex h-10 w-full items-center justify-between">
+                              <div className="flex items-center gap-4">
+                                <button className="flex items-center gap-2 p-2 rounded-xl hover:bg-background/80 transition-colors duration-200 group">
+                                  <Plus className="size-4 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
+                                  <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-200 font-medium">Add</span>
+                                </button>
+                                <button className="flex items-center gap-2 p-2 rounded-xl hover:bg-background/80 transition-colors duration-200 group">
+                                  <Settings2 className="size-4 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
+                                  <span className="text-xs text-muted-foreground group-hover:text-foreground transition-colors duration-200 font-medium">Tools</span>
+                                </button>
                               </div>
                               <div className="flex items-center gap-3">
-                                <Mic className="size-4 cursor-pointer text-muted-foreground hover:text-foreground transition-colors" />
-                                <span className="bg-foreground/10 hover:bg-foreground/20 flex size-7 cursor-pointer items-center justify-center rounded-full transition-colors">
-                                  <AudioLines className="size-3.5" />
-                                </span>
+                                <button className="p-2 rounded-xl hover:bg-background/80 transition-colors duration-200 group">
+                                  <Mic className="size-4 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
+                                </button>
+                                <button className="bg-primary/10 hover:bg-primary/20 p-2 rounded-xl transition-colors duration-200 group border border-primary/20">
+                                  <AudioLines className="size-4 text-primary" />
+                                </button>
                                 <Link
                                   href="/demo"
-                                  className="bg-primary text-primary-foreground hover:bg-primary/90 flex size-7 cursor-pointer items-center justify-center rounded-full transition-colors"
+                                  className="bg-primary text-primary-foreground hover:bg-primary/90 p-2 rounded-xl transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-primary/25"
                                 >
-                                  <Play className="size-3.5 fill-current" />
+                                  <Play className="size-4 fill-current" />
                                 </Link>
                               </div>
                             </div>
                           </div>
-                          <div className="mt-3 flex flex-wrap gap-2">
+                          <div className="mt-6 flex flex-wrap gap-3">
                             {(feature.type === "image"
                               ? [
                                   {
@@ -355,49 +358,31 @@ const Feature57 = () => {
                                       "Show @model wearing @outfit in a cozy café interior with warm lighting matching @styleguide aesthetic",
                                   },
                                 ]
-                              : feature.type === "video"
-                                ? [
-                                    {
-                                      label: "360° showcase",
-                                      prompt:
-                                        "Create a smooth 360° rotation of @model wearing @outfit following @styleguide color palette",
-                                    },
-                                    {
-                                      label: "Styling demo",
-                                      prompt:
-                                        "Generate a video showing @model styling @outfit with different accessories per @styleguide",
-                                    },
-                                    {
-                                      label: "Movement video",
-                                      prompt:
-                                        "Show @model walking and moving naturally in @outfit with cinematic lighting from @styleguide",
-                                    },
-                                  ]
-                                : [
-                                    {
-                                      label: "Full PDP content",
-                                      prompt:
-                                        "Generate complete PDP content for @template.sweater with benefits, objections, FAQs, use cases, and comparisons using @styleguide.writing",
-                                    },
-                                    {
-                                      label: "Deep narrative",
-                                      prompt:
-                                        "Create LLM-optimized narrative text for @template.sweater with structured benefits, 'best for', howto, and why sections per @styleguide.writing",
-                                    },
-                                    {
-                                      label: "GEO optimization",
-                                      prompt:
-                                        "Optimize @template.sweater for ChatGPT and Perplexity with deep product context following @styleguide.writing tone",
-                                    },
-                                  ]
+                              : [
+                                  {
+                                    label: "Full PDP content",
+                                    prompt:
+                                      "Generate complete PDP content for @template.sweater with benefits, objections, FAQs, use cases, and comparisons using @styleguide.writing",
+                                  },
+                                  {
+                                    label: "Deep narrative",
+                                    prompt:
+                                      "Create LLM-optimized narrative text for @template.sweater with structured benefits, 'best for', howto, and why sections per @styleguide.writing",
+                                  },
+                                  {
+                                    label: "GEO optimization",
+                                    prompt:
+                                      "Optimize @template.sweater for ChatGPT and Perplexity with deep product context following @styleguide.writing tone",
+                                  },
+                                ]
                             ).map((item, index) => (
-                              <span
+                              <button
                                 key={index}
                                 onClick={() => handlePromptClick(item.prompt)}
-                                className="bg-muted hover:bg-muted-foreground/20 text-muted-foreground inline-block cursor-pointer rounded-full px-3 py-1 text-xs transition-colors"
+                                className="bg-gradient-to-r from-muted/60 to-muted hover:from-primary/10 hover:to-primary/5 text-muted-foreground hover:text-primary border border-border/30 hover:border-primary/30 inline-block cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 hover:shadow-md hover:scale-105"
                               >
                                 {item.label}
-                              </span>
+                              </button>
                             ))}
                           </div>
                         </div>

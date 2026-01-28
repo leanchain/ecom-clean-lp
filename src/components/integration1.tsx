@@ -90,17 +90,19 @@ const FeatureCard: React.FC<IntegrationItem> = ({
 
 const Integration1 = () => {
   return (
-    <section className="py-20 md:py-24">
+    <section id="integrations" className="py-20 md:py-24">
       <div className="container max-w-5xl">
         <div className="mx-auto mb-8 max-w-3xl text-center">
           <h2 className="font-heading text-foreground mb-4 text-pretty text-3xl md:text-4xl lg:text-5xl">
-            Connect Beseam to the platforms you already use
+            Sync with Top E-commerce Platforms
           </h2>
-          <p className="text-muted-foreground text-sm md:text-base">
-            Beseam plugs into your ecommerce platform and product feeds so
-            AI-ready PDPs stay in sync automatically - no rebuild or custom CMS
-            needed.
+          <p className="text-muted-foreground text-sm md:text-base mb-6">
+            Seamlessly connect to Shopify, WooCommerce, BigCommerce, and ERP platforms for automatic product sync and AI-ready PDPs.
           </p>
+          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+            <span>🔄</span>
+            Real-time sync across all major platforms
+          </div>
         </div>
 
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 px-4 sm:grid-cols-2 md:mt-4 lg:mt-8">

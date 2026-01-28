@@ -330,7 +330,7 @@ const Gallery25 = () => {
   const col4 = [extraVideo, ...column4Images.map(toImage)];
 
   return (
-    <section className="pb-32">
+    <section id="gallery" className="pb-32">
       {/* Logo Bar Section */}
       <div className="container mt-12 mb-6">
         <h2 className="text-2xl md:text-4xl md:text-balance lg:text-5xl lg:leading-14 mb-6 md:mb-8 text-center mx-auto max-w-4xl">

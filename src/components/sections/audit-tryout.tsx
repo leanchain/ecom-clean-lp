@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const AuditTryout = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#0b1221] to-[#0a0f1d] py-20 text-white">
+    <section id="audit-tryout" className="relative overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#0b1221] to-[#0a0f1d] py-20 text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(120,119,198,0.35),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.3),transparent_30%)]" />
       <div className="container relative z-10 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div className="space-y-6">
