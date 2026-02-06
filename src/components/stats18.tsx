@@ -165,10 +165,9 @@ const Stats18 = () => {
         {/* AI Platforms logos at bottom */}
         <div className="mx-auto mt-8 max-w-2xl text-center">
           <p className="text-muted-foreground text-sm md:text-base">
-            Our platform analyzes your product page content for a comprehensive
-            score that predicts AI search visibility. Our Beseam PDP AI then
-            optimises and generates all images, videos and deep text structured
-            for both human conversion and AI search.
+            Beseam audits your PDPs across 8 critical dimensions: SEO, Content, Trust, UX,
+            Conversion, Mobile, Performance, and Accessibility. Then it generates the images,
+            videos, and structured content needed to maximize both AI visibility and human conversion.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-5xl">
@@ -200,12 +199,14 @@ const Stats18 = () => {
 };
 
 const chartData = [
-  { dimension: "Image Quality", before: 55, after: 98 },
-  { dimension: "Video Content", before: 37, after: 88 },
-  { dimension: "Deep Context", before: 26, after: 95 },
-  { dimension: "AI Friendly Version ", before: 10, after: 90 },
-  { dimension: "FAQ based on AI Search", before: 10, after: 94 },
-  { dimension: "Product in use Content", before: 31, after: 87 },
+  { dimension: "SEO", before: 45, after: 92 },
+  { dimension: "Content", before: 30, after: 95 },
+  { dimension: "Trust", before: 55, after: 90 },
+  { dimension: "UX", before: 40, after: 88 },
+  { dimension: "Conversion", before: 35, after: 85 },
+  { dimension: "Mobile", before: 50, after: 90 },
+  { dimension: "Performance", before: 60, after: 88 },
+  { dimension: "Accessibility", before: 55, after: 94 },
 ];
 
 const chartConfig = {

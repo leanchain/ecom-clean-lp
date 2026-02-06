@@ -4,10 +4,11 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
-import { ArrowRight, FileText, ImageIcon, PlayCircle } from "lucide-react";
+import { ArrowRight, FileText, ImageIcon, PlayCircle, Play, Check, Star } from "lucide-react";
 
 import AnimatedBorderButton from "@/components/animated-border-button";
 import { TypingAnimation } from "@/components/typing-animation";
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -152,8 +153,7 @@ const Hero230 = () => {
     <section className="pt-20">
       <div className="container flex flex-col items-center justify-center gap-4 text-center">
         <h1 className="font-heading text-foreground max-w-4xl text-4xl md:text-5xl">
-          Boost Your Sales with High-Converting Product Pages that is
-          Recommended on
+          Turn Your PDPs Into AI-Recommended Best-Sellers on
           <br />{" "}
           <span className="block md:inline">
             <TypingAnimation
@@ -164,20 +164,68 @@ const Hero230 = () => {
             />
           </span>
         </h1>
-        <p className="text-muted-foreground/80 mt-3 max-w-xl">
-          Create scroll-stopping on-brand product visuals and deep product
-          context to ensure your products are found in AI search and convert
-          browsers into buyers.
+        <p className="text-muted-foreground/80 mt-3 max-w-2xl text-base md:text-lg">
+          Beseam audits your product pages, generates AI-optimized images, videos, and deep product context—so your products get discovered by AI search engines and convert browsers into buyers.
         </p>
-        <div className="mb-12 mt-8">
+
+        {/* CTA Buttons */}
+        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
           <AnimatedBorderButton
             asChild
-            className="h-20 w-100 px-16 py-8 text-5xl cursor-pointer [&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
+            className="h-14 px-8 text-lg cursor-pointer [&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
           >
             <Link href="/demo">
-              Get Started <ArrowRight />
+              Start Free Trial <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </AnimatedBorderButton>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="h-14 rounded-full px-8 text-base"
+          >
+            <Link href="/pdp-analyzer">
+              <Play className="mr-2 h-4 w-4" />
+              Try Free Audit
+            </Link>
+          </Button>
+        </div>
+
+        {/* Trust Signals */}
+        <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
+          <div className="flex items-center gap-1">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            ))}
+            <span className="ml-1 text-sm text-muted-foreground">4.9/5 rating</span>
+          </div>
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <span className="flex items-center gap-1">
+              <Check className="h-4 w-4 text-primary" />
+              No credit card required
+            </span>
+            <span className="flex items-center gap-1">
+              <Check className="h-4 w-4 text-primary" />
+              14-day free trial
+            </span>
+          </div>
+        </div>
+
+        {/* Social Proof Snippet */}
+        <div className="mt-8 mb-12 flex items-center gap-3">
+          <div className="flex -space-x-2">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-primary/10 text-xs font-semibold text-primary"
+              >
+                {String.fromCharCode(64 + i)}
+              </div>
+            ))}
+          </div>
+          <p className="text-sm text-muted-foreground">
+            <span className="font-semibold text-foreground">500+ brands</span> trust Beseam
+          </p>
         </div>
       </div>
 

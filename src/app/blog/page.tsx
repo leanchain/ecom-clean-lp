@@ -32,7 +32,7 @@ export default function BlogPage() {
             category="Blog"
             title="Beseam Insights"
             description="The latest insights in optimising your PDP images, videos, copy and page layout for conversion and AI Search."
-            isCenter
+            layout="center"
           />
 
           <div className="mt-16 rounded-3xl border border-border bg-card p-12 md:p-16">
@@ -67,7 +67,7 @@ export default function BlogPage() {
           category="Blog"
           title="Beseam Insights"
           description="The latest insights in optimising your PDP images, videos, copy and page layout for conversion and AI Search."
-          isCenter
+          layout="center"
         />
       </section>
       <Blog7 hideHeader posts={posts} />

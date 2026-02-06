@@ -9,24 +9,22 @@ import { ComparisonTable } from "@/components/comparison-table";
 const faqs = [
   {
     question:
-      "What is “AI Search Optimization” and why does it matter for my product pages?",
+      "What is AI Search Optimization and why should I care?",
     answer: (
       <div className="space-y-3 text-sm md:text-base">
         <p>
-          AI search optimization is the process of making your products
-          discoverable and recommendable inside AI engines like ChatGPT,
-          Perplexity, Gemini, Claude, Google AI Overviews, and upcoming “AI
-          Mode” search layers.
+          AI search optimization makes your products discoverable in ChatGPT,
+          Perplexity, Claude, Google AI Overviews, and other AI engines where
+          shoppers increasingly search for product recommendations.
         </p>
         <p>
-          These engines don’t rely on keywords or backlinks. They rely on
-          structured clarity: images, videos, deep product context, FAQs,
-          comparisons, benefits, and schema.
+          Unlike traditional SEO, AI engines don't rely on keywords or backlinks.
+          They evaluate structured content: images, videos, deep product context,
+          FAQs, comparisons, and schema markup.
         </p>
         <p>
-          If your PDP isn’t complete enough for an AI to confidently answer a
-          shopper’s question, your product simply won’t be shown. AI Search
-          Optimization makes sure it is.
+          If your product page lacks the context AI needs to confidently recommend
+          it, you simply won't appear in AI search results. Beseam ensures you do.
         </p>
       </div>
     ),
@@ -129,31 +127,39 @@ const faqs = [
           The AI Search Score measures how likely your product is to be
           recommended by AI engines.
         </p>
-        <p>It evaluates every PDP across six key dimensions:</p>
+        <p>It evaluates every PDP across eight key dimensions:</p>
         <ul className="list-disc space-y-1 pl-5">
           <li>
-            <span className="font-semibold">Visual Completeness</span>{" "}
-            (packshots, on-model, lifestyle, detail, in-use, video).
+            <span className="font-semibold">SEO</span>{" "}
+            (meta tags, headings, keywords, structured data).
           </li>
           <li>
-            <span className="font-semibold">Narrative Depth</span> (benefits,
-            objections, FAQs, use cases, comparisons).
+            <span className="font-semibold">Content</span>{" "}
+            (narrative depth, FAQs, comparisons, use cases).
           </li>
           <li>
-            <span className="font-semibold">Clarity &amp; Structure</span>{" "}
-            (readability, hierarchy, clear claims, scannability).
+            <span className="font-semibold">Trust</span>{" "}
+            (reviews, ratings, guarantees, certifications).
           </li>
           <li>
-            <span className="font-semibold">AI-Friendly Format</span>{" "}
-            (schema.org, clean attributes, structured sections).
+            <span className="font-semibold">UX</span>{" "}
+            (layout, navigation, readability, visual hierarchy).
           </li>
           <li>
-            <span className="font-semibold">Brand Consistency</span> (styling,
-            tone, lighting, colors).
+            <span className="font-semibold">Conversion</span>{" "}
+            (CTAs, urgency, social proof, pricing clarity).
           </li>
           <li>
-            <span className="font-semibold">Relevance for AI Search</span> (does
-            the PDP answer real shopper questions?).
+            <span className="font-semibold">Mobile</span>{" "}
+            (responsive design, touch targets, load performance).
+          </li>
+          <li>
+            <span className="font-semibold">Performance</span>{" "}
+            (page speed, image optimization, core web vitals).
+          </li>
+          <li>
+            <span className="font-semibold">Accessibility</span>{" "}
+            (alt text, ARIA labels, color contrast, keyboard navigation).
           </li>
         </ul>
         <p>
@@ -326,26 +332,65 @@ const faqs = [
 ];
 
 const Faq9 = () => {
+  // Split FAQs into two columns
+  const midpoint = Math.ceil(faqs.length / 2);
+  const leftColumn = faqs.slice(0, midpoint);
+  const rightColumn = faqs.slice(midpoint);
+
   return (
-    <section className="py-32">
-      <div className="container">
-        <h2 className="mb-12 mt-2 text-3xl font-bold md:text-6xl">FAQs</h2>
-        <Accordion type="multiple">
-          {faqs.map((faq, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="bg-muted mb-2 rounded-3xl border-b-0 px-5 py-2 md:mb-4 transition-colors hover:bg-card data-[state=open]:bg-card"
-            >
-              <AccordionTrigger className="text-left text-lg md:text-xl">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+    <section id="faq" className="py-20 md:py-32">
+      <div className="container max-w-6xl">
+        {/* Header */}
+        <div className="mb-16 text-center">
+          <p className="text-primary mb-4 text-sm font-medium uppercase tracking-wider">
+            FAQ
+          </p>
+          <h2 className="text-3xl font-bold md:text-5xl">
+            Everything you need to know
+          </h2>
+          <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
+            E-commerce brands from lean startups to enterprise run their PDP optimization on Beseam.
+          </p>
+        </div>
+
+        {/* Two Column FAQ Grid */}
+        <div className="grid gap-0 md:grid-cols-2 md:gap-12">
+          {/* Left Column */}
+          <Accordion type="multiple" className="divide-y divide-border">
+            {leftColumn.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                value={`left-${index}`}
+                className="border-0 py-0"
+              >
+                <AccordionTrigger className="text-left text-base font-medium hover:no-underline py-5 gap-4 [&[data-state=open]>svg]:rotate-180">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-5 pr-8">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+
+          {/* Right Column */}
+          <Accordion type="multiple" className="divide-y divide-border border-t md:border-t-0">
+            {rightColumn.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                value={`right-${index}`}
+                className="border-0 py-0"
+              >
+                <AccordionTrigger className="text-left text-base font-medium hover:no-underline py-5 gap-4 [&[data-state=open]>svg]:rotate-180">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-5 pr-8">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   );

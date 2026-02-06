@@ -14,6 +14,7 @@ interface IntegrationItem {
   logo: string;
   name: string;
   description: string;
+  status?: "available" | "coming-soon";
 }
 
 const INTEGRATIONS: IntegrationItem[] = [
@@ -23,6 +24,7 @@ const INTEGRATIONS: IntegrationItem[] = [
     name: "Shopify & Shopify Plus",
     description:
       "Sync large catalogs, metafields, and PDP layouts directly from Shopify.",
+    status: "available",
   },
   {
     id: 2,
@@ -30,6 +32,7 @@ const INTEGRATIONS: IntegrationItem[] = [
     name: "WooCommerce",
     description:
       "Pull products and attributes from your WooCommerce store in a few clicks.",
+    status: "available",
   },
   {
     id: 3,
@@ -37,6 +40,7 @@ const INTEGRATIONS: IntegrationItem[] = [
     name: "BigCommerce",
     description:
       "Keep product content in sync across big catalogs without manual updates.",
+    status: "coming-soon",
   },
   {
     id: 4,
@@ -44,12 +48,14 @@ const INTEGRATIONS: IntegrationItem[] = [
     name: "Adobe Commerce / Magento",
     description:
       "Connect complex catalogs and custom PDP templates from Adobe Commerce.",
+    status: "coming-soon",
   },
   {
     id: 5,
     logo: "/logos/integrations/sfcc.svg",
     name: "Salesforce Commerce Cloud",
     description: "Enterprise-grade integration for global brands on SFCC.",
+    status: "coming-soon",
   },
   {
     id: 6,
@@ -57,6 +63,7 @@ const INTEGRATIONS: IntegrationItem[] = [
     name: "Google Merchant & Feeds",
     description:
       "Plug in product feeds and custom exports without changing your stack.",
+    status: "available",
   },
 ];
 
@@ -64,6 +71,7 @@ const FeatureCard: React.FC<IntegrationItem> = ({
   name,
   description,
   logo,
+  status,
 }) => {
   return (
     <Card className="bg-background text-foreground w-full border-border px-4 py-3 md:px-5 md:py-4">
@@ -75,10 +83,17 @@ const FeatureCard: React.FC<IntegrationItem> = ({
           height={32}
           className="h-8 w-auto shrink-0 object-contain md:h-9"
         />
-        <div>
-          <CardTitle className="text-base font-semibold md:text-lg">
-            {name}
-          </CardTitle>
+        <div className="flex-1">
+          <div className="flex items-center gap-2">
+            <CardTitle className="text-base font-semibold md:text-lg">
+              {name}
+            </CardTitle>
+            {status === "coming-soon" && (
+              <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+                Coming Soon
+              </span>
+            )}
+          </div>
           <CardDescription className="text-xs text-muted-foreground md:text-sm">
             {description}
           </CardDescription>

@@ -15,37 +15,37 @@ const roles = [
     icon: ShoppingCart,
     title: "E-commerce Managers",
     description:
-      "Launch products 10× faster with AI-powered PDPs. No more waiting on copywriters or designers—get complete product pages in minutes.",
+      "Stop waiting weeks for product launches. Beseam generates complete, AI-ready PDPs in minutes—images, video, copy, and schema included.",
   },
   {
     icon: TrendingUp,
-    title: "Marketing Teams",
+    title: "Growth & Marketing Teams",
     description:
-      "Drive more organic traffic from AI search engines. Get recommended 3-5× more often in ChatGPT, Perplexity, and other AI platforms.",
+      "Unlock a new traffic channel. When ChatGPT or Perplexity recommends products, your catalog shows up—not your competitors'.",
   },
   {
     icon: Package,
-    title: "Product Managers",
+    title: "Product Teams",
     description:
-      "Create deep product context that converts browsers to buyers. Build persuasion graphs that work for both AI discovery and human conversion.",
+      "Finally give your products the context they deserve. Deep narratives, FAQs, and comparisons that answer every buyer question.",
   },
   {
     icon: Palette,
-    title: "Content Creators",
+    title: "Content & Creative Teams",
     description:
-      "Generate images, videos, and copy from one source of truth. Keep everything on-brand and consistent across all your product pages.",
+      "Generate consistent, on-brand visuals at scale. No more coordinating photoshoots or briefing designers for every SKU.",
   },
   {
     icon: Users,
-    title: "Agency Partners",
+    title: "Agencies & Consultants",
     description:
-      "Scale client work without scaling headcount. Deliver professional PDPs for multiple clients while maintaining quality and speed.",
+      "Deliver measurable results for e-commerce clients. Offer AI visibility audits and optimization as a high-value service.",
   },
   {
     icon: Rocket,
-    title: "Solo Entrepreneurs",
+    title: "DTC Founders",
     description:
-      "Professional PDPs without the professional budget. Compete with bigger brands using AI-powered content that punches above its weight.",
+      "Compete with enterprise brands on a startup budget. Professional PDPs that look and perform like you have a full team behind them.",
   },
 ];
 

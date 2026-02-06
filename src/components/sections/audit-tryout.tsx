@@ -12,32 +12,32 @@ const AuditTryout = () => {
             AI Visibility Audit
           </div>
           <h2 className="text-3xl font-semibold leading-tight md:text-4xl">
-            See how ChatGPT & Gemini read your PDP — then view the optimized version.
+            See how AI engines evaluate your product pages—and what's missing.
           </h2>
           <p className="text-base text-indigo-100/90">
-            Paste any product URL and get a real LLM visibility score, gaps, and a ready-to-ship optimized draft
-            (copy, FAQ, schema). No mock data—real scrape, real model output.
+            Paste any product URL and get a real AI visibility score across 6 dimensions. See exactly what's holding
+            your PDPs back from getting recommended by ChatGPT, Perplexity, and Google AI Overviews.
           </p>
           <div className="grid gap-3 text-sm text-indigo-100/90">
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-emerald-300" />
-              PII-scrubbed before scoring and model calls
+              Audit covers 8 domains: SEO, Content, Trust, UX, Conversion, Mobile, Performance, Accessibility
             </div>
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-emerald-300" />
-              JSON-LD Product + Offer + FAQ + Rating emitted by the model
+              Get actionable fixes with priority scoring and estimated impact
             </div>
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-emerald-300" />
-              Public endpoint uses tenant 1 with Gemini by default
+              See exactly what schema.org markup your PDP is missing
             </div>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/ai-visibility-audit"
+              href="/pdp-analyzer"
               className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5"
             >
-              Run free audit <ArrowRight className="h-4 w-4" />
+              Analyze Your PDP Free <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/pricing"

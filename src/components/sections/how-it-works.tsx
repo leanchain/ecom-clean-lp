@@ -4,34 +4,34 @@ import React from "react";
 const steps = [
   {
     number: "01",
-    title: "Connect Store & Brand Style",
-    description: "Bring your products and brand into Beseam in one go.",
+    title: "Connect & Audit",
+    description: "Connect your store and get a complete AI visibility audit.",
     bullets: [
-      "Connect your e‑commerce platform or catalog feed.",
+      "Connect Shopify, WooCommerce, or any e‑commerce platform.",
       "Import existing PDPs, media, and product attributes.",
-      "Apply your brand voice, visual rules, and audiences.",
+      "Get instant AI visibility scores for every product page.",
     ],
   },
   {
     number: "02",
-    title: "Analyze PDPs for GEO & Conversion",
+    title: "Optimize & Enrich",
     description:
-      "Beseam PDP AI reviews every page for AI search and real shoppers.",
+      "Beseam analyzes gaps and generates AI-optimized content to fill them.",
     bullets: [
-      "Scores PDPs for AI visibility and SEO readiness.",
-      "Checks images, copy, and structure against best practices.",
-      "Surfaces gaps, weak claims, and missing FAQs or use cases.",
+      "Identify missing images, weak copy, and structural gaps.",
+      "Generate on‑brand packshots, lifestyle images, and videos.",
+      "Create deep product narratives, FAQs, and comparisons.",
     ],
   },
   {
     number: "03",
-    title: "Generate AI‑Ready Content & Sync",
+    title: "Convert & Scale",
     description:
-      "Turn those insights into AI‑ready PDP content and keep it in sync.",
+      "Deploy AI-ready PDPs that drive both discovery and conversion.",
     bullets: [
-      "Generate on‑brand images, video, and deep PDP copy.",
-      "Output structured sections that fit your PDP layout.",
-      "Sync updates back to your store for review and publish.",
+      "Sync enriched content back to your store instantly.",
+      "Get recommended 3-5x more in AI search results.",
+      "Scale across 10-100k+ SKUs without manual effort.",
     ],
   },
 ];

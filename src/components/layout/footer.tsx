@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Instagram } from "lucide-react";
+import { Mail } from "lucide-react";
 
 import Logo from "../ui/logo";
 
@@ -8,11 +8,20 @@ import { cn } from "@/lib/utils";
 
 const ITEMS = [
   {
-    title: "AI Media Studio",
+    title: "Product",
     links: [
-      { name: "Generate Images", href: "/#ai-media-studio" },
-      { name: "Generate Videos", href: "/#ai-media-studio" },
-      { name: "Enrich Product for AI Search", href: "/#beseam-pdp-ai" },
+      { name: "AI Visibility Audit", href: "/pdp-analyzer" },
+      { name: "AI Media Studio", href: "/#ai-media-studio" },
+      { name: "PDP Optimization", href: "/#beseam-pdp-ai" },
+      { name: "Pricing", href: "/pricing" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { name: "Blog", href: "/blog" },
+      { name: "FAQ", href: "/#faq" },
+      { name: "Demo", href: "/demo" },
     ],
   },
   {
@@ -24,15 +33,40 @@ const ITEMS = [
   },
 ];
 
+// Compliance badges
+const COMPLIANCE_BADGES = [
+  {
+    name: "GDPR Compliant",
+    flag: "🇪🇺",
+    href: "https://gdpr.eu/",
+  },
+  {
+    name: "CASA Tier II Verified",
+    flag: "🛡️",
+    href: "https://appdefensealliance.dev/casa",
+  },
+  {
+    name: "CCPA Compliant",
+    flag: "🇺🇸",
+    href: "https://oag.ca.gov/privacy/ccpa",
+  },
+  {
+    name: "SOC 2 Type II",
+    flag: "🔒",
+    href: "https://appdefensealliance.dev/casa",
+    comingSoon: true,
+  },
+];
+
 const SOCIAL_LINKS = [
   {
-    name: "@beseam.com",
-    href: "https://beseam.com",
-    icon: null,
+    name: "Email Us",
+    href: "mailto:contact@beseam.com",
+    icon: <Mail className="size-5" />,
   },
   {
     name: "X (Twitter)",
-    href: "https://www.linkedin.com/in/pankaj4u4m/",
+    href: "https://twitter.com/beseam_ai",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -49,37 +83,112 @@ const SOCIAL_LINKS = [
     ),
   },
   {
-    name: "Instagram",
-    href: "https://www.linkedin.com/in/pankaj4u4m/",
-    icon: <Instagram />,
+    name: "LinkedIn",
+    href: "https://linkedin.com/company/beseam",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+        <rect width="4" height="12" x="2" y="9" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+    ),
   },
 ];
 
 const Footer = () => {
   return (
-    <section className="bg-footer-background text-foreground py-11 md:py-15">
+    <footer className="bg-footer-background border-t py-16 md:py-24">
       <div className="container">
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:gap-14">
-          <div className="flex w-full flex-col divide-y divide-border md:w-auto md:flex-row md:items-center md:divide-x md:divide-y-0 md:gap-4">
-            <Logo wrapperClassName="pb-4 md:pb-0" />
+        <div className="grid gap-16 lg:grid-cols-2">
+          {/* Left Side: Brand, Social, Compliance */}
+          <div className="flex flex-col space-y-8">
+            <div>
+              <Logo className="text-primary scale-110 origin-left transition-transform hover:scale-115" />
+              <p className="font-heading mt-6 max-w-sm text-lg font-semibold leading-tight text-foreground md:text-xl">
+                Create perfect looking product pages{" "}
+                <br className="hidden sm:block" />
+                optimized for <span className="text-primary">AI Search</span>.
+              </p>
+            </div>
 
-            <p className="pt-4 text-xl md:pt-0">
-              Create perfect looking product pages for AI Search.
-            </p>
+            <div>
+              <div className="mt-4 flex items-center gap-5">
+                {SOCIAL_LINKS.map((link, index) => (
+                  <Link
+                    key={index}
+                    href={link.href}
+                    className={cn(
+                      "text-muted-foreground transition-colors hover:text-primary",
+                      link.icon && "text-muted-foreground",
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.name}
+                  >
+                    {link.icon || (
+                      <span className="text-sm font-medium">{link.name}</span>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <ul className="mt-4 flex flex-col space-y-3">
+                {COMPLIANCE_BADGES.map((badge, index) => (
+                  <li key={index}>
+                    <Link
+                      href={badge.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      <span className="text-base">{badge.flag}</span>
+                      <span>{badge.name}</span>
+                      {badge.comingSoon && (
+                        <span className="rounded-full bg-muted px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider">
+                          Soon
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="pt-4">
+              <p className="text-sm text-muted-foreground">
+                © {new Date().getFullYear()} Beseam. All rights reserved.
+              </p>
+            </div>
           </div>
 
-          {/* Menu */}
-          <div className="grid flex-1 justify-center gap-6 md:flex md:grid-cols-2 md:gap-20 lg:gap-24">
+          {/* Right Side: Product, Resources, Legal */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:justify-items-end">
             {ITEMS.map((section, sectionIdx) => (
-              <div key={sectionIdx} className="min-w-[120px]">
-                <h3 className="text-xl">{section.title}</h3>
-                <ul className="mt-3 space-y-2">
+              <div key={sectionIdx} className="space-y-5">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-foreground">
+                  {section.title}
+                </h3>
+                <ul className="space-y-3 text-sm text-muted-foreground">
                   {section.links.map((link, linkIdx) => (
-                    <li
-                      key={linkIdx}
-                      className="transition-opacity hover:opacity-80"
-                    >
-                      <Link href={link.href}>{link.name}</Link>
+                    <li key={linkIdx}>
+                      <Link
+                        href={link.href}
+                        className="transition-colors hover:text-primary"
+                      >
+                        {link.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -88,36 +197,16 @@ const Footer = () => {
           </div>
         </div>
 
-        <Logo
-          wrapperClassName="my-8 md:my-10 opacity-10"
-          className="h-24 w-[min(90%,400px)] md:h-32 md:w-full lg:h-73"
-        />
-
-        <div className="flex flex-col justify-between gap-6 md:flex-row">
-          <p className="text-xl opacity-70">
-            © {new Date().getFullYear()}. All rights reserved. Beseam
+        <div className="mt-16 border-t pt-8">
+          <p className="max-w-2xl text-[11px] leading-relaxed text-muted-foreground/60">
+            Beseam helps brands optimize product detail pages for generative
+            engine optimization (GEO). All product names, logos, and brands are
+            property of their respective owners. Security and compliance details
+            are provided for informational purposes.
           </p>
-
-          <div className="flex gap-4">
-            {SOCIAL_LINKS.map((link, index) => (
-              <Link
-                key={index}
-                href={link.href}
-                className={cn(
-                  "opacity-70 transition-opacity hover:opacity-100",
-                  link.icon && "opacity-100 hover:opacity-80"
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={link.name}
-              >
-                {link.icon || link.name}
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
-    </section>
+    </footer>
   );
 };
 

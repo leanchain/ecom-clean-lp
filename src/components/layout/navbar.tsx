@@ -1,34 +1,23 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 import {
-  AppWindow,
   ArrowLeft,
   ArrowRight,
-  ArrowRightLeft,
-  Book,
-  Camera,
+  BarChart3,
+  BookOpen,
   ChevronRight,
-  DollarSign,
-  FileImage,
-  Globe,
-  Globe2,
-  Image as ImageIcon,
-  Lightbulb,
+  FileText,
+  HelpCircle,
+  Layers,
+  Mail,
   Menu,
-  Newspaper,
-  Package,
-  Palette,
-  Phone,
-  Play,
-  PlayCircle,
-  Pyramid,
-  Rocket,
+  Ruler,
   Search,
   Sparkles,
+  TrendingUp,
   Users,
   Wand2,
   X,
@@ -47,1289 +36,500 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
-// AI Media Studio sections
-const aiMediaStudioSections = [
+// Product menu items - mirrors the 3-layer architecture
+const productItems = [
   {
-    id: "image",
-    title: "Image",
-    description: "AI-powered product image generation and enhancement.",
-    href: "/#ai-media-studio",
-    icon: Camera,
-    features: [
-      { title: "AI Image Generator", href: "/#ai-media-studio" },
-      {
-        title: "Image Optimisation for AI & Conversion",
-        href: "/#ai-media-studio",
-      },
-      { title: "Image Editor & Upscaler", href: "/#ai-media-studio" },
-    ],
-    imageTypes: [
-      { title: "Product detailed shots", href: "/#ai-media-studio" },
-      { title: "Packshots", href: "/#ai-media-studio" },
-      { title: "Lifestyle images", href: "/#ai-media-studio" },
-      { title: "Product in use images", href: "/#ai-media-studio" },
-      { title: "Painpoint images", href: "/#ai-media-studio" },
-      { title: "Benefits images", href: "/#ai-media-studio" },
-    ],
-  },
-  {
-    id: "video",
-    title: "Video",
-    description: "Bring products to life with automated video creation.",
-    href: "/#ai-media-studio-video",
-    icon: Play,
-    features: [
-      { title: "AI Video Generator", href: "/#ai-media-studio-video" },
-      {
-        title: "Video Optimisation for AI & Conversion",
-        href: "/#ai-media-studio-video",
-      },
-    ],
-    videoTypes: [
-      { title: "Product 360° Spins", href: "/#ai-media-studio-video" },
-      { title: "Product Demonstrations", href: "/#ai-media-studio-video" },
-      { title: "Lifestyle Videos", href: "/#ai-media-studio-video" },
-      { title: "Product in Use Videos", href: "/#ai-media-studio-video" },
-      { title: "AR Previews", href: "/#ai-media-studio-video" },
-      { title: "Unboxing Videos", href: "/#ai-media-studio-video" },
-    ],
-  },
-  {
-    id: "ai-search-content",
-    title: "AI Search Content",
-    description:
-      "Ensure your products are found in ChatGPT, Perplexity, and other AI search engines.",
-    href: "/#ai-media-studio-context",
+    id: "audit",
+    title: "PDP Audit",
+    description: "Analyze your product pages across 8 dimensions. Free.",
+    href: "/pdp-analyzer",
     icon: Search,
-    contentTypes: [
-      {
-        title: "Conversion optimised title",
-        href: "/#ai-media-studio-context",
-      },
-      { title: "Description", href: "/#ai-media-studio-context" },
-      { title: "Product benefits", href: "/#ai-media-studio-context" },
-      { title: "Why this product", href: "/#ai-media-studio-context" },
-      { title: "Product features", href: "/#ai-media-studio-context" },
-      { title: "Product use cases", href: "/#ai-media-studio-context" },
-      { title: "For who is this product", href: "/#ai-media-studio-context" },
-      {
-        title: "FAQ based on actual prompts",
-        href: "/#ai-media-studio-context",
-      },
-      { title: "LLM optimised", href: "/#ai-media-studio-context" },
-    ],
-  },
-];
-
-// Beseam PDP AI features
-const BeseamPdpFeatures = [
-  {
-    id: "analysis",
-    title: "Content Analysis",
-    description: "Comprehensive scoring across 6 critical dimensions.",
-    href: "/#beseam-pdp-ai",
-    icon: Lightbulb,
+    badge: "Free",
   },
   {
-    id: "optimization",
+    id: "optimize",
     title: "AI Optimization",
-    description: "Automated optimization for AI search visibility.",
-    href: "/#beseam-pdp-ai",
-    icon: Sparkles,
-  },
-  {
-    id: "generation",
-    title: "Media Generation",
-    description: "Generate all images, videos and structured content.",
-    href: "/#beseam-pdp-ai",
+    description: "Generate images, videos, copy, and structured data.",
+    href: "/#how-it-works",
     icon: Wand2,
   },
-];
-
-// Archive - AI Solutions data (moved from main nav)
-const aiSolutions = [
   {
-    id: "solution-1",
-    title: "Product Photography",
-    description: "AI-powered product image generation and enhancement.",
-    href: "#",
-    subpages: [
-      {
-        id: "subpage-1",
-        title: "Background Removal",
-        href: "#",
-        icon: Wand2,
-      },
-      {
-        id: "subpage-2",
-        title: "Scene Generation",
-        href: "#",
-        icon: Palette,
-      },
-      {
-        id: "subpage-3",
-        title: "Image Enhancement",
-        href: "#",
-        icon: Sparkles,
-      },
-      {
-        id: "subpage-4",
-        title: "Batch Processing",
-        href: "#",
-        icon: Zap,
-      },
-      {
-        id: "subpage-5",
-        title: "Style Transfer",
-        href: "#",
-        icon: ImageIcon,
-      },
-    ],
-  },
-  {
-    id: "solution-2",
-    title: "SEO Optimization",
-    description: "AI Search optimized content for better visibility.",
-    href: "#",
-    subpages: [
-      {
-        id: "subpage-6",
-        title: "Image SEO",
-        href: "#",
-        icon: Search,
-      },
-      {
-        id: "subpage-7",
-        title: "Alt Text Generation",
-        href: "#",
-        icon: FileImage,
-      },
-      {
-        id: "subpage-8",
-        title: "Metadata Optimization",
-        href: "#",
-        icon: Package,
-      },
-    ],
-  },
-  {
-    id: "solution-3",
-    title: "Content Creation",
-    description: "Automated visual content for product pages.",
-    href: "#",
-    subpages: [
-      {
-        id: "subpage-9",
-        title: "Lifestyle Images",
-        href: "#",
-        icon: Camera,
-      },
-      {
-        id: "subpage-10",
-        title: "Product Variants",
-        href: "#",
-        icon: Palette,
-      },
-      {
-        id: "subpage-11",
-        title: "360° Views",
-        href: "#",
-        icon: Globe,
-      },
-      {
-        id: "subpage-12",
-        title: "Video Content",
-        href: "#",
-        icon: PlayCircle,
-      },
-      {
-        id: "subpage-13",
-        title: "AR Previews",
-        href: "#",
-        icon: Globe2,
-      },
-    ],
-  },
-  {
-    id: "solution-4",
-    title: "Enterprise Scale",
-    description: "Scale your visual content across your organization.",
-    href: "#",
-    subpages: [
-      {
-        id: "subpage-14",
-        title: "Advanced Analytics",
-        href: "#",
-        icon: Lightbulb,
-      },
-      {
-        id: "subpage-15",
-        title: "Brand Controls",
-        href: "#",
-        icon: Package,
-      },
-      {
-        id: "subpage-16",
-        title: "Custom Workflows",
-        href: "#",
-        icon: ArrowRightLeft,
-      },
-    ],
+    id: "conversion",
+    title: "Conversion Suite",
+    description: "Size recommendations, styleguides, tryouts, personalization.",
+    href: "/#conversion-suite",
+    icon: TrendingUp,
+    badge: "Add-on",
   },
 ];
 
-const solutionTechnologies = [
+const productLinks = [
   {
-    id: "technology-1",
-    title: "AI Image Engine",
-    href: "#",
-    icon: Sparkles,
+    id: "how-it-works",
+    title: "How it Works",
+    description: "Our 3-step process: Audit → Optimize → Convert",
+    href: "/#how-it-works",
+    icon: Layers,
   },
   {
-    id: "technology-2",
-    title: "Cloud Processing",
-    href: "#",
-    icon: Zap,
-  },
-  {
-    id: "technology-3",
-    title: "API Access",
-    href: "#",
-    icon: AppWindow,
+    id: "results",
+    title: "See Results",
+    description: "Before/after examples and case studies",
+    href: "/#gallery",
+    icon: BarChart3,
   },
 ];
 
-// Product categories
-const productCategories = [
+// Resources menu items
+const resourceItems = [
   {
-    title: "Core Products",
-    products: [
-      {
-        id: "product-1",
-        title: "AI Studio Pro",
-        description: "Professional AI media creation suite.",
-        href: "#",
-        image: "/images/placeholders/placeholder-1.svg",
-      },
-      {
-        id: "product-2",
-        title: "PDP Optimizer",
-        description: "Optimize product detail pages for AI search.",
-        href: "#",
-        image: "/images/placeholders/placeholder-2.svg",
-      },
-      {
-        id: "product-3",
-        title: "Visual Generator",
-        description: "Generate product visuals at scale.",
-        href: "#",
-        image: "/images/placeholders/placeholder-3.svg",
-      },
-    ],
-  },
-  {
-    title: "Enterprise Features",
-    products: [
-      {
-        id: "product-4",
-        title: "Team Collaboration",
-        description: "Collaborate on visual content with your team.",
-        href: "#",
-        image: "/images/placeholders/placeholder-4.svg",
-      },
-      {
-        id: "product-5",
-        title: "Brand Management",
-        description: "Maintain brand consistency across all visuals.",
-        href: "#",
-        image: "/images/placeholders/placeholder-5.svg",
-      },
-    ],
-  },
-];
-
-// Company features
-const companyFeatures = [
-  {
-    title: "About Beseam",
-    features: [
-      {
-        id: "feature-1",
-        title: "Our Mission",
-        description: "Revolutionizing e-commerce with AI-powered visuals.",
-        href: "/archive/about",
-        icon: Rocket,
-      },
-      {
-        id: "feature-2",
-        title: "Technology",
-        description: "Cutting-edge AI technology for product imagery.",
-        href: "#",
-        icon: Sparkles,
-      },
-      {
-        id: "feature-3",
-        title: "Global Reach",
-        description: "Serving e-commerce brands worldwide.",
-        href: "#",
-        icon: Globe2,
-      },
-    ],
-  },
-  {
-    title: "Business",
-    features: [
-      {
-        id: "feature-4",
-        title: "Pricing",
-        description: "Flexible plans for businesses of all sizes.",
-        href: "/archive/pricing",
-        icon: Package,
-      },
-      {
-        id: "feature-5",
-        title: "Case Studies",
-        description: "See how brands succeed with Beseam.",
-        href: "#",
-        icon: Lightbulb,
-      },
-      {
-        id: "feature-6",
-        title: "Contact Sales",
-        description: "Get in touch with our sales team.",
-        href: "/demo",
-        icon: Users,
-      },
-    ],
-  },
-];
-
-// Resources
-const resources = [
-  {
-    id: "resource-1",
+    id: "blog",
     title: "Blog",
-    description: "Latest insights on AI and e-commerce.",
-    href: "#",
-    icon: Newspaper,
+    description: "Insights on AI search and PDP optimization",
+    href: "/blog",
+    icon: BookOpen,
   },
   {
-    id: "resource-2",
-    title: "Video Tutorials",
-    description: "Learn how to use Beseam effectively.",
-    href: "#",
-    icon: PlayCircle,
-  },
-  {
-    id: "resource-3",
+    id: "docs",
     title: "Documentation",
-    description: "Comprehensive guides and API docs.",
+    description: "Guides and API reference",
     href: "#",
-    icon: Book,
+    icon: FileText,
+    comingSoon: true,
   },
   {
-    id: "resource-4",
-    title: "Success Stories",
-    description: "How brands achieve results with Beseam.",
-    href: "#",
-    icon: Lightbulb,
+    id: "faq",
+    title: "FAQ",
+    description: "Common questions answered",
+    href: "/#faq",
+    icon: HelpCircle,
   },
 ];
 
-const topicGroups = [
+const resourceLinks = [
   {
-    title: "Learning & Support",
-    topics: [
-      {
-        id: "topic-1",
-        title: "Getting Started",
-        href: "#",
-        icon: Rocket,
-      },
-      {
-        id: "topic-2",
-        title: "Best Practices",
-        href: "#",
-        icon: Pyramid,
-      },
-      {
-        id: "topic-3",
-        title: "Integrations",
-        href: "#",
-        icon: ArrowRightLeft,
-      },
-      {
-        id: "topic-4",
-        title: "API Documentation",
-        href: "#",
-        icon: AppWindow,
-      },
-      {
-        id: "topic-5",
-        title: "Community Forum",
-        href: "#",
-        icon: Play,
-      },
-    ],
+    id: "contact",
+    title: "Contact Sales",
+    description: "Talk to our team about enterprise needs",
+    href: "/demo",
+    icon: Mail,
+  },
+  {
+    id: "partners",
+    title: "Partners",
+    description: "Agency and technology partnerships",
+    href: "/demo",
+    icon: Users,
   },
 ];
 
-// AI Media Studio Menu Component
-const AiMediaStudioMenu = () => (
-  <div className="grid gap-6 md:grid-cols-3">
-    {aiMediaStudioSections.map((section) => (
-      <div key={section.id} className="border-border rounded-md border p-4">
-        <div className="border-border border-b pb-3">
-          <a href={section.href} className="group flex flex-col text-left">
-            <div className="mb-2 flex items-center gap-2">
-              <section.icon className="size-5 text-primary shrink-0" />
-              <div className="flex items-center">
-                <strong className="text-sm font-medium">{section.title}</strong>
-                <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
-              </div>
-            </div>
-            <p className="text-muted-foreground mt-1 text-xs">
-              {section.description}
-            </p>
-          </a>
-        </div>
-        <menu className="mt-4 grid gap-y-2">
-          {section.features && (
-            <>
-              {section.id === "image"
-                ? (() => {
-                    // Build a combined list of image features + image types with icons
-                    const pickIcon = (title: string) => {
-                      if (/generator/i.test(title)) return Wand2;
-                      if (/optim/i.test(title)) return Sparkles;
-                      if (/editor|upscale/i.test(title)) return ImageIcon;
-                      if (/packshot/i.test(title)) return Package;
-                      if (/detailed|detail|product/i.test(title)) return Camera;
-                      if (/lifestyle/i.test(title)) return Users;
-                      if (/use\s+images?/i.test(title)) return Camera;
-                      if (/benefit/i.test(title)) return Lightbulb;
-                      if (/pain|issue|problem/i.test(title)) return X;
-                      return ImageIcon;
-                    };
-                    const items = [
-                      ...section.features.map((f) => ({
-                        title: f.title,
-                        href: f.href,
-                        Icon: pickIcon(f.title),
-                      })),
-                      ...(section.imageTypes?.map((t) => ({
-                        title: t.title,
-                        href: t.href,
-                        Icon: pickIcon(t.title),
-                      })) ?? []),
-                    ];
-                    return items.map((it, idx) => (
-                      <NavigationMenuLink
-                        key={`img-item-${idx}`}
-                        href={it.href}
-                        className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
-                      >
-                        <it.Icon className="size-4" />
-                        <div className="flex-1 text-sm font-medium">
-                          {it.title}
-                        </div>
-                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                      </NavigationMenuLink>
-                    ));
-                  })()
-                : section.id === "video"
-                  ? (() => {
-                      const pickIcon = (title: string) => {
-                        if (/generator/i.test(title)) return Play;
-                        if (/optim/i.test(title)) return Sparkles;
-                        return PlayCircle;
-                      };
-                      return section.features.map((feature, idx) => {
-                        const Icon = pickIcon(feature.title);
-                        return (
-                          <NavigationMenuLink
-                            key={idx}
-                            href={feature.href}
-                            className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
-                          >
-                            <Icon className="size-4" />
-                            <div className="flex-1 text-sm font-medium">
-                              {feature.title}
-                            </div>
-                            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                          </NavigationMenuLink>
-                        );
-                      });
-                    })()
-                  : // Default rendering for non-image/video sections
-                    section.features.map((feature, idx) => (
-                      <NavigationMenuLink
-                        key={idx}
-                        href={feature.href}
-                        className="text-foreground/85 hover:text-foreground group flex flex-row items-center justify-between text-left"
-                      >
-                        <div className="flex-1 text-sm font-medium">
-                          {feature.title}
-                        </div>
-                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                      </NavigationMenuLink>
-                    ))}
-            </>
-          )}
-          {/* For the Image section we merged imageTypes above; for others keep extra blocks */}
-          {section.imageTypes && section.id !== "image" && (
-            <div className="border-border mt-3 border-t pt-3">
-              <p className="text-muted-foreground mb-3 text-xs font-medium uppercase tracking-wider">
-                Image Types
-              </p>
-              {section.imageTypes.map((type, idx) => (
-                <NavigationMenuLink
-                  key={idx}
-                  href={type.href}
-                  className="text-foreground/70 hover:text-foreground group mb-1 flex flex-row items-center justify-between text-left text-xs"
-                >
-                  <div className="flex-1">{type.title}</div>
-                  <ArrowRight className="size-3 transition-transform group-hover:translate-x-1 lg:hidden" />
-                </NavigationMenuLink>
-              ))}
-            </div>
-          )}
-          {section.videoTypes && (
-            <>
-              {(() => {
-                const pickIcon = (title: string) => {
-                  if (/generator/i.test(title)) return Play;
-                  if (/optim/i.test(title)) return Sparkles;
-                  if (/360|spin/i.test(title)) return Globe;
-                  if (/demonstration|demo/i.test(title)) return PlayCircle;
-                  if (/lifestyle/i.test(title)) return Users;
-                  if (/in\s*use/i.test(title)) return Camera;
-                  if (/ar/i.test(title)) return Globe2;
-                  if (/unbox/i.test(title)) return Package;
-                  return Play;
-                };
-                return section.videoTypes.map((type, idx) => {
-                  const Icon = pickIcon(type.title);
-                  return (
-                    <NavigationMenuLink
-                      key={idx}
-                      href={type.href}
-                      className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
-                    >
-                      <Icon className="size-4" />
-                      <div className="flex-1 text-sm font-medium">
-                        {type.title}
-                      </div>
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                    </NavigationMenuLink>
-                  );
-                });
-              })()}
-            </>
-          )}
-          {section.contentTypes && (
-            <>
-              {(() => {
-                const pickIcon = (title: string) => {
-                  if (/title/i.test(title)) return Book;
-                  if (/description/i.test(title)) return FileImage;
-                  if (/benefit/i.test(title)) return Lightbulb;
-                  if (/why/i.test(title)) return Search;
-                  if (/feature/i.test(title)) return Sparkles;
-                  if (/use\s*cases?/i.test(title)) return AppWindow;
-                  if (/who|audience/i.test(title)) return Users;
-                  if (/faq/i.test(title)) return Newspaper;
-                  if (/llm/i.test(title)) return Wand2;
-                  return Book;
-                };
-                return section.contentTypes.map((type, idx) => {
-                  const Icon = pickIcon(type.title);
-                  return (
-                    <NavigationMenuLink
-                      key={idx}
-                      href={type.href}
-                      className="text-foreground/85 hover:text-foreground group flex flex-row items-center gap-2 text-left"
-                    >
-                      <Icon className="size-4" />
-                      <div className="flex-1 text-sm font-medium">
-                        {type.title}
-                      </div>
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                    </NavigationMenuLink>
-                  );
-                });
-              })()}
-            </>
-          )}
-        </menu>
-      </div>
-    ))}
-  </div>
-);
+// Reusable Menu Content Component
+interface MenuItem {
+  title: string;
+  description?: string;
+  href: string;
+  icon: React.ElementType;
+  badge?: string;
+  comingSoon?: boolean;
+}
 
-// Beseam PDP AI Menu Component
-const BeseamPdpAiMenu = () => (
-  <div className="grid gap-6 md:grid-cols-3">
-    {BeseamPdpFeatures.map((feature) => (
-      <NavigationMenuLink
-        key={feature.id}
-        href={feature.href}
-        className="border-border bg-accent lg:bg-background group flex flex-col space-y-4 rounded-md border p-6 text-left transition-all hover:shadow-md"
-      >
-        <feature.icon className="size-6 text-primary shrink-0" />
-        <div>
-          <h3 className="text-foreground mb-2 text-base font-semibold">
-            {feature.title}
-          </h3>
-          <p className="text-muted-foreground text-sm">{feature.description}</p>
-        </div>
-        <div className="flex items-center text-xs font-medium">
-          Learn more
-          <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
-        </div>
-      </NavigationMenuLink>
-    ))}
-  </div>
-);
+interface MenuContentProps {
+  mainItems: MenuItem[];
+  footerItems?: MenuItem[];
+}
 
-// Archive - Solutions Menu Component (moved from main nav)
-const SolutionsMenu = () => (
-  <div className="grid gap-8 sm:grid-cols-2">
-    <a
-      href="#"
-      className="bg-primary text-primary-foreground group relative flex h-full flex-row overflow-hidden rounded-lg px-0 pt-8 lg:rounded-xl lg:px-6"
-    >
-      <div className="relative flex w-full flex-col space-y-12 text-left md:space-y-8 lg:w-full lg:flex-row lg:justify-between lg:space-x-6 lg:space-y-0 xl:space-x-8">
-        <div className="relative flex flex-col px-6 lg:mb-6 lg:px-0">
-          <span className="mb-6 text-xs font-medium uppercase tracking-wider md:mb-8">
-            AI-Powered Solutions
-          </span>
-          <div className="mt-auto flex items-center space-x-1 text-xs">
-            Explore Our Platform
-            <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
+const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
+  <div className="w-max bg-background p-2">
+    <div className="grid grid-cols-2 gap-1 mb-2">
+      {mainItems.map((item, idx) => (
+        <NavigationMenuLink
+          key={idx}
+          href={item.href}
+          className="group flex w-[300px] items-start gap-3 rounded-xl p-2.5 transition-all hover:bg-accent"
+        >
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-200">
+            <item.icon className="h-5 w-5" />
           </div>
-          <p className="text-primary-foreground/85 mt-2 text-xs">
-            Transform your product visuals with cutting-edge AI technology.
-          </p>
-        </div>
-        <div className="aspect-2/1 relative overflow-clip rounded-t pl-6 lg:max-w-64 lg:pl-0 xl:max-w-96">
-          <Image
-            src="/images/placeholders/placeholder-1.svg"
-            alt="Beseam AI Solutions"
-            width={384}
-            height={192}
-            className="aspect-2/1 h-full w-full translate-y-px object-cover object-center"
-          />
-        </div>
-      </div>
-    </a>
 
-    <div className="order-last mt-3 sm:order-none sm:mt-0 sm:py-2 md:p-6">
-      <div className="mb-4 text-left leading-none md:col-span-2 lg:col-span-4 lg:mb-6">
-        <strong className="text-muted-foreground text-left text-xs font-medium uppercase tracking-wider">
-          Technology Platform
-        </strong>
-      </div>
-      <div className="grid gap-4 lg:grid-cols-2">
-        {solutionTechnologies.map((technology) => (
+          <div className="flex-1 pt-0.5">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[13px] font-bold text-foreground">
+                {item.title}
+              </span>
+
+              {(item.badge || item.comingSoon) && (
+                <span
+                  className={`rounded-full px-1.5 py-0.5 text-[8px] font-bold ${
+                    item.badge === "Free"
+                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                      : item.badge === "Add-on"
+                        ? "bg-secondary/10 text-secondary"
+                        : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  {item.badge || "Soon"}
+                </span>
+              )}
+            </div>
+
+            {item.description && (
+              <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug line-clamp-2">
+                {item.description}
+              </p>
+            )}
+          </div>
+        </NavigationMenuLink>
+      ))}
+    </div>
+
+    {footerItems && footerItems.length > 0 && (
+      <div className="grid grid-cols-2 gap-1 p-1 mt-1 border-t border-border/40 bg-background">
+        {footerItems.map((item, idx) => (
           <NavigationMenuLink
-            key={technology.id}
-            href={technology.href}
-            className="group flex flex-row items-center gap-4"
+            key={idx}
+            href={item.href}
+            className="group flex w-[240px] items-center gap-2.5 rounded-lg px-2.5 py-2 transition-all hover:bg-accent"
           >
-            <technology.icon className="size-4" />
-            <div className="flex-1 text-sm font-medium">{technology.title}</div>
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-background border border-border/50 group-hover:border-primary/30 transition-colors">
+              <item.icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary" />
+            </div>
+
+            <span className="text-[11px] font-bold text-foreground/90 group-hover:text-foreground">
+              {item.title}
+            </span>
           </NavigationMenuLink>
         ))}
       </div>
-    </div>
-    <div className="col-span-full grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-      {aiSolutions.map((solution) => (
-        <div key={solution.id} className="border-border rounded-md border p-5">
-          <div className="border-border border-b pb-4">
-            <a href={solution.href} className="group flex flex-col text-left">
-              <div className="flex items-center">
-                <strong className="text-sm font-medium">
-                  {solution.title}
-                </strong>
-                <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
-              </div>
-              <p className="text-muted-foreground mt-1 text-xs">
-                {solution.description}
-              </p>
-            </a>
-          </div>
-          <menu className="mt-6 grid gap-y-4">
-            {solution.subpages.map((subpage) => (
-              <NavigationMenuLink
-                key={subpage.id}
-                href={subpage.href}
-                className="text-foreground/85 hover:text-foreground group flex flex-row items-center space-x-4 text-left lg:space-x-4 lg:border-0"
-              >
-                <subpage.icon className="size-4" />
-                <div className="flex-1 text-sm font-medium">
-                  {subpage.title}
-                </div>
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-              </NavigationMenuLink>
-            ))}
-          </menu>
-        </div>
-      ))}
-    </div>
+    )}
   </div>
 );
 
-// Products Menu Component
-const ProductsMenu = () => (
-  <div className="grid gap-y-12 lg:flex lg:space-x-8">
-    <div className="w-full shrink-0 lg:max-w-[18rem]">
-      <a
-        href="/archive/pricing"
-        className="text-primary-foreground group relative flex h-full flex-row overflow-hidden rounded-lg px-0 lg:rounded-xl"
-      >
-        <div className="relative z-10 flex w-full flex-col text-left">
-          <div className="aspect-2/1 relative flex max-h-[11rem] w-full flex-1 justify-center">
-            <Image
-              src="/images/placeholders/placeholder-2.svg"
-              alt="Enterprise Solutions"
-              width={600}
-              height={300}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-          <div className="bg-primary relative z-20 flex flex-col rounded-b-xl p-6">
-            <div className="flex items-center space-x-1 text-xs">
-              Enterprise Solutions
-              <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
-            </div>
-            <p className="text-primary-foreground/70 mt-2 text-xs">
-              Scale your visual content with enterprise-grade features.
-            </p>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div className="grid w-full gap-y-12 lg:gap-y-6">
-      {productCategories.map((category) => (
-        <div key={category.title} className="grid gap-y-2 lg:gap-y-6">
-          <div className="border-border text-left lg:border-b lg:pb-3">
-            <strong className="text-muted-foreground text-left text-xs font-medium uppercase tracking-wider">
-              {category.title}
-            </strong>
-          </div>
-          <menu className="grid md:grid-cols-3 md:gap-x-5 lg:gap-y-7">
-            {category.products.map((product) => (
-              <NavigationMenuLink
-                key={product.id}
-                href={product.href}
-                className="border-border group flex flex-row items-center space-x-6 border-b py-5 text-left sm:py-7 lg:space-x-4 lg:border-0 lg:py-2"
-              >
-                <div className="relative flex aspect-square w-6 shrink-0 items-center justify-center overflow-clip rounded md:size-9 md:p-2">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="object-cover"
-                  />
-                </div>
-                <div className="flex-1">
-                  <div className="text-foreground/85 group-hover:text-foreground text-sm font-medium">
-                    {product.title}
-                  </div>
-                  <p className="text-muted-foreground group-hover:text-foreground mt-1 text-xs">
-                    {product.description}
-                  </p>
-                </div>
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-              </NavigationMenuLink>
-            ))}
-          </menu>
-        </div>
-      ))}
-    </div>
-  </div>
+const ProductMenu = () => (
+  <MenuContent mainItems={productItems} footerItems={productLinks} />
 );
 
-// Regions data for Company menu
-const regions = [
-  {
-    title: "Asia-Pacific",
-    locations: [
-      { title: "China", href: "#", icon: "🇨🇳" },
-      { title: "India", href: "#", icon: "🇮🇳" },
-      { title: "Japan", href: "#", icon: "🇯🇵" },
-      { title: "Thailand", href: "#", icon: "🇹🇭" },
-    ],
-  },
-  {
-    title: "Europe",
-    locations: [
-      { title: "Italy", href: "#", icon: "🇮🇹" },
-      { title: "Germany", href: "#", icon: "🇩🇪" },
-      { title: "Poland", href: "#", icon: "🇵🇱" },
-      { title: "United Kingdom", href: "#", icon: "🇬🇧" },
-    ],
-  },
-  {
-    title: "Americas",
-    locations: [
-      { title: "Brazil", href: "#", icon: "🇧🇷" },
-      { title: "Canada", href: "#", icon: "🇨🇦" },
-      { title: "Mexico", href: "#", icon: "🇲🇽" },
-      { title: "United States", href: "#", icon: "🇺🇸" },
-    ],
-  },
-  {
-    title: "Middle East/Africa",
-    locations: [
-      { title: "Egypt", href: "#", icon: "🇸🇦" },
-      { title: "Nigeria", href: "#", icon: "🇳🇬" },
-      { title: "Türkiye", href: "#", icon: "🇹🇷" },
-      { title: "United Arab Emirates", href: "#", icon: "🇦🇪" },
-    ],
-  },
-];
-
-// Company Menu Component
-const CompanyMenu = () => (
-  <div>
-    <div className="space-y-6 lg:flex lg:space-x-8 lg:space-y-0">
-      <div className="w-full shrink-0 lg:max-w-[18rem]">
-        <a
-          href="#"
-          className="text-primary-foreground group relative flex h-full flex-row overflow-hidden rounded-lg p-0 lg:rounded-xl"
-        >
-          <div className="relative z-10 flex w-full flex-col-reverse text-left lg:flex-col">
-            <div className="aspect-4/3 relative flex max-h-[18rem] w-full flex-1 justify-center">
-              <Image
-                src="/images/placeholders/placeholder-3.svg"
-                alt="Enterprise Solutions"
-                width={600}
-                height={450}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-            <div className="bg-primary relative z-20 flex flex-col rounded-b-xl p-6">
-              <div className="flex items-center space-x-1 text-xs">
-                Enterprise Solutions
-                <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
-              </div>
-              <p className="text-primary-foreground/85 mt-2 text-xs">
-                Scale your business with enterprise-grade features and support.
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div className="grid w-full gap-y-12 lg:gap-y-6">
-        {companyFeatures.map((category) => (
-          <div key={category.title} className="grid gap-y-2 lg:gap-y-6">
-            <div className="border-border text-left lg:border-b lg:pb-3">
-              <strong className="text-muted-foreground text-left text-xs font-medium uppercase tracking-wider">
-                {category.title}
-              </strong>
-            </div>
-            <menu className="grid md:grid-cols-3 md:gap-x-6 lg:gap-y-6">
-              {category.features.map((feature) => (
-                <NavigationMenuLink
-                  key={feature.id}
-                  href={feature.href}
-                  className="border-border group flex flex-row items-center space-x-4 border-b py-5 text-left sm:py-7 lg:border-0 lg:py-0"
-                >
-                  <div className="flex aspect-square size-9 shrink-0 items-center justify-center">
-                    <feature.icon className="size-5" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-foreground/85 group-hover:text-foreground text-sm font-medium">
-                      {feature.title}
-                    </div>
-                    <p className="text-muted-foreground group-hover:text-foreground mt-1 text-xs">
-                      {feature.description}
-                    </p>
-                  </div>
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                </NavigationMenuLink>
-              ))}
-            </menu>
-          </div>
-        ))}
-      </div>
-    </div>
-    <div className="mt-8">
-      <div className="border-border mb-6 pb-1 text-left lg:border-b">
-        <strong className="text-muted-foreground text-left text-xs font-medium uppercase tracking-wider">
-          Popular Locations
-        </strong>
-      </div>
-      <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-4">
-        {regions.map((region) => (
-          <div
-            key={region.title}
-            className="border-border space-y-6 rounded-md border p-6 lg:border-0 lg:p-0"
-          >
-            <div className="text-muted-foreground text-left text-xs">
-              {region.title}
-            </div>
-            <menu className="border-border grid gap-y-3 border-t pt-6 lg:border-0 lg:pt-0">
-              {region.locations.map((location) => (
-                <NavigationMenuLink
-                  key={location.title}
-                  href={location.href}
-                  className="text-foreground/85 hover:text-foreground group flex flex-row items-center space-x-4 text-left lg:space-x-4 lg:border-0 lg:py-0"
-                >
-                  <div className="flex size-4 items-center justify-center">
-                    {location.icon}
-                  </div>
-                  <div className="flex-1 text-sm font-medium">
-                    {location.title}
-                  </div>
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-                </NavigationMenuLink>
-              ))}
-            </menu>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-);
-
-// Resources Menu Component
 const ResourcesMenu = () => (
-  <div className="grid gap-y-12 md:grid-cols-2 md:gap-x-6 lg:grid-cols-4 lg:gap-6">
-    <div className="col-span-1">
-      <a
-        href="#"
-        className="bg-primary text-primary-foreground group relative flex h-full flex-row overflow-hidden rounded-lg p-0 lg:rounded-xl"
-      >
-        <div className="relative z-10 flex w-full flex-col-reverse text-left">
-          <div className="relative z-20 flex flex-col px-6 pb-[14rem] pt-6 md:pb-6 md:pt-40">
-            <div className="mt-auto flex items-center space-x-1 text-xs">
-              Resource Center
-              <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
-            </div>
-            <p className="mt-2 text-xs">
-              Access guides, tutorials, and best practices to maximize your
-              success.
-            </p>
-          </div>
-          <div className="absolute inset-0">
-            <Image
-              src="/images/placeholders/placeholder-4.svg"
-              alt="Resource Center"
-              width={800}
-              height={600}
-              className="h-full w-full object-cover object-center invert"
-            />
-          </div>
-          <div className="absolute inset-x-0 top-0 z-10 h-[60%] bg-[linear-gradient(hsl(var(--color-primary))_50%,transparent)] md:bottom-[-10%] md:top-auto md:h-[50%] md:bg-[linear-gradient(transparent,hsl(var(--color-primary))_50%)]"></div>
-        </div>
-      </a>
-    </div>
-    <div className="lg:col-span-2 lg:flex lg:flex-col">
-      <div>
-        <div className="border-border mb-4 pb-3 text-left md:mb-6 lg:border-b">
-          <strong className="text-muted-foreground text-left text-xs font-medium uppercase tracking-wider">
-            Featured Resources
-          </strong>
-        </div>
-      </div>
-      <menu className="grid gap-y-4 lg:h-full lg:grid-cols-2 lg:gap-6">
-        {resources.map((resource) => (
-          <NavigationMenuLink
-            key={resource.id}
-            href={resource.href}
-            className="border-border bg-accent lg:bg-background group flex flex-row items-center space-x-4 rounded-md px-6 py-5 text-left md:space-x-5 lg:border lg:p-5"
-          >
-            <resource.icon className="size-6 sm:size-7" />
-            <div className="ml-4 flex-1">
-              <div className="text-foreground/85 group-hover:text-foreground text-sm font-medium">
-                {resource.title}
-              </div>
-              <p className="text-muted-foreground group-hover:text-foreground mt-1 text-xs">
-                {resource.description}
-              </p>
-            </div>
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-          </NavigationMenuLink>
-        ))}
-      </menu>
-    </div>
-    <div className="col-span-1 md:col-span-2 lg:col-span-1">
-      {topicGroups.map((group) => (
-        <Fragment key={group.title}>
-          <div className="border-border mb-4 pb-3 text-left md:col-span-2 md:mb-7 lg:border-b">
-            <strong className="text-muted-foreground text-left text-xs font-medium uppercase tracking-wider">
-              Learning & Support
-            </strong>
-          </div>
-          <menu className="mb-7 grid md:grid-cols-2 md:gap-x-6 lg:grid-cols-1 lg:gap-x-0">
-            {group.topics.map((topic) => (
-              <NavigationMenuLink
-                key={topic.id}
-                href={topic.href}
-                className="border-border group flex flex-row items-center space-x-6 border-b py-5 text-left sm:py-8 lg:space-x-4 lg:border-0 lg:py-0"
-              >
-                <div className="flex aspect-square size-9 shrink-0 items-center justify-center">
-                  <topic.icon className="size-5" />
-                </div>
-                <div className="text-foreground/85 group-hover:text-foreground flex-1 text-xs font-medium md:text-sm">
-                  {topic.title}
-                </div>
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 lg:hidden" />
-              </NavigationMenuLink>
-            ))}
-          </menu>
-        </Fragment>
-      ))}
-    </div>
-  </div>
+  <MenuContent mainItems={resourceItems} footerItems={resourceLinks} />
 );
-
-// Archive Menu Component - combines all old menu items
-const ArchiveMenu = () => (
-  <div className="space-y-8">
-    {/* Direct Links to Original Sonic Pages */}
-    <div>
-      <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
-        Original Pages
-      </h3>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <Link
-          href="/archive/about"
-          className="hover:bg-accent flex items-center gap-3 rounded-lg border border-border p-3 transition-colors"
-        >
-          <div className="flex flex-col">
-            <span className="font-medium">About</span>
-            <span className="text-muted-foreground text-xs">
-              Company information
-            </span>
-          </div>
-        </Link>
-        <Link
-          href="/archive/pricing"
-          className="hover:bg-accent flex items-center gap-3 rounded-lg border border-border p-3 transition-colors"
-        >
-          <div className="flex flex-col">
-            <span className="font-medium">Pricing</span>
-            <span className="text-muted-foreground text-xs">
-              Plans and pricing
-            </span>
-          </div>
-        </Link>
-        <Link
-          href="/archive/product"
-          className="hover:bg-accent flex items-center gap-3 rounded-lg border border-border p-3 transition-colors"
-        >
-          <div className="flex flex-col">
-            <span className="font-medium">Product</span>
-            <span className="text-muted-foreground text-xs">
-              Product details
-            </span>
-          </div>
-        </Link>
-        <Link
-          href="/archive/specifications"
-          className="hover:bg-accent flex items-center gap-3 rounded-lg border border-border p-3 transition-colors"
-        >
-          <div className="flex flex-col">
-            <span className="font-medium">Specifications</span>
-            <span className="text-muted-foreground text-xs">
-              Technical specs
-            </span>
-          </div>
-        </Link>
-      </div>
-    </div>
-    <div className="border-t pt-8">
-      <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
-        Solutions Archive
-      </h3>
-      <SolutionsMenu />
-    </div>
-    <div className="border-t pt-8">
-      <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
-        Products Archive
-      </h3>
-      <ProductsMenu />
-    </div>
-    <div className="border-t pt-8">
-      <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
-        Company Archive
-      </h3>
-      <CompanyMenu />
-    </div>
-    <div className="border-t pt-8">
-      <h3 className="text-muted-foreground mb-4 text-xs font-medium uppercase tracking-wider">
-        Resources Archive
-      </h3>
-      <ResourcesMenu />
-    </div>
-  </div>
-);
-
-const navigationMenuItems = [
-  {
-    key: "ai-media-studio",
-    label: "AI Media Studio",
-    component: AiMediaStudioMenu,
-  },
-  {
-    key: "beseam-pdp-ai",
-    label: "Beseam PDP AI",
-    component: BeseamPdpAiMenu,
-  },
-] as const;
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-14 items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center lg:w-[200px]">
+          <div className="flex items-center lg:w-[220px]">
             <Link href="/" className="flex items-center space-x-2">
-              <NavbarLogo />
+              <NavbarLogo className="text-primary" />
             </Link>
           </div>
 
           {/* Desktop Navigation - Centered */}
-          <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-8">
+          <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-0">
             <NavigationMenu>
-              <NavigationMenuList className="hidden gap-0 lg:flex">
-                {navigationMenuItems.map((item) => (
-                  <NavigationMenuItem key={item.key}>
-                    <NavigationMenuTrigger className="text-xs xl:text-sm">
-                      {item.label}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent className="p-8 md:p-10 lg:p-12">
-                      <item.component />
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                ))}
+              <NavigationMenuList className="gap-0">
+                {/* Product dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-sm font-medium bg-transparent">
+                    Product
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="p-2">
+                    <ProductMenu />
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Pricing - direct link styled like nav item */}
+                <NavigationMenuItem>
+                  <Link
+                    href="/pricing"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none"
+                  >
+                    Pricing
+                  </Link>
+                </NavigationMenuItem>
+
+                {/* Resources dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-sm font-medium bg-transparent">
+                    Resources
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="p-2">
+                    <ResourcesMenu />
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-
-            {/* Demo Link */}
-            <Link
-              href="/demo"
-              className="text-sm transition-colors hover:text-primary"
-            >
-              Demo
-            </Link>
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center justify-end gap-2 lg:w-[200px]">
+          <div className="flex items-center justify-end gap-3 lg:w-[220px]">
             <ThemeToggle />
 
             <Link
               href="/demo"
-              className="hidden rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex"
+              className="hidden items-center justify-center gap-2 rounded-full bg-primary px-8 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex min-w-[140px] whitespace-nowrap shadow-sm"
             >
+              <Sparkles className="h-4 w-4" />
               Get Started
             </Link>
 
             {/* Mobile Menu Button */}
             <Button
-              variant="outline"
+              variant="ghost"
               size="icon"
               aria-label="Main Menu"
               className="lg:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
-                <X className="size-6" />
+                <X className="h-5 w-5" />
               ) : (
-                <Menu className="size-6" />
+                <Menu className="h-5 w-5" />
               )}
             </Button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
-      <div
-        className={`fixed inset-0 top-16 z-50 lg:hidden transition-transform duration-300 ease-in-out ${
-          mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <div className="container mx-auto max-h-[calc(100vh-4rem)] overflow-y-auto bg-background  px-4 py-6">
-          {activeSubmenu ? (
-            <div className="animate-in slide-in-from-right-5 duration-300">
-              <button
-                onClick={() => setActiveSubmenu(null)}
-                className="mb-6 flex items-center gap-2 text-foreground text-sm font-medium"
-              >
-                <ArrowLeft className="size-4" />
-                Go back
-              </button>
-              <NavigationMenu viewport={false} className="block w-full">
-                {navigationMenuItems
-                  .find((item) => item.key === activeSubmenu)
-                  ?.component()}
-              </NavigationMenu>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {navigationMenuItems.map((item, index) => (
-                <button
-                  key={item.key}
-                  onClick={() => setActiveSubmenu(item.key)}
-                  className={`flex w-full items-center justify-between rounded-lg border border-border/30 bg-primary-foreground/5 p-4 text-left transition-all duration-300 hover:bg-accent/20 hover:scale-[1.02] animate-in slide-in-from-right-5 ${
-                    mobileMenuOpen ? "fade-in-0" : "fade-out-0"
-                  }`}
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                    animationFillMode: "both",
-                  }}
-                >
-                  <span className="font-medium text-foreground">
-                    {item.label}
-                  </span>
-                  <ChevronRight className="size-5 text-foreground/70" />
-                </button>
-              ))}
+      {/* Mobile Menu Overlay */}
 
-              <Link
-                href="/demo"
-                className={`flex w-full items-center justify-between rounded-lg border border-border/30 bg-primary-foreground/5 p-4 text-left transition-all duration-300 hover:bg-accent/20 hover:scale-[1.02] animate-in slide-in-from-right-5 ${
-                  mobileMenuOpen ? "fade-in-0" : "fade-out-0"
-                }`}
-                style={{
-                  animationDelay: `${navigationMenuItems.length * 100}ms`,
-                  animationFillMode: "both",
-                }}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-background/60 backdrop-blur-sm lg:hidden animate-in fade-in duration-300"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Menu Content */}
+
+      {mobileMenuOpen && (
+        <div className="fixed right-0 top-0 z-50 h-[100dvh] w-1/2 lg:hidden animate-in slide-in-from-right duration-300 border-l border-border shadow-2xl bg-background">
+          <div className="flex flex-col h-full">
+            {/* Sidebar Header */}
+
+            <div className="flex h-14 items-center justify-between px-6 border-b border-border/50">
+              <span className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
+                Menu
+              </span>
+
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={() => setMobileMenuOpen(false)}
+                className="hover:bg-accent"
               >
-                <span className="font-medium text-foreground">Demo</span>
-                <ChevronRight className="size-5 text-foreground/70" />
-              </Link>
-
-              <div
-                className={`pt-4 animate-in slide-in-from-right-5 ${mobileMenuOpen ? "fade-in-0" : "fade-out-0"}`}
-                style={{
-                  animationDelay: `${(navigationMenuItems.length + 1) * 100}ms`,
-                  animationFillMode: "both",
-                }}
-              >
-                <Button
-                  asChild
-                  className="w-full animate-pulse hover:animate-none"
-                >
-                  <Link href="/demo" className="text-primary">
-                    Get Started
-                  </Link>
-                </Button>
-              </div>
+                <X className="h-5 w-5" />
+              </Button>
             </div>
-          )}
+
+            <div className="flex-1 overflow-y-auto px-6 py-8">
+              {activeSubmenu ? (
+                <div className="animate-in slide-in-from-right-5 duration-200">
+                  <button
+                    onClick={() => setActiveSubmenu(null)}
+                    className="mb-6 flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-foreground"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    Back
+                  </button>
+
+                  {activeSubmenu === "product" && (
+                    <div className="space-y-6">
+                      <div className="space-y-2">
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground px-2">
+                          Platform
+                        </p>
+
+                        {productItems.map((item) => (
+                          <Link
+                            key={item.id}
+                            href={item.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-start gap-4 rounded-xl p-3 hover:bg-accent transition-colors"
+                          >
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/5 text-primary">
+                              <item.icon className="h-5 w-5" />
+                            </div>
+
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm font-bold">
+                                  {item.title}
+                                </span>
+
+                                {item.badge && (
+                                  <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[9px] font-bold text-primary">
+                                    {item.badge}
+                                  </span>
+                                )}
+                              </div>
+
+                              <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                                {item.description}
+                              </p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+
+                      <div className="space-y-2">
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground px-2">
+                          Learn More
+                        </p>
+
+                        <div className="grid grid-cols-1 gap-2">
+                          {productLinks.map((item) => (
+                            <Link
+                              key={item.id}
+                              href={item.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="flex items-center gap-3 rounded-lg bg-muted/30 p-3 hover:bg-accent transition-colors"
+                            >
+                              <item.icon className="h-4 w-4 text-muted-foreground" />
+
+                              <span className="text-sm font-bold">
+                                {item.title}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeSubmenu === "resources" && (
+                    <div className="space-y-6">
+                      <div className="space-y-2">
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground px-2">
+                          Resources
+                        </p>
+
+                        {resourceItems.map((item) => (
+                          <Link
+                            key={item.id}
+                            href={item.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-center gap-4 rounded-xl p-3 hover:bg-accent transition-colors"
+                          >
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                              <item.icon className="h-5 w-5" />
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-bold">
+                                {item.title}
+                              </span>
+
+                              {item.comingSoon && (
+                                <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground font-bold">
+                                  Soon
+                                </span>
+                              )}
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+
+                      <div className="space-y-2">
+                        <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground px-2">
+                          Connect
+                        </p>
+
+                        <div className="grid grid-cols-1 gap-2">
+                          {resourceLinks.map((item) => (
+                            <Link
+                              key={item.id}
+                              href={item.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="flex items-center gap-3 rounded-lg bg-muted/30 p-3 hover:bg-accent transition-colors"
+                            >
+                              <item.icon className="h-4 w-4 text-muted-foreground" />
+
+                              <span className="text-sm font-bold">
+                                {item.title}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {/* Product */}
+
+                  <button
+                    onClick={() => setActiveSubmenu("product")}
+                    className="flex w-full items-center justify-between rounded-xl p-4 text-left hover:bg-accent transition-all group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                        <Layers className="h-5 w-5" />
+                      </div>
+
+                      <span className="text-lg font-bold">Product</span>
+                    </div>
+
+                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                  </button>
+
+                  {/* Pricing */}
+
+                  <Link
+                    href="/pricing"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex w-full items-center justify-between rounded-xl p-4 text-left hover:bg-accent transition-all group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/5 text-secondary group-hover:bg-secondary group-hover:text-secondary-foreground transition-all">
+                        <BarChart3 className="h-5 w-5" />
+                      </div>
+
+                      <span className="text-lg font-bold">Pricing</span>
+                    </div>
+
+                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                  </Link>
+
+                  {/* Resources */}
+
+                  <button
+                    onClick={() => setActiveSubmenu("resources")}
+                    className="flex w-full items-center justify-between rounded-xl p-4 text-left hover:bg-accent transition-all group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                        <BookOpen className="h-5 w-5" />
+                      </div>
+
+                      <span className="text-lg font-bold">Resources</span>
+                    </div>
+
+                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                  </button>
+
+                  {/* CTAs */}
+
+                  <div className="pt-8">
+                    <Link
+                      href="/demo"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex w-full items-center justify-center gap-2 rounded-full bg-primary p-5 text-base font-bold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all"
+                    >
+                      <Sparkles className="h-5 w-5" />
+                      Get Started
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface NavbarLogoProps {
@@ -12,23 +11,29 @@ const NavbarLogo: React.FC<NavbarLogoProps> = ({
   wrapperClassName = "",
 }) => {
   return (
-    <div className={cn(`relative w-25 h-6`, className, wrapperClassName)}>
-      {/* Light mode logo */}
-      <Image
-        src="/layout/logo.svg"
-        alt="Beseam Logo"
-        fill
-        priority
-        className="object-contain dark:hidden"
-      />
-      {/* Dark mode logo */}
-      <Image
-        src="/layout/logo-dark.svg"
-        alt="Beseam Logo"
-        fill
-        priority
-        className="object-contain hidden dark:block"
-      />
+    <div className={cn("flex items-center", wrapperClassName)}>
+      <div className={cn("inline-flex items-center", className)}>
+        <svg
+          width="95"
+          height="26"
+          viewBox="0 0 95 26"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-auto"
+        >
+          <text
+            x="0"
+            y="20"
+            fontFamily="var(--font-figtree), system-ui, -apple-system, sans-serif"
+            fontSize="24"
+            fontWeight="600"
+            letterSpacing="-0.02em"
+            fill="currentColor"
+          >
+            Beseam
+          </text>
+        </svg>
+      </div>
     </div>
   );
 };

@@ -38,45 +38,45 @@ const renderWithMentions = (text: string) => {
 const features = [
   {
     id: "feature-1",
-    title: "Professional Product Images",
+    title: "AI-Optimized Product Images",
     description:
-      "Full coverage on-brand images: packshots, product on model, lifestyle, product in use, detail shots. All aligned with your narrative and user needs.",
+      "Generate complete visual coverage that AI engines love: packshots, lifestyle shots, product-in-use, detail crops, and model shots—all on-brand and ready to deploy.",
     icon: Camera,
     type: "image" as const,
     media: "/images/hero/hero-1.png",
     width: 800,
     height: 600,
     bullets: [
-      "On-brand packshots, lifestyle, and detail shots",
-      "Product on model and in-use scenarios",
-      "Aligned with narrative and user needs",
+      "Fill visual gaps AI engines use to evaluate products",
+      "Consistent brand style across all product imagery",
+      "Scale from 1 to 100k+ SKUs without photoshoots",
     ],
   },
   {
     id: "feature-2",
-    title: "Engaging Product Videos",
+    title: "Product Videos That Convert",
     description:
-      "On-brand AI videos auto-built from your brandbook, aligned with narrative and user needs. No more generic clips disconnected from your story.",
+      "Auto-generate 360° spins, demonstrations, and lifestyle videos that keep shoppers engaged and give AI engines the rich media signals they prioritize.",
     icon: Video,
     type: "video" as const,
     media: "/videos/hero/hero-video-1.mp4",
     bullets: [
-      "Auto-built from brandbook and style guide",
-      "Aligned with product narrative",
-      "Consistent brand lighting, style & tone",
+      "Video content increases time on page by 88%",
+      "AI engines favor pages with multi-modal content",
+      "Built from your brand guidelines automatically",
     ],
   },
   {
     id: "feature-3",
-    title: "Deep Product Context for AI",
+    title: "Deep Narrative for AI Discovery",
     description:
-      "LLM-optimized narrative text with deep product context. Optimized for GEO (ChatGPT, Perplexity, Google AI Overviews) and SEO. Drive 3-5× higher AI search visibility.",
+      "Generate the structured content AI engines need: benefits, use cases, FAQs, comparisons, and objection handlers—all optimized for ChatGPT, Perplexity, and Google AI Overviews.",
     icon: FileText,
     type: "interactive" as const,
     bullets: [
-      "Optimized for GEO and SEO visibility",
-      "Deep context: benefits, FAQs, use cases",
-      "3-5× higher AI search recommendations",
+      "Answer the questions AI asks about products",
+      "Structured for schema.org and LLM extraction",
+      "3-5× higher recommendation rates in AI search",
     ],
   },
 ];

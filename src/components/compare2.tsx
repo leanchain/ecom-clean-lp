@@ -1,21 +1,22 @@
 import Image from "next/image";
-
-import { Check, X } from "lucide-react";
+import Link from "next/link";
+import { Check, X, ArrowRight, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const currentPdpBullets = [
-  "Low AI visibility and weak conversion.",
-  "Generic copy and thin product context.",
-  "Little or no social proof, FAQs, or objections addressed.",
-  "Manual, time-consuming updates for every PDP.",
-  "High per-product content costs (shoots, design, copy).",
+  "Invisible to ChatGPT, Perplexity, and AI Overviews.",
+  "Generic descriptions that don't answer real buyer questions.",
+  "Missing FAQs, comparisons, and use-case context AI needs.",
+  "Few images, no video, inconsistent brand presentation.",
+  "Manual updates that can't scale across your catalog.",
 ];
 
 const BeseamPdpBullets = [
-  "3–5× more visibility in AI search results (GEO, ChatGPT, Perplexity).",
-  "Deep structured narrative that answers questions and drives conversion.",
-  "On-brand images, video, and FAQs generated from one persuasion graph.",
-  "Update 1–100k+ SKUs in minutes with templates and sync.",
-  "$1–$10 per PDP instead of $X00s–$X000s in production costs.",
+  "3-5× higher recommendation rate in AI search engines.",
+  "Deep narrative with benefits, objections, and comparisons.",
+  "Complete visual coverage: packshots, lifestyle, video, detail shots.",
+  "Schema.org structured data for maximum AI extraction.",
+  "Scale to 100k+ SKUs without scaling your team or budget.",
 ];
 
 const Compare2 = () => {
@@ -122,6 +123,42 @@ const Compare2 = () => {
                   ))}
                 </ul>
               </div>
+            </div>
+          </div>
+
+          {/* Results Metrics */}
+          <div className="mt-12 rounded-3xl border bg-card p-8">
+            <div className="mb-6 text-center">
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+                <TrendingUp className="h-4 w-4" />
+                Average Results After Beseam Optimization
+              </div>
+            </div>
+            <div className="grid gap-6 md:grid-cols-4">
+              <div className="text-center">
+                <p className="text-3xl font-bold text-primary md:text-4xl">3.2x</p>
+                <p className="mt-1 text-sm text-muted-foreground">AI Search Visibility</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl font-bold text-primary md:text-4xl">+47%</p>
+                <p className="mt-1 text-sm text-muted-foreground">Click-Through Rate</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl font-bold text-primary md:text-4xl">+27%</p>
+                <p className="mt-1 text-sm text-muted-foreground">Conversion Rate</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl font-bold text-primary md:text-4xl">-23%</p>
+                <p className="mt-1 text-sm text-muted-foreground">Return Rate</p>
+              </div>
+            </div>
+            <div className="mt-8 flex justify-center">
+              <Button asChild size="lg" className="rounded-full">
+                <Link href="/demo">
+                  See How Your PDPs Compare
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
