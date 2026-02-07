@@ -34,7 +34,7 @@ const AuditTryout = () => {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/pdp-analyzer"
+              href="https://staging.beseam.com/analyze"
               className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5"
             >
               Analyze Your PDP Free <ArrowRight className="h-4 w-4" />

@@ -42,7 +42,7 @@ const productItems = [
     id: "audit",
     title: "PDP Audit",
     description: "Analyze your product pages across 8 dimensions. Free.",
-    href: "/pdp-analyzer",
+    href: "https://staging.beseam.com/analyze",
     icon: Search,
     badge: "Free",
   },
