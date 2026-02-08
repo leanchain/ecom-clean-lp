@@ -1,18 +1,15 @@
-import React from "react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+import React from 'react';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
 interface LogoProps {
   className?: string;
   wrapperClassName?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({
-  className = "",
-  wrapperClassName = "",
-}) => {
+const Logo: React.FC<LogoProps> = ({ className = '', wrapperClassName = '' }) => {
   return (
-    <div className={cn("flex items-center", wrapperClassName)}>
-      <Link href="/" className={cn("inline-flex items-center", className)}>
+    <div className={cn('flex items-center', wrapperClassName)}>
+      <Link href="/" className={cn('inline-flex items-center', className)}>
         <svg
           width="95"
           height="26"
@@ -24,7 +21,7 @@ const Logo: React.FC<LogoProps> = ({
           <text
             x="0"
             y="20"
-            fontFamily="var(--font-figtree), system-ui, -apple-system, sans-serif"
+            fontFamily="inherit"
             fontSize="24"
             fontWeight="600"
             letterSpacing="-0.02em"

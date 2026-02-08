@@ -15,13 +15,15 @@ const AuditTryout = () => {
             See how AI engines evaluate your product pages—and what's missing.
           </h2>
           <p className="text-base text-indigo-100/90">
-            Paste any product URL and get a real AI visibility score across 6 dimensions. See exactly what's holding
-            your PDPs back from getting recommended by ChatGPT, Perplexity, and Google AI Overviews.
+            Paste any product URL and get a real AI visibility score across 6
+            dimensions. See exactly what's holding your PDPs back from getting
+            recommended by ChatGPT, Perplexity, and Google AI Overviews.
           </p>
           <div className="grid gap-3 text-sm text-indigo-100/90">
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-emerald-300" />
-              Audit covers 8 domains: SEO, Content, Trust, UX, Conversion, Mobile, Performance, Accessibility
+              Audit covers 8 domains: SEO, Content, Trust, UX, Conversion,
+              Mobile, Performance, Accessibility
             </div>
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-emerald-300" />
@@ -34,7 +36,7 @@ const AuditTryout = () => {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
-              href="https://staging.beseam.com/analyze"
+              href="https://app.beseam.com/analyze"
               className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5"
             >
               Analyze Your PDP Free <ArrowRight className="h-4 w-4" />
@@ -50,38 +52,47 @@ const AuditTryout = () => {
         <div className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
           <div className="flex items-center justify-between text-sm text-indigo-100">
             <span>LLM Visibility Score</span>
-            <span className="rounded-full bg-white/10 px-3 py-1 font-semibold">Real-time</span>
+            <span className="rounded-full bg-white/10 px-3 py-1 font-semibold">
+              Real-time
+            </span>
           </div>
           <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
             <div className="flex items-center justify-between text-sm text-indigo-100">
               <span>Title / H1</span>
-              <span className="rounded-full bg-emerald-500/15 px-2 py-1 text-emerald-200">Good</span>
+              <span className="rounded-full bg-emerald-500/15 px-2 py-1 text-emerald-200">
+                Good
+              </span>
             </div>
             <div className="mt-2 h-1.5 rounded-full bg-white/10">
               <div className="h-full w-[90%] rounded-full bg-emerald-400" />
             </div>
             <div className="mt-3 flex items-center justify-between text-sm text-indigo-100">
               <span>Schema</span>
-              <span className="rounded-full bg-amber-500/15 px-2 py-1 text-amber-200">Needs</span>
+              <span className="rounded-full bg-amber-500/15 px-2 py-1 text-amber-200">
+                Needs
+              </span>
             </div>
             <div className="mt-2 h-1.5 rounded-full bg-white/10">
               <div className="h-full w-[40%] rounded-full bg-amber-400" />
             </div>
             <div className="mt-3 flex items-center justify-between text-sm text-indigo-100">
               <span>FAQs / Q&A</span>
-              <span className="rounded-full bg-amber-500/15 px-2 py-1 text-amber-200">Needs</span>
+              <span className="rounded-full bg-amber-500/15 px-2 py-1 text-amber-200">
+                Needs
+              </span>
             </div>
             <div className="mt-2 h-1.5 rounded-full bg-white/10">
               <div className="h-full w-[30%] rounded-full bg-amber-400" />
             </div>
             <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-3 text-xs text-indigo-100">
-              “Add Product + Offer + FAQ schema, 3 more FAQ entries, and alt text for 2 images to reach 90+/100.”
+              “Add Product + Offer + FAQ schema, 3 more FAQ entries, and alt
+              text for 2 images to reach 90+/100.”
             </div>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-indigo-50">
             <div className="font-semibold text-white">Optimized JSON-LD</div>
             <pre className="mt-2 max-h-48 overflow-auto rounded-lg bg-black/40 p-3 text-[11px] leading-relaxed">
-{`{
+              {`{
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Nimbus Trail Runner",

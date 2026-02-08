@@ -113,7 +113,10 @@ const FinalCta = () => {
               variant="link"
               className="text-white font-bold text-lg hover:no-underline hover:text-white/80 p-0 h-auto underline underline-offset-4 decoration-white/30"
             >
-              <Link href="https://staging.beseam.com/analyze" className="flex items-center gap-2">
+              <Link
+                href="https://app.beseam.com/analyze"
+                className="flex items-center gap-2"
+              >
                 <Play className="h-5 w-5 fill-current" />
                 Or Try Free Audit First
               </Link>

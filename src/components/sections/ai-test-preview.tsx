@@ -198,7 +198,7 @@ const AiTestPreview = () => {
               </div>
 
               <Button asChild className="w-full mt-6 rounded-full" size="lg">
-                <Link href="https://staging.beseam.com/analyze">
+                <Link href="https://app.beseam.com/analyze">
                   Get Your Full Audit
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>

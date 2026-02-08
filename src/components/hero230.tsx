@@ -184,7 +184,7 @@ const Hero230 = () => {
             size="lg"
             className="h-14 rounded-full px-8 text-base"
           >
-            <Link href="https://staging.beseam.com/analyze">
+            <Link href="https://app.beseam.com/analyze">
               <Play className="mr-2 h-4 w-4" />
               Try Free Audit
             </Link>

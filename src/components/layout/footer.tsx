@@ -10,10 +10,10 @@ const ITEMS = [
   {
     title: "Product",
     links: [
-      { name: "AI Visibility Audit", href: "https://staging.beseam.com/analyze" },
+      { name: "AI Visibility Audit", href: "https://app.beseam.com/analyze" },
       { name: "AI Media Studio", href: "/#ai-media-studio" },
       { name: "PDP Optimization", href: "/#beseam-pdp-ai" },
-      { name: "Pricing", href: "/pricing" },
+      { name: "Pricing", href: "https://app.beseam.com/pricing" },
     ],
   },
   {

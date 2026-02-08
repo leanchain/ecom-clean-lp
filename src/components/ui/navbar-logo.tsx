@@ -1,18 +1,15 @@
-import React from "react";
-import { cn } from "@/lib/utils";
+import React from 'react';
+import { cn } from '@/lib/utils';
 
 interface NavbarLogoProps {
   className?: string;
   wrapperClassName?: string;
 }
 
-const NavbarLogo: React.FC<NavbarLogoProps> = ({
-  className = "",
-  wrapperClassName = "",
-}) => {
+const NavbarLogo: React.FC<NavbarLogoProps> = ({ className = '', wrapperClassName = '' }) => {
   return (
-    <div className={cn("flex items-center", wrapperClassName)}>
-      <div className={cn("inline-flex items-center", className)}>
+    <div className={cn('flex items-center', wrapperClassName)}>
+      <div className={cn('inline-flex items-center', className)}>
         <svg
           width="95"
           height="26"
@@ -24,7 +21,7 @@ const NavbarLogo: React.FC<NavbarLogoProps> = ({
           <text
             x="0"
             y="20"
-            fontFamily="var(--font-figtree), system-ui, -apple-system, sans-serif"
+            fontFamily="inherit"
             fontSize="24"
             fontWeight="600"
             letterSpacing="-0.02em"

@@ -14,18 +14,17 @@ import {
   Layers,
   Mail,
   Menu,
-  Ruler,
   Search,
-  Sparkles,
+  TestTube,
   TrendingUp,
   Users,
   Wand2,
   X,
-  Zap,
 } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import NavbarLogo from "@/components/ui/navbar-logo";
 import {
   NavigationMenu,
@@ -34,6 +33,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
 // Product menu items - mirrors the 3-layer architecture
@@ -42,9 +42,12 @@ const productItems = [
     id: "audit",
     title: "PDP Audit",
     description: "Analyze your product pages across 8 dimensions. Free.",
-    href: "https://staging.beseam.com/analyze",
+    href: "https://app.beseam.com/analyze",
     icon: Search,
-    badge: "Free",
+    badge: {
+      label: "Free",
+      className: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+    },
   },
   {
     id: "optimize",
@@ -52,6 +55,10 @@ const productItems = [
     description: "Generate images, videos, copy, and structured data.",
     href: "/#how-it-works",
     icon: Wand2,
+    badge: {
+      label: "Soon",
+      className: "bg-primary/10 text-primary",
+    },
   },
   {
     id: "conversion",
@@ -59,7 +66,21 @@ const productItems = [
     description: "Size recommendations, styleguides, tryouts, personalization.",
     href: "/#conversion-suite",
     icon: TrendingUp,
-    badge: "Add-on",
+    badge: {
+      label: "Add-on",
+      className: "bg-secondary/10 text-secondary",
+    },
+  },
+  {
+    id: "testing",
+    title: "Live testing",
+    description: "Live testing on Google, ChatGpt, Perplexity etc",
+    href: "/#how-it-works",
+    icon: TestTube,
+    badge: {
+      label: "Soon",
+      className: "bg-primary/10 text-primary",
+    },
   },
 ];
 
@@ -95,7 +116,10 @@ const resourceItems = [
     description: "Guides and API reference",
     href: "#",
     icon: FileText,
-    comingSoon: true,
+    badge: {
+      label: "Soon",
+      className: "bg-primary/10 text-primary",
+    },
   },
   {
     id: "faq",
@@ -129,8 +153,10 @@ interface MenuItem {
   description?: string;
   href: string;
   icon: React.ElementType;
-  badge?: string;
-  comingSoon?: boolean;
+  badge?: {
+    label: string;
+    className: string;
+  };
 }
 
 interface MenuContentProps {
@@ -139,16 +165,16 @@ interface MenuContentProps {
 }
 
 const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
-  <div className="w-max bg-background p-2">
-    <div className="grid grid-cols-2 gap-1 mb-2">
+  <div className="w-max bg-background p-3">
+    <div className="grid grid-cols-2 gap-2 mb-2">
       {mainItems.map((item, idx) => (
         <NavigationMenuLink
           key={idx}
           href={item.href}
-          className="group flex w-[300px] items-start gap-3 rounded-xl p-2.5 transition-all hover:bg-accent"
+          className="group flex w-[310px] items-start gap-4 rounded-xl p-3.5 transition-all hover:bg-accent bg-muted/40 dark:bg-muted/10 border border-border/40"
         >
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-200">
-            <item.icon className="h-5 w-5" />
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-background border border-border/50 text-primary group-hover:bg-primary transition-all duration-200">
+            <item.icon className="h-5 w-5 group-hover:text-white" />
           </div>
 
           <div className="flex-1 pt-0.5">
@@ -157,17 +183,11 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
                 {item.title}
               </span>
 
-              {(item.badge || item.comingSoon) && (
+              {item.badge && (
                 <span
-                  className={`rounded-full px-1.5 py-0.5 text-[8px] font-bold ${
-                    item.badge === "Free"
-                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                      : item.badge === "Add-on"
-                        ? "bg-secondary/10 text-secondary"
-                        : "bg-muted text-muted-foreground"
-                  }`}
+                  className={`rounded-lg px-1.5 py-0.5 text-[8px] font-bold ${item.badge.className}`}
                 >
-                  {item.badge || "Soon"}
+                  {item.badge.label}
                 </span>
               )}
             </div>
@@ -183,15 +203,15 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
     </div>
 
     {footerItems && footerItems.length > 0 && (
-      <div className="grid grid-cols-2 gap-1 p-1 mt-1 border-t border-border/40 bg-background">
+      <div className="grid grid-cols-2 gap-2 p-2 mt-2 border-t border-border/40 bg-muted/20 dark:bg-muted/5 rounded-b-xl">
         {footerItems.map((item, idx) => (
           <NavigationMenuLink
             key={idx}
             href={item.href}
-            className="group flex w-[240px] items-center gap-2.5 rounded-lg px-2.5 py-2 transition-all hover:bg-accent"
+            className="group flex w-[250px] items-center gap-3 rounded-lg px-3 py-2.5 transition-all hover:bg-accent border border-transparent hover:border-border/50"
           >
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-background border border-border/50 group-hover:border-primary/30 transition-colors">
-              <item.icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary" />
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-background border border-border/50 group-hover:bg-primary group-hover:border-primary transition-all">
+              <item.icon className="h-4 w-4 text-muted-foreground group-hover:text-white" />
             </div>
 
             <span className="text-[11px] font-bold text-foreground/90 group-hover:text-foreground">
@@ -221,7 +241,7 @@ export default function Navbar() {
       <nav className="container mx-auto px-4">
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center lg:w-[220px]">
+          <div className="flex items-center lg:w-[300px]">
             <Link href="/" className="flex items-center space-x-2">
               <NavbarLogo className="text-primary" />
             </Link>
@@ -244,8 +264,8 @@ export default function Navbar() {
                 {/* Pricing - direct link styled like nav item */}
                 <NavigationMenuItem>
                   <Link
-                    href="/pricing"
-                    className="group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none"
+                    href="https://app.beseam.com/pricing"
+                    className={cn(navigationMenuTriggerStyle(), "bg-transparent text-foreground no-underline")}
                   >
                     Pricing
                   </Link>
@@ -265,14 +285,21 @@ export default function Navbar() {
           </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center justify-end gap-3 lg:w-[220px]">
+          <div className="flex items-center justify-end gap-3 lg:w-[300px]">
             <ThemeToggle />
 
-            <Link
-              href="/demo"
-              className="hidden items-center justify-center gap-2 rounded-full bg-primary px-8 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex min-w-[140px] whitespace-nowrap shadow-sm"
+            <Button
+              variant="outline"
+              className="hidden md:inline-flex rounded-lg px-6 transition-all font-bold"
+              asChild
             >
-              <Sparkles className="h-4 w-4" />
+              <Link href="https://app.beseam.com/login">Log In</Link>
+            </Button>
+
+            <Link
+              href="https://app.beseam.com/login"
+              className="hidden items-center justify-center rounded-lg bg-primary px-8 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex min-w-[140px] whitespace-nowrap shadow-sm"
+            >
               Get Started
             </Link>
 
@@ -306,7 +333,7 @@ export default function Navbar() {
       {/* Mobile Menu Content */}
 
       {mobileMenuOpen && (
-        <div className="fixed right-0 top-0 z-50 h-[100dvh] w-1/2 lg:hidden animate-in slide-in-from-right duration-300 border-l border-border shadow-2xl bg-background">
+        <div className="fixed right-0 top-0 z-50 h-[100dvh] w-[300px] sm:w-[400px] max-w-[90vw] lg:hidden animate-in slide-in-from-right duration-300 border-l border-border shadow-2xl bg-background">
           <div className="flex flex-col h-full">
             {/* Sidebar Header */}
 
@@ -348,10 +375,10 @@ export default function Navbar() {
                             key={item.id}
                             href={item.href}
                             onClick={() => setMobileMenuOpen(false)}
-                            className="flex items-start gap-4 rounded-xl p-3 hover:bg-accent transition-colors"
+                            className="group flex items-start gap-4 rounded-lg p-3 hover:bg-accent transition-colors"
                           >
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/5 text-primary">
-                              <item.icon className="h-5 w-5" />
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/5 text-primary group-hover:bg-primary transition-all">
+                              <item.icon className="h-5 w-5 group-hover:text-white" />
                             </div>
 
                             <div>
@@ -361,8 +388,10 @@ export default function Navbar() {
                                 </span>
 
                                 {item.badge && (
-                                  <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[9px] font-bold text-primary">
-                                    {item.badge}
+                                  <span
+                                    className={`rounded-lg px-2 py-0.5 text-[9px] font-bold ${item.badge.className}`}
+                                  >
+                                    {item.badge.label}
                                   </span>
                                 )}
                               </div>
@@ -386,9 +415,11 @@ export default function Navbar() {
                               key={item.id}
                               href={item.href}
                               onClick={() => setMobileMenuOpen(false)}
-                              className="flex items-center gap-3 rounded-lg bg-muted/30 p-3 hover:bg-accent transition-colors"
+                              className="group flex items-center gap-3 rounded-lg bg-muted/30 p-3 hover:bg-accent transition-colors"
                             >
-                              <item.icon className="h-4 w-4 text-muted-foreground" />
+                              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-background border border-border/50 group-hover:bg-primary group-hover:border-primary transition-colors">
+                                <item.icon className="h-4 w-4 text-muted-foreground group-hover:text-white" />
+                              </div>
 
                               <span className="text-sm font-bold">
                                 {item.title}
@@ -412,10 +443,10 @@ export default function Navbar() {
                             key={item.id}
                             href={item.href}
                             onClick={() => setMobileMenuOpen(false)}
-                            className="flex items-center gap-4 rounded-xl p-3 hover:bg-accent transition-colors"
+                            className="group flex items-center gap-4 rounded-lg p-3 hover:bg-accent transition-colors"
                           >
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
-                              <item.icon className="h-5 w-5" />
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground group-hover:bg-primary transition-all">
+                              <item.icon className="h-5 w-5 group-hover:text-white" />
                             </div>
 
                             <div className="flex items-center gap-2">
@@ -423,9 +454,11 @@ export default function Navbar() {
                                 {item.title}
                               </span>
 
-                              {item.comingSoon && (
-                                <span className="rounded bg-muted px-1.5 py-0.5 text-[9px] text-muted-foreground font-bold">
-                                  Soon
+                              {item.badge && (
+                                <span
+                                  className={`rounded-lg px-1.5 py-0.5 text-[9px] font-bold ${item.badge.className}`}
+                                >
+                                  {item.badge.label}
                                 </span>
                               )}
                             </div>
@@ -444,9 +477,11 @@ export default function Navbar() {
                               key={item.id}
                               href={item.href}
                               onClick={() => setMobileMenuOpen(false)}
-                              className="flex items-center gap-3 rounded-lg bg-muted/30 p-3 hover:bg-accent transition-colors"
+                              className="group flex items-center gap-3 rounded-lg bg-muted/30 p-3 hover:bg-accent transition-colors"
                             >
-                              <item.icon className="h-4 w-4 text-muted-foreground" />
+                              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-background border border-border/50 group-hover:bg-primary group-hover:border-primary transition-colors">
+                                <item.icon className="h-4 w-4 text-muted-foreground group-hover:text-white" />
+                              </div>
 
                               <span className="text-sm font-bold">
                                 {item.title}
@@ -464,11 +499,11 @@ export default function Navbar() {
 
                   <button
                     onClick={() => setActiveSubmenu("product")}
-                    className="flex w-full items-center justify-between rounded-xl p-4 text-left hover:bg-accent transition-all group"
+                    className="flex w-full items-center justify-between rounded-lg p-4 text-left hover:bg-accent transition-all group"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-                        <Layers className="h-5 w-5" />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/5 text-primary group-hover:bg-primary transition-all">
+                        <Layers className="h-5 w-5 group-hover:text-white" />
                       </div>
 
                       <span className="text-lg font-bold">Product</span>
@@ -480,13 +515,13 @@ export default function Navbar() {
                   {/* Pricing */}
 
                   <Link
-                    href="/pricing"
+                    href="https://app.beseam.com/pricing"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex w-full items-center justify-between rounded-xl p-4 text-left hover:bg-accent transition-all group"
+                    className="flex w-full items-center justify-between rounded-lg p-4 text-left hover:bg-accent transition-all group"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/5 text-secondary group-hover:bg-secondary group-hover:text-secondary-foreground transition-all">
-                        <BarChart3 className="h-5 w-5" />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary/5 text-secondary group-hover:bg-secondary transition-all">
+                        <BarChart3 className="h-5 w-5 group-hover:text-white" />
                       </div>
 
                       <span className="text-lg font-bold">Pricing</span>
@@ -499,11 +534,11 @@ export default function Navbar() {
 
                   <button
                     onClick={() => setActiveSubmenu("resources")}
-                    className="flex w-full items-center justify-between rounded-xl p-4 text-left hover:bg-accent transition-all group"
+                    className="flex w-full items-center justify-between rounded-lg p-4 text-left hover:bg-accent transition-all group"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-                        <BookOpen className="h-5 w-5" />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted text-muted-foreground group-hover:bg-primary transition-all">
+                        <BookOpen className="h-5 w-5 group-hover:text-white" />
                       </div>
 
                       <span className="text-lg font-bold">Resources</span>
@@ -514,13 +549,25 @@ export default function Navbar() {
 
                   {/* CTAs */}
 
-                  <div className="pt-8">
-                    <Link
-                      href="/demo"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex w-full items-center justify-center gap-2 rounded-full bg-primary p-5 text-base font-bold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all"
+                  <div className="pt-8 space-y-4">
+                    <Button
+                      variant="outline"
+                      className="w-full rounded-lg p-5 text-base font-bold border-primary/20"
+                      asChild
                     >
-                      <Sparkles className="h-5 w-5" />
+                      <Link
+                        href="https://app.beseam.com/login"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Log In
+                      </Link>
+                    </Button>
+
+                    <Link
+                      href="https://app.beseam.com/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex w-full items-center justify-center rounded-lg bg-primary p-5 text-base font-bold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all"
+                    >
                       Get Started
                     </Link>
                   </div>
