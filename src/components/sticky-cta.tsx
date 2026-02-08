@@ -6,19 +6,21 @@ import { ArrowRight, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const StickyCTA = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [scrollPast, setScrollPast] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       // Show after scrolling past hero (approximately 600px)
-      const shouldShow = window.scrollY > 600;
-      setIsVisible(shouldShow && !isDismissed);
+      setScrollPast(window.scrollY > 600);
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isDismissed]);
+  }, []);
+
+  const isVisible = scrollPast && !isDismissed;
 
   if (!isVisible) return null;
 
