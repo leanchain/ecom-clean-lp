@@ -379,6 +379,8 @@
 
   html {
     @apply scroll-smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #a1a1aa66 transparent;
   }
 
   a {
