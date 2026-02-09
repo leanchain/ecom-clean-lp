@@ -90,12 +90,23 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NavigationProvider>
-            <Navbar />
-            <main className="">
-              {children}
-              <CTA />
-            </main>
-            <Footer />
+            <div className="flex h-screen bg-background overflow-hidden">
+              <div className="flex flex-1 flex-col min-w-0 min-h-0 relative">
+                {/* Header - Fixed at top of this container */}
+                <div className="absolute top-0 left-0 right-0 z-50">
+                  <Navbar />
+                </div>
+
+                {/* Page content */}
+                <main className="flex-1 overflow-auto min-h-0 scrollbar-thin pt-14">
+                  <div className="w-full min-h-0 h-full relative">
+                    {children}
+                    <CTA />
+                    <Footer />
+                  </div>
+                </main>
+              </div>
+            </div>
           </NavigationProvider>
         </ThemeProvider>
       </body>
