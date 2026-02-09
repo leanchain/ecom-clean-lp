@@ -81,6 +81,8 @@ const baseLogos = [
 const logos = [...baseLogos, ...baseLogos, ...baseLogos];
 
 export default function ClientLogos() {
+  if (process.env.NEXT_PUBLIC_RELEASE_GUARD === "true") return null;
+
   return (
     <section className="bg-background pt-12 pb-8 md:pt-16 md:pb-10">
       <div className="container mx-auto px-4">

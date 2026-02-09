@@ -69,29 +69,31 @@ const Stats18 = () => {
   return (
     <section id="beseam-pdp-ai" className="overflow-hidden pt-20 pb-32">
       <div className="container px-4">
-        <div className="mb-12 text-center">
-          <div className="mx-auto mb-4 flex justify-center">
-            <CategoryBadge
-              label="Beseam PDP AI"
-              icon={<Package className="h-4 w-4" />}
-            />
+        {process.env.NEXT_PUBLIC_RELEASE_GUARD !== "true" && (
+          <div className="mb-12 text-center">
+            <div className="mx-auto mb-4 flex justify-center">
+              <CategoryBadge
+                label="Beseam PDP AI"
+                icon={<Package className="h-4 w-4" />}
+              />
+            </div>
+            <h2 className="relative py-2 text-center font-sans text-4xl font-semibold tracking-tighter lg:text-5xl">
+              Get your products recommended by <br />{" "}
+              <TypingAnimation
+                words={["ChatGPT", "Perplexity", "Claude", "Google AI Overviews"]}
+                typingSpeed={100}
+                deletingSpeed={50}
+                delayBetweenWords={2000}
+              />
+            </h2>
+            <p className="text-muted-foreground mx-auto max-w-2xl px-5 text-center text-sm lg:text-base">
+              {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+                ? "We're building AI-native PDP optimization that turns your product page content into deep contextual text, AI-optimised images, and videos — designed for maximum visibility across all major AI search platforms."
+                : "Beseam PDP AI optimizes your product page content from deep contextual text to AI optimised images and videos for maximum visibility across all major AI search platforms."}
+            </p>
           </div>
-          <h2 className="relative py-2 text-center font-sans text-4xl font-semibold tracking-tighter lg:text-5xl">
-            Get your products recommended by <br />{" "}
-            <TypingAnimation
-              words={["ChatGPT", "Perplexity", "Claude", "Google AI Overviews"]}
-              typingSpeed={100}
-              deletingSpeed={50}
-              delayBetweenWords={2000}
-            />
-          </h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl px-5 text-center text-sm lg:text-base">
-            Beseam PDP AI optimizes your product page content from deep
-            contextual text to AI optimised images and videos for maximum
-            visibility across all major AI search platforms.
-          </p>
-        </div>
-
+        )}
+        
         <div className="mx-auto flex max-w-7xl flex-col gap-12 lg:flex-row lg:gap-16">
           {/* Video Section - 1/3 width */}
           <div className="flex flex-col lg:w-1/3">

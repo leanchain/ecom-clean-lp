@@ -29,13 +29,15 @@ const metrics = [
   {
     id: 4,
     icon: DollarSign,
-    value: "$1-10",
+    value: "$0.50 - 5",
     label: "Cost Per Product",
     description: "vs $100s-1000s with traditional methods",
   },
 ];
 
 const MetricsBar = () => {
+  if (process.env.NEXT_PUBLIC_RELEASE_GUARD === "true") return null;
+
   return (
     <section className="py-12 md:py-16 bg-muted/30">
       <div className="container">

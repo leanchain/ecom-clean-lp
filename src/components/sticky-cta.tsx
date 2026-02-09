@@ -42,10 +42,14 @@ const StickyCTA = () => {
               </div>
               <div>
                 <p className="font-semibold text-foreground">
-                  Ready to 3x your AI visibility?
+                  {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+                    ? "Ready to boost your AI visibility?"
+                    : "Ready to 3x your AI visibility?"}
                 </p>
                 <p className="text-sm text-muted-foreground hidden sm:block">
-                  Start free • No credit card required • 14-day trial
+                  {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+                    ? "Join the pilot • No credit card required • Limited spots"
+                    : "Start free • No credit card required • 14-day trial"}
                 </p>
               </div>
             </div>
@@ -68,7 +72,9 @@ const StickyCTA = () => {
                 className="rounded-full bg-primary hover:bg-primary/90"
               >
                 <Link href="/demo" className="flex items-center gap-2">
-                  Start Free Trial
+                  {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+                    ? "Join Pilot"
+                    : "Start Free Trial"}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>

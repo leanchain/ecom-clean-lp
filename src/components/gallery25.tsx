@@ -334,7 +334,7 @@ const Gallery25 = () => {
       {/* Logo Bar Section */}
       <div className="container mt-12 mb-6">
         <h2 className="text-2xl md:text-4xl md:text-balance lg:text-5xl lg:leading-14 mb-6 md:mb-8 text-center mx-auto max-w-4xl">
-          Best-in-class AI models, orchestrated to match your brand across every category
+          Best-in-class AI models to match your brand across every category
         </h2>
         <div className="relative mx-auto w-full overflow-hidden">
           <Carousel

@@ -41,6 +41,8 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  if (process.env.NEXT_PUBLIC_RELEASE_GUARD === "true") return null;
+
   return (
     <section className="py-20 md:py-32 bg-muted/30">
       <div className="container">

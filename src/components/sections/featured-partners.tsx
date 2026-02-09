@@ -29,10 +29,14 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="font-heading text-foreground text-3xl md:text-5xl">
-            Featured Partners
+            {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+              ? "Partner With Us"
+              : "Featured Partners"}
           </h2>
           <p className="mt-3 text-muted-foreground text-sm md:text-base">
-            Earn 30% commission for 12 months.
+            {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+              ? "Join our partner program and grow together."
+              : "Earn 30% commission for 12 months."}
           </p>
         </div>
 
@@ -178,7 +182,7 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
                         </p>
                       </div>
                       <span className="rounded-full bg-secondary/10 px-3 py-1 text-[11px] font-bold text-secondary">
-                        30% / 12mo
+                        {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true" ? "Partner" : "30% / 12mo"}
                       </span>
                     </div>
                     <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
@@ -282,7 +286,7 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
                         </p>
                       </div>
                       <span className="rounded-full bg-secondary/10 px-2 py-0.5 text-[10px] font-bold text-secondary">
-                        30% / 12mo
+                        {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true" ? "Partner" : "30% / 12mo"}
                       </span>
                     </div>
                     <div className="mt-3 flex items-center justify-between text-[10px] text-muted-foreground font-medium">

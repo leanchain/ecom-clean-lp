@@ -568,7 +568,9 @@ export default function Navbar() {
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex w-full items-center justify-center rounded-lg bg-primary p-5 text-base font-bold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all"
                     >
-                      Get Started
+                      {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+                        ? "Join Pilot"
+                        : "Get Started"}
                     </Link>
                   </div>
                 </div>

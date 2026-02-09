@@ -287,7 +287,7 @@ const faqs = [
           images, and video content engineered for both AI search and human
           conversion. This deep context allows AIs to address the long tail of
           personalised needs inside AI search and results in your product
-          getting recommended 3–5× more often, driving impressions, clicks, and
+          getting recommended significantly more often, driving impressions, clicks, and
           sales.
         </p>
         <ul className="list-disc space-y-1 pl-5">
@@ -296,7 +296,7 @@ const faqs = [
             Deep, structured product context powering images, video, and copy.
           </li>
           <li>
-            Catalog-wide control so 10–100k+ SKUs stay consistent and up to
+            Catalog-wide control so all your SKUs stay consistent and up to
             date.
           </li>
         </ul>
@@ -349,7 +349,9 @@ const Faq9 = () => {
             Everything you need to know
           </h2>
           <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
-            E-commerce brands from lean startups to enterprise run their PDP optimization on Beseam.
+            {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+              ? "Learn how Beseam helps e-commerce brands optimize their PDPs for AI search discovery."
+              : "E-commerce brands from lean startups to enterprise run their PDP optimization on Beseam."}
           </p>
         </div>
 

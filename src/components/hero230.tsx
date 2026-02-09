@@ -4,7 +4,15 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Autoplay from "embla-carousel-autoplay";
-import { ArrowRight, FileText, ImageIcon, PlayCircle, Play, Check, Star } from "lucide-react";
+import {
+  ArrowRight,
+  FileText,
+  ImageIcon,
+  PlayCircle,
+  Play,
+  Check,
+  Star,
+} from "lucide-react";
 
 import AnimatedBorderButton from "@/components/animated-border-button";
 import { TypingAnimation } from "@/components/typing-animation";
@@ -165,17 +173,22 @@ const Hero230 = () => {
           </span>
         </h1>
         <p className="text-muted-foreground/80 mt-3 max-w-2xl text-base md:text-lg">
-          Beseam audits your product pages, generates AI-optimized images, videos, and deep product context—so your products get discovered by AI search engines and convert browsers into buyers.
+          {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+            ? "We’re building the future of AI-native PDPs—turning basic product content into deep contextual text and AI-optimized media. Designed specifically to dominate visibility on all major AI search platforms. Join our pilot program."
+            : "Beseam audits your product pages, generates AI-optimized images, videos, and deep product context—so your products get discovered by AI search engines and convert browsers into buyers."}
         </p>
 
         {/* CTA Buttons */}
-        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
+        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row mb-6">
           <AnimatedBorderButton
             asChild
             className="h-14 px-8 text-lg cursor-pointer [&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
           >
             <Link href="/demo">
-              Start Free Trial <ArrowRight className="ml-2 h-5 w-5" />
+              {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+                ? "Join Pilot Program"
+                : "Start Free Trial"}{" "}
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </AnimatedBorderButton>
           <Button
@@ -192,81 +205,93 @@ const Hero230 = () => {
         </div>
 
         {/* Trust Signals */}
-        <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
-          <div className="flex items-center gap-1">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            ))}
-            <span className="ml-1 text-sm text-muted-foreground">4.9/5 rating</span>
+        {process.env.NEXT_PUBLIC_RELEASE_GUARD !== "true" && (
+          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
+            <div className="flex items-center gap-1">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Star
+                  key={i}
+                  className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                />
+              ))}
+              <span className="ml-1 text-sm text-muted-foreground">
+                4.9/5 rating
+              </span>
+            </div>
+            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              <span className="flex items-center gap-1">
+                <Check className="h-4 w-4 text-primary" />
+                No credit card required
+              </span>
+              <span className="flex items-center gap-1">
+                <Check className="h-4 w-4 text-primary" />
+                14-day free trial
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span className="flex items-center gap-1">
-              <Check className="h-4 w-4 text-primary" />
-              No credit card required
-            </span>
-            <span className="flex items-center gap-1">
-              <Check className="h-4 w-4 text-primary" />
-              14-day free trial
-            </span>
-          </div>
-        </div>
+        )}
 
         {/* Social Proof Snippet */}
-        <div className="mt-8 mb-12 flex items-center gap-3">
-          <div className="flex -space-x-2">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-primary/10 text-xs font-semibold text-primary"
-              >
-                {String.fromCharCode(64 + i)}
-              </div>
-            ))}
+        {process.env.NEXT_PUBLIC_RELEASE_GUARD !== "true" && (
+          <div className="mt-8 mb-12 flex items-center gap-3">
+            <div className="flex -space-x-2">
+              {[1, 2, 3, 4].map((i) => (
+                <div
+                  key={i}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-primary/10 text-xs font-semibold text-primary"
+                >
+                  {String.fromCharCode(64 + i)}
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">500+ brands</span>{" "}
+              trust Beseam
+            </p>
           </div>
-          <p className="text-sm text-muted-foreground">
-            <span className="font-semibold text-foreground">500+ brands</span> trust Beseam
-          </p>
-        </div>
+        )}
       </div>
 
       {/* Scrolling Image Bar - Full Width */}
-      <div className="relative w-full px-4 flex items-center justify-center">
-        <Carousel
-          plugins={[Autoplay({ delay: 1500 })]}
-          opts={{ loop: true, align: "start" }}
-        >
-          <CarouselContent>
-            {shuffledMedia.map((item, index) => (
-              <CarouselItem
-                key={index}
-                className="translate-y-18 relative flex basis-1/2 cursor-grab justify-center active:cursor-grabbing sm:basis-1/4 md:basis-1/3 lg:basis-1/5"
-              >
-                <div className="easeOut hover:-translate-y-18 mt-auto w-full overflow-hidden rounded-t-3xl border transition-all">
-                  {item.type === "video" ? (
-                    <video
-                      src={item.src}
-                      className="h-full w-full object-cover"
-                      muted
-                      playsInline
-                      autoPlay
-                      loop
-                    />
-                  ) : (
-                    <Image
-                      src={item.src}
-                      alt="Product showcase"
-                      width={item.width}
-                      height={item.height}
-                      className="h-full w-full object-cover"
-                      priority={index < 3} // Priority for first 3 images
-                    />
-                  )}
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-      </div>
+      {process.env.NEXT_PUBLIC_RELEASE_GUARD !== "true" && (
+        <div className="relative w-full px-4 flex items-center justify-center">
+          <Carousel
+            plugins={[Autoplay({ delay: 1500 })]}
+            opts={{ loop: true, align: "start" }}
+          >
+            <CarouselContent>
+              {shuffledMedia.map((item, index) => (
+                <CarouselItem
+                  key={index}
+                  className="translate-y-18 relative flex basis-1/2 cursor-grab justify-center active:cursor-grabbing sm:basis-1/4 md:basis-1/3 lg:basis-1/5"
+                >
+                  <div className="easeOut hover:-translate-y-18 mt-auto w-full overflow-hidden rounded-t-3xl border transition-all">
+                    {item.type === "video" ? (
+                      <video
+                        src={item.src}
+                        className="h-full w-full object-cover"
+                        muted
+                        playsInline
+                        autoPlay
+                        loop
+                      />
+                    ) : (
+                      <Image
+                        src={item.src}
+                        alt="Product showcase"
+                        width={item.width}
+                        height={item.height}
+                        className="h-full w-full object-cover"
+                        priority={index < 3} // Priority for first 3 images
+                      />
+                    )}
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
+      )}
       {/* PDP preview showing images, video and copy together (temporarily hidden) */}
       {false && (
         <div className="container mt-16 grid items-center gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
@@ -481,9 +506,9 @@ const Hero230 = () => {
                     feel complete to both shoppers and AI.
                   </p>
                   <div className="grid grid-cols-3 gap-1.5">
-                    <div className="h-14 rounded-xl bg-gradient-to-br from-slate-100 to-slate-300 dark:from-slate-800 dark:to-slate-600" />
-                    <div className="h-14 rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-300 dark:from-emerald-900 dark:to-emerald-700" />
-                    <div className="h-14 rounded-xl bg-gradient-to-br from-indigo-100 to-indigo-300 dark:from-indigo-900 dark:to-indigo-700" />
+                    <div className="h-14 rounded-xl bg-linear-to-br from-slate-100 to-slate-300 dark:from-slate-800 dark:to-slate-600" />
+                    <div className="h-14 rounded-xl bg-linear-to-br from-emerald-100 to-emerald-300 dark:from-emerald-900 dark:to-emerald-700" />
+                    <div className="h-14 rounded-xl bg-linear-to-br from-indigo-100 to-indigo-300 dark:from-indigo-900 dark:to-indigo-700" />
                   </div>
                 </div>
 

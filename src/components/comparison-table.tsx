@@ -6,6 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import AnimatedBorderButton from "@/components/animated-border-button";
 
+const isGuarded = process.env.NEXT_PUBLIC_RELEASE_GUARD === "true";
+
 const rows = [
   {
     label: "Purpose",
@@ -16,23 +18,27 @@ const rows = [
     label: "AI Search Visibility",
     Beseam: (
       <>
-        ✅ 3–5× higher visibility ✅ Optimized for GEO (ChatGPT, Perplexity,
+        ✅ {isGuarded ? "Significantly higher" : "3–5×  higher"} visibility ✅ Optimized for GEO (ChatGPT, Perplexity,
         Google AI Overviews, etc) and ✅ SEO
       </>
     ),
     traditional: <>❌ Weak</>,
   },
-  {
-    label: "AI Visibility Score",
-    Beseam: <>✅ 75 - 95+</>,
-    traditional: <>❌ 5 - 45</>,
-  },
+  ...(!isGuarded
+    ? [
+        {
+          label: "AI Visibility Score",
+          Beseam: <>✅ 75 - 95+</>,
+          traditional: <>❌ 5 - 45</>,
+        },
+      ]
+    : []),
   {
     label: "Deep Product Context for AI",
     Beseam: (
       <>
         ✅ LLM-optimized PDP narrative text and ✅ structured format with ✅
-        benefits, objections, FAQs, 'best for', howto, use cases, why,
+        benefits, objections, FAQs, &apos;best for&apos;, howto, use cases, why,
         comparisons etc.
       </>
     ),
@@ -103,8 +109,8 @@ const rows = [
     label: "Scale & time",
     Beseam: (
       <>
-        ✅ Update & control entire catalogue in minutes, ✅ easily scale from 1
-        to 100k+ SKUs consistently, ✅ auto-updates/onboarding
+        ✅ Update & control entire catalogue in minutes, ✅ easily scale across
+        your catalog consistently, ✅ auto-updates/onboarding
       </>
     ),
     traditional: <>❌ Manual per product</>,
@@ -119,11 +125,15 @@ const rows = [
     ),
     traditional: <>❌ Manual up-/downloads</>,
   },
-  {
-    label: "Cost per Product",
-    Beseam: <>✅ $1–$10</>,
-    traditional: <>❌ $X00s–X000s</>,
-  },
+  ...(!isGuarded
+    ? [
+        {
+          label: "Cost per Product",
+          Beseam: <>✅ $1–$10</>,
+          traditional: <>❌ $X00s–X000s</>,
+        },
+      ]
+    : []),
   {
     label: "Schema Markup",
     Beseam: (

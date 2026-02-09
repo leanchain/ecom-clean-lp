@@ -30,8 +30,8 @@ const steps = [
       "Deploy AI-ready PDPs that drive both discovery and conversion.",
     bullets: [
       "Sync enriched content back to your store instantly.",
-      "Get recommended 3-5x more in AI search results.",
-      "Scale across 10-100k+ SKUs without manual effort.",
+      "Get recommended more often in AI search results.",
+      "Scale across your catalog without manual effort.",
     ],
   },
 ];
@@ -91,7 +91,7 @@ const StepVisual = ({ index }: { index: number }) => {
             AI visibility & conversion
           </span>
           <span className="bg-background text-foreground/90 rounded-full px-2 py-0.5 text-[11px] font-semibold">
-            91% score
+            {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true" ? "Score" : "91% score"}
           </span>
         </div>
       </div>
@@ -129,7 +129,9 @@ const HowItWorks = () => {
             How Beseam Works
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
-            Turn your catalog into AI‑ready PDP content in three simple steps.
+            {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+              ? "As a pilot partner, we'll work together to turn your catalog into AI‑ready PDP content."
+              : "Turn your catalog into AI‑ready PDP content in three simple steps."}
           </p>
         </div>
 

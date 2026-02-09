@@ -45,7 +45,9 @@ const AuditTryout = () => {
               href="/pricing"
               className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:border-white hover:-translate-y-0.5"
             >
-              See plans
+              {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+                ? "Learn more"
+                : "See plans"}
             </Link>
           </div>
         </div>

@@ -112,9 +112,9 @@ const Integration1 = () => {
             Connect Beseam to the platforms you already use
           </h2>
           <p className="text-muted-foreground text-sm md:text-base">
-            Beseam plugs into your ecommerce platform and product feeds so
-            AI-ready PDPs stay in sync automatically - no rebuild or custom CMS
-            needed.
+            {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+              ? "Beseam is designed to plug into your ecommerce platform and product feeds so AI-ready PDPs stay in sync automatically — no rebuild or custom CMS needed."
+              : "Beseam plugs into your ecommerce platform and product feeds so AI-ready PDPs stay in sync automatically - no rebuild or custom CMS needed."}
           </p>
         </div>
 

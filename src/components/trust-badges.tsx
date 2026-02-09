@@ -3,7 +3,7 @@
 import React from "react";
 import { Shield, Lock, Clock, Award, RefreshCw, Headphones } from "lucide-react";
 
-const badges = [
+const allBadges = [
   {
     icon: Shield,
     title: "SOC 2 Compliant",
@@ -18,15 +18,17 @@ const badges = [
     icon: RefreshCw,
     title: "Money-Back Guarantee",
     description: "30-day full refund",
+    releaseOnly: true,
   },
   {
     icon: Clock,
     title: "99.9% Uptime",
     description: "Reliable infrastructure",
+    releaseOnly: true,
   },
   {
     icon: Headphones,
-    title: "24/7 Support",
+    title: "Dedicated Support",
     description: "Always here to help",
   },
   {
@@ -37,10 +39,15 @@ const badges = [
 ];
 
 const TrustBadges = () => {
+  const isGuarded = process.env.NEXT_PUBLIC_RELEASE_GUARD === "true";
+  const badges = isGuarded
+    ? allBadges.filter((b) => !b.releaseOnly)
+    : allBadges;
+
   return (
     <section className="py-12 border-y bg-muted/30">
       <div className="container">
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+        <div className={`grid grid-cols-2 gap-6 md:grid-cols-3 ${isGuarded ? "lg:grid-cols-4" : "lg:grid-cols-6"}`}>
           {badges.map((badge, index) => {
             const Icon = badge.icon;
             return (

@@ -49,7 +49,7 @@ const features = [
     bullets: [
       "Fill visual gaps AI engines use to evaluate products",
       "Consistent brand style across all product imagery",
-      "Scale from 1 to 100k+ SKUs without photoshoots",
+      "Scale your product imagery without photoshoots",
     ],
   },
   {
@@ -61,7 +61,7 @@ const features = [
     type: "video" as const,
     media: "/videos/hero/hero-video-1.mp4",
     bullets: [
-      "Video content increases time on page by 88%",
+      "Video content significantly increases time on page",
       "AI engines favor pages with multi-modal content",
       "Built from your brand guidelines automatically",
     ],
@@ -76,7 +76,7 @@ const features = [
     bullets: [
       "Answer the questions AI asks about products",
       "Structured for schema.org and LLM extraction",
-      "3-5× higher recommendation rates in AI search",
+      "Higher recommendation rates in AI search",
     ],
   },
 ];

@@ -9,6 +9,8 @@ const RoiCalculator = () => {
   const [skuCount, setSkuCount] = useState(500);
   const [avgOrderValue, setAvgOrderValue] = useState(75);
 
+  if (process.env.NEXT_PUBLIC_RELEASE_GUARD === "true") return null;
+
   // Calculate ROI metrics
   const manualCostPerPdp = 150; // Average cost to manually optimize a PDP
   const beseamCostPerPdp = 2; // Beseam cost per PDP
