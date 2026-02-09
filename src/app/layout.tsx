@@ -3,11 +3,13 @@ import { Figtree } from "next/font/google";
 import type { Metadata } from "next";
 
 import "./globals.css";
+import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import { NavigationProvider } from "@/components/navigation-provider";
 import CTA from "@/components/sections/cta";
 import { ThemeProvider } from "@/components/theme-provider";
+import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -20,20 +22,54 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   title: {
-    default: "Beseam - AI Media Studio",
+    default:
+      "Beseam - E-commerce Growth Engine for Discoverability & Conversion",
     template: "%s | Beseam",
   },
   description:
-    "AI Media Studio for AI Search Optimised Product Detail Pages. Create stunning product visuals with advanced AI technology.",
+    "Beseam is a growth engine for e-commerce brands. We help brands turn product pages into high-performing growth assets optimized for both AI discovery and human buying behavior.",
   keywords: [
-    "AI Media Studio",
-    "Product Photography",
-    "AI Search Optimization",
-    "Product Detail Pages",
-    "E-commerce",
-    "AI Technology",
-    "Product Visuals",
     "Beseam",
+    "E-commerce",
+    "Growth Engine",
+    "Discoverability",
+    "Conversion",
+    "AI Search Optimization",
+    "AI Visibility",
+    "Product Detail Pages",
+    "PDP Audit",
+    "SEO",
+    "GEO",
+    "AEO",
+    "AIO",
+    "CRO",
+    "E-E-A-T",
+    "EEAT",
+    "Generative Engine Optimization",
+    "Answer Engine Optimization",
+    "Conversion Rate Optimization",
+    "Google Shopping",
+    "Google Merchant",
+    "Analytics",
+    "AMP",
+    "UCP",
+    "Agentic commerce readiness",
+    "Compliance",
+    "Audit Layers",
+    "Trust Scoring",
+    "technical SEO",
+    "Schema",
+    "Technical Meta",
+    "AI Readiness",
+    "Personalization",
+    "AI Content Generation",
+    "AI Product Descriptions",
+    "AI Product Images",
+    "AI Product Videos",
+    "AI Product Photography",
+    "AI Product Reviews",
+    "AI Product Recommendations",
+    "AI Product Personalization",
   ],
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
@@ -54,24 +90,24 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon/favicon.ico" }],
   },
   openGraph: {
-    title: "Beseam - AI Media Studio",
+    title: "Beseam - E-commerce Growth Engine",
     description:
-      "AI Media Studio for AI Search Optimised Product Detail Pages. Create stunning product visuals with advanced AI technology.",
+      "Turn product pages into high-performing growth assets optimized for both AI discovery and human buying behavior.",
     siteName: "Beseam",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Beseam - AI Media Studio",
+        alt: "Beseam - E-commerce Growth Engine",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam - AI Media Studio",
+    title: "Beseam - E-commerce Growth Engine",
     description:
-      "AI Media Studio for AI Search Optimised Product Detail Pages. Create stunning product visuals with advanced AI technology.",
+      "Turn product pages into high-performing growth assets optimized for both AI discovery and human buying behavior.",
     images: ["/og-image.png"],
     creator: "@Beseam",
   },
@@ -89,25 +125,28 @@ export default function RootLayout({
           defaultTheme="light"
           disableTransitionOnChange
         >
-          <NavigationProvider>
-            <div className="flex h-screen bg-background overflow-hidden">
-              <div className="flex flex-1 flex-col min-w-0 min-h-0 relative">
-                {/* Header - Fixed at top of this container */}
-                <div className="absolute top-0 left-0 right-0 z-50">
-                  <Navbar />
-                </div>
-
-                {/* Page content */}
-                <main className="flex-1 overflow-auto min-h-0 scrollbar-thin pt-14">
-                  <div className="w-full min-h-0 h-full relative">
-                    {children}
-                    <CTA />
-                    <Footer />
+          <CookieConsentProvider>
+            <AnalyticsScripts />
+            <NavigationProvider>
+              <div className="flex h-screen bg-background overflow-hidden">
+                <div className="flex flex-1 flex-col min-w-0 min-h-0 relative">
+                  {/* Header - Fixed at top of this container */}
+                  <div className="absolute top-0 left-0 right-0 z-50">
+                    <Navbar />
                   </div>
-                </main>
+
+                  {/* Page content */}
+                  <main className="flex-1 overflow-auto min-h-0 scrollbar-thin pt-14">
+                    <div className="w-full min-h-0 h-full relative">
+                      {children}
+                      <CTA />
+                      <Footer />
+                    </div>
+                  </main>
+                </div>
               </div>
-            </div>
-          </NavigationProvider>
+            </NavigationProvider>
+          </CookieConsentProvider>
         </ThemeProvider>
       </body>
     </html>

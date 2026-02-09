@@ -300,7 +300,7 @@ export default function Navbar() {
               href="https://app.beseam.com/login"
               className="hidden items-center justify-center rounded-lg bg-primary px-8 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex min-w-[140px] whitespace-nowrap shadow-sm"
             >
-              Get Started
+              Join Beta
             </Link>
 
             {/* Mobile Menu Button */}

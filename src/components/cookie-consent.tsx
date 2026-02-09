@@ -1,30 +1,33 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
+import { useCookieConsent } from "@/contexts/CookieConsentContext";
+
 const CookieConsent = () => {
+  const { status, accept, decline } = useCookieConsent();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if user has already consented
-    const hasConsented = localStorage.getItem("cookie-consent");
-    if (!hasConsented) {
+    if (status === "undecided") {
       // Show popup after a short delay
       const timer = setTimeout(() => setIsVisible(true), 1500);
       return () => clearTimeout(timer);
+    } else {
+      setIsVisible(false);
     }
-  }, []);
+  }, [status]);
 
   const handleAccept = () => {
-    localStorage.setItem("cookie-consent", "accepted");
+    accept();
     setIsVisible(false);
   };
 
   const handleDecline = () => {
-    localStorage.setItem("cookie-consent", "declined");
+    decline();
     setIsVisible(false);
   };
 
@@ -43,7 +46,8 @@ const CookieConsent = () => {
 
         <div className="pr-6">
           <p className="text-sm text-foreground">
-            Like many websites, we use cookies to enhance your experience and analyze site usage.
+            Like many websites, we use cookies to enhance your experience and
+            analyze site usage.
           </p>
           <Link
             href="/privacy-policy"
