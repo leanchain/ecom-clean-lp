@@ -5,7 +5,6 @@ import Link from "next/link";
 
 import {
   ArrowLeft,
-  ArrowRight,
   BarChart3,
   BookOpen,
   ChevronRight,
@@ -24,7 +23,6 @@ import {
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import NavbarLogo from "@/components/ui/navbar-logo";
 import {
   NavigationMenu,
@@ -35,6 +33,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 // Product menu items - mirrors the 3-layer architecture
 const productItems = [
@@ -179,7 +178,7 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
 
           <div className="flex-1 pt-0.5">
             <div className="flex items-center gap-1.5">
-              <span className="text-[13px] font-bold text-foreground">
+              <span className="text-sm font-bold text-foreground">
                 {item.title}
               </span>
 
@@ -193,7 +192,7 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
             </div>
 
             {item.description && (
-              <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug line-clamp-2">
+              <p className="text-xs text-muted-foreground mt-0.5 leading-snug line-clamp-2">
                 {item.description}
               </p>
             )}
@@ -214,7 +213,7 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
               <item.icon className="h-4 w-4 text-muted-foreground group-hover:text-white" />
             </div>
 
-            <span className="text-[11px] font-bold text-foreground/90 group-hover:text-foreground">
+            <span className="text-sm font-bold text-foreground/90 group-hover:text-foreground">
               {item.title}
             </span>
           </NavigationMenuLink>
@@ -237,7 +236,7 @@ export default function Navbar() {
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
   return (
-    <header className="relative z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="relative z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <nav className="container mx-auto px-4">
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}
@@ -253,7 +252,7 @@ export default function Navbar() {
               <NavigationMenuList className="gap-0">
                 {/* Product dropdown */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-medium bg-transparent">
+                  <NavigationMenuTrigger className="text-base font-medium bg-transparent">
                     Product
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="p-2">
@@ -265,7 +264,10 @@ export default function Navbar() {
                 <NavigationMenuItem>
                   <Link
                     href="https://app.beseam.com/pricing"
-                    className={cn(navigationMenuTriggerStyle(), "bg-transparent text-foreground no-underline")}
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "bg-transparent text-foreground no-underline text-base",
+                    )}
                   >
                     Pricing
                   </Link>
@@ -273,7 +275,7 @@ export default function Navbar() {
 
                 {/* Resources dropdown */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-medium bg-transparent">
+                  <NavigationMenuTrigger className="text-base font-medium bg-transparent">
                     Resources
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="p-2">
@@ -333,7 +335,7 @@ export default function Navbar() {
       {/* Mobile Menu Content */}
 
       {mobileMenuOpen && (
-        <div className="fixed right-0 top-0 z-50 h-[100dvh] w-[300px] sm:w-[400px] max-w-[90vw] lg:hidden animate-in slide-in-from-right duration-300 border-l border-border shadow-2xl bg-background">
+        <div className="fixed right-0 top-0 z-50 h-dvh w-[300px] sm:w-[400px] max-w-[90vw] lg:hidden animate-in slide-in-from-right duration-300 border-l border-border shadow-2xl bg-background">
           <div className="flex flex-col h-full">
             {/* Sidebar Header */}
 
