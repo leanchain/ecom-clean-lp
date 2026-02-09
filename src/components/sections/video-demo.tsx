@@ -34,13 +34,6 @@ const VideoDemo = () => {
                 playsInline
                 controls
               />
-
-              {/* Decorative elements */}
-              <div className="absolute top-4 left-4 flex items-center gap-2 pointer-events-none">
-                <div className="h-3 w-3 rounded-full bg-red-400" />
-                <div className="h-3 w-3 rounded-full bg-yellow-400" />
-                <div className="h-3 w-3 rounded-full bg-green-400" />
-              </div>
             </div>
           </div>
 
