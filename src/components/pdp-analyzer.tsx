@@ -221,7 +221,7 @@ export function PdpAnalyzer() {
         
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
-            Fieson PDP Analyzer
+            Beseam PDP Analyzer
           </p>
           <h1 className="mt-3 text-balance text-4xl font-bold md:text-5xl">
             AI Search Visibility Score
@@ -903,11 +903,11 @@ export function PdpAnalyzer() {
               </div>
 
               <p className="mt-3 text-xs text-muted-foreground">
-                With Fieson's AI-generated content
+                With Beseam's AI-generated content
               </p>
 
               <button className="mt-4 w-full rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:bg-primary/90">
-                Get to {potentialScore}/100 with Fieson →
+                Get to {potentialScore}/100 with Beseam →
               </button>
             </div>
 
