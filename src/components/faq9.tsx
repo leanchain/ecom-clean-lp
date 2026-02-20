@@ -4,335 +4,61 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { ComparisonTable } from "@/components/comparison-table";
 
 const faqs = [
   {
-    question:
-      "What is AI Search Optimization and why should I care?",
-    answer: (
-      <div className="space-y-3 text-sm md:text-base">
-        <p>
-          AI search optimization makes your products discoverable in ChatGPT,
-          Perplexity, Claude, Google AI Overviews, and other AI engines where
-          shoppers increasingly search for product recommendations.
-        </p>
-        <p>
-          Unlike traditional SEO, AI engines don't rely on keywords or backlinks.
-          They evaluate structured content: images, videos, deep product context,
-          FAQs, comparisons, and schema markup.
-        </p>
-        <p>
-          If your product page lacks the context AI needs to confidently recommend
-          it, you simply won't appear in AI search results. Beseam ensures you do.
-        </p>
-      </div>
-    ),
-  },
-  {
-    question: "What’s the difference between SEO, GEO, AEO, and AIO?",
-    answer: (
-      <div className="space-y-3 text-sm md:text-base">
-        <ul className="space-y-1">
-          <li>
-            <span className="font-semibold">SEO →</span> Traditional search
-            engines (keywords, backlinks, metadata).
-          </li>
-          <li>
-            <span className="font-semibold">
-              GEO (Generative Engine Optimization) →
-            </span>{" "}
-            Optimizing for generative search engines like ChatGPT and
-            Perplexity.
-          </li>
-          <li>
-            <span className="font-semibold">
-              AEO (Answer Engine Optimization) →
-            </span>{" "}
-            Making your content structured enough to be chosen as the answer in
-            AI-powered results.
-          </li>
-          <li>
-            <span className="font-semibold">AIO (AI Optimization) →</span>{" "}
-            Umbrella term for optimizing content for AI and with AI.
-          </li>
-        </ul>
-        <p>
-          Bottom line: AI engines don’t rank keywords—they rank clarity,
-          completeness, and helpfulness. Beseam builds PDP content that scores
-          extremely high on those signals.
-        </p>
-      </div>
-    ),
-  },
-  {
-    question: "Why do AI engines prefer deep narrative PDPs?",
-    answer: (
-      <div className="space-y-3 text-sm md:text-base">
-        <p>
-          Because large language models need rich context to make confident
-          product recommendations.
-        </p>
-        <p>They have to understand things like:</p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>What the product is.</li>
-          <li>Who it’s for.</li>
-          <li>How it’s used.</li>
-          <li>What problems it solves.</li>
-          <li>How it compares to alternatives.</li>
-          <li>Why a shopper should choose it.</li>
-        </ul>
-        <p>Typical PDPs only provide 10–20% of this.</p>
-        <p>
-          A deep narrative PDP gives AI engines the full semantic picture—
-          benefits, objections, FAQs, comparisons, ingredients/materials, use
-          cases, fitting notes, and instructions. The richer the context, the
-          more confident the engine is to select your product as the answer.
-        </p>
-      </div>
-    ),
-  },
-  {
-    question: "How does Beseam improve my AI visibility score?",
-    answer: (
-      <div className="space-y-3 text-sm md:text-base">
-        <p>
-          Beseam automatically generates and structures everything AI needs:
-        </p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>
-            On-brand packshots, lifestyle images, model shots, and videos
-            tailored to each product.
-          </li>
-          <li>
-            LLM-optimized product narratives with benefits, objections,
-            comparisons, FAQs, “best for”, and use cases.
-          </li>
-          <li>Complete schema.org structured data for every PDP.</li>
-          <li>Category-level context and smart cross-linking.</li>
-          <li>PDP layouts built specifically for AI-first engines.</li>
-        </ul>
-        <p>
-          This combination gives AI engines maximum confidence to showcase your
-          product when customers ask buying questions.
-        </p>
-      </div>
-    ),
-  },
-  {
-    question: "How does the AI Search Score work?",
-    answer: (
-      <div className="space-y-3 text-sm md:text-base">
-        <p>
-          The AI Search Score measures how likely your product is to be
-          recommended by AI engines.
-        </p>
-        <p>It evaluates every PDP across eight key dimensions:</p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>
-            <span className="font-semibold">SEO</span>{" "}
-            (meta tags, headings, keywords, structured data).
-          </li>
-          <li>
-            <span className="font-semibold">Content</span>{" "}
-            (narrative depth, FAQs, comparisons, use cases).
-          </li>
-          <li>
-            <span className="font-semibold">Trust</span>{" "}
-            (reviews, ratings, guarantees, certifications).
-          </li>
-          <li>
-            <span className="font-semibold">UX</span>{" "}
-            (layout, navigation, readability, visual hierarchy).
-          </li>
-          <li>
-            <span className="font-semibold">Conversion</span>{" "}
-            (CTAs, urgency, social proof, pricing clarity).
-          </li>
-          <li>
-            <span className="font-semibold">Mobile</span>{" "}
-            (responsive design, touch targets, load performance).
-          </li>
-          <li>
-            <span className="font-semibold">Performance</span>{" "}
-            (page speed, image optimization, core web vitals).
-          </li>
-          <li>
-            <span className="font-semibold">Accessibility</span>{" "}
-            (alt text, ARIA labels, color contrast, keyboard navigation).
-          </li>
-        </ul>
-        <p>
-          The higher your score across these dimensions, the more often AI
-          engines will surface your product as the recommended answer inside
-          ChatGPT, Gemini, Perplexity, AI Overviews, and other AI search
-          platforms.
-        </p>
-      </div>
-    ),
-  },
-  {
-    question: "Why do images matter so much for AI visibility?",
-    answer: (
-      <div className="space-y-3 text-sm md:text-base">
-        <p>
-          AI engines now evaluate multi-modal signals, not just text. Images
-          dramatically improve a product’s visibility because they tell the
-          model things like:
-        </p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>The category (“this is a dress”).</li>
-          <li>The style (“flowy, summer, A-line”).</li>
-          <li>The use case (“casual daywear”, “gym performance”, “hiking”).</li>
-          <li>The quality (materials, details, finishes).</li>
-          <li>The fit (on-model shots, body representation).</li>
-        </ul>
-        <p>
-          Most PDPs have too few images, inconsistent style, or lack context
-          (“in use” shots).
-        </p>
-        <p>AI engines tend to boost products with:</p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>Clean packshots.</li>
-          <li>Model shots.</li>
-          <li>Lifestyle shots.</li>
-          <li>Product-in-use moments.</li>
-          <li>Detail/macro shots.</li>
-        </ul>
-        <p>
-          A single studio photoshoot can’t practically scale this across
-          thousands of SKUs. Beseam generates consistent, on-brand, context-rich
-          images and video that match what AI search engines look for, so your
-          catalog feels complete to both shoppers and models.
-        </p>
-      </div>
-    ),
-  },
-  {
-    question: "What does a good AI-ready PDP look like?",
-    answer: (
-      <div className="space-y-3 text-sm md:text-base">
-        <p>
-          An AI-ready PDP is complete, structured, and multi-modal. It combines
-          strong visuals, deep product text, and an AI-friendly format.
-        </p>
-        <div>
-          <p className="font-semibold">Images &amp; Video</p>
-          <ul className="list-disc space-y-1 pl-5">
-            <li>Packshot.</li>
-            <li>On-model shot.</li>
-            <li>Lifestyle context.</li>
-            <li>Product-in-use.</li>
-            <li>Detail/macro shots.</li>
-            <li>Short video clip or 360° view.</li>
-          </ul>
-        </div>
-        <div>
-          <p className="font-semibold">Deep Product Text</p>
-          <ul className="list-disc space-y-1 pl-5">
-            <li>Clear benefits and problems solved.</li>
-            <li>Use cases and real scenarios.</li>
-            <li>Comparisons and alternatives.</li>
-            <li>“Best for” segmentation.</li>
-            <li>FAQs and objections.</li>
-            <li>Materials/ingredients.</li>
-            <li>Instructions or care guidelines.</li>
-          </ul>
-        </div>
-        <div>
-          <p className="font-semibold">AI-Friendly Structure</p>
-          <ul className="list-disc space-y-1 pl-5">
-            <li>Schema.org and clean metadata.</li>
-            <li>Consistent brand tone.</li>
-            <li>Category-level context.</li>
-            <li>Clear alignment between image, copy, and video.</li>
-          </ul>
-        </div>
-        <p>
-          This is the kind of PDP format AI engines prefer because it gives them
-          a complete, accurate understanding of your product.
-        </p>
-      </div>
-    ),
-  },
-  {
-    question:
-      "Do AI engines really reward complete PDPs that include FAQs, comparisons, and “best for” sections?",
-    answer: (
-      <div className="space-y-3 text-sm md:text-base">
-        <p>
-          Yes. Modern AI engines surface products that feel helpful and
-          complete, not minimal.
-        </p>
-        <p>
-          Extra structured sections—FAQs, use cases, comparisons, “best for”,
-          objections, instructions, model shots, in-use videos, and more—give
-          LLMs the context they need to confidently recommend one product over
-          another.
-        </p>
-        <p>
-          Beseam builds all of these sections automatically, integrated with the
-          merchant’s brandbook and product attributes.
-        </p>
-      </div>
-    ),
-  },
-  {
-    question: "How does Beseam PDP AI compare to traditional product pages?",
-    answer: (
-      <div className="space-y-4 text-sm md:text-base">
-        <p>
-          Beseam PDP AI analyses your existing product content and online search
-          behavior, and creates deep context with narrative product page text,
-          images, and video content engineered for both AI search and human
-          conversion. This deep context allows AIs to address the long tail of
-          personalised needs inside AI search and results in your product
-          getting recommended significantly more often, driving impressions, clicks, and
-          sales.
-        </p>
-        <ul className="list-disc space-y-1 pl-5">
-          <li>AI search visibility and schema-first GEO optimization.</li>
-          <li>
-            Deep, structured product context powering images, video, and copy.
-          </li>
-          <li>
-            Catalog-wide control so all your SKUs stay consistent and up to
-            date.
-          </li>
-        </ul>
-        <ComparisonTable />
-      </div>
-    ),
-  },
-  {
-    question: "How do credits work, and how many generations do I get?",
+    question: "What is Beseam?",
     answer:
-      "Credits are only used for AI generation features in Beseam (e.g., creating images, copy, or variations). Different tools may consume different amounts per generation, and a single request can yield one or multiple results. On monthly plans, credits reset each month. Annual plans receive credits upfront with a yearly reset. Unused credits don’t roll over, though you can purchase optional add‑on credits that are used after your plan’s included credits and expire after up to three years. Downloading your own outputs does not consume credits.",
+      "Beseam is a revenue-guardrailed PDP ops platform. Whether changes come from your SEO agency, dev team, or Beseam's own AI recommendations — every update is versioned, deployed safely, monitored for revenue impact, and reversible. Think of it as the infrastructure layer that makes PDP changes safe, no matter who makes them.",
   },
   {
-    question: "Is my subscription automatically renewed?",
+    question: "How do agencies use Beseam?",
     answer:
-      "Yes. Your subscription renews automatically at the end of each billing cycle to ensure uninterrupted access. You can cancel anytime in your account settings - your plan will remain active until the end of the current period.",
+      "Agencies (SEO, GEO, dev, creative) use Beseam as the deployment pipeline for their PDP work. Instead of pushing changes directly to your store, they deploy through Beseam — so every change is versioned, KPIs are monitored post-deploy, and regressions are caught automatically. It helps agencies prove ROI and gives brands confidence to let agencies move faster.",
   },
   {
-    question: "How many images or videos can I generate?",
+    question: "Does Beseam replace our agency?",
     answer:
-      "It depends on your plan and the models you use. Each plan includes an approximate number of generations per month - check the pricing table for model-specific details.",
+      "No — Beseam complements your agencies. Your SEO agency brings the strategy. Your dev team builds the theme. Beseam provides the guardrails. We also offer AI-powered recommendations (content, schema, FAQs) that agencies can use or build on. The platform is designed so that everyone who touches your PDPs — agencies, internal teams, and Beseam's AI — ships through the same safe pipeline.",
   },
   {
-    question: "How can I purchase extra credits?",
+    question: "What AI recommendations does Beseam provide?",
     answer:
-      "If you need more credits, you can upgrade your plan for a higher monthly limit or buy credit packs to generate more media without changing your current subscription. Purchased credits are added instantly and can be used across all supported models.",
+      "Beseam audits your PDPs and generates upgrade playbooks: AI-optimized FAQs, product narratives, schema markup, meta descriptions, and more. These are recommendations — you can apply them directly, hand them to your agency to refine, or use them as a starting point. Every recommendation deployed goes through the same guardrails as any other change.",
   },
   {
-    question: "Can I change my subscription after purchase?",
+    question: "How is this different from an A/B testing tool?",
     answer:
-      "Yes. You can upgrade instantly at any time - the change takes effect immediately, and any credit difference is applied to your account. If you downgrade, the change will apply at the end of your current plan duration, and your existing plan will remain active until then.",
+      "A/B testing tools help you compare two variants. Beseam is a full operational loop: it audits your PDPs, generates recommendations, deploys changes safely (from any source) with versioning, monitors KPIs after deployment, explains regressions, and guides rollback. It's the infrastructure layer that makes PDP changes safe — not just measurable.",
+  },
+  {
+    question: "What KPIs does Beseam monitor?",
+    answer:
+      "After every deployment — whether from your agency, your team, or Beseam's AI — we track revenue per session, checkout-start rate, and conversion rate. When any metric regresses beyond a threshold, the system triggers an incident linking the regression to the specific change and its source.",
+  },
+  {
+    question: "What happens when a regression is detected?",
+    answer:
+      "Beseam's Diagnosis Agent links the regression to a specific change diff (e.g., 'agency theme publish removed FAQ module'). It identifies who made the change, recommends an action (keep, rollback, holdout test, or iterate), and lets you rollback with one click. Your agency gets the same visibility so they can fix forward.",
+  },
+  {
+    question: "How does versioning work?",
+    answer:
+      "Every PDP change gets a version number, full diff, and source attribution (agency, internal, or AI-generated). Changes are isolated per PDP and won't affect other pages. You can compare any two versions side-by-side and roll back to any previous version instantly. The system maintains a complete change history with impact data.",
+  },
+  {
+    question: "What platforms do you integrate with?",
+    answer:
+      "Beseam integrates with Shopify natively, with WooCommerce and other platforms coming soon. Changes are applied through theme blocks, metafields, and structured content — ensuring compatibility with your existing theme, agency workflows, and tech stack.",
+  },
+  {
+    question: "What's included now vs what's coming later?",
+    answer:
+      "Phase 1 (available now): PDP audit + AI recommendations, safe deployment with versioning, KPI monitoring + alerts, rollback workflows, and source attribution for all changes. Phase 2 (coming soon): always-on detection for changes from any source (agencies, apps, theme updates), advanced blame ranking, automated rollback, and cross-platform support.",
   },
 ];
 
 const Faq9 = () => {
-  // Split FAQs into two columns
   const midpoint = Math.ceil(faqs.length / 2);
   const leftColumn = faqs.slice(0, midpoint);
   const rightColumn = faqs.slice(midpoint);
@@ -349,15 +75,13 @@ const Faq9 = () => {
             Everything you need to know
           </h2>
           <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
-            {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-              ? "Learn how Beseam helps e-commerce brands optimize their PDPs for AI search discovery."
-              : "E-commerce brands from lean startups to enterprise run their PDP optimization on Beseam."}
+            Common questions about how Beseam upgrades and protects your product
+            pages.
           </p>
         </div>
 
         {/* Two Column FAQ Grid */}
         <div className="grid gap-0 md:grid-cols-2 md:gap-12">
-          {/* Left Column */}
           <Accordion type="multiple" className="divide-y divide-border">
             {leftColumn.map((faq, index) => (
               <AccordionItem
@@ -375,8 +99,10 @@ const Faq9 = () => {
             ))}
           </Accordion>
 
-          {/* Right Column */}
-          <Accordion type="multiple" className="divide-y divide-border border-t md:border-t-0">
+          <Accordion
+            type="multiple"
+            className="divide-y divide-border border-t md:border-t-0"
+          >
             {rightColumn.map((faq, index) => (
               <AccordionItem
                 key={index}

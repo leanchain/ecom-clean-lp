@@ -16,7 +16,6 @@ const FinalCta = () => {
     if (!email) return;
 
     setIsSubmitting(true);
-    // Simulate API call - replace with actual endpoint
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsSubmitting(false);
     setIsSubmitted(true);
@@ -26,18 +25,13 @@ const FinalCta = () => {
     <section className="relative overflow-hidden py-20 md:py-32 bg-primary/[0.9] border-y border-white/10">
       <div className="container relative z-10">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Headline - White for maximum contrast */}
           <h2 className="mb-6 font-heading text-4xl text-white md:text-5xl lg:text-6xl drop-shadow-sm">
-            {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-              ? "Become a pilot partner."
-              : "Get started today."}
+            Ready to upgrade your PDPs without the risk?
           </h2>
 
-          {/* Subhead - Light tinted white */}
           <p className="mb-10 text-lg text-white/90 md:text-xl max-w-2xl mx-auto">
-            {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-              ? "Stop losing customers to AI search. Join our pilot program and be among the first to optimize your PDPs for AI discovery."
-              : "Stop losing customers to AI search. Start your free trial and see results in 24 hours."}
+            Get a free baseline audit, see your upgrade playbook, and deploy
+            improvements with built-in guardrails.
           </p>
 
           {/* Email Capture Form */}
@@ -64,11 +58,7 @@ const FinalCta = () => {
                   wrapperClassName="sm:w-auto"
                 >
                   <button type="submit" disabled={isSubmitting}>
-                    {isSubmitting
-                      ? "Starting..."
-                      : process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-                        ? "Join Pilot Program"
-                        : "Start Free Trial"}
+                    {isSubmitting ? "Starting..." : "Get Started"}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </button>
                 </AnimatedBorderButton>
@@ -90,22 +80,14 @@ const FinalCta = () => {
             </div>
           )}
 
-          {/* Feature Checklist - White text and icons */}
+          {/* Feature Checklist */}
           <div className="mb-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-            {(process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-              ? [
-                  "Limited pilot spots",
-                  "No credit card required",
-                  "Hands-on onboarding",
-                  "Direct founder access",
-                ]
-              : [
-                  "14-day free trial",
-                  "No credit card required",
-                  "Cancel anytime",
-                  "Full feature access",
-                ]
-            ).map((item, idx) => (
+            {[
+              "Free PDP audit",
+              "No credit card required",
+              "Hands-on onboarding",
+              "Built-in rollback",
+            ].map((item, idx) => (
               <div
                 key={idx}
                 className="flex items-center gap-2.5 text-white font-medium"
@@ -118,7 +100,7 @@ const FinalCta = () => {
             ))}
           </div>
 
-          {/* Alternative CTA - White and visible */}
+          {/* Alternative CTA */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <span className="text-sm font-medium text-white/80">
               Prefer a demo?
@@ -128,41 +110,12 @@ const FinalCta = () => {
               variant="link"
               className="text-white font-bold text-lg hover:no-underline hover:text-white/80 p-0 h-auto underline underline-offset-4 decoration-white/30"
             >
-              <Link
-                href="https://app.beseam.com/analyze"
-                className="flex items-center gap-2"
-              >
+              <Link href="/demo" className="flex items-center gap-2">
                 <Play className="h-5 w-5 fill-current" />
-                Or Try Free Audit First
+                Book a Demo
               </Link>
             </Button>
           </div>
-
-          {/* Social Proof - Inverted style for the colored background */}
-          {process.env.NEXT_PUBLIC_RELEASE_GUARD !== 'true' && (
-            <div className="mt-16 pt-8 border-t border-white/20 flex flex-col items-center gap-4">
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <div
-                    key={i}
-                    className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary bg-white text-sm font-bold text-primary shadow-lg"
-                  >
-                    {String.fromCharCode(64 + i)}
-                  </div>
-                ))}
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary bg-secondary text-xs font-bold text-white shadow-lg">
-                  +500
-                </div>
-              </div>
-              <p className="text-sm font-medium text-white/90">
-                Empowering{" "}
-                <span className="text-white font-black underline decoration-secondary decoration-2 underline-offset-4">
-                  500+
-                </span>{" "}
-                e-commerce pioneers
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </section>

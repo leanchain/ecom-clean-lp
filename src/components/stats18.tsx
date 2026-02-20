@@ -1,180 +1,194 @@
 "use client";
 
 import React from "react";
-import { Package } from "lucide-react";
+import { GitBranch, Package, MoveRight, ChevronRight } from "lucide-react";
 import CategoryBadge from "@/components/category-badge";
-import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 import Image from "next/image";
-
 import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
-import { TypingAnimation } from "@/components/typing-animation";
+  ClipboardCheck,
+  Wand2,
+  Radar,
+  MessageSquareWarning,
+  Scale,
+  RotateCcw,
+  Brain,
+} from "lucide-react";
 
-interface StatItem {
-  title: string;
-  description: string;
-}
-
-const statsData: StatItem[] = [
+const loopSteps = [
   {
-    title: "91%",
-    description: "AI Search Score",
+    icon: ClipboardCheck,
+    label: "Audit",
+    description:
+      "Baseline + priorities across AI visibility, conversion readiness, and performance.",
+    color: "text-secondary",
+    bg: "bg-muted/40",
   },
   {
-    title: "3.5x",
-    description: "Increase in Visibility",
+    icon: Wand2,
+    label: "Enhance",
+    description:
+      "Use Beseam's AI recommendations, your agency's strategy, or your own ideas — all welcome.",
+    color: "text-violet-500",
+    bg: "bg-muted/40",
   },
   {
-    title: "137%",
-    description: "Increase in conversion",
+    icon: GitBranch,
+    label: "Deploy",
+    description:
+      "Ship changes from any source safely — versioned, diffed, and reversible.",
+    color: "text-primary",
+    bg: "bg-muted/40",
+  },
+  {
+    icon: Radar,
+    label: "Guardrails",
+    description:
+      "Monitor KPIs after every deploy (rev/session, checkout-start, CVR). Alert on regressions — no matter who made the change.",
+    color: "text-amber-500",
+    bg: "bg-muted/40",
+  },
+  {
+    icon: MessageSquareWarning,
+    label: "Diagnose",
+    description:
+      "Rank the most likely cause using the change log + evidence — no more guesswork.",
+    color: "text-primary",
+    bg: "bg-muted/40",
+  },
+  {
+    icon: RotateCcw,
+    label: "Act",
+    description:
+      "One-click rollback (where possible) or a guided fix plan to recover quickly.",
+    color: "text-emerald-500",
+    bg: "bg-muted/40",
+  },
+  {
+    icon: Brain,
+    label: "Learn",
+    description:
+      "Outcomes train smarter playbooks: what to ship next, and what to avoid.",
+    color: "text-cyan-500",
+    bg: "bg-muted/40",
   },
 ];
 
 const platforms = [
-  {
-    name: "ChatGPT",
-    logo: "/images/ai-platforms/chatgpt.svg",
-  },
-  {
-    name: "Claude",
-    logo: "/images/ai-platforms/claude.svg",
-  },
-  {
-    name: "Perplexity",
-    logo: "/images/ai-platforms/perplexity.svg",
-  },
-  {
-    name: "Gemini",
-    logo: "/images/ai-platforms/gemini.svg",
-  },
-  {
-    name: "AI Overviews",
-    logo: "/images/ai-platforms/google.svg",
-  },
-  {
-    name: "AI Mode",
-    logo: "/images/ai-platforms/ai-mode.svg",
-  },
-  {
-    name: "Meta AI",
-    logo: "/images/ai-platforms/meta.svg",
-  },
+  { name: "Search", logo: "/images/ai-platforms/google.svg" },
+  { name: "ChatGPT", logo: "/images/ai-platforms/chatgpt.svg" },
+  { name: "Gemini", logo: "/images/ai-platforms/gemini.svg" },
+  { name: "AI Mode", logo: "/images/ai-platforms/ai-mode.svg" },
+  { name: "Claude", logo: "/images/ai-platforms/claude.svg" },
+  { name: "Perplexity", logo: "/images/ai-platforms/perplexity.svg" },
+  { name: "Meta AI", logo: "/images/ai-platforms/meta.svg" },
 ];
 
 const Stats18 = () => {
   return (
-    <section id="beseam-pdp-ai" className="overflow-hidden pt-20 pb-32">
+    <section id="the-loop" className="overflow-hidden pt-20 pb-32">
       <div className="container px-4">
-        {process.env.NEXT_PUBLIC_RELEASE_GUARD !== "true" && (
-          <div className="mb-12 text-center">
-            <div className="mx-auto mb-4 flex justify-center">
-              <CategoryBadge
-                label="Beseam PDP AI"
-                icon={<Package className="h-4 w-4" />}
-              />
-            </div>
-            <h2 className="relative py-2 text-center font-sans text-4xl font-semibold tracking-tighter lg:text-5xl">
-              Get your products recommended by <br />{" "}
-              <TypingAnimation
-                words={["ChatGPT", "Perplexity", "Claude", "Google AI Overviews"]}
-                typingSpeed={100}
-                deletingSpeed={50}
-                delayBetweenWords={2000}
-              />
-            </h2>
-            <p className="text-muted-foreground mx-auto max-w-2xl px-5 text-center text-sm lg:text-base">
-              {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-                ? "We're building AI-native PDP optimization that turns your product page content into deep contextual text, AI-optimised images, and videos — designed for maximum visibility across all major AI search platforms."
-                : "Beseam PDP AI optimizes your product page content from deep contextual text to AI optimised images and videos for maximum visibility across all major AI search platforms."}
-            </p>
+        <div className="mb-12 text-center">
+          <div className="mx-auto mb-4 flex justify-center">
+            <CategoryBadge
+              label="The Beseam Loop"
+              icon={<Package className="h-4 w-4" />}
+            />
           </div>
-        )}
-        
-        <div className="mx-auto flex max-w-7xl flex-col gap-12 lg:flex-row lg:gap-16">
-          {/* Video Section - 1/3 width */}
-          <div className="flex flex-col lg:w-1/3">
-            <div className="overflow-hidden rounded-3xl">
-              <video className="h-auto w-full" autoPlay loop muted playsInline>
-                <source src="/videos/ai-discovery-demo.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-
-          {/* Chart Section - 2/3 width */}
-          <div className="flex flex-col items-center justify-center lg:w-2/3">
-            {/* Chart with Legend on Right */}
-            <div className="relative mb-1 flex h-[500px] w-full items-center justify-center">
-              <div className="h-full w-full">
-                <ChartRadarDots />
-              </div>
-              {/* Legend positioned on the right */}
-              <div className="absolute right-0 top-1/2 flex -translate-y-1/2 flex-col gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-full bg-[#64748b] dark:bg-[#d5d7de]" />
-                  <span className="text-muted-foreground text-sm">Before</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-full bg-[#ff6041] dark:bg-[#ff6041]" />
-                  <span
-                    className="text-sm font-semibold"
-                    style={{ color: "#ff6041" }}
-                  >
-                    Beseam PDP AI
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Score Cards - Smaller */}
-            <div className="grid w-full max-w-2xl grid-cols-3 gap-6">
-              {statsData.map((stat, index) => (
-                <div
-                  key={index}
-                  className="bg-popover flex min-h-20 flex-row items-center gap-3 rounded-3xl px-3 py-2.5"
-                >
-                  <div className="flex h-full items-center">
-                    <div className="flex flex-col items-start gap-1">
-                      {Array.from({ length: 6 }).map((_, i) => (
-                        <span
-                          key={i}
-                          className="bg-primary block h-0.5 w-4 rounded"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex flex-1 flex-col items-start justify-center gap-0.5">
-                    <h2
-                      className="text-2xl font-bold tracking-tighter md:text-3xl"
-                      style={{ color: "#ff6041" }}
-                    >
-                      {stat.title}
-                    </h2>
-                    <p className="text-muted-foreground text-[10px] font-medium leading-tight md:text-xs">
-                      {stat.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* AI Platforms logos at bottom */}
-        <div className="mx-auto mt-8 max-w-2xl text-center">
-          <p className="text-muted-foreground text-sm md:text-base">
-            Beseam audits your PDPs across 8 critical dimensions: SEO, Content, Trust, UX,
-            Conversion, Mobile, Performance, and Accessibility. Then it generates the images,
-            videos, and structured content needed to maximize both AI visibility and human conversion.
+          <h2 className="relative py-2 text-center font-sans text-4xl font-semibold tracking-tighter lg:text-5xl">
+            One loop for every PDP change
+          </h2>
+          <p className="text-muted-foreground mx-auto max-w-2xl px-5 text-center text-sm lg:text-base">
+            Your SEO agency pushes new copy. Your dev team ships a theme update.
+            Beseam generates AI-powered upgrades. No matter where the change
+            comes from, the same loop audits, deploys safely, monitors KPIs, and
+            rolls back if revenue dips.
           </p>
         </div>
-        <div className="mx-auto mt-16 max-w-5xl">
+
+        {/* Loop Steps */}
+        <div className="mx-auto max-w-5xl">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {loopSteps.slice(0, 4).map((step, i) => (
+              <div
+                key={i}
+                className="relative flex flex-col items-center rounded-2xl border bg-card p-6 text-center"
+              >
+                <div
+                  className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl ${step.bg}`}
+                >
+                  <step.icon className={`h-6 w-6 ${step.color}`} />
+                </div>
+                <h3 className="mb-1 text-lg font-bold">{step.label}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {step.description}
+                </p>
+                {i < 3 && (
+                  <div className="absolute -right-5 top-1/2 hidden -translate-y-1/2 text-muted-foreground/30 lg:block">
+                    <ChevronRight className="h-6 w-6 stroke-[1.5]" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-3">
+            {loopSteps.slice(4).map((step, i) => (
+              <div
+                key={i}
+                className="relative flex flex-col items-center rounded-2xl border bg-card p-6 text-center"
+              >
+                <div
+                  className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl ${step.bg}`}
+                >
+                  <step.icon className={`h-6 w-6 ${step.color}`} />
+                </div>
+                <h3 className="mb-1 text-lg font-bold">{step.label}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {step.description}
+                </p>
+                {i < 2 && (
+                  <div className="absolute -right-6 top-1/2 hidden -translate-y-1/2 text-muted-foreground/30 lg:block">
+                    <ChevronRight className="h-6 w-6 stroke-[1.5]" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Feedback arrow */}
+          <div className="mx-auto mt-6 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              className="text-primary"
+            >
+              <path
+                d="M10 17V3M10 3l-4 4M10 3l4 4"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span className="font-medium text-primary">
+              Outcomes feed back into smarter recommendations — for your team,
+              your agencies, and Beseam&apos;s AI
+            </span>
+          </div>
+        </div>
+
+        {/* AI Platforms logos */}
+        <div className="mx-auto mt-16 max-w-2xl text-center">
+          <p className="text-muted-foreground text-sm md:text-base">
+            Beseam ensures your PDPs are optimized for discovery across all
+            major AI search platforms and stays on guard after every change.
+          </p>
+        </div>
+        <div className="mx-auto mt-12 max-w-5xl">
           <h3 className="text-muted-foreground mb-8 text-center text-sm font-semibold uppercase tracking-wider">
-            We Optimise Your Product Page Content For
+            Optimize Discovery for
           </h3>
           <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-7">
             {platforms.map((platform) => (
@@ -197,75 +211,6 @@ const Stats18 = () => {
         </div>
       </div>
     </section>
-  );
-};
-
-const chartData = [
-  { dimension: "SEO", before: 45, after: 92 },
-  { dimension: "Content", before: 30, after: 95 },
-  { dimension: "Trust", before: 55, after: 90 },
-  { dimension: "UX", before: 40, after: 88 },
-  { dimension: "Conversion", before: 35, after: 85 },
-  { dimension: "Mobile", before: 50, after: 90 },
-  { dimension: "Performance", before: 60, after: 88 },
-  { dimension: "Accessibility", before: 55, after: 94 },
-];
-
-const chartConfig = {
-  before: {
-    label: "Before",
-    theme: {
-      light: "#64748b",
-      dark: "#d5d7de",
-    },
-  },
-  after: {
-    label: "After Beseam",
-    theme: {
-      light: "#ff6041",
-      dark: "#ff6041",
-    },
-  },
-} satisfies ChartConfig;
-
-const ChartRadarDots = () => {
-  return (
-    <ChartContainer config={chartConfig} className="mx-auto h-full w-full">
-      <RadarChart
-        data={chartData}
-        margin={{ top: 20, right: 60, bottom: 20, left: 20 }}
-      >
-        <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-        <PolarAngleAxis
-          dataKey="dimension"
-          tick={{ fontSize: 13 }}
-          tickLine={false}
-        />
-        <PolarGrid gridType="polygon" stroke="#e5e7eb" strokeWidth={1} />
-        <Radar
-          dataKey="after"
-          fill="var(--color-after)"
-          fillOpacity={0.4}
-          stroke="var(--color-after)"
-          strokeWidth={2}
-          dot={{
-            r: 5,
-            fillOpacity: 1,
-          }}
-        />
-        <Radar
-          dataKey="before"
-          fill="var(--color-before)"
-          fillOpacity={0.5}
-          stroke="var(--color-before)"
-          strokeWidth={2}
-          dot={{
-            r: 4,
-            fillOpacity: 1,
-          }}
-        />
-      </RadarChart>
-    </ChartContainer>
   );
 };
 

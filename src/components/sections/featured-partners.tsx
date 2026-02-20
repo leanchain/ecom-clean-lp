@@ -23,20 +23,24 @@ const PARTNER_LOGOS = [
   { name: "Google Merchant", src: "/logos/integrations/google-merchant.svg" },
 ];
 
-export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean }) {
+export default function FeaturedPartners({
+  showCTA = true,
+}: {
+  showCTA?: boolean;
+}) {
   return (
     <section id="featured-partners" className="py-20 md:py-28 bg-background">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="font-heading text-foreground text-3xl md:text-5xl">
             {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-              ? "Partner With Us"
-              : "Featured Partners"}
+              ? "Partner With Beseam"
+              : "Built for the Commerce Ecosystem"}
           </h2>
           <p className="mt-3 text-muted-foreground text-sm md:text-base">
             {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-              ? "Join our partner program and grow together."
-              : "Earn 30% commission for 12 months."}
+              ? "Agencies, creators, and platform teams help brands ship PDP improvements safely at scale."
+              : "Earn 30% referral commission for 12 months by bringing teams who want guardrails for every PDP change."}
           </p>
         </div>
 
@@ -99,9 +103,9 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
                       <ul className="mt-3 space-y-2">
                         {[
                           "PDP audit + roadmap",
-                          "AI-ready assets",
-                          "Structured context",
-                          "Deploy + reporting",
+                          "Upgrade assets + copy",
+                          "Structured context + schema",
+                          "Deploy + KPI reporting",
                         ].map((item) => (
                           <li
                             key={item}
@@ -120,10 +124,10 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
                       </p>
                       <ul className="mt-3 space-y-2">
                         {[
-                          "AI-searchable PDPs",
-                          "Faster launches",
+                          "Discoverable PDPs",
+                          "Faster iteration",
                           "Higher conversion",
-                          "Lower return risk",
+                          "Regression protection",
                         ].map((item) => (
                           <li
                             key={item}
@@ -138,7 +142,7 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
                   </div>
 
                   <div className="mt-5 flex flex-wrap items-center gap-1.5">
-                    {["CRO", "SEO/GEO", "Store builds", "Optimization"].map(
+                    {["Dev agencies", "SEO/GEO", "CRO", "Theme builds"].map(
                       (tag) => (
                         <span
                           key={tag}
@@ -155,11 +159,11 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
 
             <div className="p-8">
               <h3 className="text-card-foreground text-lg font-semibold">
-                Agency & Implementation Partners
+                Dev & Implementation Agencies
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Deliver AI-ready PDPs as a service—faster, cheaper, and at
-                catalog scale.
+                Deliver PDP upgrades as a service—with versioning, monitoring,
+                and rollback built in.
               </p>
             </div>
           </div>
@@ -178,19 +182,21 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
                       <div className="flex items-center gap-2">
                         <Users className="size-4 text-secondary" />
                         <p className="text-sm font-bold text-card-foreground">
-                          Affiliate & Community
+                          SEO/GEO agency
                         </p>
                       </div>
                       <span className="rounded-full bg-secondary/10 px-3 py-1 text-[11px] font-bold text-secondary">
-                        {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true" ? "Partner" : "30% / 12mo"}
+                        {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+                          ? "Partner"
+                          : "30% / 12mo"}
                       </span>
                     </div>
                     <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
-                      Teach AI search, share your partner link, and earn
-                      recurring commission as your audience adopts Beseam.
+                      Ship schema, FAQs, and on-page improvements—with
+                      guardrails that catch regressions and guide rollback.
                     </p>
                     <div className="mt-5 flex flex-wrap gap-2">
-                      {["Newsletter", "Course", "Community"].map((tag) => (
+                      {["Schema", "FAQs", "On-page copy"].map((tag) => (
                         <span
                           key={tag}
                           className="rounded-full bg-muted/60 px-3 py-1 text-[11px] font-medium text-muted-foreground border border-border/40"
@@ -215,18 +221,18 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
                       <div className="flex items-center gap-2">
                         <Share2 className="size-3.5 text-primary" />
                         <p className="text-xs font-bold text-card-foreground">
-                          Newsletter / creator
+                          SEO/GEO agency
                         </p>
                       </div>
                       <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary">
-                        Partner link
+                        Change set
                       </span>
                     </div>
                     <p className="mt-1.5 text-[11px] text-muted-foreground">
-                      Teach AI search → drive trials → earn commission.
+                      Ship schema + FAQs → measure impact → stay revenue-safe.
                     </p>
                     <div className="mt-3 flex flex-wrap gap-1.5">
-                      {["Issue", "Video", "Thread"].map((tag) => (
+                      {["Schema", "FAQs", "Copy"].map((tag) => (
                         <span
                           key={tag}
                           className="rounded-full bg-muted/60 px-2 py-0.5 text-[10px] font-medium text-muted-foreground border border-border/40"
@@ -247,14 +253,14 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
                     <div className="flex items-center gap-2">
                       <Users className="size-3.5 text-secondary" />
                       <p className="text-xs font-bold text-card-foreground">
-                        Community / marketplace
+                        KPI guardrails
                       </p>
                     </div>
                     <div className="mt-3 grid grid-cols-3 gap-1.5">
                       {[
-                        { label: "Clicks", value: "↑" },
-                        { label: "Trials", value: "↑" },
-                        { label: "MRR", value: "↑" },
+                        { label: "Rev/session", value: "↑" },
+                        { label: "Checkout", value: "↑" },
+                        { label: "Conv", value: "↑" },
                       ].map((stat) => (
                         <div
                           key={stat.label}
@@ -282,11 +288,13 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
                       <div className="flex items-center gap-2">
                         <CreditCard className="size-3.5 text-secondary" />
                         <p className="text-xs font-bold text-card-foreground">
-                          Recurring commission
+                          Partner payout
                         </p>
                       </div>
                       <span className="rounded-full bg-secondary/10 px-2 py-0.5 text-[10px] font-bold text-secondary">
-                        {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true" ? "Partner" : "30% / 12mo"}
+                        {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
+                          ? "Partner"
+                          : "30% / 12mo"}
                       </span>
                     </div>
                     <div className="mt-3 flex items-center justify-between text-[10px] text-muted-foreground font-medium">
@@ -305,11 +313,12 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
 
             <div className="p-8">
               <h3 className="text-card-foreground text-lg font-semibold">
-                Affiliate & Community Partners
+                SEO/GEO Agencies
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Educate the market on AI search and earn recurring commission
-                when your audience adopts Beseam.
+                Deliver on-page upgrades and structured data with confidence.
+                Beseam versions every change, monitors KPIs, and helps you roll
+                back when revenue dips.
               </p>
             </div>
           </div>
@@ -318,7 +327,7 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
         {showCTA && (
           <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button asChild size="lg" className="rounded-full px-8">
-              <Link href="/demo">Partners</Link>
+              <Link href="/demo">Partner program</Link>
             </Button>
             <Button
               asChild
@@ -326,7 +335,7 @@ export default function FeaturedPartners({ showCTA = true }: { showCTA?: boolean
               variant="outline"
               className="rounded-full px-8"
             >
-              <Link href="/demo">Apply to be partner</Link>
+              <Link href="/demo">Apply to be a partner</Link>
             </Button>
           </div>
         )}

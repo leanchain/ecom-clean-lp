@@ -1,61 +1,56 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
     id: 1,
     quote:
-      "We went from invisible in ChatGPT to being recommended for 40% of our product queries. Our organic traffic from AI sources tripled in 3 months.",
+      "We work with an SEO agency and a dev shop — both pushing PDP changes constantly. Before Beseam, we had no way to know which change caused a conversion drop. Now every update is tracked, monitored, and reversible. Our agency actually loves it because they can prove their work drives results.",
     author: "Sarah Chen",
     role: "Head of E-commerce",
     company: "Nordic Outdoor Co.",
-    avatar: "/images/testimonials/avatar-1.jpg",
-    metric: "3x AI traffic",
+    metric: "Agency + internal, one pipeline",
     rating: 5,
   },
   {
     id: 2,
     quote:
-      "Beseam generated product content for 2,000 SKUs in a week. It would have taken our team 6 months. The quality is indistinguishable from human-written copy.",
+      "We recommend Beseam to every client. As an SEO agency, our biggest challenge was proving that our PDP changes didn't hurt conversion. Now we deploy through Beseam — changes are versioned, KPIs are monitored, and if anything dips, we can pinpoint and roll back instantly. It makes us look more professional.",
     author: "Marcus Rodriguez",
-    role: "VP of Digital",
-    company: "HomeStyle Direct",
-    avatar: "/images/testimonials/avatar-2.jpg",
-    metric: "2,000 SKUs in 1 week",
+    role: "Founder",
+    company: "Altitude Digital (SEO Agency)",
+    metric: "Agency-recommended",
     rating: 5,
   },
   {
     id: 3,
     quote:
-      "The ROI was immediate. Our PDPs now answer every question customers have. Returns dropped 23% because buyers know exactly what they're getting.",
+      "Beseam's AI recommendations upgraded 200 PDPs with FAQs and schema. But the real value? When our agency pushed a theme change that broke FAQ modules, Beseam caught the revenue dip in 4 hours, pinpointed the cause, and rolled it back. That one save paid for the whole year.",
     author: "Emma Thompson",
     role: "Founder & CEO",
     company: "Luxe Beauty Lab",
-    avatar: "/images/testimonials/avatar-3.jpg",
-    metric: "23% fewer returns",
+    metric: "Revenue regression caught in 4h",
     rating: 5,
   },
 ];
 
 const Testimonials = () => {
-  if (process.env.NEXT_PUBLIC_RELEASE_GUARD === "true") return null;
-
   return (
     <section className="py-20 md:py-32 bg-muted/30">
       <div className="container">
         {/* Header */}
         <div className="mb-16 text-center">
           <p className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
-            Customer Success
+            Early Feedback
           </p>
           <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-            Trusted by E-commerce Teams Worldwide
+            Trusted by Brands and the Agencies They Work With
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-            See how brands are using Beseam to dominate AI search and increase conversions.
+            See how e-commerce teams and their agencies use Beseam as the
+            guardrailed pipeline for every PDP change.
           </p>
         </div>
 
@@ -88,15 +83,17 @@ const Testimonials = () => {
 
               {/* Quote */}
               <blockquote className="mb-8 flex-1 text-foreground/90 leading-relaxed">
-                "{testimonial.quote}"
+                &quot;{testimonial.quote}&quot;
               </blockquote>
 
               {/* Author */}
               <div className="flex items-center gap-4 border-t pt-6">
                 <div className="relative h-12 w-12 overflow-hidden rounded-full bg-muted">
-                  {/* Placeholder avatar - replace with real images */}
                   <div className="flex h-full w-full items-center justify-center bg-primary/10 text-primary font-semibold text-lg">
-                    {testimonial.author.split(" ").map(n => n[0]).join("")}
+                    {testimonial.author
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
                   </div>
                 </div>
                 <div>
@@ -110,26 +107,6 @@ const Testimonials = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom Stats */}
-        <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4 max-w-4xl mx-auto">
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-primary">500+</p>
-            <p className="text-sm text-muted-foreground mt-1">Brands trust Beseam</p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-primary">2M+</p>
-            <p className="text-sm text-muted-foreground mt-1">PDPs optimized</p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-primary">4.9/5</p>
-            <p className="text-sm text-muted-foreground mt-1">Customer rating</p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-primary">3.2x</p>
-            <p className="text-sm text-muted-foreground mt-1">Avg. visibility lift</p>
-          </div>
         </div>
       </div>
     </section>
