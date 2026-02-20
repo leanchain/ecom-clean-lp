@@ -22,16 +22,21 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   title: {
-    default:
-      "Beseam - E-commerce Growth Engine for Discoverability & Conversion",
+    default: "Beseam - Guardrails for Every PDP Change",
     template: "%s | Beseam",
   },
   description:
-    "Beseam is a growth engine for e-commerce brands. We help brands turn product pages into high-performing growth assets optimized for both AI discovery and human buying behavior.",
+    "Beseam is an AI-native PDP & revenue ops platform. Upgrade product pages for discovery + conversion, then prevent regressions with monitoring, impact explanation, and guided rollback.",
   keywords: [
     "Beseam",
     "E-commerce",
-    "Growth Engine",
+    "Revenue ops",
+    "PDP upgrades",
+    "PDP monitoring",
+    "PDP guardrails",
+    "Safe deploy",
+    "Rollback",
+    "Change intelligence",
     "Discoverability",
     "Conversion",
     "AI Search Optimization",
@@ -74,6 +79,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
   publisher: "Beseam",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://beseam.com"),
   robots: {
     index: true,
     follow: true,
@@ -90,26 +96,28 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon/favicon.ico" }],
   },
   openGraph: {
-    title: "Beseam - E-commerce Growth Engine",
+    title: "Beseam - Guardrails for Every PDP Change",
     description:
-      "Turn product pages into high-performing growth assets optimized for both AI discovery and human buying behavior.",
+      "Upgrade PDPs for discovery + conversion, then protect revenue with monitoring, impact explanation, and rollback.",
     siteName: "Beseam",
+    type: "website",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Beseam - E-commerce Growth Engine",
+        alt: "Beseam - Guardrails for Every PDP Change",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam - E-commerce Growth Engine",
+    title: "Beseam - Guardrails for Every PDP Change",
     description:
-      "Turn product pages into high-performing growth assets optimized for both AI discovery and human buying behavior.",
+      "Upgrade PDPs for discovery + conversion, then protect revenue with monitoring, impact explanation, and rollback.",
     images: ["/og-image.png"],
     creator: "@Beseam",
+    site: "@Beseam",
   },
 };
 export default function RootLayout({

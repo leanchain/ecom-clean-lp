@@ -7,10 +7,10 @@ import { useCookieConsent } from "@/contexts/CookieConsentContext";
 export function AnalyticsScripts() {
   const { status } = useCookieConsent();
 
-  // Hardcoded IDs for the landing page as requested
-  const GA_MEASUREMENT_ID = "G-LRZQ9CJC4G";
-  const GTM_ID = "GTM-PXFQP8G9";
-  const ENABLE_ANALYTICS = true;
+  const ENABLE_ANALYTICS = process.env.NEXT_PUBLIC_ENABLE_ANALYTICS !== "false";
+  const GA_MEASUREMENT_ID =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-LRZQ9CJC4G";
+  const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-PXFQP8G9";
 
   // Only render if analytics are enabled, IDs are present, and user has accepted cookies
   if (!ENABLE_ANALYTICS || status !== "accepted" || !GA_MEASUREMENT_ID) {

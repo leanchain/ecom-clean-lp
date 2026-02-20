@@ -14,10 +14,10 @@ import {
   Mail,
   Menu,
   Search,
-  TestTube,
-  TrendingUp,
+  Shield,
+  AlertTriangle,
+  History,
   Users,
-  Wand2,
   X,
 } from "lucide-react";
 
@@ -35,12 +35,11 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
-// Product menu items - mirrors the 3-layer architecture
 const productItems = [
   {
     id: "audit",
     title: "PDP Audit",
-    description: "Analyze your product pages across 8 dimensions. Free.",
+    description: "Baseline quality report across AI visibility & conversion.",
     href: "https://app.beseam.com/analyze",
     icon: Search,
     badge: {
@@ -49,37 +48,25 @@ const productItems = [
     },
   },
   {
-    id: "optimize",
-    title: "AI Optimization",
-    description: "Generate images, videos, copy, and structured data.",
-    href: "/#how-it-works",
-    icon: Wand2,
-    badge: {
-      label: "Soon",
-      className: "bg-primary/10 text-primary",
-    },
+    id: "playbooks",
+    title: "Playbooks & Upgrades",
+    description: "AI-generated improvements with one-click apply.",
+    href: "/#platform",
+    icon: BookOpen,
   },
   {
-    id: "conversion",
-    title: "Conversion Suite",
-    description: "Size recommendations, styleguides, tryouts, personalization.",
-    href: "/#conversion-suite",
-    icon: TrendingUp,
-    badge: {
-      label: "Add-on",
-      className: "bg-secondary/10 text-secondary",
-    },
+    id: "monitoring",
+    title: "Monitoring & Incidents",
+    description: "KPI tracking with regression detection and blame.",
+    href: "/#platform",
+    icon: AlertTriangle,
   },
   {
-    id: "testing",
-    title: "Live testing",
-    description: "Live testing on Google, ChatGpt, Perplexity etc",
-    href: "/#how-it-works",
-    icon: TestTube,
-    badge: {
-      label: "Soon",
-      className: "bg-primary/10 text-primary",
-    },
+    id: "history",
+    title: "Change History",
+    description: "Full timeline of every PDP change with impact data.",
+    href: "/#platform",
+    icon: History,
   },
 ];
 
@@ -87,25 +74,24 @@ const productLinks = [
   {
     id: "how-it-works",
     title: "How it Works",
-    description: "Our 3-step process: Audit → Optimize → Convert",
+    description: "Audit → Deploy Safely → Monitor & Protect",
     href: "/#how-it-works",
     icon: Layers,
   },
   {
-    id: "results",
-    title: "See Results",
-    description: "Before/after examples and case studies",
-    href: "/#gallery",
-    icon: BarChart3,
+    id: "guardrails",
+    title: "Guardrails",
+    description: "Versioning + staged rollout for safe deployments",
+    href: "/#guardrails",
+    icon: Shield,
   },
 ];
 
-// Resources menu items
 const resourceItems = [
   {
     id: "blog",
     title: "Blog",
-    description: "Insights on AI search and PDP optimization",
+    description: "Insights on PDP optimization and revenue protection",
     href: "/blog",
     icon: BookOpen,
   },
@@ -146,7 +132,6 @@ const resourceLinks = [
   },
 ];
 
-// Reusable Menu Content Component
 interface MenuItem {
   title: string;
   description?: string;
@@ -175,13 +160,11 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-background border border-border/50 text-primary group-hover:bg-primary transition-all duration-200">
             <item.icon className="h-5 w-5 group-hover:text-white" />
           </div>
-
           <div className="flex-1 pt-0.5">
             <div className="flex items-center gap-1.5">
               <span className="text-sm font-bold text-foreground">
                 {item.title}
               </span>
-
               {item.badge && (
                 <span
                   className={`rounded-lg px-1.5 py-0.5 text-[8px] font-bold ${item.badge.className}`}
@@ -190,7 +173,6 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
                 </span>
               )}
             </div>
-
             {item.description && (
               <p className="text-xs text-muted-foreground mt-0.5 leading-snug line-clamp-2">
                 {item.description}
@@ -200,7 +182,6 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
         </NavigationMenuLink>
       ))}
     </div>
-
     {footerItems && footerItems.length > 0 && (
       <div className="grid grid-cols-2 gap-2 p-2 mt-2 border-t border-border/40 bg-muted/20 dark:bg-muted/5 rounded-b-xl">
         {footerItems.map((item, idx) => (
@@ -212,7 +193,6 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-background border border-border/50 group-hover:bg-primary group-hover:border-primary transition-all">
               <item.icon className="h-4 w-4 text-muted-foreground group-hover:text-white" />
             </div>
-
             <span className="text-sm font-bold text-foreground/90 group-hover:text-foreground">
               {item.title}
             </span>
@@ -239,18 +219,15 @@ export default function Navbar() {
     <header className="relative z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <nav className="container mx-auto px-4">
         <div className="flex h-14 items-center justify-between">
-          {/* Logo */}
           <div className="flex items-center lg:w-[300px]">
             <Link href="/" className="flex items-center space-x-2">
               <NavbarLogo className="text-primary" />
             </Link>
           </div>
 
-          {/* Desktop Navigation - Centered */}
           <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:gap-0">
             <NavigationMenu>
               <NavigationMenuList className="gap-0">
-                {/* Product dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-base font-medium bg-transparent">
                     Product
@@ -260,7 +237,6 @@ export default function Navbar() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* Pricing - direct link styled like nav item */}
                 <NavigationMenuItem>
                   <Link
                     href="https://app.beseam.com/pricing"
@@ -273,7 +249,6 @@ export default function Navbar() {
                   </Link>
                 </NavigationMenuItem>
 
-                {/* Resources dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-base font-medium bg-transparent">
                     Resources
@@ -286,10 +261,8 @@ export default function Navbar() {
             </NavigationMenu>
           </div>
 
-          {/* Right Side Actions */}
           <div className="flex items-center justify-end gap-3 lg:w-[300px]">
             <ThemeToggle />
-
             <Button
               variant="outline"
               className="hidden md:inline-flex rounded-lg px-6 transition-all font-bold"
@@ -297,15 +270,12 @@ export default function Navbar() {
             >
               <Link href="https://app.beseam.com/login">Log In</Link>
             </Button>
-
             <Link
-              href="https://app.beseam.com/login"
+              href="/demo"
               className="hidden items-center justify-center rounded-lg bg-primary px-8 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex min-w-[140px] whitespace-nowrap shadow-sm"
             >
-              Join Beta
+              Book Demo
             </Link>
-
-            {/* Mobile Menu Button */}
             <Button
               variant="ghost"
               size="icon"
@@ -323,8 +293,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-
       {mobileMenuOpen && (
         <div
           className="fixed inset-0 z-40 bg-background/60 backdrop-blur-sm lg:hidden animate-in fade-in duration-300"
@@ -332,18 +300,13 @@ export default function Navbar() {
         />
       )}
 
-      {/* Mobile Menu Content */}
-
       {mobileMenuOpen && (
         <div className="fixed right-0 top-0 z-50 h-dvh w-[300px] sm:w-[400px] max-w-[90vw] lg:hidden animate-in slide-in-from-right duration-300 border-l border-border shadow-2xl bg-background">
           <div className="flex flex-col h-full">
-            {/* Sidebar Header */}
-
             <div className="flex h-14 items-center justify-between px-6 border-b border-border/50">
               <span className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
                 Menu
               </span>
-
               <Button
                 variant="ghost"
                 size="icon"
@@ -371,7 +334,6 @@ export default function Navbar() {
                         <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground px-2">
                           Platform
                         </p>
-
                         {productItems.map((item) => (
                           <Link
                             key={item.id}
@@ -382,13 +344,11 @@ export default function Navbar() {
                             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/5 text-primary group-hover:bg-primary transition-all">
                               <item.icon className="h-5 w-5 group-hover:text-white" />
                             </div>
-
                             <div>
                               <div className="flex items-center gap-2">
                                 <span className="text-sm font-bold">
                                   {item.title}
                                 </span>
-
                                 {item.badge && (
                                   <span
                                     className={`rounded-lg px-2 py-0.5 text-[9px] font-bold ${item.badge.className}`}
@@ -397,7 +357,6 @@ export default function Navbar() {
                                   </span>
                                 )}
                               </div>
-
                               <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
                                 {item.description}
                               </p>
@@ -405,12 +364,10 @@ export default function Navbar() {
                           </Link>
                         ))}
                       </div>
-
                       <div className="space-y-2">
                         <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground px-2">
                           Learn More
                         </p>
-
                         <div className="grid grid-cols-1 gap-2">
                           {productLinks.map((item) => (
                             <Link
@@ -422,7 +379,6 @@ export default function Navbar() {
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-background border border-border/50 group-hover:bg-primary group-hover:border-primary transition-colors">
                                 <item.icon className="h-4 w-4 text-muted-foreground group-hover:text-white" />
                               </div>
-
                               <span className="text-sm font-bold">
                                 {item.title}
                               </span>
@@ -439,7 +395,6 @@ export default function Navbar() {
                         <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground px-2">
                           Resources
                         </p>
-
                         {resourceItems.map((item) => (
                           <Link
                             key={item.id}
@@ -450,12 +405,10 @@ export default function Navbar() {
                             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground group-hover:bg-primary transition-all">
                               <item.icon className="h-5 w-5 group-hover:text-white" />
                             </div>
-
                             <div className="flex items-center gap-2">
                               <span className="text-sm font-bold">
                                 {item.title}
                               </span>
-
                               {item.badge && (
                                 <span
                                   className={`rounded-lg px-1.5 py-0.5 text-[9px] font-bold ${item.badge.className}`}
@@ -467,12 +420,10 @@ export default function Navbar() {
                           </Link>
                         ))}
                       </div>
-
                       <div className="space-y-2">
                         <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground px-2">
                           Connect
                         </p>
-
                         <div className="grid grid-cols-1 gap-2">
                           {resourceLinks.map((item) => (
                             <Link
@@ -484,7 +435,6 @@ export default function Navbar() {
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-background border border-border/50 group-hover:bg-primary group-hover:border-primary transition-colors">
                                 <item.icon className="h-4 w-4 text-muted-foreground group-hover:text-white" />
                               </div>
-
                               <span className="text-sm font-bold">
                                 {item.title}
                               </span>
@@ -497,8 +447,6 @@ export default function Navbar() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {/* Product */}
-
                   <button
                     onClick={() => setActiveSubmenu("product")}
                     className="flex w-full items-center justify-between rounded-lg p-4 text-left hover:bg-accent transition-all group"
@@ -507,14 +455,10 @@ export default function Navbar() {
                       <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/5 text-primary group-hover:bg-primary transition-all">
                         <Layers className="h-5 w-5 group-hover:text-white" />
                       </div>
-
                       <span className="text-lg font-bold">Product</span>
                     </div>
-
                     <ChevronRight className="h-5 w-5 text-muted-foreground" />
                   </button>
-
-                  {/* Pricing */}
 
                   <Link
                     href="https://app.beseam.com/pricing"
@@ -525,14 +469,10 @@ export default function Navbar() {
                       <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary/5 text-secondary group-hover:bg-secondary transition-all">
                         <BarChart3 className="h-5 w-5 group-hover:text-white" />
                       </div>
-
                       <span className="text-lg font-bold">Pricing</span>
                     </div>
-
                     <ChevronRight className="h-5 w-5 text-muted-foreground" />
                   </Link>
-
-                  {/* Resources */}
 
                   <button
                     onClick={() => setActiveSubmenu("resources")}
@@ -542,14 +482,10 @@ export default function Navbar() {
                       <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted text-muted-foreground group-hover:bg-primary transition-all">
                         <BookOpen className="h-5 w-5 group-hover:text-white" />
                       </div>
-
                       <span className="text-lg font-bold">Resources</span>
                     </div>
-
                     <ChevronRight className="h-5 w-5 text-muted-foreground" />
                   </button>
-
-                  {/* CTAs */}
 
                   <div className="pt-8 space-y-4">
                     <Button
@@ -564,15 +500,12 @@ export default function Navbar() {
                         Log In
                       </Link>
                     </Button>
-
                     <Link
-                      href="https://app.beseam.com/login"
+                      href="/demo"
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex w-full items-center justify-center rounded-lg bg-primary p-5 text-base font-bold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all"
                     >
-                      {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-                        ? "Join Pilot"
-                        : "Get Started"}
+                      Book Demo
                     </Link>
                   </div>
                 </div>

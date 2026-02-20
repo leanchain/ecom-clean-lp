@@ -1,174 +1,154 @@
-import Image from "next/image";
+"use client";
+
+import React from "react";
+import { GitBranch, Shield, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { Check, X, ArrowRight, TrendingUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
-
-const currentPdpBullets = [
-  "Invisible to ChatGPT, Perplexity, and AI Overviews.",
-  "Generic descriptions that don't answer real buyer questions.",
-  "Missing FAQs, comparisons, and use-case context AI needs.",
-  "Few images, no video, inconsistent brand presentation.",
-  "Manual updates that can't scale across your catalog.",
-];
-
-const isGuarded = process.env.NEXT_PUBLIC_RELEASE_GUARD === "true";
-
-const BeseamPdpBullets = [
-  isGuarded
-    ? "Significantly higher recommendation rate in AI search engines."
-    : "3-5× higher recommendation rate in AI search engines.",
-  "Deep narrative with benefits, objections, and comparisons.",
-  "Complete visual coverage: packshots, lifestyle, video, detail shots.",
-  "Schema.org structured data for maximum AI extraction.",
-  isGuarded
-    ? "Scale across your catalog without scaling your team or budget."
-    : "Scale to 100k+ SKUs without scaling your team or budget.",
-];
 
 const Compare2 = () => {
   return (
-    <section className="py-24">
+    <section className="py-20 md:py-32 bg-muted/30">
       <div className="container">
-        <div className="text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-            How we turn "invisible" PDPs into AI-recommended best-sellers
-          </h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-sm md:text-base">
-            AI search engines don't rank keywords, they rank clarity, specific
-            use case completeness, and multi-modal content. If your PDPs aren't
-            AI-ready, your products won't be recommended. Beseam fixes that, at
-            scale.
-          </p>
-        </div>
-
-        <div className="mt-10 relative">
-          {/* VS badge */}
-          <div className="bg-background absolute left-1/2 top-1/2 hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-xs font-semibold md:flex">
-            VS
+        <div className="mx-auto max-w-5xl">
+          {/* Header */}
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold md:text-5xl">
+              Every Change, Revenue-Protected
+            </h2>
+            <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
+              Your SEO agency ships new copy. Your dev team pushes a theme
+              update. You apply Beseam&apos;s AI recommendations. Every change —
+              regardless of source — goes through the same guardrails.
+            </p>
           </div>
 
-          <div className="grid items-center gap-6 sm:grid-cols-2">
-            {/* Current PDPs */}
-            <div className="bg-muted/70 rounded-3xl p-6 md:p-8">
-              <h3 className="text-lg font-semibold md:text-xl">
-                Your current product page
+          <div className="grid gap-8 md:grid-cols-2">
+            {/* Mechanism 1: Versioning */}
+            <div className="rounded-3xl border bg-card p-8 shadow-sm">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
+                <GitBranch className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="mb-3 text-xl font-bold">
+                Versioning + Reversible Deployment
               </h3>
-              <p className="text-muted-foreground mt-2 text-sm">
-                Typical PDPs are built for catalog maintenance, not AI search or
-                conversion.
+              <p className="mb-6 text-sm text-muted-foreground leading-relaxed">
+                Every PDP change — whether from your agency, dev team, or
+                Beseam&apos;s AI — is isolated, tracked, and reversible. Full
+                history, instant rollback, clear attribution.
               </p>
-
-              {/* Before image */}
-              <div className="relative mt-6 overflow-hidden rounded-3xl">
-                <div className="aspect-4/3">
-                  <Image
-                    src="/images/compare/before-pdp.webp"
-                    alt="Current PDP example"
-                    width={1200}
-                    height={900}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-start bg-gradient-to-t from-background/80 via-background/40 to-transparent p-4">
-                  <span className="text-muted-foreground text-xs uppercase tracking-[0.16em]">
-                    Current PDP
-                  </span>
-                </div>
+              <div className="space-y-3">
+                {[
+                  "Every change gets a version number and full diff",
+                  "Changes are isolated — won't affect other PDPs",
+                  "One-click rollback to any previous version",
+                  "Compare any two versions side-by-side",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                    <span className="text-sm text-muted-foreground">{item}</span>
+                  </div>
+                ))}
               </div>
 
-              <ul className="mt-6 space-y-2 text-sm md:text-base">
-                {currentPdpBullets.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <span className="mt-0.5 text-destructive">
-                      <X className="size-4" />
-                    </span>
-                    <span className="text-muted-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              {/* Visual: version diff mockup */}
+              <div className="mt-6 rounded-xl border bg-muted/50 p-4">
+                <div className="flex items-center justify-between mb-3 text-xs">
+                  <span className="font-semibold text-foreground">
+                    v2.1 → v2.2
+                  </span>
+                  <span className="text-muted-foreground">Alpine Pro Jacket</span>
+                </div>
+                <div className="space-y-1.5 text-[11px] font-mono">
+                  <div className="rounded bg-emerald-500/10 px-2 py-1 text-emerald-700 dark:text-emerald-400">
+                    + FAQ section (5 entries + schema.org)
+                  </div>
+                  <div className="rounded bg-emerald-500/10 px-2 py-1 text-emerald-700 dark:text-emerald-400">
+                    + Product narrative (benefits, use cases)
+                  </div>
+                  <div className="rounded bg-amber-500/10 px-2 py-1 text-amber-700 dark:text-amber-400">
+                    ~ Meta description updated
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Beseam PDP AI */}
-            <div className="relative">
-              <div className="bg-card/95 rounded-3xl border-2 border-primary p-6 md:p-8">
-                <h3 className="text-lg font-semibold md:text-xl">
-                  With Beseam PDP AI
-                </h3>
-                <p className="text-muted-foreground mt-2 text-sm">
-                  One persuasion graph powers all copy, schema, and media so
-                  your PDPs work in AI search and for humans.
-                </p>
-
-                {/* After video */}
-                <div className="relative mt-6 overflow-hidden rounded-3xl">
-                  <div className="aspect-4/3">
-                    <video
-                      src="/videos/compare/after-pdp.mp4"
-                      className="h-full w-full object-cover"
-                      muted
-                      playsInline
-                      autoPlay
-                      loop
-                    />
+            {/* Mechanism 2: Guardrails */}
+            <div className="rounded-3xl border bg-card p-8 shadow-sm">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/10">
+                <Shield className="h-7 w-7 text-emerald-500" />
+              </div>
+              <h3 className="mb-3 text-xl font-bold">
+                Guardrails + Staged Rollout
+              </h3>
+              <p className="mb-6 text-sm text-muted-foreground leading-relaxed">
+                When your agency delivers updates or you apply AI
+                recommendations, deploy to a small set first. Beseam monitors
+                KPIs and only scales when results confirm success.
+              </p>
+              <div className="space-y-3">
+                {[
+                  "Apply to 1 PDP first — prove the improvement works",
+                  "Monitor rev/session, conversion, and checkout for 24-48h",
+                  "Scale to next 10, then to your full catalog",
+                  "Auto-alert if any KPI regresses during rollout",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
+                    <span className="text-sm text-muted-foreground">{item}</span>
                   </div>
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-start bg-gradient-to-t from-background/80 via-background/40 to-transparent p-4">
-                    <span className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
-                      Beseam PDP AI
+                ))}
+              </div>
+
+              {/* Visual: staged rollout */}
+              <div className="mt-6 rounded-xl border bg-muted/50 p-4">
+                <div className="mb-3 text-xs font-semibold text-foreground">
+                  Staged Rollout Progress
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="h-2 flex-1 rounded-full bg-muted">
+                      <div className="h-2 w-full rounded-full bg-emerald-500" />
+                    </div>
+                    <span className="text-[11px] text-emerald-500 font-medium w-16 text-right">
+                      1 PDP ✓
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="h-2 flex-1 rounded-full bg-muted">
+                      <div className="h-2 w-[60%] rounded-full bg-emerald-500" />
+                    </div>
+                    <span className="text-[11px] text-muted-foreground font-medium w-16 text-right">
+                      10 PDPs
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="h-2 flex-1 rounded-full bg-muted">
+                      <div className="h-2 w-0 rounded-full bg-emerald-500" />
+                    </div>
+                    <span className="text-[11px] text-muted-foreground font-medium w-16 text-right">
+                      All PDPs
                     </span>
                   </div>
                 </div>
-
-                <ul className="mt-6 space-y-2 text-sm md:text-base">
-                  {BeseamPdpBullets.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <span className="mt-0.5 text-primary">
-                        <Check className="size-4" />
-                      </span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="mt-3 text-[10px] text-muted-foreground">
+                  Monitoring: +8% conv, +12% rev/session — ready to scale
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Results Metrics */}
-          {process.env.NEXT_PUBLIC_RELEASE_GUARD !== "true" && (
-            <div className="mt-12 rounded-3xl border bg-card p-8">
-              <div className="mb-6 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-                  <TrendingUp className="h-4 w-4" />
-                  Average Results After Beseam Optimization
-                </div>
-              </div>
-              <div className="grid gap-6 md:grid-cols-4">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-primary md:text-4xl">3.2x</p>
-                  <p className="mt-1 text-sm text-muted-foreground">AI Search Visibility</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-primary md:text-4xl">+47%</p>
-                  <p className="mt-1 text-sm text-muted-foreground">Click-Through Rate</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-primary md:text-4xl">+27%</p>
-                  <p className="mt-1 text-sm text-muted-foreground">Conversion Rate</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-primary md:text-4xl">-23%</p>
-                  <p className="mt-1 text-sm text-muted-foreground">Return Rate</p>
-                </div>
-              </div>
-              <div className="mt-8 flex justify-center">
-                <Button asChild size="lg" className="rounded-full">
-                  <Link href="/demo">
-                    See How Your PDPs Compare
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-            )}
+          {/* Bottom CTA */}
+          <div className="mt-12 text-center">
+            <p className="text-muted-foreground mb-4">
+              Agencies, dev teams, and AI recommendations — all shipping
+              through the same guardrailed pipeline.
+            </p>
+            <Link
+              href="/demo"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:-translate-y-0.5 hover:bg-primary/90"
+            >
+              See It In Action <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

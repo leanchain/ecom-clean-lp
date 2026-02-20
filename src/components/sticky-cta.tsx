@@ -1,11 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-
 import Link from "next/link";
-
 import { ArrowRight, X, Sparkles } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 
 const StickyCTA = () => {
@@ -14,7 +11,6 @@ const StickyCTA = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling past hero (approximately 600px)
       setScrollPast(window.scrollY > 600);
     };
 
@@ -29,32 +25,25 @@ const StickyCTA = () => {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 animate-in slide-in-from-bottom-4 duration-300">
-      {/* Gradient fade at top */}
       <div className="h-8 bg-gradient-to-t from-background to-transparent pointer-events-none" />
 
       <div className="bg-background/95 backdrop-blur-lg border-t shadow-2xl">
         <div className="container py-3 md:py-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Left - Value Prop */}
             <div className="flex items-center gap-3 text-center md:text-left">
               <div className="hidden md:flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
                 <Sparkles className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <p className="font-semibold text-foreground">
-                  {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-                    ? "Ready to boost your AI visibility?"
-                    : "Ready to 3x your AI visibility?"}
+                  Ready to make PDP improvements safely at scale?
                 </p>
                 <p className="text-sm text-muted-foreground hidden sm:block">
-                  {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-                    ? "Join the pilot • No credit card required • Limited spots"
-                    : "Start free • No credit card required • 14-day trial"}
+                  Free audit · No credit card · Built-in rollback
                 </p>
               </div>
             </div>
 
-            {/* Right - CTAs */}
             <div className="flex items-center gap-3">
               <Button
                 variant="outline"
@@ -72,9 +61,7 @@ const StickyCTA = () => {
                 className="rounded-full bg-primary hover:bg-primary/90"
               >
                 <Link href="/demo" className="flex items-center gap-2">
-                  {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-                    ? "Join Pilot"
-                    : "Start Free Trial"}
+                  Book Demo
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
