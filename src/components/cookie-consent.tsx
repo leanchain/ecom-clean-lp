@@ -23,15 +23,6 @@ const CookieConsent = () => {
 
   const handleAccept = () => {
     accept();
-    // Update Google Analytics consent mode immediately
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("consent", "update", {
-        ad_storage: "granted",
-        ad_user_data: "granted",
-        ad_personalization: "granted",
-        analytics_storage: "granted",
-      });
-    }
     setIsVisible(false);
   };
 

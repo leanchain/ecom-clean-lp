@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Script from "next/script";
 
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
@@ -12,12 +13,33 @@ export function AnalyticsScripts() {
     process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-GT7632NCQT";
   const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-K5XM33MJ";
 
+  // Update consent state whenever status changes (handles initial load and user interaction)
+  useEffect(() => {
+    if (!ENABLE_ANALYTICS || typeof window === "undefined" || !(window as any).gtag) {
+      return;
+    }
+
+    if (status === "accepted") {
+      (window as any).gtag("consent", "update", {
+        "ad_storage": "granted",
+        "ad_user_data": "granted",
+        "ad_personalization": "granted",
+        "analytics_storage": "granted"
+      });
+    } else if (status === "declined") {
+      (window as any).gtag("consent", "update", {
+        "ad_storage": "denied",
+        "ad_user_data": "denied",
+        "ad_personalization": "denied",
+        "analytics_storage": "denied"
+      });
+    }
+  }, [status, ENABLE_ANALYTICS]);
+
   // Only render if analytics are enabled and ID is present
   if (!ENABLE_ANALYTICS || !GA_MEASUREMENT_ID) {
     return null;
   }
-
-  const consentState = status === "accepted" ? "granted" : "denied";
 
   return (
     <>
@@ -27,24 +49,26 @@ export function AnalyticsScripts() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           
-          // Set default consent to 'denied'
+          // Set regional defaults for EEA + UK + CH
+          // Default to 'denied' only in regions where it's legally required
           gtag('consent', 'default', {
             'ad_storage': 'denied',
             'ad_user_data': 'denied',
             'ad_personalization': 'denied',
             'analytics_storage': 'denied',
+            'region': ['AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 'IE', 'IS', 'IT', 'LI', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'GB', 'CH'],
             'wait_for_update': 500
           });
 
-          // If we already know the status from a previous session, update it immediately
-          if ('${consentState}' === 'granted') {
-            gtag('consent', 'update', {
-              'ad_storage': 'granted',
-              'ad_user_data': 'granted',
-              'ad_personalization': 'granted',
-              'analytics_storage': 'granted'
-            });
-          }
+          // Set default consent to 'granted' for all other regions 
+          // This fixes the "0% consent rate" warning for traffic outside EEA
+          gtag('consent', 'default', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted',
+            'wait_for_update': 500
+          });
         `}
       </Script>
 
