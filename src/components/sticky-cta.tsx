@@ -51,7 +51,7 @@ const StickyCTA = () => {
                 asChild
                 className="rounded-full"
               >
-                <Link href="https://app.beseam.com/analyze">
+                <Link href="https://app.beseam.com/analyze" target="_blank" rel="noopener noreferrer">
                   Try Free Audit
                 </Link>
               </Button>

@@ -36,6 +36,8 @@ const AuditTryout = () => {
           <div className="flex flex-wrap gap-3">
             <Link
               href="https://app.beseam.com/analyze"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5"
             >
               Get Your Baseline Report <ArrowRight className="h-4 w-4" />
@@ -84,14 +86,12 @@ const AuditTryout = () => {
               <div className="h-full w-[40%] rounded-full bg-amber-400" />
             </div>
             <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-3 text-xs text-indigo-100">
-              &quot;Add FAQ schema, improve product narrative depth, and optimize
-              media coverage to reach 90+/100 baseline.&quot;
+              &quot;Add FAQ schema, improve product narrative depth, and
+              optimize media coverage to reach 90+/100 baseline.&quot;
             </div>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-indigo-50">
-            <div className="font-semibold text-white">
-              Recommended Playbook
-            </div>
+            <div className="font-semibold text-white">Recommended Playbook</div>
             <div className="mt-2 space-y-2 text-xs text-indigo-100/80">
               <div className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />

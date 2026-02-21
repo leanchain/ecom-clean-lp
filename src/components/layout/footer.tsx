@@ -10,15 +10,16 @@ const ITEMS = [
   {
     title: "Product",
     links: [
-      { name: "AI Visibility Audit", href: "https://app.beseam.com/analyze" },
-      { name: "AI Media Studio", href: "/#ai-media-studio" },
-      { name: "PDP Optimization", href: "/#beseam-pdp-ai" },
-      { name: "Pricing", href: "https://app.beseam.com/pricing" },
+      { name: "PDP Audit (Free)", href: "https://app.beseam.com/analyze", target: "_blank" },
+      { name: "Playbooks & Upgrades", href: "/#platform" },
+      { name: "Monitoring & Incidents", href: "/#the-loop" },
+      { name: "Change History", href: "/#platform" },
     ],
   },
   {
     title: "Resources",
     links: [
+      { name: "About", href: "/about" },
       { name: "Blog", href: "/blog" },
       { name: "FAQ", href: "/#faq" },
       { name: "Demo", href: "/demo" },
@@ -115,9 +116,8 @@ const Footer = () => {
             <div>
               <Logo className="text-primary scale-110 origin-left transition-transform hover:scale-115" />
               <p className="font-heading mt-6 max-w-sm text-lg font-semibold leading-tight text-foreground md:text-xl">
-                Create perfect looking product pages{" "}
-                <br className="hidden sm:block" />
-                optimized for <span className="text-primary">AI Search</span>.
+                Every PDP change. <br className="hidden sm:block" />
+                <span className="text-primary">Revenue-guardrailed</span>.
               </p>
             </div>
 
@@ -185,6 +185,12 @@ const Footer = () => {
                     <li key={linkIdx}>
                       <Link
                         href={link.href}
+                        target={link.target}
+                        rel={
+                          link.target === "_blank"
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
                         className="transition-colors hover:text-primary"
                       >
                         {link.name}
@@ -199,10 +205,10 @@ const Footer = () => {
 
         <div className="mt-16 border-t pt-8">
           <p className="max-w-2xl text-[11px] leading-relaxed text-muted-foreground/60">
-            Beseam helps brands optimize product detail pages for generative
-            engine optimization (GEO). All product names, logos, and brands are
-            property of their respective owners. Security and compliance details
-            are provided for informational purposes.
+            Beseam is a revenue-guardrailed PDP ops platform. We help brands and
+            their agencies ship PDP improvements safely — with versioning,
+            monitoring, and rollback. All product names, logos, and brands are
+            property of their respective owners.
           </p>
         </div>
       </div>

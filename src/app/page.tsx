@@ -48,7 +48,7 @@ export default function Home() {
       <Compare2 />
 
       {/* Testimonials - Social proof */}
-      <Testimonials />
+      {/* <Testimonials /> */}
 
       {/* Trust Badges - Security and reliability */}
       <TrustBadges />

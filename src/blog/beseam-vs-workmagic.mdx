@@ -1,0 +1,36 @@
+---
+title: "Beseam vs WorkMagic: Ad Holdout Automation vs Storefront Rollback Automation"
+description: "WorkMagic automates incrementality tests and attribution across ad platforms. Beseam automates incident response for Shopify store changes with runbooks and rollback guidance."
+date: "2026-02-20"
+author: "Beseam Team"
+tags: ["Comparison", "Measurement", "Shopify"]
+coverImage: "/images/blog/vs/beseam-vs-workmagic.svg"
+---
+
+*Last updated: Feb 20, 2026. This comparison is based on publicly available docs/pages plus the research you shared.*
+
+## TL;DR
+
+WorkMagic is positioned around **incrementality-based attribution** and automated holdout execution for ad platforms.
+
+Beseam is positioned around **Shopify change incident response**: if conversion drops after a storefront change, Beseam ties it to the exact diff and guides rollback/remediation.
+
+## What WorkMagic claims (from the research you shared)
+
+- Incrementality-based attribution + data-driven attribution.
+- Lift test frameworks and methodologies (2-cell/3-cell, PTM vs LTM).
+- Some automation via API to set up/tear down ad-platform holdouts; “real-time monitoring” in the test context.
+
+## Beseam’s “interventions” are store changes
+
+Where WorkMagic automates *ad-platform holdouts*, Beseam automates *storefront safety*:
+
+- change capture across high-risk Shopify objects (theme, promos, pixels, checkout customizations)
+- post-change KPI monitoring
+- incident→change attribution
+- rollback/runbooks + verification
+
+## Primary sources
+
+- WorkMagic (Shopify app listing): `https://apps.shopify.com/workmagic`
+- WorkMagic: `https://workmagic.com/`

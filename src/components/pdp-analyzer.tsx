@@ -170,7 +170,7 @@ const calculatePotentialScore = (sections: SectionScore[]) => {
   const current = calculateOverallScore(sections);
   const totalGain = sections.reduce(
     (sum, section) => sum + (section.pointsGain || 0),
-    0
+    0,
   );
   return Math.min(100, current + totalGain);
 };
@@ -218,7 +218,6 @@ export function PdpAnalyzer() {
   return (
     <section className="bg-muted/40 py-24">
       <div className="container space-y-12">
-        
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary/80">
             Beseam PDP Analyzer
@@ -231,7 +230,6 @@ export function PdpAnalyzer() {
             for AI search engines like ChatGPT, Claude, and Perplexity.
           </p>
 
-          
           <div className="mt-6 rounded-3xl bg-background/80 px-4 py-3 text-left shadow-sm ring-1 ring-border/60">
             <p className="text-xs font-medium text-muted-foreground">
               Analyzed URL:
@@ -240,11 +238,8 @@ export function PdpAnalyzer() {
           </div>
         </div>
 
-        
         <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1.1fr)]">
-          
           <div className="mx-auto w-full max-w-3xl rounded-3xl border border-border/70 bg-background p-6 text-[11px] shadow-sm">
-            
             <div className="space-y-3 border-b border-border/60 pb-4">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="space-y-1">
@@ -283,7 +278,6 @@ export function PdpAnalyzer() {
               />
             </div>
 
-            
             <div className="grid gap-6 border-t border-border/60 pt-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -450,7 +444,6 @@ export function PdpAnalyzer() {
               </div>
             </div>
 
-            
             <div className="mt-6 space-y-6">
               <div className="mb-4 border-t border-dashed border-border/60 pt-4">
                 <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[9px] font-semibold text-blue-700">
@@ -458,7 +451,6 @@ export function PdpAnalyzer() {
                 </span>
               </div>
 
-              
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
@@ -502,7 +494,6 @@ export function PdpAnalyzer() {
                 />
               </div>
 
-              
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
@@ -522,7 +513,6 @@ export function PdpAnalyzer() {
                 />
               </div>
 
-              
               <div className="space-y-2">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                   Section 3 • How It Works + What's in the Box
@@ -541,7 +531,6 @@ export function PdpAnalyzer() {
                 </div>
               </div>
 
-              
               <div className="space-y-2">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                   Section 4 • Image + Text Sections (2-3 alternating layouts)
@@ -572,7 +561,6 @@ export function PdpAnalyzer() {
                 </div>
               </div>
 
-              
               <div className="space-y-2">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                   Section 5 • Image with Benefits (circular center layout)
@@ -610,7 +598,6 @@ export function PdpAnalyzer() {
                 </div>
               </div>
 
-              
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
@@ -630,7 +617,6 @@ export function PdpAnalyzer() {
                 />
               </div>
 
-              
               <div className="space-y-2">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                   Section 7 • Percentage Stats (customer satisfaction)
@@ -665,7 +651,6 @@ export function PdpAnalyzer() {
                 </div>
               </div>
 
-              
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
@@ -685,7 +670,6 @@ export function PdpAnalyzer() {
                 />
               </div>
 
-              
               <div className="space-y-2">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                   Section 9 • Customer Q&A
@@ -700,7 +684,6 @@ export function PdpAnalyzer() {
                 />
               </div>
 
-              
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
@@ -725,7 +708,6 @@ export function PdpAnalyzer() {
                 />
               </div>
 
-              
               <div className="space-y-2">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                   Section 11 • Guarantee & Warranty Details
@@ -742,7 +724,6 @@ export function PdpAnalyzer() {
                 />
               </div>
 
-              
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
@@ -777,7 +758,6 @@ export function PdpAnalyzer() {
                 />
               </div>
 
-              
               <div className="space-y-2">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                   Section 13 • UGC Gallery & Social Proof
@@ -797,7 +777,6 @@ export function PdpAnalyzer() {
                 />
               </div>
 
-              
               <div className="space-y-2">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                   Section 14 • Frequently Bought Together
@@ -812,7 +791,6 @@ export function PdpAnalyzer() {
                 />
               </div>
 
-              
               <div className="space-y-2">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                   Section 15 • Recommended & Related Products
@@ -831,9 +809,7 @@ export function PdpAnalyzer() {
             </div>
           </div>
 
-          
           <div className="space-y-4">
-            
             <div className="rounded-3xl bg-background p-6 shadow-sm ring-1 ring-border/60">
               <div className="flex items-center justify-between">
                 <div>
@@ -883,7 +859,6 @@ export function PdpAnalyzer() {
               </p>
             </div>
 
-            
             <div className="rounded-3xl bg-linear-to-br from-primary/20 to-violet-500/20 p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -911,8 +886,7 @@ export function PdpAnalyzer() {
               </button>
             </div>
 
-            
-            <div className="rounded-3xl bg-background p-6 shadow-sm ring-1 ring-border/60">
+            {/* <div className="rounded-3xl bg-background p-6 shadow-sm ring-1 ring-border/60">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-primary" />
                 <h3 className="text-sm font-semibold">Live AI Test Results</h3>
@@ -963,9 +937,8 @@ export function PdpAnalyzer() {
               <p className="mt-3 text-xs text-muted-foreground">
                 Query: "Best dance shoes for ballroom under $200"
               </p>
-            </div>
+            </div> */}
 
-            
             <div className="space-y-2">
               <h3 className="px-1 text-sm font-semibold">Section Breakdown</h3>
 

@@ -1,19 +1,10 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import {
-  ArrowRight,
-  Play,
-  Shield,
-  GitBranch,
-  Activity,
-  RotateCcw,
-} from "lucide-react";
+import { Shield, GitBranch, Activity, RotateCcw } from "lucide-react";
 
-import AnimatedBorderButton from "@/components/animated-border-button";
 import { TypingAnimation } from "@/components/typing-animation";
-import { Button } from "@/components/ui/button";
+import { AnalyzerInput } from "@/components/sections/analyzer-input";
 
 const Hero230 = () => {
   return (
@@ -50,28 +41,9 @@ const Hero230 = () => {
           </span>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="mt-8 mb-6 flex flex-col items-center gap-4 sm:flex-row">
-          <AnimatedBorderButton
-            asChild
-            className="h-14 px-8 text-lg cursor-pointer [&_svg]:transition-transform hover:[&_svg]:translate-x-0.5"
-          >
-            <Link href="https://app.beseam.com/analyze">
-              Run Free PDP Audit <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </AnimatedBorderButton>
-
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="h-14 rounded-full px-8 text-base"
-          >
-            <Link href="/demo">
-              <Play className="mr-2 h-4 w-4" />
-              Watch Demo
-            </Link>
-          </Button>
+        {/* Analyzer Input instead of old buttons */}
+        <div className="mt-8 mb-6 w-full flex justify-center">
+          <AnalyzerInput />
         </div>
 
         {/* Product pillars - visual summary */}
