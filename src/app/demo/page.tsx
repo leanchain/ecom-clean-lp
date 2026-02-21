@@ -30,8 +30,8 @@ export default function DemoPage() {
               Book Your <span className="text-primary">Beseam Demo</span>
             </h1>
             <p className="text-muted-foreground/80 mx-auto mt-6 max-w-2xl text-lg md:text-xl">
-              See how Beseam transforms your product pages for AI search engines
-              like ChatGPT, Perplexity, and Google AI Overviews.
+              See how Beseam helps brands and agencies ship PDP improvements
+              safely — with versioning, KPI monitoring, and instant rollback.
             </p>
           </motion.div>
 
@@ -101,18 +101,18 @@ export default function DemoPage() {
                 <ul className="mt-6 space-y-4">
                   {[
                     {
-                      title: "AI Media Studio Demo",
-                      desc: "Generate AI images, videos, and descriptions live.",
+                      title: "PDP Audit & Playbooks",
+                      desc: "See your baseline scores and AI-generated upgrade recommendations.",
                       icon: Zap,
                     },
                     {
-                      title: "AI Search Insights",
-                      desc: "See how Perplexity and ChatGPT rank your brand.",
+                      title: "Guardrails & Monitoring",
+                      desc: "How versioning, KPI monitoring, and rollback protect revenue.",
                       icon: CheckCircle2,
                     },
                     {
-                      title: "Personalized Roadmap",
-                      desc: "A step-by-step plan for your catalog scale-up.",
+                      title: "Agency & Team Workflow",
+                      desc: "How agencies and internal teams deploy through one safe pipeline.",
                       icon: Calendar,
                     },
                   ].map((item) => (
@@ -136,10 +136,10 @@ export default function DemoPage() {
 
             <div className="flex flex-col justify-center">
               <div className="rounded-2xl border bg-muted/30 p-8">
-                <h3 className="text-sm font-bold">Trusted by 500+ brands</h3>
+                <h3 className="text-sm font-bold">Built for brands & agencies</h3>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  Join the fast-growing ecosystem of brands and agencies
-                  building the future of AI commerce.
+                  Join brands and their agencies who ship PDP improvements
+                  through one revenue-guardrailed pipeline.
                 </p>
                 <div className="mt-6 flex items-center gap-4">
                   <div className="flex -space-x-3">
@@ -153,7 +153,7 @@ export default function DemoPage() {
                     ))}
                   </div>
                   <p className="text-sm font-medium text-foreground">
-                    +12 new brands this week
+                    Brands & agencies onboarding
                   </p>
                 </div>
               </div>

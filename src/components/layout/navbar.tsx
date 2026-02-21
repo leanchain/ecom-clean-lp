@@ -41,6 +41,7 @@ const productItems = [
     title: "PDP Audit",
     description: "Baseline quality report across AI visibility & conversion.",
     href: "https://app.beseam.com/analyze",
+    target: "_blank",
     icon: Search,
     badge: {
       label: "Free",
@@ -89,6 +90,13 @@ const productLinks = [
 
 const resourceItems = [
   {
+    id: "about",
+    title: "About",
+    description: "Learn about Beseam's mission and team",
+    href: "/about",
+    icon: Users,
+  },
+  {
     id: "blog",
     title: "Blog",
     description: "Insights on PDP optimization and revenue protection",
@@ -136,6 +144,7 @@ interface MenuItem {
   title: string;
   description?: string;
   href: string;
+  target?: string;
   icon: React.ElementType;
   badge?: {
     label: string;
@@ -155,6 +164,8 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
         <NavigationMenuLink
           key={idx}
           href={item.href}
+          target={item.target}
+          rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
           className="group flex w-[310px] items-start gap-4 rounded-xl p-3.5 transition-all hover:bg-accent bg-muted/40 dark:bg-muted/10 border border-border/40"
         >
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-background border border-border/50 text-primary group-hover:bg-primary transition-all duration-200">
@@ -271,10 +282,10 @@ export default function Navbar() {
               <Link href="https://app.beseam.com/login">Log In</Link>
             </Button>
             <Link
-              href="/demo"
+              href="https://app.beseam.com/register"
               className="hidden items-center justify-center rounded-lg bg-primary px-8 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex min-w-[140px] whitespace-nowrap shadow-sm"
             >
-              Book Demo
+              Sign up
             </Link>
             <Button
               variant="ghost"
@@ -338,6 +349,12 @@ export default function Navbar() {
                           <Link
                             key={item.id}
                             href={item.href}
+                            target={item.target}
+                            rel={
+                              item.target === "_blank"
+                                ? "noopener noreferrer"
+                                : undefined
+                            }
                             onClick={() => setMobileMenuOpen(false)}
                             className="group flex items-start gap-4 rounded-lg p-3 hover:bg-accent transition-colors"
                           >

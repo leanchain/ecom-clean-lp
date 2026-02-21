@@ -1,18 +1,40 @@
 import { Paperclip, Sparkles } from "lucide-react";
 
-import { Blog7 } from "@/components/blog7";
+import Link from "next/link";
+
+import { BlogIndexClient } from "@/components/blog/blog-index-client";
 import SectionHeader from "@/components/section-header";
 import { getAllBlogs } from "@/lib/blog";
+import { Button } from "@/components/ui/button";
 
 export default function BlogPage() {
   const blogPosts = getAllBlogs();
 
-  const posts = blogPosts.map((post) => ({
+  const comparisonPriority = new Map<string, number>([
+    ["beseam-vs-triple-whale", 1],
+    ["beseam-vs-haus", 2],
+    ["beseam-vs-measured", 3],
+    ["beseam-vs-rockerbox", 4],
+    ["beseam-vs-workmagic", 5],
+  ]);
+
+  const posts = blogPosts.map((post) => {
+    const tags = post.tags ?? [];
+    const isComparison = post.title.startsWith("Beseam vs ");
+    const contentWordCount = post.content
+      ? post.content.split(/\s+/).filter(Boolean).length
+      : 0;
+    const readingTimeMinutes = Math.max(
+      2,
+      Math.round(contentWordCount / 220) || 0,
+    );
+
+    return {
     id: post.slug,
     title: post.title,
     summary: post.description,
-    label: post.tags?.[0] ?? "Blog",
     author: post.author,
+    dateISO: post.date,
     published: new Date(post.date).toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
@@ -20,7 +42,12 @@ export default function BlogPage() {
     }),
     url: `/blog/${post.slug}`,
     image: post.coverImage,
-  }));
+    tags,
+    isComparison,
+    comparisonRank: comparisonPriority.get(post.slug) ?? 999,
+    readingTimeMinutes,
+    };
+  });
 
   // Show "Coming Soon" if no blog posts
   if (posts.length === 0) {
@@ -31,7 +58,7 @@ export default function BlogPage() {
             icon={<Paperclip />}
             category="Blog"
             title="Beseam Insights"
-            description="The latest insights in optimising your PDP images, videos, copy and page layout for conversion and AI Search."
+            description="Insights on PDP optimization, revenue protection, and shipping improvements safely at scale."
             layout="center"
           />
 
@@ -45,14 +72,29 @@ export default function BlogPage() {
             </h2>
 
             <p className="mt-4 text-lg text-muted-foreground">
-              We're crafting insightful content about AI media generation,
-              product detail page optimization, and how to win in AI search.
+              We&apos;re crafting content about PDP ops, safe deployment
+              practices, revenue guardrails, and how agencies and brands
+              ship improvements together.
             </p>
 
             <p className="mt-4 text-sm text-muted-foreground">
               Check back soon for expert tips, case studies, and industry
               insights.
             </p>
+
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button asChild size="lg" className="rounded-full px-8">
+                <a href="https://app.beseam.com/analyze" target="_blank" rel="noopener noreferrer">Run Free PDP Audit</a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="rounded-full px-8"
+              >
+                <Link href="/demo">Watch demo</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -61,16 +103,33 @@ export default function BlogPage() {
 
   return (
     <>
-      <section className="hero-padding-margin container space-y-10.5">
+      <section className="hero-padding-margin container">
         <SectionHeader
           icon={<Paperclip />}
           category="Blog"
           title="Beseam Insights"
-          description="The latest insights in optimising your PDP images, videos, copy and page layout for conversion and AI Search."
+          description="Deep dives for dev agencies and SEO/GEO agencies shipping PDP improvements—and keeping every change revenue-guardrailed."
           layout="center"
+          titleSize="xl"
+          action={
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <Button asChild size="lg" className="rounded-full px-8">
+                <a href="https://app.beseam.com/analyze" target="_blank" rel="noopener noreferrer">Run Free PDP Audit</a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="rounded-full px-8"
+              >
+                <Link href="/demo">Watch demo</Link>
+              </Button>
+            </div>
+          }
         />
+
+        <BlogIndexClient posts={posts} />
       </section>
-      <Blog7 hideHeader posts={posts} />
     </>
   );
 }
