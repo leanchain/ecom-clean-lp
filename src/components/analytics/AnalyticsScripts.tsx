@@ -9,16 +9,45 @@ export function AnalyticsScripts() {
 
   const ENABLE_ANALYTICS = process.env.NEXT_PUBLIC_ENABLE_ANALYTICS !== "false";
   const GA_MEASUREMENT_ID =
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-LRZQ9CJC4G";
-  const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-PXFQP8G9";
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-GT7632NCQT";
+  const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-K5XM33MJ";
 
-  // Only render if analytics are enabled, IDs are present, and user has accepted cookies
-  if (!ENABLE_ANALYTICS || status !== "accepted" || !GA_MEASUREMENT_ID) {
+  // Only render if analytics are enabled and ID is present
+  if (!ENABLE_ANALYTICS || !GA_MEASUREMENT_ID) {
     return null;
   }
 
+  const consentState = status === "accepted" ? "granted" : "denied";
+
   return (
     <>
+      {/* Google Consent Mode v2 Initialization */}
+      <Script id="google-consent-mode" strategy="beforeInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          
+          // Set default consent to 'denied'
+          gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            'wait_for_update': 500
+          });
+
+          // If we already know the status from a previous session, update it immediately
+          if ('${consentState}' === 'granted') {
+            gtag('consent', 'update', {
+              'ad_storage': 'granted',
+              'ad_user_data': 'granted',
+              'ad_personalization': 'granted',
+              'analytics_storage': 'granted'
+            });
+          }
+        `}
+      </Script>
+
       {/* Google Analytics (gtag.js) */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
@@ -26,8 +55,6 @@ export function AnalyticsScripts() {
       />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', '${GA_MEASUREMENT_ID}', {
             page_path: window.location.pathname,
