@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Sparkles, ArrowRight, Loader2 } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import AnimatedBorderContainer from '@/components/ui/animated-border-container';
-import { cn } from '@/lib/utils';
+import React, { useState } from "react";
+import { Sparkles, ArrowRight, Loader2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import AnimatedBorderContainer from "@/components/ui/animated-border-container";
+import { cn } from "@/lib/utils";
 
 export const AnalyzerInput = () => {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleScan = (e: React.FormEvent) => {
@@ -28,9 +28,9 @@ export const AnalyzerInput = () => {
         <form
           onSubmit={handleScan}
           className={cn(
-            'flex gap-1 p-1 bg-background border rounded-full shadow-lg transition-all duration-300 items-center',
-            'hover:shadow-xl focus-within:shadow-xl focus-within:ring-2 focus-within:ring-primary/20',
-            loading && 'animate-pulse shadow-primary/10'
+            "flex gap-1 p-1 bg-background border rounded-full shadow-lg transition-all duration-300 items-center",
+            "hover:shadow-xl focus-within:shadow-xl focus-within:ring-2 focus-within:ring-primary/20",
+            loading && "animate-pulse shadow-primary/10",
           )}
         >
           <Input
@@ -59,7 +59,8 @@ export const AnalyzerInput = () => {
 
       <div className="mt-4 text-center">
         <p className="text-xs text-muted-foreground/80">
-          Analyzes 220+ checks across 10 domains • 100% Free • No credit card required
+          Analyzes 300+ checks across 17 domains • 100% Free • No credit card
+          required
         </p>
       </div>
     </div>

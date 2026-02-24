@@ -11,7 +11,8 @@ const CTA = () => {
   const shouldShowCTA = ![
     "/privacy-policy",
     "/terms-of-service",
-    "/blog",
+    "/alternatives",
+    "/compare",
     "/demo",
   ].includes(pathname);
 

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata = {
-  title: "About Beseam | Our Founder & Advisor",
+  title: "About Beseam | Our Founder & Advisors",
   description: "Beseam is an AI-native PDP ops layer built by veterans from Google and Amazon to protect and grow e-commerce revenue.",
 };
 
@@ -62,12 +62,16 @@ const AboutPage = () => {
 
             <div className="grid grid-cols-2 gap-4 pt-4">
               <div className="flex items-center gap-3 rounded-xl border p-4 bg-muted/20">
-                <Server className="h-5 w-5 text-primary" />
-                <span className="text-sm font-semibold">10yr Google/Amazon Veteran</span>
+                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .907 5.387.907 12s4.96 12 11.573 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" fill="#4285F4"/>
+                </svg>
+                <span className="text-sm font-semibold">10yr Google Veteran</span>
               </div>
               <div className="flex items-center gap-3 rounded-xl border p-4 bg-muted/20">
-                <Database className="h-5 w-5 text-primary" />
-                <span className="text-sm font-semibold">Scale-Grade Infrastructure</span>
+                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="#FF9900" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 12c0 5.12 3.58 9.43 8.57 10.95-.42-2.15-1.05-5.04 1.92-6.95 2.2-1.51 5.18-1.15 5.18-1.15s-.85.68-1.54 1.43c-.69.75-1.27 1.83-1.27 1.83s.57-.3 1.15-.3c.58 0 1.15.3 1.15.3s-.47-.65-.7-1.21c-.23-.56-.79-1.71-.79-1.71s.92.3 1.84-.15c.92-.45 1.38-1.5 1.38-1.5s-.68 2.1-1.61 2.4c-.93.3-1.84.15-1.84.15s.23-1.65-.77-2.55c-1-.9-2.41-.6-2.41-.6s-.31 1.5.15 2.1c.46.6 1.23.9 1.23.9s-.38-1.35-.38-2.25c0-.9.54-1.95 1.84-1.95s2.26 1.2 2.26 2.85c0 1.65-.92 3.16-1.38 3.16s-1.23-.9-1.23-.9-.46 1.35.15 2.47c.61 1.12 1.61 1.43 1.61 1.43s-.92-2.55-.92-4.5c0-1.95.77-3.31.77-3.31s1.38.15 2.26-.45c.88-.6 1.38-1.5 1.38-1.5s-.61 1.8.23 3.31c.84 1.51 2.03 1.65 2.03 1.65s-.69-2.85-1.84-4.5c-1.15-1.65-2.72-1.35-2.72-1.35s.23 1.8-1.15 2.78c-1.38.98-2.72.68-2.72.68s.69-2.55.69-3.6c0-1.05-.54-1.95-1.84-1.95-1.3 0-2.26 1.05-2.26 2.25 0 .9.46 1.65.46 1.65s-.77-1.35-.77-2.1c0-.75.46-1.43 1.38-1.43.92 0 1.84.75 1.84 2.1 0 1.35-1.15 2.55-1.15 2.55s.46-1.8.46-2.85c0-1.05-.69-1.8-1.84-1.8-1.15 0-2.41 1.05-2.41 2.55 0 1.5 1.23 2.63 1.23 2.63s-.54-1.35-.54-2.1c0-.75.69-1.43 1.61-1.43.92 0 2.03.68 2.03 2.25 0 1.57-1.23 3.01-1.23 3.01s.69-1.95.69-3.16c0-1.21-.77-1.95-1.84-1.95-1.07 0-2.26.98-2.26 2.55 0 1.57.92 2.63.92 2.63s-.46-1.2-.46-1.95c0-.75.61-1.43 1.61-1.43 1 0 2.03.6 2.03 1.8 0 1.2-.69 2.25-.69 2.25s.23-.9.23-1.65c0-.75-.38-1.43-1.38-1.43-1 0-1.84.6-1.84 1.8 0 1.2.61 2.25.61 2.25s-.23-.9-.23-1.65c0-.75.54-1.43 1.61-1.43 1.07 0 1.84.75 1.84 1.8 0 1.05-.69 2.1-.69 2.1s.38-.75.38-1.5c0-.75-.46-1.35-1.38-1.35-.92 0-1.61.6-1.61 1.65 0 1.05.61 2.1.61 2.1s-.31-.75-.31-1.5c0-.75.46-1.43 1.46-1.43 1 0 1.84.6 1.84 1.8z"/>
+                </svg>
+                <span className="text-sm font-semibold">Amazon Alumni</span>
               </div>
             </div>
 
@@ -127,61 +131,75 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Advisor Section - Scaled down to differentiate from Founder */}
+      {/* Advisors Section - Compact Grid Layout */}
       <section className="container py-12">
-        <div className="mx-auto max-w-5xl rounded-3xl border bg-muted/20 p-8 md:p-12">
-          <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:items-center">
-            <div className="relative aspect-square overflow-hidden rounded-2xl bg-muted lg:h-[320px] shadow-lg">
-              <Image 
-                src="/images/about/bettina-gimenez.jpg" 
-                alt="Bettina Gimenez" 
-                fill 
-                className="object-cover object-center"
-              />
-            </div>
-            
-            <div className="space-y-6">
-              <div>
-                <Badge variant="secondary" className="mb-2 rounded-full px-3 py-0.5 text-[10px] uppercase tracking-wider">
-                  Strategic Advisor
+        <div className="mb-8 text-center">
+          <h2 className="font-heading mb-2 text-2xl font-bold md:text-3xl">Our Advisors</h2>
+          <p className="mx-auto max-w-2xl text-muted-foreground">
+            Strategic advisors guiding our vision
+          </p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          {/* Bettina Gimenez */}
+          <div className="rounded-2xl border bg-muted/20 p-6">
+            <div className="flex gap-4">
+              <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-muted">
+                <Image 
+                  src="/images/about/bettina-gimenez.jpg" 
+                  alt="Bettina Gimenez" 
+                  fill 
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <Badge variant="secondary" className="mb-1 rounded-full px-2 py-0.5 text-[9px] uppercase tracking-wider">
+                  Advisor
                 </Badge>
-                <h2 className="font-heading mb-1 text-2xl font-bold md:text-3xl">Bettina Gimenez</h2>
-                <p className="text-lg font-medium text-secondary">E-commerce Expert & DTC Founder</p>
-              </div>
-
-              <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
-                <p>
-                  Bettina brings over 15 years of deep operational and strategic e-commerce experience. 
-                  As the <strong>Co-Founder of Dancing Queens</strong> and an <strong>E-commerce Examination Expert</strong> at Handelsverband.swiss, 
-                  she bridges the gap between high-scale tech and high-growth commerce.
-                </p>
-                <p>
-                  Her previous executive leadership roles include <strong>Co-Managing Director at HelloFresh Suisse</strong> and 
-                  Business Owner at <strong>Zürcher Kantonalbank</strong>. She ensures Beseam remains 
-                  laser-focused on the real-world needs of DTC founders and growth teams.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-6">
-                <Button variant="link" asChild className="h-auto p-0 text-secondary hover:text-secondary/80">
-                  <Link href="https://www.linkedin.com/in/bettina-gimenez-a6315655/" target="_blank" rel="noopener noreferrer">
-                    <Linkedin className="mr-2 h-4 w-4" />
-                    View LinkedIn
-                  </Link>
-                </Button>
-                
-                <div className="flex gap-4 border-l pl-6">
-                  <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground">
-                    <ShoppingBag className="h-4 w-4 text-secondary" />
-                    <span>DTC Operator</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground">
-                    <GraduationCap className="h-4 w-4 text-secondary" />
-                    <span>Handelsverband Expert</span>
-                  </div>
-                </div>
+                <h3 className="font-heading text-lg font-bold truncate">Bettina Gimenez</h3>
+                <p className="text-sm font-medium text-secondary truncate">E-commerce Expert & DTC Founder</p>
               </div>
             </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground line-clamp-2">
+              Co-Founder of Dancing Queens & E-commerce Examination Expert at Handelsverband.swiss. 
+              Former Co-Managing Director at HelloFresh Suisse.
+            </p>
+            <Button variant="link" asChild className="mt-2 h-auto p-0 text-secondary">
+              <Link href="https://www.linkedin.com/in/bettina-gimenez-a6315655/" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="mr-1 h-3 w-3" />
+                LinkedIn
+              </Link>
+            </Button>
+          </div>
+
+          {/* Fabrizio Metzler */}
+          <div className="rounded-2xl border bg-muted/20 p-6">
+            <div className="flex gap-4">
+              <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-muted">
+                <Image 
+                  src="/images/about/fabrizio-metzler.jpg" 
+                  alt="Fabrizio Metzler" 
+                  fill 
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <Badge variant="secondary" className="mb-1 rounded-full px-2 py-0.5 text-[9px] uppercase tracking-wider">
+                  Advisor
+                </Badge>
+                <h3 className="font-heading text-lg font-bold truncate">Fabrizio Metzler</h3>
+                <p className="text-sm font-medium text-secondary truncate">Founder & Entrepreneur</p>
+              </div>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground line-clamp-2">
+              Founder of OLEYVO. Former Key Partner Growth Manager at Too Good To Go. 
+              Lecturer in Start-up & Entrepreneurship at STF.
+            </p>
+            <Button variant="link" asChild className="mt-2 h-auto p-0 text-secondary">
+              <Link href="https://www.linkedin.com/in/fabrizio-metzler/" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="mr-1 h-3 w-3" />
+                LinkedIn
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -195,7 +213,9 @@ const AboutPage = () => {
             <CardHeader className="bg-blue-600/5 pb-4">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl">YouTube Data & Infrastructure</CardTitle>
-                <Badge variant="outline" className="border-blue-200 text-blue-700">Google</Badge>
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .907 5.387.907 12s4.96 12 11.573 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" fill="#4285F4"/>
+                </svg>
               </div>
             </CardHeader>
             <CardContent className="pt-6 text-sm text-muted-foreground space-y-3">
@@ -211,7 +231,9 @@ const AboutPage = () => {
             <CardHeader className="bg-orange-600/5 pb-4">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl">Next-Gen Transportation</CardTitle>
-                <Badge variant="outline" className="border-orange-200 text-orange-700">Amazon</Badge>
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="#FF9900" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 12c0 5.12 3.58 9.43 8.57 10.95-.42-2.15-1.05-5.04 1.92-6.95 2.2-1.51 5.18-1.15 5.18-1.15s-.85.68-1.54 1.43c-.69.75-1.27 1.83-1.27 1.83s.57-.3 1.15-.3c.58 0 1.15.3 1.15.3s-.47-.65-.7-1.21c-.23-.56-.79-1.71-.79-1.71s.92.3 1.84-.15c.92-.45 1.38-1.5 1.38-1.5s-.68 2.1-1.61 2.4c-.93.3-1.84.15-1.84.15s.23-1.65-.77-2.55c-1-.9-2.41-.6-2.41-.6s-.31 1.5.15 2.1c.46.6 1.23.9 1.23.9s-.38-1.35-.38-2.25c0-.9.54-1.95 1.84-1.95s2.26 1.2 2.26 2.85c0 1.65-.92 3.16-1.38 3.16s-1.23-.9-1.23-.9-.46 1.35.15 2.47c.61 1.12 1.61 1.43 1.61 1.43s-.92-2.55-.92-4.5c0-1.95.77-3.31.77-3.31s1.38.15 2.26-.45c.88-.6 1.38-1.5 1.38-1.5s-.61 1.8.23 3.31c.84 1.51 2.03 1.65 2.03 1.65s-.69-2.85-1.84-4.5c-1.15-1.65-2.72-1.35-2.72-1.35s.23 1.8-1.15 2.78c-1.38.98-2.72.68-2.72.68s.69-2.55.69-3.6c0-1.05-.54-1.95-1.84-1.95-1.3 0-2.26 1.05-2.26 2.25 0 .9.46 1.65.46 1.65s-.77-1.35-.77-2.1c0-.75.46-1.43 1.38-1.43.92 0 1.84.75 1.84 2.1 0 1.35-1.15 2.55-1.15 2.55s.46-1.8.46-2.85c0-1.05-.69-1.8-1.84-1.8-1.15 0-2.41 1.05-2.41 2.55 0 1.5 1.23 2.63 1.23 2.63s-.54-1.35-.54-2.1c0-.75.69-1.43 1.61-1.43.92 0 2.03.68 2.03 2.25 0 1.57-1.23 3.01-1.23 3.01s.69-1.95.69-3.16c0-1.21-.77-1.95-1.84-1.95-1.07 0-2.26.98-2.26 2.55 0 1.57.92 2.63.92 2.63s-.46-1.2-.46-1.95c0-.75.61-1.43 1.61-1.43 1 0 2.03.6 2.03 1.8 0 1.2-.69 2.25-.69 2.25s.23-.9.23-1.65c0-.75-.46-1.35-1.38-1.35-.92 0-1.61.6-1.61 1.65 0 1.05.61 2.1.61 2.1s-.31-.75-.31-1.5c0-.75.46-1.43 1.46-1.43 1 0 1.84.6 1.84 1.8z"/>
+                </svg>
               </div>
             </CardHeader>
             <CardContent className="pt-6 text-sm text-muted-foreground space-y-3">
