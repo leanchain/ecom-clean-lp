@@ -256,7 +256,7 @@
 /* Typography utilities */
 .font-heading {
   font-family: var(--font-display, var(--font-figtree));
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }

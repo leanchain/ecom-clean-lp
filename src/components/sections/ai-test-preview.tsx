@@ -63,40 +63,44 @@ const agents = [
 
 const AiTestPreview = () => {
   return (
-    <section className="py-20 md:py-32 bg-gradient-to-b from-background to-muted/30">
-      <div className="container">
+    <section className="relative overflow-hidden py-24 md:py-32 bg-gradient-to-b from-background to-muted/50">
+      {/* Background glow effects */}
+      <div className="absolute left-0 top-1/4 -z-10 h-[500px] w-[500px] bg-primary/5 blur-[120px] rounded-full" />
+      <div className="absolute right-0 bottom-1/4 -z-10 h-[500px] w-[500px] bg-secondary/5 blur-[120px] rounded-full" />
+
+      <div className="container relative">
         <div className="mx-auto max-w-5xl">
           {/* Header */}
-          <div className="mb-12 text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+          <div className="mb-16 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6 shadow-sm border border-primary/20">
               <Wand2 className="h-4 w-4" />
               AI-Native Architecture
             </div>
-            <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-              Six Specialized Agents. One Closed Loop.
+            <h2 className="font-heading mb-6 text-3xl font-bold md:text-5xl lg:text-6xl tracking-tight">
+              Six Specialized Agents. <span className="text-primary italic">One Closed Loop.</span>
             </h2>
-            <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
+            <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed">
               Beseam&apos;s AI isn&apos;t a chatbot writing copy. It&apos;s a system of
               specialized agents that handle the full upgrade-and-protect
               lifecycle autonomously.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {agents.map((agent, idx) => (
               <div
                 key={idx}
-                className="group flex flex-col rounded-2xl border bg-card p-6 shadow-sm transition-all hover:shadow-md hover:-translate-y-1"
+                className="group flex flex-col rounded-3xl border bg-card/80 backdrop-blur-sm p-8 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 hover:border-primary/20"
               >
                 <div
-                  className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${agent.bg}`}
+                  className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl ${agent.bg} transition-all duration-300 group-hover:scale-110 shadow-sm`}
                 >
-                  <agent.icon className={`h-6 w-6 ${agent.color}`} />
+                  <agent.icon className={`h-7 w-7 ${agent.color}`} />
                 </div>
-                <h3 className="mb-2 text-lg font-bold text-foreground">
+                <h3 className="font-heading mb-3 text-xl font-bold text-foreground">
                   {agent.name}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-4">
                   {agent.description}
                 </p>
               </div>

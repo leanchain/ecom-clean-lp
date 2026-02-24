@@ -1,4 +1,4 @@
-import { Figtree } from "next/font/google";
+import { Figtree, Lora } from "next/font/google";
 
 import type { Metadata } from "next";
 
@@ -58,7 +58,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
   publisher: "Beseam",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://beseam.com"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "https://beseam.com",
+  ),
   robots: {
     index: true,
     follow: true,
@@ -115,20 +117,16 @@ export default function RootLayout({
           <CookieConsentProvider>
             <AnalyticsScripts />
             <NavigationProvider>
-              <div className="flex h-screen bg-background overflow-hidden">
-                <div className="flex flex-1 flex-col min-w-0 min-h-0 relative">
-                  {/* Header - In the flow */}
-                  <Navbar />
+              <div className="flex min-h-screen flex-col bg-background">
+                {/* Header - In the flow */}
+                <Navbar />
 
-                  {/* Page content */}
-                  <main className="flex-1 overflow-auto min-h-0 scrollbar-thin">
-                    <div className="w-full min-h-0 h-full relative">
-                      {children}
-                      <CTA />
-                      <Footer />
-                    </div>
-                  </main>
-                </div>
+                {/* Page content */}
+                <main className="flex-1">
+                  {children}
+                  <CTA />
+                  <Footer />
+                </main>
               </div>
             </NavigationProvider>
           </CookieConsentProvider>

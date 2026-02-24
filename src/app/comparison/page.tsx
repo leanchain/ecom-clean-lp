@@ -178,13 +178,13 @@ export default function ComparisonPage() {
 
         {/* Comparison Table */}
         <div className="-mr-4 overflow-x-auto">
-          <div className="min-w-[900px]">
-            <div className="grid grid-cols-4">
-              {/* Table Header - Only once */}
-              <div className="border-b p-4"></div>
-              <div className="flex flex-col items-center justify-center gap-2 rounded-t-3xl bg-green-100 p-4 md:p-6">
+          <div className="min-w-[900px] px-4">
+            <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr] rounded-3xl border shadow-xl overflow-hidden">
+              {/* Table Header - Sticky */}
+              <div className="sticky top-16 z-20 border-b bg-background p-4"></div>
+              <div className="sticky top-16 z-20 flex flex-col items-center justify-center gap-2 border-b bg-primary/5 p-4 md:p-6 backdrop-blur-md">
                 <div className="text-center">
-                  <div className="mb-2 text-xl font-bold md:text-2xl">
+                  <div className="mb-2 text-xl font-bold md:text-2xl text-primary">
                     Beseam PDP AI
                   </div>
                   <div className="text-muted-foreground text-xs md:text-sm">
@@ -192,7 +192,7 @@ export default function ComparisonPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-center gap-2 rounded-t-3xl border-b p-4 md:p-6">
+              <div className="sticky top-16 z-20 flex flex-col items-center justify-center gap-2 border-b bg-background/90 p-4 md:p-6 backdrop-blur-md">
                 <div className="text-center">
                   <div className="mb-2 text-xl font-bold md:text-2xl">
                     Point Tools
@@ -202,7 +202,7 @@ export default function ComparisonPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-center gap-2 rounded-t-3xl border-b p-4 md:p-6">
+              <div className="sticky top-16 z-20 flex flex-col items-center justify-center gap-2 border-b bg-background/90 p-4 md:p-6 backdrop-blur-md">
                 <div className="text-center">
                   <div className="mb-2 text-xl font-bold md:text-2xl">
                     Traditional Stack
@@ -217,8 +217,8 @@ export default function ComparisonPage() {
               {sections.map((section, sectionIdx) => (
                 <React.Fragment key={sectionIdx}>
                   {/* Section Header spanning all columns */}
-                  <div className="col-span-4 border-b bg-muted/50 p-4 pt-8">
-                    <h2 className="text-xl font-bold md:text-2xl">
+                  <div className="col-span-4 border-b bg-muted/30 p-4 pt-8 pb-4">
+                    <h2 className="text-lg font-bold md:text-xl uppercase tracking-wider text-muted-foreground/80">
                       {section.title}
                     </h2>
                   </div>
@@ -226,25 +226,28 @@ export default function ComparisonPage() {
                   {/* Section Rows */}
                   {section.rows.map((row, rowIdx) => (
                     <React.Fragment key={rowIdx}>
-                      <div className="flex items-center border-b p-3 text-sm font-medium md:p-4 md:text-base">
+                      <div className="flex items-center border-b p-4 text-sm font-medium md:text-base bg-background">
                         {row.label}
                       </div>
-                      <div className="border-b bg-green-50 p-3 md:p-6">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm md:text-base">
+                      <div className="border-b bg-primary/[0.02] p-4 md:p-6">
+                        <div className="flex items-start gap-2">
+                          <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                          <span className="text-sm md:text-base font-medium">
                             {row.Beseam}
                           </span>
                         </div>
                       </div>
-                      <div className="border-b p-3 md:p-6">
-                        <div className="flex items-center gap-2">
+                      <div className="border-b p-4 md:p-6 bg-background">
+                        <div className="flex items-start gap-2">
+                          <Minus className="h-5 w-5 text-muted-foreground/40 shrink-0 mt-0.5" />
                           <span className="text-muted-foreground text-sm md:text-base">
                             {row.pointTools}
                           </span>
                         </div>
                       </div>
-                      <div className="border-b p-3 md:p-6">
-                        <div className="flex items-center gap-2">
+                      <div className="border-b p-4 md:p-6 bg-background">
+                        <div className="flex items-start gap-2">
+                          <Minus className="h-5 w-5 text-muted-foreground/40 shrink-0 mt-0.5" />
                           <span className="text-muted-foreground text-sm md:text-base">
                             {row.traditional}
                           </span>
@@ -256,12 +259,12 @@ export default function ComparisonPage() {
               ))}
 
               {/* Button at the bottom */}
-              <div className="p-4"></div>
-              <div className="flex items-center justify-center rounded-b-3xl bg-green-100 p-4 md:p-6">
-                <Button className="w-full">Get Started with Beseam</Button>
+              <div className="p-4 bg-muted/5"></div>
+              <div className="flex items-center justify-center bg-primary/5 p-4 md:p-8">
+                <Button className="w-full shadow-lg shadow-primary/20 h-12 text-base font-bold rounded-xl" size="lg">Get Started with Beseam</Button>
               </div>
-              <div className="p-4"></div>
-              <div className="p-4"></div>
+              <div className="p-4 bg-muted/5"></div>
+              <div className="p-4 bg-muted/5"></div>
             </div>
           </div>
         </div>
