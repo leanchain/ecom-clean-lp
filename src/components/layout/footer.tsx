@@ -20,7 +20,9 @@ const ITEMS = [
     title: "Resources",
     links: [
       { name: "About", href: "/about" },
-      { name: "Blog", href: "/blog" },
+      { name: "Alternatives", href: "/alternatives" },
+      { name: "Compare", href: "/compare" },
+      { name: "Documentation", href: "https://docs.beseam.com/docs/public/tracker", target: "_blank" },
       { name: "FAQ", href: "/#faq" },
       { name: "Demo", href: "/demo" },
     ],

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { getBlogSlugs } from "@/lib/blog";
+import { getAlternativeSlugs } from "@/lib/alternatives";
 
 export const dynamic = "force-static";
 
@@ -12,23 +12,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getBaseUrl();
   const lastModified = new Date();
 
-  const blogRoutes = getBlogSlugs().map((slug) => {
+  const alternativeRoutes = getAlternativeSlugs().map((slug) => {
     const normalized = slug.replace(/\.mdx?$/, "");
-    return `/blog/${normalized}`;
+    return `/alternatives/${normalized}`;
   });
 
   const routes = [
     "/",
     "/about",
     "/demo",
+    "/alternatives",
+    "/compare",
     "/comparison",
     "/pdp-analyzer",
     "/example-pdp",
     "/optimised-pdp",
     "/privacy-policy",
     "/terms-of-service",
-    "/blog",
-    ...blogRoutes,
+    ...alternativeRoutes,
   ];
 
   return routes.map((route) => ({

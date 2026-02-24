@@ -14,7 +14,9 @@ import {
   Mail,
   Menu,
   Search,
+  Shuffle,
   Shield,
+  Scale,
   AlertTriangle,
   History,
   Users,
@@ -35,7 +37,25 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
-const productItems = [
+interface MenuItem {
+  id: string;
+  title: string;
+  description?: string;
+  href: string;
+  target?: string;
+  icon: React.ElementType;
+  badge?: {
+    label: string;
+    className: string;
+  };
+}
+
+interface MenuContentProps {
+  mainItems: MenuItem[];
+  footerItems?: MenuItem[];
+}
+
+const productItems: MenuItem[] = [
   {
     id: "audit",
     title: "PDP Audit",
@@ -71,7 +91,7 @@ const productItems = [
   },
 ];
 
-const productLinks = [
+const productLinks: MenuItem[] = [
   {
     id: "how-it-works",
     title: "How it Works",
@@ -88,20 +108,20 @@ const productLinks = [
   },
 ];
 
-const resourceItems = [
+const resourceItems: MenuItem[] = [
   {
-    id: "about",
-    title: "About",
-    description: "Learn about Beseam's mission and team",
-    href: "/about",
-    icon: Users,
+    id: "alternatives",
+    title: "Alternatives",
+    description: "Shortlists by category and use case",
+    href: "/alternatives",
+    icon: Shuffle,
   },
   {
-    id: "blog",
-    title: "Blog",
-    description: "Insights on PDP optimization and revenue protection",
-    href: "/blog",
-    icon: BookOpen,
+    id: "compare",
+    title: "Compare",
+    description: "Feature-by-feature comparisons across leading tools",
+    href: "/compare",
+    icon: Scale,
   },
   {
     id: "docs",
@@ -120,7 +140,7 @@ const resourceItems = [
   },
 ];
 
-const resourceLinks = [
+const resourceLinks: MenuItem[] = [
   {
     id: "contact",
     title: "Contact Sales",
@@ -137,29 +157,12 @@ const resourceLinks = [
   },
 ];
 
-interface MenuItem {
-  title: string;
-  description?: string;
-  href: string;
-  target?: string;
-  icon: React.ElementType;
-  badge?: {
-    label: string;
-    className: string;
-  };
-}
-
-interface MenuContentProps {
-  mainItems: MenuItem[];
-  footerItems?: MenuItem[];
-}
-
 const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
   <div className="w-max bg-background p-3">
     <div className="grid grid-cols-2 gap-2 mb-2">
-      {mainItems.map((item, idx) => (
+      {mainItems.map((item) => (
         <NavigationMenuLink
-          key={idx}
+          key={item.id}
           href={item.href}
           target={item.target}
           rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
@@ -192,9 +195,9 @@ const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
     </div>
     {footerItems && footerItems.length > 0 && (
       <div className="grid grid-cols-2 gap-2 p-2 mt-2 border-t border-border/40 bg-muted/20 dark:bg-muted/5 rounded-b-xl">
-        {footerItems.map((item, idx) => (
+        {footerItems.map((item) => (
           <NavigationMenuLink
-            key={idx}
+            key={item.id}
             href={item.href}
             className="group flex w-[250px] items-center gap-3 rounded-lg px-3 py-2.5 transition-all hover:bg-accent border border-transparent hover:border-border/50"
           >
@@ -413,6 +416,12 @@ export default function Navbar() {
                           <Link
                             key={item.id}
                             href={item.href}
+                            target={item.target}
+                            rel={
+                              item.target === "_blank"
+                                ? "noopener noreferrer"
+                                : undefined
+                            }
                             onClick={() => setMobileMenuOpen(false)}
                             className="group flex items-center gap-4 rounded-lg p-3 hover:bg-accent transition-colors"
                           >
@@ -423,11 +432,11 @@ export default function Navbar() {
                               <span className="text-sm font-bold">
                                 {item.title}
                               </span>
-                              {(item as any).badge && (
+                              {item.badge && (
                                 <span
-                                  className={`rounded-lg px-1.5 py-0.5 text-[9px] font-bold ${(item as any).badge.className}`}
+                                  className={`rounded-lg px-1.5 py-0.5 text-[9px] font-bold ${item.badge.className}`}
                                 >
-                                  {(item as any).badge.label}
+                                  {item.badge.label}
                                 </span>
                               )}
                             </div>
@@ -443,6 +452,12 @@ export default function Navbar() {
                             <Link
                               key={item.id}
                               href={item.href}
+                              target={item.target}
+                              rel={
+                                item.target === "_blank"
+                                  ? "noopener noreferrer"
+                                  : undefined
+                              }
                               onClick={() => setMobileMenuOpen(false)}
                               className="group flex items-center gap-3 rounded-lg bg-muted/30 p-3 hover:bg-accent transition-colors"
                             >

@@ -35,6 +35,8 @@
   --info-foreground: #ffffff;
   --success: #22c55e;
   --success-foreground: #ffffff;
+  --warning: #f59e0b;
+  --warning-foreground: #ffffff;
   --border: #d5d7de;
   --input: #9ca3af;
   --ring: #ff6041;
@@ -127,6 +129,19 @@
   --success-800: #166534;
   --success-900: #14532d;
   --success-950: #0f3d24;
+
+  /* Warning shades */
+  --warning-50: #fffbeb;
+  --warning-100: #fef3c7;
+  --warning-200: #fde68a;
+  --warning-300: #fcd34d;
+  --warning-400: #fbbf24;
+  --warning-500: #f59e0b;
+  --warning-600: #d97706;
+  --warning-700: #b45309;
+  --warning-800: #92400e;
+  --warning-900: #78350f;
+  --warning-950: #451a03;
 
   --radius: 0.625rem;
   --sidebar: #eef1f7;
@@ -223,6 +238,9 @@
 
   --success: #4ade80;
   --success-foreground: #052e16;
+
+  --warning: #fbbf24;
+  --warning-foreground: #451a03;
 
   /* UI elements - better visibility */
   --border: #2f2f35;
@@ -336,6 +354,8 @@
   --color-info-foreground: var(--info-foreground);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
