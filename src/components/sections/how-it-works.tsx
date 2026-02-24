@@ -5,13 +5,13 @@ import React from "react";
 const steps = [
   {
     number: "01",
-    title: "Audit & Recommend",
+    title: "Audit, Monitor & Recommend",
     description:
-      "Connect your store and get a baseline PDP quality report. Beseam identifies gaps and generates upgrade recommendations — or your agency brings their own improvements.",
+      "Connect your store and get a baseline PDP quality report. Beseam then continuously monitors your pages — when something changes or a new gap appears, you get alerted with prioritized fixes.",
     bullets: [
-      "Get a baseline score for AI visibility, conversion readiness, and performance.",
+      "Baseline scores for AI visibility, conversion readiness, and performance.",
+      "Continuous monitoring — get weekly reports and instant alerts when pages degrade.",
       "AI generates prioritized upgrade playbooks you can review or hand to your agency.",
-      "Agencies and internal teams can bring their own changes too — all welcome.",
     ],
   },
   {
@@ -48,6 +48,9 @@ const StepVisual = ({ index }: { index: number }) => {
           </span>
           <span className="bg-background text-foreground/80 rounded-full px-3 py-1 text-[11px] font-medium">
             Score
+          </span>
+          <span className="bg-emerald-500/15 text-emerald-600 rounded-full px-3 py-1 text-[11px] font-medium">
+            Monitoring
           </span>
           <span className="border-border text-muted-foreground rounded-full border px-3 py-1 text-[11px]">
             Playbook
@@ -149,42 +152,62 @@ const StepVisual = ({ index }: { index: number }) => {
   );
 };
 
+import { motion } from "framer-motion";
+
 const HowItWorks = () => {
   return (
-    <section className="bg-muted/30 py-20 md:py-32">
-      <div className="container">
-        <div className="mb-12 text-center md:mb-16">
-          <h2 className="mb-4 text-3xl font-bold md:text-5xl">
-            How Beseam Works
-          </h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
-            Upgrade your PDPs, deploy with confidence, and protect your revenue
-            — in three steps.
-          </p>
+    <section className="relative overflow-hidden bg-muted/30 py-24 md:py-32">
+      {/* Background glow effect */}
+      <div className="absolute left-1/2 top-1/2 -z-10 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 bg-primary/5 blur-[120px] rounded-full" />
+
+      <div className="container relative">
+        <div className="mb-16 text-center md:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="font-heading mb-6 text-4xl font-bold md:text-5xl lg:text-6xl tracking-tight">
+              How it works
+            </h2>
+            <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed">
+              From audit to auto-rollback in three steps. A closed-loop system designed for safety and scale.
+            </p>
+          </motion.div>
         </div>
 
-        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+        <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-3">
           {steps.map((step, index) => (
-            <div key={index} className="flex flex-col items-start">
-              <StepVisual index={index} />
-              <div className="text-secondary mb-1 text-3xl font-semibold tracking-tight md:text-4xl">
+            <motion.div 
+              key={index} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.2, duration: 0.6 }}
+              className="group flex flex-col items-start"
+            >
+              <div className="w-full mb-8 transform transition-all duration-300 group-hover:scale-[1.02]">
+                <StepVisual index={index} />
+              </div>
+              <div className="font-heading text-secondary mb-3 text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl opacity-20 transition-opacity group-hover:opacity-40">
                 {step.number}
               </div>
-              <h3 className="mb-1 text-lg font-semibold md:text-xl">
+              <h3 className="font-heading mb-3 text-xl font-bold md:text-2xl text-foreground">
                 {step.title}
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed md:text-base">
+              <p className="text-muted-foreground text-base leading-relaxed mb-6">
                 {step.description}
               </p>
-              <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
+              <ul className="mt-auto space-y-3">
                 {step.bullets?.map((item, bulletIndex) => (
-                  <li key={bulletIndex} className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary" />
+                  <li key={bulletIndex} className="flex gap-3 text-sm text-muted-foreground/90 leading-snug">
+                    <div className="mt-1.5 flex h-1.5 w-1.5 shrink-0 items-center justify-center rounded-full bg-primary" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -106,13 +106,10 @@ const resourceItems = [
   {
     id: "docs",
     title: "Documentation",
-    description: "Guides and API reference",
-    href: "#",
+    description: "Guides, SDK reference, and API docs",
+    href: "https://docs.beseam.com/docs/public/tracker",
+    target: "_blank",
     icon: FileText,
-    badge: {
-      label: "Soon",
-      className: "bg-primary/10 text-primary",
-    },
   },
   {
     id: "faq",
@@ -227,9 +224,9 @@ export default function Navbar() {
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
   return (
-    <header className="relative z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto px-4">
-        <div className="flex h-14 items-center justify-between">
+        <div className="flex h-16 items-center justify-between">
           <div className="flex items-center lg:w-[300px]">
             <Link href="/" className="flex items-center space-x-2">
               <NavbarLogo className="text-primary" />
@@ -426,11 +423,11 @@ export default function Navbar() {
                               <span className="text-sm font-bold">
                                 {item.title}
                               </span>
-                              {item.badge && (
+                              {(item as any).badge && (
                                 <span
-                                  className={`rounded-lg px-1.5 py-0.5 text-[9px] font-bold ${item.badge.className}`}
+                                  className={`rounded-lg px-1.5 py-0.5 text-[9px] font-bold ${(item as any).badge.className}`}
                                 >
-                                  {item.badge.label}
+                                  {(item as any).badge.label}
                                 </span>
                               )}
                             </div>

@@ -20,24 +20,14 @@ import TrustBadges from "@/components/trust-badges";
 export default function Home() {
   return (
     <>
-      {/* Hero - Upgrade + Protect value prop */}
+      {/* Hero - Outcome-focused hook + dual CTA */}
       <Hero230 />
 
       {/* Social Proof - Build trust immediately */}
       <ClientLogos />
 
-      {/* Key Metrics - Core value props */}
-      <MetricsBar />
-
-      {/* The Loop - 7-step closed-loop system */}
-      <Stats18 />
-
-      {/* Audit CTA - Low commitment baseline entry point */}
-      <AuditTryout />
-
-      {/* How It Works - Upgrade → Deploy Safely → Monitor */}
+      {/* How It Works - Numbered 01/02/03 flow */}
       <HowItWorks />
-
       {/* Platform Preview - 4-tab product UI */}
       <Feature57 />
 
@@ -48,18 +38,16 @@ export default function Home() {
       <Compare2 />
 
       {/* Testimonials - Social proof */}
-      {/* <Testimonials /> */}
-
-      {/* Trust Badges - Security and reliability */}
-      <TrustBadges />
-
+      <Testimonials />
+      {/* Audit CTA - Low commitment baseline entry point */}
+      <AuditTryout />
       {/* Integrations - Show compatibility */}
       <Integration1 />
 
       {/* Featured Partners - Affiliate / ecosystem */}
-      {/* <FeaturedPartners /> */}
+      <FeaturedPartners />
 
-      {/* FAQ - Handle objections */}
+      {/* FAQ - Top 6 objection-busters */}
       <Faq9 />
 
       {/* Final CTA - Strong close */}

@@ -1,13 +1,17 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
 
 interface IntegrationItem {
   id: number;
@@ -67,71 +71,113 @@ const INTEGRATIONS: IntegrationItem[] = [
   },
 ];
 
-const FeatureCard: React.FC<IntegrationItem> = ({
+const FeatureIcon: React.FC<IntegrationItem> = ({
   name,
   description,
   logo,
   status,
 }) => {
   return (
-    <Card className="bg-background text-foreground w-full border-border px-4 py-3 md:px-5 md:py-4">
-      <CardHeader className="flex flex-row items-center space-x-4 p-0">
-        <Image
-          src={logo}
-          alt={name}
-          width={80}
-          height={32}
-          className="h-8 w-auto shrink-0 object-contain md:h-9"
-        />
-        <div className="flex-1">
-          <div className="flex items-center gap-2">
-            <CardTitle className="text-base font-semibold md:text-lg">
-              {name}
-            </CardTitle>
-            {status === "coming-soon" && (
-              <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
-                Coming Soon
-              </span>
-            )}
-          </div>
-          <CardDescription className="text-xs text-muted-foreground md:text-sm">
-            {description}
-          </CardDescription>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <div className="group relative flex h-16 w-32 items-center justify-center rounded-xl border border-border bg-card/50 px-4 transition-all hover:bg-accent/50 md:h-20 md:w-40">
+          <Image
+            src={logo}
+            alt={name}
+            width={100}
+            height={40}
+            className="h-7 w-auto object-contain opacity-90 transition-all group-hover:opacity-100 md:h-9"
+          />
+          {status === "coming-soon" && (
+            <Badge
+              variant="outline"
+              className="absolute -top-2 -right-2 scale-75 whitespace-nowrap bg-background px-1.5 py-0 text-[10px] font-medium"
+            >
+              Soon
+            </Badge>
+          )}
         </div>
-      </CardHeader>
-    </Card>
+      </TooltipTrigger>
+      <TooltipContent side="top" className="z-[100] max-w-xs p-3 text-center">
+        <p className="text-sm font-semibold">{name}</p>
+        <p className="mt-1 text-xs text-muted-foreground">{description}</p>
+      </TooltipContent>
+    </Tooltip>
   );
 };
 
 const Integration1 = () => {
   return (
-    <section className="py-20 md:py-24">
-      <div className="container max-w-5xl">
-        <div className="mx-auto mb-8 max-w-3xl text-center">
-          <h2 className="font-heading text-foreground mb-4 text-pretty text-3xl md:text-4xl lg:text-5xl">
-            Connect Beseam to the platforms you already use
-          </h2>
-          <p className="text-muted-foreground text-sm md:text-base">
-            {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-              ? "Beseam is designed to plug into your ecommerce platform and product feeds so AI-ready PDPs stay in sync automatically — no rebuild or custom CMS needed."
-              : "Beseam plugs into your ecommerce platform and product feeds so AI-ready PDPs stay in sync automatically - no rebuild or custom CMS needed."}
-          </p>
+    <section className="relative overflow-hidden py-24 md:py-32 bg-background">
+      {/* Background glow effects */}
+      <div className="absolute left-1/4 top-1/2 -z-10 h-[400px] w-[400px] bg-primary/5 blur-[120px] rounded-full" />
+      <div className="absolute right-1/4 top-1/2 -z-10 h-[400px] w-[400px] bg-secondary/5 blur-[120px] rounded-full" />
+
+      <div className="container relative max-w-5xl">
+        <div className="mx-auto mb-16 max-w-3xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="font-heading text-foreground mb-6 text-pretty text-4xl md:text-5xl lg:text-6xl tracking-tight">
+              Connect Beseam to the <span className="text-primary italic">platforms you already use</span>
+            </h2>
+            <p className="text-muted-foreground/90 text-lg md:text-xl leading-relaxed">
+              Beseam plugs into your ecommerce platform and product feeds so
+              AI-ready PDPs stay in sync automatically - no rebuild or custom CMS
+              needed.
+            </p>
+          </motion.div>
         </div>
 
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 px-4 sm:grid-cols-2 md:mt-4 lg:mt-8">
-          {INTEGRATIONS.map((item) => (
-            <FeatureCard key={item.id} {...item} />
-          ))}
-        </div>
+        <TooltipProvider delayDuration={0}>
+          <div className="relative mt-12 w-full">
+            {/* Fade edges */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent md:w-48" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent md:w-48" />
+            
+            <div className="flex overflow-hidden">
+              <motion.div
+                className="flex w-max gap-8 py-8"
+                animate={{
+                  x: ["0%", "-50%"],
+                }}
+                transition={{
+                  duration: 30,
+                  ease: "linear",
+                  repeat: Infinity,
+                }}
+              >
+                {[...INTEGRATIONS, ...INTEGRATIONS].map((item, idx) => (
+                  <motion.div
+                    key={`${item.id}-${idx}`}
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="transition-transform"
+                  >
+                    <FeatureIcon {...item} />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+        </TooltipProvider>
 
-        <div className="mt-10 flex flex-row items-center justify-center gap-x-4 text-sm md:text-base">
-          <span className="text-muted-foreground">
-            Have a tool you'd like to integrate?
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="mt-20 flex flex-col items-center justify-center gap-6 sm:flex-row"
+        >
+          <span className="text-muted-foreground font-medium">
+            Have a tool you&apos;d like to integrate?
           </span>
-          <Button asChild size="sm" className="rounded-full px-4">
+          <Button asChild size="lg" variant="outline" className="rounded-full px-8 border-2 font-bold">
             <a href="/demo">Request an integration</a>
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

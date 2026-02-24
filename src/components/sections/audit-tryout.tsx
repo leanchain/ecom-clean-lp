@@ -11,8 +11,8 @@ const AuditTryout = () => {
             <Sparkles className="h-3 w-3" />
             PDP Audit &amp; Baseline
           </div>
-          <h2 className="text-3xl font-semibold leading-tight md:text-4xl">
-            Know exactly where your PDPs stand — before making changes.
+          <h2 className="font-heading text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl">
+            Know exactly where your PDPs stand — <span className="text-indigo-300 italic">before</span> making changes.
           </h2>
           <p className="text-base text-indigo-100/90">
             Get a comprehensive baseline report for any product page. Understand
