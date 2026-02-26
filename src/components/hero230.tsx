@@ -6,14 +6,10 @@ import { Shield, GitBranch, Activity, RotateCcw } from "lucide-react";
 import { TypingAnimation } from "@/components/typing-animation";
 import { AnalyzerInput } from "@/components/sections/analyzer-input";
 
-const DEMO_PDP_URL = "https://oleyvo.ch/products/oleyvo-man-2-0?demo=1";
-
 import { motion } from "framer-motion";
 
 const Hero230 = () => {
-  const exampleReportHref = `https://app.beseam.com/analyze?url=${encodeURIComponent(
-    DEMO_PDP_URL
-  )}`;
+  const exampleReportHref = `https://app.beseam.com/report/-1`;
 
   return (
     <section className="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32">
@@ -36,8 +32,8 @@ const Hero230 = () => {
 
           <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed">
             Beseam continuously audits your PDPs, generates AI-powered
-            recommendations, and alerts you when something changes — then deploys
-            fixes safely and rolls back if KPIs dip.
+            recommendations, and alerts you when something changes — then
+            deploys fixes safely and rolls back if KPIs dip.
           </p>
         </motion.div>
 
@@ -48,7 +44,9 @@ const Hero230 = () => {
         >
           {/* Typing animation for positioning */}
           <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground/70">
-            <span className="uppercase tracking-widest text-[10px]">Think:</span>
+            <span className="uppercase tracking-widest text-[10px]">
+              Think:
+            </span>
             <span className="text-foreground">
               <TypingAnimation
                 words={[
