@@ -20,7 +20,7 @@ const agents = [
     bg: "bg-blue-500/10",
   },
   {
-    name: "Generator Agent",
+    name: "Enhancer Agent",
     description:
       "Produces upgrade assets — schema, FAQ sections, product narratives, media prompts — all within your brand constraints and style guidelines.",
     icon: Wand2,
@@ -77,12 +77,13 @@ const AiTestPreview = () => {
               AI-Native Architecture
             </div>
             <h2 className="font-heading mb-6 text-3xl font-bold md:text-5xl lg:text-6xl tracking-tight">
-              Six Specialized Agents. <span className="text-primary italic">One Closed Loop.</span>
+              Six Specialized Agents.{" "}
+              <span className="text-primary italic">One Closed Loop.</span>
             </h2>
             <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed">
-              Beseam&apos;s AI isn&apos;t a chatbot writing copy. It&apos;s a system of
-              specialized agents that handle the full upgrade-and-protect
-              lifecycle autonomously.
+              Beseam&apos;s AI isn&apos;t a chatbot writing copy. It&apos;s a
+              system of specialized agents that handle the full
+              upgrade-and-protect lifecycle autonomously.
             </p>
           </div>
 

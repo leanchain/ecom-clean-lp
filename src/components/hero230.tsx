@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import { Shield, GitBranch, Activity, RotateCcw } from "lucide-react";
 import { TypingAnimation } from "@/components/typing-animation";
 import { AnalyzerInput } from "@/components/sections/analyzer-input";
@@ -9,7 +8,31 @@ import { AnalyzerInput } from "@/components/sections/analyzer-input";
 import { motion } from "framer-motion";
 
 const Hero230 = () => {
-  const exampleReportHref = `https://app.beseam.com/report/-1`;
+  const [loadingReport, setLoadingReport] = React.useState(false);
+
+  const handleExampleReport = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    setLoadingReport(true);
+    try {
+      const apiBase =
+        process.env.NEXT_PUBLIC_API_URL || "https://app.beseam.com/api";
+      const res = await fetch(`${apiBase}/pdp/public/pdp-audit/latest`);
+      if (res.ok) {
+        const data = await res.json();
+        const id = data?.audit_id;
+        if (id) {
+          window.open(`https://app.beseam.com/report/${id}`, "_blank");
+          return;
+        }
+      }
+    } catch {
+      // fall through to demo
+    } finally {
+      setLoadingReport(false);
+    }
+    // fallback: open the static demo report
+    window.open("https://app.beseam.com/report/-1", "_blank");
+  };
 
   return (
     <section className="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32">
@@ -78,14 +101,13 @@ const Hero230 = () => {
           transition={{ delay: 0.6 }}
         >
           {/* Secondary link */}
-          <Link
-            href={exampleReportHref}
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-primary/50"
+          <button
+            onClick={handleExampleReport}
+            disabled={loadingReport}
+            className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-primary/50 disabled:opacity-60 disabled:cursor-wait"
           >
-            See an example report
-          </Link>
+            {loadingReport ? "Loading…" : "See an example report"}
+          </button>
         </motion.div>
 
         {/* Product pillars */}

@@ -35,8 +35,8 @@ export default function FeaturedPartners({
       className="relative overflow-hidden py-24 md:py-32 bg-background"
     >
       {/* Background glow effects */}
-      <div className="absolute -left-24 top-1/3 -z-10 h-[500px] w-[500px] bg-secondary/5 blur-[120px] rounded-full" />
-      <div className="absolute -right-24 bottom-1/3 -z-10 h-[500px] w-[500px] bg-primary/5 blur-[120px] rounded-full" />
+      <div className="absolute -left-24 top-1/3 -z-10 h-[500px] w-[500px] bg-secondary/5 blur-[120px] rounded-full hidden sm:block" />
+      <div className="absolute -right-24 bottom-1/3 -z-10 h-[500px] w-[500px] bg-primary/5 blur-[120px] rounded-full hidden sm:block" />
 
       <div className="container relative">
         <div className="mx-auto max-w-3xl text-center mb-16">
@@ -59,14 +59,14 @@ export default function FeaturedPartners({
           </motion.div>
         </div>
 
-        <div className="grid max-w-6xl gap-10 mx-auto md:grid-cols-2">
+        <div className="grid max-w-6xl gap-10 sm:gap-12 md:gap-16 mx-auto md:grid-cols-2">
           {/* Innovation Partners */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="group flex flex-col overflow-hidden rounded-[2.5rem] border bg-card/50 backdrop-blur-sm shadow-sm transition-all hover:shadow-2xl hover:border-primary/20 hover:-translate-y-1"
+            className="group flex flex-col overflow-hidden rounded-[2.5rem] border bg-card/50 backdrop-blur-sm shadow-sm transition-all hover:shadow-2xl hover:border-primary/20 hover:-translate-y-1 mb-10 sm:mb-0"
           >
             <div className="relative aspect-[4/3] bg-muted/20">
               <div
@@ -76,7 +76,7 @@ export default function FeaturedPartners({
                   backgroundSize: "32px 32px",
                 }}
               />
-              <div className="absolute -left-24 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-secondary/10 blur-3xl" />
+              <div className="absolute -left-24 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-secondary/10 blur-3xl hidden sm:block" />
 
               <div className="absolute inset-x-8 top-8 flex items-center justify-between z-10">
                 <span className="rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-primary">
@@ -151,7 +151,7 @@ export default function FeaturedPartners({
               </div>
             </div>
 
-            <div className="p-10">
+            <div className="p-6 md:p-10">
               <h3 className="font-heading text-card-foreground text-2xl font-bold mb-3">
                 Dev & Implementation Agencies
               </h3>
@@ -169,11 +169,11 @@ export default function FeaturedPartners({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="group flex flex-col overflow-hidden rounded-[2.5rem] border bg-card/50 backdrop-blur-sm shadow-sm transition-all hover:shadow-2xl hover:border-secondary/20 hover:-translate-y-1"
+            className="group flex flex-col overflow-hidden rounded-[2.5rem] border bg-card/50 backdrop-blur-sm shadow-sm transition-all hover:shadow-2xl hover:border-secondary/20 hover:-translate-y-1 mb-10 sm:mb-0"
           >
             <div className="relative aspect-[4/3] bg-muted/20">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />
-              <div className="absolute -right-24 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
+              <div className="absolute -right-24 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl hidden sm:block" />
 
               <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-10">
                 {/* Mobile: keep it simple to avoid overflow */}
@@ -304,7 +304,7 @@ export default function FeaturedPartners({
               </div>
             </div>
 
-            <div className="p-10">
+            <div className="p-6 md:p-10">
               <h3 className="font-heading text-card-foreground text-2xl font-bold mb-3">
                 SEO/GEO Agencies
               </h3>
@@ -323,7 +323,7 @@ export default function FeaturedPartners({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="mt-20 flex flex-col items-center justify-center gap-5 sm:flex-row"
+            className="mt-20 flex flex-col items-center justify-center gap-5 sm:gap-8 sm:flex-row"
           >
             <Button
               asChild

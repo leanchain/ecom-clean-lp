@@ -3,12 +3,12 @@ import ClientLogos from "@/components/client-logos";
 import { Compare2 } from "@/components/compare2";
 import CookieConsent from "@/components/cookie-consent";
 import { Faq9 } from "@/components/faq9";
-import { Feature57 } from "@/components/feature57";
 import { Hero230 } from "@/components/hero230";
 import { Integration1 } from "@/components/integration1";
 import MetricsBar from "@/components/metrics-bar";
 import AiTestPreview from "@/components/sections/ai-test-preview";
 import AuditTryout from "@/components/sections/audit-tryout";
+import DashboardScroll from "@/components/sections/dashboard-scroll";
 import FeaturedPartners from "@/components/sections/featured-partners";
 import FinalCta from "@/components/sections/final-cta";
 import HowItWorks from "@/components/sections/how-it-works";
@@ -28,8 +28,8 @@ export default function Home() {
 
       {/* How It Works - Numbered 01/02/03 flow */}
       <HowItWorks />
-      {/* Platform Preview - 4-tab product UI */}
-      <Feature57 />
+      {/* Dashboard - Platform Preview scroll-driven tabs */}
+      <DashboardScroll />
 
       {/* AI Agents - 6 specialized agents */}
       <AiTestPreview />
