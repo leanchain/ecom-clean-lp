@@ -132,7 +132,9 @@ const AuditMockup = () => (
     <div className="flex items-center justify-between mb-3">
       <div>
         <h3 className="text-sm font-black text-foreground">Audit Scoreboard</h3>
-        <p className="text-[11px] text-muted-foreground/60">Last run · 14 min ago</p>
+        <p className="text-[11px] text-muted-foreground/60">
+          Last run · 14 min ago
+        </p>
       </div>
       <span className="flex items-center gap-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 px-2.5 py-1 text-[10px] font-black text-indigo-600">
         <ShieldCheck className="size-3" /> 78 / 100
@@ -184,7 +186,9 @@ const AuditMockup = () => (
         className="flex items-center gap-3 rounded-xl border border-border/40 bg-muted/20 px-3 py-2"
       >
         <div className="flex-1 min-w-0">
-          <p className="text-[12px] font-bold text-foreground truncate">{p.name}</p>
+          <p className="text-[12px] font-bold text-foreground truncate">
+            {p.name}
+          </p>
           <div className="mt-1 h-1.5 w-full rounded-full bg-muted overflow-hidden">
             <div
               className="h-full rounded-full bg-indigo-500/70"
@@ -193,7 +197,9 @@ const AuditMockup = () => (
           </div>
         </div>
         <div className="flex items-center gap-1 shrink-0">
-          <span className="text-[12px] font-black text-foreground">{p.score}</span>
+          <span className="text-[12px] font-black text-foreground">
+            {p.score}
+          </span>
           {p.trend ? (
             <TrendingUp className="size-3 text-emerald-500" />
           ) : (
@@ -212,8 +218,12 @@ const EnhanceMockup = () => (
   <div className="space-y-2.5">
     <div className="flex items-center justify-between mb-3">
       <div>
-        <h3 className="text-sm font-black text-foreground">Upgrade Playbooks</h3>
-        <p className="text-[11px] text-muted-foreground/60">3 ready · 2 pending review</p>
+        <h3 className="text-sm font-black text-foreground">
+          Upgrade Playbooks
+        </h3>
+        <p className="text-[11px] text-muted-foreground/60">
+          3 ready · 2 pending review
+        </p>
       </div>
       <div className="flex items-center gap-1.5 rounded-lg bg-muted/60 border border-border/40 px-2.5 py-1.5">
         <Search className="size-3 text-muted-foreground/50" />
@@ -234,8 +244,22 @@ const EnhanceMockup = () => (
         ],
         expanded: true,
       },
-      { product: "Summit Daypack 25L", status: "In Review", sColor: "text-amber-600 bg-amber-500/10", impact: "+31 pts", steps: [], expanded: false },
-      { product: "Cascade Rain Shell", status: "Approved", sColor: "text-blue-600 bg-blue-500/10", impact: "+19 pts", steps: [], expanded: false },
+      {
+        product: "Summit Daypack 25L",
+        status: "In Review",
+        sColor: "text-amber-600 bg-amber-500/10",
+        impact: "+31 pts",
+        steps: [],
+        expanded: false,
+      },
+      {
+        product: "Cascade Rain Shell",
+        status: "Approved",
+        sColor: "text-blue-600 bg-blue-500/10",
+        impact: "+19 pts",
+        steps: [],
+        expanded: false,
+      },
     ].map((pb, i) => (
       <div
         key={i}
@@ -267,7 +291,9 @@ const EnhanceMockup = () => (
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className={`text-[9px] font-black px-2 py-0.5 rounded-full ${pb.sColor}`}>
+            <span
+              className={`text-[9px] font-black px-2 py-0.5 rounded-full ${pb.sColor}`}
+            >
               {pb.status}
             </span>
             <ChevronRight
@@ -286,7 +312,9 @@ const EnhanceMockup = () => (
               >
                 <div className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  <span className="text-[11px] font-semibold text-foreground/90">{s.label}</span>
+                  <span className="text-[11px] font-semibold text-foreground/90">
+                    {s.label}
+                  </span>
                 </div>
                 <span className="text-[10px] font-black text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded-md ml-2 shrink-0">
                   {s.pts}
@@ -316,7 +344,9 @@ const IncidentMockup = () => (
     <div className="flex items-center justify-between mb-3">
       <div>
         <h3 className="text-sm font-black text-foreground">Incidents</h3>
-        <p className="text-[11px] text-muted-foreground/60">1 active · 2 resolved this week</p>
+        <p className="text-[11px] text-muted-foreground/60">
+          1 active · 2 resolved this week
+        </p>
       </div>
       <span className="flex h-2 w-2 relative">
         <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-red-500 opacity-75" />
@@ -341,14 +371,18 @@ const IncidentMockup = () => (
             </p>
             <div className="flex items-center gap-1 mt-0.5">
               <ArrowDownRight className="size-3 text-red-500" />
-              <span className="text-[12px] font-black text-red-600">Conversion Rate −12%</span>
+              <span className="text-[12px] font-black text-red-600">
+                Conversion Rate −12%
+              </span>
             </div>
           </div>
           <div className="text-right">
             <p className="text-[9px] font-semibold text-muted-foreground/50 uppercase tracking-widest">
               Source
             </p>
-            <p className="text-[11px] font-black text-foreground/80">Dev Team</p>
+            <p className="text-[11px] font-black text-foreground/80">
+              Dev Team
+            </p>
           </div>
         </div>
         <div className="rounded-lg bg-white/60 dark:bg-black/20 border border-red-200/20 px-3 py-2">
@@ -377,8 +411,12 @@ const IncidentMockup = () => (
       <div className="flex items-center gap-2.5">
         <CheckCircle2 className="size-3.5 text-emerald-500 shrink-0" />
         <div>
-          <p className="text-[12px] font-bold text-foreground/80">Alpine Pro Jacket</p>
-          <p className="text-[10px] text-muted-foreground/60">Add-to-Cart −7% · SEO Agency</p>
+          <p className="text-[12px] font-bold text-foreground/80">
+            Alpine Pro Jacket
+          </p>
+          <p className="text-[10px] text-muted-foreground/60">
+            Add-to-Cart −7% · SEO Agency
+          </p>
         </div>
       </div>
       <div className="text-right">
@@ -397,7 +435,9 @@ const HistoryMockup = () => (
     <div className="flex items-center justify-between mb-3">
       <div>
         <h3 className="text-sm font-black text-foreground">Change History</h3>
-        <p className="text-[11px] text-muted-foreground/60">14 changes this month</p>
+        <p className="text-[11px] text-muted-foreground/60">
+          14 changes this month
+        </p>
       </div>
       <div className="flex gap-1">
         {["All", "+", "−"].map((f, fi) => (
@@ -473,9 +513,10 @@ const HistoryMockup = () => (
                   {e.action}
                 </p>
                 <p className="text-[10px] text-muted-foreground/60 mt-0.5">
-                  {e.product}{" "}
-                  <span className="opacity-30 mx-1">·</span>
-                  <span className={`font-black ${e.authorColor}`}>{e.author}</span>
+                  {e.product} <span className="opacity-30 mx-1">·</span>
+                  <span className={`font-black ${e.authorColor}`}>
+                    {e.author}
+                  </span>
                 </p>
               </div>
               <div className="text-right shrink-0">
@@ -488,7 +529,9 @@ const HistoryMockup = () => (
                 >
                   {e.impact}
                 </span>
-                <p className="text-[9px] text-muted-foreground/40 mt-0.5">{e.date}</p>
+                <p className="text-[9px] text-muted-foreground/40 mt-0.5">
+                  {e.date}
+                </p>
               </div>
             </div>
           </div>
@@ -690,8 +733,8 @@ const StepList = ({
                 isPast
                   ? "border-muted bg-muted text-muted-foreground/50"
                   : isActive
-                  ? `${tab.numberClass} border`
-                  : "border-border/30 bg-muted/30 text-muted-foreground/30"
+                    ? `${tab.numberClass} border`
+                    : "border-border/30 bg-muted/30 text-muted-foreground/30"
               }`}
             >
               {isPast ? (
@@ -708,8 +751,8 @@ const StepList = ({
                     isActive
                       ? "text-foreground"
                       : isPast
-                      ? "text-muted-foreground/60"
-                      : "text-muted-foreground/40"
+                        ? "text-muted-foreground/60"
+                        : "text-muted-foreground/40"
                   }`}
                 >
                   {tab.title}
@@ -722,7 +765,9 @@ const StepList = ({
               </div>
               <p
                 className={`text-[12px] transition-colors truncate ${
-                  isActive ? "text-muted-foreground/70" : "text-muted-foreground/30"
+                  isActive
+                    ? "text-muted-foreground/70"
+                    : "text-muted-foreground/30"
                 }`}
               >
                 {tab.subtitle}
@@ -766,7 +811,9 @@ const StepList = ({
                         />
                       </svg>
                     </div>
-                    <span className="text-sm text-muted-foreground">{bullet}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {bullet}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -835,13 +882,18 @@ export default function DashboardScroll() {
           {/* Section header */}
           <div className="mb-14 text-center">
             <div className="mb-4 flex justify-center">
-              <CategoryBadge label="Platform Preview" icon={<Package className="h-4 w-4" />} />
+              <CategoryBadge
+                label="Platform Preview"
+                icon={<Package className="h-4 w-4" />}
+              />
             </div>
             <h2 className="font-heading text-3xl font-bold leading-tight sm:text-4xl md:text-5xl tracking-tight mb-3">
-              One Platform. <span className="text-primary italic">Every PDP Change.</span>
+              One Platform.{" "}
+              <span className="text-primary italic">Every PDP Change.</span>
             </h2>
             <p className="text-muted-foreground/80 mx-auto max-w-xl text-sm sm:text-base md:text-lg leading-relaxed">
-              AI recommendations, agency deliverables, and internal updates — all managed, monitored, and protected in one place.
+              AI recommendations, agency deliverables, and internal updates —
+              all managed, monitored, and protected in one place.
             </p>
           </div>
 
