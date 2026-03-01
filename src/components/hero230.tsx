@@ -54,9 +54,10 @@ const Hero230 = () => {
           </h1>
 
           <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed">
-            Beseam continuously audits your PDPs, generates AI-powered
-            recommendations, and alerts you when something changes — then
-            deploys fixes safely and rolls back if KPIs dip.
+            Beseam continuously monitors your PDPs to generate AI-powered
+            optimization features. Deploy improvements with one click, and rest
+            easy knowing Beseam automatically rolls back any changes if your
+            KPIs drop.
           </p>
         </motion.div>
 
