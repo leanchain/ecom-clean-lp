@@ -43,6 +43,12 @@ const AuditTryout = () => {
               Get Your Baseline Report <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
+              href="/reports"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:border-white hover:-translate-y-0.5"
+            >
+              See Recent Reports
+            </Link>
+            <Link
               href="/demo"
               className="inline-flex items-center gap-2 rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:border-white hover:-translate-y-0.5"
             >
