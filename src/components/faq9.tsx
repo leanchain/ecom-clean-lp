@@ -41,6 +41,11 @@ const faqs = [
     answer:
       "Beseam's audit scores each PDP on conversion readiness — missing FAQ sections, thin product narratives, weak CTAs, and structural gaps. It then generates a prioritized playbook of improvements ranked by projected revenue impact. After deploy, it tracks rev/session and conversion rate against a pre-change baseline so you know exactly what moved the needle.",
   },
+  {
+    question: "What access do you need to get started?",
+    answer:
+      "For a baseline audit and ongoing monitoring, Beseam can start with minimal, read-only access to your catalog and PDP structure. If you later choose to deploy changes through Beseam, we’ll request the minimum additional permissions needed for that workflow — and you stay in control of what gets shipped.",
+  },
 ];
 
 const Faq9 = () => {
