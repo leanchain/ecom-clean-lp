@@ -37,12 +37,12 @@ const FinalCta = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="font-heading mb-8 text-4xl font-bold text-white md:text-5xl lg:text-7xl tracking-tight drop-shadow-sm">
-              Ready to upgrade your PDPs <span className="italic text-white/90">without the risk?</span>
+              Get found. Convert more. <span className="italic text-white/90">Deploy without the risk.</span>
             </h2>
 
             <p className="mb-12 text-lg text-white/90 md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Get a free baseline audit, see your upgrade playbook, and deploy
-              improvements with built-in guardrails.
+              Get a free AI visibility + conversion audit, see your prioritized
+              upgrade playbook, and deploy improvements with built-in KPI guardrails.
             </p>
           </motion.div>
 
@@ -112,9 +112,9 @@ const FinalCta = () => {
             className="mb-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-4"
           >
             {[
-              "Free PDP audit",
+              "AI search visibility audit",
+              "Conversion readiness score",
               "No credit card required",
-              "Hands-on onboarding",
               "Built-in rollback",
             ].map((item, idx) => (
               <div

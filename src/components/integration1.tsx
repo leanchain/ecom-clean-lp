@@ -27,7 +27,7 @@ const INTEGRATIONS: IntegrationItem[] = [
     logo: "/logos/integrations/shopify.svg",
     name: "Shopify & Shopify Plus",
     description:
-      "Sync large catalogs, metafields, and PDP layouts directly from Shopify.",
+      "Sync large catalogs, metafields, and PDP layouts. Setup in ~15 min. Read-only catalog access.",
     status: "available",
   },
   {
@@ -35,7 +35,7 @@ const INTEGRATIONS: IntegrationItem[] = [
     logo: "/logos/integrations/woocommerce.svg",
     name: "WooCommerce",
     description:
-      "Pull products and attributes from your WooCommerce store in a few clicks.",
+      "Pull products and attributes from your WooCommerce store. Setup in ~10 min. Read-only catalog access.",
     status: "available",
   },
   {
@@ -43,7 +43,7 @@ const INTEGRATIONS: IntegrationItem[] = [
     logo: "/logos/integrations/bigcommerce.svg",
     name: "BigCommerce",
     description:
-      "Keep product content in sync across big catalogs without manual updates.",
+      "Keep product content in sync across big catalogs. Read-only catalog access.",
     status: "coming-soon",
   },
   {
@@ -51,14 +51,14 @@ const INTEGRATIONS: IntegrationItem[] = [
     logo: "/logos/integrations/adobe-commerce.svg",
     name: "Adobe Commerce / Magento",
     description:
-      "Connect complex catalogs and custom PDP templates from Adobe Commerce.",
+      "Connect complex catalogs and custom PDP templates. Read-only catalog access.",
     status: "coming-soon",
   },
   {
     id: 5,
     logo: "/logos/integrations/sfcc.svg",
     name: "Salesforce Commerce Cloud",
-    description: "Enterprise-grade integration for global brands on SFCC.",
+    description: "Enterprise-grade integration for global brands on SFCC. Read-only catalog access.",
     status: "coming-soon",
   },
   {
@@ -66,7 +66,7 @@ const INTEGRATIONS: IntegrationItem[] = [
     logo: "/logos/integrations/google-merchant.svg",
     name: "Google Merchant & Feeds",
     description:
-      "Plug in product feeds and custom exports without changing your stack.",
+      "Plug in product feeds and custom exports without changing your stack. Setup in ~5 min. Read-only feed access.",
     status: "available",
   },
 ];
@@ -125,9 +125,9 @@ const Integration1 = () => {
               Connect Beseam to the <span className="text-primary italic">platforms you already use</span>
             </h2>
             <p className="text-muted-foreground/90 text-lg md:text-xl leading-relaxed">
-              Beseam plugs into your ecommerce platform and product feeds so
-              AI-ready PDPs stay in sync automatically - no rebuild or custom CMS
-              needed.
+              Beseam connects to your store to audit AI discovery gaps, generate
+              conversion improvements, and deploy every change safely — no
+              rebuild or custom CMS needed.
             </p>
           </motion.div>
         </div>

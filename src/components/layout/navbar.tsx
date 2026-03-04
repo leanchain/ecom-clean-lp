@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 import {
@@ -59,7 +59,8 @@ const productItems: MenuItem[] = [
   {
     id: "audit",
     title: "PDP Audit",
-    description: "Baseline quality report across AI visibility & conversion.",
+    description:
+      "Free AI visibility + conversion readiness score for any product page.",
     href: "https://app.beseam.com/analyze",
     target: "_blank",
     icon: Search,
@@ -70,91 +71,95 @@ const productItems: MenuItem[] = [
   },
   {
     id: "playbooks",
-    title: "Playbooks & Upgrades",
-    description: "AI-generated improvements with one-click apply.",
+    title: "AI Upgrade Playbooks",
+    description:
+      "Discovery gaps + conversion fixes, AI-generated and ranked by revenue impact.",
     href: "/#platform",
     icon: BookOpen,
   },
   {
     id: "monitoring",
-    title: "Monitoring & Incidents",
-    description: "KPI tracking with regression detection and blame.",
+    title: "KPI Monitoring",
+    description:
+      "Track rev/session and conversion after every deploy. Catch regressions instantly.",
     href: "/#platform",
     icon: AlertTriangle,
   },
   {
     id: "history",
-    title: "Change History",
-    description: "Full timeline of every PDP change with impact data.",
+    title: "Version History",
+    description:
+      "Every PDP change logged with full attribution, diffs, and impact data.",
     href: "/#platform",
     icon: History,
   },
 ];
 
 const productLinks: MenuItem[] = [
-  {
-    id: "how-it-works",
-    title: "How it Works",
-    description: "Audit → Deploy Safely → Monitor & Protect",
-    href: "/#how-it-works",
-    icon: Layers,
-  },
-  {
-    id: "guardrails",
-    title: "Guardrails",
-    description: "Versioning + staged rollout for safe deployments",
-    href: "/#guardrails",
-    icon: Shield,
-  },
+  // {
+  //   id: "how-it-works",
+  //   title: "How it Works",
+  //   description: "Audit for discovery gaps → ship improvements → monitor KPIs",
+  //   href: "/#how-it-works",
+  //   icon: Layers,
+  // },
+  // {
+  //   id: "guardrails",
+  //   title: "Revenue Guardrails",
+  //   description: "KPI thresholds + one-click rollback to protect conversion",
+  //   href: "/#guardrails",
+  //   icon: Shield,
+  // },
 ];
 
 const resourceItems: MenuItem[] = [
   {
     id: "alternatives",
     title: "Alternatives",
-    description: "Shortlists by category and use case",
+    description: "Compare PDP ops tools by category and use case",
     href: "/alternatives",
     icon: Shuffle,
   },
   {
     id: "compare",
     title: "Compare",
-    description: "Feature-by-feature comparisons across leading tools",
+    description: "See how Beseam stacks up against A/B tools and CMS platforms",
     href: "/compare",
     icon: Scale,
   },
   {
     id: "docs",
     title: "Documentation",
-    description: "Guides, SDK reference, and API docs",
-    href: "https://docs.beseam.com/docs/public/tracker",
+    description: "Setup guides, playbooks, monitoring, and SDK reference",
+    href: "https://docs.beseam.com/public/intro",
     target: "_blank",
     icon: FileText,
   },
   {
     id: "faq",
     title: "FAQ",
-    description: "Common questions answered",
+    description: "Discovery, conversion, safety — your top questions answered",
     href: "/#faq",
     icon: HelpCircle,
   },
 ];
 
 const resourceLinks: MenuItem[] = [
-  {
-    id: "contact",
-    title: "Contact Sales",
-    description: "Talk to our team about enterprise needs",
-    href: "/demo",
-    icon: Mail,
-  },
-  {
-    id: "partners",
-    title: "Partners",
-    description: "Agency and technology partnerships",
-    href: "/demo",
-    icon: Users,
-  },
+  // {
+  //   id: "book-a-demo",
+  //   title: "Book a Demo",
+  //   description:
+  //     "See the platform in action and get your questions answered by our team",
+  //   href: "/demo",
+  //   icon: Mail,
+  // },
+  // {
+  //   id: "partners",
+  //   title: "Partners",
+  //   description: "Agency and technology partnerships",
+  //   href: "/demo",
+  //   icon: Users,
+  // },
 ];
 
 const MenuContent = ({ mainItems, footerItems }: MenuContentProps) => (
@@ -225,11 +230,36 @@ const ResourcesMenu = () => (
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-      <nav className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300",
+        isScrolled ? "py-3 px-4" : "",
+      )}
+    >
+      <nav
+        className={cn(
+          "transition-all duration-300",
+          isScrolled
+            ? "mx-auto max-w-5xl rounded-full border border-border/20 bg-background/50 backdrop-blur-2xl shadow-lg shadow-black/5 px-5"
+            : "container mx-auto px-4",
+        )}
+      >
+        <div
+          className={cn(
+            "flex items-center justify-between transition-all duration-300",
+            isScrolled ? "h-14" : "h-16",
+          )}
+        >
           <div className="flex items-center lg:w-[300px]">
             <Link href="/" className="flex items-center space-x-2">
               <NavbarLogo className="text-primary" />
@@ -282,10 +312,10 @@ export default function Navbar() {
               <Link href="https://app.beseam.com/login">Log In</Link>
             </Button>
             <Link
-              href="https://app.beseam.com/register"
+              href="/demo"
               className="hidden items-center justify-center rounded-lg bg-primary px-8 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex min-w-[140px] whitespace-nowrap shadow-sm"
             >
-              Sign up
+              Book Demo
             </Link>
             <Button
               variant="ghost"

@@ -31,7 +31,7 @@ export default async function ReportsPage() {
 
       <div className="container mx-auto py-20 px-4 sm:px-6 lg:px-8 flex-grow">
         <div className="max-w-4xl mx-auto mb-16">
-          <h1 className="text-3xl font-black tracking-tight text-foreground sm:text-5xl mb-4">
+          <h1 className="font-heading text-3xl tracking-tight text-foreground sm:text-5xl mb-4">
             Recent Audits
           </h1>
           <p className="text-lg text-muted-foreground">
@@ -53,7 +53,7 @@ export default async function ReportsPage() {
 
       <section className="py-24 bg-muted/20 border-t border-border/40">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4 tracking-tight">
+          <h2 className="font-heading text-3xl tracking-tight text-foreground mb-4 md:text-4xl">
             Audit your own product
           </h2>
           <div className="max-w-2xl mx-auto">

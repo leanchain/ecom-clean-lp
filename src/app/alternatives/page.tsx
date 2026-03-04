@@ -126,46 +126,51 @@ export default function AlternativesPage() {
   };
 
   return (
-    <div className="pb-24 pt-24 md:pt-28">
-      <section className="container">
-        <div className="mx-auto max-w-[900px] text-center">
-          <div className="flex items-center justify-center">
-            <Badge
-              variant="outline"
-              className="mb-6 rounded-full border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary"
-            >
-              <Repeat className="mr-2 h-4 w-4" />
-              Alternatives
-            </Badge>
-          </div>
-
-          <h1 className="font-heading mb-6 text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-            Find the <span className="text-primary">Right Alternative</span>
-          </h1>
-
-          <p className="mx-auto max-w-[600px] text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Looking to switch analytics tools? We publish honest comparisons to
-            help you decide — whether that&apos;s Beseam or something else.
-          </p>
-
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button asChild size="lg" className="rounded-full px-10">
-              <a
-                href="https://app.beseam.com/analyze"
-                target="_blank"
-                rel="noopener noreferrer"
+    <div className="pb-24">
+      <section className="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-20">
+        <div className="absolute -left-40 top-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute -right-40 bottom-0 -z-10 h-[400px] w-[400px] rounded-full bg-secondary/5 blur-[100px]" />
+        <div className="container">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="flex items-center justify-center">
+              <Badge
+                variant="outline"
+                className="mb-6 rounded-full border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary"
               >
-                Run Free PDP Audit
-              </a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="rounded-full px-10"
-            >
-              <Link href="/demo">See demo</Link>
-            </Button>
+                <Repeat className="mr-2 h-4 w-4" />
+                Alternatives
+              </Badge>
+            </div>
+
+            <h1 className="font-heading mb-6 text-4xl tracking-tight sm:text-5xl md:text-6xl">
+              Find the{" "}
+              <span className="text-primary italic">Right Alternative</span>
+            </h1>
+
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+              Looking to switch analytics tools? We publish honest comparisons to
+              help you decide — whether that&apos;s Beseam or something else.
+            </p>
+
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button asChild size="lg" className="rounded-full px-10 h-14 text-base font-bold shadow-xl shadow-primary/20">
+                <a
+                  href="https://app.beseam.com/analyze"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Run Free PDP Audit
+                </a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="rounded-full px-10 h-14 text-base font-bold border-2"
+              >
+                <Link href="/demo">Book a demo</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -192,7 +197,7 @@ export default function AlternativesPage() {
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl border bg-muted/20">
                       <Icon className="h-5 w-5 text-muted-foreground" />
                     </div>
-                    <h2 className="text-xl font-bold">{category}</h2>
+                    <h2 className="font-heading text-xl tracking-tight">{category}</h2>
                   </div>
                   <p className="ml-[52px] text-sm text-muted-foreground">
                     {meta.subtitle}
@@ -259,18 +264,20 @@ export default function AlternativesPage() {
       </section>
 
       <section className="container mt-16 md:mt-20">
-        <div className="mx-auto max-w-5xl rounded-3xl border bg-muted/10 p-8 md:p-12">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold md:text-3xl">
+        <div className="relative overflow-hidden mx-auto max-w-5xl rounded-[2.5rem] border bg-muted/10 p-10 md:p-16 text-center">
+          <div className="absolute -left-24 top-1/2 z-0 h-64 w-64 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
+          <div className="absolute -right-24 top-1/2 z-0 h-64 w-64 -translate-y-1/2 rounded-full bg-secondary/10 blur-3xl" />
+          <div className="relative z-10">
+            <h3 className="font-heading text-2xl tracking-tight md:text-3xl">
               Not sure which tool fits?
             </h3>
-            <p className="mt-3 text-sm text-muted-foreground md:text-base">
+            <p className="mt-3 text-muted-foreground md:text-base">
               Start with comparisons, then deep-dive into the tool docs.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button asChild size="lg" className="rounded-full px-10">
+              <Button asChild size="lg" className="rounded-full px-10 h-14 text-base font-bold shadow-xl shadow-primary/20">
                 <a
-                  href="https://app.beseam.com/register"
+                  href="https://app.beseam.com/analyze"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -281,7 +288,7 @@ export default function AlternativesPage() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="rounded-full px-10"
+                className="rounded-full px-10 h-14 text-base font-bold border-2"
               >
                 <Link href="/compare">View comparisons</Link>
               </Button>
