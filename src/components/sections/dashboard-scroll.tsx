@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
 import {
   BarChart3,
   BookOpen,
@@ -22,10 +23,9 @@ import {
   TrendingDown,
   ShieldCheck,
 } from "lucide-react";
-import CategoryBadge from "@/components/category-badge";
 
 /* ─────────────────────────────────────────────
-   Tab config  (Audit → Enhance → Incident → History)
+   Tab config
 ───────────────────────────────────────────── */
 const tabs = [
   {
@@ -122,10 +122,8 @@ const tabs = [
   },
 ];
 
-const SLIDE_DURATION = 4500; // ms per tab
-
 /* ─────────────────────────────────────────────
-   AuditMockup — Scoreboard
+   AuditMockup
 ───────────────────────────────────────────── */
 const AuditMockup = () => (
   <div className="space-y-3">
@@ -140,8 +138,6 @@ const AuditMockup = () => (
         <ShieldCheck className="size-3" /> 78 / 100
       </span>
     </div>
-
-    {/* Score grid */}
     <div className="grid grid-cols-2 gap-2">
       {[
         { label: "Coverage", value: "92%", delta: "+3%", up: true },
@@ -160,19 +156,13 @@ const AuditMockup = () => (
             <span className="text-[18px] font-black leading-none text-foreground">
               {m.value}
             </span>
-            <span
-              className={`text-[10px] font-black ${
-                m.up ? "text-emerald-600" : "text-red-500"
-              }`}
-            >
+            <span className={`text-[10px] font-black ${m.up ? "text-emerald-600" : "text-red-500"}`}>
               {m.delta}
             </span>
           </div>
         </div>
       ))}
     </div>
-
-    {/* Top products */}
     <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/40 pt-1">
       Top Products
     </p>
@@ -186,20 +176,13 @@ const AuditMockup = () => (
         className="flex items-center gap-3 rounded-xl border border-border/40 bg-muted/20 px-3 py-2"
       >
         <div className="flex-1 min-w-0">
-          <p className="text-[12px] font-bold text-foreground truncate">
-            {p.name}
-          </p>
+          <p className="text-[12px] font-bold text-foreground truncate">{p.name}</p>
           <div className="mt-1 h-1.5 w-full rounded-full bg-muted overflow-hidden">
-            <div
-              className="h-full rounded-full bg-indigo-500/70"
-              style={{ width: `${p.score}%` }}
-            />
+            <div className="h-full rounded-full bg-indigo-500/70" style={{ width: `${p.score}%` }} />
           </div>
         </div>
         <div className="flex items-center gap-1 shrink-0">
-          <span className="text-[12px] font-black text-foreground">
-            {p.score}
-          </span>
+          <span className="text-[12px] font-black text-foreground">{p.score}</span>
           {p.trend ? (
             <TrendingUp className="size-3 text-emerald-500" />
           ) : (
@@ -212,25 +195,20 @@ const AuditMockup = () => (
 );
 
 /* ─────────────────────────────────────────────
-   EnhanceMockup — Playbooks
+   EnhanceMockup
 ───────────────────────────────────────────── */
 const EnhanceMockup = () => (
   <div className="space-y-2.5">
     <div className="flex items-center justify-between mb-3">
       <div>
-        <h3 className="text-sm font-black text-foreground">
-          Upgrade Playbooks
-        </h3>
-        <p className="text-[11px] text-muted-foreground/60">
-          3 ready · 2 pending review
-        </p>
+        <h3 className="text-sm font-black text-foreground">Upgrade Playbooks</h3>
+        <p className="text-[11px] text-muted-foreground/60">3 ready · 2 pending review</p>
       </div>
       <div className="flex items-center gap-1.5 rounded-lg bg-muted/60 border border-border/40 px-2.5 py-1.5">
         <Search className="size-3 text-muted-foreground/50" />
         <span className="text-[10px] text-muted-foreground/40">Search…</span>
       </div>
     </div>
-
     {[
       {
         product: "Alpine Pro Jacket",
@@ -271,63 +249,35 @@ const EnhanceMockup = () => (
       >
         <div className="flex items-center justify-between px-3.5 py-2.5">
           <div className="flex items-center gap-2.5">
-            <div
-              className={`h-7 w-7 rounded-lg flex items-center justify-center ${
-                pb.expanded
-                  ? "bg-emerald-500/15 text-emerald-600"
-                  : "bg-muted text-muted-foreground/40"
-              }`}
-            >
+            <div className={`h-7 w-7 rounded-lg flex items-center justify-center ${pb.expanded ? "bg-emerald-500/15 text-emerald-600" : "bg-muted text-muted-foreground/40"}`}>
               <BookOpen className="size-3.5" />
             </div>
             <div>
-              <p className="text-[12px] font-bold text-foreground leading-tight">
-                {pb.product}
-              </p>
+              <p className="text-[12px] font-bold text-foreground leading-tight">{pb.product}</p>
               <p className="text-[10px] text-muted-foreground/60">
-                {pb.steps.length || "3"} improvements ·{" "}
-                <span className="text-emerald-600 font-black">{pb.impact}</span>
+                {pb.steps.length || "3"} improvements · <span className="text-emerald-600 font-black">{pb.impact}</span>
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span
-              className={`text-[9px] font-black px-2 py-0.5 rounded-full ${pb.sColor}`}
-            >
-              {pb.status}
-            </span>
-            <ChevronRight
-              className={`size-3.5 text-muted-foreground/30 transition-transform ${
-                pb.expanded ? "rotate-90" : ""
-              }`}
-            />
+            <span className={`text-[9px] font-black px-2 py-0.5 rounded-full ${pb.sColor}`}>{pb.status}</span>
+            <ChevronRight className={`size-3.5 text-muted-foreground/30 transition-transform ${pb.expanded ? "rotate-90" : ""}`} />
           </div>
         </div>
         {pb.expanded && (
           <div className="border-t border-emerald-200/30 px-3.5 py-2.5 space-y-1.5">
             {pb.steps.map((s, si) => (
-              <div
-                key={si}
-                className="flex items-center justify-between rounded-lg bg-white/50 dark:bg-white/5 border border-emerald-200/20 px-3 py-2"
-              >
+              <div key={si} className="flex items-center justify-between rounded-lg bg-white/50 dark:bg-white/5 border border-emerald-200/20 px-3 py-2">
                 <div className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  <span className="text-[11px] font-semibold text-foreground/90">
-                    {s.label}
-                  </span>
+                  <span className="text-[11px] font-semibold text-foreground/90">{s.label}</span>
                 </div>
-                <span className="text-[10px] font-black text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded-md ml-2 shrink-0">
-                  {s.pts}
-                </span>
+                <span className="text-[10px] font-black text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded-md ml-2 shrink-0">{s.pts}</span>
               </div>
             ))}
             <div className="flex gap-2 pt-1">
-              <button className="flex-1 rounded-full bg-primary py-2 text-[11px] font-black text-primary-foreground">
-                Deploy All
-              </button>
-              <button className="flex-1 rounded-full border-2 border-border/40 py-2 text-[11px] font-black text-muted-foreground">
-                Review Diff
-              </button>
+              <button className="flex-1 rounded-full bg-primary py-2 text-[11px] font-black text-primary-foreground">Deploy All</button>
+              <button className="flex-1 rounded-full border-2 border-border/40 py-2 text-[11px] font-black text-muted-foreground">Review Diff</button>
             </div>
           </div>
         )}
@@ -344,54 +294,35 @@ const IncidentMockup = () => (
     <div className="flex items-center justify-between mb-3">
       <div>
         <h3 className="text-sm font-black text-foreground">Incidents</h3>
-        <p className="text-[11px] text-muted-foreground/60">
-          1 active · 2 resolved this week
-        </p>
+        <p className="text-[11px] text-muted-foreground/60">1 active · 2 resolved this week</p>
       </div>
       <span className="flex h-2 w-2 relative">
         <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-red-500 opacity-75" />
         <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
       </span>
     </div>
-
     <div className="rounded-xl border-2 border-red-200/60 dark:border-red-900/30 bg-red-50/50 dark:bg-red-950/20 overflow-hidden">
       <div className="flex items-center justify-between px-3.5 py-2 border-b border-red-200/30 bg-red-100/30 dark:bg-red-950/30">
-        <span className="text-[10px] font-black uppercase tracking-widest text-red-700 dark:text-red-400">
-          Active — INC-041
-        </span>
-        <span className="rounded-full bg-red-500 px-2 py-0.5 text-[9px] font-black text-white">
-          HIGH
-        </span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-red-700 dark:text-red-400">Active — INC-041</span>
+        <span className="rounded-full bg-red-500 px-2 py-0.5 text-[9px] font-black text-white">HIGH</span>
       </div>
       <div className="px-3.5 py-3 space-y-2.5">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-[13px] font-black text-red-700 dark:text-red-400">
-              Nimbus Trail Runner
-            </p>
+            <p className="text-[13px] font-black text-red-700 dark:text-red-400">Nimbus Trail Runner</p>
             <div className="flex items-center gap-1 mt-0.5">
               <ArrowDownRight className="size-3 text-red-500" />
-              <span className="text-[12px] font-black text-red-600">
-                Conversion Rate −12%
-              </span>
+              <span className="text-[12px] font-black text-red-600">Conversion Rate −12%</span>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-[9px] font-semibold text-muted-foreground/50 uppercase tracking-widest">
-              Source
-            </p>
-            <p className="text-[11px] font-black text-foreground/80">
-              Dev Team
-            </p>
+            <p className="text-[9px] font-semibold text-muted-foreground/50 uppercase tracking-widest">Source</p>
+            <p className="text-[11px] font-black text-foreground/80">Dev Team</p>
           </div>
         </div>
         <div className="rounded-lg bg-white/60 dark:bg-black/20 border border-red-200/20 px-3 py-2">
-          <p className="text-[9px] font-black uppercase tracking-widest text-red-700/40 mb-0.5">
-            Root Cause
-          </p>
-          <p className="text-[11px] font-semibold text-foreground/90">
-            Theme publish removed FAQ module from PDP template
-          </p>
+          <p className="text-[9px] font-black uppercase tracking-widest text-red-700/40 mb-0.5">Root Cause</p>
+          <p className="text-[11px] font-semibold text-foreground/90">Theme publish removed FAQ module from PDP template</p>
         </div>
         <div className="flex gap-2">
           <button className="flex items-center gap-1.5 flex-1 justify-center rounded-full bg-red-500 py-2 text-[11px] font-black text-white">
@@ -403,20 +334,13 @@ const IncidentMockup = () => (
         </div>
       </div>
     </div>
-
-    <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/40">
-      Recently Resolved
-    </p>
+    <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/40">Recently Resolved</p>
     <div className="flex items-center justify-between rounded-xl border border-border/40 bg-muted/30 px-3.5 py-2.5">
       <div className="flex items-center gap-2.5">
         <CheckCircle2 className="size-3.5 text-emerald-500 shrink-0" />
         <div>
-          <p className="text-[12px] font-bold text-foreground/80">
-            Alpine Pro Jacket
-          </p>
-          <p className="text-[10px] text-muted-foreground/60">
-            Add-to-Cart −7% · SEO Agency
-          </p>
+          <p className="text-[12px] font-bold text-foreground/80">Alpine Pro Jacket</p>
+          <p className="text-[10px] text-muted-foreground/60">Add-to-Cart −7% · SEO Agency</p>
         </div>
       </div>
       <div className="text-right">
@@ -435,20 +359,11 @@ const HistoryMockup = () => (
     <div className="flex items-center justify-between mb-3">
       <div>
         <h3 className="text-sm font-black text-foreground">Change History</h3>
-        <p className="text-[11px] text-muted-foreground/60">
-          14 changes this month
-        </p>
+        <p className="text-[11px] text-muted-foreground/60">14 changes this month</p>
       </div>
       <div className="flex gap-1">
         {["All", "+", "−"].map((f, fi) => (
-          <button
-            key={fi}
-            className={`rounded-full px-2.5 py-1 text-[10px] font-black ${
-              fi === 0
-                ? "bg-foreground text-background"
-                : "border border-border/40 text-muted-foreground/60"
-            }`}
-          >
+          <button key={fi} className={`rounded-full px-2.5 py-1 text-[10px] font-black ${fi === 0 ? "bg-foreground text-background" : "border border-border/40 text-muted-foreground/60"}`}>
             {f}
           </button>
         ))}
@@ -457,81 +372,30 @@ const HistoryMockup = () => (
         </button>
       </div>
     </div>
-
     <div className="relative pl-5">
       <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border/40" />
       {[
-        {
-          date: "Today 14:32",
-          action: "FAQ section added via schema.org",
-          product: "Alpine Pro Jacket",
-          impact: "+18 pts",
-          author: "Beseam AI",
-          authorColor: "text-primary",
-          positive: true,
-        },
-        {
-          date: "Yesterday 09:15",
-          action: "Spring copy refresh",
-          product: "Nimbus Trail Runner",
-          impact: "+5 pts",
-          author: "SEO Agency",
-          authorColor: "text-blue-600",
-          positive: true,
-        },
-        {
-          date: "Feb 20 16:48",
-          action: "Theme layout updated (global)",
-          product: "All PDPs",
-          impact: "−3 pts avg",
-          author: "Dev Team",
-          authorColor: "text-amber-600",
-          positive: false,
-        },
-        {
-          date: "Feb 18 11:05",
-          action: "Schema markup added",
-          product: "Summit Daypack 25L",
-          impact: "+22 pts",
-          author: "Beseam AI",
-          authorColor: "text-primary",
-          positive: true,
-        },
+        { date: "Today 14:32", action: "FAQ section added via schema.org", product: "Alpine Pro Jacket", impact: "+18 pts", author: "Beseam AI", authorColor: "text-primary", positive: true },
+        { date: "Yesterday 09:15", action: "Spring copy refresh", product: "Nimbus Trail Runner", impact: "+5 pts", author: "SEO Agency", authorColor: "text-blue-600", positive: true },
+        { date: "Feb 20 16:48", action: "Theme layout updated (global)", product: "All PDPs", impact: "−3 pts avg", author: "Dev Team", authorColor: "text-amber-600", positive: false },
+        { date: "Feb 18 11:05", action: "Schema markup added", product: "Summit Daypack 25L", impact: "+22 pts", author: "Beseam AI", authorColor: "text-primary", positive: true },
       ].map((e, i) => (
         <div key={i} className="relative pb-2">
-          <div
-            className={`absolute -left-[13px] h-2 w-2 rounded-full border-2 border-background ring-1 mt-[13px] ${
-              e.positive
-                ? "bg-emerald-500 ring-emerald-500/40"
-                : "bg-red-500 ring-red-500/40"
-            }`}
-          />
+          <div className={`absolute -left-[13px] h-2 w-2 rounded-full border-2 border-background ring-1 mt-[13px] ${e.positive ? "bg-emerald-500 ring-emerald-500/40" : "bg-red-500 ring-red-500/40"}`} />
           <div className="rounded-xl border border-border/40 bg-muted/30 hover:bg-muted/50 px-3 py-2.5 transition-colors">
             <div className="flex items-start justify-between gap-2">
               <div className="flex-1 min-w-0">
-                <p className="text-[12px] font-bold text-foreground leading-tight truncate">
-                  {e.action}
-                </p>
+                <p className="text-[12px] font-bold text-foreground leading-tight truncate">{e.action}</p>
                 <p className="text-[10px] text-muted-foreground/60 mt-0.5">
                   {e.product} <span className="opacity-30 mx-1">·</span>
-                  <span className={`font-black ${e.authorColor}`}>
-                    {e.author}
-                  </span>
+                  <span className={`font-black ${e.authorColor}`}>{e.author}</span>
                 </p>
               </div>
               <div className="text-right shrink-0">
-                <span
-                  className={`text-[10px] font-black px-1.5 py-0.5 rounded-md border ${
-                    e.positive
-                      ? "text-emerald-600 bg-emerald-500/10 border-emerald-500/20"
-                      : "text-red-500 bg-red-500/10 border-red-500/20"
-                  }`}
-                >
+                <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-md border ${e.positive ? "text-emerald-600 bg-emerald-500/10 border-emerald-500/20" : "text-red-500 bg-red-500/10 border-red-500/20"}`}>
                   {e.impact}
                 </span>
-                <p className="text-[9px] text-muted-foreground/40 mt-0.5">
-                  {e.date}
-                </p>
+                <p className="text-[9px] text-muted-foreground/40 mt-0.5">{e.date}</p>
               </div>
             </div>
           </div>
@@ -549,7 +413,7 @@ const mockupContent = [
 ];
 
 /* ─────────────────────────────────────────────
-   Sidebar nav items
+   Sidebar items
 ───────────────────────────────────────────── */
 const sidebarItems = [
   { icon: Home, id: "overview", label: "Overview" },
@@ -580,9 +444,7 @@ const DashboardChrome = ({
         <span className="h-2.5 w-2.5 rounded-full bg-amber-300/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
         <div className="ml-3 flex items-center gap-1 rounded-md bg-background/70 border border-border/40 px-3 py-1 mx-auto">
-          <span className="text-[9px] text-muted-foreground/40 font-medium">
-            beseam.io/dashboard/
-          </span>
+          <span className="text-[9px] text-muted-foreground/40 font-medium">beseam.io/dashboard/</span>
           <AnimatePresence mode="wait">
             <motion.span
               key={activeTab}
@@ -601,9 +463,7 @@ const DashboardChrome = ({
             <span className="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 opacity-60" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
           </span>
-          <span className="text-[8px] font-black uppercase tracking-widest text-emerald-600">
-            Live
-          </span>
+          <span className="text-[8px] font-black uppercase tracking-widest text-emerald-600">Live</span>
         </div>
       </div>
 
@@ -623,9 +483,7 @@ const DashboardChrome = ({
                 <div
                   key={item.id}
                   className={`relative flex h-8 w-full items-center justify-center rounded-lg border transition-all duration-300 ${
-                    isActive
-                      ? `${tab.sidebarActiveClass} border`
-                      : "border-transparent text-muted-foreground/40"
+                    isActive ? `${tab.sidebarActiveClass} border` : "border-transparent text-muted-foreground/40"
                   }`}
                   title={item.label}
                 >
@@ -701,229 +559,132 @@ const DashboardChrome = ({
 };
 
 /* ─────────────────────────────────────────────
-   Step list (left panel — clickable, auto-advances)
-───────────────────────────────────────────── */
-const StepList = ({
-  activeTab,
-  timerProgress,
-  onSelect,
-}: {
-  activeTab: number;
-  timerProgress: number;
-  onSelect: (i: number) => void;
-}) => (
-  <div className="flex flex-col gap-1">
-    {tabs.map((tab, i) => {
-      const isActive = i === activeTab;
-      const isPast = i < activeTab;
-      return (
-        <button
-          key={tab.id}
-          onClick={() => onSelect(i)}
-          className={`group w-full text-left rounded-2xl border px-4 py-3.5 transition-all duration-300 ${
-            isActive
-              ? `${tab.borderClass} ${tab.bgClass} shadow-sm`
-              : "border-transparent hover:border-border/40 hover:bg-muted/30"
-          }`}
-        >
-          <div className="flex items-center gap-3">
-            {/* Step number / check */}
-            <div
-              className={`h-7 w-7 rounded-lg border flex items-center justify-center shrink-0 text-[11px] font-black transition-all duration-300 ${
-                isPast
-                  ? "border-muted bg-muted text-muted-foreground/50"
-                  : isActive
-                    ? `${tab.numberClass} border`
-                    : "border-border/30 bg-muted/30 text-muted-foreground/30"
-              }`}
-            >
-              {isPast ? (
-                <CheckCircle2 className="size-3.5 text-muted-foreground/50" />
-              ) : (
-                i + 1
-              )}
-            </div>
-
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between gap-2">
-                <span
-                  className={`text-sm font-black transition-colors ${
-                    isActive
-                      ? "text-foreground"
-                      : isPast
-                        ? "text-muted-foreground/60"
-                        : "text-muted-foreground/40"
-                  }`}
-                >
-                  {tab.title}
-                </span>
-                {isPast && (
-                  <span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/30 shrink-0">
-                    Done
-                  </span>
-                )}
-              </div>
-              <p
-                className={`text-[12px] transition-colors truncate ${
-                  isActive
-                    ? "text-muted-foreground/70"
-                    : "text-muted-foreground/30"
-                }`}
-              >
-                {tab.subtitle}
-              </p>
-            </div>
-
-            {!isActive && !isPast && (
-              <tab.icon className="size-4 text-muted-foreground/20 shrink-0" />
-            )}
-          </div>
-
-          {/* Expanded content when active */}
-          {isActive && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="mt-3 ml-10 overflow-hidden"
-            >
-              <p className="text-sm text-muted-foreground/75 leading-relaxed mb-3">
-                {tab.description}
-              </p>
-              <ul className="space-y-2 mb-3">
-                {tab.bullets.map((bullet, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <div
-                      className={`mt-1 h-3 w-3 shrink-0 rounded-full flex items-center justify-center border ${tab.bgClass} ${tab.borderClass}`}
-                    >
-                      <svg
-                        className="size-1.5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={4}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                    <span className="text-sm text-muted-foreground">
-                      {bullet}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              {/* Timer bar */}
-              <div className="h-0.5 w-full rounded-full bg-muted overflow-hidden">
-                <motion.div
-                  className={`h-full rounded-full ${tab.progressClass}`}
-                  style={{ width: `${timerProgress * 100}%` }}
-                />
-              </div>
-            </motion.div>
-          )}
-        </button>
-      );
-    })}
-  </div>
-);
-
-/* ─────────────────────────────────────────────
    Main export
 ───────────────────────────────────────────── */
 export default function DashboardScroll() {
   const [activeTab, setActiveTab] = useState(0);
-  const [timerProgress, setTimerProgress] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const startTimeRef = useRef<number>(Date.now());
-  const rafRef = useRef<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  const goToTab = useCallback((i: number) => {
-    setActiveTab(i);
-    setTimerProgress(0);
-    startTimeRef.current = Date.now();
+  // Scroll-driven tab switching — desktop only
+  useEffect(() => {
+    const handleScroll = () => {
+      if (typeof window === "undefined" || window.innerWidth < 1024) return;
+      const section = sectionRef.current;
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const sectionH = section.offsetHeight;
+      const winH = window.innerHeight;
+      const scrolled = -rect.top;
+      const scrollable = sectionH - winH;
+      if (scrollable <= 0) return;
+      const progress = Math.max(0, Math.min(0.9999, scrolled / scrollable));
+      setActiveTab(Math.min(Math.floor(progress * tabs.length), tabs.length - 1));
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const tick = () => {
-      if (!paused) {
-        const elapsed = Date.now() - startTimeRef.current;
-        const progress = Math.min(elapsed / SLIDE_DURATION, 1);
-        setTimerProgress(progress);
-        if (progress >= 1) {
-          const next = (activeTab + 1) % tabs.length;
-          setActiveTab(next);
-          setTimerProgress(0);
-          startTimeRef.current = Date.now();
-        }
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-    return () => {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-    };
-  }, [activeTab, paused]);
+  const tab = tabs[activeTab];
 
   return (
-    <section id="dashboard" className="relative py-24 sm:py-32 overflow-hidden">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute right-0 top-1/4 h-[600px] w-[600px] bg-primary/3 blur-[140px] rounded-full" />
-        <div className="absolute left-0 bottom-1/3 h-[500px] w-[500px] bg-secondary/3 blur-[140px] rounded-full" />
-      </div>
+    <section
+      ref={sectionRef}
+      id="dashboard"
+      /* Desktop: 500vh (4 tabs × 100vh scroll each + 100vh initial view)
+         Mobile: auto height */
+      className="relative h-auto lg:h-[500vh]"
+    >
+      {/* ── DESKTOP: sticky scroll layout ─────────────────── */}
+      <div className="hidden lg:flex lg:sticky lg:top-0 lg:h-screen flex-col overflow-hidden">
+        {/* Background glow */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <AnimatePresence>
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              className={`absolute right-0 top-1/4 h-[600px] w-[600px] blur-[140px] rounded-full opacity-15 ${tab.bgClass}`}
+            />
+          </AnimatePresence>
+          <div className="absolute left-0 bottom-1/3 h-[500px] w-[500px] bg-secondary/3 blur-[140px] rounded-full" />
+        </div>
 
-      <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          {/* Section header */}
-          <div className="mb-14 text-center">
-            <div className="mb-4 flex justify-center">
-              <CategoryBadge
-                label="Platform Preview"
-                icon={<Package className="h-4 w-4" />}
-              />
+        {/* Compact header */}
+        <div className="shrink-0 text-center pt-10 pb-2 px-4">
+          <p className="text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+            Platform Preview
+          </p>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight">
+            One Platform.{" "}
+            <span className="text-primary italic">Every PDP Change.</span>
+          </h2>
+        </div>
+
+        {/* Left + Right */}
+        <div className="flex-1 min-h-0 flex items-center px-8">
+          <div className="w-full max-w-6xl mx-auto flex gap-14 items-center">
+
+            {/* Left: text */}
+            <div className="w-[40%] shrink-0">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="space-y-5"
+                >
+                  {/* Step number + badge */}
+                  <div className="flex items-center gap-3">
+                    <span className={`text-6xl font-black opacity-10 leading-none select-none ${tab.colorClass}`}>
+                      {String(activeTab + 1).padStart(2, "0")}
+                    </span>
+                    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold border ${tab.bgClass} ${tab.colorClass} ${tab.borderClass}`}>
+                      <tab.icon className="h-3.5 w-3.5" />
+                      {tab.title}
+                    </span>
+                  </div>
+
+                  {/* Subtitle + description */}
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground mb-3">
+                      {tab.subtitle}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {tab.description}
+                    </p>
+                  </div>
+
+                  {/* Bullets */}
+                  <ul className="space-y-3">
+                    {tab.bullets.map((bullet, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <div className={`mt-0.5 h-4 w-4 shrink-0 rounded-full flex items-center justify-center ${tab.bgClass} border ${tab.borderClass}`}>
+                          <CheckCircle2 className={`h-2.5 w-2.5 ${tab.colorClass}`} />
+                        </div>
+                        <span className="text-sm text-muted-foreground/90">{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </AnimatePresence>
             </div>
-            <h2 className="font-heading text-3xl font-bold leading-tight sm:text-4xl md:text-5xl tracking-tight mb-3">
-              One Platform.{" "}
-              <span className="text-primary italic">Every PDP Change.</span>
-            </h2>
-            <p className="text-muted-foreground/80 mx-auto max-w-xl text-sm sm:text-base md:text-lg leading-relaxed">
-              AI recommendations, agency deliverables, and internal updates —
-              all managed, monitored, and protected in one place.
-            </p>
-          </div>
 
-          {/* Left / Right layout */}
-          <div
-            className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            {/* Left: step list */}
-            <div className="lg:w-[42%] shrink-0">
-              <StepList
-                activeTab={activeTab}
-                timerProgress={timerProgress}
-                onSelect={goToTab}
-              />
-            </div>
-
-            {/* Right: dashboard mockup */}
+            {/* Right: dashboard */}
             <div className="flex-1 min-w-0">
               <div className="relative">
-                {/* Ambient glow */}
                 <AnimatePresence>
                   <motion.div
-                    key={activeTab}
+                    key={`glow-${activeTab}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.6 }}
-                    className={`pointer-events-none absolute -inset-8 -z-10 rounded-3xl blur-3xl opacity-20 ${tabs[activeTab].bgClass}`}
+                    className={`pointer-events-none absolute -inset-8 -z-10 rounded-3xl blur-3xl opacity-20 ${tab.bgClass}`}
                   />
                 </AnimatePresence>
                 <DashboardChrome activeTab={activeTab}>
@@ -933,6 +694,92 @@ export default function DashboardScroll() {
             </div>
           </div>
         </div>
+
+        {/* Progress dots */}
+        <div className="shrink-0 flex items-center justify-center gap-3 pb-8">
+          {tabs.map((t, i) => (
+            <div
+              key={i}
+              className={`h-1.5 rounded-full transition-all duration-500 ${
+                i === activeTab
+                  ? `w-8 ${t.dotClass}`
+                  : i < activeTab
+                  ? `w-2 ${t.dotClass} opacity-30`
+                  : "w-1.5 bg-muted-foreground/20"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* ── MOBILE: click tabs ─────────────────────────────── */}
+      <div className="lg:hidden py-16 px-4 sm:px-6">
+        <div className="text-center mb-8">
+          <p className="text-primary text-xs font-semibold uppercase tracking-wider mb-2">
+            Platform Preview
+          </p>
+          <h2 className="font-heading text-2xl font-bold tracking-tight">
+            One Platform.{" "}
+            <span className="text-primary italic">Every PDP Change.</span>
+          </h2>
+        </div>
+
+        {/* Tab pills */}
+        <div className="flex gap-2 overflow-x-auto pb-2 mb-6">
+          {tabs.map((t, i) => (
+            <button
+              key={t.id}
+              onClick={() => setActiveTab(i)}
+              className={`shrink-0 flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold border transition-all ${
+                i === activeTab
+                  ? `${t.bgClass} ${t.colorClass} ${t.borderClass} shadow-sm`
+                  : "border-border/40 text-muted-foreground/60 bg-background"
+              }`}
+            >
+              <t.icon className="h-3 w-3" />
+              {t.title}
+            </button>
+          ))}
+        </div>
+
+        {/* Text content */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="mb-6"
+          >
+            <p className="text-foreground/80 leading-relaxed mb-4">{tab.description}</p>
+            <ul className="space-y-2 mb-6">
+              {tab.bullets.map((bullet, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <div className={`mt-0.5 h-3.5 w-3.5 shrink-0 rounded-full flex items-center justify-center ${tab.bgClass} border ${tab.borderClass}`}>
+                    <CheckCircle2 className={`h-2 w-2 ${tab.colorClass}`} />
+                  </div>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Dashboard mockup */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`mobile-dash-${activeTab}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <DashboardChrome activeTab={activeTab}>
+              {mockupContent[activeTab]}
+            </DashboardChrome>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

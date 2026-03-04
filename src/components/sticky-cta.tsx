@@ -36,10 +36,10 @@ const StickyCTA = () => {
               </div>
               <div>
                 <p className="font-semibold text-foreground">
-                  Ready to make PDP improvements safely at scale?
+                  Get found on AI search. Convert more. Deploy safely.
                 </p>
                 <p className="text-sm text-muted-foreground hidden sm:block">
-                  Free audit · No credit card · Built-in rollback
+                  Free audit · AI visibility score · Conversion insights · Built-in rollback
                 </p>
               </div>
             </div>

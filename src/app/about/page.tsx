@@ -17,13 +17,15 @@ const AboutPage = () => {
   return (
     <div className="flex flex-col gap-20 pb-20 pt-32">
       {/* Hero Section */}
-      <section className="container text-center">
-        <Badge variant="outline" className="mb-4 rounded-full px-4 py-1 text-primary">
+      <section className="relative overflow-hidden container text-center">
+        <div className="absolute -left-40 top-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute -right-40 bottom-0 -z-10 h-[400px] w-[400px] rounded-full bg-secondary/5 blur-[100px]" />
+        <Badge variant="outline" className="mb-4 rounded-full border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
           Our Story
         </Badge>
-        <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl">
+        <h1 className="font-heading mb-6 text-4xl tracking-tight md:text-6xl">
           Scale-Grade Reliability <br />
-          <span className="text-primary">for Modern Commerce</span>
+          <span className="text-primary italic">for Modern Commerce</span>
         </h1>
         <p className="mx-auto max-w-3xl text-lg text-muted-foreground md:text-xl leading-relaxed">
           Beseam is an AI-native PDP ops layer. We help brands improve product pages for 
@@ -37,7 +39,7 @@ const AboutPage = () => {
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div className="space-y-8">
             <div>
-              <h2 className="font-heading mb-2 text-3xl font-bold md:text-4xl">Pankaj Kumar</h2>
+              <h2 className="font-heading mb-2 text-3xl tracking-tight md:text-4xl">Pankaj Kumar</h2>
               <p className="text-xl font-medium text-primary">Founder & CEO, Beseam</p>
             </div>
 
@@ -113,7 +115,7 @@ const AboutPage = () => {
       <section className="bg-muted/30 py-20">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="font-heading mb-4 text-3xl font-bold">The Beseam Core Loop</h2>
+            <h2 className="font-heading mb-4 text-3xl tracking-tight">The Beseam Core Loop</h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
               We apply a closed-loop engineering approach to Product Detail Pages.
             </p>
@@ -134,7 +136,7 @@ const AboutPage = () => {
       {/* Advisors Section - Compact Grid Layout */}
       <section className="container py-12">
         <div className="mb-8 text-center">
-          <h2 className="font-heading mb-2 text-2xl font-bold md:text-3xl">Our Advisors</h2>
+          <h2 className="font-heading mb-2 text-2xl tracking-tight md:text-3xl">Our Advisors</h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
             Strategic advisors guiding our vision
           </p>
@@ -143,7 +145,7 @@ const AboutPage = () => {
           {/* Bettina Gimenez */}
           <div className="rounded-2xl border bg-muted/20 p-6">
             <div className="flex gap-4">
-              <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-muted">
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-muted">
                 <Image 
                   src="/images/about/bettina-gimenez.jpg" 
                   alt="Bettina Gimenez" 
@@ -174,7 +176,7 @@ const AboutPage = () => {
           {/* Fabrizio Metzler */}
           <div className="rounded-2xl border bg-muted/20 p-6">
             <div className="flex gap-4">
-              <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-muted">
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-muted">
                 <Image 
                   src="/images/about/fabrizio-metzler.jpg" 
                   alt="Fabrizio Metzler" 
@@ -206,7 +208,7 @@ const AboutPage = () => {
 
       {/* Detailed History Cards */}
       <section className="container bg-card/50 rounded-3xl border p-8 md:p-12">
-        <h2 className="font-heading mb-12 text-center text-3xl font-bold">Deep Technical Roots</h2>
+        <h2 className="font-heading mb-12 text-center text-3xl tracking-tight">Deep Technical Roots</h2>
         <div className="grid gap-8 md:grid-cols-2">
           {/* Google Card */}
           <Card className="overflow-hidden border-none shadow-md">
@@ -248,20 +250,25 @@ const AboutPage = () => {
 
       {/* Final CTA Section */}
       <section className="container text-center">
-        <div className="rounded-3xl bg-primary px-8 py-16 text-primary-foreground shadow-2xl">
-          <h2 className="font-heading mb-6 text-3xl font-bold md:text-5xl">
-            Ready to upgrade your PDP ops?
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg" variant="secondary" asChild className="rounded-full px-10">
-              <Link href="https://app.beseam.com/register">
-                Start Free Audit
-                <ExternalLink className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="rounded-full bg-transparent px-10 text-white hover:bg-white/10" asChild>
-              <Link href="/demo">Talk to the Team</Link>
-            </Button>
+        <div className="relative overflow-hidden rounded-[2.5rem] border bg-muted/10 px-8 py-16">
+          <div className="absolute -left-24 top-1/2 z-0 h-64 w-64 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
+          <div className="absolute -right-24 top-1/2 z-0 h-64 w-64 -translate-y-1/2 rounded-full bg-secondary/10 blur-3xl" />
+          <div className="relative z-10">
+            <h2 className="font-heading mb-6 text-3xl tracking-tight md:text-5xl">
+              Get found. Convert more.{" "}
+              <span className="text-primary italic">Deploy without the risk.</span>
+            </h2>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button size="lg" asChild className="rounded-full px-10 h-14 text-base font-bold shadow-xl shadow-primary/20">
+                <a href="https://app.beseam.com/analyze" target="_blank" rel="noopener noreferrer">
+                  Start Free Audit
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" className="rounded-full px-10 h-14 text-base font-bold border-2" asChild>
+                <Link href="/demo">Talk to the Team</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

@@ -87,7 +87,7 @@ export default function ClientLogos() {
     <section className="bg-background pt-12 pb-8 md:pt-16 md:pb-10">
       <div className="container mx-auto px-4">
         <h3 className="text-muted-foreground mb-8 text-center text-sm font-semibold uppercase tracking-wider">
-          Trusted by E-commerce Brands
+          Team experience from
         </h3>
         <div className="relative mx-auto w-full overflow-hidden">
           <Carousel

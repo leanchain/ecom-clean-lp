@@ -2,11 +2,21 @@
 
 import React from "react";
 import Link from "next/link";
-import { Shield, GitBranch, Activity, RotateCcw } from "lucide-react";
+import Image from "next/image";
 import { TypingAnimation } from "@/components/typing-animation";
 import { AnalyzerInput } from "@/components/sections/analyzer-input";
 
 import { motion } from "framer-motion";
+
+const platforms = [
+  { name: "Google", logo: "/images/ai-platforms/google.svg" },
+  { name: "ChatGPT", logo: "/images/ai-platforms/chatgpt.svg" },
+  { name: "Gemini", logo: "/images/ai-platforms/gemini.svg" },
+  { name: "AI Mode", logo: "/images/ai-platforms/ai-mode.svg" },
+  { name: "Claude", logo: "/images/ai-platforms/claude.svg" },
+  { name: "Perplexity", logo: "/images/ai-platforms/perplexity.svg" },
+  { name: "Meta AI", logo: "/images/ai-platforms/meta.svg" },
+];
 
 const Hero230 = () => {
   const exampleReportHref = `/reports`;
@@ -25,16 +35,15 @@ const Hero230 = () => {
           className="space-y-6"
         >
           <h1 className="font-heading text-foreground max-w-4xl text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Audit, upgrade, and safeguard
+            Ship PDP changes
             <br />
-            <span className="text-primary">every product page</span>
+            <span className="text-primary">without revenue risk</span>
           </h1>
 
           <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed">
-            Beseam continuously monitors your PDPs to generate AI-powered
-            optimization features. Deploy improvements with one click, and rest
-            easy knowing Beseam automatically rolls back any changes if your
-            KPIs drop.
+            Optimize PDPs for AI search discovery and conversion — then deploy
+            every change safely with versioning, KPI guardrails, and automatic
+            rollback.
           </p>
         </motion.div>
 
@@ -51,9 +60,10 @@ const Hero230 = () => {
             <span className="text-foreground">
               <TypingAnimation
                 words={[
+                  "Get found on ChatGPT, Perplexity, AI Mode",
+                  "Lift conversion. Protect what you gain.",
                   "Guardrails for every PDP change",
                   "Your agency ships, we protect revenue",
-                  "AI recommendations + safe deploy",
                   "Rollback when KPIs dip",
                 ]}
                 typingSpeed={80}
@@ -76,63 +86,44 @@ const Hero230 = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.55 }}
         >
           {/* Secondary link */}
           <Link
             href={exampleReportHref}
             className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-primary/50"
           >
-            See an example reports
+            See example reports
           </Link>
         </motion.div>
 
-        {/* Product pillars */}
+        {/* AI platform icons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 max-w-4xl w-full"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="flex flex-col items-center gap-4 pt-2"
         >
-          {[
-            {
-              icon: Shield,
-              label: "Audit & Monitor",
-              sub: "Continuous checks & recommendations",
-            },
-            {
-              icon: GitBranch,
-              label: "Version & Deploy",
-              sub: "Any source, safely shipped",
-            },
-            {
-              icon: Activity,
-              label: "Monitor KPIs",
-              sub: "Revenue guardrails, always on",
-            },
-            {
-              icon: RotateCcw,
-              label: "Diagnose & Rollback",
-              sub: "Pinpoint cause, recover fast",
-            },
-          ].map((pillar, i) => (
-            <div
-              key={i}
-              className="group flex flex-col items-center gap-3 rounded-2xl border bg-card/50 p-5 transition-all hover:bg-card hover:shadow-lg hover:-translate-y-1"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                <pillar.icon className="h-6 w-6" />
+          <p className="text-[11px] uppercase tracking-widest font-semibold text-muted-foreground/50">
+            Optimizes visibility for
+          </p>
+          <div className="flex items-center gap-5 flex-wrap justify-center">
+            {platforms.map((p) => (
+              <div key={p.name} className="flex flex-col items-center gap-1.5">
+                <Image
+                  src={p.logo}
+                  alt={p.name}
+                  width={32}
+                  height={32}
+                  title={p.name}
+                  className="h-8 w-8 object-contain"
+                />
+                <span className="text-[9px] text-muted-foreground/50 font-medium">
+                  {p.name}
+                </span>
               </div>
-              <div className="space-y-1">
-                <h3 className="text-sm font-bold text-foreground">
-                  {pillar.label}
-                </h3>
-                <p className="text-[11px] leading-tight text-muted-foreground">
-                  {pillar.sub}
-                </p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

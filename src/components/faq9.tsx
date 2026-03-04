@@ -32,9 +32,14 @@ const faqs = [
       "Beseam's Diagnosis Agent links the regression to a specific change diff (e.g., 'agency theme publish removed FAQ module'). It identifies who made the change, recommends an action (keep, rollback, holdout test, or iterate), and lets you rollback with one click.",
   },
   {
-    question: "What platforms do you integrate with?",
+    question: "How does Beseam improve AI search discovery?",
     answer:
-      "Beseam integrates with Shopify natively, with WooCommerce and other platforms coming soon. Changes are applied through theme blocks, metafields, and structured content — ensuring compatibility with your existing theme, agency workflows, and tech stack.",
+      "Beseam audits each PDP against the signals AI search engines use to surface product answers: structured FAQ schema, product narrative depth, schema.org markup, and content completeness. The upgrade playbook identifies exactly what's missing and generates the improvements — so your products get cited by ChatGPT, Perplexity, Google AI Mode, and Gemini.",
+  },
+  {
+    question: "How does Beseam actually improve conversion?",
+    answer:
+      "Beseam's audit scores each PDP on conversion readiness — missing FAQ sections, thin product narratives, weak CTAs, and structural gaps. It then generates a prioritized playbook of improvements ranked by projected revenue impact. After deploy, it tracks rev/session and conversion rate against a pre-change baseline so you know exactly what moved the needle.",
   },
 ];
 
@@ -48,13 +53,13 @@ const Faq9 = () => {
       <div className="container max-w-6xl">
         {/* Header */}
         <div className="mb-16 text-center">
-          <p className="text-primary mb-4 text-sm font-medium uppercase tracking-wider">
+          <p className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
             FAQ
           </p>
-          <h2 className="text-3xl font-bold md:text-5xl">
+          <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
             Everything you need to know
           </h2>
-          <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto leading-relaxed">
             Common questions about how Beseam upgrades and protects your product
             pages.
           </p>

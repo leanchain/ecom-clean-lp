@@ -642,13 +642,13 @@ export function AlternativeArticle(props: AlternativeArticleProps) {
         {/* Hero */}
         <section className="pt-16 mx-auto mt-10 max-w-4xl text-center">
           <Badge
-            variant="secondary"
+            variant="outline"
             className="rounded-full px-4 py-2 text-xs font-semibold"
           >
             {name} Alternative
           </Badge>
 
-          <h1 className="mt-8 font-heading text-4xl font-bold leading-tight md:text-6xl">
+          <h1 className="mt-8 font-heading text-4xl tracking-tight md:text-6xl">
             {renderStyledText(resolved.headline, {
               styledClassName: "text-primary",
             })}
@@ -692,7 +692,7 @@ export function AlternativeArticle(props: AlternativeArticleProps) {
 
         {/* Why switch */}
         <section className="mx-auto mt-24 max-w-5xl">
-          <h2 className="text-center text-2xl font-bold md:text-3xl">
+          <h2 className="font-heading text-center text-2xl tracking-tight md:text-3xl">
             {renderStyledText(resolved.whySectionHeading, {
               styledClassName:
                 "italic underline decoration-primary/30 underline-offset-8",
@@ -719,7 +719,7 @@ export function AlternativeArticle(props: AlternativeArticleProps) {
 
         {/* Quick comparison */}
         <section className="mx-auto mt-16 max-w-5xl">
-          <h2 className="text-center text-2xl font-bold md:text-3xl">
+          <h2 className="font-heading text-center text-2xl tracking-tight md:text-3xl">
             Quick Comparison
           </h2>
           <p className="mt-3 text-center text-sm text-muted-foreground md:text-base">
@@ -859,7 +859,7 @@ export function AlternativeArticle(props: AlternativeArticleProps) {
 
         {/* About */}
         <section className="mx-auto mt-16 max-w-5xl">
-          <h2 className="text-center text-2xl font-bold md:text-3xl">
+          <h2 className="font-heading text-center text-2xl tracking-tight md:text-3xl">
             About {name}
           </h2>
 
@@ -960,7 +960,7 @@ export function AlternativeArticle(props: AlternativeArticleProps) {
 
         {/* What Beseam does differently */}
         <section className="mx-auto mt-16 max-w-5xl">
-          <h2 className="text-center text-2xl font-bold md:text-3xl">
+          <h2 className="font-heading text-center text-2xl tracking-tight md:text-3xl">
             What Beseam Does Differently
           </h2>
           <p className="mt-3 text-center text-sm text-muted-foreground md:text-base">
@@ -984,7 +984,7 @@ export function AlternativeArticle(props: AlternativeArticleProps) {
 
         {/* Get started */}
         <section className="mx-auto mt-16 max-w-5xl">
-          <h2 className="text-center text-2xl font-bold md:text-3xl">
+          <h2 className="font-heading text-center text-2xl tracking-tight md:text-3xl">
             How to Get Started with Beseam
           </h2>
           <p className="mt-3 text-center text-sm text-muted-foreground md:text-base">
@@ -1037,7 +1037,7 @@ export function AlternativeArticle(props: AlternativeArticleProps) {
 
         {/* FAQ */}
         <section className="mx-auto mt-16 max-w-5xl">
-          <h2 className="text-center text-2xl font-bold md:text-3xl">
+          <h2 className="font-heading text-center text-2xl tracking-tight md:text-3xl">
             {name} Alternative FAQ
           </h2>
 
@@ -1064,7 +1064,7 @@ export function AlternativeArticle(props: AlternativeArticleProps) {
         {/* Related */}
         {related.length > 0 && (
           <section className="mx-auto mt-16 max-w-5xl">
-            <h2 className="text-center text-2xl font-bold md:text-3xl">
+            <h2 className="font-heading text-center text-2xl tracking-tight md:text-3xl">
               Related Pages
             </h2>
             <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -1076,7 +1076,9 @@ export function AlternativeArticle(props: AlternativeArticleProps) {
                 >
                   <ArrowRight className="absolute right-4 top-4 h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
                   <div className="pr-8">
-                    <div className="text-sm font-bold">{r.name}</div>
+                    <div className="text-sm font-semibold text-foreground">
+                      {r.name}
+                    </div>
                     <div className="mt-2 line-clamp-2 text-xs text-muted-foreground">
                       {r.description}
                     </div>
