@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import AnimatedBorderContainer from "@/components/ui/animated-border-container";
 import { Input } from "@/components/ui/input";
+import { TypingAnimation } from "@/components/typing-animation";
 
 const capsules = [
   "Schema markup fixed",
@@ -85,6 +86,29 @@ export default function HeroSection() {
             </span>
           ))}
         </motion.div> */}
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="flex items-center gap-2 text-sm font-medium text-muted-foreground/70"
+        >
+          <span className="text-[10px] uppercase tracking-widest text-muted-foreground/50">
+            User:
+          </span>
+          <TypingAnimation
+            words={[
+              "best linen summer dress under $80",
+              "running sneakers wide toe box free returns",
+              "eco water bottle fast shipping under $40",
+              "minimalist leather wallet slim profile",
+              "kids birthday gift under $50",
+            ]}
+            typingSpeed={65}
+            deletingSpeed={32}
+            delayBetweenWords={2500}
+          />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

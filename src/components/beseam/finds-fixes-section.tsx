@@ -616,7 +616,7 @@ function DashboardChrome({
   );
 }
 
-export default function FindsFixesSection() {
+export default function HowItWorksSection() {
   const [activeTab, setActiveTab] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -669,13 +669,11 @@ export default function FindsFixesSection() {
       <div className="hidden lg:flex lg:sticky lg:top-0 lg:h-screen flex-col overflow-hidden">
         <div className="shrink-0 text-center pt-10 pb-2 px-4">
           <p className="text-primary mb-2 text-xs font-semibold uppercase tracking-wider">
-            Platform Preview
+            How It Works
           </p>
           <h2 className="font-heading text-2xl font-bold tracking-tight sm:text-3xl">
-            One platform.{" "}
-            <span className="text-primary italic">
-              Prepare every product for AI search.
-            </span>
+            Crawl, audit, fix,{" "}
+            <span className="text-primary italic">and monitor.</span>
           </h2>
         </div>
 
@@ -787,10 +785,8 @@ export default function FindsFixesSection() {
             Platform Preview
           </p>
           <h2 className="font-heading text-2xl font-bold tracking-tight">
-            One platform.{" "}
-            <span className="text-primary italic">
-              Prepare every product for AI search.
-            </span>
+            Here&apos;s the platform{" "}
+            <span className="text-primary italic">behind it.</span>
           </h2>
         </div>
 
