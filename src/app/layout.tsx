@@ -1,13 +1,11 @@
-import { Figtree, Lora } from "next/font/google";
+import { Figtree } from "next/font/google";
 
 import type { Metadata } from "next";
 
 import "./globals.css";
 import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
-import Footer from "@/components/layout/footer";
-import Navbar from "@/components/layout/navbar";
-import { NavigationProvider } from "@/components/navigation-provider";
-import CTA from "@/components/sections/cta";
+import BeseamNavbar from "@/components/beseam/navbar";
+import BeseamFooter from "@/components/beseam/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 
@@ -22,38 +20,26 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   title: {
-    default: "Beseam - Guardrails for Every PDP Change",
+    default: "Beseam — Prepare Your Shopify Store for AI Search & LLMs",
     template: "%s | Beseam",
   },
   description:
-    "Beseam is an AI-native PDP & revenue ops platform. Upgrade product pages for discovery + conversion, then prevent regressions with monitoring, impact explanation, and guided rollback.",
+    "ChatGPT, Perplexity, and Gemini are the new shopping search. Beseam automatically fixes your schema markup, geo-tags, and metadata so your entire Shopify catalog is prepared for AI.",
   keywords: [
     "Beseam",
-    "E-commerce",
-    "Revenue ops",
-    "PDP upgrades",
-    "PDP monitoring",
-    "PDP guardrails",
-    "Safe deploy",
-    "Rollback",
-    "Change intelligence",
-    "Revenue protection",
-    "Conversion",
-    "Product Detail Pages",
-    "PDP Audit",
-    "PDP versioning",
-    "Agency guardrails",
-    "SEO agency tools",
-    "Dev agency deployment",
-    "AI recommendations",
-    "CRO",
-    "Conversion Rate Optimization",
-    "Schema",
-    "AI visibility",
-    "Staged rollout",
-    "Regression detection",
-    "Change attribution",
-    "Agentic commerce readiness",
+    "AI search optimization",
+    "LLM product discovery",
+    "Shopify AI readiness",
+    "Structured data Shopify",
+    "ChatGPT shopping",
+    "Perplexity product search",
+    "Gemini shopping",
+    "Schema markup",
+    "Product structured data",
+    "AI discoverability",
+    "Shopify SEO",
+    "AEO Shopify",
+    "AI search engine optimization",
   ],
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
@@ -77,9 +63,9 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon/favicon.ico" }],
   },
   openGraph: {
-    title: "Beseam - Guardrails for Every PDP Change",
+    title: "Beseam — Prepare Your Shopify Store for AI Search & LLMs",
     description:
-      "Upgrade PDPs for discovery + conversion, then protect revenue with monitoring, impact explanation, and rollback.",
+      "ChatGPT, Perplexity, and Gemini are the new shopping search. Beseam fixes your schema, geo-tags, and metadata so your catalog is prepared for AI.",
     siteName: "Beseam",
     type: "website",
     images: [
@@ -87,20 +73,21 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Beseam - Guardrails for Every PDP Change",
+        alt: "Beseam — Prepare Your Shopify Store for AI Search & LLMs",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam - Guardrails for Every PDP Change",
+    title: "Beseam — Prepare Your Shopify Store for AI Search & LLMs",
     description:
-      "Upgrade PDPs for discovery + conversion, then protect revenue with monitoring, impact explanation, and rollback.",
+      "ChatGPT, Perplexity, and Gemini are the new shopping search. Beseam fixes your schema, geo-tags, and metadata so your catalog is prepared for AI.",
     images: ["/og-image.png"],
     creator: "@Beseam",
     site: "@Beseam",
   },
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -116,19 +103,11 @@ export default function RootLayout({
         >
           <CookieConsentProvider>
             <AnalyticsScripts />
-            <NavigationProvider>
-              <div className="flex min-h-screen flex-col bg-background">
-                {/* Header - In the flow */}
-                <Navbar />
-
-                {/* Page content */}
-                <main className="flex-1">
-                  {children}
-                  <CTA />
-                  <Footer />
-                </main>
-              </div>
-            </NavigationProvider>
+            <div className="flex min-h-screen flex-col bg-background">
+              <BeseamNavbar />
+              <main className="flex-1">{children}</main>
+              <BeseamFooter />
+            </div>
           </CookieConsentProvider>
         </ThemeProvider>
       </body>

@@ -75,7 +75,10 @@ export function CodeViewer({
   return (
     <div
       className={cn(
-        'rounded-md border border-border/20 overflow-hidden bg-background relative flex flex-col min-h-0 group min-w-[250px]',
+        'rounded-md border overflow-hidden relative flex flex-col min-h-0 group min-w-[250px] transition-all duration-200',
+        readOnly 
+          ? 'bg-muted/40 border-dashed border-border/60' 
+          : 'bg-background border-solid border-border shadow-sm focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/20',
         className
       )}
       style={{ maxHeight, minHeight, height }}
@@ -83,11 +86,11 @@ export function CodeViewer({
       <Button
         variant="ghost"
         size="icon"
-        className="absolute top-0 right-3 z-10 h-8 w-8 opacity-30 hover:opacity-100 transition-opacity hover:text-primary hover:bg-muted/50"
+        className="absolute top-2 right-3 z-10 h-7 w-7 opacity-30 hover:opacity-100 transition-opacity hover:text-primary hover:bg-muted/50"
         onClick={copyToClipboard}
         title="Copy to clipboard"
       >
-        {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+        {copied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Copy className="h-3.5 w-3.5" />}
       </Button>
 
       <CodeMirror
@@ -95,17 +98,27 @@ export function CodeViewer({
         height="100%"
         extensions={extensions}
         theme={isDark ? vscodeDark : vscodeLight}
-        editable={!readOnly}
+        editable={true}
+        readOnly={readOnly}
         onChange={onChange}
         basicSetup={{
           lineNumbers,
           foldGutter: true,
-          highlightActiveLine: false,
+          highlightActiveLine: !readOnly,
           highlightSelectionMatches: true,
-          dropCursor: false,
-          indentOnInput: false,
+          dropCursor: !readOnly,
+          indentOnInput: !readOnly,
+          searchKeymap: true,
+          defaultKeymap: true,
+          history: !readOnly,
+          drawSelection: true,
+          bracketMatching: true,
+          closeBrackets: !readOnly,
         }}
-        className="text-[12px] cm-custom-editor flex-1 min-h-0"
+        className={cn(
+          "text-[12px] cm-custom-editor flex-1 min-h-0",
+          readOnly && "cm-readonly"
+        )}
       />
 
       <style jsx global>{`
@@ -114,6 +127,10 @@ export function CodeViewer({
           flex-direction: column !important;
           height: 100% !important;
           min-height: 0 !important;
+        }
+        .cm-custom-editor.cm-readonly .cm-editor,
+        .cm-custom-editor.cm-readonly .cm-scroller {
+          background-color: transparent !important;
         }
         .cm-custom-editor .cm-theme-container,
         .cm-custom-editor .cm-editor {
@@ -134,64 +151,95 @@ export function CodeViewer({
           line-height: 1.6 !important;
           padding-right: 2.5rem !important;
         }
+        .cm-custom-editor.cm-readonly .cm-content {
+          cursor: default !important;
+        }
+        /* Compact Shadcn-like Integrated Search Toolbar */
         .cm-custom-editor .cm-search {
-          padding: 6px 10px !important;
-          background: #f1f5f9 !important;
-          border-bottom: 1.5px solid #e2e8f0 !important;
           display: flex !important;
-          flex-wrap: wrap !important;
-          gap: 8px !important;
           align-items: center !important;
+          gap: 8px !important;
+          padding: 4px 12px !important;
+          background-color: var(--background) !important;
+          border-bottom: 1px solid var(--border) !important;
+          z-index: 50 !important;
         }
         .cm-custom-editor .cm-search [name='search'] {
-          min-width: 240px !important;
-          font-size: 13px !important;
-          padding: 3px 10px !important;
+          flex: 1 !important;
+          max-width: 280px !important;
+          height: 24px !important;
+          font-size: 12px !important;
+          padding: 0 8px !important;
           border-radius: 4px !important;
-          border: 1px solid #cbd5e1 !important;
-          background: white !important;
+          border: 1px solid var(--border) !important;
+          background-color: var(--background) !important;
+          color: var(--foreground) !important;
+          outline: none !important;
+          transition: border-color 0.2s, ring 0.2s !important;
+        }
+        .cm-custom-editor .cm-search [name='search']:focus {
+          border-color: var(--ring) !important;
+          box-shadow: 0 0 0 1px var(--ring) !important;
         }
         .cm-custom-editor .cm-search button {
-          font-size: 12px !important;
-          font-weight: 500 !important;
-          padding: 3px 10px !important;
+          height: 20px !important;
+          padding: 0 8px !important;
+          font-size: 10px !important;
+          font-weight: 600 !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.02em !important;
           border-radius: 4px !important;
-          background: #ffffff !important;
-          border: 1px solid #cbd5e1 !important;
-          color: #334155 !important;
+          border: none !important;
+          background-color: var(--secondary) !important;
+          color: var(--secondary-foreground) !important;
           cursor: pointer !important;
-          transition: all 0.1s ease !important;
+          transition: all 0.15s ease !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
         }
         .cm-custom-editor .cm-search button:hover {
-          background: #f8fafc !important;
-          border-color: #94a3b8 !important;
+          opacity: 0.9 !important;
+          transform: translateY(-0.5px) !important;
+        }
+        .cm-custom-editor .cm-search button:active {
+          transform: translateY(0) !important;
+          opacity: 0.8 !important;
         }
         .cm-custom-editor .cm-search button[name='close'] {
           margin-left: auto !important;
-          padding: 2px 8px !important;
-          font-size: 14px !important;
+          width: 20px !important;
+          height: 20px !important;
+          padding: 0 !important;
           border: none !important;
           background: transparent !important;
-          opacity: 0.5 !important;
+          color: var(--muted-foreground) !important;
+          font-size: 16px !important;
+          font-weight: 300 !important;
+          border-radius: 50% !important;
         }
         .cm-custom-editor .cm-search button[name='close']:hover {
-          opacity: 1 !important;
-          background: #fee2e2 !important;
-          color: #ef4444 !important;
+          color: var(--destructive) !important;
+          background-color: var(--destructive/10) !important;
+          transform: none !important;
         }
         .cm-custom-editor .cm-search label {
-          font-size: 12px !important;
-          font-weight: 500 !important;
-          color: #475569 !important;
+          font-size: 11px !important;
+          font-weight: 400 !important;
+          color: var(--muted-foreground) !important;
           display: flex !important;
           align-items: center !important;
           gap: 4px !important;
+          white-space: nowrap !important;
           cursor: pointer !important;
+          user-select: none !important;
         }
         .cm-custom-editor .cm-search label input {
-          width: 14px !important;
-          height: 14px !important;
-          cursor: pointer !important;
+          width: 12px !important;
+          height: 12px !important;
+          border-radius: 3px !important;
+          border: 1px solid var(--border) !important;
+          accent-color: var(--primary) !important;
         }
       `}</style>
     </div>

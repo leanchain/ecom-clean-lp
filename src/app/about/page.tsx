@@ -261,7 +261,7 @@ const AboutPage = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <Button size="lg" asChild className="rounded-full px-10 h-14 text-base font-bold shadow-xl shadow-primary/20">
                 <a href="https://app.beseam.com/analyze" target="_blank" rel="noopener noreferrer">
-                  Start Free Audit
+                  Scan Free
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
               </Button>
