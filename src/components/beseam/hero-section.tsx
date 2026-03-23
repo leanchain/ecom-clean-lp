@@ -48,7 +48,7 @@ export default function HeroSection() {
         >
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-4 py-1.5 text-xs font-semibold text-muted-foreground">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-success" />
-            Prepare Your Store for AI Search
+            Get discovered by AI shoppers
           </span>
         </motion.div>
 
@@ -59,15 +59,15 @@ export default function HeroSection() {
           className="space-y-6"
         >
           <h1 className="font-heading text-foreground max-w-4xl text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Prepare your store for
+            Get your store ready
             <br />
-            <span className="text-primary">AI Search &amp; LLMs.</span>
+            <span className="text-primary">for AI Search.</span>
           </h1>
 
           <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg leading-relaxed md:text-xl">
-            Beseam automatically fixes your schema markup, geo-tags, and
-            metadata so your catalog is structured for AI discovery before
-            ranking gaps turn into lost demand.
+            Beseam automatically finds and fixes the hidden issues stopping AI
+            tools like ChatGPT and Google from recommending your products —
+            before your competitors get there first.
           </p>
         </motion.div>
 

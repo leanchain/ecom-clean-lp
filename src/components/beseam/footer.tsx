@@ -117,9 +117,9 @@ export default function BeseamFooter() {
                 Scan. Fix. Push. <span className="text-primary">Verified.</span>
               </p>
               <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-                Prepare your Shopify store for AI search. We fix your schema,
-                geo-tags, and metadata so your catalog is ready for ChatGPT,
-                Perplexity, and Gemini.
+                Get your products recommended by AI shopping tools like ChatGPT,
+                Google, and Perplexity — automatically, without any technical
+                complexity.
               </p>
             </div>
 
@@ -201,10 +201,9 @@ export default function BeseamFooter() {
         {/* Bottom disclaimer */}
         <div className="mt-16 border-t pt-8">
           <p className="max-w-2xl text-[11px] leading-relaxed text-muted-foreground/60">
-            Beseam prepares Shopify stores for AI search. We scan, fix, and
-            verify schema markup, geo-tags, and product metadata so your catalog
-            is ready for ChatGPT, Perplexity, and Gemini. All product names,
-            logos, and brands are property of their respective owners.
+            Beseam helps Shopify store owners get their products recommended by
+            AI shopping tools like ChatGPT, Perplexity, and Gemini. All product
+            names, logos, and brands are property of their respective owners.
           </p>
         </div>
       </div>
