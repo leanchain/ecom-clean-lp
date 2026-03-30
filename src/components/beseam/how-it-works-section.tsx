@@ -18,11 +18,11 @@ import { AnimatePresence, motion } from "framer-motion";
 const sections = [
   {
     id: "diagnose",
-    title: "Diagnose",
-    subtitle: "Find the weak journeys and pages",
-    support: "Mission-level diagnostics",
-    routeLabel: "missions",
-    navLabel: "Missions",
+    title: "Audit",
+    subtitle: "See how AI reads your products",
+    support: "AI readiness diagnostics",
+    routeLabel: "ai-readiness",
+    navLabel: "AI Readiness",
     icon: Search,
     colorClass: "text-sky-600",
     bgClass: "bg-sky-50 dark:bg-sky-950/30",
@@ -31,19 +31,19 @@ const sections = [
     sidebarActiveClass:
       "bg-sky-100 text-sky-600 border-sky-200 dark:bg-sky-950/40 dark:text-sky-400 dark:border-sky-800",
     description:
-      "Track shopping missions across your store. See where journeys break, which landing pages underperform, and what page-level issues are costing you conversions.",
+      "Beseam sends AI to read every product page like ChatGPT or Gemini would. See exactly what AI gets right, what it gets wrong, and where your store is invisible to AI shopping engines.",
     areas: [
-      "Shopping mission tracking",
-      "Journey drop-off analysis",
-      "PDP audit: 118+ checks across SEO, schema, content & feed",
-      "AI-referral source diagnostics",
+      "AI product probe — LLM reads your pages like a shopper would",
+      "118+ checks across schema, structured data, content & SEO",
+      "AI readiness score per page and per store",
+      "AI referral traffic tracking across 13 engines",
     ],
     totalChecks: "118+ checks",
   },
   {
     id: "fix",
     title: "Fix",
-    subtitle: "Generate and publish page fixes",
+    subtitle: "Make your products AI-readable",
     support: "AI-generated improvements",
     routeLabel: "tasks/fix",
     navLabel: "Tasks",
@@ -55,10 +55,10 @@ const sections = [
     sidebarActiveClass:
       "bg-violet-100 text-violet-600 border-violet-200 dark:bg-violet-950/40 dark:text-violet-400 dark:border-violet-800",
     description:
-      "Take the audit findings from weak journeys and route them into fixes: AI-generated, AI-assisted, or manual. Review before/after, then publish safely to Shopify.",
+      "Get targeted fixes for the exact issues blocking AI from understanding your products: schema gaps, missing selling points, ambiguous pricing. Review before/after, then publish to Shopify.",
     areas: [
-      "AI-generated fixes for common issues",
-      "Review before/after preview",
+      "AI-generated fixes for schema, metadata & structured data",
+      "Selling point optimization for AI readability",
       "One-click publish to Shopify",
       "Rollback protection on every change",
     ],
@@ -67,8 +67,8 @@ const sections = [
   {
     id: "verify",
     title: "Verify",
-    subtitle: "Confirm what actually improved",
-    support: "Before/after tracking",
+    subtitle: "Confirm AI now recommends you",
+    support: "Before/after AI readiness tracking",
     routeLabel: "verify",
     navLabel: "Verify",
     icon: Activity,
@@ -79,11 +79,11 @@ const sections = [
     sidebarActiveClass:
       "bg-emerald-100 text-emerald-600 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800",
     description:
-      "After fixes go live, Beseam re-runs diagnostics to verify improvement. See exactly what changed — page scores, journey health, and issue resolution — with clear before/after evidence.",
+      "After fixes go live, Beseam re-runs the AI probe and diagnostics. See exactly how your AI readiness score improved — with before/after evidence across every AI engine.",
     areas: [
-      "Before/after page scores",
-      "Journey health improvement tracking",
-      "Issue resolution confirmation",
+      "Before/after AI readiness scores",
+      "AI recommendation confidence tracking",
+      "Per-engine visibility improvement",
       "Evidence you can share with stakeholders",
     ],
     totalChecks: "Continuous",
@@ -95,52 +95,49 @@ const collectTabs = ["Overview", "Missions", "Tasks", "Verify"] as const;
 /* ── Diagnose Mockup ─────────────────────────────────────────────────── */
 
 function DiagnoseMockup() {
-  const missions = [
+  const products = [
     {
-      name: "Summer Dress Collection",
-      source: "AI Referral",
-      journeys: 342,
-      dropOff: "68%",
-      dropClass: "text-red-600",
-      weakPages: 4,
-      status: "Needs attention",
+      name: "Blue Summer Dress",
+      source: "ChatGPT",
+      score: 92,
+      scoreClass: "text-emerald-600",
+      issues: 0,
+      status: "AI Ready",
+      statusClass: "bg-emerald-500/10 text-emerald-600",
+    },
+    {
+      name: "Running Shoes Pro",
+      source: "Gemini",
+      score: 41,
+      scoreClass: "text-red-600",
+      issues: 5,
+      status: "Needs fixes",
       statusClass: "bg-red-500/10 text-red-600",
     },
     {
-      name: "Running Shoes Landing",
-      source: "Google Ads",
-      journeys: 891,
-      dropOff: "42%",
-      dropClass: "text-amber-600",
-      weakPages: 2,
-      status: "Under review",
+      name: "Eco Water Bottle",
+      source: "Perplexity",
+      score: 67,
+      scoreClass: "text-amber-600",
+      issues: 2,
+      status: "Partially ready",
       statusClass: "bg-amber-500/10 text-amber-600",
-    },
-    {
-      name: "Eco Water Bottles",
-      source: "ChatGPT",
-      journeys: 156,
-      dropOff: "23%",
-      dropClass: "text-emerald-600",
-      weakPages: 0,
-      status: "Healthy",
-      statusClass: "bg-emerald-500/10 text-emerald-600",
     },
   ];
 
   const findings = [
     {
-      issue: "Missing product schema on 4 PDPs",
+      issue: "AI read wrong price on 4 products",
       priority: "P0",
       category: "Schema",
     },
     {
-      issue: "Thin meta descriptions on summer collection",
-      priority: "P1",
+      issue: "No selling points found by AI probe",
+      priority: "P0",
       category: "Content",
     },
     {
-      issue: "No review markup on best sellers",
+      issue: "Missing review markup — AI can't cite ratings",
       priority: "P1",
       category: "SEO",
     },
@@ -151,19 +148,19 @@ function DiagnoseMockup() {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-sm font-black text-foreground">
-            Shopping Missions
+            AI Readiness Audit
           </h3>
           <p className="text-[11px] text-muted-foreground/60">
-            Journey diagnostics across your store
+            How AI engines understand your products
           </p>
         </div>
         <span className="rounded-full border border-sky-200 bg-sky-50 px-2.5 py-1 text-[10px] font-black text-sky-600">
-          3 active missions
+          3 products scanned
         </span>
       </div>
 
       <div className="space-y-2">
-        {missions.map((m) => (
+        {products.map((m) => (
           <div
             key={m.name}
             className="rounded-xl border border-border/40 bg-background/80 px-3 py-2.5"
@@ -174,16 +171,16 @@ function DiagnoseMockup() {
                   {m.name}
                 </p>
                 <p className="text-[10px] text-muted-foreground/60">
-                  via {m.source} &middot; {m.journeys} journeys
+                  tested via {m.source} &middot; {m.issues} issues
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 <div className="text-right">
-                  <p className={`text-[12px] font-black ${m.dropClass}`}>
-                    {m.dropOff}
+                  <p className={`text-[12px] font-black ${m.scoreClass}`}>
+                    {m.score}%
                   </p>
                   <p className="text-[8px] text-muted-foreground/50">
-                    drop-off
+                    AI ready
                   </p>
                 </div>
                 <span
@@ -199,7 +196,7 @@ function DiagnoseMockup() {
 
       <div className="rounded-xl border border-border/40 bg-muted/20 px-3 py-2.5">
         <p className="mb-2 text-[9px] font-black uppercase tracking-widest text-muted-foreground/50">
-          Linked Findings
+          AI Probe Findings
         </p>
         <div className="space-y-1.5">
           {findings.map((f) => (
@@ -325,10 +322,10 @@ function FixMockup() {
 
 function VerifyMockup() {
   const improvements = [
-    { metric: "Product Schema", before: 12, after: 91, unit: "%" },
+    { metric: "AI Readiness", before: 34, after: 91, unit: "%" },
+    { metric: "Schema Coverage", before: 12, after: 89, unit: "%" },
     { metric: "Content Quality", before: 45, after: 78, unit: "%" },
-    { metric: "Journey Health", before: 32, after: 68, unit: "%" },
-    { metric: "SEO Foundations", before: 56, after: 89, unit: "%" },
+    { metric: "AI Confidence", before: 28, after: 85, unit: "%" },
   ];
 
   return (

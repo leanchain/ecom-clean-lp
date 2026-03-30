@@ -6,16 +6,20 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    q: "What is a shopping mission?",
-    a: "A shopping mission is a goal-driven journey a shopper takes across your store — from landing page to purchase (or drop-off). Instead of looking at individual pageviews, Beseam tracks the full mission so you can see where journeys succeed or fail.",
+    q: "What is AI commerce readiness?",
+    a: "AI commerce readiness measures how well AI shopping engines — like ChatGPT, Gemini, and Perplexity — can read and understand your product pages. A store with high AI readiness gets recommended accurately with correct prices, descriptions, and selling points. A store with low readiness gets skipped or misrepresented.",
   },
   {
-    q: "How does Beseam find weak landing pages?",
-    a: "Beseam runs 118+ checks across SEO foundations, schema markup, content quality, and shopping feed alignment. It links those page-level issues to the shopping missions they affect — so you know exactly which pages are costing you conversions.",
+    q: "Which AI engines does Beseam track?",
+    a: "Beseam tracks 13 AI engines: ChatGPT, Gemini (Google AI), Perplexity, Claude, Bing Copilot, Meta AI, Grok, You.com, Brave AI, DeepSeek, Phind, Amazon Rufus, and Shopify Sidekick. We add new engines as they emerge.",
+  },
+  {
+    q: "How does the AI product probe work?",
+    a: "Beseam sends an LLM to read your product page exactly like ChatGPT or Gemini would. It checks whether AI can correctly identify the product, understand its price and availability, find selling points, and confidently recommend it. You see a side-by-side comparison of what AI understood vs. your actual product data.",
   },
   {
     q: "What kind of fixes does Beseam generate?",
-    a: "AI-generated fixes for structured data (Product, Offer, Review schema), meta descriptions, content gaps, and feed mismatches. You review a before/after preview and approve before anything publishes. Nothing goes live without your explicit approval.",
+    a: "AI-generated fixes for structured data (Product, Offer, Review schema), meta descriptions, content gaps, and selling point clarity. You review a before/after preview and approve before anything publishes. Nothing goes live without your explicit approval.",
   },
   {
     q: "How does Shopify publish work?",
@@ -23,23 +27,19 @@ const faqs = [
   },
   {
     q: "What does 'verify' mean?",
-    a: "After a fix goes live, Beseam re-runs the same diagnostics and shows you a before/after comparison. You see exactly what improved — page scores, issue counts, journey health — with evidence you can share with your team or stakeholders.",
+    a: "After a fix goes live, Beseam re-runs the AI probe and diagnostics. You see a before/after comparison of your AI readiness score, plus exactly how each AI engine's understanding of your products improved.",
   },
   {
-    q: "Is this a self-serve tool?",
-    a: "Not yet. Today, Beseam runs as a guided pilot — operator-assisted, so you get results rather than just another dashboard login. We work with your team to set up missions, review fix queues, and verify improvements together.",
+    q: "How is this different from regular SEO audits?",
+    a: "Traditional SEO audits check what Google's crawler sees. Beseam checks what AI engines understand — including whether they can identify your product, read correct pricing, and find compelling reasons to recommend it. It's the difference between being indexed and being recommended.",
   },
   {
     q: "What Shopify plans do you support?",
     a: "Beseam works with all Shopify plans — Basic, Shopify, Advanced, and Shopify Plus. No developer access or theme changes required.",
   },
   {
-    q: "How long does a pilot take?",
-    a: "Most pilots show results within 2–4 weeks. You'll see your first mission diagnostics and page-level findings within the first few days. Fix generation and verification follow quickly after that.",
-  },
-  {
-    q: "What's the commitment for a pilot?",
-    a: "A pilot is a focused, time-boxed engagement — typically 4–6 weeks. No long-term contract. You see the results and decide if you want to continue. The goal is to prove value on your store, not lock you into a subscription.",
+    q: "How long does it take to see results?",
+    a: "You'll see your AI readiness score within minutes of scanning your store. Fix generation happens immediately after. Most stores see measurable AI readiness improvement within the first week of publishing fixes.",
   },
 ];
 
@@ -100,8 +100,8 @@ export default function FaqSection() {
             Everything you need to know
           </h2>
           <p className="text-muted-foreground mt-4 mx-auto max-w-2xl text-lg leading-relaxed">
-            Common questions about how Beseam works, what a pilot looks like,
-            and what to expect.
+            Common questions about AI commerce readiness, what Beseam audits,
+            and how to get your products recommended by AI.
           </p>
         </motion.div>
 

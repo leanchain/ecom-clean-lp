@@ -1,4 +1,5 @@
 import CookieConsent from "@/components/cookie-consent";
+import AiPlatformsStrip from "@/components/beseam/ai-platforms-strip";
 import HeroSection from "@/components/beseam/hero-section";
 import ProblemSection from "@/components/beseam/problem-section";
 import HowItWorksSection from "@/components/beseam/how-it-works-section";
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <AiPlatformsStrip />
       <ProblemSection />
       <HowItWorksSection />
       <BeforeAfterAISection />

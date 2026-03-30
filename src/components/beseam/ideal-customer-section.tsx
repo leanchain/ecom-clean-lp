@@ -7,38 +7,38 @@ import Link from "next/link";
 const personas = [
   {
     role: "Head of E-commerce",
-    why: "You own the P&L. You need to know which journeys are leaking revenue and whether published fixes actually moved the needle.",
+    why: "AI engines are the fastest-growing shopping channel. You need to know if ChatGPT recommends your products or your competitors'.",
     fits: [
-      "Journey-level visibility, not just page metrics",
+      "Store-level AI readiness score with per-product breakdown",
+      "AI traffic intelligence — which engines send revenue",
       "Before/after evidence for stakeholder reporting",
-      "Guided pilot — results in weeks, not quarters",
+    ],
+  },
+  {
+    role: "SEO & Discovery Lead",
+    why: "Organic search now includes AI Overviews, Gemini, and Perplexity. Your SEO strategy needs to cover how AI reads your pages, not just Google crawlers.",
+    fits: [
+      "118+ checks including AI-specific readability tests",
+      "Schema, structured data, and selling point optimization",
+      "AI referral tracking across 13 engines",
     ],
   },
   {
     role: "CRO / Conversion Lead",
-    why: 'You run experiments but can\'t keep up with the PDP backlog. You need a faster path from "issue found" to "fix verified."',
+    why: "AI-referred visitors convert differently. You need to know what AI told them before they arrived — and fix pages where AI gets the product wrong.",
     fits: [
-      "118+ automated page checks — no manual audit needed",
-      "AI-generated fixes you can review and approve",
-      "Publish to Shopify and verify in one workflow",
-    ],
-  },
-  {
-    role: "Search & Discovery Lead",
-    why: "You're responsible for organic and AI-referral traffic. You need to ensure landing pages match shopper intent from every source.",
-    fits: [
-      "AI-referral mission tracking (ChatGPT, Perplexity, etc.)",
-      "Schema, structured data, and feed diagnostics",
-      "Journey-to-page linkage for intent matching",
+      "AI product probe — see exactly what AI tells shoppers",
+      "AI-generated fixes for content and schema gaps",
+      "Publish to Shopify and verify AI readiness improvement",
     ],
   },
   {
     role: "Shopify Agency Operator",
-    why: "You manage stores for multiple clients. You need a repeatable workflow that scales across brands without hiring more analysts.",
+    why: "Clients are asking about AI traffic. You need a repeatable way to audit, fix, and prove AI commerce readiness across brands.",
     fits: [
-      "Operator-assisted pilot — we help you run it for your clients",
-      "White-label-ready diagnostics and verification",
-      "One consistent workflow: diagnose → fix → verify",
+      "Scalable AI readiness audit across multiple stores",
+      "White-label-ready AI readiness reports",
+      "One workflow: audit → fix → verify for every client",
     ],
   },
 ];
@@ -60,12 +60,12 @@ export default function IdealCustomerSection() {
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
             Built for teams who{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent italic">
-              ship and verify.
+              own the AI channel.
             </span>
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Beseam is for Shopify operators who are tired of audit backlog and
-            want a guided path from diagnosis to verified improvement.
+            Beseam is for Shopify operators who see AI as the next major
+            shopping channel and want to get ahead before competitors do.
           </p>
         </motion.div>
 

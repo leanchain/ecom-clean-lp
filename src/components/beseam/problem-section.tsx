@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Route, FileWarning, TrendingDown, SearchX } from "lucide-react";
+import { Bot, FileWarning, Eye, TrendingDown } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface Problem {
@@ -15,40 +15,40 @@ interface Problem {
 
 const problems: Problem[] = [
   {
-    icon: Route,
-    title: "Journeys that go nowhere",
+    icon: Bot,
+    title: "AI engines misread your products",
     description:
-      "Shoppers land from ads, referrals, or AI recommendations — then bounce because the landing page doesn't match the intent they arrived with.",
-    stat: "60–70%",
-    statLabel: "of shopping journeys end without a conversion",
-    tag: "Journey Problem",
+      "ChatGPT, Gemini, and Perplexity are recommending products to millions of shoppers — but if your pages lack structured data, they guess wrong on price, availability, and selling points.",
+    stat: "13+",
+    statLabel: "AI engines now driving e-commerce traffic",
+    tag: "Visibility Problem",
   },
   {
     icon: FileWarning,
-    title: "PDPs with hidden issues",
+    title: "Pages that humans read fine, AI can't",
     description:
-      "Missing structured data, thin descriptions, broken schema, no review markup — problems your analytics dashboard won't surface.",
+      "Your product pages may look great in a browser, but AI engines parse structured data, schema markup, and metadata — and most stores have critical gaps AI can't work around.",
     stat: "118+",
-    statLabel: "checks across SEO, content, schema & feed",
-    tag: "Page Problem",
+    statLabel: "checks across schema, content, SEO & AI readability",
+    tag: "Readability Problem",
+  },
+  {
+    icon: Eye,
+    title: "You can't see what AI sees",
+    description:
+      "There's no 'View Source' for how ChatGPT understands your product. Without an AI-eye audit, you're invisible to the fastest-growing shopping channel.",
+    stat: "Zero",
+    statLabel: "visibility into how AI engines perceive your store",
+    tag: "Intelligence Problem",
   },
   {
     icon: TrendingDown,
-    title: "Fixes that never ship",
+    title: "Competitors are already optimizing for AI",
     description:
-      "Your team knows what's wrong but can't keep up. Audit backlogs grow while pages stay broken and revenue leaks.",
-    stat: "Weeks",
-    statLabel: "average time from issue found to fix published",
-    tag: "Execution Problem",
-  },
-  {
-    icon: SearchX,
-    title: "No way to verify improvement",
-    description:
-      "You publish a fix, but there's no before/after tracking. You can't tell your team — or your boss — what actually improved.",
-    stat: "Zero",
-    statLabel: "visibility into whether fixes actually moved the needle",
-    tag: "Measurement Problem",
+      "Stores with rich structured data, clear selling points, and proper schema get recommended first. Every day you wait, AI engines learn to trust competitors more.",
+    stat: "3×",
+    statLabel: "higher AI recommendation rate with proper structured data",
+    tag: "Competitive Problem",
   },
 ];
 
@@ -67,14 +67,15 @@ export default function ProblemSection() {
             The Problem
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            Your store has weak shopping journeys.{" "}
+            AI is the new storefront.{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-              You just can&apos;t see them yet.
+              Your products aren&apos;t ready.
             </span>
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Shoppers arrive with clear intent. But broken pages, missing data,
-            and unvalidated fixes turn promising journeys into lost revenue.
+            AI shopping engines are recommending products to millions.
+            If your pages lack the right structured data, AI gets your
+            products wrong &mdash; or skips them entirely.
           </p>
         </motion.div>
 
@@ -136,12 +137,12 @@ export default function ProblemSection() {
             </span>
             <div>
               <blockquote className="text-base font-medium leading-relaxed text-foreground md:text-lg">
-                We had 40+ PDP fixes in a spreadsheet. Nobody could keep up. The
-                backlog grew every month and we had no idea which fixes actually
-                mattered for conversion.
+                We had no idea ChatGPT was showing the wrong price for our
+                best-seller. Customers were confused before they even reached
+                our site. We only found out when a customer mentioned it.
               </blockquote>
               <p className="mt-3 text-sm text-muted-foreground">
-                Head of E-commerce &mdash; Shopify Plus brand
+                Head of Digital &mdash; Shopify Plus brand
               </p>
             </div>
           </div>
