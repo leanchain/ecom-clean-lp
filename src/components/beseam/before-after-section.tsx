@@ -684,8 +684,8 @@ export default function BeforeAfterSection() {
               className={cn(
                 "flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all",
                 activePlatform === p.id
-                  ? "border-primary bg-primary/10 text-primary shadow-sm"
-                  : "border-border bg-background text-muted-foreground hover:border-primary/30 hover:text-foreground",
+                  ? "border-secondary bg-secondary/10 text-secondary shadow-sm"
+                  : "border-border bg-background text-muted-foreground hover:border-secondary/30 hover:text-foreground",
               )}
             >
               <Image

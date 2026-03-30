@@ -1,36 +1,26 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { Check, Mail } from "lucide-react";
+import { Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const FEATURES = [
-  "Free AI-readiness scan",
-  "No credit card required",
-  "AI fixes in one click",
-  "Rollback protection",
+  "Guided pilot — not self-serve",
+  "Results in weeks, not months",
+  "Shopify publish with rollback",
+  "Before/after verification",
 ];
 
 export default function FinalCtaSection() {
-  const [store, setStore] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const cleaned = store.trim().replace(/^https?:\/\//, "");
-    if (cleaned) {
-      window.location.href = `https://app.beseam.com/store?shop=${encodeURIComponent(cleaned)}`;
-    }
-  };
-
   return (
-    <section className="relative overflow-hidden border-y border-primary/20 bg-primary py-24 md:py-36">
+    <section className="relative overflow-hidden border-y border-border/20 bg-[linear-gradient(135deg,#0d0d0d,#111827)] py-24 md:py-36">
       <div
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-[100px]"
+        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[100px]"
         aria-hidden
       />
 
@@ -43,10 +33,10 @@ export default function FinalCtaSection() {
             transition={{ duration: 0.6 }}
             className="font-heading text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-7xl"
           >
-            Get found in AI search.
+            Stop guessing which pages to fix.
             <span className="text-white/90 italic">
               {" "}
-              Fix the gaps before they cost you.
+              Start verifying what works.
             </span>
           </motion.h2>
 
@@ -57,50 +47,31 @@ export default function FinalCtaSection() {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl"
           >
-            Enter your store URL and see how prepared your products are for
-            ChatGPT, Perplexity, and Gemini. Free. No sign-up.
+            Book a guided pilot. We&apos;ll diagnose your weakest shopping
+            journeys, generate fixes, and verify the improvement together.
           </motion.p>
 
-          {!submitted ? (
-            <motion.form
-              onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="mx-auto mt-10 flex max-w-lg flex-col gap-4 sm:flex-row"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="mx-auto mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center"
+          >
+            <Link
+              href="/demo"
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground shadow-2xl transition-all hover:-translate-y-0.5 hover:bg-primary/90"
             >
-              <div className="relative flex-1">
-                <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="text"
-                  value={store}
-                  onChange={(e) => setStore(e.target.value)}
-                  placeholder="yourstore.myshopify.com"
-                  className="h-14 w-full rounded-full border-transparent bg-white pl-11 pr-5 text-base text-foreground shadow-2xl placeholder:text-muted-foreground focus:outline-none focus:ring-4 focus:ring-white/30"
-                />
-              </div>
-              <button
-                type="submit"
-                className="h-14 whitespace-nowrap rounded-full bg-secondary px-8 text-base font-semibold text-white transition-colors hover:bg-secondary/90 focus:outline-none focus:ring-4 focus:ring-white/30"
-              >
-                Scan Free →
-              </button>
-            </motion.form>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="mx-auto mt-10 flex items-center justify-center gap-2 text-white"
+              Book a Pilot
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="mailto:contact@beseam.com"
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-full border-2 border-white/30 px-8 text-base font-semibold text-white transition-all hover:border-white/50 hover:bg-white/10"
             >
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20">
-                <Check className="h-3.5 w-3.5 text-white" />
-              </div>
-              <span className="text-sm font-semibold">
-                Redirecting to scan…
-              </span>
-            </motion.div>
-          )}
+              Talk Through Your Store
+            </Link>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -111,8 +82,8 @@ export default function FinalCtaSection() {
           >
             {FEATURES.map((item) => (
               <div key={item} className="flex items-center gap-2 text-white">
-                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-                  <Check className="h-3 w-3 text-white" />
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/20 backdrop-blur-sm">
+                  <Check className="h-3 w-3 text-emerald-400" />
                 </div>
                 <span className="text-sm font-medium tracking-wide">
                   {item}

@@ -20,26 +20,25 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   title: {
-    default: "Beseam — Prepare Your Shopify Store for AI Search & LLMs",
+    default:
+      "Beseam — Diagnose Weak Journeys, Fix Pages, Verify Improvement | Shopify",
     template: "%s | Beseam",
   },
   description:
-    "ChatGPT, Perplexity, and Gemini are the new shopping search. Beseam automatically fixes your schema markup, geo-tags, and metadata so your entire Shopify catalog is prepared for AI.",
+    "Beseam helps Shopify brands track shopping journeys, identify weak landing pages, generate AI fixes, publish safely, and verify what improved. Guided pilot for ecommerce teams.",
   keywords: [
     "Beseam",
-    "AI search optimization",
-    "LLM product discovery",
-    "Shopify AI readiness",
-    "Structured data Shopify",
-    "ChatGPT shopping",
-    "Perplexity product search",
-    "Gemini shopping",
-    "Schema markup",
-    "Product structured data",
-    "AI discoverability",
-    "Shopify SEO",
-    "AEO Shopify",
-    "AI search engine optimization",
+    "Shopify journey diagnostics",
+    "shopping mission tracking",
+    "PDP audit",
+    "Shopify page fixes",
+    "AI-generated fixes",
+    "Shopify publish",
+    "before after verification",
+    "CRO Shopify",
+    "landing page optimization",
+    "Shopify structured data",
+    "ecommerce conversion",
   ],
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
@@ -63,9 +62,10 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon/favicon.ico" }],
   },
   openGraph: {
-    title: "Beseam — Prepare Your Shopify Store for AI Search & LLMs",
+    title:
+      "Beseam — Diagnose Weak Journeys, Fix Pages, Verify Improvement | Shopify",
     description:
-      "ChatGPT, Perplexity, and Gemini are the new shopping search. Beseam fixes your schema, geo-tags, and metadata so your catalog is prepared for AI.",
+      "Track shopping journeys, identify weak landing pages, generate AI fixes, publish to Shopify, and verify what improved. Guided pilot for ecommerce teams.",
     siteName: "Beseam",
     type: "website",
     images: [
@@ -73,15 +73,16 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Beseam — Prepare Your Shopify Store for AI Search & LLMs",
+        alt: "Beseam — Diagnose Weak Journeys, Fix Pages, Verify Improvement",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam — Prepare Your Shopify Store for AI Search & LLMs",
+    title:
+      "Beseam — Diagnose Weak Journeys, Fix Pages, Verify Improvement | Shopify",
     description:
-      "ChatGPT, Perplexity, and Gemini are the new shopping search. Beseam fixes your schema, geo-tags, and metadata so your catalog is prepared for AI.",
+      "Track shopping journeys, identify weak landing pages, generate AI fixes, publish to Shopify, and verify what improved.",
     images: ["/og-image.png"],
     creator: "@Beseam",
     site: "@Beseam",

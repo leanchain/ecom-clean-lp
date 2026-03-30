@@ -6,40 +6,40 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    q: "How much time do I have to invest?",
-    a: "Very little. Most stores are fully scanned in under 2 minutes, and our AI fixes the most common issues automatically — no manual work needed. Reviewing and approving fixes takes around 10–15 minutes. After that, Beseam monitors your store continuously so you don't have to think about it.",
+    q: "What is a shopping mission?",
+    a: "A shopping mission is a goal-driven journey a shopper takes across your store — from landing page to purchase (or drop-off). Instead of looking at individual pageviews, Beseam tracks the full mission so you can see where journeys succeed or fail.",
   },
   {
-    q: "Do I need to hire someone to use this?",
-    a: "No. Beseam is built for store owners and e-commerce managers, not developers or technical experts. Everything is explained in plain language, and most fixes happen with a single click. You don't need an agency, a developer, or any technical knowledge.",
+    q: "How does Beseam find weak landing pages?",
+    a: "Beseam runs 118+ checks across SEO foundations, schema markup, content quality, and shopping feed alignment. It links those page-level issues to the shopping missions they affect — so you know exactly which pages are costing you conversions.",
   },
   {
-    q: "When do I see a return on my investment?",
-    a: "Many stores start seeing improvement within weeks of fixing their product listings. AI shopping tools like ChatGPT and Google are already recommending products to buyers — stores that are properly set up get picked over those that aren't. The sooner you fix it, the sooner you capture that traffic.",
+    q: "What kind of fixes does Beseam generate?",
+    a: "AI-generated fixes for structured data (Product, Offer, Review schema), meta descriptions, content gaps, and feed mismatches. You review a before/after preview and approve before anything publishes. Nothing goes live without your explicit approval.",
   },
   {
-    q: "Why aren't AI tools recommending my products right now?",
-    a: "AI shopping assistants like ChatGPT, Google, and Perplexity look for specific information on your product pages before they can recommend them. If that information is missing or incomplete, your products simply won't show up — even if they're great. Beseam finds what's missing and fixes it automatically.",
+    q: "How does Shopify publish work?",
+    a: "Once you approve a fix, Beseam publishes it directly to your Shopify store. Every change includes rollback protection — one click to revert if anything looks wrong. No developer access or theme changes required.",
   },
   {
-    q: "How is this different from regular SEO?",
-    a: 'Regular SEO is about getting your pages ranked on Google. AI search is different — these tools actively recommend specific products to shoppers who ask questions like "best linen dress under $80." Beseam ensures your products have everything AI tools need to recommend them confidently.',
+    q: "What does 'verify' mean?",
+    a: "After a fix goes live, Beseam re-runs the same diagnostics and shows you a before/after comparison. You see exactly what improved — page scores, issue counts, journey health — with evidence you can share with your team or stakeholders.",
   },
   {
-    q: "Which AI shopping tools will this help with?",
-    a: "ChatGPT, Google Gemini, Perplexity, Microsoft Copilot, and other AI shopping assistants. All of them look for the same basic product information — Beseam makes sure your catalog speaks their language.",
-  },
-  {
-    q: "Will Beseam break my store?",
-    a: "No. Every fix is saved before it goes live, and you review a before/after preview before approving. If anything ever looks wrong, one click reverts the change instantly.",
+    q: "Is this a self-serve tool?",
+    a: "Not yet. Today, Beseam runs as a guided pilot — operator-assisted, so you get results rather than just another dashboard login. We work with your team to set up missions, review fix queues, and verify improvements together.",
   },
   {
     q: "What Shopify plans do you support?",
     a: "Beseam works with all Shopify plans — Basic, Shopify, Advanced, and Shopify Plus. No developer access or theme changes required.",
   },
   {
-    q: "Can I try it before paying?",
-    a: "Yes! Every account starts with a free scan of up to 10 products. You'll see exactly what AI shopping tools can and can't find about your products — no credit card required.",
+    q: "How long does a pilot take?",
+    a: "Most pilots show results within 2–4 weeks. You'll see your first mission diagnostics and page-level findings within the first few days. Fix generation and verification follow quickly after that.",
+  },
+  {
+    q: "What's the commitment for a pilot?",
+    a: "A pilot is a focused, time-boxed engagement — typically 4–6 weeks. No long-term contract. You see the results and decide if you want to continue. The goal is to prove value on your store, not lock you into a subscription.",
   },
 ];
 
@@ -100,8 +100,8 @@ export default function FaqSection() {
             Everything you need to know
           </h2>
           <p className="text-muted-foreground mt-4 mx-auto max-w-2xl text-lg leading-relaxed">
-            Everything you need to know about getting your store recommended by
-            AI shopping tools — without any technical headaches.
+            Common questions about how Beseam works, what a pilot looks like,
+            and what to expect.
           </p>
         </motion.div>
 
