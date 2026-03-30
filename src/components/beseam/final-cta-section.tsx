@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const FEATURES = [
-  "Free AI readiness scan",
+  "Free store scan",
   "13 AI engines tracked",
   "Shopify publish with rollback",
   "Before/after AI verification",

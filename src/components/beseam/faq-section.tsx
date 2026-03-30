@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    q: "What is AI commerce readiness?",
-    a: "AI commerce readiness measures how well AI shopping engines — like ChatGPT, Gemini, and Perplexity — can read and understand your product pages. A store with high AI readiness gets recommended accurately with correct prices, descriptions, and selling points. A store with low readiness gets skipped or misrepresented.",
+    q: "What does Beseam actually do?",
+    a: "Beseam shows you how AI shopping agents — like ChatGPT, Gemini, and Perplexity — read your product pages. It finds what they get wrong (pricing, availability, selling points), generates targeted fixes, and verifies improvement after you publish. Think of it as a ‘View Source’ for how AI sees your store.",
   },
   {
     q: "Which AI engines does Beseam track?",
@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: "How does the AI product probe work?",
-    a: "Beseam sends an LLM to read your product page exactly like ChatGPT or Gemini would. It checks whether AI can correctly identify the product, understand its price and availability, find selling points, and confidently recommend it. You see a side-by-side comparison of what AI understood vs. your actual product data.",
+    a: "Beseam sends an LLM to read your product page exactly like ChatGPT or Gemini would. It checks whether AI can correctly identify the product, understand its price and availability, find selling points, and confidently recommend it. You see a side-by-side: what AI understood vs. your actual product data.",
   },
   {
     q: "What kind of fixes does Beseam generate?",
@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "What does 'verify' mean?",
-    a: "After a fix goes live, Beseam re-runs the AI probe and diagnostics. You see a before/after comparison of your AI readiness score, plus exactly how each AI engine's understanding of your products improved.",
+    a: "After a fix goes live, Beseam re-runs the AI probe and diagnostics. You see a before/after comparison of your scores, plus exactly how each AI engine's understanding of your products improved.",
   },
   {
     q: "How is this different from regular SEO audits?",
@@ -39,7 +39,7 @@ const faqs = [
   },
   {
     q: "How long does it take to see results?",
-    a: "You'll see your AI readiness score within minutes of scanning your store. Fix generation happens immediately after. Most stores see measurable AI readiness improvement within the first week of publishing fixes.",
+    a: "You'll see your audit score within minutes of scanning your store. Fix generation happens immediately after. Most stores see measurable improvement within the first week of publishing fixes.",
   },
 ];
 
@@ -100,7 +100,7 @@ export default function FaqSection() {
             Everything you need to know
           </h2>
           <p className="text-muted-foreground mt-4 mx-auto max-w-2xl text-lg leading-relaxed">
-            Common questions about AI commerce readiness, what Beseam audits,
+            Common questions about what Beseam shows you, how the audit works,
             and how to get your products recommended by AI.
           </p>
         </motion.div>

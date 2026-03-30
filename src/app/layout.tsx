@@ -20,15 +20,14 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   title: {
-    default:
-      "Beseam — AI Commerce Readiness Platform for Shopify",
+    default: "Beseam — See How AI Agents See Your Shopify Store",
     template: "%s | Beseam",
   },
   description:
-    "Beseam audits how AI shopping engines read your product pages, generates fixes for what they get wrong, and verifies improvement. Make ChatGPT, Gemini, and Perplexity recommend your store.",
+    "Beseam shows you how ChatGPT, Gemini, and Perplexity read your product pages — finds what they get wrong, generates fixes, and verifies improvement. Stop losing recommendations to competitors.",
   keywords: [
     "Beseam",
-    "AI commerce readiness",
+    "AI product visibility",
     "AI shopping optimization",
     "ChatGPT product recommendations",
     "Gemini shopping",
@@ -37,7 +36,7 @@ export const metadata: Metadata = {
     "Shopify page fixes",
     "AI-generated fixes",
     "Shopify publish",
-    "AI readiness score",
+    "AI store audit",
     "structured data",
     "Shopify structured data",
     "ecommerce AI",
@@ -64,10 +63,9 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon/favicon.ico" }],
   },
   openGraph: {
-    title:
-      "Beseam — AI Commerce Readiness Platform for Shopify",
+    title: "Beseam — See How AI Agents See Your Shopify Store",
     description:
-      "Audit how AI engines read your products. Fix what they get wrong. Verify AI now recommends your store.",
+      "See how ChatGPT, Gemini, and Perplexity read your products. Fix what they get wrong. Verify AI now recommends your store.",
     siteName: "Beseam",
     type: "website",
     images: [
@@ -75,16 +73,15 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Beseam — AI Commerce Readiness Platform",
+        alt: "Beseam — See How AI Agents See Your Store",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Beseam — AI Commerce Readiness Platform for Shopify",
+    title: "Beseam — See How AI Agents See Your Shopify Store",
     description:
-      "Audit how AI engines read your products. Fix what they get wrong. Verify AI now recommends your store.",
+      "See how ChatGPT, Gemini, and Perplexity read your products. Fix what they get wrong. Verify AI now recommends your store.",
     images: ["/og-image.png"],
     creator: "@Beseam",
     site: "@Beseam",

@@ -20,9 +20,9 @@ const sections = [
     id: "diagnose",
     title: "Audit",
     subtitle: "See how AI reads your products",
-    support: "AI readiness diagnostics",
+    support: "AI store diagnostics",
     routeLabel: "ai-readiness",
-    navLabel: "AI Readiness",
+    navLabel: "Audit",
     icon: Search,
     colorClass: "text-sky-600",
     bgClass: "bg-sky-50 dark:bg-sky-950/30",
@@ -35,8 +35,8 @@ const sections = [
     areas: [
       "AI product probe — LLM reads your pages like a shopper would",
       "118+ checks across schema, structured data, content & SEO",
-      "AI readiness score per page and per store",
-      "AI referral traffic tracking across 13 engines",
+      "Per-product score — see how well AI understands each page",
+      "AI referral tracking across 13 engines",
     ],
     totalChecks: "118+ checks",
   },
@@ -68,7 +68,7 @@ const sections = [
     id: "verify",
     title: "Verify",
     subtitle: "Confirm AI now recommends you",
-    support: "Before/after AI readiness tracking",
+    support: "Before/after tracking",
     routeLabel: "verify",
     navLabel: "Verify",
     icon: Activity,
@@ -79,9 +79,9 @@ const sections = [
     sidebarActiveClass:
       "bg-emerald-100 text-emerald-600 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800",
     description:
-      "After fixes go live, Beseam re-runs the AI probe and diagnostics. See exactly how your AI readiness score improved — with before/after evidence across every AI engine.",
+      "After fixes go live, Beseam re-runs the AI probe and diagnostics. See exactly how your scores improved — with before/after evidence across every AI engine.",
     areas: [
-      "Before/after AI readiness scores",
+      "Before/after audit scores",
       "AI recommendation confidence tracking",
       "Per-engine visibility improvement",
       "Evidence you can share with stakeholders",
@@ -90,7 +90,7 @@ const sections = [
   },
 ] as const;
 
-const collectTabs = ["Overview", "Missions", "Tasks", "Verify"] as const;
+const collectTabs = ["Overview", "Audit", "Tasks", "Verify"] as const;
 
 /* ── Diagnose Mockup ─────────────────────────────────────────────────── */
 
@@ -148,7 +148,7 @@ function DiagnoseMockup() {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-sm font-black text-foreground">
-            AI Readiness Audit
+            AI Store Audit
           </h3>
           <p className="text-[11px] text-muted-foreground/60">
             How AI engines understand your products
@@ -322,7 +322,7 @@ function FixMockup() {
 
 function VerifyMockup() {
   const improvements = [
-    { metric: "AI Readiness", before: 34, after: 91, unit: "%" },
+    { metric: "AI Understanding", before: 34, after: 91, unit: "%" },
     { metric: "Schema Coverage", before: 12, after: 89, unit: "%" },
     { metric: "Content Quality", before: 45, after: 78, unit: "%" },
     { metric: "AI Confidence", before: 28, after: 85, unit: "%" },
@@ -614,7 +614,7 @@ export default function HowItWorksSection() {
             How It Works
           </p>
           <h2 className="font-heading text-2xl font-bold tracking-tight sm:text-3xl">
-            Diagnose. Fix. <span className="text-primary italic">Verify.</span>
+            Audit. Fix. <span className="text-primary italic">Verify.</span>
           </h2>
         </div>
 
@@ -727,7 +727,7 @@ export default function HowItWorksSection() {
             How It Works
           </p>
           <h2 className="font-heading text-2xl font-bold tracking-tight">
-            Diagnose. Fix. <span className="text-primary italic">Verify.</span>
+            Audit. Fix. <span className="text-primary italic">Verify.</span>
           </h2>
         </div>
 

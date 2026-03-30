@@ -46,8 +46,8 @@ const problems: Problem[] = [
     title: "Competitors are already optimizing for AI",
     description:
       "Stores with rich structured data, clear selling points, and proper schema get recommended first. Every day you wait, AI engines learn to trust competitors more.",
-    stat: "3×",
-    statLabel: "higher AI recommendation rate with proper structured data",
+    stat: "Early",
+    statLabel: "movers are already optimizing — the gap widens daily",
     tag: "Competitive Problem",
   },
 ];
@@ -67,15 +67,15 @@ export default function ProblemSection() {
             The Problem
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            AI is the new storefront.{" "}
+            AI agents are shopping for your customers.{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Your products aren&apos;t ready.
+              Here&apos;s what goes wrong.
             </span>
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            AI shopping engines are recommending products to millions.
-            If your pages lack the right structured data, AI gets your
-            products wrong &mdash; or skips them entirely.
+            ChatGPT, Gemini, and Perplexity recommend products to millions
+            of shoppers. If your pages lack the right structured data,
+            AI gets your products wrong &mdash; or skips them entirely.
           </p>
         </motion.div>
 

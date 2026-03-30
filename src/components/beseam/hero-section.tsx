@@ -7,8 +7,8 @@ import AnimatedBorderContainer from "@/components/ui/animated-border-container";
 import { Input } from "@/components/ui/input";
 
 const WORKFLOW_STEPS = [
-  { icon: Search, label: "Audit AI readiness" },
-  { icon: Wrench, label: "Fix what AI can't read" },
+  { icon: Search, label: "See what AI sees" },
+  { icon: Wrench, label: "Fix what they get wrong" },
   { icon: CheckCircle2, label: "Verify improvement" },
 ];
 
@@ -44,11 +44,10 @@ export default function HeroSection() {
           </h1>
 
           <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg leading-relaxed md:text-xl">
-            ChatGPT, Gemini, and Perplexity recommend products every day
-            &mdash; but they might be misreading yours. Beseam shows you
-            exactly what AI agents see on your product pages, finds what
-            they get wrong, and fixes it &mdash; so they recommend you,
-            not your competitors.
+            ChatGPT, Gemini, and Perplexity recommend products every day &mdash;
+            but they might be misreading yours. Beseam shows you exactly what AI
+            agents see on your product pages, finds what they get wrong, and
+            fixes it &mdash; so they recommend you, not your competitors.
           </p>
         </motion.div>
 
@@ -110,8 +109,8 @@ export default function HeroSection() {
           transition={{ delay: 0.5, duration: 0.5 }}
           className="text-xs text-muted-foreground"
         >
-          Free AI readiness scan &middot; 13 AI engines tracked &middot; Results
-          in minutes
+          Free store scan &middot; 13 AI engines tracked &middot; Results in
+          minutes
         </motion.p>
       </div>
     </section>

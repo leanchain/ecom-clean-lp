@@ -108,12 +108,12 @@ export default function BeseamFooter() {
             <div>
               <Logo className="text-primary scale-400 origin-left transition-transform hover:scale-405 pb-2" />
               <p className="mt-6 max-w-sm text-lg font-semibold leading-tight text-foreground md:text-xl">
-                Diagnose. Fix. <span className="text-primary">Verify.</span>
+                See it. Fix it. <span className="text-primary">Verify it.</span>
               </p>
               <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-                Beseam helps Shopify brands track shopping journeys, identify
-                weak landing pages, generate fixes, publish safely, and verify
-                what improved.
+                Beseam shows you how AI agents see your Shopify store —
+                finds what they get wrong, generates fixes, and verifies
+                improvement.
               </p>
             </div>
 
@@ -191,10 +191,10 @@ export default function BeseamFooter() {
 
         <div className="mt-16 border-t pt-8">
           <p className="max-w-2xl text-[11px] leading-relaxed text-muted-foreground/60">
-            Beseam helps Shopify store operators track shopping journeys,
-            identify weak landing pages, generate AI fixes, and verify
-            improvement. All product names, logos, and brands are property of
-            their respective owners.
+            Beseam shows Shopify store operators how AI agents read their
+            product pages, generates fixes for what AI gets wrong, and
+            verifies improvement. All product names, logos, and brands are
+            property of their respective owners.
           </p>
         </div>
       </div>
