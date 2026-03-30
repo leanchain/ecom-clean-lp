@@ -9,7 +9,7 @@ const personas = [
     role: "Head of E-commerce",
     why: "AI engines are the fastest-growing shopping channel. You need to know if ChatGPT recommends your products or your competitors'.",
     fits: [
-      "Store-level AI readiness score with per-product breakdown",
+      "Store-level audit score with per-product breakdown",
       "AI traffic intelligence — which engines send revenue",
       "Before/after evidence for stakeholder reporting",
     ],
@@ -29,15 +29,15 @@ const personas = [
     fits: [
       "AI product probe — see exactly what AI tells shoppers",
       "AI-generated fixes for content and schema gaps",
-      "Publish to Shopify and verify AI readiness improvement",
+      "Publish to Shopify and verify improvement",
     ],
   },
   {
     role: "Shopify Agency Operator",
-    why: "Clients are asking about AI traffic. You need a repeatable way to audit, fix, and prove AI commerce readiness across brands.",
+    why: "Clients are asking about AI traffic. You need a repeatable way to audit how AI sees their products, fix what it gets wrong, and prove results.",
     fits: [
-      "Scalable AI readiness audit across multiple stores",
-      "White-label-ready AI readiness reports",
+      "Scalable AI store audit across multiple brands",
+      "White-label-ready audit reports",
       "One workflow: audit → fix → verify for every client",
     ],
   },
@@ -58,9 +58,9 @@ export default function IdealCustomerSection() {
             Who This Is For
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            Built for teams who{" "}
+            Built for teams who want{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent italic">
-              own the AI channel.
+              AI agents to recommend them.
             </span>
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">

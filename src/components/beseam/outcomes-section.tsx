@@ -13,9 +13,9 @@ import {
 const outcomes = [
   {
     icon: Route,
-    title: "AI Readiness Score",
+    title: "AI Store Audit",
     description:
-      "See a clear score for how well AI engines understand each product page — across schema, content, structured data, and selling points.",
+      "See a clear score for how well AI agents understand each product page — across schema, content, structured data, and selling points.",
   },
   {
     icon: Link2,
@@ -27,7 +27,7 @@ const outcomes = [
     icon: Sparkles,
     title: "AI-Generated Fixes",
     description:
-      "Get targeted fixes for the exact issues blocking AI from reading your products: schema gaps, missing selling points, ambiguous pricing.",
+      "Get targeted fixes for the exact issues blocking AI from understanding your products: schema gaps, missing selling points, ambiguous pricing.",
   },
   {
     icon: Upload,
@@ -39,7 +39,7 @@ const outcomes = [
     icon: GitCompareArrows,
     title: "Before / After Verification",
     description:
-      "After fixes go live, Beseam re-runs the AI probe and shows exactly how your AI readiness improved — with evidence for every engine.",
+      "After fixes go live, Beseam re-runs the AI probe and shows exactly how your scores improved — with evidence for every engine.",
   },
   {
     icon: CheckCircle2,
@@ -66,13 +66,13 @@ export default function OutcomesSection() {
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
             One platform.{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent italic">
-              AI-ready products.
+              See it. Fix it. Verify it.
             </span>
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Beseam connects the full loop: from auditing how AI reads your
-            products, to generating and publishing fixes, to verifying AI
-            now recommends you.
+            Beseam connects the full loop: from showing you how AI reads your
+            products, to generating and publishing fixes, to verifying AI now
+            recommends you.
           </p>
         </motion.div>
 

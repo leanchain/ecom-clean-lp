@@ -48,9 +48,8 @@ export default function DifferentiationSection() {
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
             You probably already use GA4, Semrush, and Hotjar. They&apos;re
-            great at what they do. But none of them can answer the question
-            that matters now: what does ChatGPT see when it reads your
-            product page?
+            great at what they do. But none of them can answer the question that
+            matters now: what does ChatGPT see when it reads your product page?
           </p>
         </motion.div>
 

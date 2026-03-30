@@ -24,7 +24,7 @@ export default function AiPlatformsStrip() {
           transition={{ duration: 0.6 }}
           className="mb-8 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground"
         >
-          Get discovered on every AI search platform
+          The AI engines reading your product pages right now
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
