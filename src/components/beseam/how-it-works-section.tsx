@@ -6,22 +6,24 @@ import {
   Bell,
   CheckCircle2,
   ChevronRight,
-  Globe,
   Search,
   Sparkles,
   User,
+  ArrowRight,
+  TrendingUp,
+  TrendingDown,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const sections = [
   {
-    id: "crawl",
-    title: "Crawl",
-    subtitle: "Whole-store collection",
-    support: "Crawling every page",
-    routeLabel: "crawl",
-    navLabel: "Pages",
-    icon: Globe,
+    id: "diagnose",
+    title: "Diagnose",
+    subtitle: "Find the weak journeys and pages",
+    support: "Mission-level diagnostics",
+    routeLabel: "missions",
+    navLabel: "Missions",
+    icon: Search,
     colorClass: "text-sky-600",
     bgClass: "bg-sky-50 dark:bg-sky-950/30",
     borderClass: "border-sky-200 dark:border-sky-800",
@@ -29,40 +31,21 @@ const sections = [
     sidebarActiveClass:
       "bg-sky-100 text-sky-600 border-sky-200 dark:bg-sky-950/40 dark:text-sky-400 dark:border-sky-800",
     description:
-      "Start by crawling the whole site so product pages, collections, and commercial entry points are all available for analysis.",
-    areas: ["Product pages", "Collections", "Merchant URLs"],
-    totalChecks: "126 pages",
-  },
-  {
-    id: "audit",
-    title: "Audit",
-    subtitle: "Checks everything",
-    support: "Structured audit coverage",
-    routeLabel: "tasks",
-    navLabel: "Tasks",
-    icon: Search,
-    colorClass: "text-amber-600",
-    bgClass: "bg-amber-50 dark:bg-amber-950/30",
-    borderClass: "border-amber-200 dark:border-amber-800",
-    dotClass: "bg-amber-500",
-    sidebarActiveClass:
-      "bg-amber-100 text-amber-600 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-800",
-    description:
-      "Run the full audit layer across the site and group every issue into the checks that actually matter for visibility and storefront quality.",
+      "Track shopping missions across your store. See where journeys break, which landing pages underperform, and what page-level issues are costing you conversions.",
     areas: [
-      "SEO Foundations",
-      "AI / LLM Discoverability",
-      "Shopping Feed",
-      "Content Quality",
+      "Shopping mission tracking",
+      "Journey drop-off analysis",
+      "PDP audit: 118+ checks across SEO, schema, content & feed",
+      "AI-referral source diagnostics",
     ],
     totalChecks: "118+ checks",
   },
   {
     id: "fix",
     title: "Fix",
-    subtitle: "Automated, assisted, or manual",
-    support: "AI fixes it where possible",
-    routeLabel: "tasks/184",
+    subtitle: "Generate and publish page fixes",
+    support: "AI-generated improvements",
+    routeLabel: "tasks/fix",
     navLabel: "Tasks",
     icon: Sparkles,
     colorClass: "text-violet-600",
@@ -72,17 +55,22 @@ const sections = [
     sidebarActiveClass:
       "bg-violet-100 text-violet-600 border-violet-200 dark:bg-violet-950/40 dark:text-violet-400 dark:border-violet-800",
     description:
-      "Take the audit output and route it into the right fix path: fully automated, review-first, or manual execution for edge cases.",
-    areas: ["AI fixes it", "AI-assisted", "Manual fix"],
+      "Take the audit findings from weak journeys and route them into fixes: AI-generated, AI-assisted, or manual. Review before/after, then publish safely to Shopify.",
+    areas: [
+      "AI-generated fixes for common issues",
+      "Review before/after preview",
+      "One-click publish to Shopify",
+      "Rollback protection on every change",
+    ],
     totalChecks: "3 fix paths",
   },
   {
-    id: "monitor",
-    title: "Monitor",
-    subtitle: "Continuous site health",
-    support: "Tracked & alerted",
-    routeLabel: "monitor",
-    navLabel: "Overview",
+    id: "verify",
+    title: "Verify",
+    subtitle: "Confirm what actually improved",
+    support: "Before/after tracking",
+    routeLabel: "verify",
+    navLabel: "Verify",
     icon: Activity,
     colorClass: "text-emerald-600",
     bgClass: "bg-emerald-50 dark:bg-emerald-950/30",
@@ -91,147 +79,70 @@ const sections = [
     sidebarActiveClass:
       "bg-emerald-100 text-emerald-600 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800",
     description:
-      "Keep watching site health after fixes ship so performance, international setup, and structural regressions are caught early.",
-    areas: ["Performance / Speed", "International / i18n", "Health alerts"],
+      "After fixes go live, Beseam re-runs diagnostics to verify improvement. See exactly what changed — page scores, journey health, and issue resolution — with clear before/after evidence.",
+    areas: [
+      "Before/after page scores",
+      "Journey health improvement tracking",
+      "Issue resolution confirmation",
+      "Evidence you can share with stakeholders",
+    ],
     totalChecks: "Continuous",
   },
 ] as const;
 
-const collectTabs = ["Overview", "Pages", "Tasks", "Categories"] as const;
+const collectTabs = ["Overview", "Missions", "Tasks", "Verify"] as const;
 
-function CrawlMockup() {
-  const rows = [
+/* ── Diagnose Mockup ─────────────────────────────────────────────────── */
+
+function DiagnoseMockup() {
+  const missions = [
     {
-      url: "/products/blue-summer-dress",
-      type: "product",
-      status: "Fetched",
-      statusClass: "bg-emerald-500/10 text-emerald-600",
-      updated: "2m ago",
-    },
-    {
-      url: "/products/linen-shirt",
-      type: "product",
-      status: "Crawling",
-      statusClass: "bg-sky-500/10 text-sky-600",
-      updated: "running",
-    },
-    {
-      url: "/products/running-cap",
-      type: "product",
-      status: "Pending",
-      statusClass: "bg-muted text-muted-foreground",
-      updated: "queued",
-    },
-    {
-      url: "/products/summer-sandals",
-      type: "product",
-      status: "Failed",
+      name: "Summer Dress Collection",
+      source: "AI Referral",
+      journeys: 342,
+      dropOff: "68%",
+      dropClass: "text-red-600",
+      weakPages: 4,
+      status: "Needs attention",
       statusClass: "bg-red-500/10 text-red-600",
-      updated: "retry needed",
+    },
+    {
+      name: "Running Shoes Landing",
+      source: "Google Ads",
+      journeys: 891,
+      dropOff: "42%",
+      dropClass: "text-amber-600",
+      weakPages: 2,
+      status: "Under review",
+      statusClass: "bg-amber-500/10 text-amber-600",
+    },
+    {
+      name: "Eco Water Bottles",
+      source: "ChatGPT",
+      journeys: 156,
+      dropOff: "23%",
+      dropClass: "text-emerald-600",
+      weakPages: 0,
+      status: "Healthy",
+      statusClass: "bg-emerald-500/10 text-emerald-600",
     },
   ];
 
-  return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="text-sm font-black text-foreground">Store URLs</h3>
-          <p className="text-[11px] text-muted-foreground/60">
-            Active crawl session
-          </p>
-        </div>
-        <span className="rounded-full border border-sky-200 bg-sky-50 px-2.5 py-1 text-[10px] font-black text-sky-600">
-          68% complete
-        </span>
-      </div>
-
-      <div className="grid grid-cols-4 gap-2">
-        {[
-          ["Fetched", "82"],
-          ["Crawling", "11"],
-          ["Pending", "27"],
-          ["Failed", "6"],
-        ].map(([label, value]) => (
-          <div
-            key={label}
-            className="rounded-xl border border-border/40 bg-muted/20 px-3 py-2.5"
-          >
-            <p className="mb-1 text-[9px] font-black uppercase tracking-widest text-muted-foreground/50">
-              {label}
-            </p>
-            <p className="text-[18px] font-black leading-none text-foreground">
-              {value}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
-        <div className="h-full w-[68%] rounded-full bg-sky-500" />
-      </div>
-
-      <div className="rounded-xl border border-border/40 bg-muted/20 px-3 py-2.5">
-        <div className="grid grid-cols-[1.7fr_0.6fr_0.8fr] gap-3 text-[9px] font-black uppercase tracking-widest text-muted-foreground/50">
-          <span>Page</span>
-          <span>Type</span>
-          <span>Status</span>
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        {rows.map((row) => (
-          <div
-            key={row.url}
-            className="grid grid-cols-[1.7fr_0.6fr_0.8fr] items-start gap-3 rounded-xl border border-border/40 bg-background/80 px-3 py-2.5"
-          >
-            <div className="min-w-0">
-              <p className="truncate text-[12px] font-bold text-foreground">
-                {row.url}
-              </p>
-              <p className="text-[10px] text-muted-foreground/60">
-                {row.updated}
-              </p>
-            </div>
-            <span className="text-[10px] font-black capitalize text-foreground/75">
-              {row.type}
-            </span>
-            <span
-              className={`w-fit rounded-full px-2 py-0.5 text-[10px] font-black ${row.statusClass}`}
-            >
-              {row.status}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function AuditMockup() {
-  const rows = [
+  const findings = [
     {
-      task: "Missing merchant + shipping info",
-      status: "Pending",
-      category: "AEO",
+      issue: "Missing product schema on 4 PDPs",
       priority: "P0",
+      category: "Schema",
     },
     {
-      task: "Thin meta descriptions on best sellers",
-      status: "In Progress",
+      issue: "Thin meta descriptions on summer collection",
+      priority: "P1",
       category: "Content",
-      priority: "P1",
     },
     {
-      task: "No review schema on summer collection",
-      status: "Pending",
+      issue: "No review markup on best sellers",
+      priority: "P1",
       category: "SEO",
-      priority: "P1",
-    },
-    {
-      task: "Hreflang mismatch on EU storefront",
-      status: "Pending",
-      category: "i18n",
-      priority: "P2",
     },
   ];
 
@@ -240,69 +151,97 @@ function AuditMockup() {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-sm font-black text-foreground">
-            Persistent Tasks
+            Shopping Missions
           </h3>
           <p className="text-[11px] text-muted-foreground/60">
-            Synced from crawl audit results
+            Journey diagnostics across your store
           </p>
         </div>
-        <span className="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[10px] font-black text-amber-600">
-          14 open
+        <span className="rounded-full border border-sky-200 bg-sky-50 px-2.5 py-1 text-[10px] font-black text-sky-600">
+          3 active missions
         </span>
       </div>
 
-      <div className="rounded-xl border border-border/40 bg-muted/20 px-3 py-2.5">
-        <div className="grid grid-cols-[1.55fr_0.75fr_0.55fr_0.55fr] gap-3 text-[9px] font-black uppercase tracking-widest text-muted-foreground/50">
-          <span>Task</span>
-          <span>Status</span>
-          <span>Category</span>
-          <span>Priority</span>
-        </div>
-      </div>
-
       <div className="space-y-2">
-        {rows.map((row) => (
+        {missions.map((m) => (
           <div
-            key={row.task}
-            className="grid grid-cols-[1.55fr_0.75fr_0.55fr_0.55fr] gap-3 rounded-xl border border-border/40 bg-background/80 px-3 py-3"
+            key={m.name}
+            className="rounded-xl border border-border/40 bg-background/80 px-3 py-2.5"
           >
-            <div className="min-w-0">
-              <p className="truncate text-[12px] font-bold text-foreground">
-                {row.task}
-              </p>
+            <div className="flex items-center justify-between">
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-[12px] font-bold text-foreground">
+                  {m.name}
+                </p>
+                <p className="text-[10px] text-muted-foreground/60">
+                  via {m.source} &middot; {m.journeys} journeys
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="text-right">
+                  <p className={`text-[12px] font-black ${m.dropClass}`}>
+                    {m.dropOff}
+                  </p>
+                  <p className="text-[8px] text-muted-foreground/50">
+                    drop-off
+                  </p>
+                </div>
+                <span
+                  className={`rounded-full px-2 py-0.5 text-[9px] font-black ${m.statusClass}`}
+                >
+                  {m.status}
+                </span>
+              </div>
             </div>
-            <span className="text-[10px] font-black text-muted-foreground">
-              {row.status}
-            </span>
-            <span className="text-[10px] font-black text-foreground/80">
-              {row.category}
-            </span>
-            <span className="text-[10px] font-black text-amber-600">
-              {row.priority}
-            </span>
           </div>
         ))}
+      </div>
+
+      <div className="rounded-xl border border-border/40 bg-muted/20 px-3 py-2.5">
+        <p className="mb-2 text-[9px] font-black uppercase tracking-widest text-muted-foreground/50">
+          Linked Findings
+        </p>
+        <div className="space-y-1.5">
+          {findings.map((f) => (
+            <div
+              key={f.issue}
+              className="flex items-center justify-between text-[11px]"
+            >
+              <span className="truncate text-foreground/80">{f.issue}</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[9px] font-black text-muted-foreground">
+                  {f.category}
+                </span>
+                <span className="text-[9px] font-black text-amber-600">
+                  {f.priority}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
+/* ── Fix Mockup ─────────────────────────────────────────────────────── */
+
 function FixMockup() {
-  const rows = [
+  const fixes = [
     {
-      page: "Merchant + shipping fields",
+      page: "Product schema for Summer Dress",
       status: "AI fix",
       statusClass: "bg-emerald-500/10 text-emerald-600",
     },
     {
-      page: "Thin meta descriptions",
+      page: "Meta descriptions — summer collection",
       status: "AI-assisted",
       statusClass: "bg-sky-500/10 text-sky-600",
     },
     {
-      page: "International hreflang gaps",
-      status: "Manual",
-      statusClass: "bg-amber-500/10 text-amber-700",
+      page: "Review markup on best sellers",
+      status: "AI fix",
+      statusClass: "bg-emerald-500/10 text-emerald-600",
     },
   ];
 
@@ -310,13 +249,13 @@ function FixMockup() {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-black text-foreground">Fix Paths</h3>
+          <h3 className="text-sm font-black text-foreground">Fix Queue</h3>
           <p className="text-[11px] text-muted-foreground/60">
-            Automated, assisted, and manual workflows
+            AI-generated improvements ready for review
           </p>
         </div>
         <span className="rounded-full border border-violet-200 bg-violet-50 px-2.5 py-1 text-[10px] font-black text-violet-600">
-          3 active paths
+          3 fixes ready
         </span>
       </div>
 
@@ -324,30 +263,46 @@ function FixMockup() {
         <div className="mb-3 flex items-center justify-between">
           <div>
             <p className="text-[12px] font-bold text-foreground">
-              Recommended resolution mix
+              Summer Dress &mdash; Product Schema Fix
             </p>
             <p className="text-[10px] text-muted-foreground/60">
-              Based on issue type and confidence
+              AI-generated &middot; High confidence
             </p>
           </div>
           <span className="rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-black text-emerald-600">
-            27 ready
+            Ready
           </span>
         </div>
 
-        <div className="space-y-2">
-          {rows.map((row) => (
+        {/* Preview snippet */}
+        <div className="rounded-lg border border-border/40 bg-background/80 p-2.5 text-[10px] font-mono leading-relaxed text-muted-foreground">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="rounded bg-red-500/10 px-1 py-0.5 text-[8px] font-black text-red-600">
+              BEFORE
+            </span>
+            <span className="line-through opacity-60">No product schema</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="rounded bg-emerald-500/10 px-1 py-0.5 text-[8px] font-black text-emerald-600">
+              AFTER
+            </span>
+            <span>Product, Offer, Review schema added</span>
+          </div>
+        </div>
+
+        <div className="space-y-2 mt-3">
+          {fixes.map((fix) => (
             <div
-              key={row.page}
+              key={fix.page}
               className="flex items-center justify-between rounded-lg border border-border/40 bg-background/80 px-3 py-2"
             >
               <span className="truncate text-[11px] font-semibold text-foreground/90">
-                {row.page}
+                {fix.page}
               </span>
               <span
-                className={`ml-3 shrink-0 rounded-full px-2 py-0.5 text-[10px] font-black ${row.statusClass}`}
+                className={`ml-3 shrink-0 rounded-full px-2 py-0.5 text-[10px] font-black ${fix.statusClass}`}
               >
-                {row.status}
+                {fix.status}
               </span>
             </div>
           ))}
@@ -355,13 +310,10 @@ function FixMockup() {
 
         <div className="mt-3 flex gap-2">
           <button className="flex-1 rounded-full bg-primary py-2 text-[11px] font-black text-primary-foreground">
-            Approve
+            Approve &amp; Publish
           </button>
           <button className="flex-1 rounded-full border-2 border-border/40 py-2 text-[11px] font-black text-muted-foreground">
             Discard
-          </button>
-          <button className="flex-1 rounded-full border-2 border-emerald-300 bg-emerald-50 py-2 text-[11px] font-black text-emerald-700">
-            Push to Shopify
           </button>
         </div>
       </div>
@@ -369,107 +321,76 @@ function FixMockup() {
   );
 }
 
-function MonitorMockup() {
-  const cards = [
-    {
-      label: "Performance / Speed",
-      percentage: 84,
-      metricLabel: "Healthy pages",
-      issueLabel: "warnings",
-      issueCount: 6,
-      totalCount: 38,
-      tone: "emerald",
-      description: "Core Web Vitals drift and render-blocking assets.",
-    },
-    {
-      label: "International / i18n",
-      percentage: 67,
-      metricLabel: "Coverage",
-      issueLabel: "drifts",
-      issueCount: 11,
-      totalCount: 33,
-      tone: "amber",
-      description: "Hreflang, locale routing, and market-specific URLs.",
-    },
-    {
-      label: "Schema Health",
-      percentage: 91,
-      metricLabel: "Validated markup",
-      issueLabel: "issues",
-      issueCount: 3,
-      totalCount: 34,
-      tone: "emerald",
-      description: "Merchant, offer, review, and product structured data.",
-    },
-    {
-      label: "Feed Sync",
-      percentage: 58,
-      metricLabel: "Channels aligned",
-      issueLabel: "mismatches",
-      issueCount: 14,
-      totalCount: 33,
-      tone: "red",
-      description: "Price, availability, and variant parity across feeds.",
-    },
+/* ── Verify Mockup ──────────────────────────────────────────────────── */
+
+function VerifyMockup() {
+  const improvements = [
+    { metric: "Product Schema", before: 12, after: 91, unit: "%" },
+    { metric: "Content Quality", before: 45, after: 78, unit: "%" },
+    { metric: "Journey Health", before: 32, after: 68, unit: "%" },
+    { metric: "SEO Foundations", before: 56, after: 89, unit: "%" },
   ];
 
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-black text-foreground">Site Health</h3>
+          <h3 className="text-sm font-black text-foreground">
+            Verification Report
+          </h3>
           <p className="text-[11px] text-muted-foreground/60">
-            Continuous monitoring after publish
+            Before/after improvement tracking
           </p>
         </div>
         <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[10px] font-black text-emerald-600">
-          4 health lanes tracked
+          4 verified improvements
         </span>
       </div>
 
       <div className="grid grid-cols-2 gap-2">
-        {cards.map((card) => {
-          const textClass =
-            card.tone === "emerald"
-              ? "text-emerald-600"
-              : card.tone === "amber"
-                ? "text-amber-600"
-                : "text-red-600";
-          const barClass =
-            card.tone === "emerald"
-              ? "bg-emerald-500"
-              : card.tone === "amber"
-                ? "bg-amber-500"
-                : "bg-red-500";
-
+        {improvements.map((item) => {
+          const delta = item.after - item.before;
           return (
             <div
-              key={card.label}
+              key={item.metric}
               className="rounded-xl border border-border/70 bg-card px-3 py-3 shadow-sm"
             >
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center justify-between gap-2">
                 <span className="text-[11px] font-semibold text-foreground">
-                  {card.label}
+                  {item.metric}
                 </span>
-                <span className={`text-[18px] font-black ${textClass}`}>
-                  {card.percentage}%
-                </span>
-              </div>
-              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted">
-                <div
-                  className={`h-full rounded-full ${barClass}`}
-                  style={{ width: `${card.percentage}%` }}
-                />
-              </div>
-              <div className="mt-2 flex items-center justify-between text-[10px] text-muted-foreground/70">
-                <span>{card.metricLabel}</span>
-                <span>
-                  {card.issueCount} of {card.totalCount} {card.issueLabel}
+                <span className="flex items-center gap-0.5 text-[10px] font-black text-emerald-600">
+                  <TrendingUp className="h-2.5 w-2.5" />+{delta}
+                  {item.unit}
                 </span>
               </div>
-              <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground/75">
-                {card.description}
-              </p>
+              <div className="mt-2 flex items-center gap-2">
+                <div className="flex-1">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-muted">
+                    <div
+                      className="h-full rounded-full bg-red-400/60"
+                      style={{ width: `${item.before}%` }}
+                    />
+                  </div>
+                  <p className="mt-1 text-[9px] text-muted-foreground/60">
+                    Before: {item.before}
+                    {item.unit}
+                  </p>
+                </div>
+                <ArrowRight className="h-2.5 w-2.5 text-muted-foreground/30 shrink-0" />
+                <div className="flex-1">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-muted">
+                    <div
+                      className="h-full rounded-full bg-emerald-500"
+                      style={{ width: `${item.after}%` }}
+                    />
+                  </div>
+                  <p className="mt-1 text-[9px] text-muted-foreground/60">
+                    After: {item.after}
+                    {item.unit}
+                  </p>
+                </div>
+              </div>
             </div>
           );
         })}
@@ -477,26 +398,42 @@ function MonitorMockup() {
 
       <div className="rounded-xl border border-border/40 bg-background/80 px-3 py-3">
         <div className="mb-2 flex items-center justify-between">
-          <p className="text-[12px] font-bold text-foreground">Latest alert</p>
-          <span className="rounded-full bg-red-500/10 px-2 py-0.5 text-[10px] font-black text-red-600">
-            Feed mismatch
+          <p className="text-[12px] font-bold text-foreground">
+            Issues Resolved
+          </p>
+          <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-black text-emerald-600">
+            6 of 7 fixed
           </span>
         </div>
-        <p className="text-[11px] leading-relaxed text-muted-foreground">
-          Variant availability drift was detected between Shopify and the
-          merchant feed on 14 monitored PDPs after the latest catalog sync.
-        </p>
+        <div className="space-y-1.5">
+          {[
+            { issue: "Product schema on 4 PDPs", resolved: true },
+            { issue: "Thin meta descriptions", resolved: true },
+            { issue: "Missing review markup", resolved: true },
+          ].map((item) => (
+            <div
+              key={item.issue}
+              className="flex items-center gap-2 text-[11px]"
+            >
+              <CheckCircle2 className="h-3 w-3 shrink-0 text-emerald-500" />
+              <span className="text-foreground/80">{item.issue}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
+/* ── Dashboard mockup content array ─────────────────────────────────── */
+
 const mockupContent = [
-  <CrawlMockup key="crawl" />,
-  <AuditMockup key="audit" />,
+  <DiagnoseMockup key="diagnose" />,
   <FixMockup key="fix" />,
-  <MonitorMockup key="monitor" />,
+  <VerifyMockup key="verify" />,
 ];
+
+/* ── Dashboard Chrome ────────────────────────────────────────────────── */
 
 function DashboardChrome({
   activeTab,
@@ -515,7 +452,7 @@ function DashboardChrome({
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
         <div className="mx-auto ml-3 flex items-center gap-1 rounded-md border border-border/40 bg-background/70 px-3 py-1">
           <span className="text-[9px] font-medium text-muted-foreground/40">
-            app.beseam.com/collect/
+            app.beseam.com/
           </span>
           <AnimatePresence mode="wait">
             <motion.span
@@ -560,7 +497,7 @@ function DashboardChrome({
                   <item.icon className="h-3.5 w-3.5" />
                   {isActive && (
                     <motion.div
-                      layoutId="collect-preview-sidebar"
+                      layoutId="how-it-works-sidebar"
                       className={`absolute -right-[1px] top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-full ${item.dotClass}`}
                     />
                   )}
@@ -573,7 +510,7 @@ function DashboardChrome({
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between border-b border-border/40 bg-background/50 px-4 py-2.5">
             <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground/50">
-              <span className="font-semibold">Collect</span>
+              <span className="font-semibold">Beseam</span>
               <ChevronRight className="h-2.5 w-2.5" />
               <span className={`font-black ${tab.colorClass}`}>
                 {tab.navLabel}
@@ -617,6 +554,8 @@ function DashboardChrome({
   );
 }
 
+/* ── Main Section ────────────────────────────────────────────────────── */
+
 export default function HowItWorksSection() {
   const [activeTab, setActiveTab] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -652,7 +591,11 @@ export default function HowItWorksSection() {
   const tab = sections[activeTab];
 
   return (
-    <section ref={sectionRef} className="relative h-auto lg:h-[600vh]">
+    <section
+      id="how-it-works"
+      ref={sectionRef}
+      className="relative h-auto lg:h-[450vh]"
+    >
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
         <AnimatePresence mode="wait">
           <motion.div
@@ -667,14 +610,14 @@ export default function HowItWorksSection() {
         <div className="absolute bottom-1/3 left-0 h-[480px] w-[480px] rounded-full bg-secondary/5 blur-[140px]" />
       </div>
 
+      {/* Desktop: sticky scroll-driven */}
       <div className="hidden lg:flex lg:sticky lg:top-0 lg:h-screen flex-col overflow-hidden">
         <div className="shrink-0 text-center pt-10 pb-2 px-4">
           <p className="text-primary mb-2 text-xs font-semibold uppercase tracking-wider">
             How It Works
           </p>
           <h2 className="font-heading text-2xl font-bold tracking-tight sm:text-3xl">
-            Crawl, audit, fix,{" "}
-            <span className="text-primary italic">and monitor.</span>
+            Diagnose. Fix. <span className="text-primary italic">Verify.</span>
           </h2>
         </div>
 
@@ -780,14 +723,14 @@ export default function HowItWorksSection() {
         </div>
       </div>
 
+      {/* Mobile: tab switcher */}
       <div className="lg:hidden py-16 px-4 sm:px-6">
         <div className="text-center mb-8">
           <p className="text-primary mb-2 text-xs font-semibold uppercase tracking-wider">
-            Platform Preview
+            How It Works
           </p>
           <h2 className="font-heading text-2xl font-bold tracking-tight">
-            Here&apos;s the platform{" "}
-            <span className="text-primary italic">behind it.</span>
+            Diagnose. Fix. <span className="text-primary italic">Verify.</span>
           </h2>
         </div>
 

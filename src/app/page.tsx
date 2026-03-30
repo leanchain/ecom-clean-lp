@@ -1,9 +1,11 @@
 import CookieConsent from "@/components/cookie-consent";
 import HeroSection from "@/components/beseam/hero-section";
-import ClientLogos from "@/components/client-logos";
-import BuyerJourneySection from "@/components/beseam/buyer-journey-section";
+import ProblemSection from "@/components/beseam/problem-section";
 import HowItWorksSection from "@/components/beseam/how-it-works-section";
-import BeforeAfterSection from "@/components/beseam/before-after-section";
+import BeforeAfterAISection from "@/components/beseam/before-after-ai-section";
+import OutcomesSection from "@/components/beseam/outcomes-section";
+import DifferentiationSection from "@/components/beseam/differentiation-section";
+import IdealCustomerSection from "@/components/beseam/ideal-customer-section";
 import FaqSection from "@/components/beseam/faq-section";
 import FinalCtaSection from "@/components/beseam/final-cta-section";
 
@@ -11,10 +13,12 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <ClientLogos />
-      <BuyerJourneySection />
+      <ProblemSection />
       <HowItWorksSection />
-      <BeforeAfterSection />
+      <BeforeAfterAISection />
+      <OutcomesSection />
+      <DifferentiationSection />
+      <IdealCustomerSection />
       <FaqSection />
       <FinalCtaSection />
       <CookieConsent />

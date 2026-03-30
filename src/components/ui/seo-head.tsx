@@ -29,7 +29,7 @@ const SeoHead: React.FC<SeoHeadProps> = ({
   structuredData,
 }) => {
   const pathname = usePathname();
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3123';
   const fullUrl = `${baseUrl}${pathname}`;
   const canonicalUrl = canonical || fullUrl;
 

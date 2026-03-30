@@ -1,20 +1,15 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
-import NavbarLogo from "@/components/ui/navbar-logo";
-import { cn } from "@/lib/utils";
 import Logo from "../ui/logo";
+import { cn } from "@/lib/utils";
 
 const ITEMS = [
   {
     title: "Product",
     links: [
       { name: "How It Works", href: "/#how-it-works" },
-      {
-        name: "Pricing",
-        href: "https://app.beseam.com/pricing",
-        target: "_blank" as const,
-      },
       { name: "FAQ", href: "/#faq" },
+      { name: "Book a Pilot", href: "/demo" },
     ],
   },
   {
@@ -109,21 +104,19 @@ export default function BeseamFooter() {
     <footer className="border-t bg-[var(--footer-background)] py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid gap-16 lg:grid-cols-2">
-          {/* Left: Brand, Social, Compliance */}
           <div className="flex flex-col space-y-8">
             <div>
               <Logo className="text-primary scale-400 origin-left transition-transform hover:scale-405 pb-2" />
               <p className="mt-6 max-w-sm text-lg font-semibold leading-tight text-foreground md:text-xl">
-                Scan. Fix. Push. <span className="text-primary">Verified.</span>
+                Diagnose. Fix. <span className="text-primary">Verify.</span>
               </p>
               <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-                Get your products recommended by AI shopping tools like ChatGPT,
-                Google, and Perplexity — automatically, without any technical
-                complexity.
+                Beseam helps Shopify brands track shopping journeys, identify
+                weak landing pages, generate fixes, publish safely, and verify
+                what improved.
               </p>
             </div>
 
-            {/* Social icons */}
             <div className="flex items-center gap-5">
               {SOCIAL_LINKS.map((link) => (
                 <Link
@@ -141,7 +134,6 @@ export default function BeseamFooter() {
               ))}
             </div>
 
-            {/* Compliance badges */}
             <ul className="flex flex-col space-y-3">
               {COMPLIANCE_BADGES.map((badge) => (
                 <li key={badge.name}>
@@ -168,7 +160,6 @@ export default function BeseamFooter() {
             </p>
           </div>
 
-          {/* Right: Link columns */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:justify-items-end">
             {ITEMS.map((section) => (
               <div key={section.title} className="space-y-5">
@@ -198,12 +189,12 @@ export default function BeseamFooter() {
           </div>
         </div>
 
-        {/* Bottom disclaimer */}
         <div className="mt-16 border-t pt-8">
           <p className="max-w-2xl text-[11px] leading-relaxed text-muted-foreground/60">
-            Beseam helps Shopify store owners get their products recommended by
-            AI shopping tools like ChatGPT, Perplexity, and Gemini. All product
-            names, logos, and brands are property of their respective owners.
+            Beseam helps Shopify store operators track shopping journeys,
+            identify weak landing pages, generate AI fixes, and verify
+            improvement. All product names, logos, and brands are property of
+            their respective owners.
           </p>
         </div>
       </div>

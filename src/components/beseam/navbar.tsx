@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 import NavbarLogo from "@/components/ui/navbar-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -11,11 +11,7 @@ import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
   { label: "How It Works", href: "#how-it-works" },
-  {
-    label: "Pricing",
-    href: "https://app.beseam.com/pricing",
-    target: "_blank" as const,
-  },
+  { label: "FAQ", href: "#faq" },
   {
     label: "Docs",
     href: "https://docs.beseam.com",
@@ -55,12 +51,10 @@ export default function BeseamNavbar() {
             scrolled ? "h-14" : "h-16",
           )}
         >
-          {/* Logo */}
           <Link href="/" className="flex items-center">
             <NavbarLogo className="text-primary" />
           </Link>
 
-          {/* Desktop nav */}
           <nav className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((link) => (
               <Link
@@ -77,7 +71,6 @@ export default function BeseamNavbar() {
             ))}
           </nav>
 
-          {/* Desktop actions */}
           <div className="hidden items-center gap-3 md:flex">
             <ThemeToggle />
             <Button
@@ -88,14 +81,14 @@ export default function BeseamNavbar() {
               <Link href="https://app.beseam.com/login">Log In</Link>
             </Button>
             <Link
-              href="https://app.beseam.com/store"
-              className="inline-flex h-9 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
+              href="/demo"
+              className="inline-flex h-9 items-center gap-1.5 rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
             >
-              Scan Free →
+              Book a Pilot
+              <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
-          {/* Mobile hamburger */}
           <Button
             variant="ghost"
             size="icon"
@@ -112,7 +105,6 @@ export default function BeseamNavbar() {
         </div>
       </nav>
 
-      {/* Mobile backdrop */}
       {mobileOpen && (
         <div
           className="fixed inset-0 z-40 bg-background/60 backdrop-blur-sm md:hidden animate-in fade-in duration-300"
@@ -120,7 +112,6 @@ export default function BeseamNavbar() {
         />
       )}
 
-      {/* Mobile slide-in panel */}
       {mobileOpen && (
         <div className="fixed right-0 top-0 z-50 flex h-dvh w-[300px] max-w-[90vw] flex-col border-l border-border bg-background shadow-2xl animate-in slide-in-from-right duration-300 sm:w-[360px] md:hidden">
           <div className="flex h-14 items-center justify-between border-b border-border/50 px-6">
@@ -169,11 +160,11 @@ export default function BeseamNavbar() {
                 </Link>
               </Button>
               <Link
-                href="https://app.beseam.com/store"
+                href="/demo"
                 onClick={() => setMobileOpen(false)}
                 className="flex w-full items-center justify-center rounded-lg bg-primary p-5 text-base font-bold text-primary-foreground shadow-lg transition-all hover:bg-primary/90"
               >
-                Scan Free →
+                Book a Pilot
               </Link>
             </div>
           </div>
