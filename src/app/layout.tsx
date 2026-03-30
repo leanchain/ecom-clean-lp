@@ -21,24 +21,26 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: {
     default:
-      "Beseam — Diagnose Weak Journeys, Fix Pages, Verify Improvement | Shopify",
+      "Beseam — AI Commerce Readiness Platform for Shopify",
     template: "%s | Beseam",
   },
   description:
-    "Beseam helps Shopify brands track shopping journeys, identify weak landing pages, generate AI fixes, publish safely, and verify what improved. Guided pilot for ecommerce teams.",
+    "Beseam audits how AI shopping engines read your product pages, generates fixes for what they get wrong, and verifies improvement. Make ChatGPT, Gemini, and Perplexity recommend your store.",
   keywords: [
     "Beseam",
-    "Shopify journey diagnostics",
-    "shopping mission tracking",
+    "AI commerce readiness",
+    "AI shopping optimization",
+    "ChatGPT product recommendations",
+    "Gemini shopping",
+    "Perplexity shopping",
     "PDP audit",
     "Shopify page fixes",
     "AI-generated fixes",
     "Shopify publish",
-    "before after verification",
-    "CRO Shopify",
-    "landing page optimization",
+    "AI readiness score",
+    "structured data",
     "Shopify structured data",
-    "ecommerce conversion",
+    "ecommerce AI",
   ],
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
@@ -63,9 +65,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "Beseam — Diagnose Weak Journeys, Fix Pages, Verify Improvement | Shopify",
+      "Beseam — AI Commerce Readiness Platform for Shopify",
     description:
-      "Track shopping journeys, identify weak landing pages, generate AI fixes, publish to Shopify, and verify what improved. Guided pilot for ecommerce teams.",
+      "Audit how AI engines read your products. Fix what they get wrong. Verify AI now recommends your store.",
     siteName: "Beseam",
     type: "website",
     images: [
@@ -73,16 +75,16 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Beseam — Diagnose Weak Journeys, Fix Pages, Verify Improvement",
+        alt: "Beseam — AI Commerce Readiness Platform",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title:
-      "Beseam — Diagnose Weak Journeys, Fix Pages, Verify Improvement | Shopify",
+      "Beseam — AI Commerce Readiness Platform for Shopify",
     description:
-      "Track shopping journeys, identify weak landing pages, generate AI fixes, publish to Shopify, and verify what improved.",
+      "Audit how AI engines read your products. Fix what they get wrong. Verify AI now recommends your store.",
     images: ["/og-image.png"],
     creator: "@Beseam",
     site: "@Beseam",

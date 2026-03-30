@@ -3,13 +3,12 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Search, Wrench, CheckCircle2 } from "lucide-react";
-import Image from "next/image";
 import AnimatedBorderContainer from "@/components/ui/animated-border-container";
 import { Input } from "@/components/ui/input";
 
 const WORKFLOW_STEPS = [
-  { icon: Search, label: "Diagnose journeys" },
-  { icon: Wrench, label: "Fix weak pages" },
+  { icon: Search, label: "Audit AI readiness" },
+  { icon: Wrench, label: "Fix what AI can't read" },
   { icon: CheckCircle2, label: "Verify improvement" },
 ];
 
@@ -31,41 +30,25 @@ export default function HeroSection() {
 
       <div className="container relative flex flex-col items-center justify-center gap-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-4 py-1.5 text-xs font-semibold text-muted-foreground">
-            <Image
-              src="/logos/integrations/shopify.svg"
-              alt="Shopify"
-              width={14}
-              height={14}
-              className="h-3.5 w-3.5"
-            />
-            Built for Shopify stores
-          </span>
-        </motion.div>
-
-        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="space-y-6"
         >
           <h1 className="font-heading text-foreground max-w-4xl text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Find the weak journeys.
+            See how AI agents see your store.
             <br />
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Fix the pages. Verify it worked.
+              Fix what they get wrong.
             </span>
           </h1>
 
           <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg leading-relaxed md:text-xl">
-            Beseam tracks shopping missions across your Shopify store, links
-            journey drop-offs to weak landing pages, generates AI fixes, and
-            verifies what improved &mdash; so your team stops guessing and
-            starts shipping pages that convert.
+            ChatGPT, Gemini, and Perplexity recommend products every day
+            &mdash; but they might be misreading yours. Beseam shows you
+            exactly what AI agents see on your product pages, finds what
+            they get wrong, and fixes it &mdash; so they recommend you,
+            not your competitors.
           </p>
         </motion.div>
 
@@ -127,8 +110,8 @@ export default function HeroSection() {
           transition={{ delay: 0.5, duration: 0.5 }}
           className="text-xs text-muted-foreground"
         >
-          Guided pilot &middot; Operator-assisted &middot; Results in weeks, not
-          months
+          Free AI readiness scan &middot; 13 AI engines tracked &middot; Results
+          in minutes
         </motion.p>
       </div>
     </section>

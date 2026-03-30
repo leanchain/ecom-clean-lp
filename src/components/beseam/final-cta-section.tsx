@@ -6,10 +6,10 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const FEATURES = [
-  "Guided pilot — not self-serve",
-  "Results in weeks, not months",
+  "Free AI readiness scan",
+  "13 AI engines tracked",
   "Shopify publish with rollback",
-  "Before/after verification",
+  "Before/after AI verification",
 ];
 
 export default function FinalCtaSection() {
@@ -33,10 +33,10 @@ export default function FinalCtaSection() {
             transition={{ duration: 0.6 }}
             className="font-heading text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-7xl"
           >
-            Stop guessing which pages to fix.
+            Stop guessing how AI sees your store.
             <span className="text-white/90 italic">
               {" "}
-              Start verifying what works.
+              Start making it recommend you.
             </span>
           </motion.h2>
 
@@ -47,8 +47,9 @@ export default function FinalCtaSection() {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl"
           >
-            Book a guided pilot. We&apos;ll diagnose your weakest shopping
-            journeys, generate fixes, and verify the improvement together.
+            Book a guided pilot. We&apos;ll audit how AI reads your products,
+            generate fixes for what it gets wrong, and verify improvement
+            together.
           </motion.p>
 
           <motion.div

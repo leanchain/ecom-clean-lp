@@ -13,21 +13,21 @@ import {
 const outcomes = [
   {
     icon: Route,
-    title: "Mission & Journey Diagnostics",
+    title: "AI Readiness Score",
     description:
-      "See which shopping missions are healthy and which are leaking revenue. Track drop-offs from ad click to purchase.",
+      "See a clear score for how well AI engines understand each product page — across schema, content, structured data, and selling points.",
   },
   {
     icon: Link2,
-    title: "Linked Page Issues",
+    title: "AI Traffic Intelligence",
     description:
-      "Every weak journey is traced back to the specific PDP or landing page causing the problem. No guessing which page to fix.",
+      "Track which AI engines send shoppers to your store — ChatGPT, Gemini, Perplexity, and 10+ more — with per-engine session and revenue data.",
   },
   {
     icon: Sparkles,
     title: "AI-Generated Fixes",
     description:
-      "Get concrete, reviewable fixes for schema, meta descriptions, structured data, and content gaps — generated automatically.",
+      "Get targeted fixes for the exact issues blocking AI from reading your products: schema gaps, missing selling points, ambiguous pricing.",
   },
   {
     icon: Upload,
@@ -39,13 +39,13 @@ const outcomes = [
     icon: GitCompareArrows,
     title: "Before / After Verification",
     description:
-      "After fixes go live, Beseam re-scans and shows you exactly what improved — with evidence you can share with your team.",
+      "After fixes go live, Beseam re-runs the AI probe and shows exactly how your AI readiness improved — with evidence for every engine.",
   },
   {
     icon: CheckCircle2,
-    title: "Guided Pilot Support",
+    title: "13 AI Engines Tracked",
     description:
-      "This isn't a self-serve dashboard you'll forget about. Each pilot is operator-assisted, so you get results — not another login.",
+      "From ChatGPT and Gemini to Perplexity, Claude, Meta AI, Grok, and more — know exactly which AI engines send traffic and how they see your products.",
   },
 ];
 
@@ -64,15 +64,15 @@ export default function OutcomesSection() {
             What You Get
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            One workflow.{" "}
+            One platform.{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent italic">
-              Real outcomes.
+              AI-ready products.
             </span>
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Beseam connects the full loop: from diagnosing weak journeys, to
-            generating and publishing fixes, to verifying what actually
-            improved.
+            Beseam connects the full loop: from auditing how AI reads your
+            products, to generating and publishing fixes, to verifying AI
+            now recommends you.
           </p>
         </motion.div>
 

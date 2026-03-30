@@ -6,23 +6,23 @@ import { X, Check } from "lucide-react";
 const comparisons = [
   {
     tool: "Generic Analytics (GA4, Mixpanel)",
-    them: "Shows page views and bounce rates. Doesn't connect journey drop-offs to specific page-level issues.",
-    us: "Links shopping mission failures directly to the weak PDP or landing page causing the problem.",
+    them: "Shows page views and bounce rates. Has no concept of how AI engines read your product pages or which AI channels send traffic.",
+    us: "Tracks AI referral traffic across 13 engines and audits how each AI engine understands your products.",
   },
   {
     tool: "Site Audit Tools (Screaming Frog, Semrush)",
-    them: "Crawls your site and lists hundreds of technical issues. No journey context, no fix generation, no Shopify publish.",
-    us: "Audits pages in the context of actual shopping journeys. Generates fixes and publishes directly to Shopify.",
+    them: "Crawls your site for technical SEO issues. Doesn't test how ChatGPT or Gemini actually interpret your product pages.",
+    us: "Sends AI to read your pages like a shopper would. Tests schema, content, and structured data from an AI engine's perspective.",
   },
   {
     tool: "AI Content Tools (Jasper, Copy.ai)",
-    them: "Generates copy without knowing what's actually broken on your page or why shoppers are dropping off.",
-    us: "Generates targeted fixes based on audit data — schema, meta, structured data — not generic copy.",
+    them: "Generates generic marketing copy. Doesn't know what AI engines can or can't read on your product pages.",
+    us: "Generates targeted fixes for the specific structured data and content gaps that block AI readability.",
   },
   {
     tool: "CRO Platforms (Hotjar, VWO)",
-    them: "Records sessions and runs A/B tests. You have to watch videos and guess what to fix.",
-    us: "Identifies weak journeys automatically and tells you exactly what to fix, with before/after verification.",
+    them: "Records human sessions and runs A/B tests. Has zero visibility into AI-driven shopping behavior.",
+    us: "Tracks AI-referred shopping sessions and connects them to product page readability scores.",
   },
 ];
 
@@ -38,18 +38,19 @@ export default function DifferentiationSection() {
           className="mb-16 text-center"
         >
           <p className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
-            How This Is Different
+            Why Not Your Current Stack
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            Not another dashboard.{" "}
+            Your tools were built for the human web.{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-              A complete fix workflow.
+              AI needs something different.
             </span>
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Most tools stop at showing you data. Beseam connects journey
-            diagnostics to page fixes to verified improvement — so you ship
-            results, not reports.
+            You probably already use GA4, Semrush, and Hotjar. They&apos;re
+            great at what they do. But none of them can answer the question
+            that matters now: what does ChatGPT see when it reads your
+            product page?
           </p>
         </motion.div>
 
