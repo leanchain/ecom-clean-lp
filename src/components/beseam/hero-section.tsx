@@ -44,10 +44,10 @@ export default function HeroSection() {
           </h1>
 
           <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg leading-relaxed md:text-xl">
-            ChatGPT, Gemini, and Perplexity recommend products every day &mdash;
-            but they might be misreading yours. Beseam shows you exactly what AI
-            agents see on your product pages, finds what they get wrong, and
-            fixes it &mdash; so they recommend you, not your competitors.
+            ChatGPT, Gemini, and Perplexity recommend products to millions of
+            shoppers every day. Right now, they&apos;re misreading yours. Beseam
+            shows you exactly what AI agents see, fixes what they get wrong, and
+            verifies they recommend you &mdash; not your competitors.
           </p>
         </motion.div>
 
@@ -94,9 +94,9 @@ export default function HeroSection() {
               />
               <button
                 type="submit"
-                className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
+                className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
               >
-                Scan Free
+                Scan Your Store Free
                 <ArrowRight className="h-4 w-4" />
               </button>
             </form>
@@ -109,7 +109,7 @@ export default function HeroSection() {
           transition={{ delay: 0.5, duration: 0.5 }}
           className="text-xs text-muted-foreground"
         >
-          Free store scan &middot; 13 AI engines tracked &middot; Results in
+          No credit card &middot; No app install &middot; Results in under 3
           minutes
         </motion.p>
       </div>

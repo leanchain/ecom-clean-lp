@@ -1,7 +1,9 @@
 import CookieConsent from "@/components/cookie-consent";
 import AiPlatformsStrip from "@/components/beseam/ai-platforms-strip";
+import SocialProofStrip from "@/components/beseam/social-proof-strip";
 import HeroSection from "@/components/beseam/hero-section";
 import ProblemSection from "@/components/beseam/problem-section";
+import BuyerJourneySection from "@/components/beseam/buyer-journey-section";
 import HowItWorksSection from "@/components/beseam/how-it-works-section";
 import BeforeAfterAISection from "@/components/beseam/before-after-ai-section";
 import OutcomesSection from "@/components/beseam/outcomes-section";
@@ -15,7 +17,9 @@ export default function Home() {
     <>
       <HeroSection />
       <AiPlatformsStrip />
+      <SocialProofStrip />
       <ProblemSection />
+      <BuyerJourneySection />
       <HowItWorksSection />
       <BeforeAfterAISection />
       <OutcomesSection />
