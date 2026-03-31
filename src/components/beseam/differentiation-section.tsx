@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { X, Check } from "lucide-react";
+import { X, Check, Link2 } from "lucide-react";
 
 const comparisons = [
   {
@@ -99,6 +99,29 @@ export default function DifferentiationSection() {
                 </div>
               </div>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Zero-setup callout */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="mt-8 flex flex-col items-center gap-4 rounded-2xl border border-primary/20 bg-primary/5 p-8 text-center sm:flex-row sm:text-left"
+        >
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10">
+            <Link2 className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <p className="text-lg font-bold text-foreground">
+              No code changes. No app installs. Just your store URL.
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Every tool above requires dashboard access, tracking scripts, or
+              developer setup. Beseam works with a single URL &mdash; paste it,
+              and your AI audit starts in seconds.
+            </p>
           </div>
         </motion.div>
       </div>

@@ -13,6 +13,10 @@ const NAV_LINKS = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "FAQ", href: "#faq" },
   {
+    label: "AI Audits",
+    href: "/audit/shopify",
+  },
+  {
     label: "Docs",
     href: "https://docs.beseam.com",
     target: "_blank" as const,

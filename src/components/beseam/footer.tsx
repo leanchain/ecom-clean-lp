@@ -13,6 +13,25 @@ const ITEMS = [
     ],
   },
   {
+    title: "AI Audits",
+    links: [
+      { name: "Shopify", href: "/audit/shopify" },
+      { name: "WooCommerce", href: "/audit/woocommerce" },
+      { name: "BigCommerce", href: "/audit/bigcommerce" },
+      { name: "Magento", href: "/audit/magento" },
+      { name: "Squarespace", href: "/audit/squarespace" },
+      { name: "Wix", href: "/audit/wix" },
+      { name: "Shopware", href: "/audit/shopware" },
+      { name: "PrestaShop", href: "/audit/prestashop" },
+      { name: "Salesforce CC", href: "/audit/salesforce-commerce-cloud" },
+      { name: "SAP Commerce", href: "/audit/sap-commerce-cloud" },
+      { name: "OpenCart", href: "/audit/opencart" },
+      { name: "Saleor", href: "/audit/saleor" },
+      { name: "Medusa", href: "/audit/medusa" },
+      { name: "Headless / Custom", href: "/audit/custom" },
+    ],
+  },
+  {
     title: "Resources",
     links: [
       {
@@ -111,9 +130,8 @@ export default function BeseamFooter() {
                 See it. Fix it. <span className="text-primary">Verify it.</span>
               </p>
               <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-                Beseam shows you how AI agents see your Shopify store —
-                finds what they get wrong, generates fixes, and verifies
-                improvement.
+                Beseam shows you how AI agents see your Shopify store — finds
+                what they get wrong, generates fixes, and verifies improvement.
               </p>
             </div>
 
@@ -192,9 +210,9 @@ export default function BeseamFooter() {
         <div className="mt-16 border-t pt-8">
           <p className="max-w-2xl text-[11px] leading-relaxed text-muted-foreground/60">
             Beseam shows Shopify store operators how AI agents read their
-            product pages, generates fixes for what AI gets wrong, and
-            verifies improvement. All product names, logos, and brands are
-            property of their respective owners.
+            product pages, generates fixes for what AI gets wrong, and verifies
+            improvement. All product names, logos, and brands are property of
+            their respective owners.
           </p>
         </div>
       </div>
