@@ -28,20 +28,20 @@ const findings: Finding[] = [
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": "${fn:escapeXml(product.name)}",
-  "description": "${fn:escapeXml(product.summary)}",
-  "image": "${product.primaryImage.url}",
-  "sku": "${product.code}",
+  "name": "\${fn:escapeXml(product.name)}",
+  "description": "\${fn:escapeXml(product.summary)}",
+  "image": "\${product.primaryImage.url}",
+  "sku": "\${product.code}",
   "brand": {
     "@type": "Brand",
-    "name": "${fn:escapeXml(product.manufacturer)}"
+    "name": "\${fn:escapeXml(product.manufacturer)}"
   },
   "offers": {
     "@type": "Offer",
-    "price": "${product.price.value}",
-    "priceCurrency": "${product.price.currencyIso}",
-    "availability": "${product.stock.stockLevelStatus.code == 'inStock' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'}",
-    "url": "${canonicalUrl}"
+    "price": "\${product.price.value}",
+    "priceCurrency": "\${product.price.currencyIso}",
+    "availability": "\${product.stock.stockLevelStatus.code == 'inStock' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'}",
+    "url": "\${canonicalUrl}"
   }
 }
 </script>`,
@@ -98,18 +98,18 @@ export class ProductSchemaComponent implements OnInit {
     description:
       "SAP Commerce's powerful classification system stores rich product attributes (technical specs, materials, compatibility), but these are only rendered in the page UI. AI engines can't parse classification attributes from HTML reliably.",
     fix: `<!-- Add classification attributes as PropertyValue in JSP -->
-<c:if test="${not empty product.classifications}">
+<c:if test="\${not empty product.classifications}">
   "additionalProperty": [
-    <c:forEach var="classification" items="${product.classifications}" varStatus="cStatus">
-      <c:forEach var="feature" items="${classification.features}" varStatus="fStatus">
+    <c:forEach var="classification" items="\${product.classifications}" varStatus="cStatus">
+      <c:forEach var="feature" items="\${classification.features}" varStatus="fStatus">
         {
           "@type": "PropertyValue",
-          "name": "${fn:escapeXml(feature.name)}",
-          "value": "${fn:escapeXml(feature.values[0].value)}"
-          <c:if test="${not empty feature.unit}">
-            ,"unitCode": "${fn:escapeXml(feature.unit.symbol)}"
+          "name": "\${fn:escapeXml(feature.name)}",
+          "value": "\${fn:escapeXml(feature.values[0].value)}"
+          <c:if test="\${not empty feature.unit}">
+            ,"unitCode": "\${fn:escapeXml(feature.unit.symbol)}"
           </c:if>
-        }<c:if test="${!fStatus.last || !cStatus.last}">,</c:if>
+        }<c:if test="\${!fStatus.last || !cStatus.last}">,</c:if>
       </c:forEach>
     </c:forEach>
   ]
@@ -123,12 +123,12 @@ export class ProductSchemaComponent implements OnInit {
     fix: `<!-- Add to head section of master page template -->
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 
-<c:forEach var="site" items="${cmsPage.otherLanguagePages}">
+<c:forEach var="site" items="\${cmsPage.otherLanguagePages}">
   <link rel="alternate"
-        hreflang="${site.language.isocode}-${site.country.isocode}"
-        href="${site.url}" />
+        hreflang="\${site.language.isocode}-\${site.country.isocode}"
+        href="\${site.url}" />
 </c:forEach>
-<link rel="canonical" href="${canonicalUrl}" />
+<link rel="canonical" href="\${canonicalUrl}" />
 
 <!-- For Spartacus: Configure SSR to include hreflang -->
 <!-- In your custom page-meta resolver: -->
