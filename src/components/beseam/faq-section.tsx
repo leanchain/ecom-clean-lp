@@ -6,40 +6,40 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    q: "How much time do I have to invest?",
-    a: "Very little. Most stores are fully scanned in under 2 minutes, and our AI fixes the most common issues automatically — no manual work needed. Reviewing and approving fixes takes around 10–15 minutes. After that, Beseam monitors your store continuously so you don't have to think about it.",
+    q: "What does Beseam actually do?",
+    a: "Beseam shows you how AI shopping agents — like ChatGPT, Gemini, and Perplexity — read your product pages. It finds what they get wrong (pricing, availability, selling points), generates targeted fixes, and verifies improvement after you publish. Think of it as a ‘View Source’ for how AI sees your store.",
   },
   {
-    q: "Do I need to hire someone to use this?",
-    a: "No. Beseam is built for store owners and e-commerce managers, not developers or technical experts. Everything is explained in plain language, and most fixes happen with a single click. You don't need an agency, a developer, or any technical knowledge.",
+    q: "Which AI engines does Beseam track?",
+    a: "Beseam tracks 13 AI engines: ChatGPT, Gemini (Google AI), Perplexity, Claude, Bing Copilot, Meta AI, Grok, You.com, Brave AI, DeepSeek, Phind, Amazon Rufus, and Shopify Sidekick. We add new engines as they emerge.",
   },
   {
-    q: "When do I see a return on my investment?",
-    a: "Many stores start seeing improvement within weeks of fixing their product listings. AI shopping tools like ChatGPT and Google are already recommending products to buyers — stores that are properly set up get picked over those that aren't. The sooner you fix it, the sooner you capture that traffic.",
+    q: "How does the AI product probe work?",
+    a: "Beseam sends an LLM to read your product page exactly like ChatGPT or Gemini would. It checks whether AI can correctly identify the product, understand its price and availability, find selling points, and confidently recommend it. You see a side-by-side: what AI understood vs. your actual product data.",
   },
   {
-    q: "Why aren't AI tools recommending my products right now?",
-    a: "AI shopping assistants like ChatGPT, Google, and Perplexity look for specific information on your product pages before they can recommend them. If that information is missing or incomplete, your products simply won't show up — even if they're great. Beseam finds what's missing and fixes it automatically.",
+    q: "What kind of fixes does Beseam generate?",
+    a: "AI-generated fixes for structured data (Product, Offer, Review schema), meta descriptions, content gaps, and selling point clarity. You review a before/after preview and approve before anything publishes. Nothing goes live without your explicit approval.",
   },
   {
-    q: "How is this different from regular SEO?",
-    a: 'Regular SEO is about getting your pages ranked on Google. AI search is different — these tools actively recommend specific products to shoppers who ask questions like "best linen dress under $80." Beseam ensures your products have everything AI tools need to recommend them confidently.',
+    q: "How does Shopify publish work?",
+    a: "Once you approve a fix, Beseam publishes it directly to your Shopify store. Every change includes rollback protection — one click to revert if anything looks wrong. No developer access or theme changes required.",
   },
   {
-    q: "Which AI shopping tools will this help with?",
-    a: "ChatGPT, Google Gemini, Perplexity, Microsoft Copilot, and other AI shopping assistants. All of them look for the same basic product information — Beseam makes sure your catalog speaks their language.",
+    q: "What does 'verify' mean?",
+    a: "After a fix goes live, Beseam re-runs the AI probe and diagnostics. You see a before/after comparison of your scores, plus exactly how each AI engine's understanding of your products improved.",
   },
   {
-    q: "Will Beseam break my store?",
-    a: "No. Every fix is saved before it goes live, and you review a before/after preview before approving. If anything ever looks wrong, one click reverts the change instantly.",
+    q: "How is this different from regular SEO audits?",
+    a: "Traditional SEO audits check what Google's crawler sees. Beseam checks what AI engines understand — including whether they can identify your product, read correct pricing, and find compelling reasons to recommend it. It's the difference between being indexed and being recommended.",
   },
   {
     q: "What Shopify plans do you support?",
     a: "Beseam works with all Shopify plans — Basic, Shopify, Advanced, and Shopify Plus. No developer access or theme changes required.",
   },
   {
-    q: "Can I try it before paying?",
-    a: "Yes! Every account starts with a free scan of up to 10 products. You'll see exactly what AI shopping tools can and can't find about your products — no credit card required.",
+    q: "How long does it take to see results?",
+    a: "You'll see your audit score within minutes of scanning your store. Fix generation happens immediately after. Most stores see measurable improvement within the first week of publishing fixes.",
   },
 ];
 
@@ -100,8 +100,8 @@ export default function FaqSection() {
             Everything you need to know
           </h2>
           <p className="text-muted-foreground mt-4 mx-auto max-w-2xl text-lg leading-relaxed">
-            Everything you need to know about getting your store recommended by
-            AI shopping tools — without any technical headaches.
+            Common questions about what Beseam shows you, how the audit works,
+            and how to get your products recommended by AI.
           </p>
         </motion.div>
 

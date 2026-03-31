@@ -2,26 +2,14 @@
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, Search, Wrench, CheckCircle2 } from "lucide-react";
 import AnimatedBorderContainer from "@/components/ui/animated-border-container";
 import { Input } from "@/components/ui/input";
-import { TypingAnimation } from "@/components/typing-animation";
 
-const capsules = [
-  "Schema markup fixed",
-  "Geo-tags for local intent",
-  "Metadata tuned for AI",
-];
-
-const platforms = [
-  { name: "Google", logo: "/images/ai-platforms/google.svg" },
-  { name: "ChatGPT", logo: "/images/ai-platforms/chatgpt.svg" },
-  { name: "Gemini", logo: "/images/ai-platforms/gemini.svg" },
-  { name: "AI Mode", logo: "/images/ai-platforms/ai-mode.svg" },
-  { name: "Claude", logo: "/images/ai-platforms/claude.svg" },
-  { name: "Perplexity", logo: "/images/ai-platforms/perplexity.svg" },
-  { name: "Meta AI", logo: "/images/ai-platforms/meta.svg" },
+const WORKFLOW_STEPS = [
+  { icon: Search, label: "See what AI sees" },
+  { icon: Wrench, label: "Fix what they get wrong" },
+  { icon: CheckCircle2, label: "Verify improvement" },
 ];
 
 export default function HeroSection() {
@@ -42,74 +30,49 @@ export default function HeroSection() {
 
       <div className="container relative flex flex-col items-center justify-center gap-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-4 py-1.5 text-xs font-semibold text-muted-foreground">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-success" />
-            Get discovered by AI shoppers
-          </span>
-        </motion.div>
-
-        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="space-y-6"
         >
           <h1 className="font-heading text-foreground max-w-4xl text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Get your store ready
+            See how AI agents see your store.
             <br />
-            <span className="text-primary">for AI Search.</span>
+            <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Fix what they get wrong.
+            </span>
           </h1>
 
           <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg leading-relaxed md:text-xl">
-            Beseam automatically finds and fixes the hidden issues stopping AI
-            tools like ChatGPT and Google from recommending your products —
-            before your competitors get there first.
+            ChatGPT, Gemini, and Perplexity recommend products to millions of
+            shoppers every day. Right now, they&apos;re misreading yours. Beseam
+            shows you exactly what AI agents see, fixes what they get wrong, and
+            verifies they recommend you &mdash; not your competitors.
           </p>
         </motion.div>
 
-        {/* <motion.div
+        {/* Workflow steps capsules */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
           className="flex flex-wrap items-center justify-center gap-3"
         >
-          {capsules.map((item) => (
+          {WORKFLOW_STEPS.map((step, i) => (
             <span
-              key={item}
-              className="rounded-full border border-border bg-muted/60 px-4 py-1.5 text-sm font-medium text-foreground/80"
+              key={step.label}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-4 py-1.5 text-sm font-medium text-foreground/80"
             >
-              {item}
+              <step.icon className="h-3.5 w-3.5 text-primary" />
+              {step.label}
+              {i < WORKFLOW_STEPS.length - 1 && (
+                <ArrowRight className="ml-1 h-3 w-3 text-muted-foreground/40" />
+              )}
             </span>
           ))}
-        </motion.div> */}
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="flex items-center gap-2 text-sm font-medium text-muted-foreground/70"
-        >
-          <span className="text-[10px] uppercase tracking-widest text-muted-foreground/50">
-            User:
-          </span>
-          <TypingAnimation
-            words={[
-              "best linen summer dress under $80",
-              "running sneakers wide toe box free returns",
-              "eco water bottle fast shipping under $40",
-              "minimalist leather wallet slim profile",
-              "kids birthday gift under $50",
-            ]}
-            typingSpeed={65}
-            deletingSpeed={32}
-            delayBetweenWords={2500}
-          />
         </motion.div>
 
+        {/* Store URL input CTA */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -131,9 +94,9 @@ export default function HeroSection() {
               />
               <button
                 type="submit"
-                className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
+                className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
               >
-                Scan Free
+                Scan Your Store Free
                 <ArrowRight className="h-4 w-4" />
               </button>
             </form>
@@ -146,39 +109,9 @@ export default function HeroSection() {
           transition={{ delay: 0.5, duration: 0.5 }}
           className="text-xs text-muted-foreground"
         >
-          Free AI-readiness report for 10 products · No credit card · 2 minutes
+          No credit card &middot; No app install &middot; Results in under 3
+          minutes
         </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          className="mt-4 flex flex-col items-center gap-4 pt-2"
-        >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground/50">
-            Prepare your store for
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-5">
-            {platforms.map((platform) => (
-              <div
-                key={platform.name}
-                className="flex flex-col items-center gap-1.5"
-              >
-                <Image
-                  src={platform.logo}
-                  alt={platform.name}
-                  width={32}
-                  height={32}
-                  title={platform.name}
-                  className="h-8 w-8 object-contain"
-                />
-                <span className="text-[9px] font-medium text-muted-foreground/50">
-                  {platform.name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

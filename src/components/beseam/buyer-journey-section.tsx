@@ -267,8 +267,20 @@ const SPARKLINE = [8, 12, 10, 18, 14, 22, 20, 32, 42, 56, 54, 100];
 
 const AI_SOURCES = [
   { name: "ChatGPT", dot: "bg-[#10A37F]", orders: 3, amount: "$204", bar: 60 },
-  { name: "Google AI", dot: "bg-[#4285F4]", orders: 2, amount: "$136", bar: 40 },
-  { name: "Perplexity", dot: "bg-[#9B72CB]", orders: 1, amount: "$68", bar: 20 },
+  {
+    name: "Google AI",
+    dot: "bg-[#4285F4]",
+    orders: 2,
+    amount: "$136",
+    bar: 40,
+  },
+  {
+    name: "Perplexity",
+    dot: "bg-[#9B72CB]",
+    orders: 1,
+    amount: "$68",
+    bar: 20,
+  },
   { name: "Claude", dot: "bg-[#D97757]", orders: 1, amount: "$68", bar: 15 },
 ];
 
@@ -289,7 +301,9 @@ function WinContent() {
               <p className="text-[11px] font-bold text-emerald-800 dark:text-emerald-300">
                 New order · $68.00
               </p>
-              <span className="text-[8px] text-muted-foreground/40">just now</span>
+              <span className="text-[8px] text-muted-foreground/40">
+                just now
+              </span>
             </div>
             <div className="flex items-center gap-1">
               <p className="text-[9px] text-muted-foreground">
@@ -440,7 +454,7 @@ export default function BuyerJourneySection() {
 
   return (
     <section
-      id="how-it-works"
+      id="buyer-journey"
       className="relative overflow-hidden bg-muted/30 px-4 py-24 sm:px-6 md:py-32"
     >
       <div className="absolute left-1/2 top-1/2 -z-10 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-[120px]" />

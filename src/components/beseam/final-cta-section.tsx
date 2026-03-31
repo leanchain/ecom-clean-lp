@@ -1,19 +1,21 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Check, Mail } from "lucide-react";
+import { Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { Input } from "@/components/ui/input";
 
 const FEATURES = [
-  "Free AI-readiness scan",
-  "No credit card required",
-  "AI fixes in one click",
-  "Rollback protection",
+  "Free store scan",
+  "13 AI engines tracked",
+  "Shopify publish with rollback",
+  "Before/after AI verification",
 ];
 
 export default function FinalCtaSection() {
   const [store, setStore] = useState("");
-  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -24,13 +26,13 @@ export default function FinalCtaSection() {
   };
 
   return (
-    <section className="relative overflow-hidden border-y border-primary/20 bg-primary py-24 md:py-36">
+    <section className="relative overflow-hidden border-y border-border/20 bg-[linear-gradient(135deg,#0d0d0d,#111827)] py-24 md:py-36">
       <div
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-[100px]"
+        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[100px]"
         aria-hidden
       />
 
@@ -43,10 +45,10 @@ export default function FinalCtaSection() {
             transition={{ duration: 0.6 }}
             className="font-heading text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-7xl"
           >
-            Get found in AI search.
+            Stop guessing how AI sees your store.
             <span className="text-white/90 italic">
               {" "}
-              Fix the gaps before they cost you.
+              Start making it recommend you.
             </span>
           </motion.h2>
 
@@ -57,50 +59,57 @@ export default function FinalCtaSection() {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl"
           >
-            Enter your store URL and see how prepared your products are for
-            ChatGPT, Perplexity, and Gemini. Free. No sign-up.
+            Scan your store in under 3 minutes. See exactly what AI gets wrong.
+            Fix it before your competitors do.
           </motion.p>
 
-          {!submitted ? (
-            <motion.form
+          {/* Primary CTA: Free store scan */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="mx-auto mt-10 w-full max-w-xl"
+          >
+            <form
               onSubmit={handleSubmit}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="mx-auto mt-10 flex max-w-lg flex-col gap-4 sm:flex-row"
+              className="flex flex-col gap-2 rounded-[28px] border border-white/20 bg-white/5 p-2 shadow-2xl backdrop-blur sm:flex-row sm:items-center"
             >
-              <div className="relative flex-1">
-                <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="text"
-                  value={store}
-                  onChange={(e) => setStore(e.target.value)}
-                  placeholder="yourstore.myshopify.com"
-                  className="h-14 w-full rounded-full border-transparent bg-white pl-11 pr-5 text-base text-foreground shadow-2xl placeholder:text-muted-foreground focus:outline-none focus:ring-4 focus:ring-white/30"
-                />
-              </div>
+              <Input
+                type="text"
+                value={store}
+                onChange={(e) => setStore(e.target.value)}
+                placeholder="yourstore.myshopify.com"
+                animate={false}
+                className="h-14 flex-1 rounded-full border-0 bg-transparent px-5 text-base text-white shadow-none placeholder:text-white/40 focus-visible:border-0 focus-visible:ring-0"
+              />
               <button
                 type="submit"
-                className="h-14 whitespace-nowrap rounded-full bg-secondary px-8 text-base font-semibold text-white transition-colors hover:bg-secondary/90 focus:outline-none focus:ring-4 focus:ring-white/30"
+                className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
               >
-                Scan Free →
+                Scan Your Store Free
+                <ArrowRight className="h-4 w-4" />
               </button>
-            </motion.form>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="mx-auto mt-10 flex items-center justify-center gap-2 text-white"
+            </form>
+          </motion.div>
+
+          {/* Secondary CTA: Book a pilot */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mx-auto mt-5 flex flex-col gap-4 sm:flex-row sm:justify-center"
+          >
+            <span className="text-sm text-white/50">or</span>
+            <Link
+              href="/demo"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 underline underline-offset-4 transition-colors hover:text-white"
             >
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20">
-                <Check className="h-3.5 w-3.5 text-white" />
-              </div>
-              <span className="text-sm font-semibold">
-                Redirecting to scan…
-              </span>
-            </motion.div>
-          )}
+              Book a guided pilot with our team
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -111,8 +120,8 @@ export default function FinalCtaSection() {
           >
             {FEATURES.map((item) => (
               <div key={item} className="flex items-center gap-2 text-white">
-                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-                  <Check className="h-3 w-3 text-white" />
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/20 backdrop-blur-sm">
+                  <Check className="h-3 w-3 text-emerald-400" />
                 </div>
                 <span className="text-sm font-medium tracking-wide">
                   {item}

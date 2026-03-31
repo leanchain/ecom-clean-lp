@@ -1,20 +1,34 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
-import NavbarLogo from "@/components/ui/navbar-logo";
-import { cn } from "@/lib/utils";
 import Logo from "../ui/logo";
+import { cn } from "@/lib/utils";
 
 const ITEMS = [
   {
     title: "Product",
     links: [
       { name: "How It Works", href: "/#how-it-works" },
-      {
-        name: "Pricing",
-        href: "https://app.beseam.com/pricing",
-        target: "_blank" as const,
-      },
       { name: "FAQ", href: "/#faq" },
+      { name: "Book a Pilot", href: "/demo" },
+    ],
+  },
+  {
+    title: "AI Audits",
+    links: [
+      { name: "Shopify", href: "/audit/shopify" },
+      { name: "WooCommerce", href: "/audit/woocommerce" },
+      { name: "BigCommerce", href: "/audit/bigcommerce" },
+      { name: "Magento", href: "/audit/magento" },
+      { name: "Squarespace", href: "/audit/squarespace" },
+      { name: "Wix", href: "/audit/wix" },
+      { name: "Shopware", href: "/audit/shopware" },
+      { name: "PrestaShop", href: "/audit/prestashop" },
+      { name: "Salesforce CC", href: "/audit/salesforce-commerce-cloud" },
+      { name: "SAP Commerce", href: "/audit/sap-commerce-cloud" },
+      { name: "OpenCart", href: "/audit/opencart" },
+      { name: "Saleor", href: "/audit/saleor" },
+      { name: "Medusa", href: "/audit/medusa" },
+      { name: "Headless / Custom", href: "/audit/custom" },
     ],
   },
   {
@@ -109,21 +123,18 @@ export default function BeseamFooter() {
     <footer className="border-t bg-[var(--footer-background)] py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid gap-16 lg:grid-cols-2">
-          {/* Left: Brand, Social, Compliance */}
           <div className="flex flex-col space-y-8">
             <div>
               <Logo className="text-primary scale-400 origin-left transition-transform hover:scale-405 pb-2" />
               <p className="mt-6 max-w-sm text-lg font-semibold leading-tight text-foreground md:text-xl">
-                Scan. Fix. Push. <span className="text-primary">Verified.</span>
+                See it. Fix it. <span className="text-primary">Verify it.</span>
               </p>
               <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-                Get your products recommended by AI shopping tools like ChatGPT,
-                Google, and Perplexity — automatically, without any technical
-                complexity.
+                Beseam shows you how AI agents see your Shopify store — finds
+                what they get wrong, generates fixes, and verifies improvement.
               </p>
             </div>
 
-            {/* Social icons */}
             <div className="flex items-center gap-5">
               {SOCIAL_LINKS.map((link) => (
                 <Link
@@ -141,7 +152,6 @@ export default function BeseamFooter() {
               ))}
             </div>
 
-            {/* Compliance badges */}
             <ul className="flex flex-col space-y-3">
               {COMPLIANCE_BADGES.map((badge) => (
                 <li key={badge.name}>
@@ -168,7 +178,6 @@ export default function BeseamFooter() {
             </p>
           </div>
 
-          {/* Right: Link columns */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:justify-items-end">
             {ITEMS.map((section) => (
               <div key={section.title} className="space-y-5">
@@ -198,12 +207,12 @@ export default function BeseamFooter() {
           </div>
         </div>
 
-        {/* Bottom disclaimer */}
         <div className="mt-16 border-t pt-8">
           <p className="max-w-2xl text-[11px] leading-relaxed text-muted-foreground/60">
-            Beseam helps Shopify store owners get their products recommended by
-            AI shopping tools like ChatGPT, Perplexity, and Gemini. All product
-            names, logos, and brands are property of their respective owners.
+            Beseam shows Shopify store operators how AI agents read their
+            product pages, generates fixes for what AI gets wrong, and verifies
+            improvement. All product names, logos, and brands are property of
+            their respective owners.
           </p>
         </div>
       </div>
