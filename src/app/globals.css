@@ -560,6 +560,20 @@
   }
 }
 
+/* Global fix for "dancing" spinners - ensures perfect center rotation */
+.animate-spin,
+[class*="animate-spin"] {
+  transform-origin: center center !important;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Specifically target SVGs to ensure they use their own coordinate system center */
+svg.animate-spin {
+  transform-origin: 50% 50% !important;
+}
+
 @keyframes success-pulse {
   0%,
   100% {
