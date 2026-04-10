@@ -1,26 +1,24 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import NavbarLogo from "@/components/ui/navbar-logo";
+import Link from "next/link";
+
+import { ArrowRight, Menu, X } from "lucide-react";
+
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import NavbarLogo from "@/components/ui/navbar-logo";
 import { cn } from "@/lib/utils";
+
+const APP_EXAMPLE_REPORT_URL = "https://app.beseam.com/analyze";
+const APP_SCAN_URL = "https://app.beseam.com/scan";
 
 const NAV_LINKS = [
   { label: "How It Works", href: "#how-it-works" },
+  { label: "Example Report", href: APP_EXAMPLE_REPORT_URL },
+  { label: "Fix Sprint", href: "/demo" },
   { label: "FAQ", href: "#faq" },
-  {
-    label: "AI Audits",
-    href: "/audit/shopify",
-  },
-  {
-    label: "Docs",
-    href: "https://docs.beseam.com",
-    target: "_blank" as const,
-  },
 ];
 
 export default function BeseamNavbar() {
@@ -38,14 +36,14 @@ export default function BeseamNavbar() {
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "py-3 px-4" : "",
+        scrolled ? "px-4 py-3" : "",
       )}
     >
       <nav
         className={cn(
           "transition-all duration-300",
           scrolled
-            ? "mx-auto max-w-5xl rounded-full border border-border/20 bg-background/50 backdrop-blur-2xl shadow-lg shadow-black/5 px-5"
+            ? "mx-auto max-w-5xl rounded-full border border-border/20 bg-background/50 px-5 shadow-lg shadow-black/5 backdrop-blur-2xl"
             : "mx-auto max-w-6xl px-4 sm:px-6",
         )}
       >
@@ -64,10 +62,6 @@ export default function BeseamNavbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                target={link.target}
-                rel={
-                  link.target === "_blank" ? "noopener noreferrer" : undefined
-                }
                 className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               >
                 {link.label}
@@ -85,10 +79,10 @@ export default function BeseamNavbar() {
               <Link href="https://app.beseam.com/login">Log In</Link>
             </Button>
             <Link
-              href="/demo"
+              href={APP_SCAN_URL}
               className="inline-flex h-9 items-center gap-1.5 rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
             >
-              Book a Pilot
+              Free Scan
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -111,13 +105,13 @@ export default function BeseamNavbar() {
 
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-background/60 backdrop-blur-sm md:hidden animate-in fade-in duration-300"
+          className="animate-in fade-in fixed inset-0 z-40 bg-background/60 duration-300 md:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       {mobileOpen && (
-        <div className="fixed right-0 top-0 z-50 flex h-dvh w-[300px] max-w-[90vw] flex-col border-l border-border bg-background shadow-2xl animate-in slide-in-from-right duration-300 sm:w-[360px] md:hidden">
+        <div className="animate-in slide-in-from-right fixed right-0 top-0 z-50 flex h-dvh w-[300px] max-w-[90vw] flex-col border-l border-border bg-background shadow-2xl duration-300 sm:w-[360px] md:hidden">
           <div className="flex h-14 items-center justify-between border-b border-border/50 px-6">
             <span className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
               Menu
@@ -138,10 +132,6 @@ export default function BeseamNavbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  target={link.target}
-                  rel={
-                    link.target === "_blank" ? "noopener noreferrer" : undefined
-                  }
                   onClick={() => setMobileOpen(false)}
                   className="flex items-center rounded-lg p-4 text-base font-medium transition-colors hover:bg-accent"
                 >
@@ -153,7 +143,7 @@ export default function BeseamNavbar() {
             <div className="mt-8 space-y-3 border-t border-border/50 pt-8">
               <Button
                 variant="outline"
-                className="w-full rounded-lg p-5 text-base font-bold border-primary/20"
+                className="w-full rounded-lg border-primary/20 p-5 text-base font-bold"
                 asChild
               >
                 <Link
@@ -164,11 +154,11 @@ export default function BeseamNavbar() {
                 </Link>
               </Button>
               <Link
-                href="/demo"
+                href={APP_SCAN_URL}
                 onClick={() => setMobileOpen(false)}
                 className="flex w-full items-center justify-center rounded-lg bg-primary p-5 text-base font-bold text-primary-foreground shadow-lg transition-all hover:bg-primary/90"
               >
-                Book a Pilot
+                Run Free Scan
               </Link>
             </div>
           </div>

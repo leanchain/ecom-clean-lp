@@ -1,9 +1,16 @@
 "use client";
 
-import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
-import { Star, Check, Zap, CheckCircle2, Calendar } from "lucide-react";
+
+import Cal, { getCalApi } from "@calcom/embed-react";
 import { motion } from "framer-motion";
+import {
+  Calendar,
+  CheckCircle2,
+  Search,
+  ShieldCheck,
+  Wrench,
+} from "lucide-react";
 
 export default function DemoPage() {
   useEffect(() => {
@@ -17,63 +24,58 @@ export default function DemoPage() {
   }, []);
 
   return (
-    <div className="bg-background min-h-screen">
-      <div className="container mx-auto px-4 pt-24 pb-24">
-        {/* Page Header - Styled like Hero */}
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 pb-24 pt-24">
         <div className="mb-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
+            <p className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
+              Paid next step
+            </p>
             <h1 className="font-heading text-foreground mx-auto max-w-4xl text-4xl tracking-tight md:text-5xl lg:text-6xl">
-              Book Your{" "}
-              <span className="text-primary italic">Beseam Demo</span>
+              Book your{" "}
+              <span className="text-primary italic">
+                AI visibility fix sprint
+              </span>
             </h1>
             <p className="text-muted-foreground/80 mx-auto mt-6 max-w-2xl text-lg md:text-xl">
-              See how Beseam helps brands and agencies ship PDP improvements
-              safely — with versioning, KPI monitoring, and instant rollback.
+              Bring one Shopify product page or a scan report. We will review
+              the blockers, prioritize the highest-impact fixes, and map the
+              fastest implementation path.
             </p>
           </motion.div>
 
-          {/* Trust Signals */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
             className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-8"
           >
-            <div className="flex items-center gap-1">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Star
-                  key={i}
-                  className="h-4 w-4 fill-yellow-400 text-yellow-400"
-                />
-              ))}
-              <span className="ml-1 text-sm font-medium text-foreground">
-                4.9/5 rating
+            {[
+              "30-minute working session",
+              "No store connection required to start",
+              "Focused on one live PDP",
+            ].map((item) => (
+              <span
+                key={item}
+                className="flex items-center gap-2 text-sm text-muted-foreground"
+              >
+                <CheckCircle2 className="h-4 w-4 text-primary" />
+                {item}
               </span>
-            </div>
-            <div className="flex items-center gap-6 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <Check className="h-4 w-4 text-primary" />
-                No strings attached
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Check className="h-4 w-4 text-primary" />
-                Expert-led session
-              </span>
-            </div>
+            ))}
           </motion.div>
         </div>
 
         <div className="mx-auto max-w-5xl">
-          {/* Cal.com Embed - Full Width */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="rounded-3xl border bg-card p-2 shadow-2xl ring-1 ring-border/50 overflow-hidden"
+            className="overflow-hidden rounded-3xl border bg-card p-2 shadow-2xl ring-1 ring-border/50"
           >
             <Cal
               namespace="Beseam"
@@ -83,7 +85,6 @@ export default function DemoPage() {
             />
           </motion.div>
 
-          {/* Value Props - Now Below the Calendar */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -96,24 +97,25 @@ export default function DemoPage() {
                   What to expect
                 </h2>
                 <p className="text-muted-foreground mt-2 text-sm">
-                  A 30-minute deep dive into your catalog's AI potential.
+                  A practical working session for merchants who want the fastest
+                  path from scan to fix.
                 </p>
 
                 <ul className="mt-6 space-y-4">
                   {[
                     {
-                      title: "PDP Audit & Playbooks",
-                      desc: "See your baseline scores and AI-generated upgrade recommendations.",
-                      icon: Zap,
+                      title: "Scan review",
+                      desc: "We walk through what AI shoppers can and cannot read on the page today.",
+                      icon: Search,
                     },
                     {
-                      title: "Guardrails & Monitoring",
-                      desc: "How versioning, KPI monitoring, and rollback protect revenue.",
-                      icon: CheckCircle2,
+                      title: "Fix sprint plan",
+                      desc: "We prioritize the highest-leverage fixes across schema, content, reviews, shipping, and trust signals.",
+                      icon: Wrench,
                     },
                     {
-                      title: "Agency & Team Workflow",
-                      desc: "How agencies and internal teams deploy through one safe pipeline.",
+                      title: "Implementation path",
+                      desc: "Choose done-with-you or done-for-you support. Connect your store only if we need it.",
                       icon: Calendar,
                     },
                   ].map((item) => (
@@ -137,25 +139,20 @@ export default function DemoPage() {
 
             <div className="flex flex-col justify-center">
               <div className="rounded-2xl border bg-muted/30 p-8">
-                <h3 className="text-sm font-bold">Built for brands & agencies</h3>
-                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  Join brands and their agencies who ship PDP improvements
-                  through one revenue-guardrailed pipeline.
+                <div className="bg-primary/10 mb-4 flex h-10 w-10 items-center justify-center rounded-xl">
+                  <ShieldCheck className="text-primary h-5 w-5" />
+                </div>
+                <h3 className="text-sm font-bold">
+                  Best for Shopify teams that want a fast answer
+                </h3>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                  If the free scan finds real issues, this session turns that
+                  report into a practical fix plan you can ship this week.
                 </p>
-                <div className="mt-6 flex items-center gap-4">
-                  <div className="flex -space-x-3">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div
-                        key={i}
-                        className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-primary/10 text-xs font-bold text-primary"
-                      >
-                        {String.fromCharCode(64 + i)}
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-sm font-medium text-foreground">
-                    Brands & agencies onboarding
-                  </p>
+                <div className="mt-6 space-y-3 text-sm text-foreground">
+                  <p>Founders and e-commerce leads</p>
+                  <p>Shopify teams with a key PDP to improve</p>
+                  <p>Agencies helping merchants move quickly</p>
                 </div>
               </div>
             </div>

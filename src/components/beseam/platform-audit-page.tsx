@@ -1,14 +1,17 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+
+import Link from "next/link";
+
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import AnimatedBorderContainer from "@/components/ui/animated-border-container";
-import { Input } from "@/components/ui/input";
+
 import SampleFindings, {
   type Finding,
 } from "@/components/beseam/sample-findings";
+import AnimatedBorderContainer from "@/components/ui/animated-border-container";
+import { Input } from "@/components/ui/input";
 
 interface PlatformAuditPageProps {
   platform: string;
@@ -31,16 +34,19 @@ export default function PlatformAuditPage({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const cleaned = store.trim().replace(/^https?:\/\//, "");
-    if (cleaned) {
-      window.location.href = `https://app.beseam.com/store?shop=${encodeURIComponent(cleaned)}`;
-    }
+    const cleaned = store.trim();
+    if (!cleaned) return;
+
+    const normalized = /^https?:\/\//i.test(cleaned)
+      ? cleaned
+      : `https://${cleaned}`;
+
+    window.location.href = `https://app.beseam.com/scan?url=${encodeURIComponent(normalized)}`;
   };
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden px-4 pb-12 pt-24 sm:px-6 md:pt-32 md:pb-16">
+      <section className="relative overflow-hidden px-4 pb-12 pt-24 sm:px-6 md:pb-16 md:pt-32">
         <div className="absolute left-1/2 top-0 -z-10 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-primary/5 blur-[120px]" />
         <div className="container max-w-4xl text-center">
           <motion.p
@@ -68,7 +74,6 @@ export default function PlatformAuditPage({
             {description}
           </motion.p>
 
-          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -84,7 +89,7 @@ export default function PlatformAuditPage({
                   type="text"
                   value={store}
                   onChange={(e) => setStore(e.target.value)}
-                  placeholder="yourstore.myshopify.com"
+                  placeholder="https://yourstore.com/products/your-product"
                   animate={false}
                   className="h-12 flex-1 rounded-full border-0 bg-transparent px-5 text-sm shadow-none focus-visible:border-0 focus-visible:ring-0"
                 />
@@ -92,20 +97,18 @@ export default function PlatformAuditPage({
                   type="submit"
                   className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
                 >
-                  Scan Free
+                  Scan Product Page
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </form>
             </AnimatedBorderContainer>
             <p className="mt-3 text-xs text-muted-foreground">
-              No credit card &middot; No app install &middot; Results in under 3
-              minutes
+              Paste one public product page · No app install · Free scan
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Context section */}
       <section className="bg-muted/20 px-4 py-16 sm:px-6 md:py-24">
         <div className="container max-w-3xl">
           <motion.div
@@ -131,7 +134,6 @@ export default function PlatformAuditPage({
         </div>
       </section>
 
-      {/* Findings */}
       <section className="px-4 py-16 sm:px-6 md:py-24">
         <div className="container max-w-3xl">
           <motion.div
@@ -142,10 +144,10 @@ export default function PlatformAuditPage({
             className="mb-8"
           >
             <h2 className="font-heading text-2xl font-bold tracking-tight md:text-3xl">
-              Top {findings.length} AI readability issues on {platform}
+              Example findings we often see on {platform}
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Click any finding to see the fix.
+              Click any finding to see the type of fix.
             </p>
           </motion.div>
           <motion.div
@@ -159,7 +161,6 @@ export default function PlatformAuditPage({
         </div>
       </section>
 
-      {/* Bottom CTA */}
       <section className="border-y border-border/40 bg-muted/20 px-4 py-16 sm:px-6 md:py-20">
         <div className="container max-w-2xl text-center">
           <motion.h2
@@ -169,7 +170,7 @@ export default function PlatformAuditPage({
             transition={{ duration: 0.5 }}
             className="font-heading text-2xl font-bold tracking-tight md:text-3xl"
           >
-            Scan your {platform} store now
+            Scan one {platform} product page now
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -178,7 +179,8 @@ export default function PlatformAuditPage({
             transition={{ delay: 0.1, duration: 0.4 }}
             className="mt-2 text-sm text-muted-foreground"
           >
-            Find and fix AI readability issues before your competitors do.
+            Start with a single PDP and see whether AI shopping surfaces can
+            actually understand it.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
@@ -196,7 +198,7 @@ export default function PlatformAuditPage({
                   type="text"
                   value={store}
                   onChange={(e) => setStore(e.target.value)}
-                  placeholder="yourstore.myshopify.com"
+                  placeholder="https://yourstore.com/products/your-product"
                   animate={false}
                   className="h-12 flex-1 rounded-full border-0 bg-transparent px-5 text-sm shadow-none focus-visible:border-0 focus-visible:ring-0"
                 />
@@ -204,7 +206,7 @@ export default function PlatformAuditPage({
                   type="submit"
                   className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
                 >
-                  Scan Free
+                  Scan Product Page
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </form>
@@ -213,7 +215,6 @@ export default function PlatformAuditPage({
         </div>
       </section>
 
-      {/* Cross-links */}
       <section className="px-4 py-12 sm:px-6 md:py-16">
         <div className="container max-w-3xl">
           <p className="mb-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">

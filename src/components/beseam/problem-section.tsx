@@ -1,60 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Bot, FileWarning, Eye, TrendingDown } from "lucide-react";
+import { FileText, Search, ShieldCheck, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-interface Problem {
+interface ScanCheck {
   icon: LucideIcon;
   title: string;
   description: string;
-  stat: string;
-  statLabel: string;
+  output: string;
   tag: string;
 }
 
-const problems: Problem[] = [
+const checks: ScanCheck[] = [
   {
-    icon: Bot,
-    title: "AI engines misread your products",
+    icon: Search,
+    title: "Product understanding",
     description:
-      "ChatGPT, Gemini, and Perplexity are recommending products to millions of shoppers — but if your pages lack structured data, they guess wrong on price, availability, and selling points.",
-    stat: "13+",
-    statLabel: "AI engines now driving e-commerce traffic",
-    tag: "Visibility Problem",
+      "Can AI clearly identify the product, the variant, the key attributes, and what makes it different?",
+    output: "Title clarity, variants, materials, key attributes",
+    tag: "What AI reads first",
   },
   {
-    icon: FileWarning,
-    title: "Pages that humans read fine, AI can't",
+    icon: FileText,
+    title: "Structured data readiness",
     description:
-      "Your product pages may look great in a browser, but AI engines parse structured data, schema markup, and metadata — and most stores have critical gaps AI can't work around.",
-    stat: "118+",
-    statLabel: "checks across schema, content, SEO & AI readability",
-    tag: "Readability Problem",
+      "We check the Product, Offer, and Review signals that help AI shopping surfaces trust what your page is saying.",
+    output: "Schema, identifiers, reviews, merchant-listing signals",
+    tag: "What AI trusts",
   },
   {
-    icon: Eye,
-    title: "You can't see what AI sees",
+    icon: ShieldCheck,
+    title: "Trust and buying context",
     description:
-      "There's no 'View Source' for how ChatGPT understands your product. Without an AI-eye audit, you're invisible to the fastest-growing shopping channel.",
-    stat: "Zero",
-    statLabel: "visibility into how AI engines perceive your store",
-    tag: "Intelligence Problem",
+      "Shipping, returns, availability, and other buyer-confidence details matter when AI decides whether to surface a product.",
+    output: "Availability, shipping, returns, trust signals",
+    tag: "What helps conversion",
   },
   {
-    icon: TrendingDown,
-    title: "Competitors are already optimizing for AI",
+    icon: Sparkles,
+    title: "First fix worth making",
     description:
-      "Stores with rich structured data, clear selling points, and proper schema get recommended first. Every day you wait, AI engines learn to trust competitors more.",
-    stat: "Early",
-    statLabel: "movers are already optimizing — the gap widens daily",
-    tag: "Competitive Problem",
+      "The free scan does not dump everything. It shows the top blockers and the clearest next improvement to ship.",
+    output: "Top issues, short summary, first recommended fix",
+    tag: "What to do next",
   },
 ];
 
 export default function ProblemSection() {
   return (
-    <section className="bg-background px-4 py-20 sm:px-6 md:py-32">
+    <section className="bg-background px-4 py-20 sm:px-6 md:py-28">
       <div className="container max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,18 +59,17 @@ export default function ProblemSection() {
           className="mb-12 text-center"
         >
           <p className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
-            The Problem
+            What the scan checks
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            AI agents are shopping for your customers.{" "}
+            One page. One report.{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Here&apos;s what goes wrong.
+              One clear next step.
             </span>
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            ChatGPT, Gemini, and Perplexity recommend products to millions
-            of shoppers. If your pages lack the right structured data,
-            AI gets your products wrong &mdash; or skips them entirely.
+            The launch version stays intentionally narrow. It checks one Shopify
+            product page for the signals AI shopping results rely on most.
           </p>
         </motion.div>
 
@@ -86,38 +80,38 @@ export default function ProblemSection() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="grid gap-4 sm:grid-cols-2"
         >
-          {problems.map((problem, index) => (
+          {checks.map((check, index) => (
             <motion.div
-              key={problem.title}
+              key={check.title}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 * index, duration: 0.5 }}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background transition-all hover:-translate-y-0.5 hover:shadow-md"
+              className="flex flex-col overflow-hidden rounded-2xl border border-border bg-background transition-all hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="flex flex-1 flex-col p-8">
-                <problem.icon className="mb-4 h-8 w-8 text-secondary" />
+                <check.icon className="mb-4 h-8 w-8 text-secondary" />
 
-                <h3 className="text-lg font-bold text-foreground leading-snug">
-                  {problem.title}
+                <h3 className="text-lg font-bold leading-snug text-foreground">
+                  {check.title}
                 </h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {problem.description}
+                  {check.description}
                 </p>
 
-                <div className="mt-5">
-                  <p className="text-2xl font-black tracking-tight text-foreground">
-                    {problem.stat}
+                <div className="mt-5 rounded-xl bg-muted/30 p-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    Scan output
                   </p>
-                  <p className="text-[11px] font-medium text-muted-foreground">
-                    {problem.statLabel}
+                  <p className="mt-2 text-sm font-medium text-foreground">
+                    {check.output}
                   </p>
                 </div>
               </div>
 
               <div className="border-t border-secondary/10 bg-secondary/5 px-6 py-3">
                 <span className="text-xs font-semibold text-secondary">
-                  {problem.tag}
+                  {check.tag}
                 </span>
               </div>
             </motion.div>
@@ -131,21 +125,12 @@ export default function ProblemSection() {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="mt-12 rounded-2xl border border-border bg-muted/30 p-6 md:p-8"
         >
-          <div className="flex gap-4">
-            <span className="shrink-0 select-none text-4xl font-black leading-none text-muted-foreground/30">
-              &ldquo;
-            </span>
-            <div>
-              <blockquote className="text-base font-medium leading-relaxed text-foreground md:text-lg">
-                We had no idea ChatGPT was showing the wrong price for our
-                best-seller. Customers were confused before they even reached
-                our site. We only found out when a customer mentioned it.
-              </blockquote>
-              <p className="mt-3 text-sm text-muted-foreground">
-                Head of Digital &mdash; Shopify Plus brand
-              </p>
-            </div>
-          </div>
+          <p className="text-sm leading-relaxed text-foreground md:text-base">
+            Weekend-launch scope: free Shopify PDP scan, example report, and a
+            paid fix sprint if the issues are real. Whole-store monitoring,
+            multi-platform support, and broader analytics can stay in the
+            background until customers actually ask for them.
+          </p>
         </motion.div>
       </div>
     </section>
