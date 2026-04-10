@@ -1,45 +1,27 @@
 import Link from "next/link";
+
 import { Mail } from "lucide-react";
+
 import Logo from "../ui/logo";
+
 import { cn } from "@/lib/utils";
 
 const ITEMS = [
   {
-    title: "Product",
+    title: "Launch",
     links: [
+      { name: "Free Scan", href: "https://app.beseam.com/scan" },
+      { name: "Example Report", href: "https://app.beseam.com/analyze" },
       { name: "How It Works", href: "/#how-it-works" },
-      { name: "FAQ", href: "/#faq" },
-      { name: "Book a Pilot", href: "/demo" },
-    ],
-  },
-  {
-    title: "AI Audits",
-    links: [
-      { name: "Shopify", href: "/audit/shopify" },
-      { name: "WooCommerce", href: "/audit/woocommerce" },
-      { name: "BigCommerce", href: "/audit/bigcommerce" },
-      { name: "Magento", href: "/audit/magento" },
-      { name: "Squarespace", href: "/audit/squarespace" },
-      { name: "Wix", href: "/audit/wix" },
-      { name: "Shopware", href: "/audit/shopware" },
-      { name: "PrestaShop", href: "/audit/prestashop" },
-      { name: "Salesforce CC", href: "/audit/salesforce-commerce-cloud" },
-      { name: "SAP Commerce", href: "/audit/sap-commerce-cloud" },
-      { name: "OpenCart", href: "/audit/opencart" },
-      { name: "Saleor", href: "/audit/saleor" },
-      { name: "Medusa", href: "/audit/medusa" },
-      { name: "Headless / Custom", href: "/audit/custom" },
+      { name: "Book Fix Sprint", href: "/demo" },
     ],
   },
   {
     title: "Resources",
     links: [
-      {
-        name: "Documentation",
-        href: "https://docs.beseam.com",
-        target: "_blank" as const,
-      },
+      { name: "FAQ", href: "/#faq" },
       { name: "About", href: "/about" },
+      { name: "Log In", href: "https://app.beseam.com/login" },
     ],
   },
   {
@@ -52,20 +34,20 @@ const ITEMS = [
 ];
 
 const COMPLIANCE_BADGES = [
-  { name: "GDPR Compliant", flag: "🇪🇺", href: "https://gdpr.eu/" },
+  { name: "GDPR Compliant", flag: "EU", href: "https://gdpr.eu/" },
   {
     name: "CASA Tier II Verified",
-    flag: "🛡️",
+    flag: "Shield",
     href: "https://appdefensealliance.dev/casa",
   },
   {
     name: "CCPA Compliant",
-    flag: "🇺🇸",
+    flag: "US",
     href: "https://oag.ca.gov/privacy/ccpa",
   },
   {
     name: "SOC 2 Type II",
-    flag: "🔒",
+    flag: "Lock",
     href: "https://appdefensealliance.dev/casa",
     comingSoon: true,
   },
@@ -125,13 +107,15 @@ export default function BeseamFooter() {
         <div className="grid gap-16 lg:grid-cols-2">
           <div className="flex flex-col space-y-8">
             <div>
-              <Logo className="text-primary scale-400 origin-left transition-transform hover:scale-405 pb-2" />
+              <Logo className="text-primary scale-400 origin-left pb-2 transition-transform hover:scale-405" />
               <p className="mt-6 max-w-sm text-lg font-semibold leading-tight text-foreground md:text-xl">
-                See it. Fix it. <span className="text-primary">Verify it.</span>
+                Run the scan. Fix what{" "}
+                <span className="text-primary">actually matters.</span>
               </p>
-              <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-                Beseam shows you how AI agents see your Shopify store — finds
-                what they get wrong, generates fixes, and verifies improvement.
+              <p className="mt-3 max-w-sm text-sm text-muted-foreground">
+                Free Shopify AI visibility scan. Paste one product page, see
+                what AI shoppers can read, and book a fix sprint if the report
+                finds real gaps.
               </p>
             </div>
 
@@ -161,7 +145,9 @@ export default function BeseamFooter() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    <span className="text-base">{badge.flag}</span>
+                    <span className="text-xs font-semibold uppercase tracking-wider">
+                      {badge.flag}
+                    </span>
                     <span>{badge.name}</span>
                     {badge.comingSoon && (
                       <span className="rounded-full bg-muted px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider">
@@ -189,12 +175,6 @@ export default function BeseamFooter() {
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        target={"target" in link ? link.target : undefined}
-                        rel={
-                          "target" in link && link.target === "_blank"
-                            ? "noopener noreferrer"
-                            : undefined
-                        }
                         className="transition-colors hover:text-primary"
                       >
                         {link.name}
@@ -209,10 +189,9 @@ export default function BeseamFooter() {
 
         <div className="mt-16 border-t pt-8">
           <p className="max-w-2xl text-[11px] leading-relaxed text-muted-foreground/60">
-            Beseam shows Shopify store operators how AI agents read their
-            product pages, generates fixes for what AI gets wrong, and verifies
-            improvement. All product names, logos, and brands are property of
-            their respective owners.
+            Beseam helps Shopify merchants see whether AI shopping surfaces can
+            understand and trust their product pages. All product names, logos,
+            and brands are property of their respective owners.
           </p>
         </div>
       </div>

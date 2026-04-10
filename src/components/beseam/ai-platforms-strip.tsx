@@ -1,16 +1,15 @@
 "use client";
 
 import Image from "next/image";
+
 import { motion } from "framer-motion";
 
 const platforms = [
-  { name: "Google", logo: "/images/ai-platforms/google.svg" },
   { name: "ChatGPT", logo: "/images/ai-platforms/chatgpt.svg" },
+  { name: "Google", logo: "/images/ai-platforms/google.svg" },
   { name: "Gemini", logo: "/images/ai-platforms/gemini.svg" },
   { name: "AI Mode", logo: "/images/ai-platforms/ai-mode.svg" },
-  { name: "Claude", logo: "/images/ai-platforms/claude.svg" },
   { name: "Perplexity", logo: "/images/ai-platforms/perplexity.svg" },
-  { name: "Meta AI", logo: "/images/ai-platforms/meta.svg" },
 ];
 
 export default function AiPlatformsStrip() {
@@ -24,14 +23,14 @@ export default function AiPlatformsStrip() {
           transition={{ duration: 0.6 }}
           className="mb-8 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground"
         >
-          The AI engines reading your product pages right now
+          The AI shopping surfaces merchants care about first
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-7"
+          className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-5"
         >
           {platforms.map((platform, i) => (
             <motion.div

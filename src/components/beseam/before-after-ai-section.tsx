@@ -1,9 +1,12 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+
+import Image from "next/image";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check } from "lucide-react";
-import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 
 /* ─── Star helper ──────────────────────────────────────────────── */
@@ -678,8 +681,7 @@ const supportingPlatforms: SupportingPlatform[] = [
           <div className="text-[14px] leading-relaxed text-[#202124]">
             <p>
               The <strong>Blue Summer Dress from MyStore</strong> is a top-rated
-              lightweight cotton option at{" "}
-              <strong>$49.99</strong>.{" "}
+              lightweight cotton option at <strong>$49.99</strong>.{" "}
               <span className="ml-0.5 inline-flex h-4 w-4 items-center justify-center rounded bg-[#1A73E8]/10 text-[9px] font-bold text-[#1A73E8]">
                 1
               </span>{" "}
@@ -731,21 +733,19 @@ const supportingPlatforms: SupportingPlatform[] = [
 
           {/* Source pills */}
           <div className="mt-3 flex flex-wrap gap-1.5">
-            {[
-              "mystore.com",
-              "nordstyle.com",
-              "2,340 verified reviews",
-            ].map((s) => (
-              <div
-                key={s}
-                className="flex cursor-pointer items-center gap-1.5 rounded-full border border-[#D2E3FC] bg-white/80 px-2.5 py-1 transition-colors hover:bg-[#D2E3FC]/50"
-              >
-                <div className="h-3 w-3 rounded-full bg-[#1A73E8]/20" />
-                <span className="text-[10px] font-medium text-[#1A73E8]">
-                  {s}
-                </span>
-              </div>
-            ))}
+            {["mystore.com", "nordstyle.com", "2,340 verified reviews"].map(
+              (s) => (
+                <div
+                  key={s}
+                  className="flex cursor-pointer items-center gap-1.5 rounded-full border border-[#D2E3FC] bg-white/80 px-2.5 py-1 transition-colors hover:bg-[#D2E3FC]/50"
+                >
+                  <div className="h-3 w-3 rounded-full bg-[#1A73E8]/20" />
+                  <span className="text-[10px] font-medium text-[#1A73E8]">
+                    {s}
+                  </span>
+                </div>
+              ),
+            )}
           </div>
         </div>
       ),
@@ -777,10 +777,9 @@ const supportingPlatforms: SupportingPlatform[] = [
           </div>
           <p className="text-[14px] leading-relaxed text-[#091717]">
             I found a page for a Blue Summer Dress on mystore.com, but limited
-            details are available.{" "}
-            <PplxCite n={1} /> The page meta description says &ldquo;Buy Blue
-            Summer Dress at MyStore. Shop now.&rdquo; I&apos;d recommend
-            checking the site directly for current pricing.
+            details are available. <PplxCite n={1} /> The page meta description
+            says &ldquo;Buy Blue Summer Dress at MyStore. Shop now.&rdquo;
+            I&apos;d recommend checking the site directly for current pricing.
           </p>
         </div>
       ),
@@ -819,9 +818,7 @@ const supportingPlatforms: SupportingPlatform[] = [
                 <span
                   className={cn(
                     "text-[10px]",
-                    s.active
-                      ? "font-medium text-[#20808D]"
-                      : "text-[#6B6860]",
+                    s.active ? "font-medium text-[#20808D]" : "text-[#6B6860]",
                   )}
                 >
                   {s.name}
@@ -1016,7 +1013,10 @@ const supportingPlatforms: SupportingPlatform[] = [
                 Key Considerations
               </p>
               <ul className="mt-1.5 space-y-1 font-serif text-[12px] text-[#3D3929]">
-                <li>&bull; MyStore dress runs slightly large — consider sizing down</li>
+                <li>
+                  &bull; MyStore dress runs slightly large — consider sizing
+                  down
+                </li>
                 <li>&bull; NordStyle ships free only on orders over $50</li>
                 <li>&bull; Both stores accept returns within 14–30 days</li>
               </ul>
@@ -1069,8 +1069,8 @@ const supportingPlatforms: SupportingPlatform[] = [
           </div>
           <p className="text-[14px] leading-relaxed text-[#202124]">
             I found a reference to a Blue Summer Dress from MyStore. However, I
-            wasn&apos;t able to pull detailed product information like pricing or
-            customer ratings from the listing. You might want to check the
+            wasn&apos;t able to pull detailed product information like pricing
+            or customer ratings from the listing. You might want to check the
             MyStore website for the latest details.
           </p>
         </div>
@@ -1352,19 +1352,18 @@ export default function BeforeAfterAISection() {
           className="mb-12 text-center"
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#10A37F]">
-            AI Product Discovery
+            Example report
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-5xl">
-            How AI sees your products{" "}
+            What an AI-ready product page looks like{" "}
             <span className="bg-linear-to-r from-[#10A37F] to-[#1A73E8] bg-clip-text text-transparent">
               before &amp; after
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/60">
-            Without structured data, AI engines show your products as generic
-            text mentions. With Beseam, they appear as rich, shoppable cards
-            with images, prices, reviews, and side-by-side comparisons — across
-            every major AI platform.
+            The free scan is meant to make the gap obvious: what AI shoppers see
+            today, what richer product context looks like, and why better price,
+            review, shipping, and product signals matter.
           </p>
         </motion.div>
 

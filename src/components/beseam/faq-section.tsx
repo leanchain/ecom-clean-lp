@@ -1,45 +1,38 @@
 "use client";
 
 import { useState } from "react";
+
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    q: "What does Beseam actually do?",
-    a: "Beseam shows you how AI shopping agents — like ChatGPT, Gemini, and Perplexity — read your product pages. It finds what they get wrong (pricing, availability, selling points), generates targeted fixes, and verifies improvement after you publish. Think of it as a ‘View Source’ for how AI sees your store.",
+    q: "What does the free scan do?",
+    a: "It checks one public Shopify product page for the signals AI shopping experiences rely on most: product clarity, structured data, reviews, pricing, availability, shipping, returns, and overall trust.",
   },
   {
-    q: "Which AI engines does Beseam track?",
-    a: "Beseam tracks 13 AI engines: ChatGPT, Gemini (Google AI), Perplexity, Claude, Bing Copilot, Meta AI, Grok, You.com, Brave AI, DeepSeek, Phind, Amazon Rufus, and Shopify Sidekick. We add new engines as they emerge.",
+    q: "Do I need to connect Shopify first?",
+    a: "No. The launch flow is intentionally value-first. Paste a public PDP URL and see the report before you connect anything.",
   },
   {
-    q: "How does the AI product probe work?",
-    a: "Beseam sends an LLM to read your product page exactly like ChatGPT or Gemini would. It checks whether AI can correctly identify the product, understand its price and availability, find selling points, and confidently recommend it. You see a side-by-side: what AI understood vs. your actual product data.",
+    q: "What do I get from the scan?",
+    a: "A short AI visibility report with the biggest blockers, what AI may be missing, and the first fix worth making.",
   },
   {
-    q: "What kind of fixes does Beseam generate?",
-    a: "AI-generated fixes for structured data (Product, Offer, Review schema), meta descriptions, content gaps, and selling point clarity. You review a before/after preview and approve before anything publishes. Nothing goes live without your explicit approval.",
+    q: "Is this Shopify-only?",
+    a: "Yes for launch. Keeping the offer narrow makes it easier to understand and easier to buy.",
   },
   {
-    q: "How does Shopify publish work?",
-    a: "Once you approve a fix, Beseam publishes it directly to your Shopify store. Every change includes rollback protection — one click to revert if anything looks wrong. No developer access or theme changes required.",
+    q: "Does Beseam push my products to ChatGPT or Gemini?",
+    a: "Not as the first product. Shopify, feeds, structured data, and merchant systems are increasingly becoming the distribution layer. Beseam focuses on whether your PDPs are ready for those surfaces.",
   },
   {
-    q: "What does 'verify' mean?",
-    a: "After a fix goes live, Beseam re-runs the AI probe and diagnostics. You see a before/after comparison of your scores, plus exactly how each AI engine's understanding of your products improved.",
+    q: "What is the paid next step?",
+    a: "A fix sprint. We review the report, prioritize the highest-impact changes, and help you ship the fixes that matter first.",
   },
   {
-    q: "How is this different from regular SEO audits?",
-    a: "Traditional SEO audits check what Google's crawler sees. Beseam checks what AI engines understand — including whether they can identify your product, read correct pricing, and find compelling reasons to recommend it. It's the difference between being indexed and being recommended.",
-  },
-  {
-    q: "What Shopify plans do you support?",
-    a: "Beseam works with all Shopify plans — Basic, Shopify, Advanced, and Shopify Plus. No developer access or theme changes required.",
-  },
-  {
-    q: "How long does it take to see results?",
-    a: "You'll see your audit score within minutes of scanning your store. Fix generation happens immediately after. Most stores see measurable improvement within the first week of publishing fixes.",
+    q: "Can you help implement the fixes too?",
+    a: "Yes. The free scan is the proof layer. If the report finds real issues, the fix sprint turns it into an implementation plan and, where needed, hands-on support.",
   },
 ];
 
@@ -84,7 +77,7 @@ export default function FaqSection() {
   const right = faqs.slice(mid);
 
   return (
-    <section id="faq" className="bg-background px-4 py-20 sm:px-6 md:py-32">
+    <section id="faq" className="bg-background px-4 py-20 sm:px-6 md:py-28">
       <div className="container max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -97,11 +90,11 @@ export default function FaqSection() {
             FAQ
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            Everything you need to know
+            Questions before you run the scan
           </h2>
           <p className="text-muted-foreground mt-4 mx-auto max-w-2xl text-lg leading-relaxed">
-            Common questions about what Beseam shows you, how the audit works,
-            and how to get your products recommended by AI.
+            The launch offer should feel obvious: free scan first, then a paid
+            fix sprint only if the report finds something worth fixing.
           </p>
         </motion.div>
 

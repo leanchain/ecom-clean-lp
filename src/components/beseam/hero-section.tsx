@@ -1,30 +1,23 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Search, Wrench, CheckCircle2 } from "lucide-react";
-import AnimatedBorderContainer from "@/components/ui/animated-border-container";
-import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
-const WORKFLOW_STEPS = [
-  { icon: Search, label: "See what AI sees" },
-  { icon: Wrench, label: "Fix what they get wrong" },
-  { icon: CheckCircle2, label: "Verify improvement" },
+import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+
+const APP_SCAN_URL = "https://app.beseam.com/scan";
+const APP_EXAMPLE_REPORT_URL = "https://app.beseam.com/analyze";
+const FIX_SPRINT_URL = "/demo";
+
+const PROOF_POINTS = [
+  "Product title, variants, and attribute clarity",
+  "Schema, reviews, and merchant-listing readiness",
+  "Shipping, returns, and the first fix worth making",
 ];
 
 export default function HeroSection() {
-  const [store, setStore] = useState("");
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const cleaned = store.trim().replace(/^https?:\/\//, "");
-    if (cleaned) {
-      window.location.href = `https://app.beseam.com/store?shop=${encodeURIComponent(cleaned)}`;
-    }
-  };
-
   return (
-    <section className="relative overflow-hidden px-4 pb-16 pt-24 sm:px-6 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32">
+    <section className="relative overflow-hidden px-4 pb-16 pt-24 sm:px-6 md:pb-24 md:pt-32 lg:pb-28 lg:pt-40">
       <div className="absolute left-1/2 top-0 -z-10 h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-primary/5 blur-[120px]" />
       <div className="absolute right-0 top-1/4 -z-10 h-[400px] w-[400px] rounded-full bg-secondary/5 blur-[100px]" />
 
@@ -35,82 +28,84 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="space-y-6"
         >
-          <h1 className="font-heading text-foreground max-w-4xl text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            See how AI agents see your store.
-            <br />
+          <p className="text-primary text-sm font-semibold uppercase tracking-[0.2em]">
+            Free Shopify AI Visibility Scan
+          </p>
+
+          <h1 className="font-heading text-foreground max-w-5xl text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
+            Find out if AI shoppers can read your{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Fix what they get wrong.
+              Shopify product page.
             </span>
           </h1>
 
           <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg leading-relaxed md:text-xl">
-            ChatGPT, Gemini, and Perplexity recommend products to millions of
-            shoppers every day. Right now, they&apos;re misreading yours. Beseam
-            shows you exactly what AI agents see, fixes what they get wrong, and
-            verifies they recommend you &mdash; not your competitors.
+            Paste one public PDP and see what ChatGPT, Google AI Mode, and
+            Perplexity can actually understand, trust, and recommend.
           </p>
         </motion.div>
 
-        {/* Workflow steps capsules */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-3"
-        >
-          {WORKFLOW_STEPS.map((step, i) => (
-            <span
-              key={step.label}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-4 py-1.5 text-sm font-medium text-foreground/80"
-            >
-              <step.icon className="h-3.5 w-3.5 text-primary" />
-              {step.label}
-              {i < WORKFLOW_STEPS.length - 1 && (
-                <ArrowRight className="ml-1 h-3 w-3 text-muted-foreground/40" />
-              )}
-            </span>
-          ))}
-        </motion.div>
-
-        {/* Store URL input CTA */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mx-auto mt-2 w-full max-w-xl"
+          className="mx-auto mt-2 flex w-full max-w-xl flex-col items-center justify-center gap-3 sm:flex-row"
         >
-          <AnimatedBorderContainer rounded="full">
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-2 rounded-[28px] border bg-background/95 p-2 shadow-lg backdrop-blur transition-all duration-300 hover:shadow-xl focus-within:ring-2 focus-within:ring-primary/20 focus-within:shadow-xl sm:flex-row sm:items-center"
-            >
-              <Input
-                type="text"
-                value={store}
-                onChange={(e) => setStore(e.target.value)}
-                placeholder="yourstore.myshopify.com"
-                animate={false}
-                className="h-12 flex-1 rounded-full border-0 bg-transparent px-5 text-sm shadow-none focus-visible:border-0 focus-visible:ring-0"
-              />
-              <button
-                type="submit"
-                className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
-              >
-                Scan Your Store Free
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </form>
-          </AnimatedBorderContainer>
+          <Link
+            href={APP_SCAN_URL}
+            className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95 sm:w-auto"
+          >
+            Scan a Product Page
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            href={APP_EXAMPLE_REPORT_URL}
+            className="inline-flex h-14 w-full items-center justify-center rounded-full border border-border bg-background/90 px-8 text-base font-semibold text-foreground transition-colors hover:bg-accent sm:w-auto"
+          >
+            View Example Report
+          </Link>
         </motion.div>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          transition={{ delay: 0.45, duration: 0.5 }}
           className="text-xs text-muted-foreground"
         >
-          No credit card &middot; No app install &middot; Results in under 3
-          minutes
+          Shopify only · One product page · No app install
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.55, duration: 0.5 }}
+          className="mx-auto mt-4 grid w-full max-w-4xl gap-3 md:grid-cols-3"
+        >
+          {PROOF_POINTS.map((item) => (
+            <div
+              key={item}
+              className="flex items-start gap-3 rounded-2xl border border-border/60 bg-background/70 p-4 text-left"
+            >
+              <div className="bg-primary/10 mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
+                <CheckCircle2 className="text-primary h-4 w-4" />
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/85">
+                {item}
+              </p>
+            </div>
+          ))}
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.65, duration: 0.5 }}
+          className="text-sm text-muted-foreground"
+        >
+          Need hands-on help after the scan?{" "}
+          <Link href={FIX_SPRINT_URL} className="font-semibold text-foreground">
+            Book a fix sprint.
+          </Link>
         </motion.p>
       </div>
     </section>

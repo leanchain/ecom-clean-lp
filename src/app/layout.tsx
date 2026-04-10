@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
-import BeseamNavbar from "@/components/beseam/navbar";
 import BeseamFooter from "@/components/beseam/footer";
+import BeseamNavbar from "@/components/beseam/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 
@@ -20,26 +20,20 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   title: {
-    default: "Beseam — See How AI Agents See Your Shopify Store",
+    default: "Beseam — Free Shopify AI Visibility Scan",
     template: "%s | Beseam",
   },
   description:
-    "Beseam shows you how ChatGPT, Gemini, and Perplexity read your product pages — finds what they get wrong, generates fixes, and verifies improvement. Stop losing recommendations to competitors.",
+    "Paste one Shopify product page and see what ChatGPT, Google AI Mode, and Perplexity can actually understand — plus the first fix worth making.",
   keywords: [
     "Beseam",
-    "AI product visibility",
-    "AI shopping optimization",
-    "ChatGPT product recommendations",
-    "Gemini shopping",
-    "Perplexity shopping",
-    "PDP audit",
-    "Shopify page fixes",
-    "AI-generated fixes",
-    "Shopify publish",
-    "AI store audit",
-    "structured data",
-    "Shopify structured data",
-    "ecommerce AI",
+    "Shopify AI visibility scan",
+    "Shopify product page audit",
+    "ChatGPT shopping visibility",
+    "Google AI shopping readiness",
+    "Perplexity product visibility",
+    "Shopify structured data audit",
+    "product page AI scan",
   ],
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
@@ -63,9 +57,9 @@ export const metadata: Metadata = {
     shortcut: [{ url: "/favicon/favicon.ico" }],
   },
   openGraph: {
-    title: "Beseam — See How AI Agents See Your Shopify Store",
+    title: "Beseam — Free Shopify AI Visibility Scan",
     description:
-      "See how ChatGPT, Gemini, and Perplexity read your products. Fix what they get wrong. Verify AI now recommends your store.",
+      "Run a free scan on one Shopify product page and see what AI shoppers can actually understand, trust, and recommend.",
     siteName: "Beseam",
     type: "website",
     images: [
@@ -73,15 +67,15 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Beseam — See How AI Agents See Your Store",
+        alt: "Beseam — Free Shopify AI Visibility Scan",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam — See How AI Agents See Your Shopify Store",
+    title: "Beseam — Free Shopify AI Visibility Scan",
     description:
-      "See how ChatGPT, Gemini, and Perplexity read your products. Fix what they get wrong. Verify AI now recommends your store.",
+      "Paste one Shopify product page and see what AI shoppers can actually understand — plus the first fix worth making.",
     images: ["/og-image.png"],
     creator: "@Beseam",
     site: "@Beseam",
