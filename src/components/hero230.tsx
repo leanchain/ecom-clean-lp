@@ -93,7 +93,7 @@ const Hero230 = () => {
             href={exampleReportHref}
             className="text-sm font-semibold text-muted-foreground hover:text-primary transition-all underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-primary/50"
           >
-            See example reports
+            See recent reports
           </Link>
         </motion.div>
 

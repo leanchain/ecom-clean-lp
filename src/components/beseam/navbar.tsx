@@ -11,12 +11,12 @@ import { Button } from "@/components/ui/button";
 import NavbarLogo from "@/components/ui/navbar-logo";
 import { cn } from "@/lib/utils";
 
-const APP_EXAMPLE_REPORT_URL = "https://app.beseam.com/analyze";
+const APP_RECENT_REPORTS_URL = "https://app.beseam.com/analyze";
 const APP_SCAN_URL = "https://app.beseam.com/scan";
 
 const NAV_LINKS = [
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Example Report", href: APP_EXAMPLE_REPORT_URL },
+  { label: "Recent Reports", href: APP_RECENT_REPORTS_URL },
   { label: "Fix Sprint", href: "/demo" },
   { label: "FAQ", href: "#faq" },
 ];

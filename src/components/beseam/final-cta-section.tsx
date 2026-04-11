@@ -7,7 +7,7 @@ import { ArrowRight, Check } from "lucide-react";
 
 const FEATURES = [
   "Free Shopify PDP scan",
-  "Example report before signup",
+  "Recent reports before signup",
   "Paid fix sprint if needed",
   "No store connection required to start",
 ];

@@ -126,7 +126,7 @@ export default function ProblemSection() {
           className="mt-12 rounded-2xl border border-border bg-muted/30 p-6 md:p-8"
         >
           <p className="text-sm leading-relaxed text-foreground md:text-base">
-            Weekend-launch scope: free Shopify PDP scan, example report, and a
+            Weekend-launch scope: free Shopify PDP scan, recent reports, and a
             paid fix sprint if the issues are real. Whole-store monitoring,
             multi-platform support, and broader analytics can stay in the
             background until customers actually ask for them.

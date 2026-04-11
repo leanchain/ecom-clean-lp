@@ -11,7 +11,7 @@ const ITEMS = [
     title: "Launch",
     links: [
       { name: "Free Scan", href: "https://app.beseam.com/scan" },
-      { name: "Example Report", href: "https://app.beseam.com/analyze" },
+      { name: "Recent Reports", href: "https://app.beseam.com/analyze" },
       { name: "How It Works", href: "/#how-it-works" },
       { name: "Book Fix Sprint", href: "/demo" },
     ],
