@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const APP_SCAN_URL = "https://app.beseam.com/scan";
-const APP_EXAMPLE_REPORT_URL = "https://app.beseam.com/analyze";
+const APP_RECENT_REPORTS_URL = "https://app.beseam.com/analyze";
 const FIX_SPRINT_URL = "/demo";
 
 const PROOF_POINTS = [
@@ -33,9 +33,9 @@ export default function HeroSection() {
           </p>
 
           <h1 className="font-heading text-foreground max-w-5xl text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Find out if AI shoppers can read your{" "}
+            See whether AI agents can understand your{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Shopify product page.
+              Shopify store.
             </span>
           </h1>
 
@@ -59,10 +59,10 @@ export default function HeroSection() {
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            href={APP_EXAMPLE_REPORT_URL}
+            href={APP_RECENT_REPORTS_URL}
             className="inline-flex h-14 w-full items-center justify-center rounded-full border border-border bg-background/90 px-8 text-base font-semibold text-foreground transition-colors hover:bg-accent sm:w-auto"
           >
-            View Example Report
+            View Recent Reports
           </Link>
         </motion.div>
 

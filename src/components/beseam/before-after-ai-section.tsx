@@ -1352,7 +1352,7 @@ export default function BeforeAfterAISection() {
           className="mb-12 text-center"
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#10A37F]">
-            Example report
+            Recent reports
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-5xl">
             What an AI-ready product page looks like{" "}

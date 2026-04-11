@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Link2, Search, Wrench } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const APP_EXAMPLE_REPORT_URL = "https://app.beseam.com/analyze";
+const APP_RECENT_REPORTS_URL = "https://app.beseam.com/analyze";
 const APP_SCAN_URL = "https://app.beseam.com/scan";
 
 interface Step {
@@ -49,7 +49,7 @@ const steps: Step[] = [
     description:
       "If the report finds real issues, book a fix sprint. Connect your store later only if you want help implementing changes.",
     bullets: [
-      "View an example report first",
+      "Browse recent reports first",
       "Book a paid fix sprint when ready",
       "Keep the product simple until customers buy",
     ],
@@ -140,7 +140,7 @@ export default function HowItWorksSection() {
               Launch now
             </p>
             <h3 className="mt-2 text-lg font-bold text-foreground">
-              Free scan, example report, paid fix sprint
+              Free scan, recent reports, paid fix sprint
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               This is the believable offer for the weekend launch. It is easy to
@@ -177,10 +177,10 @@ export default function HowItWorksSection() {
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            href={APP_EXAMPLE_REPORT_URL}
+            href={APP_RECENT_REPORTS_URL}
             className="inline-flex h-12 items-center justify-center rounded-full border border-border bg-background px-6 text-sm font-semibold text-foreground transition-colors hover:bg-accent"
           >
-            View Example Report
+            View Recent Reports
           </Link>
         </motion.div>
       </div>
