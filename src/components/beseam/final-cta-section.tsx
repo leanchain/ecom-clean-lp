@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 
 const FEATURES = [
-  "Free Shopify PDP scan",
-  "Recent reports before signup",
-  "Paid fix sprint if needed",
-  "No store connection required to start",
+  "Free scan to start",
+  "No app install required",
+  "Shopify-native publishing",
+  "Continuous monitoring included",
 ];
 
 const APP_SCAN_URL = "https://app.beseam.com/scan";
@@ -36,10 +36,10 @@ export default function FinalCtaSection() {
             transition={{ duration: 0.6 }}
             className="font-heading text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-7xl"
           >
-            Run the scan first.
+            Start with one product page.
             <span className="text-white/90 italic">
               {" "}
-              Book the fix sprint only if it finds real problems.
+              See what AI can read. Fix what it cannot.
             </span>
           </motion.h2>
 
@@ -50,9 +50,9 @@ export default function FinalCtaSection() {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl"
           >
-            Start with one Shopify product page. See what AI shoppers can read.
-            If the gaps are real, we help you prioritize and implement the fixes
-            that matter.
+            Run a free audit on any Shopify product page. Beseam shows you
+            exactly what AI shopping surfaces can and cannot read — then helps
+            you fix it.
           </motion.p>
 
           <motion.div
@@ -66,14 +66,14 @@ export default function FinalCtaSection() {
               href={APP_SCAN_URL}
               className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
             >
-              Scan a Product Page
+              Start Free Scan
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href={FIX_SPRINT_URL}
               className="inline-flex h-14 items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 text-base font-semibold text-white transition-colors hover:bg-white/10"
             >
-              Book Fix Sprint
+              Book a Demo
             </Link>
           </motion.div>
 
