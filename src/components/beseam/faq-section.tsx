@@ -8,31 +8,31 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     q: "What does the free scan do?",
-    a: "It checks one public Shopify product page for the signals AI shopping experiences rely on most: product clarity, structured data, reviews, pricing, availability, shipping, returns, and overall trust.",
+    a: "It checks one public Shopify product page for the signals AI shopping surfaces rely on: product clarity, structured data, reviews, pricing, shipping, and overall trust. You get a short report with the top issues and the first fix worth making.",
   },
   {
-    q: "Do I need to connect Shopify first?",
-    a: "No. The launch flow is intentionally value-first. Paste a public PDP URL and see the report before you connect anything.",
+    q: "Do I need to install a Shopify app?",
+    a: "No. Start with a free scan using just a public URL. You can connect your Shopify store later if you want to publish fixes or enable monitoring.",
   },
   {
-    q: "What do I get from the scan?",
-    a: "A short AI visibility report with the biggest blockers, what AI may be missing, and the first fix worth making.",
+    q: "What happens after the scan?",
+    a: "You get an AI visibility report showing what blocks AI agents from recommending your products. From there you can generate fixes, publish them to Shopify, and monitor improvements.",
   },
   {
     q: "Is this Shopify-only?",
-    a: "Yes for launch. Keeping the offer narrow makes it easier to understand and easier to buy.",
+    a: "Yes. Beseam is built specifically for Shopify stores. Keeping the focus narrow means deeper integration and better results.",
   },
   {
-    q: "Does Beseam push my products to ChatGPT or Gemini?",
-    a: "Not as the first product. Shopify, feeds, structured data, and merchant systems are increasingly becoming the distribution layer. Beseam focuses on whether your PDPs are ready for those surfaces.",
+    q: "Does Beseam push my products to AI engines?",
+    a: "No. Beseam makes your product pages ready for AI surfaces by fixing the structured data, content, and signals those engines rely on. The traffic comes organically.",
   },
   {
-    q: "What is the paid next step?",
-    a: "A fix sprint. We review the report, prioritize the highest-impact changes, and help you ship the fixes that matter first.",
+    q: "What AI engines does Beseam track?",
+    a: "ChatGPT, Google AI Mode, Gemini, Perplexity, Claude, Meta AI, Grok, and several others — 13 AI shopping surfaces in total.",
   },
   {
-    q: "Can you help implement the fixes too?",
-    a: "Yes. The free scan is the proof layer. If the report finds real issues, the fix sprint turns it into an implementation plan and, where needed, hands-on support.",
+    q: "Can you help implement fixes?",
+    a: "Yes. Beseam generates fixes automatically for most issues. For complex cases, you can book a fix sprint where our team prioritizes and implements changes with you.",
   },
 ];
 
@@ -90,11 +90,10 @@ export default function FaqSection() {
             FAQ
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            Questions before you run the scan
+            Common questions
           </h2>
           <p className="text-muted-foreground mt-4 mx-auto max-w-2xl text-lg leading-relaxed">
-            The launch offer should feel obvious: free scan first, then a paid
-            fix sprint only if the report finds something worth fixing.
+            Everything you need to know about getting started with Beseam.
           </p>
         </motion.div>
 
