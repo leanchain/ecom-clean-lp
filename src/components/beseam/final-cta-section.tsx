@@ -13,7 +13,7 @@ const FEATURES = [
 ];
 
 const APP_SCAN_URL = "https://app.beseam.com/scan";
-const FIX_SPRINT_URL = "/demo";
+const FIX_SPRINT_URL = "https://beseam.com/#fix-sprint";
 
 export default function FinalCtaSection() {
   return (
@@ -73,7 +73,7 @@ export default function FinalCtaSection() {
               href={FIX_SPRINT_URL}
               className="inline-flex h-14 items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 text-base font-semibold text-white transition-colors hover:bg-white/10"
             >
-              Book a Demo
+              Book a Fix Sprint
             </Link>
           </motion.div>
 

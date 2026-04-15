@@ -8,7 +8,7 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     q: "What does the free scan do?",
-    a: "It checks one public Shopify product page for the signals AI shopping surfaces rely on: product clarity, structured data, reviews, pricing, shipping, and overall trust. You get a short report with the top issues and the first fix worth making.",
+    a: "It analyzes one public Shopify PDP and checks whether AI surfaces can extract the details shoppers need to compare and trust the product: title, price, variants, reviews, shipping, schema, and merchant signals. You get the main blockers and the first fix worth making.",
   },
   {
     q: "Do I need to install a Shopify app?",
@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "What happens after the scan?",
-    a: "You get an AI visibility report showing what blocks AI agents from recommending your products. From there you can generate fixes, publish them to Shopify, and monitor improvements.",
+    a: "If the scan shows a real visibility gap, you can connect Shopify to generate and publish fixes at scale, or book a Fix Sprint for help implementing the highest-impact changes.",
   },
   {
     q: "Is this Shopify-only?",
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     q: "Does Beseam push my products to AI engines?",
-    a: "No. Beseam makes your product pages ready for AI surfaces by fixing the structured data, content, and signals those engines rely on. The traffic comes organically.",
+    a: "No. Beseam does not syndicate products to AI engines. It improves the product-page signals those systems rely on so your products are easier to understand and recommend.",
   },
   {
     q: "What AI engines does Beseam track?",
@@ -93,7 +93,8 @@ export default function FaqSection() {
             Common questions
           </h2>
           <p className="text-muted-foreground mt-4 mx-auto max-w-2xl text-lg leading-relaxed">
-            Everything you need to know about getting started with Beseam.
+            What the scan does, what happens next, and how much you need to
+            commit before seeing value.
           </p>
         </motion.div>
 

@@ -90,18 +90,17 @@ export default function OutcomesSection() {
           className="mb-14 text-center"
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-            Platform
+            After the scan
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            Four areas.{" "}
+            Find the gap. Fix it.
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent italic">
-              One platform.
+              {" "}Keep it fixed.
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Beseam covers the full lifecycle — from understanding how AI reads
-            your catalog to fixing gaps, publishing changes, and monitoring what
-            happens next.
+            The free scan proves the problem on one page. Beseam turns that
+            into a repeatable workflow across your Shopify catalog.
           </p>
         </motion.div>
 

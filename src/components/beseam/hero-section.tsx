@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const APP_SCAN_URL = "https://app.beseam.com/scan";
-const DEMO_URL = "/demo";
+const APP_RECENT_REPORTS_URL = "https://app.beseam.com/recent";
 
 export default function HeroSection() {
   return (
@@ -22,20 +22,20 @@ export default function HeroSection() {
           className="space-y-6"
         >
           <p className="text-primary text-sm font-semibold uppercase tracking-[0.2em]">
-            AI Visibility Platform for Shopify
+            Free · No App Install · Results in Minutes
           </p>
 
           <h1 className="font-heading text-foreground mx-auto max-w-4xl text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Make your products visible to{" "}
+            Free Shopify{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-              every AI shopping surface.
+              AI Visibility Scan
             </span>
           </h1>
 
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground/90 md:text-xl">
-            Beseam audits your Shopify catalog, finds what blocks AI agents from
-            recommending your products, and helps you fix it — page by page or
-            at scale.
+            Paste one product page URL and see what ChatGPT, Google AI, Gemini,
+            and Perplexity can actually read — and what is blocking it from
+            being recommended.
           </p>
         </motion.div>
 
@@ -49,14 +49,14 @@ export default function HeroSection() {
             href={APP_SCAN_URL}
             className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95 sm:w-auto"
           >
-            Start Free Scan
+            Scan a Product Page Free
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            href={DEMO_URL}
+            href={APP_RECENT_REPORTS_URL}
             className="inline-flex h-14 w-full items-center justify-center rounded-full border border-border bg-background/90 px-8 text-base font-semibold text-foreground transition-colors hover:bg-accent sm:w-auto"
           >
-            Book a Demo
+            See Recent Reports
           </Link>
         </motion.div>
 

@@ -15,27 +15,27 @@ interface ValueProp {
 const valueProps: ValueProp[] = [
   {
     icon: Eye,
-    title: "Better AI visibility",
+    title: "More complete product answers",
     description:
-      "Products start appearing in AI shopping recommendations once the signals AI agents rely on are present and correct.",
-    metric: "13",
-    metricLabel: "AI engines tracked",
+      "When AI can reliably extract price, reviews, shipping, attributes, and availability, your products are easier to compare and recommend.",
+    metric: "Buyer-ready",
+    metricLabel: "product signals",
   },
   {
     icon: Wrench,
-    title: "Faster time to fix",
+    title: "Less manual cleanup",
     description:
-      "Go from finding issues to publishing fixes in one workflow — no spreadsheets, no manual handoffs, no waiting on dev cycles.",
-    metric: "118+",
-    metricLabel: "checks per audit",
+      "Your team sees the highest-impact issues first and can publish fixes without turning every improvement into a dev project.",
+    metric: "Fewer",
+    metricLabel: "handoffs",
   },
   {
     icon: Shield,
-    title: "Ongoing protection",
+    title: "Fewer regressions",
     description:
-      "Continuous monitoring catches regressions after catalog updates, theme changes, or feed syncs — before they affect traffic.",
-    metric: "24/7",
-    metricLabel: "monitoring",
+      "Theme edits, feed changes, and catalog updates can undo good work. Monitoring catches that drift before it quietly costs discovery.",
+    metric: "Always-on",
+    metricLabel: "regression checks",
   },
 ];
 
@@ -60,9 +60,9 @@ export default function ProblemSection() {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            AI shopping surfaces are the fastest-growing channel for product
-            discovery. Stores with clean, structured data get recommended.
-            Stores without it stay invisible.
+            Better AI visibility is not just about being indexed. It is about
+            giving AI enough product detail to mention your store with confidence
+            when buyers compare options.
           </p>
         </motion.div>
 

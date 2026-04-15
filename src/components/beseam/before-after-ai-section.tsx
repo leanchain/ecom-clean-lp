@@ -1352,18 +1352,18 @@ export default function BeforeAfterAISection() {
           className="mb-12 text-center"
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#10A37F]">
-            Recent reports
+            Sample report
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-5xl">
-            What an AI-ready product page looks like{" "}
+            See the difference between a page AI can mention and a page AI can{" "}
             <span className="bg-linear-to-r from-[#10A37F] to-[#1A73E8] bg-clip-text text-transparent">
-              before &amp; after
+              recommend
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/60">
-            The free scan is meant to make the gap obvious: what AI shoppers see
-            today, what richer product context looks like, and why better price,
-            review, shipping, and product signals matter.
+            The point of the free scan is not to dump technical checks. It is
+            to show, in plain language, what a shopper-facing AI answer can and
+            cannot say about your product today.
           </p>
         </motion.div>
 

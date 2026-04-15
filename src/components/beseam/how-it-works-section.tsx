@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Link2, Search, Wrench } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const APP_RECENT_REPORTS_URL = "https://app.beseam.com/analyze";
+const APP_RECENT_REPORTS_URL = "https://app.beseam.com/recent";
 const APP_SCAN_URL = "https://app.beseam.com/scan";
 
 interface Step {
@@ -45,13 +45,13 @@ const steps: Step[] = [
   {
     icon: Wrench,
     step: "Step 3",
-    title: "Choose the next step",
+    title: "Choose your next step",
     description:
-      "If the report finds real issues, book a fix sprint. Connect your store later only if you want help implementing changes.",
+      "Connect your Shopify store to fix and monitor at scale, or book a one-time Fix Sprint for hands-on help implementing the most critical changes.",
     bullets: [
-      "Browse recent reports first",
-      "Book a paid fix sprint when ready",
-      "Keep the product simple until customers buy",
+      "Connect Shopify to fix and monitor",
+      "Book a Fix Sprint for hands-on help",
+      "No commitment until you see real issues",
     ],
   },
 ];
@@ -77,15 +77,14 @@ export default function HowItWorksSection() {
             How it works
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            A simple launch wedge{" "}
+            Three steps.{" "}
             <span className="text-primary italic">
-              you can ship this weekend.
+              No setup required.
             </span>
           </h2>
           <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            The homepage should do one job: get merchants to run a free scan on
-            one product page and understand whether there is a real problem to
-            fix.
+            Start with one product page. No app install, no OAuth, no onboarding
+            call — just paste a URL and see what AI can read.
           </p>
         </motion.div>
 
@@ -127,40 +126,6 @@ export default function HowItWorksSection() {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.25, duration: 0.6 }}
-          className="mt-10 grid gap-4 lg:grid-cols-2"
-        >
-          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6">
-            <p className="text-primary text-xs font-semibold uppercase tracking-wider">
-              Launch now
-            </p>
-            <h3 className="mt-2 text-lg font-bold text-foreground">
-              Free scan, recent reports, paid fix sprint
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              This is the believable offer for the weekend launch. It is easy to
-              understand and directly tied to a merchant pain point.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-border bg-background p-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Layer later
-            </p>
-            <h3 className="mt-2 text-lg font-bold text-foreground">
-              Store connection, recurring monitoring, broader analytics
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Those can stay behind the scenes until merchants trust the initial
-              scan and start paying for help.
-            </p>
-          </div>
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}

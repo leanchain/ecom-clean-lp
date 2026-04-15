@@ -56,12 +56,12 @@ export default function TrustSection() {
           className="mb-14 text-center"
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-            Built for production
+            Why teams start with Beseam
           </p>
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            Secure, compliant,{" "}
+            Enough trust to run the first scan.
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent italic">
-              ready to scale.
+              {" "}More control when you connect Shopify.
             </span>
           </h2>
         </motion.div>
@@ -75,7 +75,7 @@ export default function TrustSection() {
           className="mb-12 rounded-2xl border border-border bg-background p-6 text-center md:p-8"
         >
           <p className="mb-6 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            AI shopping surfaces we track
+            AI surfaces we evaluate against
           </p>
           <div className="flex flex-wrap items-center justify-center gap-8">
             {platforms.map((platform) => (
@@ -152,7 +152,7 @@ export default function TrustSection() {
             className="rounded-2xl border border-border bg-background p-6"
           >
             <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-foreground">
-              Compliance
+              Security and access
             </h3>
             <div className="grid grid-cols-2 gap-3">
               {complianceItems.map((item) => (
@@ -178,7 +178,7 @@ export default function TrustSection() {
             className="rounded-2xl border border-border bg-background p-6"
           >
             <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-foreground">
-              Enterprise ready
+              Operational safeguards
             </h3>
             <ul className="space-y-3">
               {enterpriseFeatures.map((feature) => (
