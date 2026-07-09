@@ -51,7 +51,7 @@ Your repository is now **fully configured** and **ready for Vercel deployment**!
 2. Click **Add New**
 3. Add:
    - **Name:** `SHADCNBLOCKS_API_KEY`
-   - **Value:** `sk_live_td2qxakzgUnUFkxVkjFRZmNAlCgxkN6C`
+   - **Value:** `<set in Vercel environment>`
    - **Environments:** Select all (Production, Preview, Development)
 4. Click **Save**
 
