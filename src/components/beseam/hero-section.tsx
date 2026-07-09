@@ -21,15 +21,13 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="space-y-6"
         >
-          <p className="text-primary text-sm font-semibold uppercase tracking-[0.2em]">
-            AI Visibility Platform for Shopify
+          <p className="text-primary text-sm font-semibold">
+            AI visibility evidence for Shopify catalogs
           </p>
 
           <h1 className="font-heading text-foreground mx-auto max-w-4xl text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
             Make your products visible to{" "}
-            <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-              every AI shopping surface.
-            </span>
+            <span className="text-primary">every AI shopping surface.</span>
           </h1>
 
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground/90 md:text-xl">
