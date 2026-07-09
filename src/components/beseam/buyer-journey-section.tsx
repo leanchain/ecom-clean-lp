@@ -145,7 +145,7 @@ function ChatContent() {
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className="h-1 w-1 animate-bounce rounded-full bg-white/30"
+                className="h-1 w-1 animate-pulse rounded-full bg-white/30"},{
                 style={{ animationDelay: `${i * 0.18}s` }}
               />
             ))}

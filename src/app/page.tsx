@@ -9,6 +9,7 @@ import ProblemSection from "@/components/beseam/problem-section";
 import TrustSection from "@/components/beseam/trust-section";
 import WorkspacePreviewSection from "@/components/beseam/workspace-preview-section";
 import CookieConsent from "@/components/cookie-consent";
+import MobileStickyCta from "@/components/beseam/mobile-sticky-cta";
 
 export default function Home() {
   return (
@@ -37,6 +38,7 @@ export default function Home() {
       {/* 9. Final CTA */}
       <FinalCtaSection />
 
+      <MobileStickyCta />
       <CookieConsent />
     </>
   );

@@ -34,7 +34,7 @@ const CookieConsent = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 z-50 max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-300">
+    <div className="fixed inset-x-4 bottom-20 z-40 mx-auto max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-300 sm:bottom-4 sm:left-4 sm:right-auto sm:mx-0">
       <div className="rounded-2xl border bg-card p-5 shadow-xl">
         <button
           onClick={handleDecline}
