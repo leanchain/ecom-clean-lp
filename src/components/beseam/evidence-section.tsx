@@ -102,8 +102,8 @@ export default function EvidenceSection() {
                 <Image
                   src={example.image}
                   alt={example.alt}
-                  width={1000}
-                  height={879}
+                  width={996}
+                  height={875}
                   sizes="(min-width: 1024px) 62vw, 94vw"
                   className="h-auto w-full"
                 />
