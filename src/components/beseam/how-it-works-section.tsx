@@ -1,188 +1,133 @@
-"use client";
-
 import Link from "next/link";
 
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Link2, Search, Wrench } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
-const APP_RECENT_REPORTS_URL = "https://app.beseam.com/analyze";
-const APP_SCAN_URL = "https://app.beseam.com/scan";
-
-interface Step {
-  icon: LucideIcon;
-  step: string;
-  title: string;
-  description: string;
-  bullets: string[];
-}
-
-const steps: Step[] = [
+const SOURCES = [
   {
-    icon: Link2,
-    step: "Step 1",
-    title: "Paste one Shopify product page",
-    description:
-      "Start with one public PDP URL. No app install, no OAuth, and no setup call before value.",
-    bullets: [
-      "Public product page only",
-      "No store connection required",
-      "Fast proof before commitment",
-    ],
+    name: "Shopify catalog",
+    domain: "Discoverability",
+    state: "Fresh",
+    tone: "bg-emerald-500",
+    detail: "Recent product snapshot available",
   },
   {
-    icon: Search,
-    step: "Step 2",
-    title: "See what AI can and cannot read",
-    description:
-      "Get a short report showing the gaps that matter most for AI product understanding and trust.",
-    bullets: [
-      "Clear blockers instead of a giant audit dump",
-      "Example of what AI may miss",
-      "Top issue and first fix worth making",
-    ],
+    name: "Storefront tracker",
+    domain: "Purchase",
+    state: "Fresh",
+    tone: "bg-emerald-500",
+    detail: "Recent observed event available",
   },
   {
-    icon: Wrench,
-    step: "Step 3",
-    title: "Choose the next step",
-    description:
-      "If the report finds real issues, book a fix sprint. Connect your store later only if you want help implementing changes.",
-    bullets: [
-      "Browse recent reports first",
-      "Book a paid fix sprint when ready",
-      "Keep the product simple until customers buy",
-    ],
+    name: "Completed crawl",
+    domain: "Discoverability",
+    state: "Fresh",
+    tone: "bg-emerald-500",
+    detail: "Recent completed crawl round",
   },
+  {
+    name: "Search Console",
+    domain: "Discoverability",
+    state: "Stale",
+    tone: "bg-amber-500",
+    detail: "Last successful sync is outside its freshness window",
+  },
+  {
+    name: "PDP verification",
+    domain: "Discoverability",
+    state: "Not configured",
+    tone: "border border-white/55",
+    detail: "No current verification run is available",
+  },
+];
+
+const TRUST_RULES = [
+  ["Not configured", "No trustworthy record or data has arrived yet."],
+  [
+    "Disconnected or failed",
+    "The connection cannot currently support a health answer.",
+  ],
+  [
+    "Stale",
+    "Data exists, but it is older than the source-specific freshness window.",
+  ],
+  [
+    "Fresh",
+    "Recent data is available; issues still determine the domain state.",
+  ],
 ];
 
 export default function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      className="relative overflow-hidden bg-muted/20 px-4 py-20 sm:px-6 md:py-28"
+      className="scroll-mt-20 border-t border-rule bg-surface"
     >
-      <div className="absolute left-0 top-1/4 -z-10 h-[420px] w-[420px] rounded-full bg-primary/5 blur-[120px]" />
-      <div className="absolute right-0 top-1/3 -z-10 h-[420px] w-[420px] rounded-full bg-secondary/5 blur-[120px]" />
-
-      <div className="container max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
-          <p className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
-            How it works
-          </p>
-          <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            A simple launch wedge{" "}
-            <span className="text-primary italic">
-              you can ship this weekend.
-            </span>
-          </h2>
-          <p className="mt-4 mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground">
-            The homepage should do one job: get merchants to run a free scan on
-            one product page and understand whether there is a real problem to
-            fix.
-          </p>
-        </motion.div>
-
-        <div className="grid gap-4 lg:grid-cols-3">
-          {steps.map((step, index) => (
-            <motion.div
-              key={step.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.08 * index, duration: 0.5 }}
-              className="rounded-2xl border border-border bg-background p-7 shadow-sm"
+      <div className="section-pad-tight mx-auto max-w-6xl px-6">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
+          <div>
+            <p className="text-[14px] font-semibold text-primary">
+              Monitoring coverage
+            </p>
+            <h2 className="editorial-heading mt-4 text-ink">
+              No data is not the same as healthy.
+            </h2>
+            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-foreground">
+              Every source has its own freshness semantics. Beseam checks
+              whether a connection is configured, working and recent enough
+              before it allows that source to support a Store Health answer.
+            </p>
+            <Link
+              href="/monitoring-coverage"
+              className="mt-7 inline-flex min-h-11 items-center font-semibold text-primary underline-offset-4 hover:underline"
             >
-              <div className="mb-5 flex items-center justify-between">
-                <span className="text-primary text-xs font-semibold uppercase tracking-wider">
-                  {step.step}
-                </span>
-                <div className="bg-primary/10 flex h-10 w-10 items-center justify-center rounded-full">
-                  <step.icon className="text-primary h-5 w-5" />
-                </div>
-              </div>
-              <h3 className="text-lg font-bold text-foreground">
-                {step.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {step.description}
-              </p>
+              See how coverage works →
+            </Link>
+          </div>
 
-              <ul className="mt-5 space-y-2.5">
-                {step.bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-2.5">
-                    <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-50">
-                      <CheckCircle2 className="h-2.5 w-2.5 text-emerald-600" />
-                    </div>
-                    <span className="text-sm text-foreground/80">{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+          <div className="overflow-hidden border border-rule bg-technical text-white">
+            <div className="border-b border-technical-rule px-5 py-4">
+              <p className="text-[12px] font-semibold text-white/52">
+                Example Store Health workspace · source coverage
+              </p>
+            </div>
+            <ul>
+              {SOURCES.map((source) => (
+                <li
+                  key={source.name}
+                  className="grid gap-3 border-b border-technical-rule px-5 py-4 last:border-b-0 sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)_auto] sm:items-center"
+                >
+                  <div>
+                    <p className="text-[14px] font-semibold text-white">
+                      {source.name}
+                    </p>
+                    <p className="mt-1 text-[11px] text-white/48">
+                      {source.domain}
+                    </p>
+                  </div>
+                  <p className="text-[12px] leading-relaxed text-white/62">
+                    {source.detail}
+                  </p>
+                  <span className="flex w-fit items-center gap-2 rounded-full border border-technical-rule bg-technical-panel px-3 py-1.5 text-[11px] font-semibold text-white/82">
+                    <span
+                      aria-hidden
+                      className={"h-2 w-2 rounded-full " + source.tone}
+                    />
+                    {source.state}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.25, duration: 0.6 }}
-          className="mt-10 grid gap-4 lg:grid-cols-2"
-        >
-          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6">
-            <p className="text-primary text-xs font-semibold uppercase tracking-wider">
-              Launch now
-            </p>
-            <h3 className="mt-2 text-lg font-bold text-foreground">
-              Free scan, recent reports, paid fix sprint
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              This is the believable offer for the weekend launch. It is easy to
-              understand and directly tied to a merchant pain point.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-border bg-background p-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Layer later
-            </p>
-            <h3 className="mt-2 text-lg font-bold text-foreground">
-              Store connection, recurring monitoring, broader analytics
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Those can stay behind the scenes until merchants trust the initial
-              scan and start paying for help.
-            </p>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.35, duration: 0.6 }}
-          className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
-        >
-          <Link
-            href={APP_SCAN_URL}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90"
-          >
-            Run Free Scan
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href={APP_RECENT_REPORTS_URL}
-            className="inline-flex h-12 items-center justify-center rounded-full border border-border bg-background px-6 text-sm font-semibold text-foreground transition-colors hover:bg-accent"
-          >
-            View Recent Reports
-          </Link>
-        </motion.div>
+        <dl className="mt-10 grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+          {TRUST_RULES.map(([term, description]) => (
+            <div key={term} className="bg-panel px-5 py-5">
+              <dt className="text-[14px] font-semibold text-ink">{term}</dt>
+              <dd className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
+                {description}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

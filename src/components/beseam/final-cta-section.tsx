@@ -1,101 +1,56 @@
-"use client";
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
+import { Reveal } from "@/components/beseam/reveal";
+import TrackedLink from "@/components/beseam/tracked-link";
 
-import Link from "next/link";
+const APP_LOGIN_URL = "https://app.beseam.com/login";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
-
-const FEATURES = [
-  "Free scan to start",
-  "No app install required",
-  "Shopify-native publishing",
-  "Continuous monitoring included",
+const OUTPUTS = [
+  "Review current monitoring coverage",
+  "Identify technical blind spots",
+  "Prioritize the first checks",
+  "Recommend the right pilot scope",
 ];
-
-const APP_SCAN_URL = "https://app.beseam.com/scan";
-const FIX_SPRINT_URL = "/demo";
 
 export default function FinalCtaSection() {
   return (
-    <section className="relative overflow-hidden border-y border-border/20 bg-[#0d0d0d] py-24 md:py-36">
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-primary/10"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[100px]"
-        aria-hidden
-      />
+    <section className="border-t border-rule bg-brand text-brand-foreground">
+      <div className="section-pad mx-auto max-w-5xl px-6">
+        <Reveal>
+          <h2 className="editorial-heading max-w-4xl text-brand-foreground">
+            Start with the health of your actual store.
+          </h2>
+          <p className="mt-6 max-w-3xl text-[18px] leading-relaxed text-brand-foreground">
+            In a Store Health Review, we look at your Shopify setup, current
+            monitoring coverage and the problems your team most needs to detect.
+          </p>
 
-      <div className="container relative z-10">
-        <div className="mx-auto max-w-4xl text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-heading text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-7xl"
-          >
-            Start with one product page.
-            <span className="text-white/90 italic">
-              {" "}
-              See what AI can read. Fix what it cannot.
-            </span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl"
-          >
-            Run a free audit on any Shopify product page. Beseam shows you
-            exactly what AI shopping surfaces can and cannot read — then helps
-            you fix it.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="mx-auto mt-10 flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center"
-          >
-            <Link
-              href={APP_SCAN_URL}
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
-            >
-              Start Free Scan
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href={FIX_SPRINT_URL}
-              className="inline-flex h-14 items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 text-base font-semibold text-white transition-colors hover:bg-white/10"
-            >
-              Book a Demo
-            </Link>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4"
-          >
-            {FEATURES.map((item) => (
-              <div key={item} className="flex items-center gap-2 text-white">
-                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/20 backdrop-blur-sm">
-                  <Check className="h-3 w-3 text-emerald-400" />
-                </div>
-                <span className="text-sm font-medium tracking-wide">
-                  {item}
-                </span>
-              </div>
+          <ul className="mt-8 grid gap-3 border-y border-brand-foreground/20 py-5 text-[15px] font-medium sm:grid-cols-2">
+            {OUTPUTS.map((output) => (
+              <li key={output} className="flex items-center gap-3">
+                <span
+                  aria-hidden
+                  className="h-1.5 w-1.5 rounded-full bg-brand-foreground"
+                />
+                {output}
+              </li>
             ))}
-          </motion.div>
-        </div>
+          </ul>
+
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <BookReviewCta
+              location="final_cta"
+              className="w-full bg-technical text-white hover:bg-technical-panel sm:w-auto"
+            />
+            <TrackedLink
+              href={APP_LOGIN_URL}
+              eventName="login_clicked"
+              placement="final_cta"
+              className="inline-flex min-h-11 items-center justify-center font-semibold text-brand-foreground underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ink sm:justify-start"
+            >
+              Already using Beseam? Log in
+            </TrackedLink>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

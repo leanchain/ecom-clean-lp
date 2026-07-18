@@ -69,11 +69,10 @@ export function TypingAnimation({
 
   return (
     <span className="inline-block">
-      <span style={{ color: "#ff6041" }}>{currentText}</span>
+      <span className="text-white dark:text-black">{currentText}</span>
       <span
-        className="inline-block"
+        className="inline-block text-white dark:text-black"
         style={{
-          color: "#ff6041",
           opacity: showCursor ? 1 : 0,
           transition: "opacity 0.1s",
         }}
@@ -83,4 +82,3 @@ export function TypingAnimation({
     </span>
   );
 }
-

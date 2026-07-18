@@ -1,0 +1,24 @@
+Beseam marketing production build
+Date: 2026-07-18
+Command: bun run build
+Framework: Next.js 15.5.7
+
+PASS  Compiled successfully in 50s
+PASS  Type validity check
+PASS  Generated static pages 117/117
+PASS  Static export 2/2
+
+Relevant route output
+/                                      2.39 kB   122 kB first load JS
+/shopify-store-health                  1.63 kB   116 kB first load JS
+/purchase-health                       1.63 kB   116 kB first load JS
+/discoverability-health                1.63 kB   116 kB first load JS
+/monitoring-coverage                   1.63 kB   116 kB first load JS
+/integrations/shopify                  1.63 kB   116 kB first load JS
+/integrations/google-search-console    1.63 kB   116 kB first load JS
+/store-health-review                   3.80 kB   106 kB first load JS
+
+Shared first load JS: 102 kB
+
+Non-blocking legacy warning
+The retained /reports route attempted a localhost backend fetch during static generation and used its existing fallback after NEXT_STATIC_GEN_BAILOUT. The production build completed successfully. The public worker and _redirects send /reports to /tools/ai-visibility-scan before it becomes part of the marketing journey.

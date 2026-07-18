@@ -1,0 +1,125 @@
+{
+  "responsive": [
+    {
+      "width": 375,
+      "overflow": false,
+      "h1": "Know when changes to your Shopify store hurt visibility or purchasing.",
+      "pageErrors": []
+    },
+    {
+      "width": 430,
+      "overflow": false,
+      "h1": "Know when changes to your Shopify store hurt visibility or purchasing.",
+      "pageErrors": []
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "h1": "Know when changes to your Shopify store hurt visibility or purchasing.",
+      "pageErrors": []
+    },
+    {
+      "width": 1024,
+      "overflow": false,
+      "h1": "Know when changes to your Shopify store hurt visibility or purchasing.",
+      "pageErrors": []
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "h1": "Know when changes to your Shopify store hurt visibility or purchasing.",
+      "pageErrors": []
+    },
+    {
+      "width": 1920,
+      "overflow": false,
+      "h1": "Know when changes to your Shopify store hurt visibility or purchasing.",
+      "pageErrors": []
+    }
+  ],
+  "navigation": [
+    {
+      "label": "Product",
+      "expected": "/#product",
+      "actual": "/#product"
+    },
+    {
+      "label": "How it works",
+      "expected": "/#how-it-works",
+      "actual": "/#how-it-works"
+    },
+    {
+      "label": "Who it’s for",
+      "expected": "/#teams",
+      "actual": "/#teams"
+    },
+    {
+      "label": "About",
+      "expected": "/about",
+      "actual": "/about"
+    },
+    {
+      "label": "Log in",
+      "expected": "https://app.beseam.com/login",
+      "actual": "https://app.beseam.com/login"
+    }
+  ],
+  "anchors": [
+    {
+      "id": "product",
+      "exists": true
+    },
+    {
+      "id": "purchase-health",
+      "exists": true
+    },
+    {
+      "id": "how-it-works",
+      "exists": true
+    },
+    {
+      "id": "teams",
+      "exists": true
+    }
+  ],
+  "linkChecks": [
+    {
+      "href": "/",
+      "status": 200
+    },
+    {
+      "href": "/about",
+      "status": 200
+    },
+    {
+      "href": "/store-health-review",
+      "status": 200
+    },
+    {
+      "href": "/privacy-policy",
+      "status": 200
+    },
+    {
+      "href": "/terms-of-service",
+      "status": 200
+    },
+    {
+      "href": "/tools/ai-visibility-scan",
+      "status": 200
+    }
+  ],
+  "review": {
+    "calendarButton": true,
+    "formFields": {
+      "name": true,
+      "workEmail": true,
+      "storeUrl": true,
+      "message": true
+    }
+  },
+  "consent": {
+    "bannerVisible": true,
+    "analyticsBeforeConsent": false,
+    "storedConsent": "declined"
+  }
+}

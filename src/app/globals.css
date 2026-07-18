@@ -17,10 +17,14 @@
   --card-foreground: #111827;
   --popover: #ffffff;
   --popover-foreground: #374151;
-  --primary: #ff6041;
+  /* Section backgrounds: warm orange. Buttons: bright coral via --brand-vibrant. */
+  --brand: #e8612d;
+  --brand-foreground: #16161a;
+  --brand-vibrant: #ff6041;
+  --primary: #e8612d;
   --primary-foreground: #ffffff;
-  --primary-hover: #e6563a;
-  --primary-focus: #cc4d34;
+  --primary-hover: #d4572a;
+  --primary-focus: #b84c24;
   --secondary: #2e5da6;
   --secondary-foreground: #ffffff;
   --muted: #f3f4f6;
@@ -39,10 +43,10 @@
   --warning-foreground: #ffffff;
   --border: #d5d7de;
   --input: #9ca3af;
-  --ring: #ff6041;
+  --ring: #e8612d;
 
   /* Chart colors */
-  --chart-1: #ff6041;
+  --chart-1: #e8612d;
   --chart-2: #f97316;
   --chart-3: #eab308;
   --chart-4: #10b981;
@@ -59,7 +63,7 @@
   --primary-200: #ffc5b7;
   --primary-300: #ffa893;
   --primary-400: #ff8b6f;
-  --primary-500: #ff6041;
+  --primary-500: #e8612d;
   --primary-600: #e6563a;
   --primary-700: #cc4d34;
   --primary-800: #b3432d;
@@ -146,13 +150,22 @@
   --radius: 0.625rem;
   --sidebar: #eef1f7;
   --sidebar-foreground: #111827;
-  --sidebar-primary: #ff6041;
+  --sidebar-primary: #e8612d;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #111827;
   --sidebar-accent-foreground: #f9fafb;
   --sidebar-border: #c8ced9;
-  --sidebar-ring: #ff6041;
+  --sidebar-ring: #e8612d;
   --surface-subtle: #f3f4f6;
+
+  /* Editorial Store Health surfaces */
+  --surface: #fbfaf8; /* warm off-white body surface */
+  --panel: #ffffff; /* true-white panels */
+  --rule: #e7e5e1; /* hairline structural rules */
+  --ink: #16161a; /* near-black headings */
+  --technical: #17171b; /* owned monitoring/pipeline surface */
+  --technical-panel: #202026;
+  --technical-rule: #37373f;
 
   --font-sans: var(
     --font-figtree,
@@ -209,11 +222,14 @@
   --popover: #1a1a1d;
   --popover-foreground: #d4d4d8;
 
-  /* Primary - slightly desaturated coral for dark mode */
-  --primary: #ff5f3f;
-  --primary-foreground: #fafafa;
-  --primary-hover: #ff7554;
-  --primary-focus: #e65436;
+  /* Bright coral stays readable on dark surfaces; labels use dark ink. */
+  --brand: #ff8068;
+  --brand-foreground: #16161a;
+  --brand-vibrant: #ff6041;
+  --primary: #ff8068;
+  --primary-foreground: #16161a;
+  --primary-hover: #ff957f;
+  --primary-focus: #ffad9c;
 
   /* Secondary - muted blue */
   --secondary: #4f8ff7;
@@ -245,7 +261,7 @@
   /* UI elements - better visibility */
   --border: #2f2f35;
   --input: #2a2a2e;
-  --ring: #ff5f3f;
+  --ring: #ff8068;
   --surface-subtle: #1a1a1d;
 
   /* Chart colors - slightly muted for dark mode */
@@ -263,12 +279,21 @@
   /* Sidebar - improved contrast */
   --sidebar: #161618;
   --sidebar-foreground: #d4d4d8;
-  --sidebar-primary: #ff5f3f;
-  --sidebar-primary-foreground: #fafafa;
+  --sidebar-primary: #ff8068;
+  --sidebar-primary-foreground: #16161a;
   --sidebar-accent: #2a2a2e;
   --sidebar-accent-foreground: #e4e4e7;
   --sidebar-border: #2f2f35;
-  --sidebar-ring: #ff5f3f;
+  --sidebar-ring: #ff8068;
+
+  /* Editorial Store Health surfaces - dark */
+  --surface: #121214;
+  --panel: #17171a;
+  --rule: #2b2b31;
+  --ink: #f4f4f5;
+  --technical: #09090b;
+  --technical-panel: #151518;
+  --technical-rule: #34343b;
 }
 
 /* Typography utilities */
@@ -329,6 +354,9 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-vibrant: var(--brand-vibrant);
   --color-primary: var(--primary);
   --color-primary-50: var(--primary-50);
   --color-primary-100: var(--primary-100);
@@ -379,6 +407,13 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-footer-background: var(--footer-background);
   --color-base-dark: var(--base-dark);
+  --color-surface: var(--surface);
+  --color-panel: var(--panel);
+  --color-rule: var(--rule);
+  --color-ink: var(--ink);
+  --color-technical: var(--technical);
+  --color-technical-panel: var(--technical-panel);
+  --color-technical-rule: var(--technical-rule);
 
   --text-3xl: 1.75rem;
   --text-5xl: 2.75rem;
@@ -405,6 +440,15 @@
 
   a {
     color: var(--color-primary);
+  }
+
+  :focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--ring) 72%, transparent);
+    outline-offset: 3px;
+  }
+
+  html {
+    scroll-padding-top: 5.5rem;
   }
 
   button,
@@ -528,6 +572,15 @@
 }
 
 /* Custom animations */
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes accordion-down {
   from {
     height: 0;
@@ -595,6 +648,19 @@ html.theme-transition::view-transition-new(root) {
   animation: theme-mask 0.5s ease-in forwards;
 }
 
+@keyframes marketing-reveal {
+  from {
+    transform: translateY(4px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.marketing-reveal {
+  animation: marketing-reveal 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* Handle reduced motion preference globally */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -607,5 +673,52 @@ html.theme-transition::view-transition-new(root) {
   }
   .motion-safe-only {
     display: none !important;
+  }
+}
+
+/* Editorial type scale + rhythm (Store Health redesign) */
+@layer utilities {
+  .editorial-eyebrow {
+    font-size: clamp(0.75rem, 0.4vw + 0.65rem, 0.875rem);
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .editorial-hero {
+    font-size: clamp(2.625rem, 5.6vw, 5.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .editorial-heading {
+    font-size: clamp(2.25rem, 3.6vw, 4rem);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .editorial-subheading {
+    font-size: clamp(1.375rem, 2vw, 1.875rem);
+    line-height: 1.16;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .editorial-body {
+    font-size: clamp(1.0625rem, 0.6vw + 0.95rem, 1.25rem);
+    line-height: 1.62;
+  }
+  .editorial-label {
+    font-size: clamp(0.6875rem, 0.3vw + 0.6rem, 0.8125rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .section-pad {
+    padding-top: clamp(4.25rem, 7.5vw, 7.5rem);
+    padding-bottom: clamp(4.25rem, 7.5vw, 7.5rem);
+  }
+  .section-pad-tight {
+    padding-top: clamp(3.25rem, 5.5vw, 5.75rem);
+    padding-bottom: clamp(3.25rem, 5.5vw, 5.75rem);
   }
 }

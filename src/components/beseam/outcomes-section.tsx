@@ -4,18 +4,18 @@ import Link from "next/link";
 
 import { motion } from "framer-motion";
 import {
+  Activity,
   ArrowRight,
   CheckCircle2,
-  LayoutGrid,
   Search,
-  Zap,
-  Activity,
+  ShoppingCart,
+  Wrench,
 } from "lucide-react";
 
-const APP_SCAN_URL = "https://app.beseam.com/scan";
+const APP_STORE_URL = "https://app.beseam.com/store";
 
 interface Pillar {
-  icon: typeof LayoutGrid;
+  icon: typeof Search;
   title: string;
   description: string;
   bullets: string[];
@@ -25,53 +25,53 @@ interface Pillar {
 
 const pillars: Pillar[] = [
   {
-    icon: LayoutGrid,
-    title: "Catalog",
+    icon: Search,
+    title: "Discoverability",
     description:
-      "See how AI interprets every product page — titles, variants, attributes, schema, and selling points. Know exactly what AI can and cannot read.",
+      "See how AI and search read every product page — titles, attributes, schema, and selling points. Know exactly what surfaces can and cannot understand about your catalog.",
     bullets: [
-      "Product understanding score per page",
-      "Schema and structured data coverage",
-      "Attribute and variant clarity",
+      "Product understanding across AI and search",
+      "Schema and structured-data coverage",
+      "Rankings and rich-result health",
     ],
     color: "text-primary",
     bgColor: "bg-primary/10",
   },
   {
-    icon: Search,
-    title: "Audit",
+    icon: ShoppingCart,
+    title: "Purchase",
     description:
-      "Run 118+ checks across AI discoverability, SEO foundations, shopping feed quality, and content structure. Surface the gaps that actually block recommendations.",
+      "Catch the failures that quietly block the sale — broken checkout, failed payments, frozen buttons, and wrong prices — across the devices and countries you never test on.",
     bullets: [
-      "AI discoverability and LLM readiness",
-      "SEO and shopping feed alignment",
-      "Prioritized issues with clear severity",
+      "Checkout and cart failure detection",
+      "Payment errors by gateway and country",
+      "Device- and browser-specific breakage",
     ],
     color: "text-violet-600",
     bgColor: "bg-violet-500/10",
   },
   {
-    icon: Zap,
-    title: "Actions",
+    icon: Activity,
+    title: "Monitoring",
     description:
-      "Generate targeted fixes for the issues that matter most. Approve them, publish directly to Shopify, and verify the improvement with a re-audit.",
+      "Beseam watches real shoppers and your catalog around the clock, so regressions after a theme update, app install, or feed sync surface in minutes — not from a customer complaint.",
     bullets: [
-      "AI-generated fixes for schema and content",
-      "One-click publish to Shopify",
-      "Before-and-after verification",
+      "24/7 coverage of selling and discovery",
+      "Regression alerts after changes",
+      "Instant alerts via WhatsApp, Email, Slack",
     ],
     color: "text-amber-600",
     bgColor: "bg-amber-500/10",
   },
   {
-    icon: Activity,
-    title: "Monitor",
+    icon: Wrench,
+    title: "Resolution",
     description:
-      "Track AI readiness over time. Catch regressions after catalog changes, monitor schema health, and get alerts when something drifts.",
+      "Every finding comes with the evidence and the fix. Follow the plain-language steps, or push structured-data and content fixes straight to Shopify — then re-check to confirm it is resolved.",
     bullets: [
-      "Continuous site health tracking",
-      "Regression detection after changes",
-      "Feed and schema drift alerts",
+      "Root cause and revenue impact per issue",
+      "One-click publish to Shopify with rollback",
+      "Before-and-after verification",
     ],
     color: "text-emerald-600",
     bgColor: "bg-emerald-500/10",
@@ -80,7 +80,7 @@ const pillars: Pillar[] = [
 
 export default function OutcomesSection() {
   return (
-    <section className="bg-muted/30 px-4 py-20 sm:px-6 md:py-28">
+    <section className="bg-background px-4 py-20 sm:px-6 md:py-32">
       <div className="container max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -95,13 +95,13 @@ export default function OutcomesSection() {
           <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
             Four areas.{" "}
             <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent italic">
-              One platform.
+              One store health platform.
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Beseam covers the full lifecycle — from understanding how AI reads
-            your catalog to fixing gaps, publishing changes, and monitoring what
-            happens next.
+            Beseam covers the full lifecycle of a healthy store — from how AI
+            and search discover your catalog, to whether shoppers can actually
+            buy, to catching what breaks and helping you fix it.
           </p>
         </motion.div>
 
@@ -150,10 +150,10 @@ export default function OutcomesSection() {
           className="mt-10 flex justify-center"
         >
           <Link
-            href={APP_SCAN_URL}
+            href={APP_STORE_URL}
             className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90"
           >
-            Start with a Free Scan
+            Scan my store
             <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>

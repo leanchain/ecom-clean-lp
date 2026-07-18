@@ -1,53 +1,39 @@
-# Beseam - AI Media Studio
+# Beseam — Store Health for Shopify
 
-Beseam is an AI Media Studio for AI Search Optimised Product Detail Pages
+This is the canonical public marketing site for [beseam.com](https://beseam.com).
+It presents one product story: technical discoverability, purchase health and
+monitoring-source freshness in an evidence-backed Store Health workspace.
 
-- [Demo](https://sonic-nextjs-template.vercel.app/)
-- [Documentation](https://docs.shadcnblocks.com/templates/getting-started)
+The free AI visibility scanner remains available as a secondary tool at
+`/tools/ai-visibility-scan`. The primary conversion route is
+`/store-health-review`.
 
-## Screenshot
+## Local validation
 
-![Beseam AI Media Studio screenshot](./public/og-image.png)
-
-## Getting Started
-
-```bash
-npm install
-```
+Use Bun, matching the repository lockfile:
 
 ```bash
-npm run dev
+bun install
+bun run format
+bun run lint
+bun run build
 ```
 
-Open [http://localhost:3123](http://localhost:3123) with your browser to see the result.
+The production build is a static Next.js export in `out/`.
 
-## Tech Stack
+## Cloudflare deployment
 
-- Nextjs 15 / App Router
-- Tailwind 4
-- shadcn/ui
+`main.js` serves the static export through the Workers Assets binding, handles
+legacy redirects, and accepts the same-origin Store Health Review fallback form.
 
-## Deploy on Cloudflare
+Before deployment:
 
-This project exports a static Next.js site (`output: "export"` in `next.config.ts`) and serves it
-from a Cloudflare Worker using [`@cloudflare/kv-asset-handler`](main.js). To deploy:
+1. Confirm that the Worker named `beseam` owns `beseam.com`.
+2. Authenticate Wrangler for the intended Cloudflare account.
+3. Enable Email Sending for the zone and verify `website@beseam.com`.
+4. Confirm that `contact@beseam.com` is an allowed destination.
+5. Set the public analytics and Cal.com values in the deployment environment.
+6. Run `bun run build`, then `npx wrangler deploy`.
 
-1. Build the static export:
-
-```bash
-npm run build
-```
-
-2. Authenticate `wrangler` if you haven't already:
-
-```bash
-npx wrangler login
-```
-
-3. Deploy the Worker + static assets defined in `wrangler.jsonc`:
-
-```bash
-npx wrangler deploy
-```
-
-The worker entry point is `main.js`, and the `out` directory is published as the static assets namespace.
+The email binding is declared as `REVIEW_EMAIL` in `wrangler.jsonc`. If it is
+unavailable, the form returns an error rather than showing a false success.

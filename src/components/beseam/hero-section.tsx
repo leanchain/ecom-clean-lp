@@ -1,72 +1,122 @@
-"use client";
+import Image from "next/image";
 
-import Link from "next/link";
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
+import { Reveal } from "@/components/beseam/reveal";
 
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-
-const APP_SCAN_URL = "https://app.beseam.com/scan";
-const DEMO_URL = "/demo";
+const WORKSPACE_CALLOUTS = [
+  {
+    number: "01",
+    title: "Overall state",
+    body: "Health only reads as healthy when the evidence supports it.",
+  },
+  {
+    number: "02",
+    title: "Two domains",
+    body: "Discoverability and purchasing remain distinct but connected.",
+  },
+  {
+    number: "03",
+    title: "Coverage",
+    body: "Stale and missing sources stay visible in the answer.",
+  },
+];
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-4 pb-20 pt-24 sm:px-6 md:pb-28 md:pt-32 lg:pb-32 lg:pt-40">
-      <div className="absolute left-1/2 top-0 -z-10 h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-primary/5 blur-[120px]" />
-      <div className="absolute right-0 top-1/4 -z-10 h-[400px] w-[400px] rounded-full bg-secondary/5 blur-[100px]" />
-
-      <div className="container relative flex flex-col items-center justify-center gap-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-          className="space-y-6"
-        >
-          <p className="text-primary text-sm font-semibold">
-            AI visibility evidence for Shopify catalogs
+    <section className="overflow-hidden bg-surface">
+      <div className="mx-auto max-w-6xl px-6 pb-12 pt-16 md:pb-16 md:pt-24">
+        <Reveal>
+          <p className="editorial-eyebrow text-primary">
+            Store health for Shopify
           </p>
-
-          <h1 className="font-heading text-foreground mx-auto max-w-4xl text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Make your products visible to{" "}
-            <span className="text-primary">every AI shopping surface.</span>
+          <h1 className="mt-5 max-w-[16ch] text-balance text-[clamp(2.75rem,6vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-ink">
+            Know when changes hurt visibility or the purchase experience.
           </h1>
-
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground/90 md:text-xl">
-            Beseam audits your Shopify catalog, finds what blocks AI agents from
-            recommending your products, and helps you fix it — page by page or
-            at scale.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mx-auto mt-2 flex w-full max-w-xl flex-col items-center justify-center gap-3 sm:flex-row"
-        >
-          <Link
-            href={APP_SCAN_URL}
-            className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95 sm:w-auto"
-          >
-            Start Free Scan
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href={DEMO_URL}
-            className="inline-flex h-14 w-full items-center justify-center rounded-full border border-border bg-background/90 px-8 text-base font-semibold text-foreground transition-colors hover:bg-accent sm:w-auto"
-          >
-            Book a Demo
-          </Link>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.45, duration: 0.5 }}
-          className="text-xs text-muted-foreground"
-        >
-          No app install · No store connection · Free to start
-        </motion.p>
+          <div className="mt-7 grid gap-7 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.7fr)] lg:items-end">
+            <p className="editorial-body max-w-3xl text-foreground">
+              Beseam brings technical discoverability, product health,
+              storefront signals and monitoring coverage into one
+              evidence-backed workspace. See what changed, what needs attention
+              and who should fix it.
+            </p>
+            <p className="max-w-md text-[14px] leading-relaxed text-muted-foreground lg:justify-self-end">
+              Built for Shopify teams working across SEO, content, ecommerce and
+              development.
+            </p>
+          </div>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <BookReviewCta location="hero" className="w-full sm:w-auto" />
+            <BookReviewCta
+              variant="secondary"
+              location="hero"
+              className="w-full sm:w-auto"
+            />
+          </div>
+        </Reveal>
       </div>
+
+      <Reveal
+        delay={0.08}
+        y={20}
+        className="mx-auto max-w-[88rem] px-3 pb-16 sm:px-6 md:pb-24"
+      >
+        <figure>
+          <figcaption className="mb-3 flex items-center justify-between gap-3 px-1 text-[12px] font-medium text-muted-foreground">
+            <span>Example Store Health workspace</span>
+            <span className="hidden sm:inline">
+              Seeded product data · no customer outcomes or revenue shown
+            </span>
+          </figcaption>
+
+          <div className="bg-panel">
+            <div className="relative hidden aspect-[1800/740] overflow-hidden bg-[#f8fafc] lg:block">
+              <Image
+                src="/images/store-health/overview-desktop.png"
+                alt="Store Health overall status, trusted daily pulse and the discoverability and purchase health domains"
+                fill
+                priority
+                sizes="(min-width: 1536px) 1408px, 96vw"
+                className="object-cover object-top"
+              />
+            </div>
+
+            <div className="bg-[#f8fafc] lg:hidden">
+              <div className="relative aspect-[796/1220] overflow-hidden bg-[#f8fafc]">
+                <Image
+                  src="/images/store-health/overview-mobile.png"
+                  alt="Mobile Store Health summary showing the overall status, coverage gaps and fresh purchase metrics"
+                  fill
+                  priority
+                  sizes="94vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            </div>
+
+            <ol className="grid grid-cols-3 border border-rule bg-surface">
+              {WORKSPACE_CALLOUTS.map((callout, index) => (
+                <li
+                  key={callout.number}
+                  className={
+                    "px-3 py-4 sm:px-5 sm:py-5 " +
+                    (index === 0 ? "" : "border-l border-rule")
+                  }
+                >
+                  <span className="text-[11px] font-semibold tabular-nums text-primary sm:text-[12px]">
+                    {callout.number}
+                  </span>
+                  <p className="mt-2 text-[12px] font-semibold leading-tight text-ink sm:text-[14px]">
+                    {callout.title}
+                  </p>
+                  <p className="mt-1 hidden text-[12px] leading-relaxed text-muted-foreground sm:block">
+                    {callout.body}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </figure>
+      </Reveal>
     </section>
   );
 }

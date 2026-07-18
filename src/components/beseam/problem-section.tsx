@@ -1,100 +1,71 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Eye, Wrench, Shield } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
-interface ValueProp {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  metric: string;
-  metricLabel: string;
-}
-
-const valueProps: ValueProp[] = [
+const CHANGE_PATHS = [
   {
-    icon: Eye,
-    title: "Better AI visibility",
-    description:
-      "Products start appearing in AI shopping recommendations once the signals AI agents rely on are present and correct.",
-    metric: "13",
-    metricLabel: "AI engines tracked",
+    change: "Theme or app change",
+    quietEffect:
+      "Rendered product markup, JavaScript or the add-to-cart handler changes.",
+    evidence:
+      "Rendered-page verification, storefront errors and affected sessions.",
   },
   {
-    icon: Wrench,
-    title: "Faster time to fix",
-    description:
-      "Go from finding issues to publishing fixes in one workflow — no spreadsheets, no manual handoffs, no waiting on dev cycles.",
-    metric: "118+",
-    metricLabel: "checks per audit",
+    change: "Catalog or metadata change",
+    quietEffect:
+      "A product identifier, structured field or channel requirement disappears.",
+    evidence:
+      "Shopify catalog state, channel gap and the affected product record.",
   },
   {
-    icon: Shield,
-    title: "Ongoing protection",
-    description:
-      "Continuous monitoring catches regressions after catalog updates, theme changes, or feed syncs — before they affect traffic.",
-    metric: "24/7",
-    metricLabel: "monitoring",
+    change: "Browser, market or payment-path change",
+    quietEffect:
+      "Only a narrow group of shoppers encounters friction while the store still loads.",
+    evidence:
+      "Funnel stage, browser or device context, event cluster and last observed time.",
   },
 ];
 
 export default function ProblemSection() {
   return (
-    <section className="bg-background px-4 py-20 sm:px-6 md:py-28">
-      <div className="container max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-            Why it matters
-          </p>
-          <h2 className="font-heading text-3xl font-bold tracking-tight md:text-5xl">
-            What changes{" "}
-            <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-              for your store.
-            </span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            AI shopping surfaces are the fastest-growing channel for product
-            discovery. Stores with clean, structured data get recommended.
-            Stores without it stay invisible.
-          </p>
-        </motion.div>
+    <section className="border-t border-rule bg-background">
+      <div className="section-pad-tight mx-auto max-w-6xl px-6">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-20">
+          <div>
+            <h2 className="editorial-heading text-ink">
+              A store can look fine while one change quietly degrades it.
+            </h2>
+            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-foreground">
+              Most regressions are not total outages. They begin as a narrow
+              failure, an incomplete source or a technical change that no single
+              dashboard can explain.
+            </p>
+          </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
-          {valueProps.map((prop, index) => (
-            <motion.div
-              key={prop.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 * index, duration: 0.5 }}
-              className="flex flex-col rounded-2xl border border-border bg-background p-7 transition-all hover:-translate-y-0.5 hover:shadow-md"
-            >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                <prop.icon className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-lg font-bold text-foreground">
-                {prop.title}
-              </h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                {prop.description}
-              </p>
-              <div className="mt-5 rounded-xl bg-muted/30 px-4 py-3">
-                <span className="text-2xl font-black text-foreground">
-                  {prop.metric}
+          <div className="border-t border-rule">
+            {CHANGE_PATHS.map((path, index) => (
+              <article
+                key={path.change}
+                className="grid gap-4 border-b border-rule py-7 sm:grid-cols-[2.4rem_minmax(0,0.8fr)_minmax(0,1fr)] sm:gap-6"
+              >
+                <span className="text-[12px] font-semibold tabular-nums text-primary">
+                  0{index + 1}
                 </span>
-                <span className="ml-2 text-xs font-medium text-muted-foreground">
-                  {prop.metricLabel}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+                <div>
+                  <h3 className="text-[18px] font-semibold tracking-[-0.015em] text-ink">
+                    {path.change}
+                  </h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-foreground">
+                    {path.quietEffect}
+                  </p>
+                </div>
+                <div className="border-t border-dashed border-rule pt-3 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                    Evidence Beseam can attach
+                  </p>
+                  <p className="mt-2 text-[14px] leading-relaxed text-ink">
+                    {path.evidence}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
