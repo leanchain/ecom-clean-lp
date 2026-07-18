@@ -81,7 +81,7 @@ export default function BeseamNavbar() {
             </TrackedLink>
             <BookReviewCta
               location="navbar"
-              label="Book a 30-minute Store Health Review"
+              label="Book a 20-minute Store Health Review"
               className="min-h-10 px-5 py-2 text-[14px]"
             />
           </div>

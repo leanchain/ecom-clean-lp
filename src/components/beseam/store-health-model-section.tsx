@@ -6,6 +6,7 @@ const SOURCE_GROUPS = [
   "Shopify catalog",
   "Search Console",
   "Crawl + PDP verification",
+  "AI crawler access",
   "Storefront events",
   "Friction incidents",
 ];

@@ -17,6 +17,11 @@ const LAYERS = [
   },
   { label: "Channel state", title: "Structured product and channel gaps" },
   { label: "Search source", title: "Search Console connection and freshness" },
+  {
+    label: "AI surfaces",
+    title:
+      "Crawler access, brand protection and ranking across AI answer engines",
+  },
 ];
 
 export default function HealthDomainsSection() {
