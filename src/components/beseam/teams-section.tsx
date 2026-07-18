@@ -1,16 +1,21 @@
+import { Code2, Search, ShoppingCart } from "lucide-react";
+
 import Reveal from "@/components/beseam/reveal";
 
 const ROLES = [
   {
     role: "SEO and content",
+    icon: Search,
     body: "Technical issues, affected products and pages, source freshness and evidence—not another generic score.",
   },
   {
     role: "Ecommerce and operations",
+    icon: ShoppingCart,
     body: "Prioritized health concerns, purchase friction and the monitoring gaps that make a confident answer impossible.",
   },
   {
     role: "Developers and agencies",
+    icon: Code2,
     body: "Reproducible context, affected paths and direct investigation links instead of an unspecific conversion alert.",
   },
 ];
@@ -34,17 +39,18 @@ export default function TeamsSection() {
           </p>
         </Reveal>
 
-        <div className="mt-12 border-t border-rule">
+        <div className="mt-12 grid gap-px border border-rule bg-rule sm:grid-cols-3">
           {ROLES.map((item, index) => (
             <Reveal
               key={item.role}
               delay={index * 0.05}
-              className="grid gap-3 border-b border-rule py-7 md:grid-cols-[minmax(0,0.45fr)_minmax(0,1fr)] md:gap-12"
+              className="bg-panel p-7 shadow-[0_1px_2px_rgba(23,23,27,0.04),0_8px_24px_-16px_rgba(23,23,27,0.18)]"
             >
-              <h3 className="text-[18px] font-semibold text-ink">
+              <item.icon className="h-5 w-5 text-primary" strokeWidth={1.6} />
+              <h3 className="mt-5 text-[18px] font-semibold text-ink">
                 {item.role}
               </h3>
-              <p className="max-w-2xl text-[15px] leading-relaxed text-foreground">
+              <p className="mt-3 text-[15px] leading-relaxed text-foreground">
                 {item.body}
               </p>
             </Reveal>

@@ -44,7 +44,7 @@ export default function HeroSection() {
             </span>
           </figcaption>
 
-          <div className="border border-rule bg-panel shadow-[0_1px_2px_rgba(23,23,27,0.04),0_16px_40px_-20px_rgba(23,23,27,0.22)]">
+          <div className="border border-rule bg-panel p-2 shadow-[0_1px_2px_rgba(23,23,27,0.04),0_16px_40px_-20px_rgba(23,23,27,0.22)] sm:p-3">
             <div className="relative hidden aspect-[1800/1141] overflow-hidden bg-[#f8fafc] lg:block">
               <Image
                 src="/images/store-health/overview-desktop.png"

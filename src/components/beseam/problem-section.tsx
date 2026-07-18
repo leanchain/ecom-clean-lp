@@ -1,5 +1,8 @@
+import { Globe, Layers, Tag } from "lucide-react";
+
 const CHANGE_PATHS = [
   {
+    icon: Layers,
     change: "Theme or app change",
     quietEffect:
       "Rendered product markup, JavaScript or the add-to-cart handler changes.",
@@ -7,6 +10,7 @@ const CHANGE_PATHS = [
       "Rendered-page verification, storefront errors and affected sessions.",
   },
   {
+    icon: Tag,
     change: "Catalog or metadata change",
     quietEffect:
       "A product identifier, structured field or channel requirement disappears.",
@@ -14,6 +18,7 @@ const CHANGE_PATHS = [
       "Shopify catalog state, channel gap and the affected product record.",
   },
   {
+    icon: Globe,
     change: "Browser, market or payment-path change",
     quietEffect:
       "Only a narrow group of shoppers encounters friction while the store still loads.",
@@ -44,9 +49,15 @@ export default function ProblemSection() {
                 key={path.change}
                 className="grid gap-4 border-b border-rule py-7 sm:grid-cols-[2.4rem_minmax(0,0.8fr)_minmax(0,1fr)] sm:gap-6"
               >
-                <span className="text-[12px] font-semibold tabular-nums text-primary">
-                  0{index + 1}
-                </span>
+                <div className="flex flex-row items-center gap-3 sm:flex-col sm:items-start sm:gap-4">
+                  <path.icon
+                    className="h-5 w-5 text-primary"
+                    strokeWidth={1.6}
+                  />
+                  <span className="text-[12px] font-semibold tabular-nums text-muted-foreground">
+                    0{index + 1}
+                  </span>
+                </div>
                 <div>
                   <h3 className="text-[18px] font-semibold tracking-[-0.015em] text-ink">
                     {path.change}
