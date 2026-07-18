@@ -10,6 +10,11 @@ export const STORE_HEALTH_FAQS = [
       "Purchase Health uses supported storefront and Shopify commerce signals across product views, add-to-cart, cart, checkout and purchase. It can also use observed JavaScript, resource, HTTP, form and friction signals, with affected context such as session, page pattern, product, browser or device where available.",
   },
   {
+    question: "Does Discoverability Health include AI visibility (GEO)?",
+    answer:
+      "Yes. Alongside Search Console and Shopify catalog signals, Discoverability Health tracks AI-crawler access (whether ChatGPT, Perplexity, Gemini and other answer-engine bots can read your store), brand protection against suspect or impersonating domains, and which sources those answer engines cite for your product queries—plus ranking movement across AI shopping answers—kept as connected evidence, not a separate score.",
+  },
+  {
     question: "Does Beseam detect every storefront failure?",
     answer:
       "No. Store Health currently combines observed real-user signals and existing product evidence. It does not yet synthetically reproduce every browser, market, product and payment path. Missing or stale evidence is shown as a coverage problem instead of being labelled healthy.",

@@ -48,7 +48,7 @@ export function BookReviewCta({
         className,
       )}
     >
-      {label ?? "Book a 30-minute Store Health Review"}
+      {label ?? "Book a 20-minute Store Health Review"}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
     </TrackedLink>
   );

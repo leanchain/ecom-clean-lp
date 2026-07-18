@@ -16,7 +16,7 @@ export default function MobileStickyCta() {
         preserveUtm
         className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-vibrant px-5 text-sm font-bold text-white shadow-lg"
       >
-        Book a 30-minute Store Health Review
+        Book a 20-minute Store Health Review
         <ArrowRight className="h-4 w-4" />
       </TrackedLink>
     </div>
