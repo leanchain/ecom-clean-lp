@@ -5,23 +5,23 @@ import TrackedLink from "@/components/beseam/tracked-link";
 const APP_LOGIN_URL = "https://app.beseam.com/login";
 
 const OUTPUTS = [
-  "Review current monitoring coverage",
-  "Identify technical blind spots",
-  "Prioritize the first checks",
-  "Recommend the right pilot scope",
+  "Monitoring coverage assessment",
+  "Priority risks",
+  "Recommended checks",
+  "Pilot plan",
 ];
 
 export default function FinalCtaSection() {
   return (
     <section className="border-t border-rule bg-brand text-brand-foreground">
-      <div className="section-pad mx-auto max-w-5xl px-6">
+      <div className="section-pad mx-auto max-w-6xl px-6">
         <Reveal>
           <h2 className="editorial-heading max-w-4xl text-brand-foreground">
             Start with the health of your actual store.
           </h2>
           <p className="mt-6 max-w-3xl text-[18px] leading-relaxed text-brand-foreground">
-            In a Store Health Review, we look at your Shopify setup, current
-            monitoring coverage and the problems your team most needs to detect.
+            We review your current Shopify setup, monitoring gaps and the store
+            journeys your team cannot afford to miss.
           </p>
 
           <ul className="mt-8 grid gap-3 border-y border-brand-foreground/20 py-5 text-[15px] font-medium sm:grid-cols-2">

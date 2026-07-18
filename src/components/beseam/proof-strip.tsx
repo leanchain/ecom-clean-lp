@@ -1,25 +1,15 @@
 import Link from "next/link";
 
 const SOURCES = [
+  { name: "Shopify", href: "/integrations/shopify" },
   {
-    name: "Shopify",
-    detail: "Catalog, products, variants and purchase events",
-    href: "/integrations/shopify",
-  },
-  {
-    name: "Search Console",
-    detail: "Connection and search-data freshness",
+    name: "Google Search Console",
     href: "/integrations/google-search-console",
   },
+  { name: "Storefront events", href: "/purchase-health" },
   {
-    name: "Crawl + verification",
-    detail: "Completed crawls and rendered product-page evidence",
+    name: "Crawl + rendered-page verification",
     href: "/discoverability-health",
-  },
-  {
-    name: "Storefront signals",
-    detail: "Commerce events, errors, friction and performance",
-    href: "/purchase-health",
   },
 ];
 
@@ -27,46 +17,38 @@ export default function ProofStrip() {
   return (
     <section
       aria-labelledby="evidence-sources-title"
-      className="border-y border-rule bg-panel"
+      className="border-y border-rule bg-surface"
     >
-      <div className="mx-auto max-w-[88rem] px-6 py-8">
-        <div className="grid gap-7 lg:grid-cols-[minmax(14rem,0.55fr)_minmax(0,1.45fr)] lg:items-start">
-          <div>
-            <h2
-              id="evidence-sources-title"
-              className="text-[15px] font-semibold text-ink"
-            >
-              Evidence from systems already around your store.
-            </h2>
-            <p className="mt-2 max-w-sm text-[13px] leading-relaxed text-muted-foreground">
-              Each source contributes a different part of the answer. Beseam
-              keeps its freshness visible.
-            </p>
-          </div>
-          <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-2 xl:grid-cols-4">
-            {SOURCES.map((source) => (
-              <li key={source.name} className="bg-panel">
-                <Link
-                  href={source.href}
-                  className="group block min-h-full px-5 py-4 focus-visible:ring-2 focus-visible:ring-primary"
-                >
-                  <span className="flex items-center justify-between gap-3 text-[13px] font-semibold text-ink">
-                    {source.name}
-                    <span
-                      aria-hidden
-                      className="text-primary transition-transform group-hover:translate-x-0.5"
-                    >
-                      →
-                    </span>
-                  </span>
-                  <span className="mt-2 block text-[12px] leading-relaxed text-muted-foreground">
-                    {source.detail}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="mx-auto grid max-w-6xl gap-x-8 gap-y-4 px-6 py-7 sm:grid-cols-[minmax(0,19rem)_1fr] sm:items-baseline">
+        <h2
+          id="evidence-sources-title"
+          className="text-[13px] font-semibold uppercase tracking-[0.08em] text-muted-foreground"
+        >
+          Built from signals your team already relies on
+        </h2>
+        <ul className="flex flex-wrap items-baseline gap-y-1 text-[15px] font-semibold text-ink">
+          {SOURCES.map((source, index) => (
+            <li key={source.name} className="flex items-baseline">
+              {index > 0 ? (
+                <span aria-hidden className="mx-3 text-muted-foreground/60">
+                  ·
+                </span>
+              ) : null}
+              <Link
+                href={source.href}
+                className="text-ink underline-offset-4 hover:text-primary hover:underline focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                {source.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="text-[13px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+          Designed for
+        </p>
+        <p className="text-[15px] font-medium text-foreground">
+          Ecommerce · SEO · Content · Development
+        </p>
       </div>
     </section>
   );

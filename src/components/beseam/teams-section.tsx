@@ -19,7 +19,7 @@ export default function TeamsSection() {
   return (
     <section
       id="teams"
-      className="scroll-mt-20 border-t border-rule bg-background"
+      className="scroll-mt-20 border-t border-rule bg-surface"
     >
       <div className="section-pad-tight mx-auto max-w-6xl px-6">
         <Reveal className="max-w-5xl">

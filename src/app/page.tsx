@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 
-import DiscoverabilitySection from "@/components/beseam/discoverability-section";
 import EvidenceSection from "@/components/beseam/evidence-section";
 import FaqSection from "@/components/beseam/faq-section";
 import FinalCtaSection from "@/components/beseam/final-cta-section";
 import FounderSection from "@/components/beseam/founder-section";
+import HealthDomainsSection from "@/components/beseam/health-domains-section";
 import HeroSection from "@/components/beseam/hero-section";
-import HowItWorksSection from "@/components/beseam/how-it-works-section";
+import MobileStickyCta from "@/components/beseam/mobile-sticky-cta";
 import ProblemSection from "@/components/beseam/problem-section";
 import ProofStrip from "@/components/beseam/proof-strip";
-import PurchaseHealthSection from "@/components/beseam/purchase-health-section";
 import StoreHealthModelSection from "@/components/beseam/store-health-model-section";
 import TeamsSection from "@/components/beseam/teams-section";
 import CookieConsent from "@/components/cookie-consent";
@@ -45,15 +44,14 @@ export default function Home() {
       <HeroSection />
       <ProofStrip />
       <ProblemSection />
+      <HealthDomainsSection />
       <StoreHealthModelSection />
-      <PurchaseHealthSection />
-      <DiscoverabilitySection />
-      <HowItWorksSection />
       <EvidenceSection />
       <TeamsSection />
       <FounderSection />
       <FaqSection />
       <FinalCtaSection />
+      <MobileStickyCta />
       <CookieConsent />
     </>
   );

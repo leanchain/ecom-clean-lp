@@ -13,9 +13,9 @@ const PILOT_STEPS = [
 
 export default function PilotSection() {
   return (
-    <section className="border-t border-rule bg-background">
+    <section className="border-t border-rule bg-surface">
       <div className="section-pad mx-auto max-w-6xl px-6">
-        <div className="rounded-2xl border border-rule bg-surface p-8 md:p-12">
+        <div className="rounded-2xl border border-rule bg-panel p-8 md:p-12">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-14">
             <Reveal>
               <p className="editorial-eyebrow text-primary">The pilot</p>
