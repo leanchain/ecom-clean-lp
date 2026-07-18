@@ -119,8 +119,8 @@ export default function DifferentiationSection() {
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
               Every tool above requires dashboard access, tracking scripts, or
-              developer setup. Beseam works with a single URL &mdash; paste it,
-              and your AI audit starts in seconds.
+              developer setup. Beseam works with a single URL , paste it, and
+              your AI audit starts in seconds.
             </p>
           </div>
         </motion.div>

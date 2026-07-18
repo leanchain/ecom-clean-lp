@@ -4,21 +4,22 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 
-import { ArrowRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
+import BookReviewCta from "@/components/beseam/book-review-cta";
+import TrackedLink from "@/components/beseam/tracked-link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import NavbarLogo from "@/components/ui/navbar-logo";
 import { cn } from "@/lib/utils";
 
-const APP_RECENT_REPORTS_URL = "https://app.beseam.com/analyze";
-const APP_SCAN_URL = "https://app.beseam.com/scan";
+const APP_LOGIN_URL = "https://app.beseam.com/login";
 
 const NAV_LINKS = [
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Recent Reports", href: APP_RECENT_REPORTS_URL },
-  { label: "Fix Sprint", href: "/demo" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Product", href: "/#product" },
+  { label: "How it works", href: "/#how-it-works" },
+  { label: "Who it’s for", href: "/#teams" },
+  { label: "About", href: "/about" },
 ];
 
 export default function BeseamNavbar() {
@@ -26,7 +27,7 @@ export default function BeseamNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
@@ -35,135 +36,107 @@ export default function BeseamNavbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
-        scrolled ? "px-4 py-3" : "",
+        "sticky top-0 z-50 w-full border-b transition-colors duration-200",
+        scrolled
+          ? "border-rule bg-surface/95 backdrop-blur-md"
+          : "border-transparent bg-surface",
       )}
     >
-      <nav
-        className={cn(
-          "transition-all duration-300",
-          scrolled
-            ? "mx-auto max-w-5xl rounded-full border border-border/20 bg-background/50 px-5 shadow-lg shadow-black/5 backdrop-blur-2xl"
-            : "mx-auto max-w-6xl px-4 sm:px-6",
-        )}
+      <a
+        href="#main-content"
+        className="absolute left-4 top-2 -translate-y-20 rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white focus:translate-y-0"
       >
-        <div
-          className={cn(
-            "flex items-center justify-between transition-all duration-300",
-            scrolled ? "h-14" : "h-16",
-          )}
-        >
-          <Link href="/" className="flex items-center">
-            <NavbarLogo className="text-primary" />
+        Skip to content
+      </a>
+      <div className="mx-auto max-w-[88rem] px-4 sm:px-6">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center" aria-label="Beseam home">
+            <NavbarLogo className="text-ink" />
           </Link>
 
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav
+            aria-label="Primary"
+            className="hidden items-center gap-1 lg:flex"
+          >
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="rounded-md px-3 py-2 text-[14px] font-medium text-muted-foreground transition-colors hover:text-ink focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             <ThemeToggle />
-            <Button
-              variant="outline"
-              className="rounded-lg px-6 font-bold"
-              asChild
+            <TrackedLink
+              href={APP_LOGIN_URL}
+              eventName="login_clicked"
+              placement="navbar"
+              className="inline-flex min-h-11 items-center px-2 text-[14px] font-medium text-muted-foreground transition-colors hover:text-ink focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <Link href="https://app.beseam.com/login">Log In</Link>
-            </Button>
-            <Link
-              href={APP_SCAN_URL}
-              className="inline-flex h-9 items-center gap-1.5 rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
-            >
-              Free Scan
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+              Log in
+            </TrackedLink>
+            <BookReviewCta
+              location="navbar"
+              label="Book a Store Health Review"
+              className="min-h-10 px-5 py-2 text-[14px]"
+            />
           </div>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Toggle menu"
-            className="md:hidden"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </Button>
-        </div>
-      </nav>
-
-      {mobileOpen && (
-        <div
-          className="animate-in fade-in fixed inset-0 z-40 bg-background/60 duration-300 md:hidden"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
-
-      {mobileOpen && (
-        <div className="animate-in slide-in-from-right fixed right-0 top-0 z-50 flex h-dvh w-[300px] max-w-[90vw] flex-col border-l border-border bg-background shadow-2xl duration-300 sm:w-[360px] md:hidden">
-          <div className="flex h-14 items-center justify-between border-b border-border/50 px-6">
-            <span className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-              Menu
-            </span>
+          <div className="flex items-center gap-1 lg:hidden">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setMobileOpen(false)}
-              className="hover:bg-accent"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setMobileOpen((value) => !value)}
             >
-              <X className="h-5 w-5" />
+              {mobileOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </Button>
           </div>
+        </div>
+      </div>
 
-          <div className="flex-1 overflow-y-auto px-6 py-8">
-            <nav className="space-y-1">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center rounded-lg p-4 text-base font-medium transition-colors hover:bg-accent"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-
-            <div className="mt-8 space-y-3 border-t border-border/50 pt-8">
-              <Button
-                variant="outline"
-                className="w-full rounded-lg border-primary/20 p-5 text-base font-bold"
-                asChild
-              >
-                <Link
-                  href="https://app.beseam.com/login"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Log In
-                </Link>
-              </Button>
+      {mobileOpen ? (
+        <div
+          id="mobile-navigation"
+          className="absolute inset-x-0 top-16 border-b border-rule bg-surface px-4 py-5 lg:hidden"
+        >
+          <nav aria-label="Mobile" className="flex flex-col gap-1">
+            {NAV_LINKS.map((link) => (
               <Link
-                href={APP_SCAN_URL}
+                key={link.label}
+                href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="flex w-full items-center justify-center rounded-lg bg-primary p-5 text-base font-bold text-primary-foreground shadow-lg transition-all hover:bg-primary/90"
+                className="rounded-md px-3 py-3 text-[15px] font-medium text-ink hover:bg-panel focus-visible:ring-2 focus-visible:ring-primary"
               >
-                Run Free Scan
+                {link.label}
               </Link>
-            </div>
+            ))}
+            <TrackedLink
+              href={APP_LOGIN_URL}
+              eventName="login_clicked"
+              placement="navbar_mobile"
+              onClick={() => setMobileOpen(false)}
+              className="rounded-md px-3 py-3 text-[15px] font-medium text-muted-foreground hover:bg-panel focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              Log in
+            </TrackedLink>
+          </nav>
+          <div className="mt-4 border-t border-rule pt-4">
+            <BookReviewCta location="navbar_mobile" className="w-full" />
           </div>
         </div>
-      )}
+      ) : null}
     </header>
   );
 }

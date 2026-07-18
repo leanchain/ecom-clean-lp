@@ -11,55 +11,42 @@ import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 
 const figtree = Figtree({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
   variable: "--font-figtree",
-  display: "swap",
+  display: "optional",
   preload: true,
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Beseam — Free Shopify AI Visibility Scan",
+    default: "Beseam — Store Health for Shopify",
     template: "%s | Beseam",
   },
   description:
-    "Paste one Shopify product page and see what ChatGPT, Google AI Mode, and Perplexity can actually understand — plus the first fix worth making.",
-  keywords: [
-    "Beseam",
-    "Shopify AI visibility scan",
-    "Shopify product page audit",
-    "ChatGPT shopping visibility",
-    "Google AI shopping readiness",
-    "Perplexity product visibility",
-    "Shopify structured data audit",
-    "product page AI scan",
-  ],
+    "Monitor Shopify discoverability, technical SEO and purchase-health signals in one evidence-backed workspace. See what changed and what to fix first.",
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
   publisher: "Beseam",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || "https://beseam.com",
   ),
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
   icons: {
     icon: [
       { url: "/favicon/favicon.ico", sizes: "48x48" },
       { url: "/favicon/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon/favicon.ico" },
+      {
+        url: "/favicon/favicon-96x96.png",
+        sizes: "96x96",
+        type: "image/png",
+      },
     ],
     apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180" }],
-    shortcut: [{ url: "/favicon/favicon.ico" }],
   },
   openGraph: {
-    title: "Beseam — Free Shopify AI Visibility Scan",
+    title: "Beseam — Store Health for Shopify",
     description:
-      "Run a free scan on one Shopify product page and see what AI shoppers can actually understand, trust, and recommend.",
+      "Know when your Shopify store loses visibility or the purchase experience degrades—and know what to fix first.",
+    url: "/",
     siteName: "Beseam",
     type: "website",
     images: [
@@ -67,29 +54,25 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Beseam — Free Shopify AI Visibility Scan",
+        alt: "Beseam Store Health for Shopify",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam — Free Shopify AI Visibility Scan",
+    title: "Beseam — Store Health for Shopify",
     description:
-      "Paste one Shopify product page and see what AI shoppers can actually understand — plus the first fix worth making.",
+      "One evidence-backed view of Shopify discoverability, purchase health and monitoring coverage.",
     images: ["/og-image.png"],
-    creator: "@Beseam",
-    site: "@Beseam",
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${figtree.variable} antialiased`}>
+      <body className={figtree.variable}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -99,7 +82,9 @@ export default function RootLayout({
             <AnalyticsScripts />
             <div className="flex min-h-screen flex-col bg-background">
               <BeseamNavbar />
-              <main className="flex-1">{children}</main>
+              <main id="main-content" tabIndex={-1} className="flex-1">
+                {children}
+              </main>
               <BeseamFooter />
             </div>
           </CookieConsentProvider>

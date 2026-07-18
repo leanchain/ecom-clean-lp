@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import { motion } from "framer-motion";
-import { Check, Lock, Shield, Star } from "lucide-react";
+import { Check, Lock, Shield } from "lucide-react";
 
 const platforms = [
   { name: "ChatGPT", logo: "/images/ai-platforms/chatgpt.svg" },
@@ -11,23 +11,6 @@ const platforms = [
   { name: "Gemini", logo: "/images/ai-platforms/gemini.svg" },
   { name: "AI Mode", logo: "/images/ai-platforms/ai-mode.svg" },
   { name: "Perplexity", logo: "/images/ai-platforms/perplexity.svg" },
-];
-
-const testimonials = [
-  {
-    name: "Bettina Gimenez",
-    role: "Founder, DancingQueens",
-    image: "/images/testimonials/bettina.jpeg",
-    quote:
-      "Beseam completely changed how AI engines understand our products. We went from invisible to recommended — and saw it in our traffic within weeks.",
-  },
-  {
-    name: "Sharon Bottana",
-    role: "E-commerce Manager, DancingQueens",
-    image: "/images/testimonials/sharon.jpeg",
-    quote:
-      "We used to wonder why ChatGPT never mentioned us. Beseam showed us exactly what AI was getting wrong on our pages — and the fixes were live in a day.",
-  },
 ];
 
 const complianceItems = [
@@ -46,7 +29,7 @@ const enterpriseFeatures = [
 
 export default function TrustSection() {
   return (
-    <section className="bg-muted/30 px-4 py-20 sm:px-6 md:py-28">
+    <section className="bg-background px-4 py-20 sm:px-6 md:py-32">
       <div className="container max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -99,47 +82,6 @@ export default function TrustSection() {
             ))}
           </div>
         </motion.div>
-
-        {/* Testimonials */}
-        <div className="mb-12 grid gap-5 md:grid-cols-2">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="rounded-2xl border border-border bg-background p-6"
-            >
-              <div className="mb-3 flex gap-0.5">
-                {Array.from({ length: 5 }).map((_, j) => (
-                  <Star
-                    key={j}
-                    className="h-4 w-4 fill-amber-400 text-amber-400"
-                  />
-                ))}
-              </div>
-              <p className="text-sm italic leading-relaxed text-foreground/80">
-                &ldquo;{t.quote}&rdquo;
-              </p>
-              <div className="mt-4 flex items-center gap-3">
-                <Image
-                  src={t.image}
-                  alt={t.name}
-                  width={40}
-                  height={40}
-                  className="rounded-full object-cover"
-                />
-                <div>
-                  <p className="text-sm font-semibold text-foreground">
-                    {t.name}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{t.role}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
 
         {/* Compliance + Enterprise grid */}
         <div className="grid gap-5 md:grid-cols-2">

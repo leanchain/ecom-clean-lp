@@ -1,44 +1,59 @@
-import BeforeAfterAISection from "@/components/beseam/before-after-ai-section";
+import type { Metadata } from "next";
+
+import DiscoverabilitySection from "@/components/beseam/discoverability-section";
+import EvidenceSection from "@/components/beseam/evidence-section";
 import FaqSection from "@/components/beseam/faq-section";
 import FinalCtaSection from "@/components/beseam/final-cta-section";
-import FindsFixesSection from "@/components/beseam/finds-fixes-section";
+import FounderSection from "@/components/beseam/founder-section";
 import HeroSection from "@/components/beseam/hero-section";
 import HowItWorksSection from "@/components/beseam/how-it-works-section";
-import OutcomesSection from "@/components/beseam/outcomes-section";
 import ProblemSection from "@/components/beseam/problem-section";
-import TrustSection from "@/components/beseam/trust-section";
-import WorkspacePreviewSection from "@/components/beseam/workspace-preview-section";
+import ProofStrip from "@/components/beseam/proof-strip";
+import PurchaseHealthSection from "@/components/beseam/purchase-health-section";
+import StoreHealthModelSection from "@/components/beseam/store-health-model-section";
+import TeamsSection from "@/components/beseam/teams-section";
 import CookieConsent from "@/components/cookie-consent";
-import MobileStickyCta from "@/components/beseam/mobile-sticky-cta";
+import { STORE_HEALTH_FAQS } from "@/lib/store-health-faqs";
+
+export const metadata: Metadata = {
+  title: { absolute: "Beseam — Store Health for Shopify" },
+  description:
+    "Monitor Shopify discoverability, technical SEO, purchase-health signals and source freshness in one evidence-backed workspace. See what changed and what to fix first.",
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: STORE_HEALTH_FAQS.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
     <>
-      {/* 1. Hero — category-defining headline + CTAs */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <HeroSection />
-
-      {/* 2. Product surface — calm workspace mockup */}
-      <WorkspacePreviewSection />
-
-      {/* 3. Platform pillars — 4 stable product areas */}
-      <OutcomesSection />
-
-      {/* 4. Business value — 3 outcome props */}
+      <ProofStrip />
       <ProblemSection />
-
-      {/* 6. Before/After — how AI interprets your store */}
-      <BeforeAfterAISection />
-
-      {/* 7. Trust — social proof, compliance, enterprise */}
-      <TrustSection />
-
-      {/* 8. FAQ */}
+      <StoreHealthModelSection />
+      <PurchaseHealthSection />
+      <DiscoverabilitySection />
+      <HowItWorksSection />
+      <EvidenceSection />
+      <TeamsSection />
+      <FounderSection />
       <FaqSection />
-
-      {/* 9. Final CTA */}
       <FinalCtaSection />
-
-      <MobileStickyCta />
       <CookieConsent />
     </>
   );

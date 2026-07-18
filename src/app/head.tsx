@@ -6,27 +6,37 @@ export default function Head() {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": `${baseUrl}/#organization`,
+        "@id": baseUrl + "/#organization",
         name: "Beseam",
         url: baseUrl,
-        logo: `${baseUrl}/favicon/favicon-96x96.png`,
+        logo: baseUrl + "/favicon/favicon-96x96.png",
+        sameAs: ["https://www.linkedin.com/company/beseam/"],
       },
       {
         "@type": "WebSite",
-        "@id": `${baseUrl}/#website`,
+        "@id": baseUrl + "/#website",
         url: baseUrl,
         name: "Beseam",
-        publisher: { "@id": `${baseUrl}/#organization` },
+        publisher: { "@id": baseUrl + "/#organization" },
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": baseUrl + "/#store-health",
+        name: "Beseam Store Health",
+        url: baseUrl + "/shopify-store-health",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        description:
+          "An evidence-backed workspace for Shopify discoverability, purchase health and monitoring coverage.",
+        publisher: { "@id": baseUrl + "/#organization" },
       },
     ],
   };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
   );
 }

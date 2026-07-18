@@ -55,7 +55,7 @@ const platforms: Platform[] = [
             www.mystore.com &rsaquo; products &rsaquo; blue-summer-dress
           </p>
           <p className="mt-1 text-lg font-medium text-[#1A0DAB] underline decoration-[#1A0DAB]/30">
-            Blue Summer Dress &mdash; MyStore
+            Blue Summer Dress , MyStore
           </p>
           <p className="mt-1 text-sm leading-snug text-[#4D5156]">
             Buy Blue Summer Dress at MyStore. Wide selection of summer dresses
@@ -77,7 +77,7 @@ const platforms: Platform[] = [
             products &rsaquo; blue-summer-dress
           </p>
           <p className="mt-1 cursor-pointer text-lg font-medium text-[#1A0DAB] underline decoration-[#1A0DAB]/30 hover:decoration-[#1A0DAB]">
-            Blue Summer Dress &mdash; MyStore
+            Blue Summer Dress , MyStore
           </p>
           {/* Stars row — Google's orange #E8710A */}
           <div className="mt-1 flex items-center gap-1.5">
@@ -482,7 +482,7 @@ const platforms: Platform[] = [
           </p>
           <ul className="mt-2 space-y-1 font-serif text-[14px] text-[#3D3929]">
             <li>
-              &bull; <strong>Price:</strong> $49.99 &mdash; currently in stock
+              &bull; <strong>Price:</strong> $49.99 , currently in stock
             </li>
             <li>
               &bull; <strong>Rating:</strong> 4.8/5 from 127 reviews
@@ -662,7 +662,7 @@ export default function BeforeAfterSection() {
             The Difference
           </p>
           <h2 className="font-heading mb-4 text-3xl font-bold tracking-tight md:text-5xl">
-            How AI sees your products &mdash; before &amp; after
+            How AI sees your products , before &amp; after
           </h2>
           <p className="text-muted-foreground mx-auto max-w-2xl text-lg leading-relaxed">
             Without structured data, AI engines skip your products or show

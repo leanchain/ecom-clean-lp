@@ -318,7 +318,7 @@ function ChatGPTCarouselPanel() {
                 </p>
               </div>
               <div className="mt-3 flex gap-1.5">
-                <button className="flex-1 rounded-lg bg-[#0D0D0D] px-2.5 py-1.5 text-[10px] font-semibold text-white transition-colors hover:bg-[#2D2D2D]">
+                <button className="flex-1 rounded-lg bg-foreground px-2.5 py-1.5 text-[10px] font-semibold text-background transition-colors hover:bg-foreground/90">
                   View Product
                 </button>
                 <button className="rounded-lg border border-[#E5E5E5] px-2.5 py-1.5 text-[10px] font-medium text-[#6E6E80] transition-colors hover:bg-[#F7F7F8]">
@@ -478,7 +478,7 @@ const supportingPlatforms: SupportingPlatform[] = [
             www.mystore.com &rsaquo; products &rsaquo; blue-summer-dress
           </p>
           <p className="mt-1 text-lg font-medium text-[#1A0DAB] underline decoration-[#1A0DAB]/30">
-            Blue Summer Dress &mdash; MyStore
+            Blue Summer Dress , MyStore
           </p>
           <p className="mt-1 text-sm leading-snug text-[#4D5156]">
             Buy Blue Summer Dress at MyStore. Wide selection of summer dresses
@@ -511,7 +511,7 @@ const supportingPlatforms: SupportingPlatform[] = [
               </div>
             </div>
             <p className="mt-1.5 cursor-pointer text-[18px] font-medium leading-tight text-[#1A0DAB] hover:underline">
-              Summer Dresses Collection &mdash; MyStore
+              Summer Dresses Collection , MyStore
             </p>
             <div className="mt-1 flex items-center gap-1.5">
               <Stars color="text-[#E8710A]" size={13} />
@@ -615,7 +615,7 @@ const supportingPlatforms: SupportingPlatform[] = [
         </div>
       ),
       wins: [
-        "Shopping module with product images — 3× higher CTR",
+        "Shopping module with product images — higher CTR before the click",
         "Price range, variants & stock visible before the click",
         "Multi-product strip captures comparison shoppers",
       ],
@@ -1272,22 +1272,22 @@ function SupportingPlatformView({
   return (
     <div className="grid gap-5 md:grid-cols-2">
       {/* Before */}
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-        <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3">
-          <span className="h-2 w-2 rounded-full bg-red-400" />
-          <span className="text-sm font-semibold text-white/80">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <div className="flex items-center gap-2 border-b border-border px-5 py-3">
+          <span className="h-2 w-2 rounded-full bg-red-500" />
+          <span className="text-sm font-semibold text-foreground">
             Without Beseam
           </span>
         </div>
         <div className="px-4 pb-3 pt-4">{platform.before.content}</div>
-        <div className="border-t border-red-500/10 bg-red-500/[0.04] px-4 py-3">
+        <div className="border-t border-red-200 bg-red-50 px-4 py-3">
           <ul className="space-y-2">
             {platform.before.issues.map((item) => (
               <li key={item} className="flex items-start gap-2">
-                <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-red-500/15">
-                  <X className="h-2.5 w-2.5 text-red-400" />
+                <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-red-100">
+                  <X className="h-2.5 w-2.5 text-red-600" />
                 </span>
-                <span className="text-[12px] leading-snug text-red-300/80">
+                <span className="text-[12px] leading-snug text-red-700">
                   {item}
                 </span>
               </li>
@@ -1297,22 +1297,22 @@ function SupportingPlatformView({
       </div>
 
       {/* After */}
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-        <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3">
-          <span className="h-2 w-2 rounded-full bg-emerald-400" />
-          <span className="text-sm font-semibold text-white/80">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <div className="flex items-center gap-2 border-b border-border px-5 py-3">
+          <span className="h-2 w-2 rounded-full bg-emerald-500" />
+          <span className="text-sm font-semibold text-foreground">
             After Beseam
           </span>
         </div>
         <div className="px-4 pb-3 pt-4">{platform.after.content}</div>
-        <div className="border-t border-emerald-500/10 bg-emerald-500/[0.04] px-4 py-3">
+        <div className="border-t border-emerald-200 bg-emerald-50 px-4 py-3">
           <ul className="space-y-2">
             {platform.after.wins.map((item) => (
               <li key={item} className="flex items-start gap-2">
-                <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500/15">
-                  <Check className="h-2.5 w-2.5 text-emerald-400" />
+                <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-100">
+                  <Check className="h-2.5 w-2.5 text-emerald-600" />
                 </span>
-                <span className="text-[12px] leading-snug text-emerald-300/80">
+                <span className="text-[12px] leading-snug text-emerald-700">
                   {item}
                 </span>
               </li>
@@ -1335,10 +1335,10 @@ export default function BeforeAfterAISection() {
   );
 
   return (
-    <section className="relative bg-[#0D0D0D] px-4 py-20 sm:px-6 md:py-32">
+    <section className="relative bg-primary/5 px-4 py-20 sm:px-6 md:py-32">
       {/* Glow */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[500px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(16,163,127,0.08),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[500px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,96,65,0.08),transparent_70%)]"
         aria-hidden
       />
 
@@ -1351,16 +1351,16 @@ export default function BeforeAfterAISection() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#10A37F]">
-            Recent reports
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+            How AI sees your store
           </p>
-          <h2 className="font-heading text-3xl font-bold tracking-tight text-white md:text-5xl">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             What an AI-ready product page looks like{" "}
-            <span className="bg-linear-to-r from-[#10A37F] to-[#1A73E8] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
               before &amp; after
             </span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/60">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
             The free scan is meant to make the gap obvious: what AI shoppers see
             today, what richer product context looks like, and why better price,
             review, shipping, and product signals matter.
@@ -1382,8 +1382,8 @@ export default function BeforeAfterAISection() {
               className={cn(
                 "flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all",
                 activePlatform === tab.id
-                  ? "border-white/20 bg-white text-[#0D0D0D] shadow-sm"
-                  : "border-white/10 bg-white/5 text-white/60 hover:border-white/20 hover:text-white",
+                  ? "border-transparent bg-foreground text-background shadow-sm"
+                  : "border-border bg-background text-muted-foreground hover:border-foreground/30 hover:text-foreground",
               )}
             >
               <Image
@@ -1414,7 +1414,7 @@ export default function BeforeAfterAISection() {
               transition={{ duration: 0.2 }}
               className="overflow-hidden"
             >
-              <div className="mx-auto mb-8 flex w-fit items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur">
+              <div className="mx-auto mb-8 flex w-fit items-center gap-1 rounded-full border border-border bg-background p-1 backdrop-blur">
                 {chatgptTabs.map((tab) => (
                   <button
                     key={tab.id}
@@ -1422,8 +1422,8 @@ export default function BeforeAfterAISection() {
                     className={cn(
                       "rounded-full px-5 py-2 text-sm font-medium transition-all",
                       chatgptTab === tab.id
-                        ? "bg-white text-[#0D0D0D] shadow-sm"
-                        : "text-white/60 hover:text-white",
+                        ? "bg-foreground text-background shadow-sm"
+                        : "text-muted-foreground hover:text-foreground",
                     )}
                   >
                     {tab.label}
@@ -1498,10 +1498,10 @@ export default function BeforeAfterAISection() {
           ].map((item) => (
             <div
               key={item.stat}
-              className="rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-center"
+              className="rounded-xl border border-border bg-background px-5 py-4 text-center"
             >
-              <p className="text-sm font-bold text-white">{item.stat}</p>
-              <p className="mt-1 text-[11px] leading-snug text-white/40">
+              <p className="text-sm font-bold text-foreground">{item.stat}</p>
+              <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
                 {item.label}
               </p>
             </div>
@@ -1514,11 +1514,11 @@ export default function BeforeAfterAISection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-10 text-center text-sm text-white/40"
+          className="mt-10 text-center text-sm text-muted-foreground"
         >
           Stores with complete structured data are{" "}
-          <span className="font-semibold text-white/70">
-            up to 3× more likely to appear as rich product cards
+          <span className="font-semibold text-foreground">
+            far more likely to appear as rich product cards
           </span>{" "}
           in ChatGPT, Perplexity, Google AI, and other AI shopping assistants.
         </motion.p>

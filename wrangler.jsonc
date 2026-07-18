@@ -1,8 +1,38 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "beseam",
   "main": "main.js",
-  "compatibility_date": "2025-12-12",
+  "compatibility_date": "2026-07-18",
   "assets": {
-    "directory": "./out"
-  }
+    "directory": "./out",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*",
+      "/demo",
+      "/product",
+      "/scan",
+      "/free-scan",
+      "/ai-visibility-scan",
+      "/pdp-analyzer",
+      "/example-pdp",
+      "/optimised-pdp",
+      "/reports",
+      "/alternatives",
+      "/alternatives/*",
+      "/audit/*",
+      "/compare",
+      "/comparison",
+      "/old",
+    ],
+  },
+  "send_email": [
+    {
+      "name": "REVIEW_EMAIL",
+      "destination_address": "contact@beseam.com",
+      "allowed_sender_addresses": ["website@beseam.com"],
+    },
+  ],
+  "observability": {
+    "enabled": true,
+  },
 }

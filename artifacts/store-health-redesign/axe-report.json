@@ -1,0 +1,27 @@
+[
+  {
+    "pathname": "/",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "pathname": "/",
+    "width": 430,
+    "violations": []
+  },
+  {
+    "pathname": "/about",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "pathname": "/store-health-review",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "pathname": "/tools/ai-visibility-scan",
+    "width": 430,
+    "violations": []
+  }
+]

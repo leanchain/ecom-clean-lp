@@ -12,8 +12,13 @@ const Logo: React.FC<LogoProps> = ({
 }) => {
   return (
     <div className={cn("flex items-center", wrapperClassName)}>
-      <Link href="/" className={cn("inline-flex items-center", className)}>
+      <Link
+        href="/"
+        aria-label="Beseam home"
+        className={cn("inline-flex items-center", className)}
+      >
         <svg
+          aria-hidden="true"
           width="95"
           height="26"
           viewBox="2 0 95 26"

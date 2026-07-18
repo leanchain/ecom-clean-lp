@@ -1,0 +1,16 @@
+# Host-level legacy redirects. Query parameters are preserved by supported hosts.
+/demo  /store-health-review  301
+/product  /shopify-store-health  301
+/scan  /tools/ai-visibility-scan  301
+/free-scan  /tools/ai-visibility-scan  301
+/ai-visibility-scan  /tools/ai-visibility-scan  301
+/pdp-analyzer  /tools/ai-visibility-scan  301
+/example-pdp  /tools/ai-visibility-scan  301
+/optimised-pdp  /tools/ai-visibility-scan  301
+/reports  /tools/ai-visibility-scan  301
+/audit/*  /tools/ai-visibility-scan  301
+/alternatives  /shopify-store-health  301
+/alternatives/*  /shopify-store-health  301
+/compare  /shopify-store-health  301
+/comparison  /shopify-store-health  301
+/old  /  301

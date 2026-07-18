@@ -1,82 +1,62 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { X } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
 
-const CookieConsent = () => {
+export default function CookieConsent() {
   const { status, accept, decline } = useCookieConsent();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (status === "undecided") {
-      // Show popup after a short delay
-      const timer = setTimeout(() => setIsVisible(true), 1500);
-      return () => clearTimeout(timer);
-    } else {
-      setIsVisible(false);
-    }
+    const timer =
+      status === "undecided"
+        ? window.setTimeout(() => setIsVisible(true), 400)
+        : undefined;
+    if (status !== "undecided") setIsVisible(false);
+    return () => {
+      if (timer) window.clearTimeout(timer);
+    };
   }, [status]);
-
-  const handleAccept = () => {
-    accept();
-    setIsVisible(false);
-  };
-
-  const handleDecline = () => {
-    decline();
-    setIsVisible(false);
-  };
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-x-4 bottom-20 z-40 mx-auto max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-300 sm:bottom-4 sm:left-4 sm:right-auto sm:mx-0">
-      <div className="rounded-2xl border bg-card p-5 shadow-xl">
+    <aside
+      aria-label="Cookie choices"
+      className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-md rounded-2xl border border-rule bg-panel p-5 shadow-lg sm:left-5 sm:right-auto sm:mx-0"
+    >
+      <h2 className="text-[15px] font-semibold text-ink">
+        Your privacy choices
+      </h2>
+      <p className="mt-2 text-[13.5px] leading-relaxed text-foreground">
+        Essential cookies keep the site working. We load optional analytics only
+        if you accept, so we can understand how the public website is used.
+      </p>
+      <Link
+        href="/privacy-policy"
+        className="mt-2 inline-block min-h-11 py-2 text-[13px] font-medium hover:underline"
+      >
+        Read the privacy policy
+      </Link>
+      <div className="mt-3 grid grid-cols-2 gap-2">
         <button
-          onClick={handleDecline}
-          className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-colors"
-          aria-label="Close"
+          type="button"
+          onClick={decline}
+          className="min-h-11 rounded-full border border-rule px-4 text-[14px] font-semibold text-ink transition-colors hover:border-ink/30"
         >
-          <X className="h-4 w-4" />
+          Reject analytics
         </button>
-
-        <div className="pr-6">
-          <p className="text-sm text-foreground">
-            Like many websites, we use cookies to enhance your experience and
-            analyze site usage.
-          </p>
-          <Link
-            href="/privacy-policy"
-            className="mt-1 inline-block text-xs text-primary hover:underline"
-          >
-            Learn more about our cookie policy
-          </Link>
-        </div>
-
-        <div className="mt-4 flex gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleDecline}
-            className="flex-1 rounded-full text-sm"
-          >
-            Decline
-          </Button>
-          <Button
-            size="sm"
-            onClick={handleAccept}
-            className="flex-1 rounded-full text-sm"
-          >
-            Accept
-          </Button>
-        </div>
+        <button
+          type="button"
+          onClick={accept}
+          className="min-h-11 rounded-full bg-primary px-4 text-[14px] font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)]"
+        >
+          Accept analytics
+        </button>
       </div>
-    </div>
+    </aside>
   );
-};
-
-export default CookieConsent;
+}

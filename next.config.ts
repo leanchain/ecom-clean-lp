@@ -6,6 +6,9 @@ const withMDX = createMDX({
 });
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: "./",
+  },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 
   // Skip ESLint during production builds (run separately in CI/CD)
