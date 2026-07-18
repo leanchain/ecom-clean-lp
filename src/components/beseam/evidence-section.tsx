@@ -33,7 +33,7 @@ const EXAMPLES = [
 
 export default function EvidenceSection() {
   return (
-    <section className="border-t border-rule bg-background">
+    <section className="border-t border-rule bg-surface">
       <div className="section-pad-tight mx-auto max-w-6xl px-6">
         <div className="max-w-4xl">
           <p className="text-[14px] font-semibold text-primary">
@@ -53,7 +53,7 @@ export default function EvidenceSection() {
           {EXAMPLES.map((example, index) => (
             <article
               key={example.title}
-              className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-14"
+              className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-14"
             >
               <div className={index === 1 ? "lg:order-2" : ""}>
                 <p className="text-[13px] font-semibold text-primary">
@@ -65,7 +65,7 @@ export default function EvidenceSection() {
                 <p className="mt-4 text-[16px] leading-relaxed text-foreground">
                   {example.body}
                 </p>
-                <dl className="mt-7 border-y border-rule text-[13px]">
+                <dl className="mt-7 border-y border-rule text-[14px]">
                   {[
                     ["Evidence source", example.source],
                     ["Affected scope", example.scope],
@@ -74,7 +74,7 @@ export default function EvidenceSection() {
                   ].map(([term, value]) => (
                     <div
                       key={term}
-                      className="grid grid-cols-[7.5rem_1fr] gap-4 border-b border-rule py-3 last:border-b-0"
+                      className="grid grid-cols-[8rem_1fr] gap-4 border-b border-rule py-3 last:border-b-0"
                     >
                       <dt className="text-muted-foreground">{term}</dt>
                       <dd className="font-semibold text-ink">{value}</dd>
@@ -83,7 +83,7 @@ export default function EvidenceSection() {
                 </dl>
                 <Link
                   href={example.href}
-                  className="mt-5 inline-flex min-h-11 items-center font-semibold text-primary underline-offset-4 hover:underline"
+                  className="mt-5 inline-flex min-h-11 items-center font-semibold text-ink underline-offset-4 hover:text-primary hover:underline"
                 >
                   {example.linkLabel} →
                 </Link>
@@ -91,11 +91,11 @@ export default function EvidenceSection() {
 
               <div
                 className={
-                  "overflow-hidden border border-rule bg-panel " +
+                  "overflow-hidden border border-rule bg-panel shadow-[0_1px_2px_rgba(23,23,27,0.04),0_16px_40px_-20px_rgba(23,23,27,0.22)] " +
                   (index === 1 ? "lg:order-1" : "")
                 }
               >
-                <div className="flex items-center justify-between gap-4 border-b border-rule px-4 py-3 text-[12px] font-medium text-muted-foreground">
+                <div className="flex items-center justify-between gap-4 border-b border-rule px-4 py-3 text-[13px] font-medium text-muted-foreground">
                   <span>Example Store Health workspace</span>
                   <span className="text-primary">Impact not calculated</span>
                 </div>
@@ -104,7 +104,7 @@ export default function EvidenceSection() {
                   alt={example.alt}
                   width={1000}
                   height={879}
-                  sizes="(min-width: 1024px) 54vw, 94vw"
+                  sizes="(min-width: 1024px) 62vw, 94vw"
                   className="h-auto w-full"
                 />
               </div>

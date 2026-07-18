@@ -52,7 +52,7 @@ export default function AboutPage() {
       </section>
 
       {/* 2. Founder story — qualitative framing, real background, no inflated metrics */}
-      <section className="border-t border-rule bg-background">
+      <section className="border-t border-rule bg-surface">
         <div className="section-pad mx-auto max-w-6xl px-6">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-16">
             <Reveal>

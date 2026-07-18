@@ -21,13 +21,12 @@ export default function FounderSection() {
         <Reveal>
           <p className="text-[13px] font-semibold text-brand">Why Beseam</p>
           <h2 className="editorial-heading mt-4 text-white">
-            Built by an engineer who spent his career making large systems
-            measurable and reliable.
+            Built by Pankaj Kumar, a former Google and Amazon engineer focused
+            on measurement, reliability and large-scale data systems.
           </h2>
           <p className="mt-6 max-w-3xl text-[17px] leading-relaxed text-white/72">
-            Beseam was founded by Pankaj Kumar, a former Google and Amazon
-            engineer focused on measurement, reliability and data
-            infrastructure—now applied to Shopify store health.
+            Beseam applies that reliability mindset to the changes, signals and
+            failures that are otherwise difficult to see inside a Shopify store.
           </p>
 
           <div className="mt-8 grid border-y border-white/16 sm:grid-cols-2">

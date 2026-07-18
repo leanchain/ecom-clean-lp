@@ -24,7 +24,7 @@ const CHANGE_PATHS = [
 
 export default function ProblemSection() {
   return (
-    <section className="border-t border-rule bg-background">
+    <section className="border-t border-rule bg-surface">
       <div className="section-pad-tight mx-auto max-w-6xl px-6">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-20">
           <div>

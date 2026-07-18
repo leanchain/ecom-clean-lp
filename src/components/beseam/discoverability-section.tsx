@@ -27,7 +27,7 @@ export default function DiscoverabilitySection() {
   return (
     <section
       id="discoverability-health"
-      className="scroll-mt-20 border-t border-rule bg-background"
+      className="scroll-mt-20 border-t border-rule bg-surface"
     >
       <div className="section-pad-tight mx-auto max-w-6xl px-6">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.65fr)] lg:items-end lg:gap-20">
@@ -79,7 +79,7 @@ export default function DiscoverabilitySection() {
           ))}
         </div>
 
-        <div className="mt-8 border border-rule bg-surface px-6 py-5 md:flex md:items-center md:justify-between md:gap-10">
+        <div className="mt-8 border border-rule bg-panel px-6 py-5 md:flex md:items-center md:justify-between md:gap-10">
           <p className="max-w-3xl text-[14px] leading-relaxed text-foreground">
             Current Store Health normalizes channel-readiness gaps and
             product-page verification findings. It also reports crawl and Search

@@ -155,7 +155,7 @@ export default function MarketingDetailPage({
       </section>
 
       <section className="border-b border-technical-rule bg-technical text-white">
-        <div className="section-pad-tight mx-auto max-w-[88rem] px-6">
+        <div className="section-pad-tight mx-auto max-w-6xl px-6">
           <div className="max-w-4xl">
             <p className="text-[14px] font-semibold text-brand">
               The evidence path
@@ -304,7 +304,7 @@ export default function MarketingDetailPage({
       </section>
 
       <section className="bg-brand text-brand-foreground">
-        <div className="section-pad mx-auto max-w-5xl px-6">
+        <div className="section-pad mx-auto max-w-6xl px-6">
           <h2 className="editorial-heading max-w-4xl">
             Start with the health of your actual store.
           </h2>
