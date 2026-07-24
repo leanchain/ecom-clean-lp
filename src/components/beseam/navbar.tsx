@@ -6,7 +6,7 @@ import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 
 import BookReviewCta from "@/components/beseam/book-review-cta";
 import TrackedLink from "@/components/beseam/tracked-link";
-import NavbarLogo from "@/components/ui/navbar-logo";
+import Logo from "@/components/beseam/logo";
 import { cn } from "@/lib/utils";
 
 const APP_LOGIN_URL = "https://app.beseam.com/login";
@@ -20,13 +20,13 @@ const PRODUCT_SYSTEMS = [
   },
   {
     name: "Decide",
-    statement: "Know which issue deserves attention first.",
+    statement: "Revenue-sensitive issues rise above operational noise.",
     products: ["Foundation", "Analytics", "Optimization"],
     href: "/#foundation",
   },
   {
     name: "Act",
-    statement: "Change the product, page, campaign, or creative behind the issue.",
+    statement: "Improve the commerce object, not another internal dashboard.",
     products: ["Commerce Readiness", "Advertising", "Creative Studio"],
     href: "/#advertising",
   },
@@ -63,7 +63,7 @@ export default function BeseamNavbar() {
       <div className="mx-auto max-w-[92rem] px-5 sm:px-8 lg:px-10">
         <div className="flex h-[4.5rem] items-center justify-between">
           <Link href="/" className="flex items-center" aria-label="Beseam home">
-            <NavbarLogo className="text-[#111318]" />
+            <Logo className="text-[#111318]" />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center lg:flex">

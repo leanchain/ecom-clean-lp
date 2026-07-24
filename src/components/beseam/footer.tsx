@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import TrackedLink from "@/components/beseam/tracked-link";
-import NavbarLogo from "@/components/ui/navbar-logo";
+import Logo from "@/components/beseam/logo";
 
 const FOOTER_GROUPS = [
   {
@@ -37,19 +37,19 @@ export default function BeseamFooter() {
         <div className="grid gap-12 border-b border-white/18 pb-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
           <div>
             <Link href="/" aria-label="Beseam home" className="inline-flex">
-              <NavbarLogo className="text-white" />
+              <Logo className="text-white" inverted />
             </Link>
             <p className="mt-7 max-w-md font-serif text-[31px] leading-[1.1] tracking-[-0.03em] text-white/92">
-              Find the revenue leaks between your commerce systems.
+              Autonomous revenue intelligence for commerce.
             </p>
             <p className="mt-6 max-w-md text-[14px] leading-relaxed text-white/52">
-              Beseam checks the storefront, catalog, customer behavior, AI discovery, and campaigns; ranks the issues; and verifies the result after your team acts.
+              A self-improving revenue agent that works above your existing stack, finds the revenue leaks your stack cannot see, and learns from the outcome.
             </p>
           </div>
 
           <div className="grid grid-cols-3 border-t border-white/18 lg:border-t-0">
             {FOOTER_GROUPS.map((group) => (
-              <div key={group.title} className="border-r border-white/18 py-6 pr-4 last:border-r-0 last:pl-4 sm:px-6 sm:first:pl-0 sm:last:pr-0">
+              <div key={group.title} className="border-r border-white/18 py-6 pr-4 pl-4 first:pl-0 last:border-r-0 sm:px-6 sm:first:pl-0 sm:last:pr-0">
                 <h2 className="font-serif text-[21px] text-white">{group.title}</h2>
                 <ul className="mt-5 space-y-3">
                   {group.links.map(([label, href]) => (
@@ -64,7 +64,7 @@ export default function BeseamFooter() {
         </div>
 
         <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto] lg:items-center lg:gap-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/34">Beseam for ecommerce operators</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/34">Self-improving commerce intelligence</p>
           <Link href="/about" className="text-[12px] text-white/48 hover:text-white">Company</Link>
           <Link href="/privacy-policy" className="text-[12px] text-white/48 hover:text-white">Privacy</Link>
           <Link href="/terms-of-service" className="text-[12px] text-white/48 hover:text-white">Terms</Link>

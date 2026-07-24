@@ -11,16 +11,16 @@ import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "optional", preload: true });
 
 export const metadata: Metadata = {
-  title: { default: "Beseam - Find the revenue leaks between your commerce systems", template: "%s | Beseam" },
-  description: "Beseam checks the storefront, catalog, customer journeys, AI discovery, and campaigns together, shows which issue deserves attention first and verifies the result after your team acts.",
+  title: { default: "Beseam - Autonomous revenue intelligence for commerce", template: "%s | Beseam" },
+  description: "Beseam is a self-improving revenue agent that finds the revenue leaks your commerce stack cannot see, recommends what to change, and learns from the verified outcome.",
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
   publisher: "Beseam",
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://beseam.com"),
   robots: { index: true, follow: true },
   icons: { icon: [{ url: "/favicon/favicon.ico", sizes: "48x48" }, { url: "/favicon/favicon.svg", type: "image/svg+xml" }, { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" }], apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180" }] },
-  openGraph: { title: "Beseam - Find the revenue leaks between your commerce systems", description: "See which product, page, journey, or campaign issue deserves attention first, what to change, and whether the change worked.", url: "/", siteName: "Beseam", type: "website", images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Beseam revenue intelligence platform" }] },
-  twitter: { card: "summary_large_image", title: "Beseam - Find the revenue leaks between your commerce systems", description: "See which issue deserves attention first, what to change, and whether the change worked.", images: ["/og-image.png"] },
+  openGraph: { title: "Beseam - Autonomous revenue intelligence for commerce", description: "A self-improving revenue agent that finds the revenue leaks your stack cannot see, recommends what to change, and learns from the outcome.", url: "/", siteName: "Beseam", type: "website", images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Beseam autonomous revenue intelligence for commerce" }] },
+  twitter: { card: "summary_large_image", title: "Beseam - Autonomous revenue intelligence for commerce", description: "A self-improving revenue agent that finds the revenue leaks your stack cannot see and learns from the outcome.", images: ["/og-image.png"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

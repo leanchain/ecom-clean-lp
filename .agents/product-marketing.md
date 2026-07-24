@@ -4,11 +4,11 @@
 **Last updated:** 2026-07-24
 
 ## Product Overview
-**One-liner:** Beseam finds the revenue leaks between an ecommerce brand's storefront, catalog, customer journeys, discovery channels, and advertising systems, then shows the team which issue to fix first.
+**One-liner:** Beseam is autonomous revenue intelligence for commerce: a self-improving revenue agent that finds the revenue leaks your stack cannot see, turns disconnected evidence into one commercially ranked decision, and learns from the outcome.
 
-**What it does:** Beseam connects to the commerce stack a brand already runs. It checks the customer-facing experience and the underlying commercial evidence, attaches issues to the exact product, page, query, journey, or channel involved, recommends the next action, and verifies the result after the team acts. Each verified result informs how Beseam ranks later issues.
+**What it does:** Beseam works above the commerce stack a brand already runs—not instead of it. It observes the revenue journey from the outside, attaches each issue to the exact product, page, query, journey, or channel involved, recommends the next action, and verifies the result after the team acts. Each verified result improves the next decision.
 
-**Product category:** Ecommerce revenue intelligence and operations
+**Product category:** Autonomous revenue intelligence for commerce
 **Product type:** B2B SaaS for ecommerce brands, operators, and agencies
 **Business model:** Foundation is included with every active contract. Additional products are enabled independently per tenant and store. Some customer-initiated generation uses credits; advertising media spend remains with Google or Meta.
 
@@ -90,9 +90,9 @@
 - "We fixed it, but we cannot prove whether it changed anything."
 - "We find campaign blockers after the budget is approved."
 
-**Words to use:** revenue leak, issue, evidence, product, page, store, campaign, customer journey, next action, approval, verify, booked revenue, attributed revenue, modeled opportunity, freshness.
+**Words to use:** autonomous revenue intelligence, self-improving revenue agent, revenue leak, commercially ranked decision, commerce object, systems of record, evidence, product, page, store, campaign, customer journey, next action, approval, verify, booked revenue, attributed revenue, modeled opportunity, freshness.
 
-**Words to avoid:** revenue surface, operating layer, commercial system, governed intelligence, seamless, optimize outcomes, unlock, transform, powerful, next-generation, single source of truth, autonomous growth, AI-powered.
+**Words to avoid:** revenue surface, commercial system, governed intelligence, seamless, optimize outcomes, unlock, transform, powerful, next-generation, single source of truth, autonomous growth, AI-powered. Use “autonomous” only when the copy also states the evidence, approval, and verification boundaries.
 
 **Glossary:**
 | Term | Meaning |
