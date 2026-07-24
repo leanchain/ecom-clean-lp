@@ -76,7 +76,7 @@ const rightAnnotations: AnnotationCardProps[] = [
 ];
 
 const benefitBullets = [
-  "Deep, AI-readable PDP content for every product — images, video, copy and schema in one flow.",
+  "Deep, AI-readable PDP content for every product - images, video, copy and schema in one flow.",
   "Narrative sections built to answer real shopper questions inside ChatGPT, Gemini and Perplexity.",
   "Drop-in sections that match your brand and slot straight into Shopify, composable and headless stacks.",
 ];
@@ -380,7 +380,7 @@ const LegacyOptimisedPdp = () => {
                           Will this fit my bag or cup holder?
                         </summary>
                         <p className="mt-1 text-[10px] text-muted-foreground">
-                          Yes — the Aurora is 750ml with a slim base designed
+                          Yes - the Aurora is 750ml with a slim base designed
                           for standard holders and backpacks.
                         </p>
                       </details>

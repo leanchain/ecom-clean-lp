@@ -16,7 +16,7 @@ const timeline = [
     etaStyle: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
     dotStyle: "bg-emerald-500",
     description:
-      "24/7 detection of broken checkouts, failed payments, frozen UI, wrong prices — with instant alerts and revenue impact in euros.",
+      "24/7 detection of broken checkouts, failed payments, frozen UI, wrong prices - with instant alerts and revenue impact in euros.",
     active: true,
   },
   {
@@ -26,7 +26,7 @@ const timeline = [
     etaStyle: "bg-primary/10 text-primary border-primary/30",
     dotStyle: "bg-primary",
     description:
-      "Know which visitors are about to buy — and which ones are about to leave. Trigger the right offer at the right moment.",
+      "Know which visitors are about to buy - and which ones are about to leave. Trigger the right offer at the right moment.",
     active: false,
   },
   {
@@ -46,7 +46,7 @@ const timeline = [
     etaStyle: "bg-primary/10 text-primary border-primary/30",
     dotStyle: "bg-white/20",
     description:
-      "A live dashboard of everything affecting your revenue — broken flows, missed opportunities, recovery rate, and trend forecasts.",
+      "A live dashboard of everything affecting your revenue - broken flows, missed opportunities, recovery rate, and trend forecasts.",
     active: false,
   },
 ];
@@ -72,8 +72,7 @@ export default function PlatformVisionSection() {
             <span className="text-white/80"> Tomorrow we grow it.</span>
           </h2>
           <p className="mt-4 mx-auto max-w-xl text-base leading-relaxed text-white/60">
-            Built on the same real-time session data that catches what breaks —
-            we&apos;re building the layer that turns protection into growth.
+            Built on the same real-time session data that catches what breaks -             we&apos;re building the layer that turns protection into growth.
           </p>
         </motion.div>
 
@@ -85,7 +84,7 @@ export default function PlatformVisionSection() {
           transition={{ delay: 0.15, duration: 0.5 }}
           className="relative"
         >
-          {/* Spine line — desktop only */}
+          {/* Spine line - desktop only */}
           <div className="absolute left-5 top-6 hidden h-[calc(100%-3rem)] w-px bg-linear-to-b from-emerald-500/60 via-primary/30 to-white/5 md:block" />
 
           <div className="flex flex-col gap-6">

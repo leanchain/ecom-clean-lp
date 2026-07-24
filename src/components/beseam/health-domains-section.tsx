@@ -1,132 +1,105 @@
 import Link from "next/link";
 
-const STAGES = [
-  "Product page",
-  "Variant",
-  "Add to cart",
-  "Cart",
-  "Checkout",
-  "Purchase",
-];
+import { Activity, Bot, Check } from "lucide-react";
 
-const LAYERS = [
-  { label: "Store state", title: "Shopify catalog and product identity" },
+const PRODUCTS = [
   {
-    label: "Page state",
-    title: "Completed crawls and product-page verification",
+    title: "AI Visibility",
+    eyebrow: "Across AI answers",
+    description:
+      "See when your products appear, what gets cited, and which competitor takes the lead.",
+    points: ["Buyer questions", "Product position", "Citation evidence"],
+    href: "/ai-visibility-monitoring",
+    link: "Explore AI Visibility",
+    icon: Bot,
+    className: "bg-brand text-brand-foreground",
+    mutedClassName: "text-brand-foreground/72",
+    ruleClassName: "border-brand-foreground/20",
+    iconClassName: "text-brand-foreground",
   },
-  { label: "Channel state", title: "Structured product and channel gaps" },
-  { label: "Search source", title: "Search Console connection and freshness" },
   {
-    label: "AI surfaces",
-    title:
-      "Crawler access, brand protection and ranking across AI answer engines",
+    title: "Store Health",
+    eyebrow: "Inside your store",
+    description:
+      "Catch the technical and purchase issues that make products harder to find or buy.",
+    points: [
+      "Purchase friction",
+      "Search and catalog gaps",
+      "Coverage failures",
+    ],
+    href: "/shopify-store-health",
+    link: "Explore Store Health",
+    icon: Activity,
+    className: "bg-technical text-white",
+    mutedClassName: "text-white/68",
+    ruleClassName: "border-white/15",
+    iconClassName: "text-brand",
   },
 ];
 
 export default function HealthDomainsSection() {
   return (
     <section
-      id="store-health-domains"
+      id="product"
       className="scroll-mt-20 border-t border-rule bg-surface"
     >
       <div className="section-pad-tight mx-auto max-w-6xl px-6">
-        <div className="max-w-4xl">
-          <p className="editorial-eyebrow text-primary">Store Health</p>
+        <div className="max-w-3xl">
+          <p className="text-[14px] font-semibold text-primary">Two products</p>
           <h2 className="editorial-heading mt-4 text-ink">
-            One store, two forms of health.
+            Separate jobs. Equal focus.
           </h2>
-          <p className="mt-6 max-w-3xl text-[17px] leading-relaxed text-foreground">
-            Purchasing and discoverability degrade in different ways, so Beseam
-            observes them separately—then connects them in one workspace with
-            the evidence kept visible.
-          </p>
         </div>
 
-        <div className="mt-12 grid gap-px border border-rule bg-rule lg:grid-cols-2">
-          <div
-            id="purchase-health"
-            className="scroll-mt-24 bg-panel p-7 shadow-[0_1px_2px_rgba(23,23,27,0.04),0_8px_24px_-16px_rgba(23,23,27,0.18)] md:p-9"
-          >
-            <p className="text-[14px] font-semibold text-primary">
-              Purchase Health
-            </p>
-            <h3 className="editorial-subheading mt-3 text-ink">
-              Where the buying journey starts to degrade.
-            </h3>
-            <p className="mt-4 text-[15px] leading-relaxed text-foreground">
-              Observed storefront and Shopify commerce signals identify narrow
-              purchase problems an uptime check misses—scoped to the stage and
-              sessions where they were seen.
-            </p>
-            <ol className="mt-7 flex flex-wrap items-center gap-y-2 border-y border-rule py-4 text-[14px] font-medium text-ink">
-              {STAGES.map((stage, index) => (
-                <li key={stage} className="flex items-center">
-                  {index > 0 ? (
-                    <span aria-hidden className="mx-2.5 text-primary">
-                      →
-                    </span>
-                  ) : null}
-                  {stage}
-                </li>
-              ))}
-            </ol>
-            <p className="mt-4 text-[13px] leading-relaxed text-muted-foreground">
-              Commerce events, JavaScript and form errors, rage clicks and
-              abandonment—with session, device and funnel context.
-            </p>
-            <Link
-              href="/purchase-health"
-              className="mt-6 inline-flex min-h-11 items-center font-semibold text-ink underline-offset-4 hover:text-primary hover:underline"
+        <div className="mt-10 grid lg:grid-cols-2">
+          {PRODUCTS.map((product) => (
+            <article
+              key={product.title}
+              className={`flex min-h-[28rem] flex-col p-7 md:p-10 ${product.className}`}
             >
-              Explore Purchase Health →
-            </Link>
-          </div>
-
-          <div
-            id="discoverability-health"
-            className="scroll-mt-24 bg-panel p-7 shadow-[0_1px_2px_rgba(23,23,27,0.04),0_8px_24px_-16px_rgba(23,23,27,0.18)] md:p-9"
-          >
-            <p className="text-[14px] font-semibold text-primary">
-              Discoverability Health
-            </p>
-            <h3 className="editorial-subheading mt-3 text-ink">
-              Whether products can still be found.
-            </h3>
-            <p className="mt-4 text-[15px] leading-relaxed text-foreground">
-              Discoverability is not one score. It starts with catalog truth,
-              recent technical coverage and the specific product or page
-              evidence behind an issue.
-            </p>
-            <ul className="mt-7 border-t border-rule">
-              {LAYERS.map((layer) => (
-                <li
-                  key={layer.title}
-                  className="grid grid-cols-[6.5rem_1fr] gap-4 border-b border-rule py-3"
+              <div className="flex items-center justify-between gap-4">
+                <p
+                  className={`text-[12px] font-semibold uppercase tracking-[0.08em] ${product.mutedClassName}`}
                 >
-                  <span className="pt-0.5 text-[11px] font-semibold uppercase tracking-[0.07em] text-muted-foreground">
-                    {layer.label}
-                  </span>
-                  <span className="text-[14px] font-medium text-ink">
-                    {layer.title}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/discoverability-health"
-              className="mt-6 inline-flex min-h-11 items-center font-semibold text-ink underline-offset-4 hover:text-primary hover:underline"
-            >
-              Explore Discoverability Health →
-            </Link>
-          </div>
-        </div>
+                  {product.eyebrow}
+                </p>
+                <product.icon
+                  className={`h-5 w-5 ${product.iconClassName}`}
+                  strokeWidth={1.6}
+                  aria-hidden="true"
+                />
+              </div>
 
-        <p className="mt-6 max-w-4xl text-[13px] leading-relaxed text-muted-foreground">
-          Where a conversion monitor is configured, Beseam checks hourly against
-          an earlier baseline window. A correlated change stays an investigation
-          path—not a confirmed cause. Product boundary · July 2026.
-        </p>
+              <h3 className="mt-8 max-w-sm text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
+                {product.title}
+              </h3>
+              <p
+                className={`mt-5 max-w-md text-[16px] leading-relaxed ${product.mutedClassName}`}
+              >
+                {product.description}
+              </p>
+
+              <ul className={`mt-8 border-t ${product.ruleClassName}`}>
+                {product.points.map((point) => (
+                  <li
+                    key={point}
+                    className={`flex items-center gap-3 border-b py-3 text-[14px] font-semibold ${product.ruleClassName}`}
+                  >
+                    <Check className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href={product.href}
+                className="mt-auto inline-flex min-h-11 items-end pt-8 font-semibold underline-offset-4 hover:underline"
+              >
+                {product.link} →
+              </Link>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

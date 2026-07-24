@@ -9,17 +9,17 @@ const faqs = [
   {
     question: "What is Beseam?",
     answer:
-      "Beseam is a revenue-guardrailed PDP ops platform. It audits your product pages, generates AI-powered upgrade playbooks (FAQs, narratives, schema, meta descriptions), and deploys changes safely — versioned, monitored, and reversible. Think of it as the infrastructure layer that makes PDP changes safe, no matter who makes them.",
+      "Beseam is a revenue-guardrailed PDP ops platform. It audits your product pages, generates AI-powered upgrade playbooks (FAQs, narratives, schema, meta descriptions), and deploys changes safely - versioned, monitored, and reversible. Think of it as the infrastructure layer that makes PDP changes safe, no matter who makes them.",
   },
   {
     question: "Does Beseam replace our agency?",
     answer:
-      "No — Beseam complements your agencies. Your SEO agency brings the strategy. Your dev team builds the theme. Beseam provides the guardrails. We also offer AI-powered recommendations that agencies can use or build on. Everyone who touches your PDPs — agencies, internal teams, and Beseam's AI — ships through the same safe pipeline.",
+      "No - Beseam complements your agencies. Your SEO agency brings the strategy. Your dev team builds the theme. Beseam provides the guardrails. We also offer AI-powered recommendations that agencies can use or build on. Everyone who touches your PDPs - agencies, internal teams, and Beseam's AI - ships through the same safe pipeline.",
   },
   {
     question: "How is this different from an A/B testing tool?",
     answer:
-      "A/B testing tools help you compare two variants. Beseam is a full operational loop: it audits your PDPs, generates recommendations, deploys changes safely with versioning, monitors KPIs after deployment, explains regressions, and guides rollback. It's the infrastructure layer that makes PDP changes safe — not just measurable.",
+      "A/B testing tools help you compare two variants. Beseam is a full operational loop: it audits your PDPs, generates recommendations, deploys changes safely with versioning, monitors KPIs after deployment, explains regressions, and guides rollback. It's the infrastructure layer that makes PDP changes safe - not just measurable.",
   },
   {
     question: "What KPIs does Beseam monitor?",
@@ -34,17 +34,17 @@ const faqs = [
   {
     question: "How does Beseam improve AI search discovery?",
     answer:
-      "Beseam audits each PDP against the signals AI search engines use to surface product answers: structured FAQ schema, product narrative depth, schema.org markup, and content completeness. The upgrade playbook identifies exactly what's missing and generates the improvements — so your products get cited by ChatGPT, Perplexity, Google AI Mode, and Gemini.",
+      "Beseam audits each PDP against the signals AI search engines use to surface product answers: structured FAQ schema, product narrative depth, schema.org markup, and content completeness. The upgrade playbook identifies exactly what's missing and generates the improvements - so your products get cited by ChatGPT, Perplexity, Google AI Mode, and Gemini.",
   },
   {
     question: "How does Beseam actually improve conversion?",
     answer:
-      "Beseam's audit scores each PDP on conversion readiness — missing FAQ sections, thin product narratives, weak CTAs, and structural gaps. It then generates a prioritized playbook of improvements ranked by projected revenue impact. After deploy, it tracks rev/session and conversion rate against a pre-change baseline so you know exactly what moved the needle.",
+      "Beseam's audit scores each PDP on conversion readiness - missing FAQ sections, thin product narratives, weak CTAs, and structural gaps. It then generates a prioritized playbook of improvements ranked by projected revenue impact. After deploy, it tracks rev/session and conversion rate against a pre-change baseline so you know exactly what moved the needle.",
   },
   {
     question: "What access do you need to get started?",
     answer:
-      "For a baseline audit and ongoing monitoring, Beseam can start with minimal, read-only access to your catalog and PDP structure. If you later choose to deploy changes through Beseam, we’ll request the minimum additional permissions needed for that workflow — and you stay in control of what gets shipped.",
+      "For a baseline audit and ongoing monitoring, Beseam can start with minimal, read-only access to your catalog and PDP structure. If you later choose to deploy changes through Beseam, we’ll request the minimum additional permissions needed for that workflow - and you stay in control of what gets shipped.",
   },
 ];
 

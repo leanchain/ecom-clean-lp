@@ -27,7 +27,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "Beseam completely changed how AI engines understand our products. We went from invisible to recommended — and saw it reflected in our traffic within weeks.",
+      "Beseam completely changed how AI engines understand our products. We went from invisible to recommended - and saw it reflected in our traffic within weeks.",
     name: "Apparel merchant",
     role: "Shopify · EU",
     initials: "AM",

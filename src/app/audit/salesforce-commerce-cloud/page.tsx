@@ -20,7 +20,7 @@ const findings: Finding[] = [
     title: "ISML templates emit minimal Product schema",
     severity: "critical",
     description:
-      "Salesforce Commerce Cloud ISML templates include only basic Microdata by default — product name and price. AI engines need complete JSON-LD with images, brand, availability, reviews, and detailed descriptions to surface your products accurately.",
+      "Salesforce Commerce Cloud ISML templates include only basic Microdata by default - product name and price. AI engines need complete JSON-LD with images, brand, availability, reviews, and detailed descriptions to surface your products accurately.",
     fix: `<!-- Add to product/productDetails.isml -->
 <isscript>
   var product = pdict.product;
@@ -51,7 +51,7 @@ const findings: Finding[] = [
     title: "Variation groups lack per-variant schema",
     severity: "high",
     description:
-      "SFCC variation groups (e.g., color/size) generate a single page with JavaScript-driven swatches. AI engines can't trigger these interactions — they only see the master product's base price and attributes, missing all variant-level data.",
+      "SFCC variation groups (e.g., color/size) generate a single page with JavaScript-driven swatches. AI engines can't trigger these interactions - they only see the master product's base price and attributes, missing all variant-level data.",
     fix: `<!-- Add AggregateOffer for all variants in productDetails.isml -->
 <isscript>
   var variants = product.variationModel.variants;
@@ -119,9 +119,9 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Salesforce Commerce Cloud (formerly Demandware) powers some of the world's largest retail brands. Its enterprise-grade infrastructure delivers fast, scalable storefronts — but its ISML templating system outputs minimal structured data by default.",
+  "Salesforce Commerce Cloud (formerly Demandware) powers some of the world's largest retail brands. Its enterprise-grade infrastructure delivers fast, scalable storefronts - but its ISML templating system outputs minimal structured data by default.",
   "The core issue for AI readability is that SFCC's reference architecture (SFRA) includes only basic Microdata attributes, not the comprehensive JSON-LD that modern AI engines expect. This means your carefully merchandised product data stays locked in the SFCC backend where AI can't access it.",
-  "Einstein recommendations, content slots, and A/B test variations — all powered by AJAX — are invisible to AI crawlers. The dynamic personalization that makes SFCC powerful for shoppers creates a blank page for machines.",
+  "Einstein recommendations, content slots, and A/B test variations - all powered by AJAX - are invisible to AI crawlers. The dynamic personalization that makes SFCC powerful for shoppers creates a blank page for machines.",
   "For enterprises running multiple brands or locales on a single SFCC instance, there's an added challenge: conflicting canonical URLs and hreflang gaps that confuse AI engines about which version of a product is authoritative.",
   "Beseam audits your Salesforce Commerce Cloud storefront from the perspective of 13 AI engines, identifies gaps in your ISML template output, and generates the exact code changes for your SFRA cartridge to maximize AI readability.",
 ];

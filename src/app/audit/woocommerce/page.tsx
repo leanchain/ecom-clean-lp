@@ -20,8 +20,8 @@ const findings: Finding[] = [
     title: "Missing or incomplete JSON-LD product schema",
     severity: "critical",
     description:
-      "WooCommerce relies on plugins like Yoast or Rank Math to generate JSON-LD. Many stores have misconfigured or outdated plugins that emit incomplete Product schema — missing brand, GTIN, material, and selling points that AI engines need.",
-    fix: `// functions.php — Add complete Product JSON-LD
+      "WooCommerce relies on plugins like Yoast or Rank Math to generate JSON-LD. Many stores have misconfigured or outdated plugins that emit incomplete Product schema - missing brand, GTIN, material, and selling points that AI engines need.",
+    fix: `// functions.php - Add complete Product JSON-LD
 add_action('wp_head', function() {
   if (!is_product()) return;
   global $product;
@@ -50,8 +50,8 @@ add_action('wp_head', function() {
     title: "Conflicting schema from multiple SEO plugins",
     severity: "high",
     description:
-      "WooCommerce stores often run multiple plugins that each emit their own schema — Yoast, Rank Math, WooCommerce itself, and theme-level schema. AI engines see conflicting data and pick the wrong values for price, availability, or product type.",
-    fix: `// Disable duplicate schema sources — keep one authoritative source
+      "WooCommerce stores often run multiple plugins that each emit their own schema - Yoast, Rank Math, WooCommerce itself, and theme-level schema. AI engines see conflicting data and pick the wrong values for price, availability, or product type.",
+    fix: `// Disable duplicate schema sources - keep one authoritative source
 // In functions.php, remove WooCommerce default schema:
 remove_action('wp_footer',
   ['WC_Structured_Data', 'output_structured_data'], 10);
@@ -115,7 +115,7 @@ for 100-mile races.</p>`,
 
 const contextParagraphs = [
   "WooCommerce powers roughly 25% of all online stores, but its approach to structured data is plugin-dependent rather than built-in. This creates the most fragmented schema environment of any major e-commerce platform.",
-  "The most common AI readability issue on WooCommerce is conflicting schema from multiple sources. WooCommerce core, your SEO plugin, and your theme may all emit Product schema simultaneously — and they often disagree on price, availability, and product type.",
+  "The most common AI readability issue on WooCommerce is conflicting schema from multiple sources. WooCommerce core, your SEO plugin, and your theme may all emit Product schema simultaneously - and they often disagree on price, availability, and product type.",
   "Variable products are another major gap. WooCommerce's default schema for variable products emits a price range rather than per-variant pricing. When a shopper asks ChatGPT 'how much does the red medium cost?', AI can only say '$29–$89' instead of a specific price.",
   "Plugin fragmentation also means that review schema, breadcrumb schema, and FAQ schema may be duplicated or missing depending on which combination of plugins you run. AI engines see the mess and lose confidence in your product data.",
   "Beseam audits your WooCommerce store for all of these issues, identifies which plugins are emitting conflicting data, and generates the specific PHP and schema fixes needed to give AI engines clean, authoritative product information.",

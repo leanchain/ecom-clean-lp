@@ -48,7 +48,7 @@ const tabs = [
     bullets: [
       "Coverage metrics across your full catalog",
       "Open issues and active regressions",
-      "Performance trends — week, month, quarter",
+      "Performance trends - week, month, quarter",
     ],
   },
   {
@@ -67,7 +67,7 @@ const tabs = [
     numberClass:
       "text-emerald-600 bg-emerald-50 border-emerald-200 dark:bg-emerald-950/40 dark:border-emerald-800",
     description:
-      "Every audit generates a prioritized playbook — a sequenced list of improvements ranked by projected revenue impact. Review the diff, approve, and deploy in one click.",
+      "Every audit generates a prioritized playbook - a sequenced list of improvements ranked by projected revenue impact. Review the diff, approve, and deploy in one click.",
     bullets: [
       "Ranked by projected revenue impact",
       "One-click deploy or share with your agency",
@@ -90,7 +90,7 @@ const tabs = [
     numberClass:
       "text-red-600 bg-red-50 border-red-200 dark:bg-red-950/40 dark:border-red-800",
     description:
-      "When KPIs drop after any change — from your agency, dev team, or Beseam — an incident opens automatically. You get the source, the diff, and a recommended fix.",
+      "When KPIs drop after any change - from your agency, dev team, or Beseam - an incident opens automatically. You get the source, the diff, and a recommended fix.",
     bullets: [
       "Auto-detected from real-time KPI monitoring",
       "Source-attributed: who changed what, when",
@@ -303,7 +303,7 @@ const IncidentMockup = () => (
     </div>
     <div className="rounded-xl border-2 border-red-200/60 dark:border-red-900/30 bg-red-50/50 dark:bg-red-950/20 overflow-hidden">
       <div className="flex items-center justify-between px-3.5 py-2 border-b border-red-200/30 bg-red-100/30 dark:bg-red-950/30">
-        <span className="text-[10px] font-black uppercase tracking-widest text-red-700 dark:text-red-400">Active — INC-041</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-red-700 dark:text-red-400">Active - INC-041</span>
         <span className="rounded-full bg-red-500 px-2 py-0.5 text-[9px] font-black text-white">HIGH</span>
       </div>
       <div className="px-3.5 py-3 space-y-2.5">
@@ -565,7 +565,7 @@ export default function DashboardScroll() {
   const [activeTab, setActiveTab] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Scroll-driven tab switching — desktop only
+  // Scroll-driven tab switching - desktop only
   useEffect(() => {
     const handleScroll = () => {
       if (typeof window === "undefined" || window.innerWidth < 1024) return;

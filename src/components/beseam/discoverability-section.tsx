@@ -14,7 +14,7 @@ const EVIDENCE_LAYERS = [
   {
     label: "Channel state",
     title: "Structured product and channel gaps",
-    body: "Current high-priority gaps—such as a missing GTIN—stay attached to the affected product and source record.",
+    body: "Current high-priority gaps - such as a missing GTIN - stay attached to the affected product and source record.",
   },
   {
     label: "Search source",

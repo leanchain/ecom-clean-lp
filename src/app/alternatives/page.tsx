@@ -149,7 +149,7 @@ export default function AlternativesPage() {
 
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
               Looking to switch analytics tools? We publish honest comparisons to
-              help you decide — whether that&apos;s Beseam or something else.
+              help you decide - whether that&apos;s Beseam or something else.
             </p>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">

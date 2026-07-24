@@ -20,7 +20,7 @@ const findings: Finding[] = [
     title: "Product schema is auto-generated and minimal",
     severity: "critical",
     description:
-      "Squarespace auto-generates Product schema that includes name, price, image, and availability — but omits brand, material, selling points, use cases, and every product detail AI engines need to make confident recommendations. You cannot edit this schema directly.",
+      "Squarespace auto-generates Product schema that includes name, price, image, and availability - but omits brand, material, selling points, use cases, and every product detail AI engines need to make confident recommendations. You cannot edit this schema directly.",
     fix: `<!-- Squarespace Code Injection (Settings > Advanced > Code Injection) -->
 <!-- Add this to your Product Page's "Page Header Code Injection" -->
 <script type="application/ld+json">
@@ -45,7 +45,7 @@ const findings: Finding[] = [
     title: "No control over schema output without code injection",
     severity: "high",
     description:
-      "Squarespace doesn't expose schema editing through its visual editor. The only way to modify structured data is via Code Injection — which requires a Business plan or higher and is manual per-page. Most stores never touch it.",
+      "Squarespace doesn't expose schema editing through its visual editor. The only way to modify structured data is via Code Injection - which requires a Business plan or higher and is manual per-page. Most stores never touch it.",
     fix: `<!-- Squarespace Business/Commerce plan required -->
 <!-- Settings > Advanced > Code Injection > Footer -->
 
@@ -100,7 +100,7 @@ const findings: Finding[] = [
     title: "Product descriptions lack AI-readable structure",
     severity: "medium",
     description:
-      "Squarespace product descriptions are freeform rich text. Most stores write marketing-heavy prose that reads well to humans but lacks the specification-dense structure AI engines prefer — bullet-pointed materials, dimensions, care instructions, and comparisons.",
+      "Squarespace product descriptions are freeform rich text. Most stores write marketing-heavy prose that reads well to humans but lacks the specification-dense structure AI engines prefer - bullet-pointed materials, dimensions, care instructions, and comparisons.",
     fix: `<!-- Structure your Squarespace product descriptions for AI readability -->
 <!-- In the product editor, format descriptions like this: -->
 
@@ -109,7 +109,7 @@ hidden laptop sleeve and RFID-blocking pocket.</p>
 
 <ul>
   <li><strong>Material:</strong> Full-grain Italian leather, YKK zippers</li>
-  <li><strong>Dimensions:</strong> 12" × 9" × 4" — fits laptops up to 13"</li>
+  <li><strong>Dimensions:</strong> 12" × 9" × 4" - fits laptops up to 13"</li>
   <li><strong>Weight:</strong> 1.2 lbs</li>
   <li><strong>Ideal for:</strong> Daily commuting, travel, weekend trips</li>
 </ul>
@@ -124,10 +124,10 @@ Classic Backpack with the same laptop protection.</p>
 
 const contextParagraphs = [
   "Squarespace is known for its beautiful templates and ease of use, making it a popular choice for design-focused e-commerce stores. However, its closed ecosystem means you have very limited control over the structured data AI engines read.",
-  "The biggest AI readability issue on Squarespace is that product schema is auto-generated and cannot be edited through the visual editor. Squarespace outputs basic Product schema — name, price, image — but omits brand, material, selling points, and every rich attribute AI engines need to recommend your product.",
-  "Unlike open platforms like Shopify or WooCommerce, Squarespace doesn't have a theme file editor or plugin ecosystem for schema. Your only option is Code Injection (available on Business plan and above), which requires manual JSON-LD per product page — impractical for stores with more than a handful of products.",
+  "The biggest AI readability issue on Squarespace is that product schema is auto-generated and cannot be edited through the visual editor. Squarespace outputs basic Product schema - name, price, image - but omits brand, material, selling points, and every rich attribute AI engines need to recommend your product.",
+  "Unlike open platforms like Shopify or WooCommerce, Squarespace doesn't have a theme file editor or plugin ecosystem for schema. Your only option is Code Injection (available on Business plan and above), which requires manual JSON-LD per product page - impractical for stores with more than a handful of products.",
   "Category and collection pages are another major gap. Squarespace displays product grids beautifully, but emits zero CollectionPage or ItemList schema. AI engines parsing your store see isolated products with no catalog structure.",
-  "Beseam audits what AI engines actually see on your Squarespace store, identifies the specific schema gaps, and generates the exact Code Injection snippets you need — or recommends when migrating to a more flexible platform makes sense for AI visibility.",
+  "Beseam audits what AI engines actually see on your Squarespace store, identifies the specific schema gaps, and generates the exact Code Injection snippets you need - or recommends when migrating to a more flexible platform makes sense for AI visibility.",
 ];
 
 const otherPlatforms = [
@@ -143,7 +143,7 @@ export default function SquarespaceAuditPage() {
     <PlatformAuditPage
       platform="Squarespace"
       headline="How does AI see your Squarespace store?"
-      description="Squarespace makes beautiful stores — but locks you out of the structured data AI engines need. Beseam shows you what's missing and how to fix it."
+      description="Squarespace makes beautiful stores - but locks you out of the structured data AI engines need. Beseam shows you what's missing and how to fix it."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

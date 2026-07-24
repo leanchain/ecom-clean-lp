@@ -137,9 +137,9 @@ export class ProductSchemaComponent implements OnInit {
 ];
 
 const contextParagraphs = [
-  "SAP Commerce Cloud (formerly Hybris) is the dominant enterprise e-commerce platform for large B2B and B2C retailers. Its sophisticated product information management (PIM) and multi-channel capabilities are unmatched — but its structured data output lags far behind.",
+  "SAP Commerce Cloud (formerly Hybris) is the dominant enterprise e-commerce platform for large B2B and B2C retailers. Its sophisticated product information management (PIM) and multi-channel capabilities are unmatched - but its structured data output lags far behind.",
   "The critical issue depends on which storefront you use. The legacy Accelerator (JSP) storefront emits zero JSON-LD by default. The modern Spartacus storefront (Angular SPA) renders everything client-side, which most AI crawlers can't process without properly configured server-side rendering.",
-  "SAP Commerce's classification system is one of its greatest strengths — storing detailed technical specifications, compatibility data, and material information — but none of this reaches AI engines because it's only rendered as HTML tables.",
+  "SAP Commerce's classification system is one of its greatest strengths - storing detailed technical specifications, compatibility data, and material information - but none of this reaches AI engines because it's only rendered as HTML tables.",
   "For enterprise retailers with multi-country catalogs, there's an additional challenge: SAP Commerce generates separate storefronts per locale, but hreflang and canonical tag management across these is often misconfigured, causing AI engines to see conflicting product data.",
   "Beseam audits your SAP Commerce Cloud storefront from the perspective of 13 AI engines, identifies structured data gaps in both JSP and Spartacus implementations, and generates the exact template or component code to make your product catalog AI-readable.",
 ];
@@ -157,7 +157,7 @@ export default function SapCommerceCloudAuditPage() {
     <PlatformAuditPage
       platform="SAP Commerce Cloud"
       headline="How does AI see your SAP Commerce storefront?"
-      description="SAP Commerce Cloud (Hybris) stores — whether JSP or Spartacus — have major structured data gaps. AI engines can't read your product catalog. Beseam shows exactly what's missing."
+      description="SAP Commerce Cloud (Hybris) stores - whether JSP or Spartacus - have major structured data gaps. AI engines can't read your product catalog. Beseam shows exactly what's missing."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

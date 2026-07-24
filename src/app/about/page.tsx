@@ -10,7 +10,7 @@ import TeamsSection from "@/components/beseam/teams-section";
 export const metadata = {
   title: { absolute: "About | Beseam" },
   description:
-    "Beseam is store health for Shopify — built by an engineer who spent his career making large systems measurable and reliable, now applied to Shopify discoverability and purchase health. Book a Store Health Review.",
+    "Beseam is store health for Shopify - built by an engineer who spent his career making large systems measurable and reliable, now applied to Shopify discoverability and purchase health. Book a Store Health Review.",
 };
 
 const ADVISORS = [
@@ -33,7 +33,7 @@ const ADVISORS = [
 export default function AboutPage() {
   return (
     <>
-      {/* 1. Hero — why Beseam exists */}
+      {/* 1. Hero - why Beseam exists */}
       <section className="relative overflow-hidden bg-surface">
         <div className="mx-auto max-w-4xl px-6 py-24 md:py-32">
           <Reveal>
@@ -51,7 +51,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 2. Founder story — qualitative framing, real background, no inflated metrics */}
+      {/* 2. Founder story - qualitative framing, real background, no inflated metrics */}
       <section className="border-t border-rule bg-surface">
         <div className="section-pad mx-auto max-w-6xl px-6">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-16">
@@ -123,7 +123,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. Advisors — real people, preserved and re-skinned */}
+      {/* 3. Advisors - real people, preserved and re-skinned */}
       <section className="border-t border-rule bg-surface">
         <div className="section-pad mx-auto max-w-6xl px-6">
           <Reveal className="max-w-3xl">
@@ -174,10 +174,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. How Beseam works with your team — reuse the homepage teams section */}
+      {/* 4. How Beseam works with your team - reuse the homepage teams section */}
       <TeamsSection />
 
-      {/* 5. Closing CTA — the single conversion, contact preserved */}
+      {/* 5. Closing CTA - the single conversion, contact preserved */}
       <section className="border-t border-rule bg-surface">
         <div className="section-pad mx-auto max-w-3xl px-6 text-center">
           <Reveal>

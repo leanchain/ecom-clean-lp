@@ -85,7 +85,7 @@ function useTypingLoop(
   return displayed;
 }
 
-// ── Panel 1 — Shopper's ChatGPT query ─────────────────────────────────────────
+// ── Panel 1 - Shopper's ChatGPT query ─────────────────────────────────────────
 
 function ChatContent() {
   const text = useTypingLoop(QUERIES);
@@ -111,7 +111,7 @@ function ChatContent() {
 
       {/* chat */}
       <div className="space-y-3 px-3 py-3">
-        {/* previous exchange — faded */}
+        {/* previous exchange - faded */}
         <div className="opacity-35">
           <div className="ml-auto max-w-[80%] rounded-2xl rounded-tr-sm bg-white/10 px-2.5 py-2">
             <p className="text-[10px] text-white/80">
@@ -164,7 +164,7 @@ function ChatContent() {
   );
 }
 
-// ── Panel 2 — AI recommendation (ChatGPT dark, continued) ────────────────────
+// ── Panel 2 - AI recommendation (ChatGPT dark, continued) ────────────────────
 
 function ResultContent() {
   return (
@@ -172,7 +172,7 @@ function ResultContent() {
       {/* camera spacer */}
       <div className="h-6 bg-[#0D0D0D]" />
 
-      {/* app bar — identical to ChatContent */}
+      {/* app bar - identical to ChatContent */}
       <div className="flex items-center justify-between border-b border-white/8 bg-[#171717] px-3 py-2">
         <div className="flex items-center gap-1.5">
           <ChatGPTIcon className="h-4 w-4 text-white" />
@@ -188,7 +188,7 @@ function ResultContent() {
 
       {/* chat continuation */}
       <div className="space-y-3 px-3 py-3">
-        {/* user message — faded */}
+        {/* user message - faded */}
         <div className="ml-auto max-w-[88%] rounded-2xl rounded-tr-sm bg-white/10 px-2.5 py-2 opacity-50">
           <p className="text-[10px] text-white/80">
             best linen summer dress under $80
@@ -205,7 +205,7 @@ function ResultContent() {
               Found a great match that fits your budget and ships fast:
             </p>
 
-            {/* product card — dark */}
+            {/* product card - dark */}
             <div className="rounded-xl border border-white/8 bg-white/5 p-2.5">
               <div className="flex gap-2">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5">
@@ -261,7 +261,7 @@ function ResultContent() {
   );
 }
 
-// ── Panel 3 — Store owner win ─────────────────────────────────────────────────
+// ── Panel 3 - Store owner win ─────────────────────────────────────────────────
 
 const SPARKLINE = [8, 12, 10, 18, 14, 22, 20, 32, 42, 56, 54, 100];
 
@@ -415,7 +415,7 @@ const STEPS = [
   {
     label: "Shopper asks AI",
     description:
-      "They describe what they want in plain language — no keywords, no guessing.",
+      "They describe what they want in plain language - no keywords, no guessing.",
     color: "text-violet-600",
     bg: "bg-violet-50 dark:bg-violet-950/30",
     border: "border-violet-200 dark:border-violet-800",
@@ -426,7 +426,7 @@ const STEPS = [
   {
     label: "AI picks a winner",
     description:
-      "Structured data, price, availability, and reviews — all machine-readable, all yours.",
+      "Structured data, price, availability, and reviews - all machine-readable, all yours.",
     color: "text-sky-600",
     bg: "bg-sky-50 dark:bg-sky-950/30",
     border: "border-sky-200 dark:border-sky-800",

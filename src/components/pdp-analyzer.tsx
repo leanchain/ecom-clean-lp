@@ -447,7 +447,7 @@ export function PdpAnalyzer() {
             <div className="mt-6 space-y-6">
               <div className="mb-4 border-t border-dashed border-border/60 pt-4">
                 <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[9px] font-semibold text-blue-700">
-                  Below the fold — Scroll sections
+                  Below the fold - Scroll sections
                 </span>
               </div>
 

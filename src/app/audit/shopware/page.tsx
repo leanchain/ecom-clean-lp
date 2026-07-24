@@ -142,8 +142,8 @@ const findings: Finding[] = [
 
 const contextParagraphs = [
   "Shopware is one of Europe's leading e-commerce platforms, with Shopware 6 gaining rapid adoption for its modern architecture (Symfony + Vue.js admin, Twig storefront). It powers thousands of B2C and B2B stores, particularly in Germany, Austria, and the Netherlands.",
-  "Shopware 6 includes basic Product schema by default — a significant improvement over Shopware 5. However, the auto-generated schema omits manufacturer numbers (MPN), EAN/GTIN identifiers, brand information, and the rich product properties that Shopware stores in its property system.",
-  "One of Shopware's greatest strengths — its flexible property and variant system — is also its structured data weakness. Properties used for filtering and faceted search don't appear in the schema, and variant products only show the current variant's data to AI engines.",
+  "Shopware 6 includes basic Product schema by default - a significant improvement over Shopware 5. However, the auto-generated schema omits manufacturer numbers (MPN), EAN/GTIN identifiers, brand information, and the rich product properties that Shopware stores in its property system.",
+  "One of Shopware's greatest strengths - its flexible property and variant system - is also its structured data weakness. Properties used for filtering and faceted search don't appear in the schema, and variant products only show the current variant's data to AI engines.",
   "Shopware 6's Shopping Experiences (CMS) feature creates beautiful, customizable category and landing pages, but the CMS blocks that display products don't include any structured data. A curated product collection built in the CMS is invisible to AI crawlers.",
   "Beseam audits your Shopware 6 store from the perspective of 13 AI engines, identifies what's missing from your theme's structured data output, and generates Twig template overrides that work with Shopware's theme inheritance system.",
 ];

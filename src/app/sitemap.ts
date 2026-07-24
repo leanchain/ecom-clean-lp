@@ -13,6 +13,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      path: "/ai-visibility-monitoring",
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    },
+    {
       path: "/purchase-health",
       changeFrequency: "monthly" as const,
       priority: 0.85,

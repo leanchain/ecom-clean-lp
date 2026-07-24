@@ -1,47 +1,42 @@
 export const STORE_HEALTH_FAQS = [
   {
-    question: "What is Beseam Store Health?",
+    question: "What is Beseam?",
     answer:
-      "Beseam Store Health is an evidence-backed workspace for Shopify discoverability, purchase health and monitoring coverage. It shows what needs attention, which source supports the issue and who should investigate it.",
+      "Beseam is a self-improving revenue intelligence layer for ecommerce. It sits on top of the systems you already run, observes the commercial journey from outside, finds revenue leakage, recommends or orchestrates governed fixes, verifies the result, and uses that evidence to improve the next decision.",
   },
   {
-    question: "What does Purchase Health observe?",
+    question: "Does Beseam replace our commerce platform, CMS, analytics, or advertising stack?",
     answer:
-      "Purchase Health uses supported storefront and Shopify commerce signals across product views, add-to-cart, cart, checkout and purchase. It can also use observed JavaScript, resource, HTTP, form and friction signals, with affected context such as session, page pattern, product, browser or device where available.",
+      "No. Beseam is designed as an intelligence and action layer above your existing infrastructure. Your storefront, commerce platform, CMS, analytics tools, search systems, and advertising channels remain the systems of record and execution.",
   },
   {
-    question: "Does Discoverability Health include AI visibility (GEO)?",
+    question: "Which products are available in the Beseam suite?",
     answer:
-      "Yes. Alongside Search Console and Shopify catalog signals, Discoverability Health tracks AI-crawler access (whether ChatGPT, Perplexity, Gemini and other answer-engine bots can read your store), brand protection against suspect or impersonating domains, and which sources those answer engines cite for your product queries—plus ranking movement across AI shopping answers—kept as connected evidence, not a separate score.",
+      "The commercial suite includes Foundation, AI Visibility, Commerce Readiness, Advertising, Analytics, Behavior, Optimization, Reliability, and Creative Studio. Foundation is mandatory. Other products are contract-entitled independently, with Analytics, Behavior, Optimization, Reliability, and Creative Studio currently labeled Beta in the production blueprint.",
   },
   {
-    question: "Does Beseam detect every storefront failure?",
+    question: "How does Beseam find revenue leakage?",
     answer:
-      "No. Store Health currently combines observed real-user signals and existing product evidence. It does not yet synthetically reproduce every browser, market, product and payment path. Missing or stale evidence is shown as a coverage problem instead of being labelled healthy.",
+      "Beseam connects signals from storefront behavior, commerce orders, products, pages, checkout, tracking, performance, AI discovery, search, feeds, campaigns, and external channels. It groups related evidence, identifies the commercially important issue, and keeps booked, observed, attributed, and modeled money separate.",
   },
   {
-    question: "How is Beseam different from an uptime monitor or an SEO tool?",
+    question: "Can Beseam personalize content for different visitors?",
     answer:
-      "An uptime monitor answers whether a page responds. An SEO tool usually focuses on search and page signals. Beseam connects discoverability, the purchase journey and the freshness of the monitoring sources so teams can investigate one evidence-backed issue list.",
+      "The Optimization and Behavior packages are designed to use intent, friction, engagement, navigation, and commerce signals for governed experiments and personalization decisions. Customer-facing changes remain subject to the effective contract, configured policies, approvals, and measurement requirements.",
   },
   {
-    question: "What do stale, failed and not configured mean?",
+    question: "Is Beseam fully autonomous?",
     answer:
-      "Stale means the latest data is older than the source-specific freshness window. Failed or disconnected means the connection cannot currently support an answer. Not configured means Beseam has no trustworthy data record for that source yet.",
+      "Beseam can automate observation, evidence collection, prioritization, scheduled intelligence, and supported workflows. High-impact actions such as campaign publishing, budget changes, and governed customer-facing changes retain explicit roles, approvals, preflight checks, and audit history.",
   },
   {
-    question: "Does Beseam replace our SEO team, developers or Shopify agency?",
+    question: "How do packages, entitlements, and credits work?",
     answer:
-      "No. Beseam provides the technical monitoring and evidence layer beneath their work. SEO and content teams see affected products and technical evidence; ecommerce teams see prioritized health concerns; developers and agencies receive a clearer investigation path.",
+      "Foundation and contracted scheduled intelligence are funded through the customer contract. AI Visibility, Commerce Readiness, Advertising, and the Advanced Intelligence modules are enabled according to the tenant and store contract. Creative Studio generation and some customer-initiated variable compute use credits, with a visible estimate before credits are reserved.",
   },
   {
-    question: "How do conversion-monitor alerts work?",
+    question: "How does Beseam prove commercial impact?",
     answer:
-      "Where a conversion monitor is configured, it runs hourly and compares current performance with an earlier baseline window. It creates an alert when the configured threshold is crossed. Optional email notification is available. This is a statistical signal and still requires investigation.",
-  },
-  {
-    question: "What happens in a Store Health Review?",
-    answer:
-      "The 30-minute review looks at your Shopify setup, current monitoring coverage and the problems your team most needs to detect. You leave with identified blind spots, the first checks to prioritize and a recommended pilot scope.",
+      "Beseam links a finding to an accepted action, execution, verification, and a comparable measurement window. Booked commerce revenue remains the authoritative ledger, while channel attribution and modeled opportunity are disclosed separately with method, freshness, confidence, and currency context.",
   },
 ] as const;

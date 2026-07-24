@@ -7,10 +7,8 @@ const SOURCES = [
     href: "/integrations/google-search-console",
   },
   { name: "Storefront events", href: "/purchase-health" },
-  {
-    name: "Crawl + rendered-page verification",
-    href: "/discoverability-health",
-  },
+  { name: "Crawl + page verification", href: "/discoverability-health" },
+  { name: "AI answer engines", href: "/ai-visibility-monitoring" },
 ];
 
 export default function ProofStrip() {
@@ -24,7 +22,7 @@ export default function ProofStrip() {
           id="evidence-sources-title"
           className="text-[13px] font-semibold uppercase tracking-[0.08em] text-muted-foreground"
         >
-          Built from signals your team already relies on
+          Store and answer-engine evidence
         </h2>
         <ul className="flex flex-wrap items-baseline gap-y-1 text-[15px] font-semibold text-ink">
           {SOURCES.map((source, index) => (
@@ -47,7 +45,7 @@ export default function ProofStrip() {
           Designed for
         </p>
         <p className="text-[15px] font-medium text-foreground">
-          Ecommerce · SEO · Content · Development
+          Ecommerce · SEO + GEO · Content · Development
         </p>
       </div>
     </section>

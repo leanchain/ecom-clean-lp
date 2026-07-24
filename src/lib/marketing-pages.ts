@@ -30,7 +30,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
     description:
       "Monitor Shopify discoverability, purchase health and source freshness in one evidence-backed workspace. See issues, affected scope, owners and next actions.",
     intro:
-      "Beseam Store Health brings together current Shopify catalog state, technical product-page evidence, storefront commerce signals and monitoring coverage. It gives ecommerce teams one place to ask what needs attention now—and whether enough current data exists to trust the answer.",
+      "Beseam Store Health brings together current Shopify catalog state, technical product-page evidence, storefront commerce signals and monitoring coverage. It gives ecommerce teams one place to ask what needs attention now - and whether enough current data exists to trust the answer.",
     proofLine:
       "A read-only health view built from existing Beseam sources; missing or stale data never becomes a reassuring healthy status.",
     observations: [
@@ -58,7 +58,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
     sections: [
       {
         title: "Store Health separates a real issue from a monitoring gap.",
-        body: "A store can have no reported errors because it is healthy—or because a source stopped sending data. Beseam keeps those situations separate. Domain health is calculated from active issues and the freshness of the primary evidence source.",
+        body: "A store can have no reported errors because it is healthy - or because a source stopped sending data. Beseam keeps those situations separate. Domain health is calculated from active issues and the freshness of the primary evidence source.",
         points: [
           "Critical, degraded, healthy and unknown are distinct health states.",
           "Broken, degraded and opportunity issues are prioritized differently.",
@@ -75,7 +75,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
         ],
       },
       {
-        title: "The workspace is evidence first—not score first.",
+        title: "The workspace is evidence first - not score first.",
         body: "Store Health preserves the source record and observation time behind an issue. It can show a likely cause or recommended action when supported, but it leaves impact uncalculated when the product cannot verify it.",
         points: [
           "No fabricated revenue-at-risk figure.",
@@ -113,18 +113,113 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       { label: "Monitoring coverage", href: "/monitoring-coverage" },
     ],
   },
+  "ai-visibility-monitoring": {
+    slug: "ai-visibility-monitoring",
+    eyebrow: "AI visibility monitoring (GEO)",
+    headline:
+      "See when your products appear in AI answers - and why competitors win instead.",
+    metaTitle: "AI Visibility Monitoring for Ecommerce | Beseam",
+    description:
+      "Monitor ecommerce visibility across AI answer and shopping surfaces. Track product presence, accuracy, merchant control, citations, competitors and the evidence behind every result.",
+    intro:
+      "Beseam AI Visibility monitors the buying questions that matter to your catalog across configured AI answer and shopping surfaces. It turns each run into a clear visibility verdict, a trend and an evidence path your SEO, GEO, content and ecommerce teams can investigate.",
+    proofLine:
+      "Every percentage is calculated from configured monitoring targets and links back to the prompt, answer, channel, product result and observation time.",
+    observations: [
+      {
+        title: "Question coverage",
+        detail:
+          "Configured branded, category, comparison, use-case, deal, shipping and where-to-buy prompts define the market slice you monitor.",
+      },
+      {
+        title: "Visibility, accuracy and control",
+        detail:
+          "See whether products appear, whether their facts are represented accurately and whether your store is credited as the merchant.",
+      },
+      {
+        title: "Citations and competitors",
+        detail:
+          "Track which sources an answer cites, which competing products appear and who holds the top product-card or citation position.",
+      },
+      {
+        title: "Run-level evidence",
+        detail:
+          "Open the original prompt, response, product results, citations, competitor reasons and observation time behind the metric.",
+      },
+    ],
+    sections: [
+      {
+        title: "Lead with a plain-language visibility verdict.",
+        body: "The overview tells a merchant how often monitored AI answers include their products and whether that rate is improving. Accuracy and merchant control sit beside visibility so a mention is not mistaken for a correct or commercially useful recommendation.",
+        points: [
+          "Visibility shows how often a product appears for monitored questions.",
+          "Accuracy checks whether AI represents supported product facts correctly.",
+          "Control shows whether your store is credited as the seller.",
+        ],
+      },
+      {
+        title: "Compare answer engines, questions and competitors.",
+        body: "One overall rate can hide where the real change happened. Beseam breaks monitoring down by channel, product and prompt family, then shows which competitors and cited sources appeared when your product did not.",
+        points: [
+          "Filter trends to the channels your store actually monitors.",
+          "Compare branded, discovery, comparison and buying-intent questions.",
+          "Open competitor sightings and the exact runs where they appeared.",
+        ],
+      },
+      {
+        title: "Move from a chart to the evidence and next action.",
+        body: "A regression becomes useful when the team can open the underlying answer. Run detail keeps the prompt, response, positions, citations and reason evidence together so the next action is grounded in what was observed.",
+        points: [
+          "No detached score without the monitored sample behind it.",
+          "No claim that a single run represents every buyer or answer.",
+          "No guaranteed ranking, traffic or revenue outcome.",
+        ],
+      },
+    ],
+    limits: [
+      "Visibility reflects configured prompts and channels, not the entire market.",
+      "AI answers can change between runs and are point-in-time observations.",
+      "Competitor and citation evidence does not prove the cause of a ranking change.",
+      "Monitoring does not guarantee future recommendation, traffic or revenue.",
+    ],
+    faqs: [
+      {
+        question: "What does GEO mean?",
+        answer:
+          "GEO means generative engine optimization: improving how a brand or product is understood, cited and recommended in AI-generated answers. Beseam focuses on monitoring the observable result and the evidence behind it.",
+      },
+      {
+        question: "Which AI surfaces can Beseam monitor?",
+        answer:
+          "Configured targets can cover surfaces such as ChatGPT Shopping, Gemini, Perplexity, Claude, Google Shopping and related search or catalog channels. Available coverage depends on the targets configured for the store.",
+      },
+      {
+        question: "How is AI visibility calculated?",
+        answer:
+          "Visibility is the share of monitored AI queries in which the product appeared. Beseam also reports accuracy and merchant control separately so an inaccurate mention or reseller attribution is not counted as a complete win.",
+      },
+    ],
+    related: [
+      { label: "Shopify Store Health", href: "/shopify-store-health" },
+      { label: "Discoverability Health", href: "/discoverability-health" },
+      {
+        label: "Try the AI visibility scan",
+        href: "/tools/ai-visibility-scan",
+      },
+    ],
+  },
   "purchase-health": {
     slug: "purchase-health",
     eyebrow: "Purchase Health for Shopify",
     headline:
-      "Observe where the purchase journey degrades—and keep the affected context attached.",
+      "Observe where the purchase journey degrades - and keep the affected context attached.",
     metaTitle: "Shopify Purchase Health and Checkout Monitoring | Beseam",
     description:
       "Monitor Shopify purchase-path signals, storefront errors, friction incidents and conversion regressions with evidence, source freshness and affected context.",
     intro:
       "Purchase Health turns supported Shopify commerce events, storefront errors, friction signals and configured conversion monitors into evidence that ecommerce and development teams can investigate. It is designed for partial failures that affect a browser, product, page pattern or funnel stage while the rest of the store still appears normal.",
     proofLine:
-      "Real-user evidence across product view, add-to-cart, cart, checkout and purchase—without claiming synthetic reproduction of every path.",
+      "Real-user evidence across product view, add-to-cart, cart, checkout and purchase - without claiming synthetic reproduction of every path.",
     observations: [
       {
         title: "Commerce events",
@@ -173,7 +268,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
         points: [
           "Lookback and alert threshold are configurable.",
           "Overall and per-zone regressions can create alerts.",
-          "The alert is a statistical signal—not proof of root cause.",
+          "The alert is a statistical signal - not proof of root cause.",
         ],
       },
     ],
@@ -251,7 +346,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
         ],
       },
       {
-        title: "Treat technical coverage as evidence—not decoration.",
+        title: "Treat technical coverage as evidence - not decoration.",
         body: "A recent crawl or product-page verification run can support a technical answer. A missing, failed or stale source cannot. Discoverability Health exposes that distinction before presenting the domain as healthy.",
         points: [
           "Crawl and verification use source-specific freshness windows.",
@@ -365,7 +460,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       },
     ],
     limits: [
-      "Freshness confirms recent data—not the absence of every issue.",
+      "Freshness confirms recent data - not the absence of every issue.",
       "A configured source with no trustworthy data is not considered healthy.",
       "Thresholds are deterministic but may evolve with the product.",
       "Coverage does not replace source-specific investigation.",

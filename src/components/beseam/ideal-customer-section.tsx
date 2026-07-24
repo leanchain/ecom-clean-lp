@@ -10,7 +10,7 @@ const personas = [
     why: "AI engines are the fastest-growing shopping channel. You need to know if ChatGPT recommends your products or your competitors'.",
     fits: [
       "Store-level audit score with per-product breakdown",
-      "AI traffic intelligence — which engines send revenue",
+      "AI traffic intelligence - which engines send revenue",
       "Before/after evidence for stakeholder reporting",
     ],
   },
@@ -25,9 +25,9 @@ const personas = [
   },
   {
     role: "CRO / Conversion Lead",
-    why: "AI-referred visitors convert differently. You need to know what AI told them before they arrived — and fix pages where AI gets the product wrong.",
+    why: "AI-referred visitors convert differently. You need to know what AI told them before they arrived - and fix pages where AI gets the product wrong.",
     fits: [
-      "AI product probe — see exactly what AI tells shoppers",
+      "AI product probe - see exactly what AI tells shoppers",
       "AI-generated fixes for content and schema gaps",
       "Publish to Shopify and verify improvement",
     ],

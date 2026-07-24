@@ -126,7 +126,7 @@ const Integration1 = () => {
             </h2>
             <p className="text-muted-foreground/90 text-lg md:text-xl leading-relaxed">
               Beseam connects to your store to audit AI discovery gaps, generate
-              conversion improvements, and deploy every change safely — no
+              conversion improvements, and deploy every change safely - no
               rebuild or custom CMS needed.
             </p>
           </motion.div>

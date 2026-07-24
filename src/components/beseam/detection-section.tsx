@@ -41,7 +41,7 @@ const detections: Detection[] = [
     title: "Broken UI by Device",
     impact: "€500–€5K per incident",
     description:
-      "Frozen dropdowns, dead buttons, broken navigation — on devices you don't test.",
+      "Frozen dropdowns, dead buttons, broken navigation - on devices you don't test.",
     tag: "Conversion Killer",
   },
   {
@@ -95,7 +95,7 @@ export default function DetectionSection() {
             </span>
           </h2>
           <p className="mt-4 mx-auto max-w-xl text-base leading-relaxed text-muted-foreground">
-            Six categories of invisible failures — each one costing money while
+            Six categories of invisible failures - each one costing money while
             you have no idea they exist.
           </p>
         </motion.div>

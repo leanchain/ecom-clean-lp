@@ -427,7 +427,7 @@ export default function ComparePage() {
 
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
               Most tools tell you what happened. Beseam tells you what to fix,
-              ships the improvement, and guardrails your revenue — all in one
+              ships the improvement, and guardrails your revenue - all in one
               loop.
             </p>
 

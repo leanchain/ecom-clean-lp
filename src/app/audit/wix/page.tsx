@@ -20,8 +20,8 @@ const findings: Finding[] = [
     title: "Auto-generated schema omits critical product details",
     severity: "critical",
     description:
-      "Wix auto-generates Product schema with basic fields — name, image, price, availability. It does not include brand, material, weight, dimensions, selling points, or any custom attribute you've entered. AI engines see a generic listing with nothing to recommend.",
-    fix: `<!-- Wix Velo (formerly Corvid) — Add custom JSON-LD to product pages -->
+      "Wix auto-generates Product schema with basic fields - name, image, price, availability. It does not include brand, material, weight, dimensions, selling points, or any custom attribute you've entered. AI engines see a generic listing with nothing to recommend.",
+    fix: `<!-- Wix Velo (formerly Corvid) - Add custom JSON-LD to product pages -->
 <!-- In your product page code (Velo Editor): -->
 
 import wixWindow from 'wix-window';
@@ -57,12 +57,12 @@ $w.onReady(function () {
     title: "Wix renders product content via JavaScript",
     severity: "high",
     description:
-      "Wix uses a JavaScript-heavy rendering engine. While Wix does server-render some content for SEO, product pages can have delayed rendering that AI crawlers may not fully execute — leading to incomplete content being indexed.",
-    fix: `<!-- Wix SEO Settings — Ensure SSR is enabled -->
+      "Wix uses a JavaScript-heavy rendering engine. While Wix does server-render some content for SEO, product pages can have delayed rendering that AI crawlers may not fully execute - leading to incomplete content being indexed.",
+    fix: `<!-- Wix SEO Settings - Ensure SSR is enabled -->
 <!-- Dashboard > Marketing & SEO > SEO Tools > SEO Patterns -->
 
 <!-- 1. Set product page SEO patterns: -->
-<!-- Title: {product.name} — {site.name} -->
+<!-- Title: {product.name} - {site.name} -->
 <!-- Description: {product.description} (first 160 chars) -->
 
 <!-- 2. Add structured data via Wix SEO panel: -->
@@ -79,7 +79,7 @@ $w.onReady(function () {
     severity: "high",
     description:
       "Wix products with options (size, color) emit a single Offer in the schema with the base price. AI engines can't distinguish between variant prices, so they may quote incorrect pricing when shoppers ask about specific options.",
-    fix: `// Wix Velo — Add per-variant Offer schema
+    fix: `// Wix Velo - Add per-variant Offer schema
 import wixWindow from 'wix-window';
 import wixStores from 'wix-stores';
 
@@ -112,7 +112,7 @@ $w.onReady(async function () {
     severity: "medium",
     description:
       "Wix store category pages display product grids but don't emit ItemList or CollectionPage schema. AI engines can't understand your product catalog hierarchy, making it harder for them to recommend products by category.",
-    fix: `<!-- Wix Velo — Add ItemList schema to collection pages -->
+    fix: `<!-- Wix Velo - Add ItemList schema to collection pages -->
 <!-- In your Category page code: -->
 
 import wixWindow from 'wix-window';
@@ -146,9 +146,9 @@ $w.onReady(async function () {
 
 const contextParagraphs = [
   "Wix is one of the most popular website builders worldwide, offering drag-and-drop simplicity for creating online stores. However, its closed ecosystem gives you limited control over the structured data that AI engines read.",
-  "Wix auto-generates basic Product schema — name, image, price — but omits virtually every product attribute AI engines need to make recommendations: brand, material, size details, selling points, and competitive context. None of your carefully entered product info reaches AI crawlers.",
+  "Wix auto-generates basic Product schema - name, image, price - but omits virtually every product attribute AI engines need to make recommendations: brand, material, size details, selling points, and competitive context. None of your carefully entered product info reaches AI crawlers.",
   "Wix's JavaScript-heavy rendering is another concern. While Wix has improved its server-side rendering for SEO, AI crawlers vary in their ability to execute JavaScript. Some AI engines may only see a partial page, missing key product details.",
-  "Wix Velo (the platform's coding environment) does offer some schema control, but it requires developer knowledge and manual implementation per page type — a significant barrier for most Wix users who chose the platform specifically to avoid coding.",
+  "Wix Velo (the platform's coding environment) does offer some schema control, but it requires developer knowledge and manual implementation per page type - a significant barrier for most Wix users who chose the platform specifically to avoid coding.",
   "Beseam audits your Wix store from the perspective of 13 AI engines, revealing exactly what each engine sees. Even on a platform with limited schema control, knowing your gaps is the first step to fixing them.",
 ];
 
@@ -165,7 +165,7 @@ export default function WixAuditPage() {
     <PlatformAuditPage
       platform="Wix"
       headline="How does AI see your Wix store?"
-      description="Wix makes building beautiful stores easy — but gives you almost no control over what AI engines see. Beseam reveals the gaps."
+      description="Wix makes building beautiful stores easy - but gives you almost no control over what AI engines see. Beseam reveals the gaps."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

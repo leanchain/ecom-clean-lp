@@ -211,7 +211,7 @@ const evidenceCategories: Category[] = [
       {
         platform: "BigCommerce",
         title:
-          "Default option is out of stock — add to cart button doesn't populate for in-stock options",
+          "Default option is out of stock - add to cart button doesn't populate for in-stock options",
         date: "Jan 26, 2021",
         href: "https://github.com/bigcommerce/cornerstone/blob/master/CHANGELOG.md",
       },
@@ -273,7 +273,7 @@ const evidenceCategories: Category[] = [
       },
       {
         platform: "Shopify",
-        title: "GWP with 'discount code' — not working",
+        title: "GWP with 'discount code' - not working",
         date: "May 5, 2025",
         href: "https://community.shopify.com/t/gwp-with-discount-code-anyone-figured-it-out/412607",
       },
@@ -297,7 +297,7 @@ const evidenceCategories: Category[] = [
     items: [
       {
         platform: "Shopify",
-        title: "Country not selected automatically — payment methods disappear",
+        title: "Country not selected automatically - payment methods disappear",
         date: "Mar 16, 2026",
         href: "https://community.shopify.com/t/country-not-automatically-selected-in-checkout-causing-payment-methods-to-disappear/592280",
       },
@@ -401,7 +401,7 @@ const evidenceCategories: Category[] = [
       },
       {
         platform: "Shopify",
-        title: "Shipping — Product Dimensions not applying to rates",
+        title: "Shipping - Product Dimensions not applying to rates",
         date: "Jan 31, 2025",
         href: "https://community.shopify.com/t/shipping-product-dimensions/391461",
       },
@@ -471,7 +471,7 @@ const evidenceCategories: Category[] = [
       },
       {
         platform: "Shopify",
-        title: "Email informing that order was paid — but it was not",
+        title: "Email informing that order was paid - but it was not",
         href: "https://community.shopify.com/t/email-informing-that-the-order-was-paid-but-it-was-not/395214",
       },
       {
@@ -541,7 +541,7 @@ const evidenceCategories: Category[] = [
     items: [
       {
         platform: "WooCommerce",
-        title: "Payment gateway succeeds after stock = 0 — potential oversell",
+        title: "Payment gateway succeeds after stock = 0 - potential oversell",
         date: "Mar 14, 2026",
         href: "https://wordpress.org/support/topic/potential-stock-issue-when-payment-gateway-succeeds-after-stock-0/",
       },
@@ -565,7 +565,7 @@ const evidenceCategories: Category[] = [
       },
       {
         platform: "Square",
-        title: "Visible items becoming unavailable — changing at will",
+        title: "Visible items becoming unavailable - changing at will",
         href: "https://community.squareup.com/t5/Square-Online/Visible-Items-Becoming-Unavailable-Changing-at-Will/m-p/776447",
       },
       {
@@ -743,7 +743,7 @@ export default function ProofSection() {
           </h2>
           <p className="text-muted-foreground mt-4 mx-auto max-w-2xl text-lg leading-relaxed">
             Dated public reports from merchants across Shopify, WooCommerce,
-            BigCommerce, Square, Wix, Magento, and others — revenue and
+            BigCommerce, Square, Wix, Magento, and others - revenue and
             reputation risks that standard uptime monitoring never catches.
           </p>
         </motion.div>
@@ -907,7 +907,7 @@ export default function ProofSection() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="flex flex-col gap-6 rounded-2xl border border-border bg-muted/40 p-1 md:flex-row"
         >
-          {/* Left — category list */}
+          {/* Left - category list */}
           <div className="md:w-72 shrink-0">
             <div className="flex flex-col gap-0.5 p-2 md:sticky md:top-24">
               {/* Mobile: horizontal scroll */}
@@ -953,7 +953,7 @@ export default function ProofSection() {
             </div>
           </div>
 
-          {/* Right — evidence cards */}
+          {/* Right - evidence cards */}
           <div className="flex-1 rounded-xl bg-background p-4 md:p-6">
             <AnimatePresence mode="wait">
               <motion.div

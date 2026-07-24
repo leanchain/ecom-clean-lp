@@ -20,7 +20,7 @@ const findings: Finding[] = [
     title: "Default Product schema misses rich attributes",
     severity: "critical",
     description:
-      "PrestaShop's built-in schema module outputs basic Product JSON-LD — name, description, image, price, and availability. Custom features, materials, selling points, and product-specific attributes stored in your catalog are not included in the schema output.",
+      "PrestaShop's built-in schema module outputs basic Product JSON-LD - name, description, image, price, and availability. Custom features, materials, selling points, and product-specific attributes stored in your catalog are not included in the schema output.",
     fix: `// Override ProductController or use a custom module
 // modules/yourmodule/override/controllers/front/ProductController.php
 
@@ -87,7 +87,7 @@ $schema['offers'] = $offers;`,
     title: "Module conflicts create duplicate schema",
     severity: "high",
     description:
-      "PrestaShop's module ecosystem often results in multiple SEO modules emitting their own schema — the core module, third-party SEO modules, and theme-level schema can all conflict, giving AI engines contradictory product data.",
+      "PrestaShop's module ecosystem often results in multiple SEO modules emitting their own schema - the core module, third-party SEO modules, and theme-level schema can all conflict, giving AI engines contradictory product data.",
     fix: `// 1. Identify all schema sources
 // Check: Back Office > Modules > Search "schema" or "structured data"
 // Common culprits: SEO Expert, Google Rich Snippets, theme modules
@@ -124,7 +124,7 @@ $schema['offers'] = $offers;`,
 
 const contextParagraphs = [
   "PrestaShop is one of the most popular open-source e-commerce platforms, particularly in Europe and Latin America. It powers over 300,000 stores and offers full control over structured data through its module and template system.",
-  "The most common AI readability problem on PrestaShop is that the default schema output is basic. PrestaShop's core emits Product schema with name, price, and availability — but your carefully configured product features, materials, and attributes are stored in the database without ever appearing in structured data.",
+  "The most common AI readability problem on PrestaShop is that the default schema output is basic. PrestaShop's core emits Product schema with name, price, and availability - but your carefully configured product features, materials, and attributes are stored in the database without ever appearing in structured data.",
   "Module conflicts are another frequent issue. PrestaShop's marketplace has dozens of SEO and schema modules, and stores that install multiple modules end up with duplicate or conflicting structured data. AI engines see two different prices or availability statuses and lose confidence in your data.",
   "Multi-language deployments add complexity. PrestaShop handles multiple languages well in the admin, but the schema output often defaults to the primary language regardless of which language the user (or AI crawler) is viewing.",
   "Beseam audits your PrestaShop store across 118+ AI readability checks, identifies schema conflicts from multiple modules, and generates the exact PHP and Smarty template fixes for your specific setup.",
@@ -143,7 +143,7 @@ export default function PrestaShopAuditPage() {
     <PlatformAuditPage
       platform="PrestaShop"
       headline="How does AI see your PrestaShop store?"
-      description="PrestaShop gives you full schema control — but most stores run the defaults. Beseam finds what's missing and generates the fixes."
+      description="PrestaShop gives you full schema control - but most stores run the defaults. Beseam finds what's missing and generates the fixes."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

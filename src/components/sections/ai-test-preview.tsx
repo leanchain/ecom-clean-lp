@@ -22,7 +22,7 @@ const agents = [
   {
     name: "Enhancer Agent",
     description:
-      "Produces upgrade assets — schema, FAQ sections, product narratives, media prompts — all within your brand constraints and style guidelines.",
+      "Produces upgrade assets - schema, FAQ sections, product narratives, media prompts - all within your brand constraints and style guidelines.",
     icon: Wand2,
     color: "text-violet-500",
     bg: "bg-violet-500/10",
@@ -30,7 +30,7 @@ const agents = [
   {
     name: "Deploy Agent",
     description:
-      "Applies changes in a reversible way with full versioning. Manages staged rollouts — 1 PDP first, then scale when KPIs confirm success.",
+      "Applies changes in a reversible way with full versioning. Manages staged rollouts - 1 PDP first, then scale when KPIs confirm success.",
     icon: Rocket,
     color: "text-emerald-500",
     bg: "bg-emerald-500/10",

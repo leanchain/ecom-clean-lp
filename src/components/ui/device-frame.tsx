@@ -8,7 +8,7 @@ export interface DeviceFrameProps {
   height?: number;
   url?: string;
   isFullPage?: boolean;
-  /** Hide the browser/URL bar — use when content provides its own app chrome */
+  /** Hide the browser/URL bar - use when content provides its own app chrome */
   hideHeader?: boolean;
 }
 
@@ -49,7 +49,7 @@ export function DeviceFrame({
           : undefined,
       }}
     >
-      {/* Browser header — desktop */}
+      {/* Browser header - desktop */}
       {!isMobile && !hideHeader && (
         <div
           className="flex items-center gap-1.5 px-4 border-b bg-muted/50 shrink-0"
@@ -66,7 +66,7 @@ export function DeviceFrame({
         </div>
       )}
 
-      {/* Browser header — mobile */}
+      {/* Browser header - mobile */}
       {isMobile && !hideHeader && (
         <div
           className="flex items-end justify-center px-4 pb-2 border-b bg-muted/30 shrink-0 pt-7"
@@ -87,7 +87,7 @@ export function DeviceFrame({
         {children}
       </div>
 
-      {/* Camera dot — single circle, centered at top */}
+      {/* Camera dot - single circle, centered at top */}
       {isMobile && (
         <div className="pointer-events-none absolute left-1/2 top-3 z-20 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-black" />
       )}

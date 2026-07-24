@@ -28,7 +28,7 @@ const gaps = [
   {
     tool: "SEO crawlers & audit tools",
     misses:
-      "They grade static markup and meta tags — not whether real shoppers can buy or whether AI assistants recommend you.",
+      "They grade static markup and meta tags - not whether real shoppers can buy or whether AI assistants recommend you.",
     beseam:
       "Beseam ties live shopper behavior, revenue risk, and AI discoverability together, not a one-off markup score.",
   },

@@ -17,7 +17,7 @@ const tabs = [
     title: "Scoreboard",
     icon: BarChart3,
     description:
-      "See your entire catalog at a glance. AI visibility scores, conversion readiness, and performance — all in one view. Prioritize what to fix first.",
+      "See your entire catalog at a glance. AI visibility scores, conversion readiness, and performance - all in one view. Prioritize what to fix first.",
     bullets: [
       "AI visibility + conversion readiness scores per PDP",
       "Prioritized by revenue impact",
@@ -62,7 +62,7 @@ const tabs = [
     title: "Playbooks",
     icon: BookOpen,
     description:
-      "AI-generated upgrade recommendations you can apply directly or hand to your agency. Each playbook is versioned and reversible — review the diff before deploying.",
+      "AI-generated upgrade recommendations you can apply directly or hand to your agency. Each playbook is versioned and reversible - review the diff before deploying.",
     bullets: [
       "Prioritized improvements per PDP",
       "Apply directly or share with your agency to refine",
@@ -99,7 +99,7 @@ const tabs = [
     title: "Incidents",
     icon: AlertTriangle,
     description:
-      "When KPIs regress after any change — from your agency, dev team, or AI — Beseam explains what happened, identifies the source, and recommends whether to rollback, iterate, or keep.",
+      "When KPIs regress after any change - from your agency, dev team, or AI - Beseam explains what happened, identifies the source, and recommends whether to rollback, iterate, or keep.",
     bullets: [
       "Auto-detected regressions with source attribution",
       "Change diff linked to KPI impact",
@@ -122,7 +122,7 @@ const tabs = [
     title: "History",
     icon: History,
     description:
-      "A complete timeline of every PDP change — whether from your agency, dev team, or Beseam AI. See who changed what, when, and what happened to revenue afterward.",
+      "A complete timeline of every PDP change - whether from your agency, dev team, or Beseam AI. See who changed what, when, and what happened to revenue afterward.",
     bullets: [
       "Full attribution: agency, internal, or AI-generated",
       "Filter by product, source, or outcome",
@@ -193,7 +193,7 @@ const Feature57 = () => {
               One Platform. <span className="text-primary italic">Every PDP Change.</span>
             </h2>
             <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed">
-              AI recommendations, agency deliverables, and internal updates — all
+              AI recommendations, agency deliverables, and internal updates - all
               managed, monitored, and protected in one place.
             </p>
           </motion.div>

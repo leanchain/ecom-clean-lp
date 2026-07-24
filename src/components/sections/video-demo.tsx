@@ -17,7 +17,7 @@ const VideoDemo = () => {
             </h2>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
               {process.env.NEXT_PUBLIC_RELEASE_GUARD === "true"
-                ? "See how we audit PDPs and generate AI-optimized content — this is what you'll get as a pilot partner."
+                ? "See how we audit PDPs and generate AI-optimized content - this is what you'll get as a pilot partner."
                 : "2-minute demo showing how to audit a PDP and generate AI-optimized content."}
             </p>
           </div>

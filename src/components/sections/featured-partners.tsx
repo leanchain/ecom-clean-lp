@@ -80,7 +80,7 @@ export default function FeaturedPartners({
                   Dev &amp; Implementation Agencies
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  Deliver PDP upgrades as a service — with versioning,
+                  Deliver PDP upgrades as a service - with versioning,
                   monitoring, and rollback built in. Build a recurring
                   high-margin service on top of Beseam.
                 </p>

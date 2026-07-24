@@ -20,7 +20,7 @@ const findings: Finding[] = [
     title: "Built-in schema lacks selling points and differentiators",
     severity: "critical",
     description:
-      "BigCommerce includes decent Product schema out of the box — name, price, availability, SKU — but omits the contextual selling points, use cases, and competitive positioning that AI engines need to confidently recommend your product.",
+      "BigCommerce includes decent Product schema out of the box - name, price, availability, SKU - but omits the contextual selling points, use cases, and competitive positioning that AI engines need to confidently recommend your product.",
     fix: `<!-- BigCommerce Stencil: Extend Product schema in product.html -->
 <script type="application/ld+json">
 {
@@ -105,10 +105,10 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "BigCommerce has better built-in structured data than most e-commerce platforms. Product schema includes name, price, availability, SKU, and images out of the box — which gives it a head start on AI readability.",
-  "However, BigCommerce's default schema stops at the basics. The custom fields that make your products unique — materials, certifications, warranty terms, care instructions — are stored in BigCommerce but never surfaced in structured data. AI engines can't see them.",
+  "BigCommerce has better built-in structured data than most e-commerce platforms. Product schema includes name, price, availability, SKU, and images out of the box - which gives it a head start on AI readability.",
+  "However, BigCommerce's default schema stops at the basics. The custom fields that make your products unique - materials, certifications, warranty terms, care instructions - are stored in BigCommerce but never surfaced in structured data. AI engines can't see them.",
   "The Stencil theme engine gives you full control over schema output, but most stores use default templates that haven't been optimized for AI readability. This means your competitors on the same platform could be getting recommended over you simply because their theme emits richer data.",
-  "Multi-storefront deployments add another layer of complexity. When the same product lives on multiple storefronts with different pricing or descriptions, AI engines can surface inconsistent information — recommending a product at the wrong price or from the wrong region.",
+  "Multi-storefront deployments add another layer of complexity. When the same product lives on multiple storefronts with different pricing or descriptions, AI engines can surface inconsistent information - recommending a product at the wrong price or from the wrong region.",
   "Beseam audits your BigCommerce store across all 118+ AI readability checks, identifies the specific schema gaps in your Stencil templates, and generates the exact code fixes needed for your theme.",
 ];
 
@@ -123,7 +123,7 @@ export default function BigCommerceAuditPage() {
     <PlatformAuditPage
       platform="BigCommerce"
       headline="How does AI see your BigCommerce store?"
-      description="BigCommerce has solid defaults — but AI engines need more than defaults to recommend your products over competitors. Beseam bridges the gap."
+      description="BigCommerce has solid defaults - but AI engines need more than defaults to recommend your products over competitors. Beseam bridges the gap."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

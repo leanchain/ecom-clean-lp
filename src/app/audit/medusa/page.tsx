@@ -20,7 +20,7 @@ const findings: Finding[] = [
     title: "No structured data in Medusa starter storefronts",
     severity: "critical",
     description:
-      "Medusa's official Next.js starter storefront does not include any Product JSON-LD schema. The product pages render beautifully for users but AI engines see no structured product data — no price, no availability, no product type.",
+      "Medusa's official Next.js starter storefront does not include any Product JSON-LD schema. The product pages render beautifully for users but AI engines see no structured product data - no price, no availability, no product type.",
     fix: `// In your Medusa Next.js storefront:
 // Create src/lib/schema.ts
 
@@ -201,7 +201,7 @@ export async function generateRegionAwareSchema(
 const contextParagraphs = [
   "Medusa is an open-source headless commerce platform built with Node.js and TypeScript. It's the leading Node.js alternative to Saleor, offering a modular architecture that developers love. Its official starter uses Next.js for the storefront.",
   "Like all headless platforms, Medusa's core challenge for AI readability is architectural: the backend provides a REST API but no HTML output. Any structured data must be implemented in your frontend code. Medusa's official Next.js starter includes zero JSON-LD.",
-  "Medusa's product model supports variants, collections, and a flexible metadata system (JSON key-value pairs), but translating this API data to rich structured data is left entirely to the storefront developer — and it's rarely done.",
+  "Medusa's product model supports variants, collections, and a flexible metadata system (JSON key-value pairs), but translating this API data to rich structured data is left entirely to the storefront developer - and it's rarely done.",
   "The multi-region system is a standout Medusa feature, but it complicates structured data: prices, currencies, and tax inclusion vary by region, and your schema needs to reflect the correct region's pricing for SE crawlers and AI engines.",
   "Beseam audits your Medusa storefront from the perspective of 13 AI engines, identifies the complete absence of structured data in your Next.js (or custom) storefront, and provides TypeScript utility functions you can drop directly into your codebase.",
 ];

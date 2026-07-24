@@ -35,7 +35,7 @@ const AuditTryout = () => {
             <p className="text-muted-foreground text-lg leading-relaxed max-w-xl">
               Get a comprehensive baseline report for any product page.
               Understand AI visibility, conversion readiness, and performance
-              gaps — so every improvement starts from solid ground.
+              gaps - so every improvement starts from solid ground.
             </p>
 
             <ul className="space-y-3">
@@ -135,7 +135,7 @@ const AuditTryout = () => {
                   {[
                     "Add FAQ section with schema.org markup",
                     "Generate deep product narrative (benefits, use cases)",
-                    "Deploy staged rollout — monitor 48h before scaling",
+                    "Deploy staged rollout - monitor 48h before scaling",
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2.5 rounded-lg bg-background/60 border border-border/30 px-3 py-2">
                       <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />

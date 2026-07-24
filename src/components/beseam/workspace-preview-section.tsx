@@ -31,7 +31,7 @@ const TABS = [
 type TabId = (typeof TABS)[number]["id"];
 
 /* ================================================================
-   SIDEBAR NAV — mirrors real Sidebar.tsx
+   SIDEBAR NAV - mirrors real Sidebar.tsx
    ================================================================ */
 
 type NavItem = {
@@ -77,7 +77,7 @@ const SIDEBAR_NAV: Record<TabId, { main: NavItem[]; bottom: NavItem[] }> = {
 };
 
 /* ================================================================
-   SHARED — Header + SubTabRail + scoreColor
+   SHARED - Header + SubTabRail + scoreColor
    ================================================================ */
 
 function sc(n: number) {
@@ -176,7 +176,7 @@ function SubTabRail({
 }
 
 /* ════════════════════════════════════════════════════════════════
-   TAB 1 — DSM OVERVIEW
+   TAB 1 - DSM OVERVIEW
    ════════════════════════════════════════════════════════════════ */
 
 function DsmContent() {
@@ -202,7 +202,7 @@ function DsmContent() {
                 new quick wins since last run.
               </p>
               <p className="mt-0.5 text-[11px] text-gray-400 dark:text-gray-500">
-                Score improved +11 pts this week — best in 30 days.
+                Score improved +11 pts this week - best in 30 days.
               </p>
             </div>
           </div>
@@ -352,19 +352,19 @@ function DsmContent() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   TAB 2 — CATALOG / PRODUCTS
+   TAB 2 - CATALOG / PRODUCTS
    ════════════════════════════════════════════════════════════════ */
 
 function CatalogContent() {
   const products = [
     { name: "Summer Floral Midi Dress", vendor: "Zara", score: 92, issues: 1, status: "active" },
-    { name: "Block Heel Sandal — Nude", vendor: "Jimmy Choo", score: 74, issues: 4, status: "active" },
+    { name: "Block Heel Sandal - Nude", vendor: "Jimmy Choo", score: 74, issues: 4, status: "active" },
     { name: "Quilted Chain Shoulder Bag", vendor: "Chanel", score: 61, issues: 8, status: "active" },
     { name: "Oversized Square Sunglasses", vendor: "Ray-Ban", score: 88, issues: 2, status: "active" },
     { name: "Straw Wide-Brim Hat", vendor: "H&M", score: 45, issues: 11, status: "draft" },
     { name: "Ribbed Knit Tank Top", vendor: "COS", score: 79, issues: 3, status: "active" },
-    { name: "Leather Belt — Cognac", vendor: "Massimo Dutti", score: 84, issues: 2, status: "active" },
-    { name: "Silk Scarf — Floral Print", vendor: "Hermès", score: 96, issues: 0, status: "active" },
+    { name: "Leather Belt - Cognac", vendor: "Massimo Dutti", score: 84, issues: 2, status: "active" },
+    { name: "Silk Scarf - Floral Print", vendor: "Hermès", score: 96, issues: 0, status: "active" },
   ];
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
@@ -418,7 +418,7 @@ function CatalogContent() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   TAB 3 — TRAFFIC OPTIMIZER
+   TAB 3 - TRAFFIC OPTIMIZER
    ════════════════════════════════════════════════════════════════ */
 
 const TRAFFIC_TABS = [

@@ -138,7 +138,7 @@ const resourceItems: MenuItem[] = [
   {
     id: "faq",
     title: "FAQ",
-    description: "Discovery, conversion, safety — your top questions answered",
+    description: "Discovery, conversion, safety - your top questions answered",
     href: "/#faq",
     icon: HelpCircle,
   },

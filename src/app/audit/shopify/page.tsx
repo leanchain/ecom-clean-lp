@@ -5,7 +5,7 @@ import type { Finding } from "@/components/beseam/sample-findings";
 export const metadata: Metadata = {
   title: "How Does AI See Your Shopify Store?",
   description:
-    "Shopify stores have critical AI readability gaps. Beseam audits how ChatGPT, Gemini, and 13 AI engines read your product pages — and generates fixes.",
+    "Shopify stores have critical AI readability gaps. Beseam audits how ChatGPT, Gemini, and 13 AI engines read your product pages - and generates fixes.",
   keywords: [
     "Shopify AI optimization",
     "ChatGPT Shopify",
@@ -20,7 +20,7 @@ const findings: Finding[] = [
     title: "Product schema missing key selling points",
     severity: "critical",
     description:
-      "Shopify's default Product schema includes name, price, and availability — but omits selling points, materials, fit details, and competitive differentiators. AI engines see a bare product listing with no reason to recommend it over competitors.",
+      "Shopify's default Product schema includes name, price, and availability - but omits selling points, materials, fit details, and competitive differentiators. AI engines see a bare product listing with no reason to recommend it over competitors.",
     fix: `// Shopify Liquid: Add selling points to Product schema
 <script type="application/ld+json">
 {
@@ -59,7 +59,7 @@ const findings: Finding[] = [
 ]`,
   },
   {
-    title: "Missing review aggregate — AI can't cite ratings",
+    title: "Missing review aggregate - AI can't cite ratings",
     severity: "high",
     description:
       "Most Shopify review apps inject stars visually but don't add AggregateRating schema. AI engines can't see your 4.8-star rating, so they can't mention it when recommending products.",
@@ -76,7 +76,7 @@ const findings: Finding[] = [
     title: "Collection pages have no structured data",
     severity: "medium",
     description:
-      "Shopify collection pages list products visually but emit zero structured data. AI engines crawling your store can't discover product relationships, categories, or collection context — they see each product in isolation.",
+      "Shopify collection pages list products visually but emit zero structured data. AI engines crawling your store can't discover product relationships, categories, or collection context - they see each product in isolation.",
     fix: `// Add ItemList schema to collection pages
 <script type="application/ld+json">
 {
@@ -99,11 +99,11 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Shopify is the most popular e-commerce platform, powering millions of stores. Its default themes handle basic product schema — name, price, availability — but they leave massive gaps that AI engines can't work around.",
+  "Shopify is the most popular e-commerce platform, powering millions of stores. Its default themes handle basic product schema - name, price, availability - but they leave massive gaps that AI engines can't work around.",
   "The most common issue we find on Shopify stores is incomplete Product schema. Shopify's Liquid templates emit minimal structured data that lacks the selling points, materials, fit details, and competitive context that AI engines need to confidently recommend a product.",
-  "Variant pricing is another blind spot. Most Shopify themes emit a single price in the schema — typically the first variant's price — which means AI engines like ChatGPT report incorrect pricing when shoppers ask about specific sizes or colors.",
+  "Variant pricing is another blind spot. Most Shopify themes emit a single price in the schema - typically the first variant's price - which means AI engines like ChatGPT report incorrect pricing when shoppers ask about specific sizes or colors.",
   "Review apps are a third gap. Shopify's ecosystem has dozens of review apps that display stars beautifully in the browser, but many don't inject AggregateRating schema. AI engines literally can't see your ratings, so they can't mention them in recommendations.",
-  "Beseam audits your Shopify store from the perspective of 13 AI engines, finds these exact gaps, generates schema and content fixes, and publishes them directly to your store — with rollback protection on every change.",
+  "Beseam audits your Shopify store from the perspective of 13 AI engines, finds these exact gaps, generates schema and content fixes, and publishes them directly to your store - with rollback protection on every change.",
 ];
 
 const otherPlatforms = [
@@ -117,7 +117,7 @@ export default function ShopifyAuditPage() {
     <PlatformAuditPage
       platform="Shopify"
       headline="How does AI see your Shopify store?"
-      description="Shopify handles the basics — but AI engines need more than basics to recommend your products. Beseam finds the gaps and fixes them."
+      description="Shopify handles the basics - but AI engines need more than basics to recommend your products. Beseam finds the gaps and fixes them."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

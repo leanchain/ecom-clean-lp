@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import ScanForm from "./scan-form";
 
 export const metadata: Metadata = {
-  title: { absolute: "AI Visibility Scan — Free Tool | Beseam" },
+  title: { absolute: "AI Visibility Scan - Free Tool | Beseam" },
   description:
     "A secondary Beseam tool for checking how search and AI systems read a Shopify store's public product data.",
   alternates: { canonical: "/tools/ai-visibility-scan" },

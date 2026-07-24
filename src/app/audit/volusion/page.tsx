@@ -21,7 +21,7 @@ const findings: Finding[] = [
     severity: "critical",
     description:
       "Volusion generates a basic Product schema but omits critical fields: brand, SKU, GTIN, detailed descriptions, and product images beyond the primary thumbnail. AI engines get a skeleton of your product data instead of the complete picture.",
-    fix: `<!-- Volusion's template system is limited — use footer HTML injection -->
+    fix: `<!-- Volusion's template system is limited - use footer HTML injection -->
 <!-- In Marketing > SEO > Header/Footer Tags, add to Footer: -->
 <script>
 (function() {
@@ -53,7 +53,7 @@ const findings: Finding[] = [
     title: "No AggregateRating or Review schema",
     severity: "high",
     description:
-      "Volusion's built-in product reviews do not generate Review or AggregateRating schema. When customers leave reviews, AI engines can't see the ratings — meaning your highly-rated products have no structured credibility signal.",
+      "Volusion's built-in product reviews do not generate Review or AggregateRating schema. When customers leave reviews, AI engines can't see the ratings - meaning your highly-rated products have no structured credibility signal.",
     fix: `<!-- Add via Footer HTML injection in Volusion admin -->
 <script>
 (function() {
@@ -88,7 +88,7 @@ const findings: Finding[] = [
     title: "Category pages lack CollectionPage schema",
     severity: "medium",
     description:
-      "Volusion category pages display product grids but include no structured data at all — no CollectionPage, no ItemList, no product references. AI engines can't understand your catalog organization or browse your products systematically.",
+      "Volusion category pages display product grids but include no structured data at all - no CollectionPage, no ItemList, no product references. AI engines can't understand your catalog organization or browse your products systematically.",
     fix: `<!-- Category page schema via Footer injection (only on category pages) -->
 <script>
 (function() {
@@ -165,7 +165,7 @@ const findings: Finding[] = [
 const contextParagraphs = [
   "Volusion is one of the original hosted e-commerce platforms, powering online stores since 2002. While it has modernized over the years, its structured data implementation remains minimal compared to newer platforms like Shopify or BigCommerce.",
   "The biggest challenge with Volusion is its limited template customization. Unlike open-source platforms where you can freely edit templates to add JSON-LD, Volusion restricts access to core template files. Your main option for adding structured data is the header/footer HTML injection in the admin panel.",
-  "Volusion's default Product schema covers the basics — name, price, availability — but omits brand information, detailed product descriptions, additional images, and customer review data. AI engines get a bare-bones view of your products.",
+  "Volusion's default Product schema covers the basics - name, price, availability - but omits brand information, detailed product descriptions, additional images, and customer review data. AI engines get a bare-bones view of your products.",
   "For stores that have invested in Volusion's product review system, the lack of AggregateRating schema is a significant missed opportunity. Reviews are visible to shoppers but invisible to AI engines that could use them to recommend your products.",
   "Beseam audits your Volusion store from the perspective of 13 AI engines, identifies the structured data gaps that Volusion's platform creates, and provides injectable code solutions that work within Volusion's template constraints.",
 ];

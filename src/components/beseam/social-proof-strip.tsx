@@ -10,14 +10,14 @@ const testimonials = [
     role: "Founder, DancingQueens",
     image: "/images/testimonials/bettina.jpeg",
     quote:
-      "Beseam completely changed how AI engines understand our products. We went from invisible to recommended — and saw it in our traffic within weeks.",
+      "Beseam completely changed how AI engines understand our products. We went from invisible to recommended - and saw it in our traffic within weeks.",
   },
   {
     name: "Sharon Bottana",
     role: "E-commerce Manager, DancingQueens",
     image: "/images/testimonials/sharon.jpeg",
     quote:
-      "We used to wonder why ChatGPT never mentioned us. Beseam showed us exactly what AI was getting wrong on our pages — and the fixes were live in a day.",
+      "We used to wonder why ChatGPT never mentioned us. Beseam showed us exactly what AI was getting wrong on our pages - and the fixes were live in a day.",
   },
 ];
 

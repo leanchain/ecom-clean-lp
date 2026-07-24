@@ -20,7 +20,7 @@ const findings: Finding[] = [
     title: "Default schema outputs minimal product attributes",
     severity: "critical",
     description:
-      "Magento's built-in structured data module emits basic Product schema — name, image, price — but omits rich attributes like material, size charts, compatibility, and selling points stored in product attributes. AI engines see a bare listing with nothing to differentiate it.",
+      "Magento's built-in structured data module emits basic Product schema - name, image, price - but omits rich attributes like material, size charts, compatibility, and selling points stored in product attributes. AI engines see a bare listing with nothing to differentiate it.",
     fix: `// app/code/YourModule/view/frontend/templates/product/jsonld.phtml
 <?php
 $product = $block->getProduct();
@@ -53,7 +53,7 @@ foreach ($product->getAttributes() as $attr) {
     title: "Configurable products show price range, not variant prices",
     severity: "critical",
     description:
-      "Magento configurable products display a price range ('From $49.00') in both the UI and schema. AI engines can't tell shoppers the price of a specific size or color — they can only quote the range, which feels unreliable.",
+      "Magento configurable products display a price range ('From $49.00') in both the UI and schema. AI engines can't tell shoppers the price of a specific size or color - they can only quote the range, which feels unreliable.",
     fix: `// Generate per-variant Offer schema for configurable products
 $offers = [];
 foreach ($product->getTypeInstance()->getUsedProducts($product) as $child) {
@@ -126,10 +126,10 @@ $schema = [
 ];
 
 const contextParagraphs = [
-  "Adobe Commerce (formerly Magento) is one of the most powerful e-commerce platforms, used by mid-market and enterprise brands worldwide. Its attribute system can store hundreds of product properties — but very few of them make it into structured data by default.",
-  "The most common AI readability issue on Magento stores is sparse Product schema. Magento's core module outputs name, image, and a basic Offer — but materials, certifications, size guides, and selling points stored in product attributes are invisible to AI engines.",
+  "Adobe Commerce (formerly Magento) is one of the most powerful e-commerce platforms, used by mid-market and enterprise brands worldwide. Its attribute system can store hundreds of product properties - but very few of them make it into structured data by default.",
+  "The most common AI readability issue on Magento stores is sparse Product schema. Magento's core module outputs name, image, and a basic Offer - but materials, certifications, size guides, and selling points stored in product attributes are invisible to AI engines.",
   "Configurable products compound the problem. Magento's default schema emits a price range ('From $49') rather than individual variant prices. When ChatGPT or Gemini tells a shopper the product 'starts at $49,' it undermines trust and may lose the sale to a competitor whose schema shows the exact price.",
-  "Multi-store and multi-language deployments are another challenge. The same product on different store views can have different prices, descriptions, and currencies — and without proper canonical/hreflang tags, AI engines can serve the wrong version.",
+  "Multi-store and multi-language deployments are another challenge. The same product on different store views can have different prices, descriptions, and currencies - and without proper canonical/hreflang tags, AI engines can serve the wrong version.",
   "Beseam audits your Magento store from the AI engine's perspective, identifies exactly which attributes and schema are missing, and generates the PHP and template fixes for your specific Magento version and theme.",
 ];
 
@@ -146,7 +146,7 @@ export default function MagentoAuditPage() {
     <PlatformAuditPage
       platform="Adobe Commerce (Magento)"
       headline="How does AI see your Magento store?"
-      description="Magento stores have the richest attribute systems in e-commerce — but almost none of that data reaches AI engines. Beseam fixes that."
+      description="Magento stores have the richest attribute systems in e-commerce - but almost none of that data reaches AI engines. Beseam fixes that."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

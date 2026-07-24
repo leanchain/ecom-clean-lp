@@ -7,10 +7,10 @@ const steps = [
     number: "01",
     title: "Audit, Monitor & Recommend",
     description:
-      "Connect your store and get a baseline PDP quality report. Beseam then continuously monitors your pages — when something changes or a new gap appears, you get alerted with prioritized fixes.",
+      "Connect your store and get a baseline PDP quality report. Beseam then continuously monitors your pages - when something changes or a new gap appears, you get alerted with prioritized fixes.",
     bullets: [
       "Baseline scores for AI visibility, conversion readiness, and performance.",
-      "Continuous monitoring — get weekly reports and instant alerts when pages degrade.",
+      "Continuous monitoring - get weekly reports and instant alerts when pages degrade.",
       "AI generates prioritized upgrade playbooks you can review or hand to your agency.",
     ],
   },
@@ -18,9 +18,9 @@ const steps = [
     number: "02",
     title: "Deploy Through Beseam",
     description:
-      "Whether the change comes from your agency, dev team, or Beseam's AI — every update is versioned, diffed, and deployed safely.",
+      "Whether the change comes from your agency, dev team, or Beseam's AI - every update is versioned, diffed, and deployed safely.",
     bullets: [
-      "One pipeline for all PDP changes — agencies, internal, and AI-generated.",
+      "One pipeline for all PDP changes - agencies, internal, and AI-generated.",
       "Staged rollout: apply to 1 PDP, then 10, then your whole catalog.",
       "Full diff view with source attribution (who changed what, and when).",
     ],
@@ -29,10 +29,10 @@ const steps = [
     number: "03",
     title: "Monitor & Protect Revenue",
     description:
-      "Guardrails watch KPIs after every change. If revenue dips, Beseam pinpoints which change caused it — and who made it.",
+      "Guardrails watch KPIs after every change. If revenue dips, Beseam pinpoints which change caused it - and who made it.",
     bullets: [
       "Track rev/session, checkout-start rate, and conversion continuously.",
-      "Get alerted when a regression is detected — with the change and source identified.",
+      "Get alerted when a regression is detected - with the change and source identified.",
       "One-click rollback or guided remediation. Your agency gets visibility too.",
     ],
   },
