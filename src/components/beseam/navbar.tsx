@@ -14,28 +14,28 @@ const APP_LOGIN_URL = "https://app.beseam.com/login";
 const PRODUCT_SYSTEMS = [
   {
     name: "Observe",
-    statement: "See the commercial journey from outside the stack.",
+    statement: "Find where demand is lost before it becomes an order.",
     products: ["AI Visibility", "Behavior", "Reliability"],
     href: "/#observe",
   },
   {
     name: "Decide",
-    statement: "Rank evidence by commercial consequence.",
+    statement: "Know which issue deserves attention first.",
     products: ["Foundation", "Analytics", "Optimization"],
     href: "/#foundation",
   },
   {
     name: "Act",
-    statement: "Improve products, campaigns, and experiences.",
+    statement: "Change the product, page, campaign, or creative behind the issue.",
     products: ["Commerce Readiness", "Advertising", "Creative Studio"],
     href: "/#advertising",
   },
 ] as const;
 
 const NAV_LINKS = [
-  { label: "Platform", href: "/#platform" },
-  { label: "Evidence", href: "/#advanced-intelligence" },
-  { label: "Entitlements", href: "/#packages" },
+  { label: "How it works", href: "/#platform" },
+  { label: "Example", href: "/#advanced-intelligence" },
+  { label: "Products & access", href: "/#packages" },
   { label: "Company", href: "/about" },
 ] as const;
 
@@ -90,13 +90,13 @@ export default function BeseamNavbar() {
                             <span key={product} className="block py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-black/48">{product}</span>
                           ))}
                         </div>
-                        <span className="mt-5 inline-flex items-center gap-2 text-[12px] font-semibold text-[#3154ff]">View system <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/item:translate-x-0.5" /></span>
+                        <span className="mt-5 inline-flex items-center gap-2 text-[12px] font-semibold text-[#3154ff]">View products <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/item:translate-x-0.5" /></span>
                       </Link>
                     ))}
                   </div>
                   <div className="flex items-center justify-between border-t border-black/18 px-6 py-3 font-mono text-[10px] uppercase tracking-[0.08em] text-black/45">
-                    <span>Products resolve per contract and store</span>
-                    <Link href="/#packages" className="text-[#3154ff]">Entitlement index →</Link>
+                    <span>Products are enabled per store and contract</span>
+                    <Link href="/#packages" className="text-[#3154ff]">Compare products →</Link>
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@ export default function BeseamNavbar() {
             <TrackedLink href={APP_LOGIN_URL} eventName="login_clicked" placement="navbar" className="text-[14px] font-semibold text-black/62 transition-colors hover:text-[#3154ff]">
               Log in
             </TrackedLink>
-            <BookReviewCta location="navbar" label="Commercial review" className="min-h-10 px-5 text-[13px]" />
+            <BookReviewCta location="navbar" label="Book a 20-minute review" className="min-h-10 px-5 text-[13px]" />
           </div>
 
           <button
@@ -132,7 +132,7 @@ export default function BeseamNavbar() {
         <div id="mobile-navigation" className="border-t border-black/18 bg-[#f4f1e9] lg:hidden">
           <div className="mx-auto max-w-[92rem] px-5 pb-7 sm:px-8">
             <div className="border-b border-black/18 py-5">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#3154ff]">Product systems</p>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#3154ff]">Products by job</p>
               {PRODUCT_SYSTEMS.map((system) => (
                 <Link key={system.name} href={system.href} onClick={() => setMobileOpen(false)} className="grid grid-cols-[5.5rem_1fr] gap-4 border-b border-black/14 py-4 last:border-b-0">
                   <span className="font-serif text-[20px] text-[#111318]">{system.name}</span>
@@ -151,7 +151,7 @@ export default function BeseamNavbar() {
               <TrackedLink href={APP_LOGIN_URL} eventName="login_clicked" placement="mobile_nav" className="flex min-h-12 items-center justify-center border border-black/22 text-[14px] font-semibold text-[#111318]">
                 Log in
               </TrackedLink>
-              <BookReviewCta location="mobile_nav" label="Commercial review" className="w-full" />
+              <BookReviewCta location="mobile_nav" label="Book a 20-minute review" className="w-full" />
             </div>
           </div>
         </div>

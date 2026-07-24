@@ -7,9 +7,9 @@ import CookieConsent from "@/components/cookie-consent";
 import { STORE_HEALTH_FAQS } from "@/lib/store-health-faqs";
 
 export const metadata: Metadata = {
-  title: { absolute: "Beseam: The self-improving revenue layer for commerce" },
+  title: { absolute: "Beseam | Find the revenue leaks between your commerce systems" },
   description:
-    "Beseam sits on top of your existing commerce stack to observe customer behavior, find revenue leakage, adapt experiences, orchestrate approved fixes, and learn from verified commercial outcomes.",
+    "Beseam checks your storefront, catalog, customer journeys, AI discovery, and campaigns together, shows which issue deserves attention first, and verifies what changed after your team acts.",
   alternates: { canonical: "/" },
 };
 
@@ -17,7 +17,7 @@ export default function Home() {
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    name: "Beseam commerce revenue platform questions",
+    name: "Questions about Beseam products, access, and revenue measurement",
     mainEntity: STORE_HEALTH_FAQS.map((faq) => ({
       "@type": "Question",
       name: faq.question,

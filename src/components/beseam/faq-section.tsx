@@ -5,12 +5,12 @@ export default function FaqSection() {
     <section id="faq" className="border-b border-black/18 bg-[#f4f1e9]">
       <div className="mx-auto grid max-w-[92rem] gap-12 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20 lg:px-10 lg:py-28">
         <div>
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Questions</p>
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Before you book</p>
           <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.7rem,4.1vw,4.1rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#111318]">
-            How the revenue layer fits your stack.
+            What Beseam connects to, changes, and measures.
           </h2>
           <p className="mt-7 max-w-lg text-[16px] leading-[1.7] text-black/62">
-            Products, entitlements, autonomy, personalization, credits, and commercial measurement.
+            Clear answers about the existing stack, product access, approval, personalization, credits, and revenue claims.
           </p>
         </div>
         <div className="border-t border-black/25">
