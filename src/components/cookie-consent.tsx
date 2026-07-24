@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import Link from "next/link";
 
 import { useCookieConsent } from "@/contexts/CookieConsentContext";
@@ -11,10 +10,7 @@ export default function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer =
-      status === "undecided"
-        ? window.setTimeout(() => setIsVisible(true), 400)
-        : undefined;
+    const timer = status === "undecided" ? window.setTimeout(() => setIsVisible(true), 400) : undefined;
     if (status !== "undecided") setIsVisible(false);
     return () => {
       if (timer) window.clearTimeout(timer);
@@ -24,36 +20,20 @@ export default function CookieConsent() {
   if (!isVisible) return null;
 
   return (
-    <aside
-      aria-label="Cookie choices"
-      className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-sm rounded-2xl border border-rule bg-panel p-4 shadow-xl sm:left-5 sm:right-auto sm:mx-0 sm:p-5"
-    >
-      <h2 className="text-[15px] font-semibold text-ink">
-        Your privacy choices
-      </h2>
-      <p className="mt-2 text-[12.5px] leading-relaxed text-foreground sm:text-[13.5px]">
-        Essential cookies keep the site working. We load optional analytics only
-        if you accept, so we can understand how the public website is used.
+    <aside aria-label="Cookie choices" className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-sm border border-black/22 bg-[#f4f1e9] p-4 shadow-[0_20px_60px_rgba(17,19,24,0.18)] sm:left-5 sm:right-auto sm:mx-0 sm:p-5">
+      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#3154ff]">Privacy choices</p>
+      <h2 className="mt-3 font-serif text-[23px] leading-tight tracking-[-0.02em] text-[#111318]">Keep analytics under your control.</h2>
+      <p className="mt-3 text-[13px] leading-relaxed text-black/62">
+        Essential cookies keep the site working. Optional analytics load only after you accept.
       </p>
-      <Link
-        href="/privacy-policy"
-        className="mt-1 inline-flex min-h-9 items-center py-1 text-[12px] font-medium hover:underline sm:min-h-11 sm:text-[13px]"
-      >
+      <Link href="/privacy-policy" className="mt-2 inline-flex min-h-9 items-center text-[12px] font-semibold text-black/60 underline decoration-black/20 underline-offset-5 hover:decoration-[#3154ff]">
         Read the privacy policy
       </Link>
-      <div className="mt-2 grid grid-cols-2 gap-2 sm:mt-3">
-        <button
-          type="button"
-          onClick={decline}
-          className="min-h-10 rounded-full border border-rule px-3 text-[12px] font-semibold text-ink transition-colors hover:border-ink/30 sm:min-h-11 sm:px-4 sm:text-[14px]"
-        >
+      <div className="mt-3 grid grid-cols-2 gap-2">
+        <button type="button" onClick={decline} className="min-h-10 border border-black/22 px-3 text-[12px] font-semibold text-[#111318] transition-colors hover:border-[#3154ff] hover:text-[#3154ff]">
           Reject analytics
         </button>
-        <button
-          type="button"
-          onClick={accept}
-          className="min-h-10 rounded-full bg-primary px-3 text-[12px] font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)] sm:min-h-11 sm:px-4 sm:text-[14px]"
-        >
+        <button type="button" onClick={accept} className="min-h-10 bg-[#111318] px-3 text-[12px] font-semibold text-white transition-colors hover:bg-[#3154ff]">
           Accept analytics
         </button>
       </div>

@@ -38,8 +38,15 @@ export default function MobileStickyCta() {
 
   return (
     <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
-      <TrackedLink href={REVIEW_URL} eventName="marketing_primary_cta_clicked" eventCategory="conversion" placement="mobile_sticky" preserveUtm className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-vibrant px-5 text-sm font-bold text-white shadow-lg">
-        Book a platform demo
+      <TrackedLink
+        href={REVIEW_URL}
+        eventName="marketing_primary_cta_clicked"
+        eventCategory="conversion"
+        placement="mobile_sticky"
+        preserveUtm
+        className="flex min-h-12 items-center justify-center gap-3 border border-white/18 bg-[#111318] px-5 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(17,19,24,0.28)]"
+      >
+        Review your revenue surface
         <ArrowRight className="h-4 w-4" />
       </TrackedLink>
     </div>
