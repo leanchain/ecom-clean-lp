@@ -31,7 +31,7 @@ export function BookReviewCta({
           className,
         )}
       >
-        {label ?? "Examine the product systems"}
+        {label ?? "Explore the product suite"}
       </TrackedLink>
     );
   }
@@ -48,7 +48,7 @@ export function BookReviewCta({
         className,
       )}
     >
-      {label ?? "Review your revenue surface"}
+      {label ?? "Book a 20-minute commerce review"}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
     </TrackedLink>
   );

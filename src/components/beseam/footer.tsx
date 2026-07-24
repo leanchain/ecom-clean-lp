@@ -40,10 +40,10 @@ export default function BeseamFooter() {
               <NavbarLogo className="text-white" />
             </Link>
             <p className="mt-7 max-w-md font-serif text-[31px] leading-[1.1] tracking-[-0.03em] text-white/92">
-              The commercial decision layer outside your commerce stack.
+              Find the revenue leaks between your commerce systems.
             </p>
             <p className="mt-6 max-w-md text-[14px] leading-relaxed text-white/52">
-              Observe revenue surfaces, diagnose leakage, govern interventions, and verify what changed.
+              Beseam checks the storefront, catalog, customer behavior, AI discovery, and campaigns; ranks the issues; and verifies the result after your team acts.
             </p>
           </div>
 
@@ -64,7 +64,7 @@ export default function BeseamFooter() {
         </div>
 
         <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto] lg:items-center lg:gap-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/34">Beseam commerce revenue intelligence</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/34">Beseam for ecommerce operators</p>
           <Link href="/about" className="text-[12px] text-white/48 hover:text-white">Company</Link>
           <Link href="/privacy-policy" className="text-[12px] text-white/48 hover:text-white">Privacy</Link>
           <Link href="/terms-of-service" className="text-[12px] text-white/48 hover:text-white">Terms</Link>
@@ -73,7 +73,7 @@ export default function BeseamFooter() {
         <div className="flex flex-col gap-4 pt-8 text-[11px] text-white/34 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Beseam. All rights reserved.</p>
           <TrackedLink href="/tools/ai-visibility-scan" eventName="scanner_tool_clicked" placement="footer_secondary" className="w-fit underline decoration-white/20 underline-offset-5 transition-colors hover:text-[#8ea2ff] hover:decoration-[#8ea2ff]">
-            Run an external AI visibility scan
+            Check how AI assistants describe your brand
           </TrackedLink>
         </div>
       </div>

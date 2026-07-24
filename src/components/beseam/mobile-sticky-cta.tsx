@@ -46,7 +46,7 @@ export default function MobileStickyCta() {
         preserveUtm
         className="flex min-h-12 items-center justify-center gap-3 border border-white/18 bg-[#111318] px-5 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(17,19,24,0.28)]"
       >
-        Review your revenue surface
+        Book a 20-minute commerce review
         <ArrowRight className="h-4 w-4" />
       </TrackedLink>
     </div>

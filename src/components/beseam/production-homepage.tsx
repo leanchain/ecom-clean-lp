@@ -33,19 +33,19 @@ const INTEGRATIONS = [
 const TRACE = [
   {
     label: "Observe",
-    detail: "Storefront, catalog, behavior, discovery, campaigns, and booked commerce.",
+    detail: "Check the storefront, catalog, customer sessions, AI answers, campaign setup, and order data.",
   },
   {
     label: "Diagnose",
-    detail: "Separate noise from commercially meaningful leakage and show the evidence.",
+    detail: "Attach the issue to the exact product, page, query, or channel and rank it by evidence.",
   },
   {
     label: "Intervene",
-    detail: "Recommend, approve, publish, or personalize through governed workflows.",
+    detail: "Create the proposed change, assign an owner, and require approval where spend or customer-facing content is involved.",
   },
   {
     label: "Verify",
-    detail: "Measure what changed, reconcile the money, and improve the next decision.",
+    detail: "Recheck the original signal and compare equivalent periods without merging booked, attributed, and modeled results.",
   },
 ] as const;
 
@@ -54,26 +54,26 @@ const SYSTEMS = [
     id: "observe",
     index: "01",
     name: "Observe",
-    title: "See the revenue journey your stack cannot see as one system.",
+    title: "Find where demand is lost before it becomes an order.",
     description:
-      "Beseam watches commerce from the outside: how stores render, how products are represented, how customers move, where discovery fails, and where reliability erodes intent.",
+      "AI Visibility checks how assistants describe and cite the brand. Behavior shows where visitors hesitate or abandon. Reliability connects technical incidents to the pages and journeys exposed.",
     products: [
       {
         name: "AI Visibility",
         status: "Production",
-        detail: "AI answers, citations, representation accuracy, and competitor displacement.",
+        detail: "Track the queries that mention you, the sources assistants cite, incorrect claims, and competitors taking your place.",
         icon: Eye,
       },
       {
         name: "Behavior",
         status: "Beta",
-        detail: "Sessions, heatmaps, intent, navigation, and friction intelligence.",
+        detail: "See where visitors hesitate, backtrack, abandon, or follow a high-intent path.",
         icon: MousePointerClick,
       },
       {
         name: "Reliability",
         status: "Beta",
-        detail: "Incidents, regressions, performance, and commercial exposure.",
+        detail: "Tie slowdowns and incidents to the pages, products, and revenue windows they affected.",
         icon: Radar,
       },
     ],
@@ -82,26 +82,26 @@ const SYSTEMS = [
     id: "decide",
     index: "02",
     name: "Decide",
-    title: "Turn disconnected evidence into one commercially ranked decision.",
+    title: "Know which issue deserves attention first.",
     description:
-      "Foundation unifies the state of the business. Analytics explains the money. Optimization converts evidence into experiments and governed personalization decisions.",
+      "Foundation brings current state, booked revenue, open actions, and verified impact into one view. Analytics explains movement. Optimization turns evidence into an experiment or personalization proposal.",
     products: [
       {
         name: "Foundation",
         status: "Production",
-        detail: "Revenue overview, commerce truth, Actions, Impact, and connection health.",
+        detail: "Today’s store state, authoritative revenue, action ownership, connection health, and verified impact.",
         icon: BarChart3,
       },
       {
         name: "Analytics",
         status: "Beta",
-        detail: "Revenue, funnel, cohort, journey, attribution, and reconciliation.",
+        detail: "Funnels, cohorts, journeys, attribution, and reconciliation with the commerce ledger.",
         icon: BarChart3,
       },
       {
         name: "Optimization",
         status: "Beta",
-        detail: "Experiments, personalization, missions, proposals, and decisioning.",
+        detail: "Experiments and personalization proposals with a hypothesis, approval, and measurement plan.",
         icon: Sparkles,
       },
     ],
@@ -110,26 +110,26 @@ const SYSTEMS = [
     id: "act",
     index: "03",
     name: "Act",
-    title: "Improve the commerce object, not another internal dashboard.",
+    title: "Change the product, page, campaign, or creative behind the issue.",
     description:
-      "Beseam works on the products, pages, feeds, destinations, campaigns, and creative assets customers actually encounter—while preserving approval and audit boundaries.",
+      "Commerce Readiness finds product, page, feed, tracking, and checkout defects before traffic reaches them. Advertising checks whether Google or Meta can launch safely. Creative Studio creates approved assets for products and campaigns.",
     products: [
       {
         name: "Commerce Readiness",
         status: "Production",
-        detail: "Products, Store Health, Inspection, brand evidence, feeds, and checkout readiness.",
+        detail: "Find product, feed, landing-page, tracking, or checkout problems before they block traffic or a launch.",
         icon: ShoppingBag,
       },
       {
         name: "Advertising",
-        status: "Production path",
-        detail: "Google and Meta readiness, exact drafts, approvals, publishing, and reconciliation.",
+        status: "Production rollout",
+        detail: "Check the account, catalog, measurement, destination, budget, and creative before an Admin publishes to Google or Meta.",
         icon: Megaphone,
       },
       {
         name: "Creative Studio",
         status: "Beta",
-        detail: "Images, video, reusable assets, and governed generation workflows.",
+        detail: "Create product and campaign images or video from approved brand evidence, with a credit estimate before generation.",
         icon: Palette,
       },
     ],
@@ -137,10 +137,10 @@ const SYSTEMS = [
 ] as const;
 
 const ENTITLEMENTS = [
-  ["Foundation", "Core decision layer", "Included with every contract", "Production"],
+  ["Foundation", "Decide", "Included with every active contract", "Production"],
   ["AI Visibility", "Observe", "Independent package", "Production"],
   ["Commerce Readiness", "Act", "Independent package", "Production"],
-  ["Advertising", "Act", "Google + Meta lifecycle package", "Production path"],
+  ["Advertising", "Act", "Google + Meta lifecycle package", "Production rollout"],
   ["Analytics", "Decide", "Advanced Intelligence module", "Beta"],
   ["Behavior", "Observe", "Advanced Intelligence module", "Beta"],
   ["Optimization", "Decide", "Advanced Intelligence module", "Beta"],
@@ -240,28 +240,28 @@ export default function ProductionHomepage() {
             <Reveal>
               <div className="flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/55">
                 <span className="h-2 w-2 bg-[#e8653a]" aria-hidden="true" />
-                Outside-in commerce intelligence
+                For ecommerce teams running multiple systems
               </div>
               <h1 className="mt-8 max-w-[10.5ch] font-serif text-[clamp(3.25rem,5.1vw,4.75rem)] font-normal leading-[0.98] tracking-[-0.045em] text-[#111318]">
-                The revenue you are missing is already visible.
+                Beseam finds the revenue leaks between your commerce systems.
               </h1>
               <p className="mt-8 max-w-xl text-[18px] leading-[1.65] text-black/68">
-                Beseam sits above the commerce stack you already run. It observes the customer journey from the outside, finds revenue leakage, proposes the next governed intervention, and learns from verified outcomes.
+                Beseam checks the storefront, catalog, customer journeys, AI discovery, and campaigns from the outside, then reconciles what it sees with order data. Your team sees which issue deserves attention first, what to change, and whether the change worked. Each verified result changes how Beseam prioritizes the next issue.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <BookReviewCta location="hero" label="Review your revenue surface" className="w-full sm:w-auto" />
+                <BookReviewCta location="hero" label="Book a 20-minute commerce review" className="w-full sm:w-auto" />
                 <Link
                   href="#products"
                   className="inline-flex min-h-12 items-center justify-center gap-2 px-1 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#3154ff] sm:justify-start"
                 >
-                  Examine the product systems <ArrowRight className="h-4 w-4" />
+                  Explore the product suite <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
               <dl className="mt-14 grid grid-cols-3 border-y border-black/18">
                 {[
-                  ["Scope", "Outside the stack"],
-                  ["Priority", "Revenue leakage"],
-                  ["Learning", "Verified outcomes"],
+                  ["Connects to", "Your existing stack"],
+                  ["Ranks", "Issues by evidence"],
+                  ["Learns from", "Verified results"],
                 ].map(([term, value]) => (
                   <div key={term} className="border-r border-black/18 py-4 pr-3 last:border-r-0 last:pl-4 sm:py-5 sm:pr-5 sm:last:pl-5">
                     <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-black/45">{term}</dt>
@@ -285,7 +285,7 @@ export default function ProductionHomepage() {
                   src="/images/product-live/revenue-overview.webp"
                   alt="Beseam revenue overview for the Dancing Queens workspace"
                   label="Current state"
-                  caption="A real Beseam workspace showing connected commerce scope, booked revenue, operational state, and the next commercial action."
+                  caption="The Dancing Queens workspace shows connected store state, booked revenue, data freshness, and the highest-priority issue."
                   priority
                 />
               </div>
@@ -297,7 +297,7 @@ export default function ProductionHomepage() {
       <section aria-label="Supported commerce platforms" className="border-b border-black/18 bg-[#ebe8df]">
         <div className="mx-auto grid max-w-[92rem] gap-5 px-5 py-7 sm:px-8 lg:grid-cols-[15rem_1fr] lg:items-center lg:px-10">
           <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/48">
-            Layered over existing infrastructure
+            Works with the systems already in place
           </p>
           <div className="grid grid-cols-4 items-center gap-x-7 gap-y-5 opacity-62 sm:grid-cols-8">
             {INTEGRATIONS.map((integration) => (
@@ -313,14 +313,14 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">The operating trace</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">How Beseam works</p>
               <h2 className="mt-6 max-w-[11ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
-                One continuous line from signal to verified money.
+                From a problem on the storefront to a measured result.
               </h2>
             </div>
             <div className="self-end">
               <p className="max-w-2xl text-[17px] leading-[1.65] text-black/66">
-                Beseam does not replace Shopify, analytics, advertising platforms, or your team. It creates the commercial decision layer between them, while each source remains authoritative for what it owns.
+                Beseam keeps the source evidence, affected product or page, proposed action, approval, execution, and outcome connected. Shopify remains the order ledger; Google and Meta keep their own attribution; Beseam shows the relationship without merging unlike numbers.
               </p>
             </div>
           </Reveal>
@@ -345,13 +345,13 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 pt-20 sm:px-8 sm:pt-24 lg:px-10 lg:pt-28">
           <div className="grid gap-10 border-b border-black/22 pb-16 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Product systems</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Products</p>
               <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
-                Not a bundle of features. Three commercial systems.
+                Nine products for three decisions.
               </h2>
             </div>
             <p className="max-w-2xl self-end text-[17px] leading-[1.65] text-black/66">
-              Every Beseam product has a role in the same loop: observe a revenue surface, decide what matters, or act on the commerce object. Entitlements control which systems are available to each contract and store.
+              Find where demand is being lost, decide which issue deserves attention first, and change the product, page, campaign, or creative behind it. Foundation is included with every active contract; other products are enabled per store.
             </p>
           </div>
 
@@ -376,7 +376,7 @@ export default function ProductionHomepage() {
                       src="/images/product-live/ai-visibility.webp"
                       alt="Beseam AI Visibility workspace for Dancing Queens"
                       label="Observe / AI Visibility"
-                      caption="Real query monitoring and representation evidence from the Dancing Queens workspace."
+                      caption="Queries, cited sources, competitor mentions, and representation evidence from the live Dancing Queens workspace."
                     />
                   )}
 
@@ -386,13 +386,13 @@ export default function ProductionHomepage() {
                         src="/images/product-live/revenue-analytics.webp"
                         alt="Beseam revenue analytics workspace for Dancing Queens"
                         label="Decide / Analytics"
-                        caption="Booked revenue, funnels, attribution, and commercial movement remain distinguishable from modeled impact."
+                        caption="Booked revenue, funnels, and attribution stay separate so the team can trace movement without merging unlike numbers."
                       />
                       <EvidenceFigure
                         src="/images/product-live/optimization.webp"
                         alt="Beseam optimization experiment workspace for Dancing Queens"
                         label="Decide / Optimization"
-                        caption="An experiment workspace that connects a hypothesis, intervention, and outcome rather than stopping at an alert."
+                        caption="A real experiment record with a hypothesis, proposed change, audience, and measurement window."
                       />
                     </div>
                   )}
@@ -403,7 +403,7 @@ export default function ProductionHomepage() {
                         src="/images/product-live/product-workflow.gif"
                         alt="Beseam product workflow using a Dancing Queens product"
                         label="Act / Product workflow"
-                        caption="A real product workflow moving from commerce evidence into a governed fix lifecycle."
+                        caption="A real Dancing Queens product moves from evidence to proposed change, approval, and verification."
                         unoptimized
                       />
                       <div className="grid grid-cols-3 border border-black/18 bg-[#ebe8df]">
@@ -423,7 +423,7 @@ export default function ProductionHomepage() {
                         src="/images/product-live/campaign-readiness.webp"
                         alt="Beseam campaign readiness workspace for Dancing Queens"
                         label="Act / Advertising"
-                        caption="Channel readiness, budget, destinations, and evidence are checked before publishing into Google or Meta."
+                        caption="Google and Meta readiness checks cover the account, catalog, measurement, destination, budget, and creative before publication."
                       />
                     </div>
                   )}
@@ -438,14 +438,14 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-10 border-b border-white/18 pb-14 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">Evidence case / Dancing Queens</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">Dancing Queens example</p>
               <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
-                Follow one commercial question through the system.
+                See one issue move from first evidence to measured result.
               </h2>
             </div>
             <div className="self-end">
               <p className="max-w-2xl text-[16px] leading-[1.7] text-white/64">
-                The interface and catalog below are authentic Beseam product captures. The demonstration workspace uses the real Dancing Queens catalog with representative CHF commerce activity so each stage can be inspected end to end.
+                These are real Beseam product captures from the Dancing Queens workspace. The workspace uses the real catalog and representative CHF activity so the evidence, proposed action, and verification can be inspected together.
               </p>
             </div>
           </div>
@@ -454,26 +454,26 @@ export default function ProductionHomepage() {
             {[
               {
                 code: "Signal",
-                title: "Where is the brand absent or misrepresented?",
+                title: "Where does AI discovery omit or misrepresent the brand?",
                 src: "/images/product-live/ai-visibility.webp",
                 alt: "AI visibility evidence in Beseam",
-                note: "Observation begins with external evidence, not an internally generated task.",
+                note: "Beseam keeps the query, answer, cited sources, competitor presence, and timestamp together.",
                 accent: "text-[#e98a66]",
               },
               {
                 code: "Intervention",
-                title: "Which commerce object should change first?",
+                title: "Which product or page should the team change?",
                 src: "/images/product-live/product-intelligence.webp",
                 alt: "Product intelligence evidence in Beseam",
-                note: "The product, destination, evidence, owner, and approval state stay attached to the decision.",
+                note: "The affected product, evidence, proposed change, owner, and approval state remain linked.",
                 accent: "text-[#8ea2ff]",
               },
               {
                 code: "Verification",
-                title: "Did commercial movement follow the change?",
+                title: "Did the original signal improve after the change?",
                 src: "/images/product-live/revenue-analytics.webp",
                 alt: "Revenue analytics evidence in Beseam",
-                note: "Booked, observed, attributed, and modeled money retain distinct meanings.",
+                note: "Beseam rechecks the original signal and compares commercial results over equivalent periods.",
                 accent: "text-[#8ea2ff]",
               },
             ].map((item) => (
@@ -494,18 +494,18 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Entitlements</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Products and access</p>
               <h2 className="mt-6 max-w-[9ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
-                Buy the operating surface you need.
+                Choose the products each store needs.
               </h2>
               <p className="mt-7 max-w-lg text-[16px] leading-[1.7] text-black/64">
-                Foundation is the shared decision layer. Independent packages and Advanced Intelligence modules are resolved per contract, tenant, and store.
+                Every active contract includes Foundation. AI Visibility, Commerce Readiness, Advertising, Analytics, Behavior, Optimization, Reliability, and Creative Studio can be enabled independently for each store.
               </p>
             </div>
 
             <div className="border-t border-black/25">
               <div className="hidden grid-cols-[1.05fr_0.6fr_1.35fr_0.6fr] border-b border-black/25 py-3 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-black/42 sm:grid">
-                <span>Product</span><span>System</span><span>Commercial model</span><span>Status</span>
+                <span>Product</span><span>System</span><span>How it is sold</span><span>Status</span>
               </div>
               {ENTITLEMENTS.map(([product, system, commercial, status]) => (
                 <div key={product} className="grid gap-2 border-b border-black/18 py-5 sm:grid-cols-[1.05fr_0.6fr_1.35fr_0.6fr] sm:items-baseline sm:gap-5">
@@ -516,7 +516,7 @@ export default function ProductionHomepage() {
                 </div>
               ))}
               <div id="creative-studio" className="scroll-mt-24 pt-6 text-[13px] leading-relaxed text-black/54">
-                Beta labels are explicit. Advertising media spend remains outside Beseam software entitlements. Creative generation may be credit-metered by contract.
+                Beta products remain marked Beta. Google and Meta bill media spend directly. Creative Studio shows the credit estimate before generation.
               </div>
             </div>
           </div>
@@ -527,27 +527,27 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Governed autonomy</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Automation boundaries</p>
               <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.7rem,4.1vw,4.1rem)] font-normal leading-[1.02] tracking-[-0.04em]">
-                Autonomous where evidence is strong. Human where impact is material.
+                Your team approves spend and customer-facing changes.
               </h2>
             </div>
             <div className="grid border-y border-black/22 md:grid-cols-3">
               {[
                 {
                   icon: ShieldCheck,
-                  title: "Systems remain authoritative",
-                  detail: "Commerce, advertising, and analytics sources keep ownership of the records they produce.",
+                  title: "Your existing systems keep their records",
+                  detail: "Shopify keeps the order ledger. Google and Meta keep channel attribution. Beseam connects the evidence without rewriting the source record.",
                 },
                 {
                   icon: PackageSearch,
-                  title: "Every action keeps evidence",
-                  detail: "Scope, issue, consequence, owner, approval, execution, and verification travel together.",
+                  title: "Every change keeps its evidence",
+                  detail: "The affected store, product or page, issue, owner, approval, execution, and verification remain attached.",
                 },
                 {
                   icon: Check,
-                  title: "Money keeps its meaning",
-                  detail: "Booked, observed, attributed, reconciled, and modeled values are never collapsed into one claim.",
+                  title: "Revenue types stay separate",
+                  detail: "Booked, observed, attributed, and modeled values keep their own source, period, method, and confidence.",
                 },
               ].map((item) => {
                 const Icon = item.icon;
@@ -568,19 +568,19 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid border-y border-black/24 lg:grid-cols-[minmax(0,1fr)_19rem]">
             <div className="py-10 pr-0 lg:py-14 lg:pr-16">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Commercial review / 20 minutes</p>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">20-minute commerce review</p>
               <h2 className="mt-5 max-w-[16ch] font-serif text-[clamp(2.6rem,4.2vw,4.3rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#111318]">
-                Find the first revenue surface worth fixing.
+                Bring one store and leave with the first issue to investigate.
               </h2>
             </div>
             <div className="border-t border-black/24 py-8 lg:border-l lg:border-t-0 lg:py-0 lg:pl-8">
               <div className="flex h-full flex-col justify-center">
                 <dl className="grid gap-4 border-b border-black/18 pb-6 font-mono text-[10px] uppercase tracking-[0.09em] text-black/48">
-                  <div className="flex justify-between gap-4"><dt>Input</dt><dd className="text-right text-black/72">Your current stack</dd></div>
-                  <div className="flex justify-between gap-4"><dt>Output</dt><dd className="text-right text-black/72">Evidence + next action</dd></div>
-                  <div className="flex justify-between gap-4"><dt>Commitment</dt><dd className="text-right text-black/72">No replatform</dd></div>
+                  <div className="flex justify-between gap-4"><dt>Input</dt><dd className="text-right text-black/72">One store + current stack</dd></div>
+                  <div className="flex justify-between gap-4"><dt>Output</dt><dd className="text-right text-black/72">Priority + next step</dd></div>
+                  <div className="flex justify-between gap-4"><dt>Commitment</dt><dd className="text-right text-black/72">20 minutes; no replatform</dd></div>
                 </dl>
-                <BookReviewCta location="homepage_final" label="Review your revenue surface" className="mt-7 w-full" />
+                <BookReviewCta location="homepage_final" label="Book a 20-minute commerce review" className="mt-7 w-full" />
               </div>
             </div>
           </div>
