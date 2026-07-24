@@ -149,7 +149,7 @@ function getDefaults(category: string | undefined, name: string) {
     },
     {
       q: "Can I use multiple tools together?",
-      a: "Yes—many teams pair web analytics (traffic + conversions) with replay/heatmaps for qualitative insight and product analytics for event-level funnels.",
+      a: "Yes - many teams pair web analytics (traffic + conversions) with replay/heatmaps for qualitative insight and product analytics for event-level funnels.",
     },
   ];
 
@@ -169,12 +169,12 @@ function getDefaults(category: string | undefined, name: string) {
     {
       title: "Audit + get an upgrade playbook",
       description:
-        "Get baseline scores for AI visibility, conversion readiness, and performance—plus prioritized fixes you can approve.",
+        "Get baseline scores for AI visibility, conversion readiness, and performance - plus prioritized fixes you can approve.",
     },
     {
       title: "Install Beseam tracking",
       description:
-        "60-second install via Google Tag Manager to start learning from real traffic—no heavy instrumentation required.",
+        "60-second install via Google Tag Manager to start learning from real traffic - no heavy instrumentation required.",
     },
     {
       title: "Mark UI zones",
@@ -197,11 +197,11 @@ function getDefaults(category: string | undefined, name: string) {
     return {
       headline: `The ${name} Alternative Guide`,
       subheadline:
-        "A detailed look at what teams use instead—plus a practical framework for choosing the right tool for your conversion workflow.",
+        "A detailed look at what teams use instead - plus a practical framework for choosing the right tool for your conversion workflow.",
       beseamDoesDifferently,
       whySwitch: [
         "Hard to translate insights into fixes",
-        "Heatmaps show what happened—not the best next action",
+        "Heatmaps show what happened - not the best next action",
         "Session replay gets noisy at scale (sampling + manual review)",
         "You still need a repeatable process to prioritize changes",
       ],
@@ -264,7 +264,7 @@ function getDefaults(category: string | undefined, name: string) {
     return {
       headline: `${name}: Overview, strengths, and alternatives`,
       subheadline:
-        "Session replay platforms can be extremely powerful—here’s how teams evaluate them and what to look for when switching.",
+        "Session replay platforms can be extremely powerful - here’s how teams evaluate them and what to look for when switching.",
       beseamDoesDifferently,
       whySwitch: [
         "Costs can scale quickly with traffic and replay volume",
@@ -318,7 +318,7 @@ function getDefaults(category: string | undefined, name: string) {
     return {
       headline: `${name} alternatives and evaluation guide`,
       subheadline:
-        "Product analytics is about event-level truth: funnels, retention, cohorts, and activation—this is how teams choose.",
+        "Product analytics is about event-level truth: funnels, retention, cohorts, and activation - this is how teams choose.",
       beseamDoesDifferently,
       whySwitch: [
         "Instrumentation can take time and maintenance",
@@ -558,7 +558,7 @@ export function AlternativeArticle(props: AlternativeArticleProps) {
     whySectionHeading: whySectionHeading ?? `Why Teams Switch from ${name}`,
     whySectionSubheading:
       whySectionSubheading ??
-      "Common reasons teams look for alternatives—based on workflow fit, scale, and how fast insights translate into action.",
+      "Common reasons teams look for alternatives - based on workflow fit, scale, and how fast insights translate into action.",
     whySwitch: (whySwitch && whySwitch.length > 0
       ? whySwitch
       : defaults.whySwitch) as string[],

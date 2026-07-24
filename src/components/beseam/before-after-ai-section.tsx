@@ -230,10 +230,10 @@ function ChatGPTBeforePanel() {
       </div>
       <div className="mt-5 space-y-2 border-t border-[#E5E5E5] pt-4">
         {[
-          "No product images — users can't visually browse",
-          "No prices or ratings — can't compare options",
-          "No merchant or shipping info — low purchase confidence",
-          "Generic text response — gets skipped by shoppers",
+          "No product images - users can't visually browse",
+          "No prices or ratings - can't compare options",
+          "No merchant or shipping info - low purchase confidence",
+          "Generic text response - gets skipped by shoppers",
         ].map((issue) => (
           <div key={issue} className="flex items-start gap-2">
             <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-red-100 text-[9px] text-red-600">
@@ -337,7 +337,7 @@ function ChatGPTCarouselPanel() {
         <p className="mt-1 text-[12px] leading-relaxed text-[#4D5156]">
           Customers love the <strong>Blue Summer Dress</strong> for its
           lightweight feel and relaxed fit. Popular for beach trips and casual
-          outings. Some note sizing runs slightly large — consider ordering one
+          outings. Some note sizing runs slightly large - consider ordering one
           size down.
         </p>
         <div className="mt-2 flex flex-wrap gap-1.5">
@@ -464,7 +464,7 @@ interface SupportingPlatform {
 const supportingPlatforms: SupportingPlatform[] = [
   /* ══ GOOGLE SEARCH ═══════════════════════════════════════════════
      Before: plain blue-link snippet, no enrichments
-     After:  shopping module — enriched listing + product image strip
+     After:  shopping module - enriched listing + product image strip
      ════════════════════════════════════════════════════════════════ */
   {
     id: "google",
@@ -487,9 +487,9 @@ const supportingPlatforms: SupportingPlatform[] = [
         </div>
       ),
       issues: [
-        "Plain blue link — no images, stars, or price in SERP",
+        "Plain blue link - no images, stars, or price in SERP",
         "Generic meta description gets ignored by shoppers",
-        "Zero structured data — invisible to Shopping Graph",
+        "Zero structured data - invisible to Shopping Graph",
       ],
     },
 
@@ -615,7 +615,7 @@ const supportingPlatforms: SupportingPlatform[] = [
         </div>
       ),
       wins: [
-        "Shopping module with product images — higher CTR before the click",
+        "Shopping module with product images - higher CTR before the click",
         "Price range, variants & stock visible before the click",
         "Multi-product strip captures comparison shoppers",
       ],
@@ -625,7 +625,7 @@ const supportingPlatforms: SupportingPlatform[] = [
   /* ══ AI OVERVIEW ═════════════════════════════════════════════════
      Before: vague summary + empty product card
      After:  answer-first block + inline citations + source pills
-             + optional "best options" chip row — NOT a shopping app
+             + optional "best options" chip row - NOT a shopping app
      ════════════════════════════════════════════════════════════════ */
   {
     id: "google-ai",
@@ -648,7 +648,7 @@ const supportingPlatforms: SupportingPlatform[] = [
           </p>
           <div className="mt-3 rounded-lg border border-[#DADCE0] bg-white px-3 py-2.5">
             <p className="text-xs font-medium text-[#202124]">
-              Blue Summer Dress — MyStore
+              Blue Summer Dress - MyStore
             </p>
             <p className="text-[11px] text-[#70757A]">
               Price unavailable · No reviews
@@ -661,9 +661,9 @@ const supportingPlatforms: SupportingPlatform[] = [
         </div>
       ),
       issues: [
-        "Listed without price — users skip incomplete cards",
-        "No reviews — loses to competitors in AI Overview",
-        "Vague mention — not confidently recommended",
+        "Listed without price - users skip incomplete cards",
+        "No reviews - loses to competitors in AI Overview",
+        "Vague mention - not confidently recommended",
       ],
     },
 
@@ -750,7 +750,7 @@ const supportingPlatforms: SupportingPlatform[] = [
         </div>
       ),
       wins: [
-        "Cited in AI-generated summary — highest trust position",
+        "Cited in AI-generated summary - highest trust position",
         "Source pills drive verified traffic from answer boxes",
         "Product chips below answer capture purchase-intent clicks",
       ],
@@ -784,7 +784,7 @@ const supportingPlatforms: SupportingPlatform[] = [
         </div>
       ),
       issues: [
-        "Generic meta description — nothing useful to cite",
+        "Generic meta description - nothing useful to cite",
         "No price, rating, or stock in source data",
         "Ranked below competitors with richer structured data",
       ],
@@ -929,7 +929,7 @@ const supportingPlatforms: SupportingPlatform[] = [
 
   /* ══ CLAUDE ══════════════════════════════════════════════════════
      Before: generic "visit the store" paragraph
-     After:  research memo — structured findings, considerations, sources
+     After:  research memo - structured findings, considerations, sources
      ════════════════════════════════════════════════════════════════ */
   {
     id: "claude",
@@ -954,7 +954,7 @@ const supportingPlatforms: SupportingPlatform[] = [
         </div>
       ),
       issues: [
-        "No structured data to extract — generic response",
+        "No structured data to extract - generic response",
         "Can't provide price or availability specifics",
         "Vague mention instead of a confident recommendation",
       ],
@@ -985,7 +985,7 @@ const supportingPlatforms: SupportingPlatform[] = [
                 Best Overall
               </p>
               <p className="mt-1 font-serif text-[13px] font-semibold text-[#3D3929]">
-                Blue Summer Dress — MyStore · $49.99
+                Blue Summer Dress - MyStore · $49.99
               </p>
               <p className="mt-0.5 font-serif text-[12px] leading-snug text-[#6B6356]">
                 Highest-rated at 4.8/5 from 2,340 reviews. Lightweight cotton,
@@ -999,7 +999,7 @@ const supportingPlatforms: SupportingPlatform[] = [
                 Best Value
               </p>
               <p className="mt-1 font-serif text-[13px] font-semibold text-[#3D3929]">
-                Linen Blend Midi Skirt — NordStyle · $38.00
+                Linen Blend Midi Skirt - NordStyle · $38.00
               </p>
               <p className="mt-0.5 font-serif text-[12px] leading-snug text-[#6B6356]">
                 Lowest price with strong 4.6/5 rating (891 reviews). Linen
@@ -1014,7 +1014,7 @@ const supportingPlatforms: SupportingPlatform[] = [
               </p>
               <ul className="mt-1.5 space-y-1 font-serif text-[12px] text-[#3D3929]">
                 <li>
-                  &bull; MyStore dress runs slightly large — consider sizing
+                  &bull; MyStore dress runs slightly large - consider sizing
                   down
                 </li>
                 <li>&bull; NordStyle ships free only on orders over $50</li>
@@ -1076,9 +1076,9 @@ const supportingPlatforms: SupportingPlatform[] = [
         </div>
       ),
       issues: [
-        "No product data extracted — vague, unhelpful response",
+        "No product data extracted - vague, unhelpful response",
         "Missing price means your product can't be compared",
-        "No rating data — Gemini can't vouch for quality",
+        "No rating data - Gemini can't vouch for quality",
       ],
     },
 

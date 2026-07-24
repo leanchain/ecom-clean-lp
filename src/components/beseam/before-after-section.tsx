@@ -64,9 +64,9 @@ const platforms: Platform[] = [
         </div>
       ),
       issues: [
-        "No Product structured data — no rich snippet",
-        "Missing review schema — no star rating in SERP",
-        "Price not declared — users scroll past",
+        "No Product structured data - no rich snippet",
+        "Missing review schema - no star rating in SERP",
+        "Price not declared - users scroll past",
       ],
     },
     after: {
@@ -79,7 +79,7 @@ const platforms: Platform[] = [
           <p className="mt-1 cursor-pointer text-lg font-medium text-[#1A0DAB] underline decoration-[#1A0DAB]/30 hover:decoration-[#1A0DAB]">
             Blue Summer Dress , MyStore
           </p>
-          {/* Stars row — Google's orange #E8710A */}
+          {/* Stars row - Google's orange #E8710A */}
           <div className="mt-1 flex items-center gap-1.5">
             <Stars color="text-[#E8710A]" className="h-3.5 w-3.5" />
             <span className="text-xs text-[#70757A]">4.8 (127 reviews)</span>
@@ -94,7 +94,7 @@ const platforms: Platform[] = [
               In Stock
             </span>
           </div>
-          {/* Merchant / shipping / returns — Google grey metadata row */}
+          {/* Merchant / shipping / returns - Google grey metadata row */}
           <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-[#70757A]">
             <span>
               Sold by <strong className="text-[#202124]">MyStore</strong>
@@ -107,9 +107,9 @@ const platforms: Platform[] = [
         </div>
       ),
       wins: [
-        "Rich snippet with orange stars — up to 30% more clicks",
+        "Rich snippet with orange stars - up to 30% more clicks",
         "Price, merchant & shipping visible before the click",
-        "Return policy shown — reduces purchase hesitation",
+        "Return policy shown - reduces purchase hesitation",
       ],
     },
   },
@@ -151,9 +151,9 @@ const platforms: Platform[] = [
         </div>
       ),
       issues: [
-        "No structured data — ChatGPT can't extract product info",
-        "Missing price — excluded from shopping comparisons",
-        'No reviews — skipped in "best of" recommendations',
+        "No structured data - ChatGPT can't extract product info",
+        "Missing price - excluded from shopping comparisons",
+        'No reviews - skipped in "best of" recommendations',
       ],
     },
     after: {
@@ -181,7 +181,7 @@ const platforms: Platform[] = [
           <p className="text-[14px] leading-relaxed text-[#0D0D0D]">
             Here&apos;s a great option:
           </p>
-          {/* ChatGPT product card — rounded, subtle shadow, image placeholder */}
+          {/* ChatGPT product card - rounded, subtle shadow, image placeholder */}
           <div className="mt-3 cursor-pointer rounded-xl border border-[#E5E5E5] bg-[#F7F7F8] p-3 transition-shadow hover:shadow-md">
             <div className="flex gap-3">
               <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-sky-100">
@@ -252,7 +252,7 @@ const platforms: Platform[] = [
       content: (
         /* Perplexity: warm paper #FBFAF4 bg, Inter, turquoise #20808D accent, inline citations */
         <div className="rounded-lg border border-[#E8E6DF] bg-[#FBFAF4] p-4">
-          {/* Source chips — faded */}
+          {/* Source chips - faded */}
           <div className="mb-3 flex items-center gap-2">
             <div className="flex items-center gap-1.5 rounded-md bg-[#F0EDE6] px-2 py-1">
               <div className="h-3.5 w-3.5 rounded-sm bg-[#D4D0C8]" />
@@ -272,7 +272,7 @@ const platforms: Platform[] = [
         </div>
       ),
       issues: [
-        "Generic meta description — nothing useful to cite",
+        "Generic meta description - nothing useful to cite",
         "No price, rating, or stock in source data",
         "Ranked below competitors with richer structured data",
       ],
@@ -280,7 +280,7 @@ const platforms: Platform[] = [
     after: {
       content: (
         <div className="rounded-lg border border-[#E8E6DF] bg-[#FBFAF4] p-4">
-          {/* Source chips — rich, with product page link */}
+          {/* Source chips - rich, with product page link */}
           <div className="mb-3 flex items-center gap-2">
             <div className="flex cursor-pointer items-center gap-1.5 rounded-md bg-[#20808D]/10 px-2 py-1 transition-colors hover:bg-[#20808D]/20">
               <div className="h-3.5 w-3.5 rounded-sm bg-[#20808D]/30" />
@@ -317,7 +317,7 @@ const platforms: Platform[] = [
       wins: [
         "Rich citation: price, rating, shipping & returns cited",
         "Sourced recommendation beats competitors with less data",
-        "Footnotes build trust — users click confident sources",
+        "Footnotes build trust - users click confident sources",
       ],
     },
   },
@@ -355,10 +355,10 @@ const platforms: Platform[] = [
             to carry a Blue Summer Dress, though I couldn&apos;t confirm pricing
             or reviews from their product page.
           </p>
-          {/* Product card — faded */}
+          {/* Product card - faded */}
           <div className="mt-3 rounded-lg border border-[#DADCE0] bg-white px-3 py-2.5">
             <p className="text-xs font-medium text-[#202124]">
-              Blue Summer Dress — MyStore
+              Blue Summer Dress - MyStore
             </p>
             <p className="text-[11px] text-[#70757A]">
               Price unavailable · No reviews
@@ -372,9 +372,9 @@ const platforms: Platform[] = [
         </div>
       ),
       issues: [
-        "Listed without price — users skip incomplete cards",
-        "No reviews — loses to competitors in AI Overview",
-        "Vague mention — not confidently recommended",
+        "Listed without price - users skip incomplete cards",
+        "No reviews - loses to competitors in AI Overview",
+        "Vague mention - not confidently recommended",
       ],
     },
     after: {
@@ -403,11 +403,11 @@ const platforms: Platform[] = [
             <strong>Blue Summer Dress from MyStore</strong> is highly rated.
             It&apos;s priced at $49.99 and currently in stock.
           </p>
-          {/* Product card — rich, clickable */}
+          {/* Product card - rich, clickable */}
           <div className="mt-3 cursor-pointer rounded-lg border border-[#DADCE0] bg-white px-3 py-2.5 transition-shadow hover:shadow-md">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-[#202124]">
-                Blue Summer Dress — MyStore
+                Blue Summer Dress - MyStore
               </p>
               <Stars color="text-[#E8710A]" className="h-2.5 w-2.5" />
             </div>
@@ -418,7 +418,7 @@ const platforms: Platform[] = [
               Sold by MyStore · 30-day returns
             </p>
           </div>
-          {/* Source chip — links to product page */}
+          {/* Source chip - links to product page */}
           <div className="mt-3 flex cursor-pointer items-center gap-1.5 rounded-full border border-[#D2E3FC] bg-[#E8F0FE] px-2.5 py-1 transition-colors hover:bg-[#D2E3FC] w-fit">
             <div className="h-3.5 w-3.5 rounded-full bg-[#1A73E8]" />
             <span className="text-[11px] font-medium text-[#1A73E8]">
@@ -430,7 +430,7 @@ const platforms: Platform[] = [
       wins: [
         "Product card shows price, merchant & return policy",
         "Confidently recommended over incomplete competitors",
-        "Source link highlighted — drives direct traffic",
+        "Source link highlighted - drives direct traffic",
       ],
     },
   },
@@ -459,7 +459,7 @@ const platforms: Platform[] = [
         </div>
       ),
       issues: [
-        "No structured data to extract — generic response",
+        "No structured data to extract - generic response",
         "Can't provide price or availability specifics",
         "Your product gets a vague mention instead of a recommendation",
       ],
@@ -512,7 +512,7 @@ const platforms: Platform[] = [
       ),
       wins: [
         "Brand, price, rating & sizes all extracted precisely",
-        "Shipping speed & return policy cited — drives trust",
+        "Shipping speed & return policy cited - drives trust",
         "Direct link to product page included in the response",
       ],
     },
@@ -553,9 +553,9 @@ const platforms: Platform[] = [
         </div>
       ),
       issues: [
-        "No product data extracted — vague, unhelpful response",
+        "No product data extracted - vague, unhelpful response",
         "Missing price means your product can't be compared",
-        "No rating data — Gemini can't vouch for quality",
+        "No rating data - Gemini can't vouch for quality",
       ],
     },
     after: {
@@ -582,7 +582,7 @@ const platforms: Platform[] = [
             Great choice! The <strong>Blue Summer Dress from MyStore</strong> is
             a popular lightweight cotton dress:
           </p>
-          {/* Gemini inline product details — markdown-style */}
+          {/* Gemini inline product details - markdown-style */}
           <div className="mt-3 rounded-lg bg-[#F8F9FA] px-3 py-2.5 text-sm text-[#202124]">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
@@ -634,7 +634,7 @@ const platforms: Platform[] = [
       ),
       wins: [
         "Full product table: price, brand, sizes, stock",
-        "Shipping speed & return policy shown — no friction",
+        "Shipping speed & return policy shown - no friction",
         '"View on mystore.com" link drives direct traffic',
       ],
     },

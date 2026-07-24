@@ -1,9 +1,10 @@
-import Image from "next/image";
+import Link from "next/link";
 
 import { Activity } from "lucide-react";
 
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import { Reveal } from "@/components/beseam/reveal";
+import WorkspaceShowcase from "@/components/beseam/workspace-showcase";
 
 export default function HeroSection() {
   return (
@@ -12,24 +13,27 @@ export default function HeroSection() {
         <Reveal>
           <p className="editorial-eyebrow flex items-center gap-2 text-primary">
             <Activity className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
-            Store health for Shopify
+            Beseam for ecommerce teams
           </p>
-          <h1 className="mt-5 max-w-[20ch] text-balance text-[clamp(2.75rem,6vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-ink">
-            Know when changes to your Shopify store hurt visibility or
-            purchasing.
+          <h1 className="mt-5 max-w-[17ch] text-balance text-[clamp(2.75rem,6vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-ink">
+            AI Visibility. Store Health.
           </h1>
-          <p className="editorial-body mt-7 max-w-3xl text-foreground">
-            Beseam combines search, AI visibility, catalog, storefront and
-            commerce signals to show what changed, what degraded and what your
-            team should fix first.
+          <p className="editorial-body mt-7 max-w-2xl text-foreground">
+            Two focused products for the teams accountable for how products are
+            discovered and bought.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <BookReviewCta location="hero" className="w-full sm:w-auto" />
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
             <BookReviewCta
-              variant="secondary"
               location="hero"
+              label="Book a Beseam review"
               className="w-full sm:w-auto"
             />
+            <Link
+              href="#product"
+              className="inline-flex min-h-11 items-center justify-center font-semibold text-ink underline-offset-4 hover:text-primary hover:underline sm:justify-start"
+            >
+              Explore both products ↓
+            </Link>
           </div>
         </Reveal>
       </div>
@@ -39,37 +43,7 @@ export default function HeroSection() {
         y={20}
         className="mx-auto max-w-7xl px-6 pb-16 md:pb-24"
       >
-        <figure>
-          <figcaption className="mb-3 flex items-center justify-between gap-3 px-1 text-[13px] font-medium text-muted-foreground">
-            <span>Example Store Health workspace</span>
-          </figcaption>
-
-          <div className="border border-rule bg-panel p-2 shadow-[0_1px_2px_rgba(23,23,27,0.04),0_16px_40px_-20px_rgba(23,23,27,0.22)] sm:p-3">
-            <div className="relative hidden aspect-[1800/1141] overflow-hidden bg-[#f8fafc] lg:block">
-              <Image
-                src="/images/store-health/overview-desktop.png"
-                alt="Store Health overall status, trusted daily pulse and the discoverability and purchase health domains"
-                fill
-                priority
-                sizes="(min-width: 1280px) 1232px, 96vw"
-                className="object-cover object-top"
-              />
-            </div>
-
-            <div className="bg-[#f8fafc] lg:hidden">
-              <div className="relative aspect-[796/1220] overflow-hidden bg-[#f8fafc]">
-                <Image
-                  src="/images/store-health/overview-mobile.png"
-                  alt="Mobile Store Health summary showing the overall status, coverage gaps and fresh purchase metrics"
-                  fill
-                  priority
-                  sizes="94vw"
-                  className="object-cover object-top"
-                />
-              </div>
-            </div>
-          </div>
-        </figure>
+        <WorkspaceShowcase />
       </Reveal>
     </section>
   );

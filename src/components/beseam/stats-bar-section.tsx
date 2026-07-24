@@ -6,12 +6,12 @@ const stats = [
   {
     value: "~70%",
     label: "of online carts abandoned",
-    sub: "documented average — Baymard Institute",
+    sub: "documented average - Baymard Institute",
   },
   {
     value: "Silent",
     label: "checkout & payment bugs go unreported",
-    sub: "not price, not UX — code that fails quietly",
+    sub: "not price, not UX - code that fails quietly",
   },
   {
     value: "No warning",

@@ -27,7 +27,7 @@ const loopSteps = [
     icon: Wand2,
     label: "Enhance",
     description:
-      "Use Beseam's AI recommendations, your agency's strategy, or your own ideas — all welcome.",
+      "Use Beseam's AI recommendations, your agency's strategy, or your own ideas - all welcome.",
     color: "text-violet-500",
     bg: "bg-muted/40",
   },
@@ -35,7 +35,7 @@ const loopSteps = [
     icon: GitBranch,
     label: "Deploy",
     description:
-      "Ship changes from any source safely — versioned, diffed, and reversible.",
+      "Ship changes from any source safely - versioned, diffed, and reversible.",
     color: "text-primary",
     bg: "bg-muted/40",
   },
@@ -43,7 +43,7 @@ const loopSteps = [
     icon: Radar,
     label: "Guardrails",
     description:
-      "Monitor KPIs after every deploy (rev/session, checkout-start, CVR). Alert on regressions — no matter who made the change.",
+      "Monitor KPIs after every deploy (rev/session, checkout-start, CVR). Alert on regressions - no matter who made the change.",
     color: "text-amber-500",
     bg: "bg-muted/40",
   },
@@ -51,7 +51,7 @@ const loopSteps = [
     icon: MessageSquareWarning,
     label: "Diagnose",
     description:
-      "Rank the most likely cause using the change log + evidence — no more guesswork.",
+      "Rank the most likely cause using the change log + evidence - no more guesswork.",
     color: "text-primary",
     bg: "bg-muted/40",
   },

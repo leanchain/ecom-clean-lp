@@ -44,7 +44,13 @@ export default function MarketingDetailPage({
         name: page.metaTitle,
         description: page.description,
         isPartOf: { "@id": baseUrl + "/#website" },
-        about: { "@id": baseUrl + "/#store-health" },
+        about: {
+          "@id":
+            baseUrl +
+            (page.slug === "ai-visibility-monitoring"
+              ? "/#ai-visibility"
+              : "/#store-health"),
+        },
       },
       {
         "@type": "BreadcrumbList",
@@ -129,7 +135,7 @@ export default function MarketingDetailPage({
                 What Beseam uses
               </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-foreground">
-                Concrete evidence contributing to this part of Store Health.
+                Concrete evidence contributing to this Beseam workspace.
               </p>
             </div>
             <div className="border-t border-rule">
@@ -161,7 +167,7 @@ export default function MarketingDetailPage({
               The evidence path
             </p>
             <h2 className="editorial-heading mt-4 text-white">
-              One trust model across every health domain.
+              One trust model across both Beseam workspaces.
             </h2>
           </div>
           <ol className="mt-10 grid border-y border-technical-rule md:grid-cols-4">
@@ -287,7 +293,7 @@ export default function MarketingDetailPage({
       <section className="border-b border-rule bg-panel">
         <div className="mx-auto max-w-6xl px-6 py-10">
           <p className="text-[13px] font-semibold text-muted-foreground">
-            Continue exploring Store Health
+            Continue exploring Beseam
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             {page.related.map((item) => (
@@ -306,11 +312,11 @@ export default function MarketingDetailPage({
       <section className="bg-brand text-brand-foreground">
         <div className="section-pad mx-auto max-w-6xl px-6">
           <h2 className="editorial-heading max-w-4xl">
-            Start with the health of your actual store.
+            Start with your store - and how AI sees it.
           </h2>
           <p className="mt-5 max-w-3xl text-[18px] leading-relaxed">
-            Review your Shopify setup, current monitoring coverage and the
-            problems your team most needs to detect.
+            Review your Shopify setup, current monitoring coverage and priority
+            AI visibility questions in one focused session.
           </p>
           <div className="mt-8">
             <BookReviewCta

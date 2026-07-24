@@ -52,9 +52,9 @@ const FILTER_GROUPS: {
     key: 'discovery',
     label: 'Discovery Score (AI Search)',
     options: [
-      { value: 'good', label: 'Good — 70+' },
-      { value: 'average', label: 'Average — 40–69' },
-      { value: 'poor', label: 'Poor — below 40' },
+      { value: 'good', label: 'Good - 70+' },
+      { value: 'average', label: 'Average - 40–69' },
+      { value: 'poor', label: 'Poor - below 40' },
       { value: 'none', label: 'Not yet analyzed' },
     ],
   },
@@ -62,9 +62,9 @@ const FILTER_GROUPS: {
     key: 'conversion',
     label: 'Conversion Score',
     options: [
-      { value: 'good', label: 'Good — 70+' },
-      { value: 'average', label: 'Average — 40–69' },
-      { value: 'poor', label: 'Poor — below 40' },
+      { value: 'good', label: 'Good - 70+' },
+      { value: 'average', label: 'Average - 40–69' },
+      { value: 'poor', label: 'Poor - below 40' },
       { value: 'none', label: 'Not yet analyzed' },
     ],
   },
@@ -133,7 +133,7 @@ function ScoreCell({
           <span className={cn('text-[10px] font-bold opacity-50', colorCls)}>/100</span>
         </div>
       ) : (
-        <span className="text-xl font-bold text-muted-foreground/40">—</span>
+        <span className="text-xl font-bold text-muted-foreground/40"> - </span>
       )}
       <span className={cn('text-[8px] font-black uppercase tracking-widest opacity-70', colorCls)}>
         {label}

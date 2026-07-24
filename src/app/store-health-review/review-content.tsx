@@ -21,8 +21,8 @@ const DETAILS = [
   {
     title: "What we review",
     items: [
-      "Your Shopify setup and current monitoring coverage",
-      "Discoverability, product data and technical SEO blind spots",
+      "Your Shopify setup and current Store Health coverage",
+      "Priority AI visibility questions, citations and competitor gaps",
       "Purchase signals across product, cart, checkout and payment stages",
     ],
   },
@@ -37,7 +37,7 @@ const DETAILS = [
   {
     title: "What you receive",
     items: [
-      "A concise view of current monitoring coverage and gaps",
+      "A Store Health and AI visibility baseline",
       "A prioritized first issue list, grounded in available evidence",
       "A recommendation on ownership and next investigation steps",
     ],
@@ -124,7 +124,7 @@ function ContactFallback() {
         </h2>
         <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-foreground">
           Thank you. We&rsquo;ll use the details you shared to prepare the next
-          step for your Store Health Review.
+          step for your visibility and health review.
         </p>
       </div>
     );
@@ -274,15 +274,15 @@ export default function ReviewContent() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal className="max-w-3xl">
           <p className="editorial-eyebrow text-primary">
-            30-minute Store Health Review
+            30-minute visibility + health review
           </p>
           <h1 className="editorial-hero mt-5 text-ink">
-            Start with the health of your actual store.
+            Start with your store - and how AI sees it.
           </h1>
           <p className="editorial-body mt-6 max-w-2xl text-foreground">
-            We look at your Shopify setup, current monitoring coverage and the
-            problems your team most needs to detect. You leave with a focused
-            first scope, not a generic sales deck.
+            We look at your Shopify setup, current Store Health coverage and the
+            AI buying questions that matter to your catalog. You leave with a
+            focused first scope, not a generic sales deck.
           </p>
         </Reveal>
 

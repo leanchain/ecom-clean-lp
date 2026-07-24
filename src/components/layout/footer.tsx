@@ -208,7 +208,7 @@ const Footer = () => {
         <div className="mt-16 border-t pt-8">
           <p className="max-w-2xl text-[11px] leading-relaxed text-muted-foreground/60">
             Beseam is a revenue-guardrailed PDP ops platform. We help brands and
-            their agencies ship PDP improvements safely — with versioning,
+            their agencies ship PDP improvements safely - with versioning,
             monitoring, and rollback. All product names, logos, and brands are
             property of their respective owners.
           </p>

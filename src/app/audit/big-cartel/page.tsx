@@ -20,7 +20,7 @@ const findings: Finding[] = [
     title: "No Product JSON-LD schema at all",
     severity: "critical",
     description:
-      "Big Cartel does not generate any Product JSON-LD schema on product pages. AI engines see your product pages as generic web pages with no structured product information — no price, no availability, no product type. Your products are invisible to AI-powered shopping and recommendation engines.",
+      "Big Cartel does not generate any Product JSON-LD schema on product pages. AI engines see your product pages as generic web pages with no structured product information - no price, no availability, no product type. Your products are invisible to AI-powered shopping and recommendation engines.",
     fix: `<!-- Big Cartel themes use Twig-like template syntax -->
 <!-- Edit your theme's product.html to add JSON-LD: -->
 <!-- Go to Account > Design > Edit Theme > Code Editor -->

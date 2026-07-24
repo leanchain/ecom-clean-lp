@@ -25,7 +25,7 @@ const steps: Step[] = [
     icon: Radar,
     title: "We watch selling and discovery",
     description:
-      "Beseam observes what real shoppers experience and reads your catalog the way search and AI do — catching broken checkout, failed payments, frozen buttons, lost rankings, and missing product data, by device, country, and surface.",
+      "Beseam observes what real shoppers experience and reads your catalog the way search and AI do - catching broken checkout, failed payments, frozen buttons, lost rankings, and missing product data, by device, country, and surface.",
   },
   {
     number: "02",
@@ -41,7 +41,7 @@ const steps: Step[] = [
     icon: ListChecks,
     title: "Know which fix matters first",
     description:
-      "Issues are ranked by real impact on revenue and traffic, so you always work the problem that is costing the most — not the loudest one or the easiest one.",
+      "Issues are ranked by real impact on revenue and traffic, so you always work the problem that is costing the most - not the loudest one or the easiest one.",
   },
   {
     number: "04",
@@ -122,7 +122,7 @@ export default function HowItWorksSection() {
                 {step.description}
               </p>
 
-              {/* WhatsApp preview — Evidence step only */}
+              {/* WhatsApp preview - Evidence step only */}
               {step.number === "02" && (
                 <div className="mt-4 rounded-xl border border-[#25D366]/20 bg-[#ECF8F0] p-3">
                   <div className="mb-1.5 flex items-center gap-1.5">

@@ -1,12 +1,14 @@
-# Beseam — Store Health for Shopify
+# Beseam — Store Health + AI Visibility for Shopify
 
 This is the canonical public marketing site for [beseam.com](https://beseam.com).
-It presents one product story: technical discoverability, purchase health and
-monitoring-source freshness in an evidence-backed Store Health workspace.
+It presents two equal, connected product stories:
 
-The free AI visibility scanner remains available as a secondary tool at
-`/tools/ai-visibility-scan`. The primary conversion route is
-`/store-health-review`.
+- Store Health: technical discoverability, purchase paths and monitoring-source freshness.
+- AI Visibility (GEO): answer-engine visibility, product accuracy, merchant control, citations and competitors.
+
+Both workspaces keep the underlying evidence and observation time visible. The
+primary conversion route is `/store-health-review`; the free AI visibility scan
+remains available at `/tools/ai-visibility-scan`.
 
 ## Local validation
 
@@ -14,8 +16,8 @@ Use Bun, matching the repository lockfile:
 
 ```bash
 bun install
-bun run format
-bun run lint
+bunx prettier --check src
+bunx tsc --noEmit
 bun run build
 ```
 
@@ -24,7 +26,7 @@ The production build is a static Next.js export in `out/`.
 ## Cloudflare deployment
 
 `main.js` serves the static export through the Workers Assets binding, handles
-legacy redirects, and accepts the same-origin Store Health Review fallback form.
+legacy redirects, and accepts the same-origin review fallback form.
 
 Before deployment:
 

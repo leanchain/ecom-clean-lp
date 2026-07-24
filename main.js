@@ -133,7 +133,7 @@ async function submitReview(request, env, url) {
       to: "contact@beseam.com",
       from: "website@beseam.com",
       replyTo: email,
-      subject: "Store Health Review request — " + store,
+      subject: "Store Health Review request - " + store,
       text: textBody,
       html: htmlBody,
     });

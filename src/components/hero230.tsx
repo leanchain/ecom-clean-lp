@@ -41,7 +41,7 @@ const Hero230 = () => {
           </h1>
 
           <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed">
-            Optimize PDPs for AI search discovery and conversion — then deploy
+            Optimize PDPs for AI search discovery and conversion - then deploy
             every change safely with versioning, KPI guardrails, and automatic
             rollback.
           </p>

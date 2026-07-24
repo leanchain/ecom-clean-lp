@@ -92,7 +92,7 @@ const findings: Finding[] = [
     title: "Extra fields and custom attributes not in schema",
     severity: "high",
     description:
-      "Shift4Shop's extra fields (up to 30 custom fields per product) contain valuable product data — dimensions, materials, certifications — but none of this appears in structured data. AI engines miss the detailed attributes that make your products findable.",
+      "Shift4Shop's extra fields (up to 30 custom fields per product) contain valuable product data - dimensions, materials, certifications - but none of this appears in structured data. AI engines miss the detailed attributes that make your products findable.",
     fix: `<!-- Add extra fields as PropertyValue schema -->
 <!-- Edit product.html template: -->
 "additionalProperty": [
@@ -151,10 +151,10 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Shift4Shop (formerly 3dcart) is a hosted e-commerce platform that became free for U.S. merchants through Shift4 Payments. It offers robust features including unlimited products, built-in SEO tools, and over 100 free themes — but its structured data implementation has gaps.",
+  "Shift4Shop (formerly 3dcart) is a hosted e-commerce platform that became free for U.S. merchants through Shift4 Payments. It offers robust features including unlimited products, built-in SEO tools, and over 100 free themes - but its structured data implementation has gaps.",
   "The platform generates basic Product schema by default, which is better than platforms that produce none. However, the auto-generated schema misses brand information, product identifiers (GTIN, MPN), and the rich custom attributes stored in Shift4Shop's extra fields system.",
   "One of Shift4Shop's strengths is its template editing system, which gives you direct access to HTML templates using platform-specific variables. This means you can enhance structured data more easily than on fully closed platforms like Square Online.",
-  "Shift4Shop's extra fields feature — allowing up to 30 custom attributes per product — is underutilized from an AI readability perspective. Merchants often store dimensions, materials, and compatibility data here, but none of it reaches AI engines through structured data.",
+  "Shift4Shop's extra fields feature - allowing up to 30 custom attributes per product - is underutilized from an AI readability perspective. Merchants often store dimensions, materials, and compatibility data here, but none of it reaches AI engines through structured data.",
   "Beseam audits your Shift4Shop store from the perspective of 13 AI engines, identifies the gaps between your product data and what AI engines can actually read, and generates template code using Shift4Shop's native variables to maximize AI readability.",
 ];
 

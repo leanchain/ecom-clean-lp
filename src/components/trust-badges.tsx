@@ -24,7 +24,7 @@ const TrustBadges = () => {
             Built for teams that take revenue seriously
           </h2>
           <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-lg">
-            We only access what we need — and we&apos;re transparent about how.
+            We only access what we need - and we&apos;re transparent about how.
           </p>
         </div>
 
@@ -102,7 +102,7 @@ const TrustBadges = () => {
             <Shield className="mb-4 h-6 w-6 text-primary" />
             <h3 className="mb-3 font-semibold">SOC 2 Type II</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              SOC 2 Type II in progress — estimated Q3 2025. Security overview
+              SOC 2 Type II in progress - estimated Q3 2025. Security overview
               available on request.
             </p>
           </div>

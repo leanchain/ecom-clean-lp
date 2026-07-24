@@ -200,7 +200,7 @@ export default function PricingSection() {
                 Pricing scales with your revenue.
               </span>{" "}
               Small store? &euro;199/mo. Growing fast? We grow with you. Every
-              plan includes the full revenue guard — no feature gates.
+              plan includes the full revenue guard - no feature gates.
             </p>
           </div>
         </motion.div>

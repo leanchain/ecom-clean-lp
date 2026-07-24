@@ -4,19 +4,19 @@ import Reveal from "@/components/beseam/reveal";
 
 const ROLES = [
   {
-    role: "SEO and content",
+    role: "SEO, GEO, and content",
     icon: Search,
-    body: "Technical issues, affected products and pages, source freshness and evidence—not another generic score.",
+    body: "See answers, citations, competitors, and affected products.",
   },
   {
     role: "Ecommerce and operations",
     icon: ShoppingCart,
-    body: "Prioritized health concerns, purchase friction and the monitoring gaps that make a confident answer impossible.",
+    body: "Know what buyers can find and where the purchase journey breaks.",
   },
   {
     role: "Developers and agencies",
     icon: Code2,
-    body: "Reproducible context, affected paths and direct investigation links instead of an unspecific conversion alert.",
+    body: "Start with reproducible evidence and a clear investigation path.",
   },
 ];
 
@@ -27,30 +27,27 @@ export default function TeamsSection() {
       className="scroll-mt-20 border-t border-rule bg-surface"
     >
       <div className="section-pad-tight mx-auto max-w-6xl px-6">
-        <Reveal className="max-w-5xl">
-          <h2 className="editorial-heading text-ink">
-            Beseam does not replace your SEO team. It gives them better
-            evidence.
-          </h2>
-          <p className="mt-5 max-w-3xl text-[17px] leading-relaxed text-foreground">
-            Your SEO team improves visibility. Your content team improves the
-            message. Your developers ship changes. Beseam watches whether those
-            changes damage discoverability or purchasing.
+        <Reveal className="max-w-4xl">
+          <p className="text-[14px] font-semibold text-primary">
+            For your team
           </p>
+          <h2 className="editorial-heading mt-4 text-ink">
+            Built for the people who own ecommerce growth.
+          </h2>
         </Reveal>
 
-        <div className="mt-12 grid gap-px border border-rule bg-rule sm:grid-cols-3">
+        <div className="mt-10 border-t border-rule">
           {ROLES.map((item, index) => (
             <Reveal
               key={item.role}
-              delay={index * 0.05}
-              className="bg-panel p-7 shadow-[0_1px_2px_rgba(23,23,27,0.04),0_8px_24px_-16px_rgba(23,23,27,0.18)]"
+              delay={index * 0.04}
+              className="grid gap-4 border-b border-rule py-6 sm:grid-cols-[2rem_minmax(12rem,0.7fr)_minmax(0,1fr)] sm:items-center"
             >
               <item.icon className="h-5 w-5 text-primary" strokeWidth={1.6} />
-              <h3 className="mt-5 text-[18px] font-semibold text-ink">
+              <h3 className="text-[17px] font-semibold text-ink">
                 {item.role}
               </h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-foreground">
+              <p className="text-[15px] leading-relaxed text-foreground">
                 {item.body}
               </p>
             </Reveal>

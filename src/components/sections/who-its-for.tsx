@@ -15,13 +15,13 @@ const roles = [
     icon: ShoppingCart,
     title: "E-commerce Managers",
     description:
-      "Stop waiting weeks for product launches. Beseam generates complete, AI-ready PDPs in minutes—images, video, copy, and schema included.",
+      "Stop waiting weeks for product launches. Beseam generates complete, AI-ready PDPs in minutes - images, video, copy, and schema included.",
   },
   {
     icon: TrendingUp,
     title: "Growth & Marketing Teams",
     description:
-      "Unlock a new traffic channel. When ChatGPT or Perplexity recommends products, your catalog shows up—not your competitors'.",
+      "Unlock a new traffic channel. When ChatGPT or Perplexity recommends products, your catalog shows up - not your competitors'.",
   },
   {
     icon: Package,

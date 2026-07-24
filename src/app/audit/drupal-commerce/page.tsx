@@ -159,9 +159,9 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Drupal Commerce is the e-commerce framework built on Drupal CMS, powering complex product catalogs for retailers, distributors, and B2B businesses. Its flexibility is unmatched — but this means structured data requires intentional configuration that's often overlooked.",
+  "Drupal Commerce is the e-commerce framework built on Drupal CMS, powering complex product catalogs for retailers, distributors, and B2B businesses. Its flexibility is unmatched - but this means structured data requires intentional configuration that's often overlooked.",
   "The core issue is that Drupal Commerce core provides zero Product schema out of the box. Unlike hosted platforms that auto-generate at least basic structured data, Drupal Commerce depends entirely on contributed modules (like Schema.org Metatag) that must be installed, enabled, and configured.",
-  "Drupal Commerce's variation system — where product variations are separate entities with their own prices, SKUs, and stock levels — is architecturally sophisticated but creates a structured data challenge. Most schema solutions only map the default variation, not all options.",
+  "Drupal Commerce's variation system - where product variations are separate entities with their own prices, SKUs, and stock levels - is architecturally sophisticated but creates a structured data challenge. Most schema solutions only map the default variation, not all options.",
   "The irony of Drupal Commerce is that it stores more detailed product data than almost any other platform (thanks to the Field API), but less of it reaches AI engines. Custom fields for materials, dimensions, certifications, and compatibility data stay locked in the Drupal database.",
   "Beseam audits your Drupal Commerce store from the perspective of 13 AI engines, identifies the structured data gaps in your specific Drupal configuration, and provides Twig template code and module configurations to make your product data AI-readable.",
 ];

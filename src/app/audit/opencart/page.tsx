@@ -20,7 +20,7 @@ const findings: Finding[] = [
     title: "No built-in Product JSON-LD schema",
     severity: "critical",
     description:
-      "OpenCart does not include Product JSON-LD schema in its default installation. AI engines parsing your product pages see raw HTML content but no machine-readable structured data — making your products invisible to AI-powered recommendations.",
+      "OpenCart does not include Product JSON-LD schema in its default installation. AI engines parsing your product pages see raw HTML content but no machine-readable structured data - making your products invisible to AI-powered recommendations.",
     fix: `<!-- Add to catalog/view/theme/yourtheme/template/product/product.twig -->
 <script type="application/ld+json">
 {
@@ -55,7 +55,7 @@ const findings: Finding[] = [
     title: "Product attributes not exposed to AI engines",
     severity: "high",
     description:
-      "OpenCart supports product attributes (weight, dimensions, custom fields) but these are only rendered as HTML tables. AI engines can't reliably parse HTML tables for product specifications — they need structured data.",
+      "OpenCart supports product attributes (weight, dimensions, custom fields) but these are only rendered as HTML tables. AI engines can't reliably parse HTML tables for product specifications - they need structured data.",
     fix: `<!-- In product.twig, add attributes as PropertyValue schema -->
 {% if attribute_groups %}
   "additionalProperty": [
@@ -133,9 +133,9 @@ foreach ($product_options as $option) {
 ];
 
 const contextParagraphs = [
-  "OpenCart is a free, open-source e-commerce platform used by hundreds of thousands of stores worldwide. It's known for its simplicity and low barrier to entry — but this simplicity extends to its structured data, which is virtually nonexistent by default.",
+  "OpenCart is a free, open-source e-commerce platform used by hundreds of thousands of stores worldwide. It's known for its simplicity and low barrier to entry - but this simplicity extends to its structured data, which is virtually nonexistent by default.",
   "The most critical AI readability issue on OpenCart is the complete absence of Product JSON-LD schema. Unlike Shopify or BigCommerce, OpenCart doesn't generate any structured data out of the box. AI engines see your product pages as plain HTML with no machine-readable product information.",
-  "OpenCart's rich attribute system — where you can define custom product specifications like material, weight, dimensions — is only rendered as HTML tables in the browser. AI engines can't reliably extract product attributes from HTML table markup.",
+  "OpenCart's rich attribute system - where you can define custom product specifications like material, weight, dimensions - is only rendered as HTML tables in the browser. AI engines can't reliably extract product attributes from HTML table markup.",
   "The extension marketplace has some schema plugins, but quality varies widely and many are outdated for the latest OpenCart versions. Most stores end up with either no schema or broken schema from an incompatible extension.",
   "Beseam audits your OpenCart store from the perspective of 13 AI engines, identifies the complete schema gap, and generates the exact Twig template code to add comprehensive Product, Collection, and Rating schema to your store.",
 ];

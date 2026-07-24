@@ -59,7 +59,7 @@ export default function SeoScanSection() {
             {/* Left */}
             <div>
               <p className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
-                Plus — Free Store Audit
+                Plus - Free Store Audit
               </p>
               <h2 className="font-heading text-2xl font-bold tracking-tight md:text-3xl">
                 See everything costing you revenue.{" "}
@@ -69,7 +69,7 @@ export default function SeoScanSection() {
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Every Beseam account includes a full audit of your product
-                catalog — 118+ checks across 15 domains, from SEO and security
+                catalog - 118+ checks across 15 domains, from SEO and security
                 to AI discoverability and international readiness.
               </p>
 
@@ -110,7 +110,7 @@ export default function SeoScanSection() {
               </a>
             </div>
 
-            {/* Right — domain tags */}
+            {/* Right - domain tags */}
             <div>
               <p className="mb-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                 118+ checks across 15 domains

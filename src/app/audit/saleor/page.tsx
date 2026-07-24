@@ -20,7 +20,7 @@ const findings: Finding[] = [
     title: "No structured data unless explicitly implemented",
     severity: "critical",
     description:
-      "Saleor is a headless commerce platform — it provides a GraphQL API but no storefront. This means zero structured data unless your frontend explicitly generates it. If your React/Next.js storefront doesn't include JSON-LD, AI engines see no product information at all.",
+      "Saleor is a headless commerce platform - it provides a GraphQL API but no storefront. This means zero structured data unless your frontend explicitly generates it. If your React/Next.js storefront doesn't include JSON-LD, AI engines see no product information at all.",
     fix: `// In your Next.js storefront (e.g., saleor-storefront or custom):
 // Create a component that generates JSON-LD from Saleor's GraphQL data
 
@@ -61,7 +61,7 @@ export function generateProductSchema(product: ProductDetailsFragment) {
     title: "Product attributes from GraphQL not in frontend schema",
     severity: "high",
     description:
-      "Saleor's attribute system (stored in the GraphQL API) contains rich product specifications — materials, dimensions, care instructions. But headless storefronts typically only query what they display, and rarely map attributes to PropertyValue schema.",
+      "Saleor's attribute system (stored in the GraphQL API) contains rich product specifications - materials, dimensions, care instructions. But headless storefronts typically only query what they display, and rarely map attributes to PropertyValue schema.",
     fix: `// Extend your GraphQL query to include attributes:
 // query ProductDetails($slug: String!) {
 //   product(slug: $slug) {
@@ -175,8 +175,8 @@ export function getChannelAwareOffers(product: ProductDetailsFragment) {
 const contextParagraphs = [
   "Saleor is an open-source, headless e-commerce platform built with Python (Django) and GraphQL. It's gained significant traction among developers building custom storefronts with React, Next.js, and other modern frameworks.",
   "The fundamental AI readability challenge with Saleor is inherent to headless commerce: since Saleor provides only an API (no storefront), structured data is entirely the frontend developer's responsibility. If your storefront doesn't generate JSON-LD, AI engines see nothing.",
-  "Saleor's GraphQL API is actually well-suited for building rich structured data — it exposes detailed product attributes, variant pricing, collection hierarchies, and media. The problem is that most frontend implementations focus on visual rendering and overlook schema generation.",
-  "The multi-channel architecture adds another layer of complexity. Saleor manages different pricing, currencies, and availability per channel, and your structured data must reflect the correct channel's data — not just the default or first channel.",
+  "Saleor's GraphQL API is actually well-suited for building rich structured data - it exposes detailed product attributes, variant pricing, collection hierarchies, and media. The problem is that most frontend implementations focus on visual rendering and overlook schema generation.",
+  "The multi-channel architecture adds another layer of complexity. Saleor manages different pricing, currencies, and availability per channel, and your structured data must reflect the correct channel's data - not just the default or first channel.",
   "Beseam audits your Saleor storefront from the perspective of 13 AI engines, identifies what's missing from your client-side rendered pages, and provides ready-to-use TypeScript utility functions that map Saleor's GraphQL schema to Product JSON-LD.",
 ];
 

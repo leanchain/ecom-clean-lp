@@ -28,7 +28,7 @@ const pillars: Pillar[] = [
     icon: Search,
     title: "Discoverability",
     description:
-      "See how AI and search read every product page — titles, attributes, schema, and selling points. Know exactly what surfaces can and cannot understand about your catalog.",
+      "See how AI and search read every product page - titles, attributes, schema, and selling points. Know exactly what surfaces can and cannot understand about your catalog.",
     bullets: [
       "Product understanding across AI and search",
       "Schema and structured-data coverage",
@@ -41,7 +41,7 @@ const pillars: Pillar[] = [
     icon: ShoppingCart,
     title: "Purchase",
     description:
-      "Catch the failures that quietly block the sale — broken checkout, failed payments, frozen buttons, and wrong prices — across the devices and countries you never test on.",
+      "Catch the failures that quietly block the sale - broken checkout, failed payments, frozen buttons, and wrong prices - across the devices and countries you never test on.",
     bullets: [
       "Checkout and cart failure detection",
       "Payment errors by gateway and country",
@@ -54,7 +54,7 @@ const pillars: Pillar[] = [
     icon: Activity,
     title: "Monitoring",
     description:
-      "Beseam watches real shoppers and your catalog around the clock, so regressions after a theme update, app install, or feed sync surface in minutes — not from a customer complaint.",
+      "Beseam watches real shoppers and your catalog around the clock, so regressions after a theme update, app install, or feed sync surface in minutes - not from a customer complaint.",
     bullets: [
       "24/7 coverage of selling and discovery",
       "Regression alerts after changes",
@@ -67,7 +67,7 @@ const pillars: Pillar[] = [
     icon: Wrench,
     title: "Resolution",
     description:
-      "Every finding comes with the evidence and the fix. Follow the plain-language steps, or push structured-data and content fixes straight to Shopify — then re-check to confirm it is resolved.",
+      "Every finding comes with the evidence and the fix. Follow the plain-language steps, or push structured-data and content fixes straight to Shopify - then re-check to confirm it is resolved.",
     bullets: [
       "Root cause and revenue impact per issue",
       "One-click publish to Shopify with rollback",
@@ -99,7 +99,7 @@ export default function OutcomesSection() {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Beseam covers the full lifecycle of a healthy store — from how AI
+            Beseam covers the full lifecycle of a healthy store - from how AI
             and search discover your catalog, to whether shoppers can actually
             buy, to catching what breaks and helping you fix it.
           </p>

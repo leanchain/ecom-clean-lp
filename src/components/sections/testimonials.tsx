@@ -50,7 +50,7 @@ const caseStudies: CaseStudy[] = [
     timeframe: "3 clients live in week 1",
     measurement: "Rev/session vs. 14-day pre-change baseline",
     quote:
-      "Our biggest challenge was proving that PDP changes didn't hurt conversion. Now we deploy through Beseam — changes are versioned, KPIs are monitored, and if anything dips we can pinpoint and roll back instantly.",
+      "Our biggest challenge was proving that PDP changes didn't hurt conversion. Now we deploy through Beseam - changes are versioned, KPIs are monitored, and if anything dips we can pinpoint and roll back instantly.",
     author: "Marcus Rodriguez",
     role: "Founder",
     company: "Altitude Digital (SEO Agency)",
@@ -61,7 +61,7 @@ const caseStudies: CaseStudy[] = [
     category: "Beauty DTC Brand · ~200 PDPs",
     partnerType: "Design Partner",
     problem:
-      "Theme change broke FAQ modules across 200 PDPs. No way to isolate root cause — revenue was silently dropping.",
+      "Theme change broke FAQ modules across 200 PDPs. No way to isolate root cause - revenue was silently dropping.",
     solution:
       "AI-upgraded PDPs with FAQs and schema via Beseam. When theme change caused regression, Beseam pinpointed the cause and guided rollback.",
     impact: "Regression detected in 3.8h → rolled back → baseline recovered same day",

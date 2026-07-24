@@ -45,7 +45,7 @@ const CTA = () => {
           </h3>
           <p className="text-xl leading-8">
             Whether updates come from your SEO agency, dev team, or
-            Beseam&apos;s AI recommendations — every PDP change is versioned,
+            Beseam&apos;s AI recommendations - every PDP change is versioned,
             monitored, and reversible. Ship improvements without risking
             conversion.
           </p>
