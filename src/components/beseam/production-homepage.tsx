@@ -2,32 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 import {
-  Activity,
   ArrowRight,
   BarChart3,
-  BrainCircuit,
   Check,
-  CheckCircle2,
-  ChevronRight,
-  CircleDollarSign,
-  Database,
   Eye,
-  Layers3,
-  LockKeyhole,
   Megaphone,
   MousePointerClick,
   PackageSearch,
   Palette,
-  Plug,
   Radar,
-  RefreshCw,
-  ScanSearch,
   ShieldCheck,
   ShoppingBag,
   Sparkles,
-  Target,
-  TrendingUp,
-  WandSparkles,
 } from "lucide-react";
 
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
@@ -44,699 +30,562 @@ const INTEGRATIONS = [
   { name: "Meta", src: "/images/ai-platforms/meta.svg" },
 ] as const;
 
-const PRODUCT_SUITE = [
+const TRACE = [
   {
-    name: "Foundation",
-    entitlement: "Included with every contract",
-    status: "Production",
-    description:
-      "The shared revenue command layer: Overview, commerce truth, Actions, Impact, catalog synchronization, and connection health.",
-    features: ["Revenue overview", "Unified actions", "Verified impact"],
-    icon: Layers3,
-    href: "#foundation",
-    image: "/images/product-live/revenue-overview.webp",
-    imageAlt: "Beseam revenue overview for the Dancing Queens commerce workspace",
+    label: "Observe",
+    detail: "Storefront, catalog, behavior, discovery, campaigns, and booked commerce.",
   },
   {
-    name: "AI Visibility",
-    entitlement: "Independent package",
-    status: "Production",
-    description:
-      "Track where products and brands are absent, inaccurate, or displaced across AI answers, citations, and discovery surfaces.",
-    features: ["Query monitoring", "Competitor displacement", "Representation accuracy"],
-    icon: Eye,
-    href: "/ai-visibility-monitoring",
-    image: "/images/product-live/ai-visibility.webp",
-    imageAlt: "Beseam AI Visibility workspace for Dancing Queens",
+    label: "Diagnose",
+    detail: "Separate noise from commercially meaningful leakage and show the evidence.",
   },
   {
-    name: "Commerce Readiness",
-    entitlement: "Independent package",
-    status: "Production",
-    description:
-      "Keep products, pages, feeds, checkout, tracking, brand evidence, and destinations ready to convert and ready for traffic.",
-    features: ["Products", "Store Health", "Inspection + Brand"],
-    icon: ShoppingBag,
-    href: "/shopify-store-health",
-    image: "/images/product-live/product-intelligence.webp",
-    imageAlt: "Beseam product intelligence workspace using a real Dancing Queens product",
+    label: "Intervene",
+    detail: "Recommend, approve, publish, or personalize through governed workflows.",
   },
   {
-    name: "Advertising",
-    entitlement: "Google + Meta lifecycle",
-    status: "Production path",
-    description:
-      "Connect channels, verify readiness, create exact drafts, approve budgets and targeting, publish safely, and reconcile performance.",
-    features: ["Campaign readiness", "Safe publishing", "Performance evidence"],
-    icon: Megaphone,
-    href: "#advertising",
-    image: "/images/product-live/campaign-readiness.webp",
-    imageAlt: "Beseam campaign readiness workspace for Dancing Queens",
-  },
-  {
-    name: "Analytics",
-    entitlement: "Advanced Intelligence",
-    status: "Beta",
-    description:
-      "Revenue, funnel, cohort, journey, attribution, reconciliation, and trend intelligence grounded in booked commerce data.",
-    features: ["Revenue analytics", "Funnels + cohorts", "Attribution"],
-    icon: BarChart3,
-    href: "#advanced-intelligence",
-    image: "/images/product-live/revenue-analytics.webp",
-    imageAlt: "Beseam revenue analytics workspace for Dancing Queens",
-  },
-  {
-    name: "Optimization",
-    entitlement: "Advanced Intelligence",
-    status: "Beta",
-    description:
-      "Turn behavioral and commercial signals into governed experiments, personalization decisions, missions, and proposals.",
-    features: ["Experiments", "Personalization", "Decisioning"],
-    icon: Sparkles,
-    href: "#advanced-intelligence",
-    image: "/images/product-live/optimization.webp",
-    imageAlt: "Beseam optimization experiment workspace for Dancing Queens",
+    label: "Verify",
+    detail: "Measure what changed, reconcile the money, and improve the next decision.",
   },
 ] as const;
 
-const EXTENDED_PRODUCTS = [
+const SYSTEMS = [
   {
-    name: "Behavior",
-    entitlement: "Advanced Intelligence · Beta",
+    id: "observe",
+    index: "01",
+    name: "Observe",
+    title: "See the revenue journey your stack cannot see as one system.",
     description:
-      "Sessions, replay, heatmaps, zones, intent, navigation, and friction intelligence for understanding why customers hesitate or convert.",
-    icon: MousePointerClick,
+      "Beseam watches commerce from the outside: how stores render, how products are represented, how customers move, where discovery fails, and where reliability erodes intent.",
+    products: [
+      {
+        name: "AI Visibility",
+        status: "Production",
+        detail: "AI answers, citations, representation accuracy, and competitor displacement.",
+        icon: Eye,
+      },
+      {
+        name: "Behavior",
+        status: "Beta",
+        detail: "Sessions, heatmaps, intent, navigation, and friction intelligence.",
+        icon: MousePointerClick,
+      },
+      {
+        name: "Reliability",
+        status: "Beta",
+        detail: "Incidents, regressions, performance, and commercial exposure.",
+        icon: Radar,
+      },
+    ],
   },
   {
-    name: "Reliability",
-    entitlement: "Advanced Intelligence · Beta",
+    id: "decide",
+    index: "02",
+    name: "Decide",
+    title: "Turn disconnected evidence into one commercially ranked decision.",
     description:
-      "Performance, errors, incidents, web vitals, and revenue-sensitive monitoring before operational failures become expensive blind spots.",
-    icon: ShieldCheck,
+      "Foundation unifies the state of the business. Analytics explains the money. Optimization converts evidence into experiments and governed personalization decisions.",
+    products: [
+      {
+        name: "Foundation",
+        status: "Production",
+        detail: "Revenue overview, commerce truth, Actions, Impact, and connection health.",
+        icon: BarChart3,
+      },
+      {
+        name: "Analytics",
+        status: "Beta",
+        detail: "Revenue, funnel, cohort, journey, attribution, and reconciliation.",
+        icon: BarChart3,
+      },
+      {
+        name: "Optimization",
+        status: "Beta",
+        detail: "Experiments, personalization, missions, proposals, and decisioning.",
+        icon: Sparkles,
+      },
+    ],
   },
   {
-    name: "Creative Studio",
-    entitlement: "Independent creation package · Beta",
+    id: "act",
+    index: "03",
+    name: "Act",
+    title: "Improve the commerce object, not another internal dashboard.",
     description:
-      "Product, brand, organic, and advertising images and video with model choice, approvals, reusable assets, and visible credit estimates.",
-    icon: Palette,
+      "Beseam works on the products, pages, feeds, destinations, campaigns, and creative assets customers actually encounter—while preserving approval and audit boundaries.",
+    products: [
+      {
+        name: "Commerce Readiness",
+        status: "Production",
+        detail: "Products, Store Health, Inspection, brand evidence, feeds, and checkout readiness.",
+        icon: ShoppingBag,
+      },
+      {
+        name: "Advertising",
+        status: "Production path",
+        detail: "Google and Meta readiness, exact drafts, approvals, publishing, and reconciliation.",
+        icon: Megaphone,
+      },
+      {
+        name: "Creative Studio",
+        status: "Beta",
+        detail: "Images, video, reusable assets, and governed generation workflows.",
+        icon: Palette,
+      },
+    ],
   },
 ] as const;
 
-const AGENT_LOOP = [
+const ENTITLEMENTS = [
+  ["Foundation", "Core decision layer", "Included with every contract", "Production"],
+  ["AI Visibility", "Observe", "Independent package", "Production"],
+  ["Commerce Readiness", "Act", "Independent package", "Production"],
+  ["Advertising", "Act", "Google + Meta lifecycle package", "Production path"],
+  ["Analytics", "Decide", "Advanced Intelligence module", "Beta"],
+  ["Behavior", "Observe", "Advanced Intelligence module", "Beta"],
+  ["Optimization", "Decide", "Advanced Intelligence module", "Beta"],
+  ["Reliability", "Observe", "Advanced Intelligence module", "Beta"],
+  ["Creative Studio", "Act", "Independent creation package", "Beta"],
+] as const;
+
+const CATALOG = [
   {
-    step: "01",
-    title: "Observe",
-    detail:
-      "Watch storefront behavior, catalog state, checkout reliability, AI discovery, campaigns, and booked commerce outcomes from outside the stack.",
-    icon: Radar,
+    name: "Flow Tanzschuhe in Gold Glitter",
+    price: "CHF 189",
+    image: "/images/product-live/catalog/flow-gold.webp",
   },
   {
-    step: "02",
-    title: "Understand",
-    detail:
-      "Connect signals that normally live in different systems, identify the leak, estimate its commercial priority, and explain the evidence.",
-    icon: BrainCircuit,
+    name: "Glow Twinkle in Rosé Gold Glitter",
+    price: "CHF 179",
+    image: "/images/product-live/catalog/glow-rose.webp",
   },
   {
-    step: "03",
-    title: "Improve",
-    detail:
-      "Recommend the exact fix, prepare governed content or campaign changes, route approval, and act through the systems already in place.",
-    icon: WandSparkles,
-  },
-  {
-    step: "04",
-    title: "Learn",
-    detail:
-      "Recheck the affected signal, measure the comparable result, and use verified outcomes to improve the next recommendation.",
-    icon: RefreshCw,
+    name: "Flow in Silber & Schwarz Glitter",
+    price: "CHF 189",
+    image: "/images/product-live/catalog/flow-silver-black.webp",
   },
 ] as const;
 
-const PACKAGE_MODEL = [
-  {
-    name: "Foundation",
-    status: "Mandatory",
-    funding: "Contract included",
-    detail: "Overview, Actions, Impact, commerce ledger, connection health, and minimum catalog synchronization.",
-  },
-  {
-    name: "AI Visibility",
-    status: "Independent",
-    funding: "Contract package",
-    detail: "Scheduled visibility intelligence is included within contract limits. Incremental discretionary runs can be credit-metered.",
-  },
-  {
-    name: "Commerce Readiness",
-    status: "Independent",
-    funding: "Contract package",
-    detail: "Products, Store Health, Inspection, and Brand work as one readiness system. Deep runs or generation may use credits.",
-  },
-  {
-    name: "Advertising",
-    status: "One package",
-    funding: "Contract + channel spend",
-    detail: "Google and Meta connection, readiness, drafting, publishing, performance, and measurement. Media spend remains external.",
-  },
-  {
-    name: "Advanced Intelligence",
-    status: "Choose modules",
-    funding: "Contract funded",
-    detail: "Analytics, Behavior, Optimization, and Reliability are enabled independently and do not consume credits for entitled intelligence.",
-  },
-  {
-    name: "Creative Studio",
-    status: "Independent",
-    funding: "Contract access + credits",
-    detail: "Workspace access is contracted; image and video generation shows an estimate and reserves credits before work begins.",
-  },
-] as const;
-
-const TRUST_POINTS = [
-  {
-    title: "Your systems remain the systems of record",
-    detail:
-      "Beseam layers over the storefront, commerce platform, analytics, search, and ad channels instead of forcing a replatform.",
-    icon: Database,
-  },
-  {
-    title: "Every money number keeps its meaning",
-    detail:
-      "Booked, observed, attributed, and modeled values remain separate, with currency, freshness, confidence, and methodology visible.",
-    icon: CircleDollarSign,
-  },
-  {
-    title: "High-impact changes remain governed",
-    detail:
-      "Budgets, targeting, publishing, and customer-facing changes follow explicit entitlements, roles, approvals, and audit trails.",
-    icon: LockKeyhole,
-  },
-] as const;
-
-function BrowserFrame({ title, children, className = "" }: { title: string; children: React.ReactNode; className?: string }) {
-  return (
-    <div className={`product-screen overflow-hidden rounded-[1.25rem] border border-rule bg-panel ${className}`}>
-      <div className="flex h-11 items-center justify-between border-b border-rule bg-[#f7f7f5] px-4 dark:bg-technical-panel">
-        <div className="flex items-center gap-1.5" aria-hidden="true">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#ff6b5d]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#f6bd4f]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#56c271]" />
-        </div>
-        <p className="truncate px-4 text-[11px] font-semibold text-muted-foreground">{title}</p>
-        <span className="w-10" aria-hidden="true" />
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function ProductMedia({
+function EvidenceFigure({
   src,
   alt,
-  title,
-  animated = false,
+  label,
+  caption,
   priority = false,
-  caption = "Real Beseam product interface · Dancing Queens local demonstration workspace.",
+  className = "",
+  unoptimized = false,
 }: {
   src: string;
   alt: string;
-  title: string;
-  animated?: boolean;
+  label: string;
+  caption: string;
   priority?: boolean;
-  caption?: string;
+  className?: string;
+  unoptimized?: boolean;
 }) {
   return (
-    <figure>
-      <BrowserFrame title={title}>
+    <figure className={className}>
+      <div className="relative aspect-[16/10] overflow-hidden border border-black/18 bg-white">
         <Image
           src={src}
           alt={alt}
-          width={animated ? 1200 : 1600}
-          height={animated ? 750 : 1000}
+          fill
           priority={priority}
-          loading="eager"
-          unoptimized={animated}
-          className="h-auto w-full bg-[#f7f8fb]"
+          unoptimized={unoptimized}
+          sizes="(max-width: 1024px) 100vw, 58vw"
+          className="object-cover object-top"
         />
-      </BrowserFrame>
-      <figcaption className="mt-3 text-center text-[11px] leading-relaxed text-muted-foreground">{caption}</figcaption>
+      </div>
+      <figcaption className="grid gap-2 border-x border-b border-black/18 bg-[#f7f5ee] px-4 py-3 sm:grid-cols-[8rem_1fr] sm:px-5">
+        <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#3154ff]">
+          {label}
+        </span>
+        <span className="text-[13px] leading-relaxed text-black/62">{caption}</span>
+      </figcaption>
     </figure>
   );
 }
 
-function LayerArchitectureVisual() {
-  const sources = [
-    ["Storefront", ShoppingBag],
-    ["Commerce platform", Database],
-    ["Customer behavior", MousePointerClick],
-    ["Search + AI", Eye],
-    ["Google + Meta", Megaphone],
-  ] as const;
-  const outcomes = [
-    ["Revenue leakage found", ScanSearch],
-    ["Priorities ranked", Target],
-    ["Experiences adapted", Sparkles],
-    ["Changes verified", CheckCircle2],
-  ] as const;
-
+function ProductRows({ products }: { products: (typeof SYSTEMS)[number]["products"] }) {
   return (
-    <div className="rounded-[1.5rem] border border-white/12 bg-white/[0.04] p-5 shadow-2xl sm:p-7">
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,0.78fr)_3rem_minmax(0,1fr)_3rem_minmax(0,0.78fr)] lg:items-center">
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.11em] text-white/40">Existing infrastructure</p>
-          <div className="mt-4 space-y-2">
-            {sources.map(([label, Icon]) => (
-              <div key={label} className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/10 px-3.5 py-3">
-                <Icon className="h-4 w-4 text-white/58" strokeWidth={1.7} aria-hidden="true" />
-                <span className="text-[12px] font-semibold text-white/82">{label}</span>
-                <Plug className="ml-auto h-3.5 w-3.5 text-success-300" strokeWidth={1.7} aria-hidden="true" />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="hidden items-center justify-center lg:flex"><ArrowRight className="h-5 w-5 text-brand" aria-hidden="true" /></div>
-
-        <div className="rounded-2xl border border-brand/35 bg-brand/[0.07] p-5">
-          <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand text-brand-foreground">
-              <BrainCircuit className="h-5 w-5" strokeWidth={1.7} aria-hidden="true" />
-            </span>
-            <div>
-              <p className="text-[14px] font-semibold text-white">Beseam revenue agent</p>
-              <p className="mt-0.5 text-[10px] text-white/46">Outside-in intelligence + governed action</p>
+    <div className="mt-10 border-t border-black/18">
+      {products.map((product) => {
+        const Icon = product.icon;
+        return (
+          <div
+            key={product.name}
+            className="grid gap-3 border-b border-black/18 py-5 sm:grid-cols-[1.1fr_7rem_1.8fr] sm:items-start"
+          >
+            <div className="flex items-center gap-3 text-[16px] font-semibold text-[#151515]">
+              <Icon className="h-4 w-4 text-[#3154ff]" strokeWidth={1.7} aria-hidden="true" />
+              {product.name}
             </div>
+            <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-black/48">
+              {product.status}
+            </span>
+            <p className="text-[14px] leading-relaxed text-black/62">{product.detail}</p>
           </div>
-          <div className="mt-4 space-y-3">
-            {["Observe continuously", "Connect evidence", "Prioritize by revenue", "Recommend or orchestrate", "Verify and learn"].map((capability, index) => (
-              <div key={capability} className="flex items-center gap-3 text-[11px] text-white/72">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full border border-brand/35 text-[8px] font-bold text-brand">{index + 1}</span>
-                {capability}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="hidden items-center justify-center lg:flex"><ArrowRight className="h-5 w-5 text-brand" aria-hidden="true" /></div>
-
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.11em] text-white/40">Commercial outcomes</p>
-          <div className="mt-4 space-y-2">
-            {outcomes.map(([label, Icon]) => (
-              <div key={label} className="flex items-center gap-3 rounded-xl border border-white/10 bg-black/10 px-3.5 py-3">
-                <Icon className="h-4 w-4 text-brand" strokeWidth={1.7} aria-hidden="true" />
-                <span className="text-[12px] font-semibold text-white/82">{label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CatalogStrip() {
-  const products = [
-    {
-      name: "Flow Tanzschuhe in Gold Glitter",
-      detail: "Real catalog product · CHF 99 · 14 variants",
-      image: "/images/product-live/catalog/flow-gold.webp",
-    },
-    {
-      name: "Glow Twinkle in Rosé Gold Glitter",
-      detail: "Real catalog product monitored by AI Visibility",
-      image: "/images/product-live/catalog/glow-rose.webp",
-    },
-    {
-      name: "Flow in Silber & Schwarz Glitter",
-      detail: "Real catalog product connected to commerce evidence",
-      image: "/images/product-live/catalog/flow-silver-black.webp",
-    },
-  ] as const;
-
-  return (
-    <div className="mt-5 grid gap-3 sm:grid-cols-3">
-      {products.map((product) => (
-        <div key={product.name} className="group flex items-center gap-3 rounded-xl border border-rule bg-panel p-3">
-          <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-[#f2f2ef]">
-            <Image src={product.image} alt={product.name} fill sizes="64px" className="object-cover transition-transform duration-300 group-hover:scale-[1.04]" />
-          </div>
-          <div className="min-w-0">
-            <p className="line-clamp-2 text-[12px] font-semibold leading-snug text-ink">{product.name}</p>
-            <p className="mt-1 text-[10px] leading-relaxed text-muted-foreground">{product.detail}</p>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
 
 export default function ProductionHomepage() {
   return (
-    <>
-      <section id="home-hero" className="relative overflow-hidden border-b border-rule bg-surface">
-        <div className="marketing-grid absolute inset-0 opacity-50" aria-hidden="true" />
-        <div className="marketing-wash absolute -right-44 -top-60 h-[46rem] w-[46rem] rounded-full" aria-hidden="true" />
-        <div className="relative mx-auto max-w-[88rem] px-6 pb-16 pt-14 lg:pb-24 lg:pt-20">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.82fr)_minmax(42rem,1.18fr)] lg:items-center lg:gap-14">
+    <div className="bg-[#f4f1e9] text-[#151515]">
+      <section id="home-hero" className="border-b border-black/18">
+        <div className="mx-auto max-w-[92rem] px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-20 lg:px-10 lg:pb-28 lg:pt-24">
+          <div className="grid gap-14 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-end lg:gap-16">
             <Reveal>
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-50 px-4 py-2 text-[12px] font-semibold text-primary-700 dark:bg-primary/10 dark:text-primary">
-                <Activity className="h-4 w-4" strokeWidth={1.8} aria-hidden="true" />
-                Autonomous revenue intelligence for commerce
+              <div className="flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/55">
+                <span className="h-2 w-2 bg-[#e8653a]" aria-hidden="true" />
+                Outside-in commerce intelligence
               </div>
-              <h1 className="mt-7 max-w-[12ch] text-[clamp(3rem,5.5vw,6.25rem)] font-extrabold leading-[0.96] tracking-[-0.055em] text-ink">
-                Find the revenue leaks <em className="font-semibold text-primary">your stack cannot see.</em>
+              <h1 className="mt-8 max-w-[10.5ch] font-serif text-[clamp(3.25rem,5.1vw,4.75rem)] font-normal leading-[0.98] tracking-[-0.045em] text-[#111318]">
+                The revenue you are missing is already visible.
               </h1>
-              <p className="mt-7 max-w-2xl text-[clamp(1.1rem,1.2vw,1.32rem)] leading-[1.58] text-foreground">
-                Beseam is a self-improving agent above your existing commerce infrastructure. It observes the storefront and customer journey from the outside, connects those signals to catalog, campaigns, and booked revenue, then recommends, orchestrates, and verifies the changes most likely to increase conversion.
+              <p className="mt-8 max-w-xl text-[18px] leading-[1.65] text-black/68">
+                Beseam sits above the commerce stack you already run. It observes the customer journey from the outside, finds revenue leakage, proposes the next governed intervention, and learns from verified outcomes.
               </p>
-              <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <BookReviewCta location="hero" label="Book a platform demo" className="w-full sm:w-auto" />
-                <Link href="#products" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-ink/15 bg-panel px-6 text-[15px] font-semibold text-ink transition-colors hover:border-ink/30 hover:bg-white">
-                  Explore the product suite
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <BookReviewCta location="hero" label="Review your revenue surface" className="w-full sm:w-auto" />
+                <Link
+                  href="#products"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 px-1 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#3154ff] sm:justify-start"
+                >
+                  Examine the product systems <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
-              <div className="mt-8 grid gap-3 text-[13px] font-medium text-muted-foreground sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                {["No replatform", "Human-governed action", "Verified commercial impact"].map((item) => (
-                  <span key={item} className="flex items-center gap-2"><Check className="h-4 w-4 shrink-0 text-primary" strokeWidth={2} aria-hidden="true" />{item}</span>
+              <dl className="mt-14 grid grid-cols-3 border-y border-black/18">
+                {[
+                  ["Scope", "Outside the stack"],
+                  ["Priority", "Revenue leakage"],
+                  ["Learning", "Verified outcomes"],
+                ].map(([term, value]) => (
+                  <div key={term} className="border-r border-black/18 py-4 pr-3 last:border-r-0 last:pl-4 sm:py-5 sm:pr-5 sm:last:pl-5">
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-black/45">{term}</dt>
+                    <dd className="mt-2 text-[13px] font-semibold leading-snug text-black/78 sm:text-[14px]">{value}</dd>
+                  </div>
                 ))}
-              </div>
+              </dl>
             </Reveal>
 
-            <Reveal delay={0.08} y={20}>
-              <ProductMedia
-                src="/images/product-live/product-workflow.gif"
-                alt="Animated walkthrough of a real Beseam product intelligence workspace for Dancing Queens"
-                title="Product intelligence · live workflow"
-                animated
-                priority
-              />
+            <Reveal delay={0.08} y={18}>
+              <div className="grid gap-0 lg:grid-cols-[7rem_1fr]">
+                <div className="hidden border-y border-l border-black/18 bg-[#e9e6dd] px-4 py-5 lg:flex lg:flex-col lg:justify-between">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-black/48 [writing-mode:vertical-rl]">
+                    Live product evidence
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#3154ff] [writing-mode:vertical-rl]">
+                    Dancing Queens / CHF
+                  </span>
+                </div>
+                <EvidenceFigure
+                  src="/images/product-live/revenue-overview.webp"
+                  alt="Beseam revenue overview for the Dancing Queens workspace"
+                  label="Current state"
+                  caption="A real Beseam workspace showing connected commerce scope, booked revenue, operational state, and the next commercial action."
+                  priority
+                />
+              </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-rule bg-panel">
-        <div className="mx-auto max-w-[88rem] px-6 py-8">
-          <p className="text-center text-[11px] font-semibold uppercase tracking-[0.11em] text-muted-foreground">A revenue layer across the commerce infrastructure already in place</p>
-          <div className="mt-7 grid grid-cols-2 items-center gap-x-8 gap-y-7 sm:grid-cols-4 lg:grid-cols-8">
+      <section aria-label="Supported commerce platforms" className="border-b border-black/18 bg-[#ebe8df]">
+        <div className="mx-auto grid max-w-[92rem] gap-5 px-5 py-7 sm:px-8 lg:grid-cols-[15rem_1fr] lg:items-center lg:px-10">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/48">
+            Layered over existing infrastructure
+          </p>
+          <div className="grid grid-cols-4 items-center gap-x-7 gap-y-5 opacity-62 sm:grid-cols-8">
             {INTEGRATIONS.map((integration) => (
-              <div key={integration.name} className="flex min-h-9 items-center justify-center opacity-68 grayscale transition duration-200 hover:opacity-100 hover:grayscale-0">
-                <Image src={integration.src} alt={integration.name} width={130} height={36} className="max-h-7 w-auto max-w-[7rem] object-contain dark:brightness-0 dark:invert" />
+              <div key={integration.name} className="relative h-6">
+                <Image src={integration.src} alt={integration.name} fill sizes="120px" className="object-contain object-left grayscale" />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="platform" className="border-b border-technical-rule bg-technical text-white">
-        <div className="section-pad mx-auto max-w-[88rem] px-6">
-          <Reveal className="grid gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-16">
+      <section id="platform" className="scroll-mt-24 border-b border-black/18">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="editorial-eyebrow text-brand">Layer on top. Do not rip and replace.</p>
-              <h2 className="editorial-heading mt-5 max-w-[13ch] font-bold text-white">One agent across <em className="font-semibold text-brand">every revenue surface.</em></h2>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">The operating trace</p>
+              <h2 className="mt-6 max-w-[11ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+                One continuous line from signal to verified money.
+              </h2>
             </div>
-            <p className="editorial-body max-w-3xl text-white/66 lg:justify-self-end">
-              Commerce platforms know transactions. Analytics tools know events. Search tools know queries. Ad platforms know campaigns. Beseam connects the evidence between them and keeps each source’s truth intact.
-            </p>
+            <div className="self-end">
+              <p className="max-w-2xl text-[17px] leading-[1.65] text-black/66">
+                Beseam does not replace Shopify, analytics, advertising platforms, or your team. It creates the commercial decision layer between them, while each source remains authoritative for what it owns.
+              </p>
+            </div>
           </Reveal>
-          <Reveal delay={0.08} y={18} className="mt-14"><LayerArchitectureVisual /></Reveal>
+
+          <div id="agent-loop" className="relative mt-16 scroll-mt-24 border-y border-black/22">
+            <div className="absolute left-0 right-0 top-[2.2rem] hidden h-px bg-[#3154ff] md:block" aria-hidden="true" />
+            <div className="grid md:grid-cols-4">
+              {TRACE.map((item, index) => (
+                <div key={item.label} className="relative border-b border-black/18 py-7 md:border-b-0 md:border-r md:px-6 md:py-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                  <span className="relative z-10 inline-flex h-5 items-center bg-[#f4f1e9] pr-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+                    {String(index + 1).padStart(2, "0")} / {item.label}
+                  </span>
+                  <p className="mt-9 max-w-xs text-[15px] leading-relaxed text-black/66">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      <section id="products" className="border-b border-rule bg-panel">
-        <div className="section-pad mx-auto max-w-[88rem] px-6">
-          <Reveal className="grid gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-16">
+      <section id="products" className="scroll-mt-24">
+        <div className="mx-auto max-w-[92rem] px-5 pt-20 sm:px-8 sm:pt-24 lg:px-10 lg:pt-28">
+          <div className="grid gap-10 border-b border-black/22 pb-16 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="editorial-eyebrow text-primary">The Beseam product suite</p>
-              <h2 className="editorial-heading mt-5 max-w-[13ch] font-bold text-ink">A complete revenue platform, <em className="font-semibold text-primary">product by product.</em></h2>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Product systems</p>
+              <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+                Not a bundle of features. Three commercial systems.
+              </h2>
             </div>
-            <p className="editorial-body max-w-3xl text-foreground lg:justify-self-end">
-              Foundation creates the shared revenue model. Independent product packages add discovery, readiness, advertising, analytics, behavior, optimization, reliability, and creative capabilities without pretending every customer needs the same contract.
+            <p className="max-w-2xl self-end text-[17px] leading-[1.65] text-black/66">
+              Every Beseam product has a role in the same loop: observe a revenue surface, decide what matters, or act on the commerce object. Entitlements control which systems are available to each contract and store.
             </p>
-          </Reveal>
+          </div>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {PRODUCT_SUITE.map((product, index) => {
-              const Icon = product.icon;
-              const beta = product.status === "Beta";
-              return (
-                <Reveal key={product.name} delay={(index % 3) * 0.04}>
-                  <Link href={product.href} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-rule bg-surface transition duration-200 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-xl">
-                    <div className="relative aspect-[16/10] overflow-hidden border-b border-rule bg-[#f7f8fb]">
-                      <Image src={product.image} alt={product.imageAlt} fill loading="eager" sizes="(min-width:1280px) 30vw, (min-width:768px) 48vw, 100vw" className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.015]" />
+          {SYSTEMS.map((system) => (
+            <section key={system.id} id={system.id === "decide" ? "foundation" : system.id === "act" ? "advertising" : undefined} className="scroll-mt-24 border-b border-black/22 py-20 sm:py-24 lg:py-28">
+              <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+                <div>
+                  <div className="flex items-baseline gap-4">
+                    <span className="font-mono text-[11px] text-black/38">{system.index}</span>
+                    <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">{system.name}</span>
+                  </div>
+                  <h3 className="mt-7 max-w-[11ch] font-serif text-[clamp(2.45rem,3.6vw,3.8rem)] font-normal leading-[1.04] tracking-[-0.035em]">
+                    {system.title}
+                  </h3>
+                  <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-black/64">{system.description}</p>
+                  <ProductRows products={system.products} />
+                </div>
+
+                <div className="lg:pt-2">
+                  {system.id === "observe" && (
+                    <EvidenceFigure
+                      src="/images/product-live/ai-visibility.webp"
+                      alt="Beseam AI Visibility workspace for Dancing Queens"
+                      label="Observe / AI Visibility"
+                      caption="Real query monitoring and representation evidence from the Dancing Queens workspace."
+                    />
+                  )}
+
+                  {system.id === "decide" && (
+                    <div className="grid gap-6">
+                      <EvidenceFigure
+                        src="/images/product-live/revenue-analytics.webp"
+                        alt="Beseam revenue analytics workspace for Dancing Queens"
+                        label="Decide / Analytics"
+                        caption="Booked revenue, funnels, attribution, and commercial movement remain distinguishable from modeled impact."
+                      />
+                      <EvidenceFigure
+                        src="/images/product-live/optimization.webp"
+                        alt="Beseam optimization experiment workspace for Dancing Queens"
+                        label="Decide / Optimization"
+                        caption="An experiment workspace that connects a hypothesis, intervention, and outcome rather than stopping at an alert."
+                      />
                     </div>
-                    <div className="flex flex-1 flex-col p-6">
-                      <div className="flex items-start justify-between gap-4">
-                        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-50 text-primary dark:bg-primary/10"><Icon className="h-5 w-5" strokeWidth={1.7} aria-hidden="true" /></span>
-                        <span className={`rounded-full border px-2.5 py-1 text-[10px] font-semibold ${beta ? "border-warning-200 bg-warning-50 text-warning-700" : "border-success-200 bg-success-50 text-success-700"}`}>{product.status}</span>
+                  )}
+
+                  {system.id === "act" && (
+                    <div className="grid gap-6">
+                      <EvidenceFigure
+                        src="/images/product-live/product-workflow.gif"
+                        alt="Beseam product workflow using a Dancing Queens product"
+                        label="Act / Product workflow"
+                        caption="A real product workflow moving from commerce evidence into a governed fix lifecycle."
+                        unoptimized
+                      />
+                      <div className="grid grid-cols-3 border border-black/18 bg-[#ebe8df]">
+                        {CATALOG.map((product) => (
+                          <figure key={product.name} className="border-r border-black/18 last:border-r-0">
+                            <div className="relative aspect-square overflow-hidden bg-white">
+                              <Image src={product.image} alt={product.name} fill sizes="(max-width: 768px) 33vw, 18vw" className="object-cover" />
+                            </div>
+                            <figcaption className="border-t border-black/18 px-3 py-3">
+                              <p className="line-clamp-2 text-[11px] font-semibold leading-snug text-black/72">{product.name}</p>
+                              <p className="mt-1 font-mono text-[10px] text-black/45">{product.price}</p>
+                            </figcaption>
+                          </figure>
+                        ))}
                       </div>
-                      <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.08em] text-primary">{product.entitlement}</p>
-                      <h3 className="mt-2 text-[25px] font-semibold tracking-[-0.025em] text-ink">{product.name}</h3>
-                      <p className="mt-3 flex-1 text-[14px] leading-relaxed text-muted-foreground">{product.description}</p>
-                      <div className="mt-5 flex flex-wrap gap-2">{product.features.map((feature) => <span key={feature} className="rounded-full border border-rule bg-panel px-2.5 py-1 text-[10px] font-medium text-muted-foreground">{feature}</span>)}</div>
-                      <span className="mt-6 inline-flex items-center gap-2 text-[13px] font-semibold text-primary">Explore {product.name}<ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden="true" /></span>
+                      <EvidenceFigure
+                        src="/images/product-live/campaign-readiness.webp"
+                        alt="Beseam campaign readiness workspace for Dancing Queens"
+                        label="Act / Advertising"
+                        caption="Channel readiness, budget, destinations, and evidence are checked before publishing into Google or Meta."
+                      />
                     </div>
-                  </Link>
-                </Reveal>
-              );
-            })}
+                  )}
+                </div>
+              </Reveal>
+            </section>
+          ))}
+        </div>
+      </section>
+
+      <section id="advanced-intelligence" className="scroll-mt-24 bg-[#111318] text-white">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <div className="grid gap-10 border-b border-white/18 pb-14 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+            <div>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">Evidence case / Dancing Queens</p>
+              <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+                Follow one commercial question through the system.
+              </h2>
+            </div>
+            <div className="self-end">
+              <p className="max-w-2xl text-[16px] leading-[1.7] text-white/64">
+                The interface and catalog below are authentic Beseam product captures. The demonstration workspace uses the real Dancing Queens catalog with representative CHF commerce activity so each stage can be inspected end to end.
+              </p>
+            </div>
           </div>
 
-          <div className="mt-5 grid gap-5 lg:grid-cols-3">
-            {EXTENDED_PRODUCTS.map((product, index) => {
-              const Icon = product.icon;
-              return (
-                <Reveal key={product.name} delay={index * 0.04}>
-                  <div id={product.name === "Creative Studio" ? "creative-studio" : undefined} className="h-full scroll-mt-28 rounded-2xl border border-rule bg-surface p-6">
-                    <div className="flex items-start justify-between gap-4">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-50 text-primary dark:bg-primary/10"><Icon className="h-5 w-5" strokeWidth={1.7} aria-hidden="true" /></span>
-                      <span className="rounded-full border border-warning-200 bg-warning-50 px-2.5 py-1 text-[10px] font-semibold text-warning-700">Beta</span>
-                    </div>
-                    <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.08em] text-primary">{product.entitlement}</p>
-                    <h3 className="mt-2 text-[23px] font-semibold tracking-[-0.025em] text-ink">{product.name}</h3>
-                    <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">{product.description}</p>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section id="foundation" className="border-b border-rule bg-surface">
-        <div className="section-pad mx-auto max-w-[88rem] px-6">
-          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(42rem,1.28fr)] lg:items-center lg:gap-20">
-            <div>
-              <p className="editorial-eyebrow text-primary">Foundation</p>
-              <h2 className="editorial-heading mt-5 font-bold text-ink">Revenue first. <em className="font-semibold text-primary">Every other signal second.</em></h2>
-              <p className="mt-6 text-[17px] leading-relaxed text-foreground">
-                The command center keeps booked revenue, commercial risk, evidence quality, actions requiring attention, verification, and measured impact in one store-scoped operating view.
-              </p>
-              <div className="mt-8 space-y-4">
-                {[
-                  ["See the state of the business", "Currency, window, scope, freshness, completeness, connection, and authoritative booked revenue remain visible."],
-                  ["Open the next commercial decision", "The highest-value issue is connected to evidence and the product workspace that can resolve it."],
-                  ["Keep outcomes accountable", "Actions, verification, and impact remain separate stages rather than becoming a generic task list."],
-                ].map(([title, detail]) => (
-                  <div key={title} className="flex gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" strokeWidth={1.7} aria-hidden="true"/><div><p className="text-[14px] font-semibold text-ink">{title}</p><p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{detail}</p></div></div>
-                ))}
-              </div>
-            </div>
-            <ProductMedia src="/images/product-live/revenue-overview.webp" alt="Real Beseam revenue overview showing Dancing Queens booked revenue and commercial decisions" title="Foundation · revenue overview" />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="border-b border-rule bg-panel">
-        <div className="section-pad mx-auto max-w-[88rem] px-6">
-          <Reveal className="grid gap-12 lg:grid-cols-[minmax(42rem,1.25fr)_minmax(0,0.75fr)] lg:items-center lg:gap-20">
-            <div className="lg:order-2">
-              <p className="editorial-eyebrow text-primary">AI Visibility</p>
-              <h2 className="editorial-heading mt-5 font-bold text-ink">Know how AI systems represent you—<em className="font-semibold text-primary">and why competitors win.</em></h2>
-              <p className="mt-6 text-[17px] leading-relaxed text-foreground">
-                Monitor the queries, products, sources, competitor mentions, seller attribution, and claim accuracy shaping discovery across answer engines and AI shopping surfaces.
-              </p>
-              <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                {["Visibility share", "Answer accuracy", "Seller control", "Performance matrix"].map((item) => <div key={item} className="flex items-center gap-3 rounded-xl border border-rule bg-surface p-4"><Eye className="h-4 w-4 text-primary" strokeWidth={1.7} aria-hidden="true"/><span className="text-[13px] font-semibold text-ink">{item}</span></div>)}
-              </div>
-              <Link href="/ai-visibility-monitoring" className="mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-primary">Explore AI Visibility <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
-            </div>
-            <div className="lg:order-1"><ProductMedia src="/images/product-live/ai-visibility.webp" alt="Real Beseam AI Visibility dashboard for Dancing Queens" title="AI Visibility · overview" /></div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="border-b border-rule bg-surface">
-        <div className="section-pad mx-auto max-w-[88rem] px-6">
-          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(42rem,1.28fr)] lg:items-center lg:gap-20">
-            <div>
-              <p className="editorial-eyebrow text-primary">Product Intelligence</p>
-              <h2 className="editorial-heading mt-5 font-bold text-ink">Improve the actual products <em className="font-semibold text-primary">customers are deciding between.</em></h2>
-              <p className="mt-6 text-[17px] leading-relaxed text-foreground">
-                Product-level intelligence combines canonical catalog truth, SEO and GEO evidence, variants, translations, discoverability, readiness, proposed changes, and post-change performance.
-              </p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                {[
-                  ["Catalog truth", PackageSearch],
-                  ["Content readiness", CheckCircle2],
-                  ["AI visibility", Eye],
-                  ["Changes + performance", TrendingUp],
-                ].map(([label, Icon]) => {
-                  const TypedIcon = Icon as typeof PackageSearch;
-                  return <div key={label as string} className="flex items-center gap-3 rounded-xl border border-rule bg-panel p-4"><TypedIcon className="h-4 w-4 text-primary" strokeWidth={1.7} aria-hidden="true"/><span className="text-[13px] font-semibold text-ink">{label as string}</span></div>;
-                })}
-              </div>
-            </div>
-            <div>
-              <ProductMedia src="/images/product-live/product-workflow.gif" alt="Real animated Beseam product intelligence workflow using a Dancing Queens product" title="Product intelligence · overview to performance" animated />
-              <CatalogStrip />
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section id="advanced-intelligence" className="border-b border-technical-rule bg-technical text-white">
-        <div className="section-pad mx-auto max-w-[88rem] px-6">
-          <Reveal className="grid gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-16">
-            <div>
-              <div className="flex items-center gap-3"><p className="editorial-eyebrow text-brand">Advanced Intelligence</p><span className="rounded-full border border-warning-300/30 bg-warning-300/10 px-2.5 py-1 text-[10px] font-semibold text-warning-300">Beta modules</span></div>
-              <h2 className="editorial-heading mt-5 max-w-[13ch] font-bold text-white">Understand behavior. <em className="font-semibold text-brand">Prove the next change.</em></h2>
-            </div>
-            <p className="editorial-body max-w-3xl text-white/66 lg:justify-self-end">
-              Analytics, Behavior, Optimization, and Reliability can be contracted independently. Together they reveal where revenue is leaking, why customers struggle, which intervention should run, and what evidence proves recovery.
-            </p>
-          </Reveal>
-
-          <div className="mt-14 grid gap-7 lg:grid-cols-2">
-            <Reveal>
-              <ProductMedia src="/images/product-live/revenue-analytics.webp" alt="Real Beseam analytics dashboard showing Dancing Queens revenue and funnel performance" title="Analytics · performance overview" caption="Real Beseam product interface · locally seeded commerce history linked to the real Dancing Queens catalog." />
-              <div className="mt-5"><p className="text-[20px] font-semibold text-white">Analytics</p><p className="mt-2 text-[13px] leading-relaxed text-white/56">Revenue, funnels, cohorts, journeys, attribution, reconciliation, and commercial trend intelligence.</p></div>
-            </Reveal>
-            <Reveal delay={0.06}>
-              <ProductMedia src="/images/product-live/optimization.webp" alt="Real Beseam optimization workspace showing a completed commerce experiment" title="Optimization · experiments" caption="Real Beseam product interface · locally seeded experiment evidence in the Dancing Queens workspace." />
-              <div className="mt-5"><p className="text-[20px] font-semibold text-white">Optimization</p><p className="mt-2 text-[13px] leading-relaxed text-white/56">Governed experiments, personalization, decisioning, missions, holdouts, and measured results.</p></div>
-            </Reveal>
-          </div>
-
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="grid lg:grid-cols-3">
             {[
-              ["Behavior", "Sessions, replay, heatmaps, zones, engagement, intent, and friction signals.", MousePointerClick],
-              ["Reliability", "Errors, incidents, performance, web vitals, recovery evidence, and revenue-sensitive monitoring.", ShieldCheck],
-            ].map(([title, detail, Icon]) => {
-              const TypedIcon = Icon as typeof MousePointerClick;
-              return <div key={title as string} className="rounded-2xl border border-white/12 bg-white/[0.035] p-6"><TypedIcon className="h-5 w-5 text-brand" strokeWidth={1.7} aria-hidden="true"/><h3 className="mt-6 text-[22px] font-semibold text-white">{title as string}</h3><p className="mt-2 max-w-xl text-[13px] leading-relaxed text-white/54">{detail as string}</p></div>;
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section id="advertising" className="border-b border-rule bg-surface">
-        <div className="section-pad mx-auto max-w-[88rem] px-6">
-          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(42rem,1.28fr)] lg:items-center lg:gap-20">
-            <div>
-              <p className="editorial-eyebrow text-primary">Advertising</p>
-              <h2 className="editorial-heading mt-5 font-bold text-ink">From readiness to revenue, <em className="font-semibold text-primary">without unsafe automation.</em></h2>
-              <p className="mt-6 text-[17px] leading-relaxed text-foreground">
-                Beseam checks Google and Meta account access, billing, measurement, catalog truth, product eligibility, destinations, creative, configuration, and final preflight before spend can activate.
-              </p>
-              <div className="mt-7 rounded-xl border border-warning-200 bg-warning-50 p-4">
-                <div className="flex gap-3"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-warning-700" aria-hidden="true"/><p className="text-[13px] leading-relaxed text-muted-foreground"><strong className="font-semibold text-ink">Human approval stays explicit.</strong> Administrators review the exact account, products, audience, geography, budget, schedule, conversion event, creative, and destination before publishing.</p></div>
-              </div>
-            </div>
-            <ProductMedia src="/images/product-live/campaign-readiness.webp" alt="Real Beseam campaign readiness workspace showing Google and Meta lifecycle states" title="Advertising · campaign readiness" caption="Real Beseam product interface · local Dancing Queens demonstration with a connected Meta draft." />
-          </Reveal>
-        </div>
-      </section>
-
-      <section id="agent-loop" className="border-b border-rule bg-panel">
-        <div className="section-pad mx-auto max-w-[88rem] px-6">
-          <Reveal className="mx-auto max-w-4xl text-center">
-            <p className="editorial-eyebrow text-primary">A self-improving commercial agent</p>
-            <h2 className="editorial-heading mt-5 font-bold text-ink">It does not stop at the alert. <em className="font-semibold text-primary">It learns from the outcome.</em></h2>
-            <p className="editorial-body mx-auto mt-6 max-w-3xl text-foreground">Every cycle makes the next recommendation more useful while preserving evidence, ownership, approval, verification, and commercial meaning.</p>
-          </Reveal>
-          <div className="mt-14 grid border-y border-rule md:grid-cols-2 xl:grid-cols-4">
-            {AGENT_LOOP.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <Reveal key={item.title} delay={index * 0.05} className="relative border-b border-rule p-6 last:border-b-0 md:border-r md:even:border-r-0 xl:border-b-0 xl:even:border-r xl:last:border-r-0">
-                  <div className="flex items-center justify-between"><span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 text-primary dark:bg-primary/10"><Icon className="h-5 w-5" strokeWidth={1.7} aria-hidden="true" /></span><span className="text-[12px] font-semibold text-muted-foreground">{item.step}</span></div>
-                  <h3 className="mt-8 text-[24px] font-semibold tracking-[-0.025em] text-ink">{item.title}</h3>
-                  <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">{item.detail}</p>
-                  {index < AGENT_LOOP.length - 1 ? <ChevronRight className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 rounded-full border border-rule bg-panel p-1 text-primary xl:block" aria-hidden="true" /> : null}
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section id="packages" className="border-b border-rule bg-surface">
-        <div className="section-pad mx-auto max-w-[88rem] px-6">
-          <Reveal className="mx-auto max-w-4xl text-center">
-            <p className="editorial-eyebrow text-primary">Products and entitlements</p>
-            <h2 className="editorial-heading mt-5 font-bold text-ink">Build the platform around <em className="font-semibold text-primary">the capabilities you need.</em></h2>
-            <p className="editorial-body mx-auto mt-6 max-w-3xl text-foreground">Foundation is always present. Every other product is contracted deliberately and enforced across the interface, APIs, processing, jobs, models, and credit policy—not hidden behind a cosmetic menu toggle.</p>
-          </Reveal>
-
-          <div className="mt-14 overflow-hidden rounded-2xl border border-rule bg-panel">
-            <div className="hidden grid-cols-[1.05fr_0.65fr_0.9fr_1.8fr] border-b border-rule bg-[#f5f5f2] px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground lg:grid dark:bg-technical-panel">
-              <span>Package</span><span>Entitlement</span><span>Funding</span><span>What it means</span>
-            </div>
-            {PACKAGE_MODEL.map((item) => (
-              <div key={item.name} className="grid gap-3 border-b border-rule px-5 py-5 last:border-b-0 lg:grid-cols-[1.05fr_0.65fr_0.9fr_1.8fr] lg:items-center">
-                <p className="text-[15px] font-semibold text-ink">{item.name}</p>
-                <p className="text-[12px] font-semibold text-primary">{item.status}</p>
-                <p className="text-[12px] font-medium text-foreground">{item.funding}</p>
-                <p className="text-[13px] leading-relaxed text-muted-foreground">{item.detail}</p>
-              </div>
+              {
+                code: "Signal",
+                title: "Where is the brand absent or misrepresented?",
+                src: "/images/product-live/ai-visibility.webp",
+                alt: "AI visibility evidence in Beseam",
+                note: "Observation begins with external evidence, not an internally generated task.",
+                accent: "text-[#e98a66]",
+              },
+              {
+                code: "Intervention",
+                title: "Which commerce object should change first?",
+                src: "/images/product-live/product-intelligence.webp",
+                alt: "Product intelligence evidence in Beseam",
+                note: "The product, destination, evidence, owner, and approval state stay attached to the decision.",
+                accent: "text-[#8ea2ff]",
+              },
+              {
+                code: "Verification",
+                title: "Did commercial movement follow the change?",
+                src: "/images/product-live/revenue-analytics.webp",
+                alt: "Revenue analytics evidence in Beseam",
+                note: "Booked, observed, attributed, and modeled money retain distinct meanings.",
+                accent: "text-[#8ea2ff]",
+              },
+            ].map((item) => (
+              <article key={item.code} className="border-b border-white/18 py-10 lg:border-b-0 lg:border-r lg:px-7 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0">
+                <p className={`font-mono text-[10px] font-semibold uppercase tracking-[0.14em] ${item.accent}`}>{item.code}</p>
+                <h3 className="mt-4 min-h-[4.5rem] max-w-sm text-[20px] font-semibold leading-snug text-white">{item.title}</h3>
+                <div className="relative mt-7 aspect-[16/10] overflow-hidden border border-white/18 bg-white">
+                  <Image src={item.src} alt={item.alt} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover object-top" />
+                </div>
+                <p className="mt-5 max-w-sm text-[14px] leading-relaxed text-white/58">{item.note}</p>
+              </article>
             ))}
           </div>
-          <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">Product availability and Beta access are contract-specific. Generation and discretionary compute show a visible estimate before credits are reserved.</p>
         </div>
       </section>
 
-      <section className="border-b border-rule bg-panel">
-        <div className="section-pad mx-auto max-w-[88rem] px-6">
-          <Reveal className="grid gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-16">
+      <section id="packages" className="scroll-mt-24 border-b border-black/18">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="editorial-eyebrow text-primary">Enterprise trust by design</p>
-              <h2 className="editorial-heading mt-5 max-w-[13ch] font-bold text-ink">Autonomy where it helps. <em className="font-semibold text-primary">Control where it matters.</em></h2>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Entitlements</p>
+              <h2 className="mt-6 max-w-[9ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+                Buy the operating surface you need.
+              </h2>
+              <p className="mt-7 max-w-lg text-[16px] leading-[1.7] text-black/64">
+                Foundation is the shared decision layer. Independent packages and Advanced Intelligence modules are resolved per contract, tenant, and store.
+              </p>
             </div>
-            <p className="editorial-body max-w-3xl text-foreground lg:justify-self-end">A self-improving system only works when evidence, money, permissions, approvals, and resulting changes remain inspectable.</p>
-          </Reveal>
-          <div className="mt-12 grid gap-4 lg:grid-cols-3">
-            {TRUST_POINTS.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <Reveal key={item.title} delay={index * 0.05}>
-                  <div className="h-full rounded-2xl border border-rule bg-surface p-6">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 text-primary dark:bg-primary/10"><Icon className="h-5 w-5" strokeWidth={1.7} aria-hidden="true" /></span>
-                    <h3 className="mt-7 text-[20px] font-semibold tracking-[-0.02em] text-ink">{item.title}</h3>
-                    <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">{item.detail}</p>
-                  </div>
-                </Reveal>
-              );
-            })}
+
+            <div className="border-t border-black/25">
+              <div className="hidden grid-cols-[1.05fr_0.6fr_1.35fr_0.6fr] border-b border-black/25 py-3 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-black/42 sm:grid">
+                <span>Product</span><span>System</span><span>Commercial model</span><span>Status</span>
+              </div>
+              {ENTITLEMENTS.map(([product, system, commercial, status]) => (
+                <div key={product} className="grid gap-2 border-b border-black/18 py-5 sm:grid-cols-[1.05fr_0.6fr_1.35fr_0.6fr] sm:items-baseline sm:gap-5">
+                  <span className="text-[15px] font-semibold text-black/82">{product}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.09em] text-[#3154ff]">{system}</span>
+                  <span className="text-[13px] leading-relaxed text-black/58">{commercial}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-black/48">{status}</span>
+                </div>
+              ))}
+              <div id="creative-studio" className="scroll-mt-24 pt-6 text-[13px] leading-relaxed text-black/54">
+                Beta labels are explicit. Advertising media spend remains outside Beseam software entitlements. Creative generation may be credit-metered by contract.
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-primary text-primary-foreground">
-        <div className="mx-auto max-w-[88rem] px-6 py-16 md:py-20">
-          <Reveal className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+      <section className="border-b border-black/18 bg-[#ebe8df]">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="editorial-eyebrow text-white/72">See the platform on your commerce stack</p>
-              <h2 className="mt-5 max-w-[18ch] text-[clamp(2.4rem,4.5vw,5rem)] font-bold leading-[1.02] tracking-[-0.045em] text-white">Put a revenue agent above the systems you already run.</h2>
-              <p className="mt-5 max-w-3xl text-[17px] leading-relaxed text-white/78">We will map the product packages, evidence sources, governance boundaries, and first commercial decisions for your store or portfolio.</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Governed autonomy</p>
+              <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.7rem,4.1vw,4.1rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+                Autonomous where evidence is strong. Human where impact is material.
+              </h2>
             </div>
-            <BookReviewCta location="homepage_final" label="Book a platform demo" className="w-full border-white bg-white text-ink hover:bg-white/92 lg:w-auto" />
-          </Reveal>
+            <div className="grid border-y border-black/22 md:grid-cols-3">
+              {[
+                {
+                  icon: ShieldCheck,
+                  title: "Systems remain authoritative",
+                  detail: "Commerce, advertising, and analytics sources keep ownership of the records they produce.",
+                },
+                {
+                  icon: PackageSearch,
+                  title: "Every action keeps evidence",
+                  detail: "Scope, issue, consequence, owner, approval, execution, and verification travel together.",
+                },
+                {
+                  icon: Check,
+                  title: "Money keeps its meaning",
+                  detail: "Booked, observed, attributed, reconciled, and modeled values are never collapsed into one claim.",
+                },
+              ].map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.title} className="border-b border-black/18 py-7 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                    <Icon className="h-5 w-5 text-[#3154ff]" strokeWidth={1.6} aria-hidden="true" />
+                    <h3 className="mt-8 text-[18px] font-semibold leading-snug">{item.title}</h3>
+                    <p className="mt-3 text-[14px] leading-relaxed text-black/60">{item.detail}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
-    </>
+
+      <section className="border-b border-black/18 bg-[#f4f1e9]">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
+          <div className="grid border-y border-black/24 lg:grid-cols-[minmax(0,1fr)_19rem]">
+            <div className="py-10 pr-0 lg:py-14 lg:pr-16">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Commercial review / 20 minutes</p>
+              <h2 className="mt-5 max-w-[16ch] font-serif text-[clamp(2.6rem,4.2vw,4.3rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#111318]">
+                Find the first revenue surface worth fixing.
+              </h2>
+            </div>
+            <div className="border-t border-black/24 py-8 lg:border-l lg:border-t-0 lg:py-0 lg:pl-8">
+              <div className="flex h-full flex-col justify-center">
+                <dl className="grid gap-4 border-b border-black/18 pb-6 font-mono text-[10px] uppercase tracking-[0.09em] text-black/48">
+                  <div className="flex justify-between gap-4"><dt>Input</dt><dd className="text-right text-black/72">Your current stack</dd></div>
+                  <div className="flex justify-between gap-4"><dt>Output</dt><dd className="text-right text-black/72">Evidence + next action</dd></div>
+                  <div className="flex justify-between gap-4"><dt>Commitment</dt><dd className="text-right text-black/72">No replatform</dd></div>
+                </dl>
+                <BookReviewCta location="homepage_final" label="Review your revenue surface" className="mt-7 w-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
