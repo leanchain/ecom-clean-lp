@@ -1,38 +1,14 @@
-import React from 'react';
-import { cn } from '@/lib/utils';
+import Logo, { type LogoProps } from "@/components/beseam/logo";
+import { cn } from "@/lib/utils";
 
-interface NavbarLogoProps {
-  className?: string;
+interface NavbarLogoProps extends LogoProps {
   wrapperClassName?: string;
 }
 
-const NavbarLogo: React.FC<NavbarLogoProps> = ({ className = '', wrapperClassName = '' }) => {
+export default function NavbarLogo({ wrapperClassName, ...props }: NavbarLogoProps) {
   return (
-    <div className={cn('flex items-center', wrapperClassName)}>
-      <div className={cn('inline-flex items-center', className)}>
-        <svg
-          width="95"
-          height="26"
-          viewBox="0 0 95 26"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-auto"
-        >
-          <text
-            x="0"
-            y="20"
-            fontFamily="inherit"
-            fontSize="24"
-            fontWeight="600"
-            letterSpacing="-0.02em"
-            fill="currentColor"
-          >
-            Beseam
-          </text>
-        </svg>
-      </div>
-    </div>
+    <span className={cn("inline-flex items-center", wrapperClassName)}>
+      <Logo {...props} />
+    </span>
   );
-};
-
-export default NavbarLogo;
+}

@@ -82,7 +82,7 @@ const SYSTEMS = [
     id: "decide",
     index: "02",
     name: "Decide",
-    title: "Know which issue deserves attention first.",
+    title: "Revenue-sensitive issues rise above operational noise.",
     description:
       "Foundation brings current state, booked revenue, open actions, and verified impact into one view. Analytics explains movement. Optimization turns evidence into an experiment or personalization proposal.",
     products: [
@@ -110,7 +110,7 @@ const SYSTEMS = [
     id: "act",
     index: "03",
     name: "Act",
-    title: "Change the product, page, campaign, or creative behind the issue.",
+    title: "Improve the commerce object, not another internal dashboard.",
     description:
       "Commerce Readiness finds product, page, feed, tracking, and checkout defects before traffic reaches them. Advertising checks whether Google or Meta can launch safely. Creative Studio creates approved assets for products and campaigns.",
     products: [
@@ -240,13 +240,13 @@ export default function ProductionHomepage() {
             <Reveal>
               <div className="flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/55">
                 <span className="h-2 w-2 bg-[#e8653a]" aria-hidden="true" />
-                For ecommerce teams running multiple systems
+                Autonomous revenue intelligence for commerce
               </div>
               <h1 className="mt-8 max-w-[10.5ch] font-serif text-[clamp(3.25rem,5.1vw,4.75rem)] font-normal leading-[0.98] tracking-[-0.045em] text-[#111318]">
-                Beseam finds the revenue leaks between your commerce systems.
+                Find the revenue leaks your stack cannot see.
               </h1>
               <p className="mt-8 max-w-xl text-[18px] leading-[1.65] text-black/68">
-                Beseam checks the storefront, catalog, customer journeys, AI discovery, and campaigns from the outside, then reconciles what it sees with order data. Your team sees which issue deserves attention first, what to change, and whether the change worked. Each verified result changes how Beseam prioritizes the next issue.
+                Beseam is a self-improving revenue agent that observes commerce from the outside, connects what it sees to your catalog, campaigns, customer behavior, and booked revenue, then recommends and verifies the change most likely to matter. Each verified result improves the next decision.
               </p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <BookReviewCta location="hero" label="Book a 20-minute commerce review" className="w-full sm:w-auto" />
@@ -263,7 +263,7 @@ export default function ProductionHomepage() {
                   ["Ranks", "Issues by evidence"],
                   ["Learns from", "Verified results"],
                 ].map(([term, value]) => (
-                  <div key={term} className="border-r border-black/18 py-4 pr-3 last:border-r-0 last:pl-4 sm:py-5 sm:pr-5 sm:last:pl-5">
+                  <div key={term} className="border-r border-black/18 py-4 pr-3 pl-3 first:pl-0 last:border-r-0 sm:py-5 sm:pr-5 sm:pl-5 sm:first:pl-0">
                     <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-black/45">{term}</dt>
                     <dd className="mt-2 text-[13px] font-semibold leading-snug text-black/78 sm:text-[14px]">{value}</dd>
                   </div>
@@ -297,7 +297,7 @@ export default function ProductionHomepage() {
       <section aria-label="Supported commerce platforms" className="border-b border-black/18 bg-[#ebe8df]">
         <div className="mx-auto grid max-w-[92rem] gap-5 px-5 py-7 sm:px-8 lg:grid-cols-[15rem_1fr] lg:items-center lg:px-10">
           <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/48">
-            Works with the systems already in place
+            Works above your existing stack—not instead of it.
           </p>
           <div className="grid grid-cols-4 items-center gap-x-7 gap-y-5 opacity-62 sm:grid-cols-8">
             {INTEGRATIONS.map((integration) => (
@@ -315,12 +315,12 @@ export default function ProductionHomepage() {
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">How Beseam works</p>
               <h2 className="mt-6 max-w-[11ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
-                From a problem on the storefront to a measured result.
+                See the whole revenue journey as one connected system.
               </h2>
             </div>
             <div className="self-end">
               <p className="max-w-2xl text-[17px] leading-[1.65] text-black/66">
-                Beseam keeps the source evidence, affected product or page, proposed action, approval, execution, and outcome connected. Shopify remains the order ledger; Google and Meta keep their own attribution; Beseam shows the relationship without merging unlike numbers.
+                Beseam turns disconnected evidence into one commercially ranked decision, then carries the issue from observation to diagnosis, intervention, and verification. It does not stop at the recommendation. It learns from the outcome, while Shopify remains the order ledger and Google and Meta retain their own attribution.
               </p>
             </div>
           </Reveal>
@@ -347,11 +347,11 @@ export default function ProductionHomepage() {
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Products</p>
               <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
-                Nine products for three decisions.
+                Observe. Decide. Act.
               </h2>
             </div>
             <p className="max-w-2xl self-end text-[17px] leading-[1.65] text-black/66">
-              Find where demand is being lost, decide which issue deserves attention first, and change the product, page, campaign, or creative behind it. Foundation is included with every active contract; other products are enabled per store.
+              Nine products help your team find the issue, choose the next move, and make the change.
             </p>
           </div>
 
@@ -440,7 +440,7 @@ export default function ProductionHomepage() {
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">Dancing Queens example</p>
               <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
-                See one issue move from first evidence to measured result.
+                Measure what changed. Improve the next decision.
               </h2>
             </div>
             <div className="self-end">
@@ -529,24 +529,24 @@ export default function ProductionHomepage() {
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Automation boundaries</p>
               <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.7rem,4.1vw,4.1rem)] font-normal leading-[1.02] tracking-[-0.04em]">
-                Your team approves spend and customer-facing changes.
+                Autonomous where evidence is strong. Human where impact is material.
               </h2>
             </div>
             <div className="grid border-y border-black/22 md:grid-cols-3">
               {[
                 {
                   icon: ShieldCheck,
-                  title: "Your existing systems keep their records",
+                  title: "Your systems remain the systems of record",
                   detail: "Shopify keeps the order ledger. Google and Meta keep channel attribution. Beseam connects the evidence without rewriting the source record.",
                 },
                 {
                   icon: PackageSearch,
-                  title: "Every change keeps its evidence",
+                  title: "Every action keeps evidence",
                   detail: "The affected store, product or page, issue, owner, approval, execution, and verification remain attached.",
                 },
                 {
                   icon: Check,
-                  title: "Revenue types stay separate",
+                  title: "Money keeps its meaning",
                   detail: "Booked, observed, attributed, and modeled values keep their own source, period, method, and confidence.",
                 },
               ].map((item) => {
