@@ -677,6 +677,19 @@ html.theme-transition::view-transition-new(root) {
   pointer-events: none;
 }
 
+.product-screen {
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--ink) 5%, transparent),
+    0 18px 50px color-mix(in srgb, var(--ink) 10%, transparent),
+    0 3px 10px color-mix(in srgb, var(--ink) 5%, transparent);
+}
+
+.dark .product-screen {
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.04),
+    0 22px 60px rgb(0 0 0 / 0.32);
+}
+
 /* Handle reduced motion preference globally */
 @media (prefers-reduced-motion: reduce) {
   *,

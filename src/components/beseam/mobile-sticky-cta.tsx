@@ -1,10 +1,41 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
+
 import { REVIEW_URL } from "@/components/beseam/book-review-cta";
 import TrackedLink from "@/components/beseam/tracked-link";
 
 export default function MobileStickyCta() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const updateVisibility = () => {
+      const hero = document.getElementById("home-hero");
+      const menuOpen = Boolean(document.getElementById("mobile-navigation"));
+      const cookieChoicesOpen = Boolean(document.querySelector('[aria-label="Cookie choices"]'));
+      const dialogOpen = Boolean(document.querySelector('[role="dialog"]'));
+      const footer = document.querySelector("footer");
+      const footerVisible = footer ? footer.getBoundingClientRect().top < window.innerHeight : false;
+      const passedHero = hero ? hero.getBoundingClientRect().bottom < 120 : window.scrollY > window.innerHeight * 0.8;
+      setVisible(passedHero && !menuOpen && !cookieChoicesOpen && !dialogOpen && !footerVisible);
+    };
+
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+    const observer = new MutationObserver(updateVisibility);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+      observer.disconnect();
+    };
+  }, []);
+
+  if (!visible) return null;
+
   return (
     <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
       <TrackedLink href={REVIEW_URL} eventName="marketing_primary_cta_clicked" eventCategory="conversion" placement="mobile_sticky" preserveUtm className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-brand-vibrant px-5 text-sm font-bold text-white shadow-lg">
