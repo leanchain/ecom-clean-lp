@@ -1,51 +1,51 @@
 ---
 name: commerce-measurement-reconciliation
-description: Reconcile booked orders, observed customer events, and attributed platform results without treating the three as interchangeable revenue totals.
+description: Match orders, analytics events, and attributed channel results at transaction level before comparing totals.
 version: "0.1"
 status: stable
 ---
 
 # Commerce measurement reconciliation
 
-Use this skill when commerce, analytics, and advertising reports disagree and the team needs a transaction-level explanation rather than another dashboard total.
+Run this reconciliation when commerce, analytics, and advertising totals disagree and the team needs to know which transactions account for the gap.
 
-## Required inputs
+## Inputs
 
 - Order-ledger export
 - Analytics purchase events
 - Channel reports
-- Period, timezone, and currency rules
+- Date range, timezone, and currency rules
 - Tax, refund, cancellation, and order-state policy
-- Consent and tracking context
+- Consent and tracking setup
 
-## Expected output
+## Output
 
 - Transaction-level match table
-- Missing, duplicate, late, and transformed-event evidence
-- Attribution-boundary notes
+- Missing, duplicate, late, and transformed events
+- Notes on attribution differences
 - Reconciliation rules
-- Owner-specific remediation plan
+- Fixes grouped by owner
 
-## Workflow
+## Steps
 
-1. Normalize period, timezone, currency, and order states.
-2. Choose the commerce ledger for booked orders.
-3. Match transaction identifiers across sources.
-4. Separate collection loss from expected model differences.
-5. Review consent, browser, server, and checkout event coverage.
-6. Document attribution windows and modeled conversions.
-7. Assign fixes and rerun the reconciliation.
+1. Normalize the date range, timezone, currency, and included order states.
+2. Use the commerce ledger for booked orders.
+3. Match transaction IDs across systems.
+4. Distinguish collection loss from normal attribution differences.
+5. Check consent, browser, server, and checkout event coverage.
+6. Record attribution windows and modeled conversions.
+7. Assign fixes and rerun the same reconciliation.
 
 ## Checks
 
-- Transaction identifiers
+- Transaction IDs
 - Currency, tax, shipping, refunds, and cancellations
-- Event sequence and deduplication
+- Event order and deduplication
 - Consent and browser coverage
-- Attribution windows and identity models
+- Attribution windows and identity rules
 
-## Boundaries
+## Limits
 
-<Callout type="boundary" title="Do not merge revenue meanings">
-Booked, observed, attributed, and modeled values remain separately labeled throughout the output.
-</Callout>
+> **Keep the labels honest**
+>
+> Booked, observed, attributed, and modeled values keep those labels throughout the report.

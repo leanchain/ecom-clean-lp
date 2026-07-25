@@ -48,10 +48,10 @@ export default async function FieldbookDocumentPage({
         relatedResources.length > 0) && (
         <section className="mt-14 border-t border-black/18 pt-9">
           <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-[var(--beseam-accent)]">
-            Continue the investigation
+            Related pages
           </p>
           <h2 className="mt-4 font-serif text-[32px] tracking-[-0.035em] text-[var(--beseam-ink)]">
-            Related Fieldbook material
+            Keep working on this issue
           </h2>
           {(relatedSkills.length > 0 || relatedProblems.length > 0) && (
             <div className="mt-6 grid gap-px border border-black/16 bg-black/16 sm:grid-cols-2">

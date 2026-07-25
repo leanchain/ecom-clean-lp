@@ -1,7 +1,7 @@
 ---
 title: Checkout fails for only some visitors
 navTitle: Partial checkout failure
-summary: Investigate partial failure by browser, device, market, page state, and funnel stage instead of relying on store-wide uptime.
+summary: Narrow a partial purchase failure by browser, device, market, consent state, payment method, and funnel step.
 category: Purchase experience
 kind: problem
 status: stable
@@ -18,39 +18,39 @@ relatedResources:
   - lighthouse
 ---
 
-Partial purchase failures often remain invisible to uptime checks because the storefront still loads and most sessions complete normally.
+Uptime checks can stay green while a browser, market, payment method, or consent state blocks part of the purchase path.
 
-## What teams usually observe
+## Typical symptoms
 
-- Conversion drops without a complete outage.
-- Support reports cluster around one browser, device, market, or payment method.
-- Add-to-cart, cart updates, or checkout navigation intermittently fail.
-- A recent theme, app, tag, or checkout configuration changed.
+- Conversion falls without a complete outage.
+- Support cases cluster around one browser, device, market, or payment method.
+- Add-to-cart, cart updates, or checkout navigation fail intermittently.
+- The issue starts after a theme, app, tag, or checkout change.
 
-## Evidence to collect
+## What to capture
 
-Capture the affected URL and journey, product, browser, device, market, consent state, time window, console and network output, storefront events, relevant release history, and authorized payment-test context.
+Record the URL, exact journey, product, browser, device, market, consent state, payment method, time window, console and network output, storefront events, release history, and approved test setup.
 
-## What not to conclude yet
+## Don't assume
 
-A correlation with a release or app does not prove root cause. Store-wide uptime does not prove that the transaction path works for every state.
+A recent release may be related without being the cause. A healthy homepage and successful orders from other visitors do not clear the affected path.
 
-## Investigation workflow
+## Steps
 
-1. Build the smallest useful reproduction matrix.
-2. Reproduce the exact step where observed behavior diverges.
-3. Inspect page state, network calls, console errors, and button accessibility.
-4. Compare affected and unaffected conditions.
-5. Narrow the owning component, app, service, or configuration.
-6. Apply a controlled fix and rerun the same path.
+1. Build the smallest matrix that can reproduce the report.
+2. Find the exact step where expected and actual behavior diverge.
+3. Inspect page state, requests, console errors, focus, and button state.
+4. Compare failing and passing conditions.
+5. Narrow the issue to a theme, app, service, configuration, or provider.
+6. Apply one approved fix and rerun the same path.
 
-<Callout type="warning" title="Authorized testing only">
-Use approved test products, payment modes, and environments. Do not create destructive production orders or handle sensitive payment data outside authorized systems.
+<Callout type="warning" title="Use approved test paths">
+Use test products, payment modes, accounts, and environments. Do not create destructive production orders or move payment data outside authorized systems.
 </Callout>
 
-## Verification checklist
+## Done when
 
-- The original failure conditions were retested.
-- The path works across the affected browser or market.
-- Monitoring covers the step that previously failed.
-- The explanation distinguishes observed failure from inferred root cause.
+- The original conditions have been retested.
+- The path works in the affected browser, market, or payment state.
+- Monitoring covers the step that failed.
+- The report distinguishes the observed failure from the proposed cause.

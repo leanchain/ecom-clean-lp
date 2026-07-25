@@ -1,7 +1,7 @@
 ---
 title: Our products do not appear in AI shopping answers
 navTitle: Missing from AI answers
-summary: Separate prompt coverage, product eligibility, source visibility, content completeness, and competitor presence before proposing a fix.
+summary: Work out whether the gap comes from the questions being tested, product data, source visibility, or the answer system's own selection.
 category: Discovery
 kind: problem
 status: emerging
@@ -18,41 +18,41 @@ relatedResources:
   - beseam-ai-visibility-scan
 ---
 
-A product can be absent because the monitored question set is incomplete, the product is ineligible or unavailable, useful facts are missing, another source is easier to cite, or the answer system selected a competitor. Those are different problems.
+A missing product can have several causes. The questions may be poor, the item may be unavailable, important facts may be absent, another page may be easier to cite, or the system may simply choose a competitor.
 
-## What teams usually observe
+## Typical symptoms
 
 - Competitors appear for category and comparison questions.
-- The brand appears only for branded queries.
-- Answers cite publishers or marketplaces rather than the merchant.
-- Product descriptions are inaccurate, stale, or incomplete.
+- The brand appears only when its name is included.
+- Answers cite publishers or marketplaces instead of the merchant.
+- Product details are stale, incomplete, or wrong.
 
-## Evidence to collect
+## What to capture
 
-Capture a stable prompt set, model or surface, market, timestamp, answer text, cited URLs, merchant attribution, and competitor presence.
+Record the question set, model or answer system, market, date and time, full answer, cited URLs, merchant attribution, and competing products.
 
-Inspect the current product facts, structured data, availability, indexability, canonical signals, merchant identity, and consistency across controlled sources.
+Then check the product page, structured data, availability, canonical URL, indexability, merchant identity, and catalog values.
 
-## What not to conclude yet
+## Don't assume
 
-<Callout type="boundary" title="Point-in-time boundary">
-One answer run does not represent the entire market, and an answer change after a page update does not automatically prove ranking or revenue causation.
+<Callout type="boundary" title="A snapshot is not a market share report">
+One run shows what happened under those conditions. A different answer after an edit shows a change in the retest; it does not prove durable ranking or revenue impact.
 </Callout>
 
-Do not assume missing schema is the only cause. Do not rewrite product content before confirming which source patterns the answer system actually uses.
+Missing schema is not automatically the cause. Rewriting copy before checking the cited sources can waste time or introduce unsupported claims.
 
-## Investigation workflow
+## Steps
 
-1. Confirm that the prompt set represents real buying intent.
-2. Separate branded, category, comparison, and use-case questions.
-3. Record which sources are cited when the product is absent.
-4. Compare merchant-controlled facts with cited third-party facts.
-5. Identify a controlled object that can be improved without inventing claims.
-6. Retest the same prompt set and document the changed evidence.
+1. Check that the questions reflect real buying intent.
+2. Group them into branded, category, comparison, and use-case questions.
+3. Note which pages are cited when your product is absent.
+4. Compare merchant-owned facts with the facts on those cited pages.
+5. Pick one merchant-controlled page or data source that can be improved accurately.
+6. Run the same question set again and record the difference.
 
-## Verification checklist
+## Done when
 
-- The same prompt set and conditions were reused.
-- Product facts remain accurate across page, catalog, and markup.
-- Any answer change is recorded as an observed retest.
-- Placement and commercial impact are not guaranteed.
+- Baseline and retest conditions match.
+- Product facts agree across the page, catalog, and markup.
+- Answer changes are reported as retest observations.
+- No claim is made about guaranteed placement or sales.

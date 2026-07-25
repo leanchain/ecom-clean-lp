@@ -1,7 +1,7 @@
 ---
 title: Feed-to-PDP parity check
 navTitle: Feed-to-PDP parity
-summary: Compare catalog truth, rendered product-page facts, and channel-ready values to find contradictions before they become disapprovals or buyer confusion.
+summary: Compare catalog, storefront, markup, and feed values for the same product, variant, market, and time.
 category: Catalog and product pages
 kind: skill
 status: stable
@@ -20,33 +20,33 @@ relatedResources:
   - playwright
 ---
 
-Use this skill when product facts differ across the platform catalog, rendered page, structured data, merchant export, or channel diagnostic.
+Run this check when product details differ across the commerce platform, rendered page, structured data, merchant feed, or channel diagnostic.
 
-## Required inputs
+## Inputs
 
 - Product and variant record
 - Rendered product-page URL
-- Target market and currency
-- Merchant-feed row or export when available
-- Channel diagnostic when available
+- Market and currency
+- Feed row or export, when available
+- Channel diagnostic, when available
 
-## Expected output
+## Output
 
-- Field-level comparison table
-- Contradictions grouped by source and variant
-- Authoritative-source status for each field
-- Suggested owner and first remediation target
-- Verification plan
+- Field-by-field comparison
+- Mismatches grouped by source and variant
+- Known owner or system of record for each field
+- First fix to make
+- Retest plan
 
-## Workflow
+## Steps
 
-1. Normalize product and variant identifiers.
-2. Capture values from each source at a named time.
+1. Normalize product and variant IDs.
+2. Capture each source at a named time.
 3. Compare price, availability, title, description, images, identifiers, shipping, and returns.
-4. Trace transformations and localization rules.
-5. Mark the system of record or ownership gap.
-6. Recommend a correction to the authoritative object or transformation.
-7. Recheck the rendered page and channel separately.
+4. Trace localization and transformation rules.
+5. Mark the approved owner or note that ownership is missing.
+6. Fix the approved source or the transform that changed it.
+7. Check the rendered page and channel separately.
 
 ## Checks
 
@@ -54,13 +54,13 @@ Use this skill when product facts differ across the platform catalog, rendered p
 - GTIN, MPN, SKU, and variant identity
 - Titles and descriptions
 - Primary and variant images
-- Shipping and return claims
-- Visible content versus structured data
+- Shipping and return statements
+- Visible content against structured data
 
-## Boundaries
+## Limits
 
-<Callout type="operator" title="Do not invent catalog truth">
-When sources disagree and ownership is unresolved, report the conflict. The skill must not choose a value solely because it appears most often.
+<Callout type="operator" title="Do not guess the product record">
+When sources conflict and no owner is known, report the conflict. Frequency and recency are not enough to establish the approved value.
 </Callout>
 
-The workflow does not publish changes and cannot guarantee channel eligibility.
+This check does not publish changes, and the sales channel still controls eligibility.

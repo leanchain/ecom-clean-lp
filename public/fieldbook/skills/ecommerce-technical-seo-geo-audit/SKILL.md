@@ -1,57 +1,57 @@
 ---
 name: ecommerce-technical-seo-geo-audit
-description: Inspect a product page as a crawler, structured-data consumer, AI answer source, and buyer without merging those perspectives into one score.
+description: Check crawl access, rendered content, product markup, merchant facts, and answer-source visibility without collapsing them into one score.
 version: "0.1"
 status: stable
 ---
 
 # Ecommerce technical SEO and GEO audit
 
-Use this skill when a product or category page has a discovery problem that may involve crawl access, page quality, structured data, merchant facts, or AI answer-source eligibility.
+Run this audit when a product or category page has a discovery problem that could involve crawling, rendering, markup, product facts, or citations in AI answers.
 
-## Required inputs
+## Inputs
 
-- Public product-page or category-page URL
+- Public product or category URL
 - Target market and language
-- Priority queries or buying questions
-- Optional competitor set
-- Known platform and merchant-feed context
+- Priority search queries or buying questions
+- Competitor set, when relevant
+- Platform and merchant-feed context
 
-## Expected output
+## Output
 
-- Evidence inventory with source and timestamp
-- SEO and GEO findings kept separate
-- Affected page elements and controlled objects
-- Ranked next actions with confidence
+- Source-and-time inventory
+- SEO findings and AI-answer findings in separate sections
+- Affected page fields or data sources
+- Recommended fixes, ranked by confidence
 - Retest plan
 
-## Workflow
+## Steps
 
-1. Record canonical, indexability, robots, rendering, and response evidence.
-2. Parse product, offer, organization, breadcrumb, and review entities.
-3. Compare structured facts with visible content and catalog expectations.
-4. Inspect completeness, claim support, merchant identity, and source eligibility.
-5. Run a fixed answer-query set when AI visibility is in scope.
-6. Separate technical defects, content gaps, and external selection behavior.
-7. Recommend controlled changes and define the retest.
+1. Record response status, canonical URL, robots rules, indexability, and rendered output.
+2. Parse product, offer, organization, breadcrumb, and review markup.
+3. Compare markup with visible content and known catalog values.
+4. Check missing buyer information, unsupported claims, merchant identity, and source clarity.
+5. When AI visibility matters, run a fixed set of buying questions.
+6. Classify findings as technical, content, data, or selection outside the merchant's control.
+7. Recommend a small change and define the retest.
 
 ## Checks
 
-- Canonical and indexability signals
-- Product and Offer structured data
-- Content completeness and claim support
-- Merchant and product consistency
-- Cited-source patterns for fixed AI queries
-- Performance and accessibility context affecting usability
+- Canonical URL, robots rules, and indexability
+- `Product` and `Offer` markup
+- Product-detail completeness and claim support
+- Merchant identity and product consistency
+- Citations for the fixed AI question set
+- Performance and accessibility issues that block use
 
-## Boundaries
+## Limits
 
-<Callout type="boundary" title="No placement guarantee">
-The skill does not guarantee search rankings, rich results, citations, recommendations, or commercial impact. One answer-engine run is a point-in-time observation.
-</Callout>
+> **No placement promise**
+>
+> This audit can find defects and record answer behavior. It cannot promise rankings, rich results, citations, recommendations, or sales.
 
-Customer-facing changes require human approval. Unsupported claims must not be created to improve discoverability.
+Any customer-facing edit needs approval. Do not add claims merely to make a page look more complete.
 
-## Verification
+## Retest
 
-Repeat the technical checks and any fixed query set after the controlled change. Record what changed and what remains externally controlled.
+Repeat the relevant page checks and the same AI question set after the change. Record exactly what moved and what did not.

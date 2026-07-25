@@ -1,7 +1,7 @@
 ---
 title: A theme change broke our product structured data
 navTitle: Theme broke product schema
-summary: Compare the rendered page before and after the change, then separate missing markup, contradictory facts, and search-engine eligibility.
+summary: Compare rendered markup before and after a release, then trace missing, duplicate, or contradictory product entities to their source.
 category: Catalog and product pages
 kind: problem
 status: stable
@@ -17,35 +17,35 @@ relatedResources:
   - playwright
 ---
 
-A theme deployment can remove, duplicate, or contradict product markup while the visible page still looks correct.
+A theme release can damage product markup while the page still looks fine to a shopper.
 
-## What teams usually observe
+## Typical symptoms
 
 - Rich-result or merchant diagnostics change after deployment.
-- Visible product facts remain correct while JSON-LD changes.
-- Variant, price, or availability markup no longer matches the page.
-- Multiple apps or theme extensions emit competing Product entities.
+- Visible product details remain correct while JSON-LD changes.
+- Price, availability, or variant markup no longer matches the page.
+- More than one app or theme extension emits a `Product` entity.
 
-## Evidence to collect
+## What to capture
 
-Capture rendered HTML from the affected release, expected product and variant facts, parsed structured-data output, deployment changes, app and theme-extension changes, and the relevant search diagnostic.
+Save the rendered HTML, expected product and variant facts, parsed graph, deployment diff, app and theme-extension changes, and the relevant external diagnostic.
 
-## What not to conclude yet
+## Don't assume
 
-Valid syntax does not guarantee eligibility, display, or correctness. A parser passing does not prove that visible content and markup describe the same offer.
+Passing a parser only proves that the syntax can be read. It does not show that the graph describes the product on the page or that a search engine will display it.
 
-## Investigation workflow
+## Steps
 
-1. Parse every Product and Offer entity on the rendered page.
-2. Compare visible facts with markup field by field.
-3. Identify duplicates, missing relationships, and wrong variants.
-4. Trace each entity to its theme or app source.
-5. Correct the owning template or extension.
-6. Retest the rendered page and then the external diagnostic.
+1. Parse every `Product`, `ProductGroup`, and `Offer` entity.
+2. Compare each field with what the shopper sees.
+3. Find duplicate entities, missing links, and incorrect variants.
+4. Trace every entity to its theme or app source.
+5. Fix the template or extension that owns it.
+6. Test the rendered page, then check the external diagnostic.
 
-## Verification checklist
+## Done when
 
-- One coherent product graph describes the visible product.
-- Offer facts match the active variant and market.
-- Reviews and ratings are supported by visible content.
-- Search-engine eligibility remains described as externally controlled.
+- One coherent graph describes the visible product.
+- Offer data matches the active variant and market.
+- Reviews and ratings are visible and supported.
+- Search display is described as a search-engine decision, not an assured result.

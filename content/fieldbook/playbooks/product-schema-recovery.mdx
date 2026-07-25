@@ -1,7 +1,7 @@
 ---
 title: Product schema recovery after a theme change
 navTitle: Product schema recovery
-summary: Restore one coherent product graph after a theme, app, or storefront deployment changes structured data.
+summary: Repair product markup after a theme, app, or storefront deployment changes the rendered graph.
 category: Storefront operations
 kind: playbook
 status: stable
@@ -15,23 +15,23 @@ relatedResources:
   - google-product-structured-data
 ---
 
-Use this playbook when structured-data diagnostics regress after a controlled storefront change.
+This sequence applies when structured-data diagnostics regress after a storefront release.
 
-## Before changing code
+## Capture before editing
 
-Capture the current rendered page, parser output, visible product facts, active variant, market, and previous known-good evidence if available.
+Save the rendered HTML, parser output, visible product facts, active variant, market, and a previous known-good page when one is available.
 
-## Recovery sequence
+## Steps
 
-1. Enumerate every Product, ProductGroup, and Offer entity.
-2. Identify the template, app, or extension emitting each entity.
-3. Compare visible product facts with the graph.
-4. Remove or consolidate competing emitters.
-5. Correct variant and offer relationships.
-6. Retest rendered HTML locally or in preview.
-7. Deploy through the normal approval path.
-8. Recheck the live page and external diagnostic.
+1. List every `Product`, `ProductGroup`, and `Offer` entity.
+2. Find the theme, app, or extension that emits each one.
+3. Compare the graph with the product facts shown to the shopper.
+4. Remove or consolidate duplicate emitters.
+5. Repair variant and offer relationships.
+6. Test the rendered HTML in preview.
+7. Deploy through the normal review path.
+8. Check the live page and the external diagnostic again.
 
-<Callout type="boundary" title="Eligibility remains external">
-Recovery proves that the controlled implementation is coherent. Search engines still decide eligibility and display.
+<Callout type="boundary" title="Search display is still external">
+A coherent implementation is the part you control. Search engines decide whether and how to display it.
 </Callout>

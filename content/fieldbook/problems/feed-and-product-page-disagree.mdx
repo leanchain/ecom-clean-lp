@@ -1,7 +1,7 @@
 ---
 title: Our feed and product page disagree
 navTitle: Feed and PDP disagree
-summary: Find the exact field, variant, source, and observation time before treating the issue as a generic feed problem.
+summary: Find the field, variant, source, and timestamp behind a product-data mismatch.
 category: Catalog and product pages
 kind: problem
 status: stable
@@ -18,39 +18,39 @@ relatedResources:
   - playwright
 ---
 
-A feed mismatch is a field-level contradiction, not a single store-wide state. Price, availability, identifiers, images, titles, shipping, and return information may each come from different transformations.
+A feed mismatch is rarely store-wide. Price may come from one transform, availability from another, and images or shipping rules from somewhere else entirely.
 
-## What teams usually observe
+## Typical symptoms
 
-- Channel disapprovals despite correct-looking platform data.
-- Different prices or availability across the catalog, page, and feed.
-- AI answers or search surfaces repeat stale product facts.
-- Only particular variants or markets are affected.
+- A channel rejects products that look correct in the commerce platform.
+- Price or availability differs between catalog, page, markup, and feed.
+- Search or AI tools repeat old product details.
+- Only certain variants, languages, or markets are affected.
 
-## Evidence to collect
+## What to capture
 
-Collect the current catalog record, rendered page, structured data, feed export or channel diagnostic, variant identifiers, market, currency, and observation time.
+Collect the catalog record, rendered page, structured data, feed row or channel diagnostic, product and variant identifiers, market, currency, and timestamp.
 
-## What not to conclude yet
+## Don't assume
 
-Do not choose a correct value merely because one surface looks more recent. Name the authoritative system for the field or escalate the conflict to its owner.
+The newest-looking value is not necessarily the approved value. Find the owner or system of record for the field before changing it.
 
-## Investigation workflow
+## Steps
 
-1. Build a field-level comparison by product and variant.
-2. Trace each value to its source and transformation.
-3. Check stale syncs, theme rendering, localization, and market rules.
-4. Correct the authoritative object or transformation.
-5. Re-export or wait for the documented channel refresh.
-6. Verify the controlled page and channel diagnostic separately.
+1. Put each field side by side for the affected product and variant.
+2. Trace every value to its source and transforms.
+3. Check sync delays, theme output, localization, and market rules.
+4. Fix the approved source value or the transform that changed it.
+5. Regenerate the feed or wait for the documented refresh.
+6. Check the page and channel diagnostic separately.
 
-<Callout type="operator" title="System-of-record check">
-When two systems disagree and ownership is unclear, report the conflict. Do not let the agent invent catalog truth.
+<Callout type="operator" title="When ownership is unclear">
+Show the conflict and escalate it. Do not let an agent choose catalog truth by majority vote.
 </Callout>
 
-## Verification checklist
+## Done when
 
 - Product and variant identifiers match.
 - Price and availability agree for the same market and time.
-- Visible content and structured data agree.
-- The channel has reprocessed the corrected data.
+- Visible content matches structured data.
+- The channel has processed the corrected data.

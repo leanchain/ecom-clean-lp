@@ -1,7 +1,7 @@
 ---
 title: Purchase-friction triage
 navTitle: Purchase-friction triage
-summary: Turn an intermittent storefront symptom into a reproducible investigation across product, cart, checkout, browser, and reliability evidence.
+summary: Reproduce an intermittent storefront failure and narrow it to a browser, state, component, service, or configuration.
 category: Purchase experience
 kind: skill
 status: stable
@@ -21,49 +21,49 @@ relatedResources:
   - k6
 ---
 
-Use this skill for intermittent add-to-cart, cart, checkout-navigation, form, or storefront failures that do not produce a full outage.
+Run this triage for intermittent add-to-cart, cart, form, checkout-navigation, or storefront failures that do not cause a full outage.
 
-## Required inputs
+## Inputs
 
 - Affected URL and journey
-- Observed error or behavior
+- Error message or observed behavior
 - Browser, device, market, and time window
 - Product or variant
-- Recent deployment or configuration context
-- Authorized test environment details
+- Recent release or configuration changes
+- Approved test-environment details
 
-## Expected output
+## Output
 
 - Reproduction matrix
-- Observed evidence separated from suspected cause
-- Narrowed owner or component
-- Risk-aware remediation options
-- Exact verification plan
+- Raw observations and suspected cause in separate fields
+- Likely owner or component
+- Remediation options with risk notes
+- Exact retest path
 
-## Workflow
+## Steps
 
 1. Reproduce the failure with the smallest useful condition matrix.
-2. Record page state, network failures, console errors, events, and timing.
-3. Compare affected and unaffected conditions.
-4. Check accessibility and interaction state, not only JavaScript errors.
-5. Trace the failing step to theme, app, service, configuration, or external provider.
-6. Apply an approved controlled fix.
-7. Rerun the exact journey and monitoring check.
+2. Record page state, failed requests, console output, events, and timing.
+3. Compare failing and passing conditions.
+4. Check focus, disabled states, validation, and accessibility as well as JavaScript errors.
+5. Trace the failing step to a theme, app, service, configuration, or provider.
+6. Apply one approved fix.
+7. Rerun the same journey and monitoring check.
 
 ## Checks
 
-- Cross-browser behavior
+- Browser and device behavior
 - Console and network failures
-- Button, form, and focus state
+- Button, form, focus, and validation state
 - Cart and checkout transitions
-- Performance context
+- Performance at the failing step
 - Accessibility blockers
-- Relevant traces and errors
+- Related traces and application errors
 
-## Boundaries
+## Limits
 
-<Callout type="warning" title="Safe test boundary">
-Payment paths require authorized products, credentials, and environments. The skill must not create destructive production transactions or expose sensitive customer data.
+<Callout type="warning" title="Safe testing only">
+Payment tests need approved products, credentials, and environments. Do not create destructive orders or expose customer or payment data.
 </Callout>
 
-Correlation is not labeled as root cause without supporting evidence.
+A timing correlation is not a root cause until the failing path supports it.
