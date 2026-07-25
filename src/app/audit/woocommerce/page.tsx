@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your WooCommerce Store?",
+  title: "WooCommerce product data audit",
   description:
-    "WooCommerce stores frequently have missing or broken JSON-LD. Beseam audits how AI engines read your product pages and generates targeted fixes.",
+    "Check the JSON-LD your WooCommerce plugins and theme emit on product pages. Get an evidence-backed list of conflicts and gaps, plus a proposed fix.",
   keywords: [
-    "WooCommerce AI optimization",
-    "ChatGPT WooCommerce",
     "WooCommerce structured data",
     "WooCommerce JSON-LD",
-    "WooCommerce schema markup",
+    "WooCommerce product schema",
+    "WooCommerce variable product pricing",
+    "WooCommerce schema conflicts",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "Missing or incomplete JSON-LD product schema",
+    title: "Product JSON-LD incomplete or missing",
     severity: "critical",
     description:
-      "WooCommerce relies on plugins like Yoast or Rank Math to generate JSON-LD. Many stores have misconfigured or outdated plugins that emit incomplete Product schema - missing brand, GTIN, material, and selling points that AI engines need.",
+      "WooCommerce leaves most structured data to plugins. When one is misconfigured, outdated, or scoped to the wrong post type, product pages ship without brand, SKU, GTIN, or a usable description. An assistant reading the page has no identifier to match your product against the same item elsewhere.",
     fix: `// functions.php - Add complete Product JSON-LD
 add_action('wp_head', function() {
   if (!is_product()) return;
@@ -47,10 +47,10 @@ add_action('wp_head', function() {
 });`,
   },
   {
-    title: "Conflicting schema from multiple SEO plugins",
+    title: "Core, SEO plugin, and theme disagree",
     severity: "high",
     description:
-      "WooCommerce stores often run multiple plugins that each emit their own schema - Yoast, Rank Math, WooCommerce itself, and theme-level schema. AI engines see conflicting data and pick the wrong values for price, availability, or product type.",
+      "WooCommerce core, Yoast or Rank Math, and the theme can each output Product schema on the same page. When their price or availability values differ, a parser has no rule for choosing, and the value repeated back to a shopper may be the stale one.",
     fix: `// Disable duplicate schema sources - keep one authoritative source
 // In functions.php, remove WooCommerce default schema:
 remove_action('wp_footer',
@@ -61,10 +61,10 @@ remove_action('wp_footer',
 // https://validator.schema.org/`,
   },
   {
-    title: "Variable products emit only parent pricing",
+    title: "Variable products emit a price range",
     severity: "high",
     description:
-      "WooCommerce variable products often emit the parent product's price range rather than individual variant prices. AI engines tell shoppers a product costs '$29–$89' instead of the specific variant price they asked about.",
+      "Default schema for a variable product carries the parent's range instead of an Offer per variation. A shopper asking about one size gets a span like $29–$89 back from an assistant, with no way to confirm the price of the combination they actually want.",
     fix: `// Add per-variation Offer schema
 add_filter('woocommerce_structured_data_product_offer', function($offer, $product) {
   if ($product->is_type('variable')) {
@@ -87,10 +87,10 @@ add_filter('woocommerce_structured_data_product_offer', function($offer, $produc
 }, 10, 2);`,
   },
   {
-    title: "Product descriptions are thin or auto-generated",
+    title: "Descriptions duplicated from the manufacturer",
     severity: "medium",
     description:
-      "Many WooCommerce stores use manufacturer-provided descriptions that are short, generic, or duplicated across sites. AI engines have nothing unique to cite when deciding whether to recommend your product over a competitor selling the same item.",
+      "Supplier copy pasted into the product description appears word for word on every retailer selling the same item. Nothing on your page is unique to you, so an assistant choosing between identical listings has no basis for naming your store rather than another.",
     fix: `<!-- Add rich, AI-readable content to product descriptions -->
 <!-- In your product editor, include: -->
 
@@ -114,11 +114,10 @@ for 100-mile races.</p>`,
 ];
 
 const contextParagraphs = [
-  "WooCommerce powers roughly 25% of all online stores, but its approach to structured data is plugin-dependent rather than built-in. This creates the most fragmented schema environment of any major e-commerce platform.",
-  "The most common AI readability issue on WooCommerce is conflicting schema from multiple sources. WooCommerce core, your SEO plugin, and your theme may all emit Product schema simultaneously - and they often disagree on price, availability, and product type.",
-  "Variable products are another major gap. WooCommerce's default schema for variable products emits a price range rather than per-variant pricing. When a shopper asks ChatGPT 'how much does the red medium cost?', AI can only say '$29–$89' instead of a specific price.",
-  "Plugin fragmentation also means that review schema, breadcrumb schema, and FAQ schema may be duplicated or missing depending on which combination of plugins you run. AI engines see the mess and lose confidence in your product data.",
-  "Beseam audits your WooCommerce store for all of these issues, identifies which plugins are emitting conflicting data, and generates the specific PHP and schema fixes needed to give AI engines clean, authoritative product information.",
+  "WooCommerce ships its own structured data class, most stores add Yoast or Rank Math on top, and the theme injects whatever it injects. Each writes Product schema. Nothing arbitrates between them, so one product page can carry several JSON-LD blocks that disagree on price, availability, or type.",
+  "Variable products are the second recurring problem. Core emits the parent's price range rather than an Offer per variation, so the structured data answers with a span where the shopper asked about one combination. An assistant can only repeat the span, which reads as evasive.",
+  "Identifiers go missing next. Brand, GTIN, and MPN usually sit in product attributes or a plugin's custom fields, and the default schema does not map them across. Without identifiers, your listing cannot be matched to the same item sold elsewhere, so the page stands alone.",
+  "Beseam requests your product pages the way a crawler does, parses each JSON-LD block separately, and reports which source emitted which value. It proposes the PHP or plugin configuration change. Beseam does not edit WordPress — your developer applies the fix.",
 ];
 
 const otherPlatforms = [
@@ -131,8 +130,8 @@ export default function WooCommerceAuditPage() {
   return (
     <PlatformAuditPage
       platform="WooCommerce"
-      headline="How does AI see your WooCommerce store?"
-      description="WooCommerce's plugin-dependent schema creates the most fragmented AI readability profile of any platform. Beseam finds the conflicts and fixes them."
+      headline="Four plugins, four versions of your product"
+      description="Beseam reads every JSON-LD block your WooCommerce stack renders — core, SEO plugin, and theme — and shows where they disagree. The output is an evidence-backed list of gaps and a proposed fix, not an automatic change."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your BigCommerce Store?",
+  title: "BigCommerce product data audit",
   description:
-    "BigCommerce has better built-in schema than most platforms, but still has critical AI readability gaps. Beseam audits and fixes them.",
+    "Check what your Stencil templates emit on BigCommerce product and category pages. Get an evidence-backed list of schema gaps and a proposed theme fix.",
   keywords: [
-    "BigCommerce AI optimization",
-    "ChatGPT BigCommerce",
     "BigCommerce structured data",
-    "BigCommerce schema markup",
-    "BigCommerce product pages AI",
+    "BigCommerce product schema",
+    "Stencil theme schema",
+    "BigCommerce custom fields schema",
+    "BigCommerce category ItemList",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "Built-in schema lacks selling points and differentiators",
+    title: "Schema covers commerce fields, not product detail",
     severity: "critical",
     description:
-      "BigCommerce includes decent Product schema out of the box - name, price, availability, SKU - but omits the contextual selling points, use cases, and competitive positioning that AI engines need to confidently recommend your product.",
+      "Out of the box BigCommerce covers name, price, availability, and SKU. What the product is for, who it suits, and how it differs from the near-identical listing beside it appears nowhere in the structured data, so a parser has product identity without product substance.",
     fix: `<!-- BigCommerce Stencil: Extend Product schema in product.html -->
 <script type="application/ld+json">
 {
@@ -44,10 +44,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Custom fields not surfaced in structured data",
+    title: "Custom fields absent from structured data",
     severity: "high",
     description:
-      "BigCommerce's custom fields feature is powerful for storing product attributes, but these fields are not included in the default schema output. AI engines can't see size charts, material composition, warranty info, or any custom attribute you've carefully entered.",
+      "Custom fields hold the size chart, material composition, warranty term, and compatibility notes your team entered. The default schema output ignores them. A shopper asking an assistant whether the item fits their setup gets no answer from your page, even though the answer is in your catalog.",
     fix: `// In your Stencil theme's product.html template,
 // loop through custom fields and add to schema:
 "additionalProperty": [
@@ -61,10 +61,10 @@ const findings: Finding[] = [
 ]`,
   },
   {
-    title: "Multi-storefront schema conflicts",
+    title: "Multi-storefront pages resolve to wrong data",
     severity: "medium",
     description:
-      "BigCommerce's multi-storefront feature can cause schema inconsistencies when the same product exists across storefronts with different pricing, availability, or descriptions. AI engines may surface the wrong storefront's data.",
+      "The same product across storefronts can differ in price, currency, and availability. If canonical tags or schema URLs point at another storefront, a crawler collects values from a store the shopper is not on, and the price quoted back does not match the one at checkout.",
     fix: `<!-- Ensure canonical URLs point to the correct storefront -->
 <link rel="canonical" href="{{product.url}}" />
 
@@ -76,10 +76,10 @@ const findings: Finding[] = [
 }`,
   },
   {
-    title: "Category pages missing ItemList schema",
+    title: "Category pages carry no ItemList schema",
     severity: "medium",
     description:
-      "BigCommerce category pages display products visually but don't include ItemList or CollectionPage schema. AI engines can't understand product relationships or category context when crawling your store.",
+      "Category templates render products as markup with no ItemList or CollectionPage schema. Nothing declares which products belong to the category or their order, so the grouping your merchandising team maintains is not available to anything reading the page programmatically.",
     fix: `<!-- Add to category.html in Stencil theme -->
 <script type="application/ld+json">
 {
@@ -105,11 +105,10 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "BigCommerce has better built-in structured data than most e-commerce platforms. Product schema includes name, price, availability, SKU, and images out of the box - which gives it a head start on AI readability.",
-  "However, BigCommerce's default schema stops at the basics. The custom fields that make your products unique - materials, certifications, warranty terms, care instructions - are stored in BigCommerce but never surfaced in structured data. AI engines can't see them.",
-  "The Stencil theme engine gives you full control over schema output, but most stores use default templates that haven't been optimized for AI readability. This means your competitors on the same platform could be getting recommended over you simply because their theme emits richer data.",
-  "Multi-storefront deployments add another layer of complexity. When the same product lives on multiple storefronts with different pricing or descriptions, AI engines can surface inconsistent information - recommending a product at the wrong price or from the wrong region.",
-  "Beseam audits your BigCommerce store across all 118+ AI readability checks, identifies the specific schema gaps in your Stencil templates, and generates the exact code fixes needed for your theme.",
+  "BigCommerce emits more structured data by default than most platforms. Product name, price, availability, SKU, and images are handled without theme work, which removes a class of problem other platforms leave to the merchant.",
+  "The default stops at commerce fields. Custom fields — material, certification, warranty term, compatibility — are stored against the product and rendered into a specs table, not into the JSON-LD. Stencil can emit them through Handlebars, but a stock theme does not, and the two look identical in a browser.",
+  "Multi-storefront adds a resolution problem. The same product can carry different prices, descriptions, and availability per storefront. If canonical tags or schema URLs point at another storefront, a crawler collects data belonging to a store the shopper cannot buy from.",
+  "Beseam requests your storefront pages the way a crawler does, compares the rendered schema against the fields your catalog holds, and reports the difference with the template involved. It proposes the Stencil change. Beseam does not deploy to your theme.",
 ];
 
 const otherPlatforms = [
@@ -122,8 +121,8 @@ export default function BigCommerceAuditPage() {
   return (
     <PlatformAuditPage
       platform="BigCommerce"
-      headline="How does AI see your BigCommerce store?"
-      description="BigCommerce has solid defaults - but AI engines need more than defaults to recommend your products over competitors. Beseam bridges the gap."
+      headline="Your custom fields never reach the schema"
+      description="Beseam reads the JSON-LD your Stencil theme renders across product, category, and storefront templates. You get an evidence-backed list of gaps and a proposed Handlebars change your team reviews before applying."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

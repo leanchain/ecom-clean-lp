@@ -3,25 +3,28 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your OpenCart Store?",
+  title: "OpenCart product data audit",
   description:
-    "OpenCart stores often lack structured data entirely. Beseam audits how AI engines read your product pages and generates the schema OpenCart doesn't provide.",
+    "OpenCart ships no Product JSON-LD. Beseam checks what your theme and extensions emit, and returns the gaps with evidence and a proposed Twig fix.",
   keywords: [
-    "OpenCart AI optimization",
-    "ChatGPT OpenCart",
     "OpenCart structured data",
-    "OpenCart JSON-LD",
     "OpenCart product schema",
+    "OpenCart JSON-LD",
+    "OpenCart Twig template schema",
+    "OpenCart product options pricing",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "No built-in Product JSON-LD schema",
+    title: "No Product JSON-LD in the default theme",
     severity: "critical",
     description:
-      "OpenCart does not include Product JSON-LD schema in its default installation. AI engines parsing your product pages see raw HTML content but no machine-readable structured data - making your products invisible to AI-powered recommendations.",
+      "OpenCart's stock templates emit no structured data for products. Price, stock status, and model are present as text only. An assistant answering a question about availability has to read a phrase out of a div, and it will read it wrong on themes that translate or restyle that label.",
     fix: `<!-- Add to catalog/view/theme/yourtheme/template/product/product.twig -->
+<!-- The default controller only exposes formatted values, so assign
+     price_raw, currency_code and review_count in
+     catalog/controller/product/product.php before using them here. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,17 +48,17 @@ const findings: Finding[] = [
   ,"aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "{{ rating }}",
-    "reviewCount": "{{ reviews | length }}"
+    "reviewCount": "{{ review_count }}"
   }
   {% endif %}
 }
 </script>`,
   },
   {
-    title: "Product attributes not exposed to AI engines",
+    title: "Attributes render as a table, not data",
     severity: "high",
     description:
-      "OpenCart supports product attributes (weight, dimensions, custom fields) but these are only rendered as HTML tables. AI engines can't reliably parse HTML tables for product specifications - they need structured data.",
+      "Attribute groups appear as a two-column table inside a tab. Weight, dimensions, material, and compatibility never appear as typed properties. When a shopper asks an assistant whether something fits, the fact that would answer it is on the page but not in a form the assistant can rely on.",
     fix: `<!-- In product.twig, add attributes as PropertyValue schema -->
 {% if attribute_groups %}
   "additionalProperty": [
@@ -72,10 +75,10 @@ const findings: Finding[] = [
 {% endif %}`,
   },
   {
-    title: "Product options lack per-variant pricing in schema",
+    title: "Option price modifiers absent from any schema",
     severity: "high",
     description:
-      "OpenCart product options (size, color, etc.) can have price modifiers, but there's no schema output for individual option combinations. AI engines see only the base price, not the actual price a shopper would pay for a specific configuration.",
+      "OpenCart option values add to or subtract from the base price. The page shows the base, and nothing describes what a specific configuration costs. An assistant quotes the base figure, the shopper configures the product, and the total in the cart does not match what they were told.",
     fix: `<!-- Add option-level Offer schema -->
 <!-- In your product controller (catalog/controller/product/product.php): -->
 
@@ -102,10 +105,10 @@ foreach ($product_options as $option) {
 }`,
   },
   {
-    title: "Category pages have no structured data",
+    title: "Category pages carry no ItemList",
     severity: "medium",
     description:
-      "OpenCart category pages display product listings but emit no CollectionPage or ItemList schema. AI engines can't understand your catalog hierarchy or how products relate to categories.",
+      "Category and manufacturer pages list products with no CollectionPage or ItemList markup. A crawler reading your catalog gets a page of links and no statement of what the category contains, so your range is discovered one product at a time rather than as a set.",
     fix: `<!-- Add to catalog/view/theme/yourtheme/template/product/category.twig -->
 <script type="application/ld+json">
 {
@@ -133,11 +136,10 @@ foreach ($product_options as $option) {
 ];
 
 const contextParagraphs = [
-  "OpenCart is a free, open-source e-commerce platform used by hundreds of thousands of stores worldwide. It's known for its simplicity and low barrier to entry - but this simplicity extends to its structured data, which is virtually nonexistent by default.",
-  "The most critical AI readability issue on OpenCart is the complete absence of Product JSON-LD schema. Unlike Shopify or BigCommerce, OpenCart doesn't generate any structured data out of the box. AI engines see your product pages as plain HTML with no machine-readable product information.",
-  "OpenCart's rich attribute system - where you can define custom product specifications like material, weight, dimensions - is only rendered as HTML tables in the browser. AI engines can't reliably extract product attributes from HTML table markup.",
-  "The extension marketplace has some schema plugins, but quality varies widely and many are outdated for the latest OpenCart versions. Most stores end up with either no schema or broken schema from an incompatible extension.",
-  "Beseam audits your OpenCart store from the perspective of 13 AI engines, identifies the complete schema gap, and generates the exact Twig template code to add comprehensive Product, Collection, and Rating schema to your store.",
+  "OpenCart's default themes render product pages with no JSON-LD. The data is on the page — model, price, stock status, description — but only as markup a parser has to infer from. Nothing states that this is a product, that this number is the price, or that it is in stock.",
+  "Attributes are the second loss. The attribute groups you set up in the admin arrive as a table under a tab. Weight, dimensions, material, and compatibility are exactly the fields a shopper asks an assistant about, and they are the hardest to read reliably out of table markup.",
+  "Options make pricing unreliable. Option values carry price prefixes that add to or subtract from the base, so the figure at the top of the page is often not what a configured product costs, and no markup describes any specific configuration.",
+  "Schema extensions exist, but versions drift across OpenCart 3 and 4 and several are unmaintained, so stores end up with nothing or with malformed JSON-LD. Beseam reads the served pages, reports what it found with the evidence, and proposes the template change. It does not modify your store.",
 ];
 
 const otherPlatforms = [
@@ -152,8 +154,8 @@ export default function OpenCartAuditPage() {
   return (
     <PlatformAuditPage
       platform="OpenCart"
-      headline="How does AI see your OpenCart store?"
-      description="OpenCart stores have zero structured data by default. AI engines can't see your products at all. Beseam shows you exactly what's missing."
+      headline="OpenCart ships without product structured data"
+      description="Beseam reads the HTML your OpenCart storefront returns for products, categories, and configured options, and reports what a parser can and cannot extract. The output is a list of gaps with the response that proves each one, plus the Twig changes your developer applies."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Shopware Store?",
+  title: "Shopware product data audit",
   description:
-    "Shopware stores have improving structured data support but still miss key product details. Beseam audits how AI engines read your Shopware product pages.",
+    "Check what your Shopware 6 Twig storefront emits as JSON-LD. Get an evidence-backed list of schema gaps and a proposed template override.",
   keywords: [
-    "Shopware AI optimization",
-    "ChatGPT Shopware",
-    "Shopware structured data",
-    "Shopware 6 JSON-LD",
+    "Shopware 6 structured data",
     "Shopware product schema",
+    "Shopware Twig JSON-LD",
+    "Shopware product properties schema",
+    "Shopware variant offers",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "Default Product schema missing rich attributes",
+    title: "Default schema omits identifiers and specifications",
     severity: "critical",
     description:
-      "Shopware 6 includes a basic Product schema with name, price, and description, but omits brand, manufacturer part numbers, product properties, and detailed specifications. AI engines see a basic product listing instead of the rich product data stored in your Shopware backend.",
+      "The rendered Product block carries name, description, and price. Manufacturer number, EAN, brand, and the specification detail held against the product are commonly absent. Without identifiers, your listing cannot be matched to the same item sold elsewhere, and a parser treats it as an unknown product.",
     fix: `{# Override in theme: views/storefront/page/product-detail/index.html.twig #}
 {% block page_product_detail_structured_data %}
 <script type="application/ld+json">
@@ -60,10 +60,10 @@ const findings: Finding[] = [
 {% endblock %}`,
   },
   {
-    title: "Product properties not mapped to schema",
+    title: "Properties never become additionalProperty",
     severity: "high",
     description:
-      "Shopware 6's property system (color, material, size, etc.) stores rich filterable attributes, but they don't appear in the Product structured data. AI engines can't see that your product is made of organic cotton or available in specific colors.",
+      "Shopware properties are structured, translated, and used for filtering, which makes them the cleanest attribute data in the store. The storefront prints them as a specs list. The JSON-LD does not carry them, so organic cotton or a specific colorway is readable by a person and not by a parser.",
     fix: `{# Add product properties as PropertyValue #}
 {% if page.product.properties|length > 0 %}
 "additionalProperty": [
@@ -80,10 +80,10 @@ const findings: Finding[] = [
 {% endif %}`,
   },
   {
-    title: "Variant products lack per-variant Offer schema",
+    title: "Only the selected variant appears in schema",
     severity: "high",
     description:
-      "Shopware 6 variant products (parent + child products with different options) generate schema only for the currently displayed variant. AI engines can't see the full range of options, prices, and availability across all variants.",
+      "A variant detail page emits an Offer for the combination currently displayed. The other options, their prices, and their stock status are not in the structured data. A shopper asking whether a size is available gets nothing from the page that could answer it.",
     fix: `{# Add all variant offers if this is a parent product #}
 {% if page.product.childCount > 0 %}
 "offers": [
@@ -106,10 +106,10 @@ const findings: Finding[] = [
    available in the template context #}`,
   },
   {
-    title: "Shopping Experiences (CMS) pages lack structured data",
+    title: "Shopping Experiences pages carry no schema",
     severity: "medium",
     description:
-      "Shopware 6's Shopping Experiences (the CMS page builder) creates rich landing pages and category layouts, but these CMS pages have no structured data. Product listing CMS blocks, cross-selling elements, and curated collections are invisible to AI.",
+      "Category and landing pages built in Shopping Experiences render product listing and cross-selling blocks with no ItemList schema. The curation your team assembled in the CMS exists as markup only, so nothing states which products the page groups or in what order.",
     fix: `{# Override category listing CMS element to add ItemList schema #}
 {# Theme: views/storefront/element/cms-element-product-listing.html.twig #}
 
@@ -141,11 +141,10 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Shopware is one of Europe's leading e-commerce platforms, with Shopware 6 gaining rapid adoption for its modern architecture (Symfony + Vue.js admin, Twig storefront). It powers thousands of B2C and B2B stores, particularly in Germany, Austria, and the Netherlands.",
-  "Shopware 6 includes basic Product schema by default - a significant improvement over Shopware 5. However, the auto-generated schema omits manufacturer numbers (MPN), EAN/GTIN identifiers, brand information, and the rich product properties that Shopware stores in its property system.",
-  "One of Shopware's greatest strengths - its flexible property and variant system - is also its structured data weakness. Properties used for filtering and faceted search don't appear in the schema, and variant products only show the current variant's data to AI engines.",
-  "Shopware 6's Shopping Experiences (CMS) feature creates beautiful, customizable category and landing pages, but the CMS blocks that display products don't include any structured data. A curated product collection built in the CMS is invisible to AI crawlers.",
-  "Beseam audits your Shopware 6 store from the perspective of 13 AI engines, identifies what's missing from your theme's structured data output, and generates Twig template overrides that work with Shopware's theme inheritance system.",
+  "Shopware 6 renders product structured data from a Twig block in the storefront bundle, which is more than Shopware 5 gave you. It covers the core commerce fields. Whether manufacturer number, EAN, and brand reach the output depends on your version and how far your theme has overridden that block.",
+  "The property system is where Shopware loses the most. Properties drive filtering and faceted search, so color, material, and size are structured, translated, and complete in the admin. They render as a specs list in the storefront and not as additionalProperty in the JSON-LD.",
+  "Variants behave the same way. A detail page renders schema for the variant currently selected, so the Offer describes one combination out of the set. Nothing on the page declares the range of options, their prices, or which of them are in stock.",
+  "Beseam requests your storefront pages the way a crawler does, parses what the Twig output contains, and compares it against the properties and variants in your catalog. It proposes the theme override. Beseam does not write to your Shopware installation — your team applies it.",
 ];
 
 const otherPlatforms = [
@@ -160,8 +159,8 @@ export default function ShopwareAuditPage() {
   return (
     <PlatformAuditPage
       platform="Shopware"
-      headline="How does AI see your Shopware store?"
-      description="Shopware 6 generates basic schema but misses your product properties, variants, and CMS content. AI engines see a fraction of your product data. Beseam shows the full picture."
+      headline="Your Shopware properties stay out of the schema"
+      description="Beseam reads the JSON-LD your Shopware 6 storefront renders on product detail and Shopping Experiences pages. You get an evidence-backed list of gaps and a proposed Twig override for your theme to review."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

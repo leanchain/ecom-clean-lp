@@ -8,7 +8,6 @@
 /example-pdp  /tools/ai-visibility-scan  301
 /optimised-pdp  /tools/ai-visibility-scan  301
 /reports  /tools/ai-visibility-scan  301
-/audit/*  /tools/ai-visibility-scan  301
 /alternatives  /compare  301
 /alternatives/google-analytics  /compare/google-analytics  301
 /alternatives/hotjar  /compare/hotjar  301

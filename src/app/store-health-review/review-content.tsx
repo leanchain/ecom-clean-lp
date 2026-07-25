@@ -27,7 +27,7 @@ const DETAILS = [
     ],
   },
   {
-    title: "During 30 minutes",
+    title: "During 20 minutes",
     items: [
       "Map the changes and failures your team most needs to detect",
       "Separate fresh evidence from stale, unknown or failed sources",
@@ -85,10 +85,14 @@ function ContactFallback() {
     setError("");
 
     try {
-      const response = await fetch("/api/store-health-review", {
+      const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ ...form, utm: getUtmValues() }),
+        body: JSON.stringify({
+          ...form,
+          source: "store_health_review",
+          utm: getUtmValues(),
+        }),
       });
 
       if (!response.ok)
@@ -97,15 +101,12 @@ function ContactFallback() {
       trackEvent({
         action: "store_health_review_submitted",
         category: "marketing",
-        ...getMarketingProperties(
-          "review_fallback_form",
-          "/api/store-health-review",
-        ),
+        ...getMarketingProperties("review_fallback_form", "/api/lead"),
       });
       setSubmitted(true);
     } catch {
       setError(
-        "We could not send your request. Please email contact@beseam.com instead.",
+        "We could not send your request. Please email pankaj@beseam.com instead.",
       );
     } finally {
       setSubmitting(false);
@@ -274,7 +275,7 @@ export default function ReviewContent() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal className="max-w-3xl">
           <p className="editorial-eyebrow text-primary">
-            30-minute visibility + health review
+            20-minute commerce review
           </p>
           <h1 className="editorial-hero mt-5 text-ink">
             Start with your store - and how AI sees it.
@@ -304,7 +305,7 @@ export default function ReviewContent() {
                   Book directly with the founder.
                 </h2>
               </div>
-              <p className="text-[14px] text-muted-foreground">30 minutes</p>
+              <p className="text-[14px] text-muted-foreground">20 minutes</p>
             </div>
             <div className="flex flex-col gap-6 rounded-2xl border border-rule bg-panel p-7 sm:flex-row sm:items-center sm:justify-between md:p-9">
               <div className="max-w-xl">
@@ -313,7 +314,7 @@ export default function ReviewContent() {
                 </h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-foreground">
                   The secure Cal.com scheduler opens on this page. Pick a
-                  30-minute slot that works for you.
+                  20-minute slot that works for you.
                 </p>
               </div>
               <button

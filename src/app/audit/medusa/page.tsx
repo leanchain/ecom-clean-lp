@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Medusa Store?",
+  title: "Medusa product data audit",
   description:
-    "Medusa headless commerce stores have no built-in structured data. Beseam audits how AI engines read your Medusa-powered storefront and generates the schema you need.",
+    "Medusa's Next.js starter emits no JSON-LD. Beseam reads what your storefront actually returns and lists the gaps with evidence and TypeScript to review.",
   keywords: [
-    "Medusa AI optimization",
-    "ChatGPT Medusa",
-    "Medusa JS structured data",
-    "Medusa headless commerce schema",
-    "Medusa product JSON-LD",
+    "Medusa structured data",
+    "Medusa storefront JSON-LD",
+    "Medusa product schema",
+    "Medusa headless commerce SEO",
+    "Medusa region pricing schema",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "No structured data in Medusa starter storefronts",
+    title: "Starter storefront emits no Product JSON-LD",
     severity: "critical",
     description:
-      "Medusa's official Next.js starter storefront does not include any Product JSON-LD schema. The product pages render beautifully for users but AI engines see no structured product data - no price, no availability, no product type.",
+      "Medusa's official Next.js starter renders product pages with no Product node at all — no name, price, availability, or images in machine-readable form. Anything reading the page for an answer about your catalogue has to infer it from prose, or skip the product entirely.",
     fix: `// In your Medusa Next.js storefront:
 // Create src/lib/schema.ts
 
@@ -70,10 +70,10 @@ export function generateProductSchema(
 // />`,
   },
   {
-    title: "Product metadata and custom attributes not in schema",
+    title: "Product metadata never becomes structured data",
     severity: "high",
     description:
-      "Medusa products have a metadata field (JSON key-value pairs) where stores often keep specifications, materials, and other attributes. This metadata is accessible via the API but never appears in structured data on the storefront.",
+      "Medusa products carry a metadata object plus weight and material fields, and teams use them for specifications, care, and compatibility. The API returns all of it and the storefront maps none of it to additionalProperty, so the detail that answers a specification question stays server-side.",
     fix: `// Map Medusa product metadata to PropertyValue schema
 export function mapMetadataToProperties(
   metadata: Record<string, string> | null
@@ -115,10 +115,10 @@ export function mapProductTypeAttributes(product: PricedProduct) {
 }`,
   },
   {
-    title: "Collection pages have no CollectionPage schema",
+    title: "Collection pages lack CollectionPage and ItemList",
     severity: "high",
     description:
-      "Medusa's collection pages (product groupings) render as product grids in the storefront but include no CollectionPage or ItemList structured data. AI engines can't navigate your catalog hierarchy or understand product groupings.",
+      "Medusa collections render as product grids with no CollectionPage or ItemList node. Nothing declares which products belong together or how the catalogue is grouped, so each product page is read without the category context that would place it against its alternatives.",
     fix: `// lib/schema.ts - Add collection schema
 import { ProductCollection } from "@medusajs/medusa";
 
@@ -156,10 +156,10 @@ export function generateCollectionSchema(
 // />`,
   },
   {
-    title: "Multi-region pricing shows wrong currency in schema",
+    title: "Region-blind schema quotes the wrong currency",
     severity: "medium",
     description:
-      "Medusa supports multiple regions with different currencies and tax settings. Storefronts that generate schema often hardcode a single currency or use the wrong region's pricing, causing AI engines to display inaccurate prices.",
+      "Medusa calculates price, currency, and tax inclusion per region. Storefront schema that hardcodes a currency or drops the region argument emits figures that hold for one market only. A shopper elsewhere is quoted a price the checkout will not honour.",
     fix: `// Ensure region-aware pricing in your schema
 // Access the current region from your middleware or context:
 
@@ -199,11 +199,10 @@ export async function generateRegionAwareSchema(
 ];
 
 const contextParagraphs = [
-  "Medusa is an open-source headless commerce platform built with Node.js and TypeScript. It's the leading Node.js alternative to Saleor, offering a modular architecture that developers love. Its official starter uses Next.js for the storefront.",
-  "Like all headless platforms, Medusa's core challenge for AI readability is architectural: the backend provides a REST API but no HTML output. Any structured data must be implemented in your frontend code. Medusa's official Next.js starter includes zero JSON-LD.",
-  "Medusa's product model supports variants, collections, and a flexible metadata system (JSON key-value pairs), but translating this API data to rich structured data is left entirely to the storefront developer - and it's rarely done.",
-  "The multi-region system is a standout Medusa feature, but it complicates structured data: prices, currencies, and tax inclusion vary by region, and your schema needs to reflect the correct region's pricing for SE crawlers and AI engines.",
-  "Beseam audits your Medusa storefront from the perspective of 13 AI engines, identifies the complete absence of structured data in your Next.js (or custom) storefront, and provides TypeScript utility functions you can drop directly into your codebase.",
+  "Medusa is a Node.js and TypeScript commerce backend. It returns JSON over REST and renders no HTML, so structured data is entirely a storefront concern. The official Next.js starter includes no JSON-LD, which means a fresh install emits nothing for a parser to read.",
+  "The data is available; the mapping is not written. Products carry variants, collections, weight, material, and a free-form metadata object where teams keep specifications. None of that is translated into a Product node by default, so it stays inside the API.",
+  "Rendering strategy decides visibility. If the product page fetches client-side, the first HTML response is a shell and any markup appears only after hydration. Server components or static generation put the JSON-LD in the initial payload, where something that does not run JavaScript can still read it.",
+  "Regions are the accuracy risk. Medusa varies price, currency, and tax inclusion by region, and prices are calculated per region through the pricing module. A storefront that hardcodes a currency or omits region context emits a price that is wrong for much of the traffic it serves.",
 ];
 
 const otherPlatforms = [
@@ -218,8 +217,8 @@ export default function MedusaAuditPage() {
   return (
     <PlatformAuditPage
       platform="Medusa"
-      headline="How does AI see your Medusa storefront?"
-      description="Medusa's headless architecture means your Next.js storefront has zero structured data by default. AI engines can't see your products. Beseam shows what's missing."
+      headline="Medusa's starter storefront emits no product schema"
+      description="Beseam fetches your Medusa storefront as a crawler would, reads the HTML that arrives, and compares it against the product, variant, and region data your API already returns. You get a list of gaps with evidence and TypeScript to review before it ships."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

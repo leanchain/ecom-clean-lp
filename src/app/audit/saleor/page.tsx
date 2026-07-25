@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Saleor Storefront?",
+  title: "Saleor product data audit",
   description:
-    "Saleor headless commerce stores depend entirely on frontend implementation for structured data. Beseam audits how AI engines read your Saleor storefront.",
+    "Saleor ships an API, not a storefront. Beseam reads what your frontend renders and returns the missing schema as gaps with evidence and code to review.",
   keywords: [
-    "Saleor AI optimization",
-    "ChatGPT Saleor",
     "Saleor structured data",
-    "Saleor headless commerce schema",
+    "Saleor storefront JSON-LD",
     "Saleor GraphQL product schema",
+    "Saleor headless commerce SEO",
+    "Saleor channel pricing schema",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "No structured data unless explicitly implemented",
+    title: "No JSON-LD until your frontend writes it",
     severity: "critical",
     description:
-      "Saleor is a headless commerce platform - it provides a GraphQL API but no storefront. This means zero structured data unless your frontend explicitly generates it. If your React/Next.js storefront doesn't include JSON-LD, AI engines see no product information at all.",
+      "Saleor provides a GraphQL API and no storefront, so the site emits whatever its frontend emits, which is often nothing. Without a Product node, a shopper asking an assistant about price, availability, or materials gets an answer sourced from somewhere other than your store, if at all.",
     fix: `// In your Next.js storefront (e.g., saleor-storefront or custom):
 // Create a component that generates JSON-LD from Saleor's GraphQL data
 
@@ -58,10 +58,10 @@ export function generateProductSchema(product: ProductDetailsFragment) {
 // />`,
   },
   {
-    title: "Product attributes from GraphQL not in frontend schema",
+    title: "GraphQL attributes never reach the Product node",
     severity: "high",
     description:
-      "Saleor's attribute system (stored in the GraphQL API) contains rich product specifications - materials, dimensions, care instructions. But headless storefronts typically only query what they display, and rarely map attributes to PropertyValue schema.",
+      "Saleor's attribute system holds materials, dimensions, care instructions, and fit. Storefront queries typically request only what the template displays, so those values are neither fetched nor mapped to additionalProperty. The specification detail that decides a purchase never becomes machine-readable.",
     fix: `// Extend your GraphQL query to include attributes:
 // query ProductDetails($slug: String!) {
 //   product(slug: $slug) {
@@ -92,10 +92,10 @@ export function mapAttributesToSchema(
 // additionalProperty: mapAttributesToSchema(product.attributes)`,
   },
   {
-    title: "Collection and category pages lack structured data",
+    title: "Collections render without CollectionPage or ItemList",
     severity: "high",
     description:
-      "Saleor collections and categories exist in the GraphQL API but your storefront must explicitly build CollectionPage and ItemList schema from the API response. Most headless storefronts skip this entirely.",
+      "Saleor exposes collections and categories through the API, but CollectionPage and ItemList markup has to be assembled in the storefront from that response. Most implementations skip it, so category pages state no relationship between the products they list.",
     fix: `// lib/schema.ts - Add collection schema generator
 import type { CollectionDetailsFragment } from "@/saleor/graphql";
 
@@ -133,10 +133,10 @@ export function generateCollectionSchema(
 // />`,
   },
   {
-    title: "Checkout channel pricing not reflected in schema",
+    title: "Channel-blind queries emit the wrong price",
     severity: "medium",
     description:
-      "Saleor's multi-channel architecture means product prices vary by channel (currency, tax, availability). Your storefront schema must use the correct channel's pricing, but many implementations accidentally output the default channel's prices regardless of the viewer's context.",
+      "Saleor prices per channel, each with its own currency, tax treatment, and availability. A schema generator that omits the channel argument falls back to a default, so the markup quotes a price that does not match what the visitor is shown or charged.",
     fix: `// Ensure you're using channel-specific pricing in schema
 // Your GraphQL query MUST include the channel parameter:
 
@@ -173,11 +173,10 @@ export function getChannelAwareOffers(product: ProductDetailsFragment) {
 ];
 
 const contextParagraphs = [
-  "Saleor is an open-source, headless e-commerce platform built with Python (Django) and GraphQL. It's gained significant traction among developers building custom storefronts with React, Next.js, and other modern frameworks.",
-  "The fundamental AI readability challenge with Saleor is inherent to headless commerce: since Saleor provides only an API (no storefront), structured data is entirely the frontend developer's responsibility. If your storefront doesn't generate JSON-LD, AI engines see nothing.",
-  "Saleor's GraphQL API is actually well-suited for building rich structured data - it exposes detailed product attributes, variant pricing, collection hierarchies, and media. The problem is that most frontend implementations focus on visual rendering and overlook schema generation.",
-  "The multi-channel architecture adds another layer of complexity. Saleor manages different pricing, currencies, and availability per channel, and your structured data must reflect the correct channel's data - not just the default or first channel.",
-  "Beseam audits your Saleor storefront from the perspective of 13 AI engines, identifies what's missing from your client-side rendered pages, and provides ready-to-use TypeScript utility functions that map Saleor's GraphQL schema to Product JSON-LD.",
+  "Saleor is a GraphQL commerce API. It renders no storefront, so no structured data exists until your React or Next.js frontend writes it. Nothing about the platform is misconfigured — there is simply no default output to inspect, and every schema decision belongs to your team.",
+  "The API is a good source to build from. Product attributes, variant pricing, media, and collection hierarchies are all queryable. The gap is usually scope: a storefront query asks for what the page displays, and attributes never rendered visually never make it into a Product node either.",
+  "Rendering strategy decides whether any of it is readable. A client-rendered storefront attaches JSON-LD after hydration, so a fetcher reading the first HTML response finds a shell. Server components, SSR, or static generation put the markup in the initial payload where it can be parsed.",
+  "Channels complicate correctness. Saleor prices per channel, each with its own currency, tax rules, and availability. A generator that queries without a channel argument, or defaults to the first one, emits a price that is right for some visitors and wrong for the rest.",
 ];
 
 const otherPlatforms = [
@@ -192,8 +191,8 @@ export default function SaleorAuditPage() {
   return (
     <PlatformAuditPage
       platform="Saleor"
-      headline="How does AI see your Saleor storefront?"
-      description="Saleor's headless architecture means zero structured data unless your frontend builds it. AI engines can't see your products. Beseam shows what's missing and gives you the code."
+      headline="Saleor ships an API, not structured data"
+      description="Beseam fetches your Saleor storefront the way a crawler does, reads the HTML that actually arrives, and checks it against the product data your GraphQL API already holds. The output is a list of gaps with evidence and TypeScript you can review before merging."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

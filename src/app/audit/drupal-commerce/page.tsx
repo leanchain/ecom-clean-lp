@@ -3,30 +3,30 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Drupal Commerce Store?",
+  title: "Drupal Commerce product data audit",
   description:
-    "Drupal Commerce sites depend on contributed modules for structured data. Beseam audits how AI engines read your Drupal Commerce product pages and finds the gaps.",
+    "Drupal Commerce core emits no product schema. Beseam checks what your modules and Twig templates actually output and returns gaps with a proposed fix.",
   keywords: [
-    "Drupal Commerce AI optimization",
-    "ChatGPT Drupal Commerce",
     "Drupal Commerce structured data",
-    "Drupal Commerce JSON-LD",
-    "Drupal product schema",
+    "Drupal Commerce product schema",
+    "Schema.org Metatag Drupal",
+    "Drupal Commerce variations JSON-LD",
+    "Drupal Commerce Twig schema",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "No Product schema without contributed modules",
+    title: "No product schema without a contributed module",
     severity: "critical",
     description:
-      "Drupal Commerce core does not include any Product JSON-LD. Without installing and configuring modules like Schema.org Metatag or JSON-LD Schema, your product pages have zero structured data. AI engines see content pages, not product pages.",
+      "Drupal Commerce core renders product entities as content, with no JSON-LD. Until Schema.org Metatag or an equivalent is installed and mapped, a crawler sees a node with a heading and a price field. Nothing on the page states that it describes a purchasable product.",
     fix: `// Install and configure the Schema.org Metatag module
 // Run in your Drupal root:
 // composer require drupal/schema_metatag
 
 // Then enable it:
-// drush en schema_metatag schema_product_metatag
+// drush en schema_metatag schema_product
 
 // Configure at: /admin/config/search/metatag
 // Add Product schema mapping for Commerce Product entity type:
@@ -63,10 +63,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Product variations not reflected in schema",
+    title: "Only the default variation reaches the offer",
     severity: "high",
     description:
-      "Drupal Commerce's variation system (where each color/size is a separate variation entity) is powerful for store management but invisible to AI. Even with Schema.org modules installed, variations are typically not mapped to individual Offer entities in the structured data.",
+      "Commerce product variations are separate entities, each with its own SKU, price, and stock level. Standard mappings expose the default variation only. A product selling across a range of prices publishes one of them, and a shopper quoted that figure meets a different total at checkout.",
     fix: `{# Enhanced product-schema.html.twig with all variations #}
 <script type="application/ld+json">
 {
@@ -92,10 +92,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Custom product fields not exposed as structured data",
+    title: "Custom fields need a mapping nobody wrote",
     severity: "high",
     description:
-      "Drupal's Field API lets you add unlimited custom fields to products (materials, dimensions, compatibility, certifications), but these are only rendered as HTML. Even with schema modules installed, custom fields require manual mapping that's often skipped.",
+      "Field API lets you attach material, dimensions, certification, and compatibility fields to a product type. Schema modules do not map them for you; each needs an explicit mapping to a schema property. A skipped mapping is silent — the field renders on the page and appears nowhere in the data.",
     fix: `{# Map custom fields as PropertyValue #}
 "additionalProperty": [
   {% if product.field_material.value %}
@@ -127,10 +127,10 @@ const findings: Finding[] = [
 // Map each custom field to the appropriate schema property`,
   },
   {
-    title: "Taxonomy-based categories lack CollectionPage schema",
+    title: "Views category pages carry no ItemList",
     severity: "medium",
     description:
-      "Drupal Commerce uses taxonomy terms for product categories. While Drupal's Views module generates category listing pages, these don't include CollectionPage or ItemList schema. AI engines can't understand your product catalog hierarchy.",
+      "Taxonomy-driven catalog pages built with Views output rows of teasers and no CollectionPage or ItemList markup. Nothing states what the category holds or in what order. A crawler mapping your catalog has to discover products individually rather than read the listing that already groups them.",
     fix: `{# Add to views template: views-view--product-catalog.html.twig #}
 <script type="application/ld+json">
 {
@@ -159,11 +159,10 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Drupal Commerce is the e-commerce framework built on Drupal CMS, powering complex product catalogs for retailers, distributors, and B2B businesses. Its flexibility is unmatched - but this means structured data requires intentional configuration that's often overlooked.",
-  "The core issue is that Drupal Commerce core provides zero Product schema out of the box. Unlike hosted platforms that auto-generate at least basic structured data, Drupal Commerce depends entirely on contributed modules (like Schema.org Metatag) that must be installed, enabled, and configured.",
-  "Drupal Commerce's variation system - where product variations are separate entities with their own prices, SKUs, and stock levels - is architecturally sophisticated but creates a structured data challenge. Most schema solutions only map the default variation, not all options.",
-  "The irony of Drupal Commerce is that it stores more detailed product data than almost any other platform (thanks to the Field API), but less of it reaches AI engines. Custom fields for materials, dimensions, certifications, and compatibility data stay locked in the Drupal database.",
-  "Beseam audits your Drupal Commerce store from the perspective of 13 AI engines, identifies the structured data gaps in your specific Drupal configuration, and provides Twig template code and module configurations to make your product data AI-readable.",
+  "Drupal Commerce core emits no Product JSON-LD. Structured data comes from contributed modules, Schema.org Metatag most often, which have to be installed, mapped field by field, and re-checked whenever the product type changes. Sites that skipped a mapping usually do not know which one.",
+  "Variations are the second problem. Each variation is its own entity with a price, SKU, and stock level, but most mappings resolve only the default variation. The page then publishes one offer for a product that sells at several prices, and an assistant repeats that single number.",
+  "The Field API is the reason to run Drupal Commerce and the reason it loses the most. Fields for material, tolerance, certification, and compatibility render through the display mode as HTML. Unless someone mapped each one to a schema property, none of it is machine-readable.",
+  "Beseam reads the site as it is served, names the field or mapping that is missing, and proposes the Twig or Metatag change. It does not install modules, edit your theme, or alter configuration. Every finding comes with the response that produced it.",
 ];
 
 const otherPlatforms = [
@@ -178,8 +177,8 @@ export default function DrupalCommerceAuditPage() {
   return (
     <PlatformAuditPage
       platform="Drupal Commerce"
-      headline="How does AI see your Drupal Commerce store?"
-      description="Drupal Commerce stores have zero structured data without contributed modules. AI engines can't see your rich product attributes. Beseam identifies every gap."
+      headline="Drupal Commerce emits no product schema by default"
+      description="Beseam reads the pages your Drupal Commerce site serves, checks which product fields and variations reach the JSON-LD your modules produce, and reports the gaps with evidence. The output is Twig and module configuration your team reviews, not a change to your site."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}
