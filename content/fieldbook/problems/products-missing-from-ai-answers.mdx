@@ -1,0 +1,58 @@
+---
+title: Our products do not appear in AI shopping answers
+navTitle: Missing from AI answers
+summary: Separate prompt coverage, product eligibility, source visibility, content completeness, and competitor presence before proposing a fix.
+category: Discovery
+kind: problem
+status: emerging
+difficulty: intermediate
+order: 1
+reviewedAt: 2026-07-25
+relatedSkills:
+  - ai-citation-gap-investigation
+  - ecommerce-technical-seo-geo-audit
+relatedResources:
+  - promptfoo
+  - schema-org
+  - google-generative-ai-search-guide
+  - beseam-ai-visibility-scan
+---
+
+A product can be absent because the monitored question set is incomplete, the product is ineligible or unavailable, useful facts are missing, another source is easier to cite, or the answer system selected a competitor. Those are different problems.
+
+## What teams usually observe
+
+- Competitors appear for category and comparison questions.
+- The brand appears only for branded queries.
+- Answers cite publishers or marketplaces rather than the merchant.
+- Product descriptions are inaccurate, stale, or incomplete.
+
+## Evidence to collect
+
+Capture a stable prompt set, model or surface, market, timestamp, answer text, cited URLs, merchant attribution, and competitor presence.
+
+Inspect the current product facts, structured data, availability, indexability, canonical signals, merchant identity, and consistency across controlled sources.
+
+## What not to conclude yet
+
+<Callout type="boundary" title="Point-in-time boundary">
+One answer run does not represent the entire market, and an answer change after a page update does not automatically prove ranking or revenue causation.
+</Callout>
+
+Do not assume missing schema is the only cause. Do not rewrite product content before confirming which source patterns the answer system actually uses.
+
+## Investigation workflow
+
+1. Confirm that the prompt set represents real buying intent.
+2. Separate branded, category, comparison, and use-case questions.
+3. Record which sources are cited when the product is absent.
+4. Compare merchant-controlled facts with cited third-party facts.
+5. Identify a controlled object that can be improved without inventing claims.
+6. Retest the same prompt set and document the changed evidence.
+
+## Verification checklist
+
+- The same prompt set and conditions were reused.
+- Product facts remain accurate across page, catalog, and markup.
+- Any answer change is recorded as an observed retest.
+- Placement and commercial impact are not guaranteed.

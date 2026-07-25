@@ -1,9 +1,65 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+
 import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
 
-import { FIELD_SKILLS } from "@/lib/commerce-fieldbook";
+import FieldbookShell from "@/components/beseam/fieldbook/fieldbook-shell";
+import { getFieldbookDocuments } from "@/lib/fieldbook-content";
 
-export const metadata: Metadata = { title: { absolute: "Agent Skills | Beseam Commerce Fieldbook" }, description: "Reusable ecommerce workflows for Claude, coding agents, other assistants, and human operators.", alternates: { canonical: "/resources/skills" } };
+export const metadata: Metadata = {
+  title: { absolute: "Agent Skills | Beseam Commerce Fieldbook" },
+  description:
+    "Versioned, evidence-aware ecommerce workflows for Claude, coding agents, other assistants, and human operators.",
+  alternates: { canonical: "/resources/skills" },
+};
 
-export default function SkillsIndexPage() { return <div className="bg-[var(--beseam-technical)] text-white"><section className="border-b border-white/18"><div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 lg:px-10"><Link href="/resources" className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--beseam-accent-soft)]">Commerce Fieldbook / Agent skills</Link><h1 className="mt-7 max-w-[11ch] font-serif text-[clamp(3.2rem,5.2vw,5.4rem)] leading-[0.98] tracking-[-0.05em]">Reusable workflows, not magic prompts.</h1><p className="mt-7 max-w-2xl text-[18px] leading-relaxed text-white/62">Each skill states its inputs, expected outputs, checks, supporting projects, and the conclusions it is not allowed to make.</p></div></section><section><div className="mx-auto grid max-w-[92rem] gap-px bg-white/18 sm:grid-cols-2 lg:grid-cols-3">{FIELD_SKILLS.map((skill) => <Link key={skill.slug} href={`/resources/skills/${skill.slug}`} className="group bg-[var(--beseam-technical)] p-7 hover:bg-[var(--beseam-technical-hover)]"><p className="font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--beseam-accent-soft)]">{skill.category}</p><h2 className="mt-6 text-[21px] font-semibold leading-snug">{skill.title}</h2><p className="mt-4 text-[14px] leading-relaxed text-white/55">{skill.summary}</p><p className="mt-6 font-mono text-[9px] uppercase tracking-[0.09em] text-white/34">Works with {skill.worksWith.join(" · ")}</p><span className="mt-7 inline-flex items-center gap-2 text-[12px] font-semibold text-[var(--beseam-accent-soft)]">Open skill <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></span></Link>)}</div></section></div>; }
+export default function SkillsIndexPage() {
+  const skills = getFieldbookDocuments("skills");
+  return (
+    <FieldbookShell currentHref="/resources/skills">
+      <header className="border-b border-black/18 pb-10">
+        <p className="font-mono text-[9px] uppercase tracking-[0.1em] text-[var(--beseam-accent)]">
+          Commerce Fieldbook / Agent skills
+        </p>
+        <h1 className="mt-6 max-w-[12ch] font-serif text-[clamp(3.2rem,5vw,5.2rem)] leading-[0.98] tracking-[-0.05em]">
+          Reusable workflows, not magic prompts.
+        </h1>
+        <p className="mt-7 max-w-3xl text-[18px] leading-relaxed text-black/62">
+          Each skill states its inputs, expected output, checks, safety
+          boundaries, version, and supporting primary references.
+        </p>
+      </header>
+      <div className="mt-8 grid gap-px border border-black/16 bg-black/16 sm:grid-cols-2">
+        {skills.map((skill) => (
+          <Link
+            key={skill.href}
+            href={skill.href}
+            className="group flex min-h-full flex-col bg-[var(--beseam-surface)] p-6 transition-colors hover:bg-[var(--beseam-panel)]"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-mono text-[8px] uppercase tracking-[0.09em] text-[var(--beseam-accent)]">
+                {skill.frontmatter.category}
+              </span>
+              <span className="font-mono text-[8px] uppercase tracking-[0.08em] text-black/36">
+                v{skill.frontmatter.version} · {skill.frontmatter.status}
+              </span>
+            </div>
+            <h2 className="mt-5 text-[18px] font-semibold leading-snug text-[var(--beseam-ink)]">
+              {skill.frontmatter.title}
+            </h2>
+            <p className="mt-3 text-[13px] leading-relaxed text-black/52">
+              {skill.frontmatter.summary}
+            </p>
+            <p className="mt-5 font-mono text-[8px] uppercase tracking-[0.08em] text-black/34">
+              Works with {skill.frontmatter.worksWith?.join(" · ")}
+            </p>
+            <span className="mt-auto inline-flex items-center gap-2 pt-6 text-[11px] font-semibold text-[var(--beseam-accent)]">
+              Open skill{" "}
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+        ))}
+      </div>
+    </FieldbookShell>
+  );
+}

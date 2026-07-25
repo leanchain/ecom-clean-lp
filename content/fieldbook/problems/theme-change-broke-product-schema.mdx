@@ -1,0 +1,51 @@
+---
+title: A theme change broke our product structured data
+navTitle: Theme broke product schema
+summary: Compare the rendered page before and after the change, then separate missing markup, contradictory facts, and search-engine eligibility.
+category: Catalog and product pages
+kind: problem
+status: stable
+difficulty: intermediate
+order: 5
+reviewedAt: 2026-07-25
+relatedSkills:
+  - product-structured-data-validation
+relatedResources:
+  - schema-org
+  - json-ld-11
+  - google-product-structured-data
+  - playwright
+---
+
+A theme deployment can remove, duplicate, or contradict product markup while the visible page still looks correct.
+
+## What teams usually observe
+
+- Rich-result or merchant diagnostics change after deployment.
+- Visible product facts remain correct while JSON-LD changes.
+- Variant, price, or availability markup no longer matches the page.
+- Multiple apps or theme extensions emit competing Product entities.
+
+## Evidence to collect
+
+Capture rendered HTML from the affected release, expected product and variant facts, parsed structured-data output, deployment changes, app and theme-extension changes, and the relevant search diagnostic.
+
+## What not to conclude yet
+
+Valid syntax does not guarantee eligibility, display, or correctness. A parser passing does not prove that visible content and markup describe the same offer.
+
+## Investigation workflow
+
+1. Parse every Product and Offer entity on the rendered page.
+2. Compare visible facts with markup field by field.
+3. Identify duplicates, missing relationships, and wrong variants.
+4. Trace each entity to its theme or app source.
+5. Correct the owning template or extension.
+6. Retest the rendered page and then the external diagnostic.
+
+## Verification checklist
+
+- One coherent product graph describes the visible product.
+- Offer facts match the active variant and market.
+- Reviews and ratings are supported by visible content.
+- Search-engine eligibility remains described as externally controlled.

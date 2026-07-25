@@ -9,16 +9,15 @@ import {
 } from "@/lib/fieldbook-content";
 
 export function generateStaticParams() {
-  return getFieldbookDocuments("problems").map(({ slug }) => ({ slug }));
+  return getFieldbookDocuments("playbooks").map(({ slug }) => ({ slug }));
 }
-
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const document = getFieldbookDocument("problems", slug);
+  const document = getFieldbookDocument("playbooks", slug);
   if (!document) return {};
   return {
     title: {
@@ -28,14 +27,13 @@ export async function generateMetadata({
     alternates: { canonical: document.href },
   };
 }
-
-export default async function ProblemPage({
+export default async function PlaybookPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const document = getFieldbookDocument("problems", slug);
+  const document = getFieldbookDocument("playbooks", slug);
   if (!document) notFound();
   return <FieldbookDocumentPage document={document} />;
 }

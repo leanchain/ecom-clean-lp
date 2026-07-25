@@ -1,11 +1,41 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ExternalLink } from "lucide-react";
 
-import { FIELD_SKILLS, getResource, getSkill } from "@/lib/commerce-fieldbook";
+import type { Metadata } from "next";
 
-export function generateStaticParams() { return FIELD_SKILLS.map(({ slug }) => ({ slug })); }
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> { const { slug } = await params; const skill = getSkill(slug); if (!skill) return {}; return { title: { absolute: `${skill.title} | Beseam Commerce Fieldbook` }, description: skill.summary, alternates: { canonical: `/resources/skills/${slug}` } }; }
-function SkillList({ number, title, items }: { number: string; title: string; items: string[] }) { return <section className="border-t border-white/20 pt-6"><div className="grid gap-4 sm:grid-cols-[3rem_12rem_1fr]"><span className="font-mono text-[10px] text-white/32">{number}</span><h2 className="text-[17px] font-semibold text-white/88">{title}</h2><ul className="border-t border-white/16">{items.map((item) => <li key={item} className="border-b border-white/16 py-4 text-[14px] leading-relaxed text-white/60">{item}</li>)}</ul></div></section>; }
-export default async function SkillPage({ params }: { params: Promise<{ slug: string }> }) { const { slug } = await params; const skill = getSkill(slug); if (!skill) notFound(); const projects = skill.projectSlugs.map(getResource).filter(Boolean); return <div className="bg-[var(--beseam-technical)] text-white"><section className="border-b border-white/18"><div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 lg:px-10"><Link href="/resources/skills" className="font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--beseam-accent-soft)]">Fieldbook / {skill.category}</Link><div className="mt-7 grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-end lg:gap-20"><h1 className="max-w-[12ch] font-serif text-[clamp(3.2rem,5.2vw,5.4rem)] leading-[0.98] tracking-[-0.05em]">{skill.title}</h1><div><p className="max-w-2xl text-[18px] leading-relaxed text-white/62">{skill.summary}</p><p className="mt-5 font-mono text-[10px] uppercase tracking-[0.09em] text-[var(--beseam-accent-soft)]">Works with {skill.worksWith.join(" · ")}</p></div></div></div></section><div className="mx-auto max-w-[92rem] space-y-12 px-5 py-16 sm:px-8 lg:px-10"><SkillList number="01" title="Required inputs" items={skill.inputs} /><SkillList number="02" title="Expected output" items={skill.outputs} /><SkillList number="03" title="Checks" items={skill.checks} /><SkillList number="04" title="Boundaries" items={skill.boundaries} /><section className="border-t border-white/20 pt-6"><div className="grid gap-6 sm:grid-cols-[3rem_12rem_1fr]"><span className="font-mono text-[10px] text-white/32">05</span><h2 className="text-[17px] font-semibold text-white/88">Projects and references</h2><div className="grid gap-px border border-white/16 bg-white/16 sm:grid-cols-2">{projects.map((project) => project && <a key={project.slug} href={project.url} target={project.url.startsWith("http") ? "_blank" : undefined} rel={project.url.startsWith("http") ? "noreferrer" : undefined} className="bg-[var(--beseam-technical)] p-5 hover:bg-[var(--beseam-technical-hover)]"><p className="font-mono text-[9px] uppercase tracking-[0.09em] text-white/34">{project.kind} · {project.maturity}</p><h3 className="mt-3 flex items-center gap-2 text-[16px] font-semibold">{project.name}{project.url.startsWith("http") && <ExternalLink className="h-3.5 w-3.5 text-[var(--beseam-accent-soft)]" />}</h3><p className="mt-3 text-[13px] leading-relaxed text-white/52">{project.summary}</p><p className="mt-4 font-mono text-[8px] uppercase tracking-[0.08em] text-white/28">Reviewed {project.reviewedAt}</p></a>)}</div></div></section></div></div>; }
+import FieldbookDocumentPage from "@/components/beseam/fieldbook/fieldbook-document";
+import {
+  getFieldbookDocument,
+  getFieldbookDocuments,
+} from "@/lib/fieldbook-content";
+
+export function generateStaticParams() {
+  return getFieldbookDocuments("skills").map(({ slug }) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const document = getFieldbookDocument("skills", slug);
+  if (!document) return {};
+  return {
+    title: {
+      absolute: `${document.frontmatter.title} | Beseam Commerce Fieldbook`,
+    },
+    description: document.frontmatter.summary,
+    alternates: { canonical: document.href },
+  };
+}
+
+export default async function SkillPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const document = getFieldbookDocument("skills", slug);
+  if (!document) notFound();
+  return <FieldbookDocumentPage document={document} />;
+}

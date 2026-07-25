@@ -1,0 +1,57 @@
+---
+name: ecommerce-technical-seo-geo-audit
+description: Inspect a product page as a crawler, structured-data consumer, AI answer source, and buyer without merging those perspectives into one score.
+version: "0.1"
+status: stable
+---
+
+# Ecommerce technical SEO and GEO audit
+
+Use this skill when a product or category page has a discovery problem that may involve crawl access, page quality, structured data, merchant facts, or AI answer-source eligibility.
+
+## Required inputs
+
+- Public product-page or category-page URL
+- Target market and language
+- Priority queries or buying questions
+- Optional competitor set
+- Known platform and merchant-feed context
+
+## Expected output
+
+- Evidence inventory with source and timestamp
+- SEO and GEO findings kept separate
+- Affected page elements and controlled objects
+- Ranked next actions with confidence
+- Retest plan
+
+## Workflow
+
+1. Record canonical, indexability, robots, rendering, and response evidence.
+2. Parse product, offer, organization, breadcrumb, and review entities.
+3. Compare structured facts with visible content and catalog expectations.
+4. Inspect completeness, claim support, merchant identity, and source eligibility.
+5. Run a fixed answer-query set when AI visibility is in scope.
+6. Separate technical defects, content gaps, and external selection behavior.
+7. Recommend controlled changes and define the retest.
+
+## Checks
+
+- Canonical and indexability signals
+- Product and Offer structured data
+- Content completeness and claim support
+- Merchant and product consistency
+- Cited-source patterns for fixed AI queries
+- Performance and accessibility context affecting usability
+
+## Boundaries
+
+<Callout type="boundary" title="No placement guarantee">
+The skill does not guarantee search rankings, rich results, citations, recommendations, or commercial impact. One answer-engine run is a point-in-time observation.
+</Callout>
+
+Customer-facing changes require human approval. Unsupported claims must not be created to improve discoverability.
+
+## Verification
+
+Repeat the technical checks and any fixed query set after the controlled change. Record what changed and what remains externally controlled.

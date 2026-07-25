@@ -1,0 +1,53 @@
+---
+name: feed-pdp-parity-check
+description: Compare catalog truth, rendered product-page facts, and channel-ready values to find contradictions before they become disapprovals or buyer confusion.
+version: "0.1"
+status: stable
+---
+
+# Feed-to-PDP parity check
+
+Use this skill when product facts differ across the platform catalog, rendered page, structured data, merchant export, or channel diagnostic.
+
+## Required inputs
+
+- Product and variant record
+- Rendered product-page URL
+- Target market and currency
+- Merchant-feed row or export when available
+- Channel diagnostic when available
+
+## Expected output
+
+- Field-level comparison table
+- Contradictions grouped by source and variant
+- Authoritative-source status for each field
+- Suggested owner and first remediation target
+- Verification plan
+
+## Workflow
+
+1. Normalize product and variant identifiers.
+2. Capture values from each source at a named time.
+3. Compare price, availability, title, description, images, identifiers, shipping, and returns.
+4. Trace transformations and localization rules.
+5. Mark the system of record or ownership gap.
+6. Recommend a correction to the authoritative object or transformation.
+7. Recheck the rendered page and channel separately.
+
+## Checks
+
+- Price and availability by market
+- GTIN, MPN, SKU, and variant identity
+- Titles and descriptions
+- Primary and variant images
+- Shipping and return claims
+- Visible content versus structured data
+
+## Boundaries
+
+<Callout type="operator" title="Do not invent catalog truth">
+When sources disagree and ownership is unresolved, report the conflict. The skill must not choose a value solely because it appears most often.
+</Callout>
+
+The workflow does not publish changes and cannot guarantee channel eligibility.

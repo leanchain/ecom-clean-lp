@@ -1,0 +1,42 @@
+---
+title: Feed-to-PDP parity playbook
+navTitle: Feed-to-PDP parity
+summary: Coordinate catalog, storefront, feed, and channel owners around one field-level product truth investigation.
+category: Catalog operations
+kind: playbook
+status: stable
+order: 1
+reviewedAt: 2026-07-25
+relatedSkills:
+  - feed-pdp-parity-check
+relatedResources:
+  - google-merchant-product-data-spec
+  - schema-org
+  - playwright
+---
+
+Use this playbook when product data contradictions cross team or system boundaries.
+
+## Roles
+
+- Catalog owner: confirms authoritative product and variant values.
+- Storefront owner: confirms rendered content and structured data.
+- Feed owner: confirms transformations and export timing.
+- Channel owner: confirms diagnostics and reprocessing state.
+
+## Sequence
+
+1. Select a small affected product and variant set.
+2. Freeze observation time, market, and currency.
+3. Build the field-level comparison.
+4. Assign every contradiction to a source or transformation owner.
+5. Correct the authoritative object.
+6. Regenerate dependent outputs.
+7. Verify storefront and channel separately.
+
+## Exit criteria
+
+- Identifiers, price, availability, title, and images agree.
+- Ownership is documented for every transformed field.
+- Channel diagnostics reflect the corrected export.
+- Monitoring or regression tests cover the failure mode.

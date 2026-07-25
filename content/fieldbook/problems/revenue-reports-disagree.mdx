@@ -1,0 +1,53 @@
+---
+title: Shopify, analytics, and ad platforms disagree on revenue
+navTitle: Revenue reports disagree
+summary: Keep booked, observed, and attributed values separate while tracing scope, period, currency, identity, and attribution method.
+category: Measurement and growth
+kind: problem
+status: stable
+difficulty: advanced
+order: 4
+reviewedAt: 2026-07-25
+relatedSkills:
+  - commerce-measurement-reconciliation
+relatedResources:
+  - google-analytics-ecommerce
+  - shopify-web-pixels-api
+  - snowplow-javascript-tracker
+  - opentelemetry-js
+---
+
+Commerce, analytics, and advertising reports answer different questions. A discrepancy is expected until period, currency, transaction identity, event collection, refunds, tax, and attribution boundaries are aligned.
+
+## What teams usually observe
+
+- Channel dashboards claim more revenue than the order ledger.
+- Analytics misses or duplicates purchase events.
+- Teams manually reconcile dashboards every week.
+- Differences increase after consent, checkout, or tracking changes.
+
+## Evidence to collect
+
+Collect order-ledger totals and transaction identifiers, analytics events, channel reports, reporting period, timezone, currency, tax and refund treatment, consent coverage, and attribution windows.
+
+## What not to conclude yet
+
+<Callout type="boundary" title="Booked versus attributed">
+The commerce ledger represents booked orders. Analytics represents observed events. Advertising platforms represent attributed outcomes under their own models. Do not relabel one as another.
+</Callout>
+
+## Investigation workflow
+
+1. Define the exact period, timezone, currency, and order states.
+2. Reconcile transaction identifiers before comparing totals.
+3. Find missing, duplicate, late, or transformed events.
+4. Document each platform's attribution window and identity model.
+5. Separate collection defects from expected attribution differences.
+6. Assign remediation to commerce, analytics, consent, or channel owners.
+
+## Verification checklist
+
+- Transaction-level matches are reproducible.
+- Duplicates and missing events have evidence.
+- Modeled conversions remain labeled as modeled.
+- Reconciliation rules are documented for future reporting.
