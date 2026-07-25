@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Volusion Store?",
+  title: "Volusion product data audit",
   description:
-    "Volusion stores have limited structured data with no easy way to customize schema output. Beseam audits how AI engines read your Volusion product pages.",
+    "Beseam reads what your Volusion pages emit — Product schema, ratings, category markup — and returns a list of gaps with evidence and a proposed fix.",
   keywords: [
-    "Volusion AI optimization",
-    "ChatGPT Volusion",
     "Volusion structured data",
-    "Volusion JSON-LD",
     "Volusion product schema",
+    "Volusion JSON-LD",
+    "Volusion schema markup",
+    "Volusion SEO audit",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "Minimal default Product schema with missing fields",
+    title: "Product schema omits brand and identifiers",
     severity: "critical",
     description:
-      "Volusion generates a basic Product schema but omits critical fields: brand, SKU, GTIN, detailed descriptions, and product images beyond the primary thumbnail. AI engines get a skeleton of your product data instead of the complete picture.",
+      "Volusion's default Product node carries name, price, and availability. Brand, SKU, GTIN, and images beyond the primary thumbnail are absent. An assistant asked to compare your product against a competitor has no manufacturer, no identifier to match against a catalogue, and one image to work from.",
     fix: `<!-- Volusion's template system is limited - use footer HTML injection -->
 <!-- In Marketing > SEO > Header/Footer Tags, add to Footer: -->
 <script>
@@ -50,10 +50,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "No AggregateRating or Review schema",
+    title: "Ratings render as stars, not markup",
     severity: "high",
     description:
-      "Volusion's built-in product reviews do not generate Review or AggregateRating schema. When customers leave reviews, AI engines can't see the ratings - meaning your highly-rated products have no structured credibility signal.",
+      "Volusion's built-in reviews display as stars in the page body and produce no Review or AggregateRating node. The rating a shopper weighs most heavily is invisible to anything parsing the markup, so it cannot be quoted back when someone asks whether the product is well reviewed.",
     fix: `<!-- Add via Footer HTML injection in Volusion admin -->
 <script>
 (function() {
@@ -85,10 +85,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Category pages lack CollectionPage schema",
+    title: "Category pages carry no structured data",
     severity: "medium",
     description:
-      "Volusion category pages display product grids but include no structured data at all - no CollectionPage, no ItemList, no product references. AI engines can't understand your catalog organization or browse your products systematically.",
+      "Volusion category pages render a product grid with no CollectionPage node, no ItemList, and no references to the products shown. Nothing describes how the catalogue is organised, so each product page stands alone with no category context around it.",
     fix: `<!-- Category page schema via Footer injection (only on category pages) -->
 <script>
 (function() {
@@ -128,10 +128,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Product variants not reflected in Offer schema",
-    severity: "medium",
+    title: "Option pricing missing from Offer schema",
+    severity: "high",
     description:
-      "Volusion product options (size, color, etc.) change the price dynamically via JavaScript, but the structured data only reflects the base product price. AI engines show an inaccurate price that may differ from what shoppers actually pay.",
+      "Volusion product options adjust price through JavaScript after load, while the emitted Offer keeps the base price. A shopper asking about a specific size or colour gets a figure that does not match checkout, and the mismatch surfaces after they have decided to buy.",
     fix: `<!-- Enhance product schema with option pricing -->
 <script>
 (function() {
@@ -163,11 +163,10 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Volusion is one of the original hosted e-commerce platforms, powering online stores since 2002. While it has modernized over the years, its structured data implementation remains minimal compared to newer platforms like Shopify or BigCommerce.",
-  "The biggest challenge with Volusion is its limited template customization. Unlike open-source platforms where you can freely edit templates to add JSON-LD, Volusion restricts access to core template files. Your main option for adding structured data is the header/footer HTML injection in the admin panel.",
-  "Volusion's default Product schema covers the basics - name, price, availability - but omits brand information, detailed product descriptions, additional images, and customer review data. AI engines get a bare-bones view of your products.",
-  "For stores that have invested in Volusion's product review system, the lack of AggregateRating schema is a significant missed opportunity. Reviews are visible to shoppers but invisible to AI engines that could use them to recommend your products.",
-  "Beseam audits your Volusion store from the perspective of 13 AI engines, identifies the structured data gaps that Volusion's platform creates, and provides injectable code solutions that work within Volusion's template constraints.",
+  "Volusion is a hosted platform from the early 2000s. Its product template emits a Product node with name, price, and availability. Brand, SKU, GTIN, secondary images, and review data are absent, so anything answering a question about your product has the label and little else.",
+  "Template access is the constraint. Volusion does not expose the core product template for direct editing, so schema additions usually go through the header and footer HTML injection under Marketing > SEO. That code runs in the browser, after the initial HTML, so a fetcher that does not execute JavaScript never sees it.",
+  "Options are the second gap. Size and colour selections adjust price through JavaScript, while the emitted schema keeps the base price. An AI assistant reading the page quotes a figure the shopper will not see at checkout.",
+  "Reviews collected in Volusion's built-in system render as stars in the browser and nothing in the markup. There is no AggregateRating node, so the rating a shopper trusts is unavailable to anything reading the page programmatically.",
 ];
 
 const otherPlatforms = [
@@ -182,8 +181,8 @@ export default function VolusionAuditPage() {
   return (
     <PlatformAuditPage
       platform="Volusion"
-      headline="How does AI see your Volusion store?"
-      description="Volusion's closed templates make adding structured data difficult. AI engines see minimal product information. Beseam identifies the gaps and gives you injectable fixes."
+      headline="Volusion emits a skeleton Product schema"
+      description="Beseam reads the JSON-LD, meta tags, and HTML your Volusion storefront returns, then checks it against what a shopper or an AI assistant would need to answer. Each gap arrives with evidence and a proposed fix your team approves."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

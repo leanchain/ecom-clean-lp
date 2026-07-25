@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your SAP Commerce Cloud Store?",
+  title: "SAP Commerce Cloud product data audit",
   description:
-    "SAP Commerce Cloud (Hybris) sites with JSP or Spartacus storefronts often lack structured data. Beseam audits how AI engines read your SAP Commerce pages.",
+    "Beseam checks what your Accelerator JSP or Spartacus storefront emits as structured data and returns the gaps with evidence and a proposed fix.",
   keywords: [
-    "SAP Commerce Cloud AI optimization",
-    "Hybris structured data",
-    "SAP Spartacus schema",
-    "SAP Commerce JSON-LD",
-    "ChatGPT SAP Commerce",
+    "SAP Commerce Cloud structured data",
+    "Hybris product schema",
+    "Spartacus JSON-LD",
+    "SAP Commerce Accelerator markup",
+    "Hybris classification attributes schema",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "JSP storefront has no JSON-LD product schema",
+    title: "Accelerator JSP emits no product JSON-LD",
     severity: "critical",
     description:
-      "SAP Commerce Cloud's legacy Accelerator storefront (JSP-based) does not generate Product JSON-LD. AI engines see rendered HTML but no structured data. Your product catalog is invisible to AI-powered shopping and research tools.",
+      "The legacy Accelerator storefront renders name, price, and stock into HTML and stops there. No JSON-LD block is generated. An assistant answering a question about your catalog has to infer price and availability from layout, and on discounted lines it will sometimes read the struck-through list price as current.",
     fix: `<!-- Add to productLayout1Page.jsp or productDetailPage.jsp -->
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
 
@@ -47,10 +47,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Spartacus SPA renders schema client-side only",
+    title: "Spartacus needs SSR before anything is readable",
     severity: "critical",
     description:
-      "SAP's modern Spartacus storefront (Angular SPA) renders all content via JavaScript. Without server-side rendering (SSR) properly configured, AI crawlers see an empty shell. Even with SSR, Spartacus doesn't include structured data in its default components.",
+      "Spartacus is an Angular SPA. Without server-side rendering configured, or with a cold SSR cache, a crawler receives an app shell. With SSR working, the default components still emit no product schema, so the page renders correctly for people and carries nothing structured for an assistant.",
     fix: `// Create a custom Spartacus component for JSON-LD
 // src/app/product/product-schema.component.ts
 import { Component, OnInit } from '@angular/core';
@@ -93,10 +93,10 @@ export class ProductSchemaComponent implements OnInit {
 }`,
   },
   {
-    title: "Classification attributes not in structured data",
+    title: "Classification attributes stay in the spec table",
     severity: "high",
     description:
-      "SAP Commerce's powerful classification system stores rich product attributes (technical specs, materials, compatibility), but these are only rendered in the page UI. AI engines can't parse classification attributes from HTML reliably.",
+      "Classification features — dimensions, material, voltage, compatibility, with units attached — reach the page as a spec table and nothing more. A shopper asking an assistant whether a part fits their model gets a hedged answer, because the attribute that would settle it was never exposed as data.",
     fix: `<!-- Add classification attributes as PropertyValue in JSP -->
 <c:if test="\${not empty product.classifications}">
   "additionalProperty": [
@@ -116,10 +116,10 @@ export class ProductSchemaComponent implements OnInit {
 </c:if>`,
   },
   {
-    title: "Multi-country catalog with missing hreflang",
+    title: "Country sites disagree on price and canonical",
     severity: "medium",
     description:
-      "SAP Commerce Cloud's multi-country/multi-currency catalog management creates separate URLs per locale. Without proper hreflang annotations and consistent canonical URLs, AI engines may index the wrong market's pricing or see duplicate products.",
+      "A base site per country produces a URL per market. Where hreflang is partial and canonicals point at the default site, one product exists at several addresses in several currencies. An assistant has no way to tell which market's price applies, and will sometimes quote the wrong one.",
     fix: `<!-- Add to head section of master page template -->
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 
@@ -137,15 +137,17 @@ export class ProductSchemaComponent implements OnInit {
 ];
 
 const contextParagraphs = [
-  "SAP Commerce Cloud (formerly Hybris) is the dominant enterprise e-commerce platform for large B2B and B2C retailers. Its sophisticated product information management (PIM) and multi-channel capabilities are unmatched - but its structured data output lags far behind.",
-  "The critical issue depends on which storefront you use. The legacy Accelerator (JSP) storefront emits zero JSON-LD by default. The modern Spartacus storefront (Angular SPA) renders everything client-side, which most AI crawlers can't process without properly configured server-side rendering.",
-  "SAP Commerce's classification system is one of its greatest strengths - storing detailed technical specifications, compatibility data, and material information - but none of this reaches AI engines because it's only rendered as HTML tables.",
-  "For enterprise retailers with multi-country catalogs, there's an additional challenge: SAP Commerce generates separate storefronts per locale, but hreflang and canonical tag management across these is often misconfigured, causing AI engines to see conflicting product data.",
-  "Beseam audits your SAP Commerce Cloud storefront from the perspective of 13 AI engines, identifies structured data gaps in both JSP and Spartacus implementations, and generates the exact template or component code to make your product catalog AI-readable.",
+  "SAP Commerce Cloud, still Hybris to most of the people running it, ships two storefronts. The Accelerator JSP templates render product data into HTML with no JSON-LD block. Spartacus renders through Angular, so without SSR configured and warm, a crawler receives an app shell and no product at all.",
+  "Even with SSR working, the out-of-the-box Spartacus components emit no schema. Adding it means a custom component or a PageMetaResolver extension. Teams often assume the SEO module already covers it, and find out otherwise only when they check what the storefront actually returned.",
+  "The classification system is where the loss hurts. Classification attributes hold technical specs, materials, compatibility, and units, and the storefront renders them as a table. An assistant asked whether a part fits a specific model has to guess from table markup rather than read a typed property.",
+  "Beseam reads the responses your storefront serves — JSP or Spartacus, per base site and locale — and reports the gaps with the evidence for each. It does not deploy to your instance. The output is a template or component change your developers review and ship themselves.",
 ];
 
 const otherPlatforms = [
-  { name: "Salesforce Commerce Cloud", href: "/audit/salesforce-commerce-cloud" },
+  {
+    name: "Salesforce Commerce Cloud",
+    href: "/audit/salesforce-commerce-cloud",
+  },
   { name: "Adobe Commerce (Magento)", href: "/audit/magento" },
   { name: "Shopify", href: "/audit/shopify" },
   { name: "BigCommerce", href: "/audit/bigcommerce" },
@@ -156,8 +158,8 @@ export default function SapCommerceCloudAuditPage() {
   return (
     <PlatformAuditPage
       platform="SAP Commerce Cloud"
-      headline="How does AI see your SAP Commerce storefront?"
-      description="SAP Commerce Cloud (Hybris) stores - whether JSP or Spartacus - have major structured data gaps. AI engines can't read your product catalog. Beseam shows exactly what's missing."
+      headline="Spartacus and Accelerator both ship without product JSON-LD"
+      description="Beseam reads what your SAP Commerce storefront returns to a crawler, whether that is a rendered Accelerator JSP or a Spartacus SSR response, and lists the structured-data gaps with the evidence for each. The output is a proposed template or component change, not an edit to your codebase."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

@@ -3,25 +3,25 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Big Cartel Store?",
+  title: "Big Cartel product data audit",
   description:
-    "Big Cartel stores have extremely limited structured data with no template-level customization. Beseam audits how AI engines read your Big Cartel product pages.",
+    "Beseam checks whether your Big Cartel theme emits Product markup at all, then returns each gap with evidence and the Liquid to add to your theme.",
   keywords: [
-    "Big Cartel AI optimization",
-    "ChatGPT Big Cartel",
     "Big Cartel structured data",
     "Big Cartel product schema",
-    "Big Cartel SEO",
+    "Big Cartel theme code",
+    "Big Cartel Liquid JSON-LD",
+    "Big Cartel store SEO",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "No Product JSON-LD schema at all",
+    title: "No Product JSON-LD on product pages",
     severity: "critical",
     description:
-      "Big Cartel does not generate any Product JSON-LD schema on product pages. AI engines see your product pages as generic web pages with no structured product information - no price, no availability, no product type. Your products are invisible to AI-powered shopping and recommendation engines.",
-    fix: `<!-- Big Cartel themes use Twig-like template syntax -->
+      "Big Cartel's default themes emit no Product block. A crawler that parses your page finds no price, no currency, no availability and no statement that the page describes something for sale. An assistant assembling a list of shops that sell what you sell has nothing to place you in it with.",
+    fix: `<!-- Big Cartel themes are built with Liquid templates -->
 <!-- Edit your theme's product.html to add JSON-LD: -->
 <!-- Go to Account > Design > Edit Theme > Code Editor -->
 <script type="application/ld+json">
@@ -46,10 +46,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Product options have no structured data",
+    title: "Product options carry no price information",
     severity: "high",
     description:
-      "Big Cartel supports product options (size, color) with different prices, but since there's no structured data at all, AI engines can't see any variation information. A t-shirt available in 5 sizes at different prices is just an unnamed HTML page to AI.",
+      "Big Cartel options can each hold their own price and sold-out state. With no markup on the page, none of it is readable. A shirt sold in five sizes at three prices reads as an untyped page, so an assistant asked what the XL costs cannot answer and moves to a shop that can.",
     fix: `<!-- Add option-aware schema in product.html -->
 <script type="application/ld+json">
 {
@@ -73,10 +73,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "No breadcrumb or category schema",
+    title: "No breadcrumb or category markup",
     severity: "medium",
     description:
-      "Big Cartel's category system is limited to artist-defined categories, but even these don't generate any structured data. AI engines can't understand how your products are organized or navigate your catalog by category.",
+      "Categories exist in Big Cartel and appear in your navigation, but nothing in the page states the path from store to category to product. A crawler sees a flat set of unrelated URLs, and an assistant cannot tell that your prints and your ceramics are separate lines rather than one pile.",
     fix: `<!-- Add BreadcrumbList in product.html -->
 <script type="application/ld+json">
 {
@@ -115,10 +115,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Product images lack structured alt text and gallery schema",
+    title: "Images are not attached to the product",
     severity: "medium",
     description:
-      "Big Cartel themes often output product images without alt text or structured image data. Big Cartel supports up to 5 product images, but AI engines can't associate these images with the product or understand what they depict.",
+      "Big Cartel themes usually output product images with weak or missing alt text and no image array in the markup. The extra shots that show scale, texture and the back of the piece are never linked to the product, so an assistant describing it works from the first thumbnail alone.",
     fix: `<!-- Enhance image output in product.html -->
 <script type="application/ld+json">
 {
@@ -143,11 +143,10 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Big Cartel is an e-commerce platform built specifically for artists, makers, and independent creators. With free plans supporting up to 5 products and paid plans for up to 500, it's the go-to platform for small-scale creative commerce.",
-  "The most critical issue: Big Cartel generates zero Product JSON-LD schema. Unlike Shopify, BigCommerce, or even Squarespace which include some structured data automatically, Big Cartel products are completely invisible to AI engines from a structured data perspective.",
-  "The good news is that Big Cartel's theme system (based on Twig-like templates) is relatively easy to customize. If you're on a paid plan with code editing access, you can add Product JSON-LD directly to your theme templates.",
-  "For artists and makers, AI readability is becoming increasingly important as tools like ChatGPT, Perplexity, and Google's AI overview start recommending products. Without structured data, your handmade goods won't surface in any AI-powered shopping experience.",
-  "Beseam audits your Big Cartel store from the perspective of 13 AI engines, identifies the complete absence of structured data, and generates the exact Twig template code to add Product, Breadcrumb, and Collection schema to your store.",
+  "Big Cartel is built for artists and makers, and the trade for its simplicity is markup. Most default themes ship without a Product JSON-LD block, so a product page reaches a crawler as an ordinary page: some text, some images, no price field, no availability field, no product type.",
+  "That matters more than it used to. When someone asks ChatGPT or Perplexity for a shop selling hand-thrown mugs, the assistant works from what it can parse. A page that never states it is selling something at a price is hard to include in that answer, however good the work on it is.",
+  "The recovery path is short. Big Cartel themes are Liquid, and the theme code editor is reachable from your dashboard on plans that include it. A single JSON-LD block in the product template covers the whole catalog, because that template renders for every product you list.",
+  "Beseam fetches your pages as a crawler would, shows the response it received, and lists what is absent from it. Each finding arrives with Liquid written against Big Cartel's own product variables. You paste it into the theme; Beseam has no write access to your store.",
 ];
 
 const otherPlatforms = [
@@ -162,8 +161,8 @@ export default function BigCartelAuditPage() {
   return (
     <PlatformAuditPage
       platform="Big Cartel"
-      headline="How does AI see your Big Cartel store?"
-      description="Big Cartel generates zero structured data. Your handmade products are completely invisible to AI engines. Beseam shows what's missing and how to fix it."
+      headline="Most Big Cartel themes emit no product markup"
+      description="Beseam fetches your Big Cartel product and category pages and reports what structured data the theme actually emits, which is often none. You get the missing fields, the evidence behind each one, and Liquid you can paste into the theme editor yourself."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

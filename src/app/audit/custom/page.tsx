@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Headless / Custom Store?",
+  title: "Headless / Custom product data audit",
   description:
-    "Headless and custom-built e-commerce stores often have zero structured data. Beseam audits AI readability and generates the schema your framework won't.",
+    "Custom storefronts emit only the markup you write. Beseam reads what a crawler receives and lists the gaps with evidence and a proposed fix.",
   keywords: [
-    "headless commerce AI optimization",
-    "custom e-commerce structured data",
-    "Next.js e-commerce schema",
-    "headless Shopify AI",
-    "composable commerce AI readability",
+    "headless commerce structured data",
+    "custom storefront JSON-LD",
+    "Next.js e-commerce product schema",
+    "composable commerce SEO audit",
+    "server-side rendering product markup",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "No Product schema - AI sees raw HTML only",
+    title: "No Product schema in the rendered page",
     severity: "critical",
     description:
-      "Headless and custom stores built with React, Next.js, or Vue often render product data entirely in JavaScript. AI engines that parse HTML see an empty page with no structured data, no product name, and no price - making it impossible to recommend anything.",
+      "Custom React, Vue, and Next.js storefronts commonly render product detail from component state with no JSON-LD alongside it. Nothing in the response states the name, price, availability, or brand in a form a parser can read, so the product cannot be quoted accurately in an answer.",
     fix: `// Next.js: Add Product JSON-LD to your PDP page
 // app/products/[slug]/page.tsx
 
@@ -55,10 +55,10 @@ export default function ProductPage({ product }) {
 }`,
   },
   {
-    title: "Client-side rendering hides content from AI crawlers",
+    title: "Client-side rendering returns an empty shell",
     severity: "critical",
     description:
-      "Single-page apps (SPAs) that rely on client-side rendering show AI crawlers a loading spinner or empty shell. Even if your product data loads perfectly in a browser, AI engines that don't execute JavaScript see nothing.",
+      "A single-page app returns markup with no product content and fills it after hydration. A fetcher that does not run JavaScript receives a loading state. The page can be flawless in a browser and still contain nothing readable at the moment it is crawled.",
     fix: `// Use Server-Side Rendering (SSR) or Static Site Generation (SSG)
 // to ensure product content is in the initial HTML response.
 
@@ -77,10 +77,10 @@ const { data: product } = await useFetch(
 // If empty, AI engines can't see your products.`,
   },
   {
-    title: "API-driven content with no meta tags",
+    title: "Meta tags stay generic across every product",
     severity: "high",
     description:
-      "Headless stores fetch product data from APIs (Shopify Storefront, Commerce.js, Medusa, etc.) but often forget to set meta tags dynamically. AI engines see generic site-wide meta titles and descriptions instead of product-specific content.",
+      "Headless storefronts pull product records from a Storefront API, a CMS, or a custom backend, then leave title, description, and canonical at their site-wide defaults. Every product page presents the same summary, so nothing distinguishes one item from the next to anything reading the head.",
     fix: `// Next.js App Router - dynamic metadata
 export async function generateMetadata({ params }) {
   const product = await getProduct(params.slug);
@@ -100,10 +100,10 @@ export async function generateMetadata({ params }) {
 // and Twitter card metadata for AI discovery.`,
   },
   {
-    title: "Breadcrumb and navigation schema missing",
+    title: "BreadcrumbList missing behind visual breadcrumbs",
     severity: "medium",
     description:
-      "Custom stores often implement visual breadcrumbs but skip BreadcrumbList schema. AI engines can't understand your site hierarchy - they don't know which category a product belongs to or how products relate to each other.",
+      "Custom stores render a breadcrumb trail for people and skip the BreadcrumbList node. Nothing declares which category a product sits in or how deep it is in the hierarchy, so the product is read without the surrounding structure that gives it context.",
     fix: `// Add BreadcrumbList JSON-LD alongside Product schema
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
@@ -123,11 +123,10 @@ const breadcrumbJsonLd = {
 ];
 
 const contextParagraphs = [
-  "Headless and custom-built e-commerce stores - whether powered by Next.js, Nuxt, Remix, Hydrogen, or fully custom frameworks - offer total design freedom. But that freedom comes with a cost: your framework doesn't generate structured data for you.",
-  "The most critical issue is that many headless stores render product content entirely in JavaScript. AI engines that parse the initial HTML response see an empty page - no product name, no price, no schema. Your products are completely invisible to AI recommendations.",
-  "Even stores using SSR (Server-Side Rendering) often miss structured data because developers focus on visual output and forget to add JSON-LD. The page looks perfect in a browser, but AI engines see HTML without any machine-readable product information.",
-  "API-driven architectures add another challenge. Product data lives in Shopify Storefront API, Sanity, Contentful, or a custom backend - but none of these sources automatically generate the meta tags and schema that AI engines need to discover and understand your products.",
-  "Beseam works with any stack. Paste your store URL, and we audit what AI engines actually see - regardless of whether you're running Shopify Hydrogen, a headless WooCommerce setup, or a fully custom React storefront. You get specific fixes for your exact rendering approach.",
+  "A custom storefront — Next.js, Nuxt, Remix, Hydrogen, or something in-house — emits exactly the markup you wrote and nothing else. No theme adds a Product node behind you. Every schema decision, every field, and every mapping from your backend belongs to your team.",
+  "Rendering strategy comes first. A client-rendered app returns an HTML shell and fills it after hydration, so a fetcher that does not execute JavaScript sees an empty page. Server rendering or static generation puts the product content and the JSON-LD in the first response, where it can be parsed.",
+  "Server rendering alone is not enough. Plenty of SSR storefronts return complete, correct HTML and still carry no Product, Offer, or BreadcrumbList node. The page reads well to a person and offers a parser no explicit price, availability, brand, or position in the catalogue.",
+  "The data source adds a mapping step. Product records live in a Storefront API, a CMS, or your own backend, and none of them generate meta tags or JSON-LD for you. Title, description, canonical, and schema each have to be derived per route from the fetched record.",
 ];
 
 const otherPlatforms = [
@@ -140,8 +139,8 @@ export default function CustomAuditPage() {
   return (
     <PlatformAuditPage
       platform="Headless / Custom"
-      headline="How does AI see your headless store?"
-      description="Your framework gives you full control - but it also means AI readability is entirely on you. Beseam shows you what's missing."
+      headline="Your framework emits nothing you did not write"
+      description="Beseam requests your storefront the way a crawler does, reads the HTML that comes back before any JavaScript runs, and checks it against what a shopper would need to answer. The output is a list of gaps with evidence and a proposed fix your team approves."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

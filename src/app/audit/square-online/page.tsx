@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Square Online Store?",
+  title: "Square Online product data audit",
   description:
-    "Square Online stores have auto-generated structured data with limited customization. Beseam audits how AI engines read your Square Online product pages.",
+    "Beseam reads what Square Online emits on your product pages, compares it against your Square catalog, and returns each gap with a proposed fix.",
   keywords: [
-    "Square Online AI optimization",
-    "ChatGPT Square Online",
     "Square Online structured data",
-    "Square Online schema",
-    "Square ecommerce AI readability",
+    "Square Online product schema",
+    "Square Online SEO audit",
+    "Square catalog website data",
+    "Square Online custom code",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "Auto-generated schema missing key product details",
+    title: "Catalog detail does not reach the page",
     severity: "critical",
     description:
-      "Square Online generates basic Product schema automatically, but it omits brand, GTIN/MPN identifiers, detailed product specifications, and additional images. AI engines see a minimal product profile when your listing data could tell a much richer story.",
+      "Square Online emits Product schema automatically, but a thin one: no brand, no GTIN or MPN, no item attributes, and usually one image. The rest of the detail sits in your Square catalog and stops there. An assistant matching a shopper's query to a product identifier has nothing to match on.",
     fix: `<!-- Square Online allows custom code injection via Website > Pages > Page-level code -->
 <!-- Add to the product page template's custom code section: -->
 <script>
@@ -56,10 +56,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Item variations not in structured data",
+    title: "Variations collapse into a single base price",
     severity: "high",
     description:
-      "Square Online products with variations (sizes, colors) use JavaScript to update pricing dynamically. The schema only contains a single Offer with the base price - AI engines don't see that your product comes in multiple configurations at different price points.",
+      "Sizes and colours are applied in JavaScript after the page loads, while the markup keeps one Offer at the base price. An assistant quotes that price for every variation. The shopper meets a different number in the cart, and the abandoned checkout is yours.",
     fix: `<!-- Enhance schema with variation data -->
 <script>
 (function() {
@@ -96,10 +96,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "No BreadcrumbList schema for navigation",
+    title: "No breadcrumb markup for category structure",
     severity: "medium",
     description:
-      "Square Online renders breadcrumb navigation visually but doesn't include BreadcrumbList schema. AI engines can't understand your store's category hierarchy or how products relate to collections.",
+      "Breadcrumbs are drawn on the page but never emitted as BreadcrumbList. Nothing tells a crawler that this product sits under this category under this store, so an assistant handling a category-level question cannot place your product and answers from a competitor who supplied the structure.",
     fix: `<!-- Add BreadcrumbList schema -->
 <script>
 (function() {
@@ -131,10 +131,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Store information not linked to product pages",
+    title: "Pickup and store location missing from offers",
     severity: "medium",
     description:
-      "Square Online stores with physical locations (common since Square is POS-first) don't connect LocalBusiness schema to their product pages. AI engines can't tell that your products are available for local pickup or associate them with your physical store.",
+      "Square is a point-of-sale system first, and many merchants sell from a counter as well as online. The product markup names no seller and no delivery method, so an assistant asked where to buy something today nearby cannot tell that you have it in stock down the road.",
     fix: `<!-- Add LocalBusiness and product availability schema -->
 <script>
 (function() {
@@ -165,11 +165,10 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Square Online is Square's e-commerce extension, tightly integrated with the Square POS system used by millions of small and medium businesses. It's designed for brick-and-mortar retailers expanding online - but its structured data implementation reflects its POS-first heritage.",
-  "Square Online auto-generates basic Product schema, which puts it ahead of platforms like OpenCart that have none. However, the auto-generated data is minimal: name, price, and availability with few additional details that AI engines expect.",
-  "The most unique challenge for Square Online stores is the POS integration gap. Many Square merchants have rich product data in their Square catalog - categories, modifiers, item variations - but this data doesn't fully translate to structured data on the website.",
-  "Square Online's template customization is limited compared to platforms like Shopify or WooCommerce, but it does allow custom code injection at the page level. This provides a path to enhance structured data without leaving the platform.",
-  "Beseam audits your Square Online store from the perspective of 13 AI engines, identifies gaps between your Square catalog data and what AI engines can actually read, and provides injectable code solutions compatible with Square Online's platform.",
+  "Square Online starts from the Square catalog, so the item data is usually already good: variations, modifiers, categories, images, locations. The website emits a much smaller subset of it. Name, price and availability travel across. Brand, GTIN, item attributes and the second through fifth images often do not.",
+  "Variations are the sharpest version of this. The page updates its price in JavaScript when a shopper picks a size, but the markup holds one Offer at the base price. An assistant reading that page repeats the base number for every size, including the ones that cost more.",
+  "Square merchants usually have a counter as well as a site. Nothing in the product markup says the item can be collected today at a named address, so an assistant answering a near-me question has no reason in the page to send anyone to you rather than to a listing that said so.",
+  "Square Online allows custom code on paid plans, applied per page or site-wide, which is the route to adding what is missing. Beseam fetches the page, shows what Square emitted, and hands you the snippet. Applying it stays with you; Beseam does not write to the site.",
 ];
 
 const otherPlatforms = [
@@ -184,8 +183,8 @@ export default function SquareOnlineAuditPage() {
   return (
     <PlatformAuditPage
       platform="Square Online"
-      headline="How does AI see your Square Online store?"
-      description="Square Online's POS-first approach means your online store's structured data is minimal. AI engines can't see your full product catalog. Beseam shows what's invisible."
+      headline="Your Square catalog is richer than your product pages"
+      description="Beseam reads the JSON-LD Square Online emits on product and category pages and compares it against the item data in your Square catalog. You get the fields that never made it across, the evidence, and code to add where your plan allows."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

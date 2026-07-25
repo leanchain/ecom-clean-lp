@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Ecwid Store?",
+  title: "Ecwid product data audit",
   description:
-    "Ecwid stores embedded on websites render entirely via JavaScript, making products invisible to AI crawlers. Beseam audits how AI engines read your Ecwid store.",
+    "Beseam fetches your Ecwid pages without running scripts, shows what a crawler actually receives, and returns each gap with a server-side fix to apply.",
   keywords: [
-    "Ecwid AI optimization",
-    "ChatGPT Ecwid",
     "Ecwid structured data",
-    "Ecwid by Lightspeed schema",
-    "Ecwid product JSON-LD",
+    "Ecwid product schema",
+    "Ecwid by Lightspeed SEO",
+    "Ecwid JSON-LD server rendering",
+    "Ecwid Instant Site markup",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "JavaScript-rendered store invisible to AI crawlers",
+    title: "Served HTML may contain no product data",
     severity: "critical",
     description:
-      "Ecwid stores are embedded via JavaScript widget that renders the entire product catalog client-side. Most AI crawlers don't execute JavaScript, so they see only the host page content and none of your products, prices, or descriptions.",
+      "The Ecwid widget builds the catalog in the browser. A client that fetches the URL without executing scripts can receive the host page and an empty container: no product name, no price, no description. An assistant asked about that product has nothing on the page to read.",
     fix: `<!-- Ecwid provides an SEO-friendly catalog (Instant Site or SEO-optimized embedding) -->
 <!-- 1. Enable SEO-friendly URLs in Ecwid admin: -->
 <!-- Settings > General > SEO > Enable clean URLs -->
@@ -57,10 +57,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Product variations exist only in JavaScript state",
+    title: "Variations live only in widget state",
     severity: "high",
     description:
-      "Ecwid product options and combinations (size, color, material) live entirely in the JavaScript widget state. AI engines can't interact with dropdowns or see variation-specific pricing, images, or availability.",
+      "Options and combinations, and the price, image and stock attached to each, exist in the widget's JavaScript state. Nothing opens a dropdown on a crawler's behalf. An assistant reporting your price reports one number, or none, for a product you sell at several.",
     fix: `<!-- Use Ecwid REST API to build server-side variant schema -->
 <!-- GET /api/v3/{storeId}/products/{id}?responseFields=combinations -->
 <script type="application/ld+json">
@@ -84,10 +84,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Ecwid Instant Site has no customizable structured data",
+    title: "Instant Site offers no injection point",
     severity: "high",
     description:
-      "Ecwid's Instant Site (free hosted storefront) generates basic meta tags but offers no way to customize or enhance structured data. You can't add custom JSON-LD or modify the schema output. AI engines see minimal product information.",
+      "Ecwid's hosted Instant Site emits its own meta tags and gives you nowhere to add JSON-LD. There is no theme file, no header injection and no override. Whatever it emits is what an assistant reads, and filling in every product field is the only lever you have left.",
     fix: `<!-- For Instant Site users: migrate product schema via external approach -->
 <!-- Option 1: Use a custom domain with your own hosting -->
 <!-- Option 2: Embed Ecwid on WordPress/Wix where you control the markup -->
@@ -102,10 +102,10 @@ const findings: Finding[] = [
      and use server-side rendering to output JSON-LD -->`,
   },
   {
-    title: "Category and collection pages have no schema",
+    title: "Category pages emit no collection markup",
     severity: "medium",
     description:
-      "Ecwid category pages are entirely JavaScript-rendered with no server-side HTML. AI engines see zero structured data for your product collections, meaning your catalog hierarchy and product relationships are invisible.",
+      "Ecwid category pages are drawn client-side and carry no CollectionPage or ItemList block. Nothing states which products sit in which category. An assistant asked for a shop that stocks a whole category cannot see that you stock it, only that a URL exists.",
     fix: `<!-- Server-side render category page schema using Ecwid API -->
 <!-- GET /api/v3/{storeId}/categories/{categoryId} -->
 <!-- GET /api/v3/{storeId}/products?category={categoryId} -->
@@ -136,11 +136,10 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Ecwid (now Ecwid by Lightspeed) is an embeddable e-commerce solution that lets you add a full online store to any existing website. With over 100,000 active stores, it's popular for businesses that want to add shopping to an existing site without rebuilding.",
-  "The fundamental AI readability challenge with Ecwid is its architecture: the entire store is a JavaScript widget. When AI crawlers visit your page, they see your host website's content and an empty div where your store should be. No products, no prices, no structured data.",
-  "Ecwid does offer SEO-friendly URLs and server-side rendering for some hosting platforms (notably WordPress via their plugin), but many Ecwid stores are embedded on custom sites or use Instant Site where these features don't apply or are limited.",
-  "For stores using Ecwid's Instant Site (their free hosted storefront), there's virtually no way to customize structured data. The platform generates basic meta tags but offers no code injection points for custom JSON-LD.",
-  "Beseam audits your Ecwid store from the perspective of 13 AI engines, identifies what they can and can't see through the JavaScript rendering layer, and provides server-side solutions using Ecwid's REST API to make your products AI-readable.",
+  "Ecwid, now Ecwid by Lightspeed, adds a store to a site you already have. The catalog arrives as a JavaScript widget, which is what makes it quick to install and hard to read. Fetch the page with scripts off and you often get the host page and an empty container.",
+  "Ecwid does prerender for some crawlers and some hosting setups, and its WordPress plugin renders server-side. Coverage is uneven across custom sites and Instant Site, and it is not safe to assume a given client gets the rendered version. Checking costs one request, so make the request.",
+  "Instant Site is the tightest case. It generates meta tags but offers no injection point for your own JSON-LD, so the schema you get is the schema you keep. Embedding Ecwid on a site whose markup you control is the practical route to fixing most of what turns up here.",
+  "Where you control the host page, Ecwid's REST API returns products, combinations and categories, and you can render JSON-LD server-side from it. Beseam shows which fields are missing from the served HTML and what the API already holds. The rendering change is yours to make; Beseam only reads.",
 ];
 
 const otherPlatforms = [
@@ -155,8 +154,8 @@ export default function EcwidAuditPage() {
   return (
     <PlatformAuditPage
       platform="Ecwid"
-      headline="How does AI see your Ecwid store?"
-      description="Ecwid renders your entire store via JavaScript. AI crawlers see an empty page. Beseam identifies what's invisible and shows you how to fix it."
+      headline="Your Ecwid catalog lives inside a JavaScript widget"
+      description="Beseam requests your Ecwid pages the way a crawler does, with and without JavaScript, and reports the difference. You get the product data missing from the served HTML, the evidence, and a server-side fix using Ecwid's API for someone on your team to apply."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

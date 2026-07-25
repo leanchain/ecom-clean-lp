@@ -357,7 +357,7 @@ export default function ProductionHomepage() {
           </div>
 
           {SYSTEMS.map((system) => (
-            <section key={system.id} id={system.id === "decide" ? "foundation" : system.id === "act" ? "advertising" : undefined} className="scroll-mt-24 border-b border-black/22 py-20 sm:py-24 lg:py-28">
+            <section key={system.id} id={system.id === "decide" ? "foundation" : system.id === "act" ? "advertising" : "observe"} className="scroll-mt-24 border-b border-black/22 py-20 sm:py-24 lg:py-28">
               <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
                 <div>
                   <div className="flex items-baseline gap-4">

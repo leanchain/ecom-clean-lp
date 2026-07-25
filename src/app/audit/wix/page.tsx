@@ -3,28 +3,28 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Wix Store?",
+  title: "Wix product data audit",
   description:
-    "Wix stores have auto-generated schema with little merchant control. Beseam audits how ChatGPT, Gemini, and 13 AI engines read your Wix product pages.",
+    "Beseam reads the schema Wix emits on your product and category pages, then returns a list of gaps with evidence and a proposed fix for each.",
   keywords: [
-    "Wix AI optimization",
-    "ChatGPT Wix",
     "Wix structured data",
-    "Wix e-commerce schema",
-    "Wix product pages AI",
+    "Wix product schema",
+    "Wix Velo JSON-LD",
+    "Wix store SEO audit",
+    "Wix product page markup",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "Auto-generated schema omits critical product details",
+    title: "Auto-generated schema omits your product attributes",
     severity: "critical",
     description:
-      "Wix auto-generates Product schema with basic fields - name, image, price, availability. It does not include brand, material, weight, dimensions, selling points, or any custom attribute you've entered. AI engines see a generic listing with nothing to recommend.",
+      "Wix emits name, image, price and availability. Brand, material, weight, dimensions and the selling points you entered in product fields are not in the markup. An assistant comparing your product against three others has nothing from you to tell them apart, so it has little reason to prefer yours.",
     fix: `<!-- Wix Velo (formerly Corvid) - Add custom JSON-LD to product pages -->
 <!-- In your product page code (Velo Editor): -->
 
-import wixWindow from 'wix-window';
+import wixSeo from 'wix-seo';
 
 $w.onReady(function () {
   const product = $w('#productPage1').getProduct();
@@ -50,14 +50,14 @@ $w.onReady(function () {
     },
   };
 
-  wixWindow.setPageStructuredData([schema]);
+  wixSeo.setStructuredData([schema]);
 });`,
   },
   {
-    title: "Wix renders product content via JavaScript",
-    severity: "high",
+    title: "Crawlers may receive less than the browser",
+    severity: "medium",
     description:
-      "Wix uses a JavaScript-heavy rendering engine. While Wix does server-render some content for SEO, product pages can have delayed rendering that AI crawlers may not fully execute - leading to incomplete content being indexed.",
+      "Wix renders much of the storefront in JavaScript and server-renders for search crawlers, but coverage varies by page and by client. An assistant that fetches the URL without running scripts can get markup with no product body, so it answers from your title alone.",
     fix: `<!-- Wix SEO Settings - Ensure SSR is enabled -->
 <!-- Dashboard > Marketing & SEO > SEO Tools > SEO Patterns -->
 
@@ -72,20 +72,21 @@ $w.onReady(function () {
 <!-- curl -s "https://yourstore.wixsite.com/product-page" | grep "ld+json" -->
 
 <!-- If empty, AI crawlers can't see your structured data -->
-<!-- Use Beseam to verify what 13 AI engines actually see -->`,
+<!-- Use Beseam to compare this output with what assistants receive -->`,
   },
   {
-    title: "Product variants lack individual schema",
+    title: "Variants share one price in the markup",
     severity: "high",
     description:
-      "Wix products with options (size, color) emit a single Offer in the schema with the base price. AI engines can't distinguish between variant prices, so they may quote incorrect pricing when shoppers ask about specific options.",
-    fix: `// Wix Velo - Add per-variant Offer schema
-import wixWindow from 'wix-window';
-import wixStores from 'wix-stores';
+      "A Wix product with size or colour options emits one Offer at the base price. Ask an assistant what the extra-large costs and it repeats that single number. The shopper arrives expecting one price, meets another at checkout, and the order is the thing you lose.",
+    fix: `// Wix Velo — Add per-variant Offer schema
+import wixSeo from 'wix-seo';
+import { getProductVariants } from 'backend/products.web';
+// backend/products.web.js wraps wix-stores-backend getProductVariants()
 
 $w.onReady(async function () {
   const product = $w('#productPage1').getProduct();
-  const variants = await wixStores.getProductVariants(product._id);
+  const variants = await getProductVariants(product._id);
 
   const offers = variants.map(v => ({
     '@type': 'Offer',
@@ -104,18 +105,18 @@ $w.onReady(async function () {
     offers: offers,
   };
 
-  wixWindow.setPageStructuredData([schema]);
+  await wixSeo.setStructuredData([schema]);
 });`,
   },
   {
-    title: "Collection pages missing catalog structure",
+    title: "Category pages carry no catalog structure",
     severity: "medium",
     description:
-      "Wix store category pages display product grids but don't emit ItemList or CollectionPage schema. AI engines can't understand your product catalog hierarchy, making it harder for them to recommend products by category.",
+      "Wix category pages show a product grid and emit no ItemList or CollectionPage markup. An assistant asked which shops sell a whole category cannot see that a category by that name exists on your store, so it never reaches the products inside it.",
     fix: `<!-- Wix Velo - Add ItemList schema to collection pages -->
 <!-- In your Category page code: -->
 
-import wixWindow from 'wix-window';
+import wixSeo from 'wix-seo';
 import wixData from 'wix-data';
 
 $w.onReady(async function () {
@@ -130,7 +131,7 @@ $w.onReady(async function () {
     url: \`https://yourstore.com/product-page/\${p.slug}\`,
   }));
 
-  wixWindow.setPageStructuredData([{
+  wixSeo.setStructuredData([{
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: category,
@@ -145,11 +146,10 @@ $w.onReady(async function () {
 ];
 
 const contextParagraphs = [
-  "Wix is one of the most popular website builders worldwide, offering drag-and-drop simplicity for creating online stores. However, its closed ecosystem gives you limited control over the structured data that AI engines read.",
-  "Wix auto-generates basic Product schema - name, image, price - but omits virtually every product attribute AI engines need to make recommendations: brand, material, size details, selling points, and competitive context. None of your carefully entered product info reaches AI crawlers.",
-  "Wix's JavaScript-heavy rendering is another concern. While Wix has improved its server-side rendering for SEO, AI crawlers vary in their ability to execute JavaScript. Some AI engines may only see a partial page, missing key product details.",
-  "Wix Velo (the platform's coding environment) does offer some schema control, but it requires developer knowledge and manual implementation per page type - a significant barrier for most Wix users who chose the platform specifically to avoid coding.",
-  "Beseam audits your Wix store from the perspective of 13 AI engines, revealing exactly what each engine sees. Even on a platform with limited schema control, knowing your gaps is the first step to fixing them.",
+  "Wix builds and injects Product schema for you. The visual editor exposes no field for it, so name, image, price and availability go out as Wix decides, while the brand, material, dimensions and selling points you typed into product fields usually do not travel with them.",
+  "The override path is Velo, Wix's code environment. Its SEO API can replace a page's structured data, but the work runs per page type and needs a developer. Most merchants chose Wix to avoid that, so the default markup is what assistants end up reading.",
+  "Products with options ship a single offer at the base price. When a shopper asks ChatGPT or Perplexity what the large costs, the assistant answers from the only price in the markup, which is often not the price the shopper would pay.",
+  "Beseam fetches the same pages a crawler does, compares the emitted markup against the catalog data you already hold, and lists what is missing. Each gap arrives with the response it came from and a proposed change. Someone on your team applies it; Beseam does not write to Wix.",
 ];
 
 const otherPlatforms = [
@@ -164,8 +164,8 @@ export default function WixAuditPage() {
   return (
     <PlatformAuditPage
       platform="Wix"
-      headline="How does AI see your Wix store?"
-      description="Wix makes building beautiful stores easy - but gives you almost no control over what AI engines see. Beseam reveals the gaps."
+      headline="Wix auto-generates product schema you cannot edit directly"
+      description="Beseam fetches your Wix product and category pages and reads the JSON-LD Wix emits. You get a ranked list of gaps, the evidence behind each one, and a fix to approve — Beseam does not change your store."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

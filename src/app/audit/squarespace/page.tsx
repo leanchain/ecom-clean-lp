@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Squarespace Store?",
+  title: "Squarespace product data audit",
   description:
-    "Squarespace stores have limited structured data and restricted schema customization. Beseam audits how AI engines read your product pages and shows you what to fix.",
+    "Beseam reads the Product and collection markup Squarespace emits, then returns the gaps, the evidence, and the code injection needed to close them.",
   keywords: [
-    "Squarespace AI optimization",
-    "ChatGPT Squarespace",
     "Squarespace structured data",
     "Squarespace product schema",
-    "Squarespace e-commerce AI",
+    "Squarespace code injection",
+    "Squarespace commerce SEO",
+    "Squarespace product page markup",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "Product schema is auto-generated and minimal",
+    title: "Generated Product schema carries no brand or specifics",
     severity: "critical",
     description:
-      "Squarespace auto-generates Product schema that includes name, price, image, and availability - but omits brand, material, selling points, use cases, and every product detail AI engines need to make confident recommendations. You cannot edit this schema directly.",
+      "Squarespace emits name, price, image and availability, then stops. There is no brand, material, dimension or use-case field in the output and no editor control to add one. An assistant comparing three linen shirts has nothing from you beyond a price, so it ranks on whoever supplied detail.",
     fix: `<!-- Squarespace Code Injection (Settings > Advanced > Code Injection) -->
 <!-- Add this to your Product Page's "Page Header Code Injection" -->
 <script type="application/ld+json">
@@ -42,10 +42,10 @@ const findings: Finding[] = [
      Use Beseam to ensure they don't conflict. -->`,
   },
   {
-    title: "No control over schema output without code injection",
+    title: "Code injection is the only override path",
     severity: "high",
     description:
-      "Squarespace doesn't expose schema editing through its visual editor. The only way to modify structured data is via Code Injection - which requires a Business plan or higher and is manual per-page. Most stores never touch it.",
+      "Structured data is not exposed in the Squarespace editor. Changing it means code injection, which needs a Business plan or higher and is applied by hand, page by page. Stores with more than a few products rarely do it, so the generated minimum is what assistants read across the catalog.",
     fix: `<!-- Squarespace Business/Commerce plan required -->
 <!-- Settings > Advanced > Code Injection > Footer -->
 
@@ -55,17 +55,18 @@ const findings: Finding[] = [
 <!-- Approach 2: Use a Squarespace plugin / third-party service -->
 <!-- Beseam can audit and recommend the exact JSON-LD to inject -->
 
-<!-- Approach 3: Use Squarespace's Custom CSS to hide default -->
-<!-- and inject corrected schema via global code injection -->
+<!-- Approach 3: Merge, don't duplicate. Squarespace's own Product -->
+<!-- block stays in the page and CSS cannot remove it, since JSON-LD -->
+<!-- is never rendered. Read it first, then add only what it lacks. -->
 
 <!-- Verify your schema: -->
 <!-- https://validator.schema.org/?url=YOUR_PRODUCT_URL -->`,
   },
   {
-    title: "Category/collection pages have zero structured data",
+    title: "Shop pages emit no collection markup",
     severity: "high",
     description:
-      "Squarespace product category pages display product grids visually but emit no ItemList or CollectionPage schema. AI engines crawling your store cannot discover product-to-category relationships or understand your catalog structure.",
+      "Squarespace category pages render a product grid with no CollectionPage or ItemList block. Nothing in the markup states which products belong to which category. An assistant answering a category-shaped question has to infer your catalog one page at a time, and usually stops before it gets there.",
     fix: `<!-- Add to global Code Injection (Footer) with conditional logic -->
 <script>
   // Only run on collection/category pages
@@ -97,10 +98,10 @@ const findings: Finding[] = [
 </script>`,
   },
   {
-    title: "Product descriptions lack AI-readable structure",
+    title: "Descriptions read as prose, not specification",
     severity: "medium",
     description:
-      "Squarespace product descriptions are freeform rich text. Most stores write marketing-heavy prose that reads well to humans but lacks the specification-dense structure AI engines prefer - bullet-pointed materials, dimensions, care instructions, and comparisons.",
+      "Squarespace product descriptions are freeform rich text, and most read as marketing paragraphs. Materials, dimensions, weight and care sit inside sentences rather than on labelled lines. An assistant asked whether the bag fits a 13-inch laptop cannot answer from prose it has to interpret, so it skips your product.",
     fix: `<!-- Structure your Squarespace product descriptions for AI readability -->
 <!-- In the product editor, format descriptions like this: -->
 
@@ -114,8 +115,8 @@ hidden laptop sleeve and RFID-blocking pocket.</p>
   <li><strong>Ideal for:</strong> Daily commuting, travel, weekend trips</li>
 </ul>
 
-<p><strong>Compared to similar bags:</strong> 40% lighter than the Bellroy
-Classic Backpack with the same laptop protection.</p>
+<p><strong>Compared to similar bags:</strong> [your own verified
+comparison here, with the measurement it came from]</p>
 
 <!-- AI engines extract structured lists and bold labels much better
      than flowing prose. -->`,
@@ -123,11 +124,10 @@ Classic Backpack with the same laptop protection.</p>
 ];
 
 const contextParagraphs = [
-  "Squarespace is known for its beautiful templates and ease of use, making it a popular choice for design-focused e-commerce stores. However, its closed ecosystem means you have very limited control over the structured data AI engines read.",
-  "The biggest AI readability issue on Squarespace is that product schema is auto-generated and cannot be edited through the visual editor. Squarespace outputs basic Product schema - name, price, image - but omits brand, material, selling points, and every rich attribute AI engines need to recommend your product.",
-  "Unlike open platforms like Shopify or WooCommerce, Squarespace doesn't have a theme file editor or plugin ecosystem for schema. Your only option is Code Injection (available on Business plan and above), which requires manual JSON-LD per product page - impractical for stores with more than a handful of products.",
-  "Category and collection pages are another major gap. Squarespace displays product grids beautifully, but emits zero CollectionPage or ItemList schema. AI engines parsing your store see isolated products with no catalog structure.",
-  "Beseam audits what AI engines actually see on your Squarespace store, identifies the specific schema gaps, and generates the exact Code Injection snippets you need - or recommends when migrating to a more flexible platform makes sense for AI visibility.",
+  "Squarespace emits Product schema on commerce pages without being asked: name, image, price, availability. The visual editor has no field for the rest. Brand, material, dimensions, care instructions and the reasons someone should buy this one stay inside your description text, where they are prose rather than markup.",
+  "The only override is code injection, which sits behind a Business or Commerce plan and is applied per page or site-wide. Adding a second Product block alongside the generated one can leave two conflicting descriptions of the same item, so read what is already on the page before you inject anything.",
+  "Shop and category pages are the wider gap. Squarespace renders the grid but emits no CollectionPage or ItemList markup. An assistant asked which shops sell linen aprons meets your products one at a time, with nothing in the page saying they belong to a category or to each other.",
+  "Beseam fetches your pages, parses what Squarespace actually emitted, and lists what is missing against the catalog you already maintain. Each item carries the response it came from and a snippet for code injection. Beseam is read-only; nothing reaches your site until someone on your team applies it.",
 ];
 
 const otherPlatforms = [
@@ -142,8 +142,8 @@ export default function SquarespaceAuditPage() {
   return (
     <PlatformAuditPage
       platform="Squarespace"
-      headline="How does AI see your Squarespace store?"
-      description="Squarespace makes beautiful stores - but locks you out of the structured data AI engines need. Beseam shows you what's missing and how to fix it."
+      headline="Squarespace generates your product schema; you cannot edit it"
+      description="Beseam reads the JSON-LD on your Squarespace product and shop pages the way an assistant would, then returns each gap with the evidence behind it and the code injection snippet that closes it. You decide whether to paste it in."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your PrestaShop Store?",
+  title: "PrestaShop product data audit",
   description:
-    "PrestaShop stores have configurable schema but most run defaults that leave critical AI readability gaps. Beseam audits and generates targeted fixes.",
+    "Beseam checks the Product JSON-LD your PrestaShop theme and modules emit, finds conflicts and gaps, and returns evidence with a proposed fix.",
   keywords: [
-    "PrestaShop AI optimization",
-    "ChatGPT PrestaShop",
     "PrestaShop structured data",
-    "PrestaShop schema markup",
-    "PrestaShop SEO AI",
+    "PrestaShop product schema",
+    "PrestaShop JSON-LD module",
+    "PrestaShop combinations schema",
+    "PrestaShop Smarty template schema",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "Default Product schema misses rich attributes",
+    title: "Product features never reach the schema block",
     severity: "critical",
     description:
-      "PrestaShop's built-in schema module outputs basic Product JSON-LD - name, description, image, price, and availability. Custom features, materials, selling points, and product-specific attributes stored in your catalog are not included in the schema output.",
+      "The core theme prints name, description, image, price, and availability. Everything you configured as a feature or attribute — material, capacity, certification, compatibility — stays in the database. An assistant comparing your product against a competitor has the name and the price, and no reason to prefer yours.",
     fix: `// Override ProductController or use a custom module
 // modules/yourmodule/override/controllers/front/ProductController.php
 
@@ -53,10 +53,10 @@ public function initContent()
 }`,
   },
   {
-    title: "Combination/variant pricing not reflected in schema",
+    title: "Combination prices missing from the offer block",
     severity: "high",
     description:
-      "PrestaShop products with combinations (size/color variants) emit schema with only the default combination's price. AI engines can't provide accurate pricing for specific variants when shoppers ask.",
+      "PrestaShop emits one offer built from the default combination. A catalog with size or capacity ranges therefore publishes a single price for a product that sells across a wide band. A shopper told one number by an assistant and shown another in the cart is a shopper who leaves.",
     fix: `// Add per-combination Offer schema
 $combinations = $product->getAttributeCombinations($this->context->language->id);
 $offers = [];
@@ -84,10 +84,10 @@ foreach ($grouped as $id => $data) {
 $schema['offers'] = $offers;`,
   },
   {
-    title: "Module conflicts create duplicate schema",
+    title: "Several modules print schema on one page",
     severity: "high",
     description:
-      "PrestaShop's module ecosystem often results in multiple SEO modules emitting their own schema - the core module, third-party SEO modules, and theme-level schema can all conflict, giving AI engines contradictory product data.",
+      "The core block, an SEO module, a rich-snippet module, and a theme override can each emit their own script tag. The page then carries contradictory prices and availability for the same product. Contradiction is worse than absence: a parser that cannot reconcile the two may discard both.",
     fix: `// 1. Identify all schema sources
 // Check: Back Office > Modules > Search "schema" or "structured data"
 // Common culprits: SEO Expert, Google Rich Snippets, theme modules
@@ -104,10 +104,10 @@ $schema['offers'] = $offers;`,
 // Remove any hardcoded schema in template files if using a module`,
   },
   {
-    title: "Multi-language stores miss hreflang and localized schema",
+    title: "Language versions share one schema block",
     severity: "medium",
     description:
-      "PrestaShop's multi-language feature serves product pages in different languages under the same URL with a language prefix. Without proper hreflang tags and localized schema, AI engines may index the wrong language version or mix languages in recommendations.",
+      "PrestaShop serves each language under its own URL prefix, but the emitted description and offer often stay in the shop's default language, and hreflang alternates are frequently incomplete. An assistant answering in French can quote your English copy, or treat the two URLs as two separate products.",
     fix: `<!-- In your theme's head section (themes/your-theme/templates/_partials/head.tpl) -->
 {foreach $languages as $language}
   <link rel="alternate"
@@ -123,11 +123,10 @@ $schema['offers'] = $offers;`,
 ];
 
 const contextParagraphs = [
-  "PrestaShop is one of the most popular open-source e-commerce platforms, particularly in Europe and Latin America. It powers over 300,000 stores and offers full control over structured data through its module and template system.",
-  "The most common AI readability problem on PrestaShop is that the default schema output is basic. PrestaShop's core emits Product schema with name, price, and availability - but your carefully configured product features, materials, and attributes are stored in the database without ever appearing in structured data.",
-  "Module conflicts are another frequent issue. PrestaShop's marketplace has dozens of SEO and schema modules, and stores that install multiple modules end up with duplicate or conflicting structured data. AI engines see two different prices or availability statuses and lose confidence in your data.",
-  "Multi-language deployments add complexity. PrestaShop handles multiple languages well in the admin, but the schema output often defaults to the primary language regardless of which language the user (or AI crawler) is viewing.",
-  "Beseam audits your PrestaShop store across 118+ AI readability checks, identifies schema conflicts from multiple modules, and generates the exact PHP and Smarty template fixes for your specific setup.",
+  "PrestaShop 1.7 and 8 emit Product JSON-LD from the core theme, covering name, description, image, price, and availability. The features and attributes you configured in the back office — material, capacity, compatibility — live in the feature tables and never reach the schema block.",
+  "Combinations are the second gap. The emitted offer carries the default combination's price and stock. A shopper asking an assistant what the large costs gets the price of whichever combination happens to be default, which on discounted ranges is often the cheapest one.",
+  "Module stacking causes the messiest failures. The core block, an SEO module, a rich-snippet module, and a theme override can each print a script tag on the same page. A parser then sees two prices and two availability values for one product, with no rule for choosing.",
+  "Beseam reads the pages as they are served, in each active language, and reports what it found. It does not install modules, edit templates, or change your shop. Each finding names the source that emitted it and comes with a proposed override for your developer to review.",
 ];
 
 const otherPlatforms = [
@@ -142,8 +141,8 @@ export default function PrestaShopAuditPage() {
   return (
     <PlatformAuditPage
       platform="PrestaShop"
-      headline="How does AI see your PrestaShop store?"
-      description="PrestaShop gives you full schema control - but most stores run the defaults. Beseam finds what's missing and generates the fixes."
+      headline="Your PrestaShop modules disagree about price and stock"
+      description="Beseam reads every JSON-LD block your PrestaShop pages emit, from the core theme, your template, and each installed module, then reports where they conflict, where combinations are missing, and where fields are empty. You get the evidence and a proposed override, not an automatic edit."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

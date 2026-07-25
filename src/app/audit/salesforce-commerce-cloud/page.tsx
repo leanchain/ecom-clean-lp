@@ -3,24 +3,24 @@ import PlatformAuditPage from "@/components/beseam/platform-audit-page";
 import type { Finding } from "@/components/beseam/sample-findings";
 
 export const metadata: Metadata = {
-  title: "How Does AI See Your Salesforce Commerce Cloud Store?",
+  title: "Salesforce Commerce Cloud product data audit",
   description:
-    "Salesforce Commerce Cloud sites often rely on ISML templates with minimal schema output. Beseam audits how AI engines read your SFCC storefront and shows what's missing.",
+    "Beseam checks what your SFCC storefront's ISML and SFRA templates emit as structured data, then returns the gaps with evidence and a proposed fix.",
   keywords: [
-    "Salesforce Commerce Cloud AI optimization",
     "SFCC structured data",
     "SFCC JSON-LD",
-    "Salesforce B2C Commerce schema",
-    "ChatGPT Salesforce Commerce",
+    "SFRA product schema",
+    "ISML template schema",
+    "Salesforce B2C Commerce product markup",
   ],
 };
 
 const findings: Finding[] = [
   {
-    title: "ISML templates emit minimal Product schema",
+    title: "SFRA emits Microdata, not JSON-LD",
     severity: "critical",
     description:
-      "Salesforce Commerce Cloud ISML templates include only basic Microdata by default - product name and price. AI engines need complete JSON-LD with images, brand, availability, reviews, and detailed descriptions to surface your products accurately.",
+      "The SFRA product detail page carries itemprop attributes for name, price, and availability, and little else. There is no JSON-LD block with images, brand, GTIN, condition, or shipping terms. An assistant asked to compare your product against a competitor has a name and a number to work with.",
     fix: `<!-- Add to product/productDetails.isml -->
 <isscript>
   var product = pdict.product;
@@ -48,10 +48,10 @@ const findings: Finding[] = [
 <script type="application/ld+json"><isprint value="\${JSON.stringify(schema)}" encoding="off" /></script>`,
   },
   {
-    title: "Variation groups lack per-variant schema",
+    title: "Variation masters carry no per-variant offers",
     severity: "high",
     description:
-      "SFCC variation groups (e.g., color/size) generate a single page with JavaScript-driven swatches. AI engines can't trigger these interactions - they only see the master product's base price and attributes, missing all variant-level data.",
+      "A variation master renders with the base price and one availability state. Per-variant price, SKU, and stock arrive through a Product-Variation call fired on swatch click. Nothing in the crawled response separates the cheapest variant from the most expensive, so an assistant quotes one price for the whole range.",
     fix: `<!-- Add AggregateOffer for all variants in productDetails.isml -->
 <isscript>
   var variants = product.variationModel.variants;
@@ -73,10 +73,10 @@ const findings: Finding[] = [
 </isscript>`,
   },
   {
-    title: "Content slots and Einstein recommendations invisible to AI",
+    title: "Cross-sells load after the initial response",
     severity: "high",
     description:
-      "SFCC's content slots and Einstein AI recommendations are loaded dynamically via AJAX. AI engines see empty placeholder divs where your cross-sell and upsell content should be. Related products and curated collections are completely invisible.",
+      "Content slots, Einstein recommendation carousels, and Page Designer regions are commonly hydrated by AJAX. A crawler stores the empty container. Bundles, accessories, and merchandised collection copy — the parts that answer what else a shopper needs with this item — never reach the assistant.",
     fix: `<!-- Server-side render related products in template -->
 <!-- In productDetails.isml, add related products as schema -->
 <isscript>
@@ -95,10 +95,10 @@ const findings: Finding[] = [
 </isscript>`,
   },
   {
-    title: "Multi-site architecture creates canonical and hreflang issues",
+    title: "Multi-site canonicals point at the wrong site",
     severity: "medium",
     description:
-      "SFCC's multi-site architecture (different locales, brands on one instance) often generates conflicting canonical URLs and missing hreflang tags. AI engines may index the wrong locale or see duplicate products across sites, diluting your structured data authority.",
+      "One instance serving several sites and locales often emits canonical URLs built from the wrong site ID, and hreflang sets covering only some locales. The same product then exists at several addresses with different prices, and an assistant has no basis for choosing the one that applies.",
     fix: `<!-- Ensure proper hreflang and canonical in htmlHead.isml -->
 <isscript>
   var sites = dw.system.Site.getAllSites();
@@ -119,11 +119,10 @@ const findings: Finding[] = [
 ];
 
 const contextParagraphs = [
-  "Salesforce Commerce Cloud (formerly Demandware) powers some of the world's largest retail brands. Its enterprise-grade infrastructure delivers fast, scalable storefronts - but its ISML templating system outputs minimal structured data by default.",
-  "The core issue for AI readability is that SFCC's reference architecture (SFRA) includes only basic Microdata attributes, not the comprehensive JSON-LD that modern AI engines expect. This means your carefully merchandised product data stays locked in the SFCC backend where AI can't access it.",
-  "Einstein recommendations, content slots, and A/B test variations - all powered by AJAX - are invisible to AI crawlers. The dynamic personalization that makes SFCC powerful for shoppers creates a blank page for machines.",
-  "For enterprises running multiple brands or locales on a single SFCC instance, there's an added challenge: conflicting canonical URLs and hreflang gaps that confuse AI engines about which version of a product is authoritative.",
-  "Beseam audits your Salesforce Commerce Cloud storefront from the perspective of 13 AI engines, identifies gaps in your ISML template output, and generates the exact code changes for your SFRA cartridge to maximize AI readability.",
+  "Salesforce B2C Commerce runs on ISML templates and, in most implementations, the SFRA reference architecture. SFRA ships Microdata attributes on the product detail page — itemprop for name, price, and availability — and no JSON-LD. Anything beyond that came from a cartridge someone on your team wrote.",
+  "Variation masters are the usual break. The PDP renders the master, and variant price, SKU, and stock arrive through a Product-Variation call. An assistant reading the served page sees the master's price and one availability state, so it answers with the wrong number for the size a shopper asked about.",
+  "Content slots, Einstein recommendations, and Page Designer components are often fetched after the first response, so a crawler gets empty containers where cross-sells belong. Multi-site instances add canonical URLs built from the wrong site ID and hreflang sets that skip locales, which makes one product look like several.",
+  "Beseam reads the storefront the way an assistant does and reports what it found. It does not write to your cartridges or deploy anything. Each finding carries the response that produced it and a proposed ISML or controller change for your team to review.",
 ];
 
 const otherPlatforms = [
@@ -138,8 +137,8 @@ export default function SalesforceCommerceCloudAuditPage() {
   return (
     <PlatformAuditPage
       platform="Salesforce Commerce Cloud"
-      headline="How does AI see your SFCC storefront?"
-      description="Salesforce Commerce Cloud's ISML templates emit minimal structured data. AI engines can't see your product attributes, variants, or recommendations. Beseam shows what's missing."
+      headline="SFCC storefronts emit less schema than your catalog holds"
+      description="Beseam reads the HTML your SFCC storefront actually serves: the Microdata and JSON-LD your ISML templates emit, and what the SFRA controllers leave out. You get a ranked list of gaps with the evidence behind each, and a proposed template change your team reviews before it ships."
       contextParagraphs={contextParagraphs}
       findings={findings}
       otherPlatforms={otherPlatforms}

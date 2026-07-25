@@ -1,17 +1,13 @@
-"use client";
-
-import { useState, type FormEvent } from "react";
-
 import Link from "next/link";
 
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
+import BookReviewCta from "@/components/beseam/book-review-cta";
+import LeadCaptureForm from "@/components/beseam/lead-capture-form";
+import Reveal from "@/components/beseam/reveal";
 import SampleFindings, {
   type Finding,
 } from "@/components/beseam/sample-findings";
-import AnimatedBorderContainer from "@/components/ui/animated-border-container";
-import { Input } from "@/components/ui/input";
 
 interface PlatformAuditPageProps {
   platform: string;
@@ -22,6 +18,21 @@ interface PlatformAuditPageProps {
   otherPlatforms: { name: string; href: string }[];
 }
 
+const BOUNDARIES = [
+  [
+    "Read-only",
+    "The scan reads public pages and the structured data your storefront already emits. It does not install an app, change a template, or publish anything to your store.",
+  ],
+  [
+    "Evidence, then a proposal",
+    "Each gap is shown with the page it came from and a specific change to make. Your team decides whether to apply it.",
+  ],
+  [
+    "No placement promises",
+    "No vendor controls whether an assistant cites you. Correct, complete product data is what you can control, so that is what this checks.",
+  ],
+] as const;
+
 export default function PlatformAuditPage({
   platform,
   headline,
@@ -30,212 +41,169 @@ export default function PlatformAuditPage({
   findings,
   otherPlatforms,
 }: PlatformAuditPageProps) {
-  const [store, setStore] = useState("");
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const cleaned = store.trim();
-    if (!cleaned) return;
-
-    const normalized = /^https?:\/\//i.test(cleaned)
-      ? cleaned
-      : `https://${cleaned}`;
-
-    window.location.href = `https://app.beseam.com/scan?url=${encodeURIComponent(normalized)}`;
-  };
-
   return (
-    <>
-      <section className="relative overflow-hidden px-4 pb-12 pt-24 sm:px-6 md:pb-16 md:pt-32">
-        <div className="absolute left-1/2 top-0 -z-10 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-primary/5 blur-[120px]" />
-        <div className="container max-w-4xl text-center">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary"
-          >
-            {platform} AI Audit
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="font-heading text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl"
-          >
-            {headline}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground"
-          >
-            {description}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="mx-auto mt-8 w-full max-w-xl"
-          >
-            <AnimatedBorderContainer rounded="full">
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col gap-2 rounded-[28px] border bg-background/95 p-2 shadow-lg backdrop-blur sm:flex-row sm:items-center"
-              >
-                <Input
-                  type="text"
-                  value={store}
-                  onChange={(e) => setStore(e.target.value)}
-                  placeholder="https://yourstore.com/products/your-product"
-                  animate={false}
-                  className="h-12 flex-1 rounded-full border-0 bg-transparent px-5 text-sm shadow-none focus-visible:border-0 focus-visible:ring-0"
+    <div className="bg-[#f4f1e9] text-[#151515]">
+      <section className="border-b border-black/18">
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-end lg:gap-16">
+            <div>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+                {platform} · Product data audit
+              </p>
+              <h1 className="mt-7 max-w-[12ch] font-serif text-[clamp(2.9rem,5vw,4.6rem)] font-normal leading-[0.99] tracking-[-0.045em] text-[#111318]">
+                {headline}
+              </h1>
+            </div>
+            <div className="self-end">
+              <p className="max-w-2xl text-[18px] leading-[1.65] text-black/68">
+                {description}
+              </p>
+              <div className="mt-8">
+                <LeadCaptureForm
+                  mode="product-page"
+                  source="platform_audit"
+                  placement={`audit_${platform.toLowerCase().replaceAll(" ", "_")}_hero`}
+                  storeLabel="Product page URL"
+                  storePlaceholder="https://yourstore.com/products/your-product"
+                  buttonLabel="Scan this product page"
+                  helpText="One public product page. No app install. We send the findings to your email and open the scan."
+                  storeFieldId="audit-hero"
                 />
-                <button
-                  type="submit"
-                  className="flex h-14 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-lg transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
-                >
-                  Scan Product Page
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              </form>
-            </AnimatedBorderContainer>
-            <p className="mt-3 text-xs text-muted-foreground">
-              Paste one public product page · No app install · Free scan
-            </p>
-          </motion.div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      <section className="bg-muted/20 px-4 py-16 sm:px-6 md:py-24">
-        <div className="container max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="font-heading text-2xl font-bold tracking-tight md:text-3xl">
-              {platform} &amp; AI readability: what you need to know
-            </h2>
-            <div className="mt-6 space-y-4">
-              {contextParagraphs.map((p, i) => (
-                <p
-                  key={i}
-                  className="text-sm leading-relaxed text-muted-foreground"
-                >
-                  {p}
-                </p>
+      <section className="border-b border-black/18 bg-[#ebe8df]">
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+            <div>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+                Platform behaviour
+              </p>
+              <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.4rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.04em]">
+                What {platform} emits, and where it stops.
+              </h2>
+            </div>
+            <div className="max-w-3xl space-y-5 text-[16px] leading-[1.75] text-black/66">
+              {contextParagraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)}>{paragraph}</p>
               ))}
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 md:py-24">
-        <div className="container max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-8"
-          >
-            <h2 className="font-heading text-2xl font-bold tracking-tight md:text-3xl">
-              Example findings we often see on {platform}
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Click any finding to see the type of fix.
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-          >
+      <section className="border-b border-black/18">
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+            <div>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+                Example findings
+              </p>
+              <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.4rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.04em]">
+                What we usually find on {platform}.
+              </h2>
+              <p className="mt-7 max-w-md text-[15px] leading-relaxed text-black/60">
+                Open a finding to see the change it would take to fix it. These
+                are patterns from real stores, not results from yours.
+              </p>
+            </div>
             <SampleFindings findings={findings} />
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      <section className="border-y border-border/40 bg-muted/20 px-4 py-16 sm:px-6 md:py-20">
-        <div className="container max-w-2xl text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="font-heading text-2xl font-bold tracking-tight md:text-3xl"
-          >
-            Scan one {platform} product page now
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.4 }}
-            className="mt-2 text-sm text-muted-foreground"
-          >
-            Start with a single PDP and see whether AI shopping surfaces can
-            actually understand it.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.4 }}
-            className="mx-auto mt-6 w-full max-w-xl"
-          >
-            <AnimatedBorderContainer rounded="full">
-              <form
-                onSubmit={handleSubmit}
-                className="flex flex-col gap-2 rounded-[28px] border bg-background/95 p-2 shadow-md backdrop-blur sm:flex-row sm:items-center"
-              >
-                <Input
-                  type="text"
-                  value={store}
-                  onChange={(e) => setStore(e.target.value)}
-                  placeholder="https://yourstore.com/products/your-product"
-                  animate={false}
-                  className="h-12 flex-1 rounded-full border-0 bg-transparent px-5 text-sm shadow-none focus-visible:border-0 focus-visible:ring-0"
-                />
-                <button
-                  type="submit"
-                  className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 active:scale-95"
+      <section className="border-b border-black/18 bg-[#111318] text-white">
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+            <div>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">
+                What this audit does not do
+              </p>
+              <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.4rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.04em]">
+                We read your store. We do not change it.
+              </h2>
+            </div>
+            <dl className="border-t border-white/22">
+              {BOUNDARIES.map(([term, detail]) => (
+                <div
+                  key={term}
+                  className="grid gap-2 border-b border-white/18 py-6 sm:grid-cols-[14rem_1fr] sm:gap-6"
                 >
-                  Scan Product Page
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              </form>
-            </AnimatedBorderContainer>
-          </motion.div>
+                  <dt className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-white/50">
+                    {term}
+                  </dt>
+                  <dd className="text-[14px] leading-relaxed text-white/64">
+                    {detail}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
       </section>
 
-      <section className="px-4 py-12 sm:px-6 md:py-16">
-        <div className="container max-w-3xl">
-          <p className="mb-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-            Also available
+      <section className="border-b border-black/18 bg-[#ebe8df]">
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+          <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-20">
+            <div>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+                Start here
+              </p>
+              <h2 className="mt-6 max-w-[13ch] font-serif text-[clamp(2.3rem,3.4vw,3.4rem)] font-normal leading-[1.04] tracking-[-0.04em]">
+                Scan one {platform} product page.
+              </h2>
+            </div>
+            <div className="self-end">
+              <LeadCaptureForm
+                mode="product-page"
+                source="platform_audit"
+                placement={`audit_${platform.toLowerCase().replaceAll(" ", "_")}_footer`}
+                storeLabel="Product page URL"
+                storePlaceholder="https://yourstore.com/products/your-product"
+                buttonLabel="Scan this product page"
+                helpText="Prefer to talk it through first? Book the 20-minute commerce review below."
+                storeFieldId="audit-footer"
+              />
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <BookReviewCta
+                  location={`audit_${platform.toLowerCase().replaceAll(" ", "_")}`}
+                  label="Book a 20-minute commerce review"
+                  className="w-full sm:w-auto"
+                />
+                <Link
+                  href="/shopify-store-health"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 text-[14px] font-semibold text-[#151515] underline decoration-black/25 underline-offset-7 hover:decoration-[#3154ff] sm:justify-start"
+                >
+                  See continuous store health{" "}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section>
+        <div className="mx-auto max-w-[92rem] px-5 py-12 sm:px-8 sm:py-16 lg:px-10">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45">
+            Audits for other platforms
           </p>
-          <h3 className="font-heading text-lg font-bold">
-            AI audits for other platforms
-          </h3>
-          <div className="mt-4 flex flex-wrap gap-3">
-            {otherPlatforms.map((p) => (
+          <div className="mt-6 flex flex-wrap gap-3">
+            {otherPlatforms.map((entry) => (
               <Link
-                key={p.name}
-                href={p.href}
-                className="inline-flex items-center rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary/30 hover:bg-primary/5"
+                key={entry.name}
+                href={entry.href}
+                className="inline-flex min-h-11 items-center border border-black/22 px-5 text-[14px] font-medium text-black/72 transition-colors hover:border-[#3154ff] hover:text-[#3154ff]"
               >
-                {p.name}
+                {entry.name}
               </Link>
             ))}
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
