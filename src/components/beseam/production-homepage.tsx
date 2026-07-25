@@ -326,7 +326,7 @@ export default function ProductionHomepage() {
           </Reveal>
 
           <div id="agent-loop" className="relative mt-16 scroll-mt-24 border-y border-black/22">
-            <div className="absolute left-0 right-0 top-[1.6rem] hidden h-px bg-[#3154ff] md:block" aria-hidden="true" />
+            <div className="absolute left-0 right-0 top-[3.1rem] hidden h-px bg-[#3154ff] md:block" aria-hidden="true" />
             <div className="grid md:grid-cols-4">
               {TRACE.map((item, index) => (
                 <div key={item.label} className="relative border-b border-black/18 py-5 md:border-b-0 md:border-r md:px-6 md:py-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
@@ -518,6 +518,34 @@ export default function ProductionHomepage() {
               <div id="creative-studio" className="scroll-mt-24 pt-6 text-[13px] leading-relaxed text-black/54">
                 Beta products remain marked Beta. Google and Meta bill media spend directly. Creative Studio shows the credit estimate before generation.
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-black/18 bg-[#f4f1e9]">
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <div className="grid gap-10 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
+            <div>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">Compare the operating model</p>
+              <h2 className="mt-6 font-serif text-[36px] leading-[1.02] tracking-[-0.038em]">Keep the tools that already do their job.</h2>
+              <Link href="/compare" className="mt-6 inline-flex items-center gap-2 text-[13px] font-semibold text-[#3154ff]">
+                View all comparisons <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="border-t border-black/24">
+              {[
+                ["Google Analytics", "Reporting", "Measure acquisition and events; use Beseam to rank the cross-system commerce issue."],
+                ["Hotjar", "Behavior", "Keep replay and heatmaps; use Beseam to connect the evidence to revenue action."],
+                ["VWO", "Experimentation", "Run the experiment in VWO; use Beseam to decide what deserves one."],
+              ].map(([name, category, detail]) => (
+                <Link key={name} href={`/compare/${name.toLowerCase().replaceAll(" ", "-")}`} className="group grid gap-3 border-b border-black/18 py-6 sm:grid-cols-[11rem_8rem_minmax(0,1fr)_auto] sm:items-start">
+                  <h3 className="text-[15px] font-semibold text-black/82">Beseam vs {name}</h3>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.09em] text-[#3154ff]">{category}</span>
+                  <p className="text-[13px] leading-relaxed text-black/56">{detail}</p>
+                  <ArrowRight className="h-4 w-4 text-[#3154ff] transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              ))}
             </div>
           </div>
         </div>

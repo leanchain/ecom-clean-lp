@@ -9,8 +9,12 @@
 /optimised-pdp  /tools/ai-visibility-scan  301
 /reports  /tools/ai-visibility-scan  301
 /audit/*  /tools/ai-visibility-scan  301
-/alternatives  /shopify-store-health  301
-/alternatives/*  /shopify-store-health  301
-/compare  /shopify-store-health  301
-/comparison  /shopify-store-health  301
+/alternatives  /compare  301
+/alternatives/google-analytics  /compare/google-analytics  301
+/alternatives/hotjar  /compare/hotjar  301
+/alternatives/contentsquare  /compare/contentsquare  301
+/alternatives/amplitude  /compare/amplitude  301
+/alternatives/vwo  /compare/vwo  301
+/alternatives/triple-whale  /compare/triple-whale  301
+/comparison  /compare  301
 /old  /  301
