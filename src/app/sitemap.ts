@@ -45,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.65,
     },
     { path: "/about", changeFrequency: "monthly" as const, priority: 0.7 },
+    { path: "/manifesto", changeFrequency: "monthly" as const, priority: 0.75 },
     {
       path: "/store-health-review",
       changeFrequency: "monthly" as const,

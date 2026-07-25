@@ -10,7 +10,7 @@ import TeamsSection from "@/components/beseam/teams-section";
 export const metadata = {
   title: { absolute: "About | Beseam" },
   description:
-    "Beseam is store health for Shopify - built by an engineer who spent his career making large systems measurable and reliable, now applied to Shopify discoverability and purchase health. Book a Store Health Review.",
+    "Why Pankaj Kumar founded Beseam after a year working closely with ecommerce founders and operators, applying a career in measurement and reliability to the revenue problems that cross commerce systems.",
 };
 
 const ADVISORS = [
@@ -37,15 +37,12 @@ export default function AboutPage() {
       <section className="relative overflow-hidden bg-surface">
         <div className="mx-auto max-w-4xl px-6 py-24 md:py-32">
           <Reveal>
-            <p className="editorial-eyebrow text-primary">Why we exist</p>
+            <p className="editorial-eyebrow text-primary">Why Beseam exists</p>
             <h1 className="editorial-hero mt-5 text-ink">
-              Store health should be something you can measure not something you
-              hope for.
+              Revenue problems do not respect software boundaries.
             </h1>
             <p className="editorial-body mt-6 max-w-2xl text-foreground">
-              Beseam makes Shopify stores measurable, showing the moment
-              discoverability slips or the purchase experience degrades, with
-              the evidence to act.
+              Beseam connects the evidence that falls between commerce systems, shows which issue deserves attention first, and carries it from diagnosis to a proposed fix and verified result.
             </p>
           </Reveal>
         </div>
@@ -67,17 +64,20 @@ export default function AboutPage() {
                   infrastructure.
                 </p>
                 <p>
-                  A Shopify store is the same problem at another scale: it can
-                  look fine on the surface while its technical discoverability
-                  quietly erodes or its purchase experience degrades.
+                  For the past year, he has worked closely with ecommerce founders and operators on real stores—tracing visibility gaps, product and feed problems, tracking drift, campaign readiness, and purchase friction.
                 </p>
                 <p>
-                  He founded Beseam after watching too many changes ship blind,
-                  to give teams the evidence to see what changed, why it
-                  matters, and how to verify the fix.
+                  The same pattern kept repeating: every tool could explain its own slice, while the revenue problem lived between them. He founded Beseam to connect that evidence, propose the change, and verify what happened next.
                 </p>
               </div>
-              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link
+                href="/manifesto"
+                className="mt-8 inline-flex items-center gap-2 text-[15px] font-semibold text-primary underline-offset-4 hover:underline"
+              >
+                Read why I am building Beseam
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <Link
                   href="https://linkedin.com/in/pankaj4u4m"
                   target="_blank"
@@ -183,11 +183,10 @@ export default function AboutPage() {
           <Reveal>
             <p className="editorial-eyebrow text-primary">Talk to us</p>
             <h2 className="editorial-heading mt-5 text-ink">
-              See what Beseam finds in your store.
+              Bring one store. See which issue deserves attention first.
             </h2>
             <p className="editorial-body mx-auto mt-5 max-w-2xl text-foreground">
-              A Store Health Review looks at your real Shopify setup, your
-              monitoring coverage and the issues you most need to catch.
+              A 20-minute commerce review looks at the store, the current stack, and the evidence Beseam would need to investigate the first material revenue leak.
             </p>
             <div className="mt-8 flex justify-center">
               <BookReviewCta variant="primary" location="about_footer" />
