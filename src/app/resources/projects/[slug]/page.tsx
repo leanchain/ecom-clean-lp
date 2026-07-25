@@ -13,23 +13,23 @@ import {
 
 const HEADINGS: FieldbookHeading[] = [
   {
-    id: "why-it-is-in-the-fieldbook",
-    title: "Why it is in the Fieldbook",
+    id: "how-the-fieldbook-uses-it",
+    title: "How the Fieldbook uses it",
     level: 2,
   },
   {
-    id: "useful-commerce-applications",
-    title: "Useful commerce applications",
+    id: "good-fit-for",
+    title: "Good fit for",
     level: 2,
   },
   {
-    id: "maintenance-and-usage-boundary",
-    title: "Maintenance and usage boundary",
+    id: "before-you-adopt-it",
+    title: "Before you adopt it",
     level: 2,
   },
   {
-    id: "related-fieldbook-workflows",
-    title: "Related Fieldbook workflows",
+    id: "related-guides",
+    title: "Related guides",
     level: 2,
   },
 ];
@@ -124,23 +124,24 @@ export default async function ResourcePage({
 
       <div className="fieldbook-prose mt-12">
         <h2
-          id="why-it-is-in-the-fieldbook"
+          id="how-the-fieldbook-uses-it"
           className="scroll-mt-36 border-t border-black/18 pt-9 font-serif text-[clamp(2rem,3.2vw,2.75rem)] leading-[1.08] tracking-[-0.035em]"
         >
-          Why it is in the Fieldbook
+          How the Fieldbook uses it
         </h2>
         <p className="text-[15px] leading-[1.78] text-black/64">
-          {resource.name} is included because it supports practical work in{" "}
-          <strong>{resource.category.toLowerCase()}</strong>. The Fieldbook uses
-          it as a project, standard, or primary source—not as evidence that its
-          maintainers endorse Beseam.
+          We refer to {resource.name} in work involving{" "}
+          <strong>{resource.category.toLowerCase()}</strong>. Its own
+          documentation remains the authority for installation, compatibility,
+          and current behavior. A listing here does not imply endorsement by its
+          maintainers.
         </p>
 
         <h2
-          id="useful-commerce-applications"
+          id="good-fit-for"
           className="scroll-mt-36 border-t border-black/18 pt-9 font-serif text-[clamp(2rem,3.2vw,2.75rem)] leading-[1.08] tracking-[-0.035em]"
         >
-          Useful commerce applications
+          Good fit for
         </h2>
         <ul className="space-y-2 border-l border-black/16 pl-5 text-[14px] leading-relaxed text-black/62">
           {resource.useCases.map((useCase) => (
@@ -159,10 +160,10 @@ export default async function ResourcePage({
         </div>
 
         <h2
-          id="maintenance-and-usage-boundary"
+          id="before-you-adopt-it"
           className="scroll-mt-36 border-t border-black/18 pt-9 font-serif text-[clamp(2rem,3.2vw,2.75rem)] leading-[1.08] tracking-[-0.035em]"
         >
-          Maintenance and usage boundary
+          Before you adopt it
         </h2>
         <dl className="grid gap-px border border-black/16 bg-black/16 sm:grid-cols-2">
           <div className="bg-[var(--beseam-surface)] p-5">
@@ -183,17 +184,16 @@ export default async function ResourcePage({
           </div>
         </dl>
         <p className="text-[13px] leading-relaxed text-black/56">
-          Confirm current requirements, support policy, compatibility, and
-          licensing against the official source before adopting the resource.
-          Fieldbook review metadata does not replace the maintainer's
-          documentation.
+          Check the official source for the current release, support policy,
+          compatibility notes, and license terms. The review date on this page
+          only records when Beseam last checked the listing.
         </p>
 
         <h2
-          id="related-fieldbook-workflows"
+          id="related-guides"
           className="scroll-mt-36 border-t border-black/18 pt-9 font-serif text-[clamp(2rem,3.2vw,2.75rem)] leading-[1.08] tracking-[-0.035em]"
         >
-          Related Fieldbook workflows
+          Related guides
         </h2>
         {relatedDocuments.length > 0 ? (
           <div className="grid gap-px border border-black/16 bg-black/16 sm:grid-cols-2">
@@ -221,8 +221,8 @@ export default async function ResourcePage({
           </div>
         ) : (
           <p className="text-[14px] leading-relaxed text-black/56">
-            No dedicated workflow currently depends on this resource. It remains
-            in the ecosystem index for its broader operational value.
+            No Fieldbook guide links to this entry yet. It is listed because it
+            is still relevant to the category.
           </p>
         )}
         {relatedResources.length > 0 && (

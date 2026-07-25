@@ -22,7 +22,7 @@ import { getFieldbookSearchIndex } from "@/lib/fieldbook-navigation";
 export const metadata: Metadata = {
   title: { absolute: "Commerce Fieldbook | Beseam" },
   description:
-    "A structured ecommerce knowledge base for observable problems, reusable agent skills, playbooks, open-source projects, standards, and primary references.",
+    "Commerce problem guides, agent skills, team playbooks, open-source projects, standards, and official references maintained by Beseam.",
   alternates: { canonical: "/resources" },
 };
 
@@ -31,42 +31,42 @@ const SECTIONS = [
     title: "Start here",
     href: "/resources/start-here",
     description:
-      "Understand the evidence model, skill boundaries, maturity labels, and editorial policy.",
+      "Learn what the Fieldbook treats as a fact, an estimate, a hypothesis, or a verified result.",
     icon: BookOpen,
   },
   {
     title: "Problems",
     href: "/resources/problems",
     description:
-      "Begin with the symptom your team can observe before committing to a cause or discipline.",
+      "Find the symptom closest to yours, then collect the details needed to narrow the cause.",
     icon: ClipboardCheck,
   },
   {
     title: "Agent skills",
     href: "/resources/skills",
     description:
-      "Run versioned, evidence-aware workflows with explicit inputs, outputs, checks, and boundaries.",
+      "Use a written procedure with a defined input list, output format, checks, and limits.",
     icon: Workflow,
   },
   {
     title: "Playbooks",
     href: "/resources/playbooks",
     description:
-      "Coordinate roles, systems, controlled actions, verification steps, and exit criteria.",
+      "Give each team a role, an order of work, and a clear definition of done.",
     icon: Boxes,
   },
   {
     title: "Projects and references",
     href: "/resources/projects",
     description:
-      "Browse open-source tools, standards, official documentation, and selected Beseam work.",
+      "Read the standards, platform documentation, and open-source tools used by the guides.",
     icon: FolderGit2,
   },
   {
     title: "Contribute",
     href: "/resources/contribute",
     description:
-      "Propose a correction, workflow, project, problem, or anonymized field result.",
+      "Send a correction, missing problem, useful project, or publishable field result.",
     icon: MessagesSquare,
   },
 ] as const;
@@ -87,7 +87,7 @@ export default function ResourcesPage() {
           <div className="mt-7 grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-20">
             <div>
               <h1 className="max-w-[11ch] font-serif text-[clamp(3.5rem,6.2vw,6.5rem)] font-normal leading-[0.95] tracking-[-0.055em]">
-                Commerce knowledge organized around the work.
+                Find the commerce problem in front of you.
               </h1>
               <Link
                 href="/resources/start-here"
@@ -98,10 +98,10 @@ export default function ResourcesPage() {
             </div>
             <div className="max-w-2xl">
               <p className="text-[19px] leading-[1.72] text-black/66">
-                Diagnose a real ecommerce problem, run a reusable skill,
-                coordinate a playbook, or inspect the primary references behind
-                the workflow. Beseam curates the system without pretending to
-                have invented the ecosystem.
+                Pick the symptom that matches your store. From there, the
+                Fieldbook links to a checklist, a team playbook, and the
+                official sources behind the recommendation. External work stays
+                credited to its maintainers.
               </p>
               <div className="mt-8">
                 <FieldbookSearch entries={searchEntries} />
@@ -148,10 +148,10 @@ export default function ResourcesPage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.65fr)_minmax(0,1.35fr)] lg:gap-20">
             <div>
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--beseam-accent)]">
-                Popular investigation paths
+                Common problems
               </p>
               <h2 className="mt-5 max-w-[10ch] font-serif text-[clamp(2.8rem,4vw,4.2rem)] leading-[1.02] tracking-[-0.04em]">
-                Start with a symptom. Continue with a workflow.
+                Pick the closest symptom.
               </h2>
             </div>
             <div className="border-t border-black/18">
@@ -189,10 +189,10 @@ export default function ResourcesPage() {
           <div className="flex flex-col gap-6 border-b border-white/16 pb-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--beseam-accent-soft)]">
-                Open ecosystem
+                Sources and tools
               </p>
               <h2 className="mt-5 font-serif text-[clamp(2.8rem,4vw,4.2rem)] leading-[1.02] tracking-[-0.04em]">
-                Original guidance, with the sources attached.
+                Read the rule before you change the store.
               </h2>
             </div>
             <Link

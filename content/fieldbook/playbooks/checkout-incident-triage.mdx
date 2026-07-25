@@ -1,7 +1,7 @@
 ---
 title: Partial checkout incident triage
 navTitle: Checkout incident triage
-summary: Coordinate support, QA, storefront, analytics, and reliability evidence for a purchase-path failure affecting only some visitors.
+summary: Coordinate support, QA, storefront, analytics, and reliability teams when a purchase failure affects only some visitors.
 category: Purchase operations
 kind: playbook
 status: stable
@@ -16,25 +16,25 @@ relatedResources:
   - axe-core
 ---
 
-Use this playbook when conversion or support signals suggest a purchase failure but the storefront is not fully down.
+Choose this playbook when support or conversion data points to a purchase failure while the store is still taking orders.
 
-## Immediate response
+## First response
 
-Preserve the affected time window, release context, customer-safe evidence, and any browser or market clustering. Avoid changing multiple systems before a reproducible condition is found.
+Preserve the time window, release history, safe customer evidence, and any browser, market, or payment pattern. Avoid changing several systems at once before the failure can be reproduced.
 
-## Sequence
+## Steps
 
-1. Define the affected step and customer impact.
-2. Build a minimal browser, device, market, and consent matrix.
-3. Reproduce with approved test data.
-4. Correlate browser evidence with traces, errors, and releases.
-5. Identify a controlled mitigation or rollback.
-6. Verify the original failure path.
-7. Add monitoring for the previously invisible step.
+1. Name the failing step and estimate the customer impact.
+2. Build a small matrix of browser, device, market, consent state, and payment method.
+3. Reproduce the failure with approved test data.
+4. Match browser output with traces, errors, and release events.
+5. Choose a focused mitigation or rollback.
+6. Retest the original path.
+7. Add monitoring for the step that was previously invisible.
 
-## Exit criteria
+## Done when
 
-- The observed failure is reproducible or bounded.
-- Mitigation ownership and customer impact are documented.
-- Verification covers the original affected conditions.
-- Follow-up work addresses detection and regression coverage.
+- The failure can be reproduced or its affected conditions are clearly bounded.
+- The mitigation owner and customer impact are recorded.
+- The original conditions pass the retest.
+- Follow-up work covers detection and regression testing.

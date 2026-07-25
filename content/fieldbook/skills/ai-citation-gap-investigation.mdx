@@ -1,7 +1,7 @@
 ---
 title: AI citation-gap investigation
 navTitle: AI citation-gap investigation
-summary: Compare monitored buying questions, cited sources, merchant attribution, and competitor presence to identify an evidence-backed content or catalog hypothesis.
+summary: Compare a fixed set of buying questions, cited pages, merchant attribution, product facts, and competing products.
 category: Discovery
 kind: skill
 status: emerging
@@ -20,46 +20,46 @@ relatedResources:
   - beseam-ai-visibility-scan
 ---
 
-Use this skill when monitored AI buying answers omit a product, cite competitors, or repeat inaccurate merchant facts.
+Run this investigation when AI shopping answers omit a product, cite a competitor, or state the merchant's facts incorrectly.
 
-## Required inputs
+## Inputs
 
-- Fixed prompt set
-- Named model or answer surface
-- Target products and markets
-- Timestamped observed answers
+- Fixed question set
+- Named model or answer system
+- Products and markets
+- Timestamped answers
 - Relevant competitors
-- Merchant-controlled product sources
+- Merchant-owned product sources
 
-## Expected output
+## Output
 
-- Visibility and citation matrix
-- Incorrect or unsupported claims
-- Source-pattern observations
-- Candidate controlled-object changes
+- Product-visibility and citation table
+- Incorrect or unsupported statements
+- Patterns in cited sources
+- Merchant-owned pages or data that may need work
 - Retest plan
 
-## Workflow
+## Steps
 
-1. Classify prompts by intent.
-2. Capture answers, citations, merchant attribution, and competitor presence.
-3. Inspect cited-source patterns and controlled product facts.
-4. Compare absent products with selected alternatives.
-5. Form a testable content, catalog, or entity hypothesis.
-6. Change one controlled object where possible.
-7. Retest the fixed prompt set and document differences.
+1. Group questions by buying intent.
+2. Record answers, citations, merchant attribution, and competing products.
+3. Compare cited pages with merchant-owned product facts.
+4. Compare absent products with the products the system selected.
+5. Write a testable explanation involving content, catalog data, or entity identity.
+6. Change one merchant-controlled source when there is a sound reason.
+7. Run the same questions again and record the difference.
 
 ## Checks
 
-- Product appearance
-- Fact accuracy
+- Whether the product appears
+- Accuracy of product facts
 - Merchant attribution
-- Citation sources
-- Competitor displacement
-- Market and timestamp consistency
+- Cited pages
+- Competing products
+- Market, model, and timestamp consistency
 
-## Boundaries
+## Limits
 
-<Callout type="boundary" title="Observation, not guarantee">
-Results are point-in-time observations. Retests can show answer changes but do not prove durable placement, search ranking, or revenue causation.
+<Callout type="boundary" title="A retest is a snapshot">
+A retest can show that an answer changed under the same conditions. It cannot establish durable placement, search ranking, or revenue impact.
 </Callout>

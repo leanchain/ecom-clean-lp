@@ -1,7 +1,7 @@
 ---
 title: Product structured-data validation
 navTitle: Product schema validation
-summary: Check whether visible product facts, JSON-LD, platform data, and search-specific requirements describe the same product and offer.
+summary: Check whether the rendered page and its JSON-LD describe the same product, variant, offer, reviews, and merchant terms.
 category: Catalog and product pages
 kind: skill
 status: stable
@@ -20,43 +20,43 @@ relatedResources:
   - playwright
 ---
 
-Use this skill after theme changes, app installations, catalog migrations, or diagnostics indicating missing or contradictory product markup.
+Run this validation after a theme change, app installation, catalog migration, or diagnostic warning about product markup.
 
-## Required inputs
+## Inputs
 
 - Rendered product-page URL
-- Expected product and variant facts
-- Target market
-- Relevant search or merchant surface
-- Recent theme or app changes when available
+- Expected product and variant data
+- Market
+- Relevant search or merchant diagnostic
+- Recent theme or app changes, when known
 
-## Expected output
+## Output
 
 - Parsed entity graph
-- Visible-to-markup comparison
-- Duplicate, missing, and contradictory fields
-- Owning template or integration hypothesis
+- Comparison of visible and structured values
+- Duplicate, missing, and conflicting fields
+- Likely template or integration owner
 - Retest checklist
 
-## Workflow
+## Steps
 
-1. Capture rendered HTML rather than relying only on source templates.
-2. Parse all Product, ProductGroup, Offer, Review, and merchant entities.
-3. Compare visible and structured facts.
-4. Verify product, variant, price, currency, availability, and URL relationships.
-5. Trace competing entities to their source.
-6. Correct the controlled implementation.
-7. Retest the rendered page and external diagnostic.
+1. Capture rendered HTML, not only the source template.
+2. Parse every `Product`, `ProductGroup`, `Offer`, `Review`, and merchant entity.
+3. Compare the graph with the visible page.
+4. Check product identity, variant, price, currency, availability, and URL links.
+5. Trace duplicate or conflicting entities to their source.
+6. Fix the theme, app, or integration that owns the output.
+7. Test the rendered page, then rerun the external diagnostic.
 
 ## Checks
 
 - Product and variant identity
 - Offer price, currency, availability, and URL
-- ProductGroup relationships
+- `ProductGroup` relationships
 - Reviews and aggregate ratings
-- Merchant, shipping, and return-policy relationships
-- Duplicate or conflicting entities
+- Merchant, shipping, and return-policy links
+- Duplicate or contradictory entities
 
-## Boundaries
+## Limits
 
-Valid markup does not guarantee a rich result. Markup must not contain facts or reviews that are absent from the visible customer experience.
+Valid markup can still be ineligible for display. It also must not state facts or reviews that shoppers cannot see on the page.

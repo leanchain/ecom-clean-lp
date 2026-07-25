@@ -1,7 +1,7 @@
 ---
 title: Shopify, analytics, and ad platforms disagree on revenue
 navTitle: Revenue reports disagree
-summary: Keep booked, observed, and attributed values separate while tracing scope, period, currency, identity, and attribution method.
+summary: Reconcile scope, dates, currency, transaction IDs, event collection, refunds, and attribution rules before comparing totals.
 category: Measurement and growth
 kind: problem
 status: stable
@@ -17,37 +17,37 @@ relatedResources:
   - opentelemetry-js
 ---
 
-Commerce, analytics, and advertising reports answer different questions. A discrepancy is expected until period, currency, transaction identity, event collection, refunds, tax, and attribution boundaries are aligned.
+These reports measure different things. The order system records orders, analytics records events it received, and ad platforms assign credit under their own models.
 
-## What teams usually observe
+## Typical symptoms
 
-- Channel dashboards claim more revenue than the order ledger.
+- Ad dashboards report more revenue than the order ledger.
 - Analytics misses or duplicates purchase events.
-- Teams manually reconcile dashboards every week.
-- Differences increase after consent, checkout, or tracking changes.
+- Teams reconcile dashboards by hand every week.
+- Differences grow after consent, checkout, or tracking changes.
 
-## Evidence to collect
+## What to capture
 
-Collect order-ledger totals and transaction identifiers, analytics events, channel reports, reporting period, timezone, currency, tax and refund treatment, consent coverage, and attribution windows.
+Collect order totals and transaction IDs, analytics events, channel reports, date range, timezone, currency, tax and refund treatment, consent coverage, and attribution windows.
 
-## What not to conclude yet
+## Keep the meanings straight
 
-<Callout type="boundary" title="Booked versus attributed">
-The commerce ledger represents booked orders. Analytics represents observed events. Advertising platforms represent attributed outcomes under their own models. Do not relabel one as another.
+<Callout type="boundary" title="Booked, observed, and attributed">
+Booked orders come from the commerce ledger. Observed purchases come from analytics events. Attributed results come from a channel model. They should not be renamed to make the totals match.
 </Callout>
 
-## Investigation workflow
+## Steps
 
-1. Define the exact period, timezone, currency, and order states.
-2. Reconcile transaction identifiers before comparing totals.
+1. Fix the date range, timezone, currency, and included order states.
+2. Match transaction IDs before comparing aggregate totals.
 3. Find missing, duplicate, late, or transformed events.
-4. Document each platform's attribution window and identity model.
-5. Separate collection defects from expected attribution differences.
-6. Assign remediation to commerce, analytics, consent, or channel owners.
+4. Write down each platform's attribution window and identity rules.
+5. Distinguish tracking defects from expected model differences.
+6. Assign each fix to the commerce, analytics, consent, or channel owner.
 
-## Verification checklist
+## Done when
 
-- Transaction-level matches are reproducible.
-- Duplicates and missing events have evidence.
-- Modeled conversions remain labeled as modeled.
-- Reconciliation rules are documented for future reporting.
+- Transaction-level matches can be reproduced.
+- Missing and duplicate events are documented.
+- Modeled conversions are still labeled as modeled.
+- The reconciliation rules can be reused in the next reporting period.

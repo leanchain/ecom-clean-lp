@@ -1,7 +1,7 @@
 ---
 title: Feed-to-PDP parity playbook
 navTitle: Feed-to-PDP parity
-summary: Coordinate catalog, storefront, feed, and channel owners around one field-level product truth investigation.
+summary: Bring catalog, storefront, feed, and channel owners together to resolve conflicting product data.
 category: Catalog operations
 kind: playbook
 status: stable
@@ -15,28 +15,28 @@ relatedResources:
   - playwright
 ---
 
-Use this playbook when product data contradictions cross team or system boundaries.
+Choose this playbook when the contradiction crosses team or system boundaries.
 
-## Roles
+## Owners
 
-- Catalog owner: confirms authoritative product and variant values.
-- Storefront owner: confirms rendered content and structured data.
-- Feed owner: confirms transformations and export timing.
-- Channel owner: confirms diagnostics and reprocessing state.
+- **Catalog:** confirms the approved product and variant values.
+- **Storefront:** checks visible content and structured data.
+- **Feed:** checks transforms, localization, and export timing.
+- **Channel:** checks diagnostics and reprocessing.
 
-## Sequence
+## Steps
 
-1. Select a small affected product and variant set.
-2. Freeze observation time, market, and currency.
-3. Build the field-level comparison.
-4. Assign every contradiction to a source or transformation owner.
-5. Correct the authoritative object.
-6. Regenerate dependent outputs.
-7. Verify storefront and channel separately.
+1. Pick a small set of affected products and variants.
+2. Fix the comparison time, market, and currency.
+3. Put every relevant field from every source in one table.
+4. Trace each mismatch to its source or transform.
+5. Correct the authoritative value or the transform that changed it.
+6. Regenerate dependent feeds and markup.
+7. Check the storefront and the channel independently.
 
-## Exit criteria
+## Done when
 
-- Identifiers, price, availability, title, and images agree.
-- Ownership is documented for every transformed field.
-- Channel diagnostics reflect the corrected export.
-- Monitoring or regression tests cover the failure mode.
+- Identifiers, price, availability, title, and images agree for the same variant and market.
+- Each transformed field has a named owner.
+- The channel has processed the corrected export.
+- A test or monitor now covers the failure that was missed.

@@ -1,7 +1,7 @@
 ---
 title: The Fieldbook evidence model
 navTitle: Evidence model
-summary: Keep observed facts, attributed results, modeled estimates, hypotheses, and verified outcomes visibly separate.
+summary: Label facts, platform attribution, estimates, hypotheses, and retest results correctly.
 category: Start here
 kind: guide
 status: stable
@@ -9,42 +9,42 @@ order: 2
 reviewedAt: 2026-07-25
 ---
 
-Reliable commerce work depends less on producing more findings and more on labeling what each finding actually means.
+Most bad commerce decisions begin with a labeling error: an estimate is presented as a result, a platform claim is treated as accounting truth, or a correlation becomes a root cause.
 
-## Observed evidence
+## Observed
 
-Observed evidence was captured directly from a controlled or named surface: a rendered product page, network response, catalog record, merchant diagnostic, transaction ledger, browser test, or timestamped AI answer.
+An observed fact came from a named source: a rendered product page, network response, catalog record, merchant diagnostic, transaction ledger, browser test, or timestamped AI answer.
 
-Record the source, observation time, affected object, market, device, and test conditions when they matter.
+Record enough context to reproduce it: source, time, product or journey, market, device, and test conditions.
 
-## Attributed results
+## Attributed
 
-Attributed results belong to a platform's attribution model. Advertising and analytics systems may use different identity rules, windows, deduplication behavior, and modeled conversions.
+Advertising and analytics platforms assign credit according to their own identity rules, attribution windows, deduplication logic, and modeled conversions.
 
-<Callout type="boundary" title="Revenue boundary">
-Attributed revenue is not automatically booked revenue. The commerce ledger remains the source for completed orders unless the organization has explicitly defined another accounting system.
+<Callout type="boundary" title="Revenue is not one number">
+The order ledger records booked orders. Analytics records events it observed. Ad platforms report outcomes they attribute to campaigns. Keep those meanings intact.
 </Callout>
 
-## Modeled estimates
+## Modeled
 
-A forecast, opportunity estimate, expected impact, or probability is modeled. Display its assumptions and confidence. Never restate it as an observed result.
+Forecasts, opportunity estimates, probabilities, and expected impact are models. Show their assumptions and confidence range. Never rewrite them as measured results.
 
-## Hypotheses
+## Hypothesis
 
-A hypothesis explains evidence and proposes something testable. It should name the controlled object that may change and the observation that would support or weaken the explanation.
+A useful hypothesis explains an observation and names a test. It should identify what will change and what result would strengthen or weaken the explanation.
 
-## Verified outcomes
+## Verified
 
-A verified outcome requires a defined intervention and a retest. Verification may show that a page now renders correctly, a feed agrees with the page, an event is no longer duplicated, or a monitored answer changed.
+A result is verified when a defined change is followed by a retest. Verification can show that markup now matches the page, a feed now carries the right price, an event is no longer duplicated, or a monitored answer changed.
 
-It does not automatically establish revenue causation. Commercial impact often requires a longer measurement design.
+That retest may confirm the fix without proving revenue impact. Commercial effects often need a longer measurement period and a separate design.
 
-## Minimum evidence record
+## Minimum record
 
-- Object or journey being investigated
+- Product, page, event, or journey
 - Source and collection method
-- Timestamp and relevant market context
+- Time, market, and relevant test conditions
 - Observed value
-- Expected value or acceptance criterion
-- Confidence and remaining uncertainty
-- Owner and next verification step
+- Expected value or acceptance rule
+- Confidence and open questions
+- Owner and next check
