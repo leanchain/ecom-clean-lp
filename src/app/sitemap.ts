@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { COMPARISONS } from "@/lib/comparisons";
+
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -63,6 +65,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.2,
     },
+    {
+      path: "/compare",
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    },
+    ...COMPARISONS.map((comparison) => ({
+      path: `/compare/${comparison.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
   ].map(({ path, ...route }) => ({
     url: baseUrl + path,
     lastModified,
