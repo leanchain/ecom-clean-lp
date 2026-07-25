@@ -9,7 +9,9 @@ import {
 } from "@/lib/fieldbook-content";
 
 export function generateStaticParams() {
-  return getFieldbookDocuments("problems").map(({ slug }) => ({ slug }));
+  return getFieldbookDocuments("start-here")
+    .filter(({ slug }) => slug !== "overview")
+    .map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -18,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const document = getFieldbookDocument("problems", slug);
+  const document = getFieldbookDocument("start-here", slug);
   if (!document) return {};
   return {
     title: {
@@ -29,13 +31,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProblemPage({
+export default async function StartHereDocumentPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const document = getFieldbookDocument("problems", slug);
-  if (!document) notFound();
+  const document = getFieldbookDocument("start-here", slug);
+  if (!document || slug === "overview") notFound();
   return <FieldbookDocumentPage document={document} />;
 }

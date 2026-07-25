@@ -1,0 +1,55 @@
+---
+name: purchase-friction-triage
+description: Turn an intermittent storefront symptom into a reproducible investigation across product, cart, checkout, browser, and reliability evidence.
+version: "0.1"
+status: stable
+---
+
+# Purchase-friction triage
+
+Use this skill for intermittent add-to-cart, cart, checkout-navigation, form, or storefront failures that do not produce a full outage.
+
+## Required inputs
+
+- Affected URL and journey
+- Observed error or behavior
+- Browser, device, market, and time window
+- Product or variant
+- Recent deployment or configuration context
+- Authorized test environment details
+
+## Expected output
+
+- Reproduction matrix
+- Observed evidence separated from suspected cause
+- Narrowed owner or component
+- Risk-aware remediation options
+- Exact verification plan
+
+## Workflow
+
+1. Reproduce the failure with the smallest useful condition matrix.
+2. Record page state, network failures, console errors, events, and timing.
+3. Compare affected and unaffected conditions.
+4. Check accessibility and interaction state, not only JavaScript errors.
+5. Trace the failing step to theme, app, service, configuration, or external provider.
+6. Apply an approved controlled fix.
+7. Rerun the exact journey and monitoring check.
+
+## Checks
+
+- Cross-browser behavior
+- Console and network failures
+- Button, form, and focus state
+- Cart and checkout transitions
+- Performance context
+- Accessibility blockers
+- Relevant traces and errors
+
+## Boundaries
+
+<Callout type="warning" title="Safe test boundary">
+Payment paths require authorized products, credentials, and environments. The skill must not create destructive production transactions or expose sensitive customer data.
+</Callout>
+
+Correlation is not labeled as root cause without supporting evidence.

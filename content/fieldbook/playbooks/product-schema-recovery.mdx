@@ -1,0 +1,37 @@
+---
+title: Product schema recovery after a theme change
+navTitle: Product schema recovery
+summary: Restore one coherent product graph after a theme, app, or storefront deployment changes structured data.
+category: Storefront operations
+kind: playbook
+status: stable
+order: 2
+reviewedAt: 2026-07-25
+relatedSkills:
+  - product-structured-data-validation
+relatedResources:
+  - schema-org
+  - json-ld-11
+  - google-product-structured-data
+---
+
+Use this playbook when structured-data diagnostics regress after a controlled storefront change.
+
+## Before changing code
+
+Capture the current rendered page, parser output, visible product facts, active variant, market, and previous known-good evidence if available.
+
+## Recovery sequence
+
+1. Enumerate every Product, ProductGroup, and Offer entity.
+2. Identify the template, app, or extension emitting each entity.
+3. Compare visible product facts with the graph.
+4. Remove or consolidate competing emitters.
+5. Correct variant and offer relationships.
+6. Retest rendered HTML locally or in preview.
+7. Deploy through the normal approval path.
+8. Recheck the live page and external diagnostic.
+
+<Callout type="boundary" title="Eligibility remains external">
+Recovery proves that the controlled implementation is coherent. Search engines still decide eligibility and display.
+</Callout>

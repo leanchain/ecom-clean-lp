@@ -1,0 +1,38 @@
+---
+title: How to use agent skills
+navTitle: Using agent skills
+summary: Use skills as bounded operating procedures with explicit inputs and checks—not as magic prompts.
+category: Start here
+kind: guide
+status: stable
+order: 3
+reviewedAt: 2026-07-25
+---
+
+An agent skill is a reusable package of instructions, references, and optional scripts for a defined task. The Fieldbook presents skills in a vendor-neutral way and also provides `SKILL.md` packages that work naturally with compatible agents.
+
+## Before running a skill
+
+Confirm that you have permission to inspect the system, page, dataset, or customer journey. Use test environments for payment and destructive workflows.
+
+Collect the required inputs rather than asking the agent to guess missing facts.
+
+## During the workflow
+
+Require the agent to keep observed evidence separate from suspected causes. Ask it to cite the source object and timestamp for material findings.
+
+Do not allow a workflow to publish customer-facing changes, alter campaigns, or mutate production data unless that action is explicitly approved and supported by the environment.
+
+<Callout type="operator" title="Operator check">
+Review every proposed system-of-record change. When two sources disagree, the agent should report the conflict rather than invent the correct value.
+</Callout>
+
+## After the workflow
+
+Review the output against the skill's expected structure. Confirm that every conclusion has supporting evidence and that unresolved uncertainty remains visible.
+
+Run the verification step against the same object and conditions whenever possible.
+
+## Portability
+
+Fieldbook skills describe the task independently of one model. The downloadable package may include Claude-compatible metadata, but the workflow can also be followed by coding agents, QA teams, analysts, or human operators.

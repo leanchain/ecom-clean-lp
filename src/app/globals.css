@@ -761,3 +761,28 @@ html.theme-transition::view-transition-new(root) {
     padding-bottom: clamp(3.25rem, 5.5vw, 5.75rem);
   }
 }
+
+/* Commerce Fieldbook document rhythm */
+.fieldbook-prose > * + * {
+  margin-top: 1.35rem;
+}
+
+.fieldbook-prose > h2 {
+  margin-top: 3.5rem;
+}
+
+.fieldbook-prose > h3 {
+  margin-top: 2.25rem;
+}
+
+.fieldbook-prose > ul + h2,
+.fieldbook-prose > ol + h2,
+.fieldbook-prose > p + h2,
+.fieldbook-prose > aside + h2 {
+  margin-top: 4rem;
+}
+
+.fieldbook-prose strong {
+  color: var(--beseam-ink);
+  font-weight: 650;
+}

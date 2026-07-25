@@ -19,36 +19,16 @@ export const RESOURCE_KINDS = [
   "Beseam project",
 ] as const;
 
-export const RESOURCE_MATURITIES = ["Stable", "Reference", "Emerging", "Experimental"] as const;
+export const RESOURCE_MATURITIES = [
+  "Stable",
+  "Reference",
+  "Emerging",
+  "Experimental",
+] as const;
 
 export type ResourceCategory = (typeof RESOURCE_CATEGORIES)[number];
 export type ResourceKind = (typeof RESOURCE_KINDS)[number];
 export type ResourceMaturity = (typeof RESOURCE_MATURITIES)[number];
-
-export type FieldbookProblem = {
-  slug: string;
-  title: string;
-  summary: string;
-  category: string;
-  signals: string[];
-  evidence: string[];
-  firstMoves: string[];
-  skillSlugs: string[];
-  projectSlugs: string[];
-};
-
-export type FieldbookSkill = {
-  slug: string;
-  title: string;
-  summary: string;
-  category: string;
-  worksWith: string[];
-  inputs: string[];
-  outputs: string[];
-  checks: string[];
-  boundaries: string[];
-  projectSlugs: string[];
-};
 
 export type EcosystemResource = {
   slug: string;
@@ -69,17 +49,20 @@ export const FIELD_TYPES = [
   {
     title: "Problems",
     href: "/resources/problems",
-    description: "Start with the symptom your team is seeing, then narrow the evidence and the first investigation path.",
+    description:
+      "Start with the symptom your team is seeing, then narrow the evidence and the first investigation path.",
   },
   {
     title: "Agent skills",
     href: "/resources/skills",
-    description: "Reusable, evidence-aware workflows for Claude, coding agents, other assistants, or a human operator.",
+    description:
+      "Reusable, evidence-aware workflows for Claude, coding agents, other assistants, or a human operator.",
   },
   {
     title: "Projects and references",
     href: "/resources/projects",
-    description: "Open-source tools, standards, primary documentation, and Beseam projects that support practical commerce work.",
+    description:
+      "Open-source tools, standards, primary documentation, and Beseam projects that support practical commerce work.",
   },
 ] as const;
 
@@ -93,8 +76,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Anthropic and contributors",
     license: "Mixed: Apache-2.0 examples and source-available document skills",
     url: "https://github.com/anthropics/skills",
-    summary: "Public examples, templates, and the reference structure for reusable SKILL.md-based agent capabilities.",
-    useCases: ["Designing versioned commerce skills", "Reviewing skill packaging and boundaries"],
+    summary:
+      "Public examples, templates, and the reference structure for reusable SKILL.md-based agent capabilities.",
+    useCases: [
+      "Designing versioned commerce skills",
+      "Reviewing skill packaging and boundaries",
+    ],
     tags: ["Agent skills", "Claude", "SKILL.md"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -107,8 +94,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Agent Skills maintainers",
     license: "Published specification; see repository terms",
     url: "https://agentskills.io/specification",
-    summary: "The published structure and metadata model for portable folders of agent instructions, scripts, and resources.",
-    useCases: ["Validating public skill packages", "Keeping skills portable across compatible agents"],
+    summary:
+      "The published structure and metadata model for portable folders of agent instructions, scripts, and resources.",
+    useCases: [
+      "Validating public skill packages",
+      "Keeping skills portable across compatible agents",
+    ],
     tags: ["Specification", "Agent skills", "Portability"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -121,8 +112,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Shopify",
     license: "MIT",
     url: "https://github.com/Shopify/shopify-ai-toolkit",
-    summary: "Shopify-aware agent plugins, skills, documentation lookup, schema validation, and CLI-assisted store workflows.",
-    useCases: ["Shopify development with current platform context", "GraphQL, Liquid, and extension validation"],
+    summary:
+      "Shopify-aware agent plugins, skills, documentation lookup, schema validation, and CLI-assisted store workflows.",
+    useCases: [
+      "Shopify development with current platform context",
+      "GraphQL, Liquid, and extension validation",
+    ],
     tags: ["Shopify", "Agent skills", "Validation"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -135,8 +130,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Model Context Protocol project",
     license: "MIT",
     url: "https://github.com/modelcontextprotocol/modelcontextprotocol",
-    summary: "An open protocol and schema for connecting AI applications to tools, data sources, and contextual services.",
-    useCases: ["Connecting commerce agents to approved systems", "Separating tool contracts from model prompts"],
+    summary:
+      "An open protocol and schema for connecting AI applications to tools, data sources, and contextual services.",
+    useCases: [
+      "Connecting commerce agents to approved systems",
+      "Separating tool contracts from model prompts",
+    ],
     tags: ["MCP", "Agents", "Integrations"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -149,8 +148,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Promptfoo and contributors",
     license: "MIT",
     url: "https://github.com/promptfoo/promptfoo",
-    summary: "A framework for evaluating prompts, agents, and model behavior with repeatable test cases and assertions.",
-    useCases: ["AI answer regression checks", "Commerce-agent workflow evaluation"],
+    summary:
+      "A framework for evaluating prompts, agents, and model behavior with repeatable test cases and assertions.",
+    useCases: [
+      "AI answer regression checks",
+      "Commerce-agent workflow evaluation",
+    ],
     tags: ["AI evaluation", "GEO", "Agents"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -163,8 +166,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Saleor",
     license: "AGPL-3.0",
     url: "https://github.com/saleor/saleor-mcp",
-    summary: "An ecommerce-specific MCP server for exploring how agents can interact with a composable commerce platform.",
-    useCases: ["Agent-to-commerce experiments", "Studying scoped commerce tools"],
+    summary:
+      "An ecommerce-specific MCP server for exploring how agents can interact with a composable commerce platform.",
+    useCases: [
+      "Agent-to-commerce experiments",
+      "Studying scoped commerce tools",
+    ],
     tags: ["Saleor", "MCP", "Agentic commerce"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -177,8 +184,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Shopify",
     license: "Official developer documentation",
     url: "https://shopify.dev/docs/agents/get-started/quickstart",
-    summary: "Shopify's current walkthrough for agent-driven product discovery, cart creation, checkout conversion, and order tracking.",
-    useCases: ["Tracking agentic-commerce capabilities", "Separating preview workflows from stable storefront behavior"],
+    summary:
+      "Shopify's current walkthrough for agent-driven product discovery, cart creation, checkout conversion, and order tracking.",
+    useCases: [
+      "Tracking agentic-commerce capabilities",
+      "Separating preview workflows from stable storefront behavior",
+    ],
     tags: ["Shopify", "UCP", "Agentic commerce"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -191,8 +202,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Medusa and contributors",
     license: "MIT",
     url: "https://github.com/medusajs/medusa",
-    summary: "Composable commerce modules for product, cart, order, inventory, fulfillment, and integration workflows.",
-    useCases: ["Headless commerce references", "Catalog and order integration experiments"],
+    summary:
+      "Composable commerce modules for product, cart, order, inventory, fulfillment, and integration workflows.",
+    useCases: [
+      "Headless commerce references",
+      "Catalog and order integration experiments",
+    ],
     tags: ["Commerce platform", "Headless", "Catalog"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -205,8 +220,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Vendure and contributors",
     license: "GPL-3.0",
     url: "https://github.com/vendurehq/vendure",
-    summary: "A TypeScript and GraphQL headless commerce framework with channel, catalog, order, and localization primitives.",
-    useCases: ["Channel-aware catalog patterns", "TypeScript commerce integrations"],
+    summary:
+      "A TypeScript and GraphQL headless commerce framework with channel, catalog, order, and localization primitives.",
+    useCases: [
+      "Channel-aware catalog patterns",
+      "TypeScript commerce integrations",
+    ],
     tags: ["Commerce platform", "GraphQL", "TypeScript"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -219,8 +238,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Saleor and contributors",
     license: "BSD-3-Clause",
     url: "https://github.com/saleor/saleor",
-    summary: "A composable GraphQL commerce API for products, channels, checkout, orders, apps, and multi-market operations.",
-    useCases: ["Composable commerce architecture", "GraphQL catalog and checkout references"],
+    summary:
+      "A composable GraphQL commerce API for products, channels, checkout, orders, apps, and multi-market operations.",
+    useCases: [
+      "Composable commerce architecture",
+      "GraphQL catalog and checkout references",
+    ],
     tags: ["Commerce platform", "GraphQL", "Composable"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -233,8 +256,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Automattic and contributors",
     license: "GPL-3.0-or-later",
     url: "https://github.com/woocommerce/woocommerce",
-    summary: "The open-source WordPress commerce platform and a major reference for plugin-driven storefront operations.",
-    useCases: ["WordPress commerce investigations", "Plugin and theme interaction patterns"],
+    summary:
+      "The open-source WordPress commerce platform and a major reference for plugin-driven storefront operations.",
+    useCases: [
+      "WordPress commerce investigations",
+      "Plugin and theme interaction patterns",
+    ],
     tags: ["Commerce platform", "WordPress", "Plugins"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -247,8 +274,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Sylius and contributors",
     license: "MIT",
     url: "https://github.com/Sylius/Sylius",
-    summary: "A Symfony-based headless ecommerce framework for highly customized commerce applications and integrations.",
-    useCases: ["Custom commerce-domain modeling", "PHP and API-led storefront references"],
+    summary:
+      "A Symfony-based headless ecommerce framework for highly customized commerce applications and integrations.",
+    useCases: [
+      "Custom commerce-domain modeling",
+      "PHP and API-led storefront references",
+    ],
     tags: ["Commerce platform", "Symfony", "Headless"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -261,8 +292,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Spree Commerce and contributors",
     license: "BSD-3-Clause",
     url: "https://github.com/spree/spree",
-    summary: "A headless ecommerce platform with REST APIs, a TypeScript SDK, and a Next.js storefront.",
-    useCases: ["Cross-border and B2B patterns", "Storefront and backend reference implementations"],
+    summary:
+      "A headless ecommerce platform with REST APIs, a TypeScript SDK, and a Next.js storefront.",
+    useCases: [
+      "Cross-border and B2B patterns",
+      "Storefront and backend reference implementations",
+    ],
     tags: ["Commerce platform", "REST API", "Next.js"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -275,8 +310,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Webkul and contributors",
     license: "MIT",
     url: "https://github.com/bagisto/bagisto",
-    summary: "A Laravel ecommerce platform with marketplace, multi-tenant, mobile, and headless extension patterns.",
-    useCases: ["Laravel commerce references", "Marketplace and multi-tenant experiments"],
+    summary:
+      "A Laravel ecommerce platform with marketplace, multi-tenant, mobile, and headless extension patterns.",
+    useCases: [
+      "Laravel commerce references",
+      "Marketplace and multi-tenant experiments",
+    ],
     tags: ["Commerce platform", "Laravel", "Marketplace"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -289,8 +328,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "PrestaShop and contributors",
     license: "OSL-3.0",
     url: "https://github.com/PrestaShop/PrestaShop",
-    summary: "An established open-source ecommerce platform with modules, themes, product, order, and internationalization workflows.",
-    useCases: ["Module-driven commerce investigations", "International catalog references"],
+    summary:
+      "An established open-source ecommerce platform with modules, themes, product, order, and internationalization workflows.",
+    useCases: [
+      "Module-driven commerce investigations",
+      "International catalog references",
+    ],
     tags: ["Commerce platform", "PHP", "Modules"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -303,8 +346,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Adobe, Magento community, and contributors",
     license: "OSL-3.0; repository also includes other license files",
     url: "https://github.com/magento/magento2",
-    summary: "A large modular ecommerce codebase for catalog, pricing, inventory, checkout, indexing, and extension workflows.",
-    useCases: ["Enterprise commerce architecture references", "Indexing and extension investigations"],
+    summary:
+      "A large modular ecommerce codebase for catalog, pricing, inventory, checkout, indexing, and extension workflows.",
+    useCases: [
+      "Enterprise commerce architecture references",
+      "Indexing and extension investigations",
+    ],
     tags: ["Commerce platform", "PHP", "Enterprise"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -317,8 +364,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Shopify and contributors",
     license: "MIT",
     url: "https://github.com/Shopify/hydrogen",
-    summary: "Shopify's open-source stack and libraries for building dynamic headless storefronts with React Router.",
-    useCases: ["Shopify headless storefronts", "Storefront API and performance patterns"],
+    summary:
+      "Shopify's open-source stack and libraries for building dynamic headless storefronts with React Router.",
+    useCases: [
+      "Shopify headless storefronts",
+      "Storefront API and performance patterns",
+    ],
     tags: ["Shopify", "Headless", "React"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -329,10 +380,15 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     category: "Catalog, feeds and structured data",
     maturity: "Reference",
     maintainer: "Schema.org community",
-    license: "Vocabulary and supporting software published for reuse; see terms",
+    license:
+      "Vocabulary and supporting software published for reuse; see terms",
     url: "https://schema.org/",
-    summary: "The shared structured-data vocabulary used to describe products, offers, organizations, reviews, and web entities.",
-    useCases: ["Product and Offer markup", "Merchant and organization identity"],
+    summary:
+      "The shared structured-data vocabulary used to describe products, offers, organizations, reviews, and web entities.",
+    useCases: [
+      "Product and Offer markup",
+      "Merchant and organization identity",
+    ],
     tags: ["Structured data", "SEO", "Catalog"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -345,7 +401,8 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Google Search Central",
     license: "Official documentation",
     url: "https://developers.google.com/search/docs/appearance/structured-data/product",
-    summary: "Google's requirements and guidance for Product snippets and merchant-listing structured data in Search.",
+    summary:
+      "Google's requirements and guidance for Product snippets and merchant-listing structured data in Search.",
     useCases: ["Merchant-listing eligibility", "Product and Offer validation"],
     tags: ["Structured data", "Google Search", "Product"],
     reviewedAt: FIELD_REVIEW_DATE,
@@ -359,7 +416,8 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Google Merchant Center",
     license: "Official documentation",
     url: "https://support.google.com/merchants/answer/7052112?hl=en",
-    summary: "The attribute, formatting, identifier, availability, price, and landing-page requirements for Merchant Center data.",
+    summary:
+      "The attribute, formatting, identifier, availability, price, and landing-page requirements for Merchant Center data.",
     useCases: ["Feed validation", "Feed-to-landing-page parity"],
     tags: ["Merchant feeds", "Google Shopping", "Catalog"],
     reviewedAt: FIELD_REVIEW_DATE,
@@ -373,8 +431,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "GS1",
     license: "GS1 standard; usage subject to GS1 terms",
     url: "https://www.gs1.org/standards/gs1-digital-link",
-    summary: "A standard for expressing GS1 identifiers in web-addressable links that connect physical products to digital information.",
-    useCases: ["Product identity resolution", "Connecting GTINs to web resources"],
+    summary:
+      "A standard for expressing GS1 identifiers in web-addressable links that connect physical products to digital information.",
+    useCases: [
+      "Product identity resolution",
+      "Connecting GTINs to web resources",
+    ],
     tags: ["GS1", "Product identity", "Standards"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -387,8 +449,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "W3C",
     license: "W3C Recommendation",
     url: "https://www.w3.org/TR/json-ld11/",
-    summary: "The W3C recommendation for expressing linked data in JSON, commonly used to publish product structured data.",
-    useCases: ["Structured-data serialization", "Validating context and graph behavior"],
+    summary:
+      "The W3C recommendation for expressing linked data in JSON, commonly used to publish product structured data.",
+    useCases: [
+      "Structured-data serialization",
+      "Validating context and graph behavior",
+    ],
     tags: ["JSON-LD", "W3C", "Structured data"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -401,8 +467,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Shopify",
     license: "Official API documentation",
     url: "https://shopify.dev/docs/api/storefront",
-    summary: "The official Shopify API surface for public products, collections, carts, customer accounts, and storefront experiences.",
-    useCases: ["Catalog source-of-truth checks", "Headless storefront integration review"],
+    summary:
+      "The official Shopify API surface for public products, collections, carts, customer accounts, and storefront experiences.",
+    useCases: [
+      "Catalog source-of-truth checks",
+      "Headless storefront integration review",
+    ],
     tags: ["Shopify", "GraphQL", "Storefront API"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -415,8 +485,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Google",
     license: "Official API documentation",
     url: "https://developers.google.com/merchant/api",
-    summary: "Google's current API documentation for programmatic merchant accounts, products, data sources, and diagnostics.",
-    useCases: ["Merchant diagnostics integrations", "Programmatic product-data workflows"],
+    summary:
+      "Google's current API documentation for programmatic merchant accounts, products, data sources, and diagnostics.",
+    useCases: [
+      "Merchant diagnostics integrations",
+      "Programmatic product-data workflows",
+    ],
     tags: ["Merchant Center", "API", "Catalog"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -429,8 +503,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Internet Engineering Task Force",
     license: "Internet Standards Track",
     url: "https://www.rfc-editor.org/rfc/rfc9309.html",
-    summary: "The standards-track definition of robots.txt retrieval, matching, errors, and caching for automated clients.",
-    useCases: ["Crawler-access reviews", "Separating crawl controls from authorization"],
+    summary:
+      "The standards-track definition of robots.txt retrieval, matching, errors, and caching for automated clients.",
+    useCases: [
+      "Crawler-access reviews",
+      "Separating crawl controls from authorization",
+    ],
     tags: ["Crawling", "SEO", "Web standards"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -443,8 +521,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Sitemaps.org participants",
     license: "Protocol published for implementation",
     url: "https://www.sitemaps.org/protocol.html",
-    summary: "The XML sitemap format and submission rules used to communicate canonical URLs and update metadata to crawlers.",
-    useCases: ["Catalog URL discovery", "Sitemap completeness and freshness checks"],
+    summary:
+      "The XML sitemap format and submission rules used to communicate canonical URLs and update metadata to crawlers.",
+    useCases: [
+      "Catalog URL discovery",
+      "Sitemap completeness and freshness checks",
+    ],
     tags: ["Sitemaps", "Crawling", "SEO"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -457,8 +539,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Google Search Central",
     license: "Official documentation",
     url: "https://developers.google.com/search/docs/essentials",
-    summary: "Google's technical requirements, spam policies, and core best practices for eligibility and performance in Search.",
-    useCases: ["Technical SEO acceptance criteria", "Checking third-party SEO recommendations"],
+    summary:
+      "Google's technical requirements, spam policies, and core best practices for eligibility and performance in Search.",
+    useCases: [
+      "Technical SEO acceptance criteria",
+      "Checking third-party SEO recommendations",
+    ],
     tags: ["Google Search", "SEO", "Policies"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -471,8 +557,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Google Search Central",
     license: "Official documentation",
     url: "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
-    summary: "Google's current guidance on AI Overviews, AI Mode, SEO fundamentals, measurement, and claims around AEO and GEO tactics.",
-    useCases: ["Grounding GEO recommendations", "Avoiding unsupported AI-search shortcuts"],
+    summary:
+      "Google's current guidance on AI Overviews, AI Mode, SEO fundamentals, measurement, and claims around AEO and GEO tactics.",
+    useCases: [
+      "Grounding GEO recommendations",
+      "Avoiding unsupported AI-search shortcuts",
+    ],
     tags: ["Generative search", "GEO", "Google Search"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -485,7 +575,8 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "IndexNow sponsors and participating search engines",
     license: "CC BY-SA 4.0 specification",
     url: "https://www.indexnow.org/documentation",
-    summary: "A protocol for notifying participating search engines when URLs are added, updated, or deleted.",
+    summary:
+      "A protocol for notifying participating search engines when URLs are added, updated, or deleted.",
     useCases: ["Faster change notification", "Catalog URL update workflows"],
     tags: ["Indexing", "Search engines", "Protocol"],
     reviewedAt: FIELD_REVIEW_DATE,
@@ -499,8 +590,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Shopify",
     license: "Official developer documentation",
     url: "https://shopify.dev/docs/storefronts/themes/architecture/templates/agents-md-liquid",
-    summary: "Shopify's canonical agent-discovery document, template behavior, UCP metadata, and fallback relationship with llms.txt routes.",
-    useCases: ["Shopify agent-discovery reviews", "Avoiding stale hardcoded agent endpoints"],
+    summary:
+      "Shopify's canonical agent-discovery document, template behavior, UCP metadata, and fallback relationship with llms.txt routes.",
+    useCases: [
+      "Shopify agent-discovery reviews",
+      "Avoiding stale hardcoded agent endpoints",
+    ],
     tags: ["Shopify", "agents.md", "Agent discovery"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -513,8 +608,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Jeremy Howard and community contributors",
     license: "Community proposal; see site terms",
     url: "https://llmstxt.org/",
-    summary: "A community proposal for serving a concise Markdown index intended to help language models use a website at inference time.",
-    useCases: ["Tracking agent-discovery experiments", "Comparing proposals with platform-native implementations"],
+    summary:
+      "A community proposal for serving a concise Markdown index intended to help language models use a website at inference time.",
+    useCases: [
+      "Tracking agent-discovery experiments",
+      "Comparing proposals with platform-native implementations",
+    ],
     tags: ["llms.txt", "GEO", "Proposal"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -527,8 +626,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "IETF draft authors and implementers",
     license: "IETF drafts and implementation documentation",
     url: "https://developers.cloudflare.com/bots/reference/bot-verification/web-bot-auth/",
-    summary: "A cryptographic request-signing approach for identifying automated bots and agents to participating web infrastructure.",
-    useCases: ["Verified-agent access design", "Separating authenticated agents from anonymous crawling"],
+    summary:
+      "A cryptographic request-signing approach for identifying automated bots and agents to participating web infrastructure.",
+    useCases: [
+      "Verified-agent access design",
+      "Separating authenticated agents from anonymous crawling",
+    ],
     tags: ["Agents", "Bot identity", "HTTP signatures"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -541,8 +644,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Google Analytics",
     license: "Official developer documentation",
     url: "https://developers.google.com/analytics/devguides/collection/ga4/ecommerce",
-    summary: "The recommended GA4 ecommerce events, item model, currency handling, purchase identifiers, promotions, and refunds.",
-    useCases: ["Event-contract reviews", "Revenue and item-level measurement reconciliation"],
+    summary:
+      "The recommended GA4 ecommerce events, item model, currency handling, purchase identifiers, promotions, and refunds.",
+    useCases: [
+      "Event-contract reviews",
+      "Revenue and item-level measurement reconciliation",
+    ],
     tags: ["GA4", "Ecommerce events", "Measurement"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -555,8 +662,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Shopify",
     license: "Official developer documentation",
     url: "https://shopify.dev/docs/api/web-pixels-api",
-    summary: "Shopify's controlled browser APIs and customer-event subscriptions for analytics and marketing measurement in sandboxed pixels.",
-    useCases: ["Customer-event instrumentation", "Consent-aware Shopify measurement"],
+    summary:
+      "Shopify's controlled browser APIs and customer-event subscriptions for analytics and marketing measurement in sandboxed pixels.",
+    useCases: [
+      "Customer-event instrumentation",
+      "Consent-aware Shopify measurement",
+    ],
     tags: ["Shopify", "Measurement", "Customer events"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -569,8 +680,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Snowplow and contributors",
     license: "Apache-2.0",
     url: "https://github.com/snowplow/snowplow-javascript-tracker",
-    summary: "A browser event-tracking SDK for structured first-party behavioral data and custom ecommerce measurement designs.",
-    useCases: ["First-party event pipelines", "Comparing observed events with booked orders"],
+    summary:
+      "A browser event-tracking SDK for structured first-party behavioral data and custom ecommerce measurement designs.",
+    useCases: [
+      "First-party event pipelines",
+      "Comparing observed events with booked orders",
+    ],
     tags: ["Analytics", "First-party data", "Events"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -583,7 +698,8 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Google Chrome team and contributors",
     license: "Apache-2.0",
     url: "https://github.com/GoogleChrome/lighthouse",
-    summary: "Automated audits for performance, accessibility, best practices, SEO, and evolving web-platform checks.",
+    summary:
+      "Automated audits for performance, accessibility, best practices, SEO, and evolving web-platform checks.",
     useCases: ["Storefront performance baselines", "Repeatable page audits"],
     tags: ["Performance", "SEO", "Accessibility"],
     reviewedAt: FIELD_REVIEW_DATE,
@@ -597,7 +713,8 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Microsoft and contributors",
     license: "Apache-2.0",
     url: "https://github.com/microsoft/playwright",
-    summary: "Cross-browser automation for Chromium, Firefox, and WebKit, useful for repeatable storefront and purchase-path verification.",
+    summary:
+      "Cross-browser automation for Chromium, Firefox, and WebKit, useful for repeatable storefront and purchase-path verification.",
     useCases: ["Product-page checks", "Cart and checkout verification"],
     tags: ["Testing", "Purchase journey", "Automation"],
     reviewedAt: FIELD_REVIEW_DATE,
@@ -611,7 +728,8 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Apify and contributors",
     license: "Apache-2.0",
     url: "https://github.com/apify/crawlee",
-    summary: "A web crawling and browser-automation library for collecting repeatable evidence across catalogs and storefronts.",
+    summary:
+      "A web crawling and browser-automation library for collecting repeatable evidence across catalogs and storefronts.",
     useCases: ["Catalog crawling", "Rendered-page evidence at scale"],
     tags: ["Crawling", "Catalog", "Evidence"],
     reviewedAt: FIELD_REVIEW_DATE,
@@ -625,8 +743,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Deque Systems and contributors",
     license: "MPL-2.0",
     url: "https://github.com/dequelabs/axe-core",
-    summary: "An accessibility testing engine that can be integrated into automated storefront and component tests.",
-    useCases: ["Automated accessibility regression tests", "Product-page usability evidence"],
+    summary:
+      "An accessibility testing engine that can be integrated into automated storefront and component tests.",
+    useCases: [
+      "Automated accessibility regression tests",
+      "Product-page usability evidence",
+    ],
     tags: ["Accessibility", "Testing", "Compliance"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -639,8 +761,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Google Chrome team and contributors",
     license: "Apache-2.0",
     url: "https://github.com/GoogleChrome/web-vitals",
-    summary: "A small library for measuring Core Web Vitals and attribution data from real storefront sessions.",
-    useCases: ["Real-user performance measurement", "Diagnosing LCP, INP, and CLS regressions"],
+    summary:
+      "A small library for measuring Core Web Vitals and attribution data from real storefront sessions.",
+    useCases: [
+      "Real-user performance measurement",
+      "Diagnosing LCP, INP, and CLS regressions",
+    ],
     tags: ["Core Web Vitals", "RUM", "Performance"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -653,8 +779,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Grafana Labs and contributors",
     license: "AGPL-3.0",
     url: "https://github.com/grafana/k6",
-    summary: "A scriptable load-testing tool for APIs, storefront services, and performance-sensitive commerce workflows.",
-    useCases: ["Checkout-service load tests", "Pre-release capacity verification"],
+    summary:
+      "A scriptable load-testing tool for APIs, storefront services, and performance-sensitive commerce workflows.",
+    useCases: [
+      "Checkout-service load tests",
+      "Pre-release capacity verification",
+    ],
     tags: ["Load testing", "Performance", "Reliability"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -667,8 +797,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "W3C Web Accessibility Initiative",
     license: "W3C Recommendation",
     url: "https://www.w3.org/TR/WCAG22/",
-    summary: "The W3C recommendation for accessible content, navigation, input, authentication, and target sizing across purchase journeys.",
-    useCases: ["Accessibility acceptance criteria", "Human verification beyond automated checks"],
+    summary:
+      "The W3C recommendation for accessible content, navigation, input, authentication, and target sizing across purchase journeys.",
+    useCases: [
+      "Accessibility acceptance criteria",
+      "Human verification beyond automated checks",
+    ],
     tags: ["Accessibility", "Compliance", "UX"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -681,8 +815,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "OWASP Foundation and contributors",
     license: "CC BY-SA 4.0",
     url: "https://owasp.org/www-project-web-security-testing-guide/",
-    summary: "A structured guide for testing web applications, authentication, authorization, sessions, input handling, and client-side security.",
-    useCases: ["Storefront and account security reviews", "Defining authorized security-test coverage"],
+    summary:
+      "A structured guide for testing web applications, authentication, authorization, sessions, input handling, and client-side security.",
+    useCases: [
+      "Storefront and account security reviews",
+      "Defining authorized security-test coverage",
+    ],
     tags: ["Security", "Testing guide", "OWASP"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -695,8 +833,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "OWASP Foundation and contributors",
     license: "CC BY-SA 4.0",
     url: "https://owasp.org/www-project-application-security-verification-standard/",
-    summary: "A verification standard for defining and assessing application security controls at explicit assurance levels.",
-    useCases: ["Security acceptance criteria", "Scoping commerce application controls"],
+    summary:
+      "A verification standard for defining and assessing application security controls at explicit assurance levels.",
+    useCases: [
+      "Security acceptance criteria",
+      "Scoping commerce application controls",
+    ],
     tags: ["Security", "Verification", "OWASP"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -709,7 +851,8 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "OpenTelemetry community",
     license: "Apache-2.0",
     url: "https://github.com/open-telemetry/opentelemetry-js",
-    summary: "Vendor-neutral instrumentation for traces, metrics, and logs across commerce applications and supporting services.",
+    summary:
+      "Vendor-neutral instrumentation for traces, metrics, and logs across commerce applications and supporting services.",
     useCases: ["Checkout-service tracing", "Incident and reliability evidence"],
     tags: ["Observability", "Reliability", "Tracing"],
     reviewedAt: FIELD_REVIEW_DATE,
@@ -723,8 +866,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Sentry and contributors",
     license: "MIT",
     url: "https://github.com/getsentry/sentry-javascript",
-    summary: "Open-source browser and server SDKs for error capture, tracing, performance context, and debugging workflows.",
-    useCases: ["Storefront error evidence", "Release and transaction diagnostics"],
+    summary:
+      "Open-source browser and server SDKs for error capture, tracing, performance context, and debugging workflows.",
+    useCases: [
+      "Storefront error evidence",
+      "Release and transaction diagnostics",
+    ],
     tags: ["Errors", "Tracing", "JavaScript"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -737,8 +884,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Prometheus community and CNCF",
     license: "Apache-2.0",
     url: "https://github.com/prometheus/prometheus",
-    summary: "A monitoring and alerting system built around dimensional time-series metrics and a flexible query language.",
-    useCases: ["Commerce-service health metrics", "Alerting on operational regressions"],
+    summary:
+      "A monitoring and alerting system built around dimensional time-series metrics and a flexible query language.",
+    useCases: [
+      "Commerce-service health metrics",
+      "Alerting on operational regressions",
+    ],
     tags: ["Metrics", "Monitoring", "Alerts"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -751,8 +902,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "OpenTelemetry community",
     license: "Apache-2.0 specification repository",
     url: "https://opentelemetry.io/docs/specs/semconv/",
-    summary: "Shared naming and attribute conventions that make telemetry comparable across services, frameworks, and vendors.",
-    useCases: ["Consistent commerce telemetry", "Cross-service trace and metric review"],
+    summary:
+      "Shared naming and attribute conventions that make telemetry comparable across services, frameworks, and vendors.",
+    useCases: [
+      "Consistent commerce telemetry",
+      "Cross-service trace and metric review",
+    ],
     tags: ["Telemetry", "Conventions", "Observability"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
@@ -765,153 +920,16 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maintainer: "Beseam",
     license: "Hosted tool; not presented as open source",
     url: "/tools/ai-visibility-scan",
-    summary: "A focused entry point for checking how configured AI surfaces describe a commerce brand at a point in time.",
-    useCases: ["Initial AI visibility review", "Starting evidence for a commerce investigation"],
+    summary:
+      "A focused entry point for checking how configured AI surfaces describe a commerce brand at a point in time.",
+    useCases: [
+      "Initial AI visibility review",
+      "Starting evidence for a commerce investigation",
+    ],
     tags: ["AI visibility", "GEO", "Beseam"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
 ];
-
-export const FIELD_SKILLS: FieldbookSkill[] = [
-  {
-    slug: "ecommerce-technical-seo-geo-audit",
-    title: "Ecommerce technical SEO and GEO audit",
-    summary: "Inspect a product page as a search crawler, structured-data consumer, AI answer source, and buyer without merging those perspectives into one score.",
-    category: "Discovery",
-    worksWith: ["Claude", "Coding agents", "Human checklist"],
-    inputs: ["Public product-page URL", "Target market and language", "Optional priority queries and competitors"],
-    outputs: ["Evidence inventory", "SEO and GEO findings kept separate", "Affected page elements", "Ranked next actions with confidence"],
-    checks: ["Canonical and indexability signals", "Product and Offer structured data", "Content completeness and claim support", "Citations and source eligibility", "Merchant identity and product consistency"],
-    boundaries: ["Does not guarantee rankings or AI recommendations", "Does not treat one answer-engine run as the whole market", "Requires human approval before customer-facing changes"],
-    projectSlugs: ["schema-org", "google-search-essentials", "google-generative-ai-search-guide", "lighthouse", "crawlee", "promptfoo"],
-  },
-  {
-    slug: "feed-pdp-parity-check",
-    title: "Feed-to-PDP parity check",
-    summary: "Compare catalog truth, rendered product-page facts, and channel-ready values to find contradictions before they become disapprovals or buyer confusion.",
-    category: "Catalog and product pages",
-    worksWith: ["Claude", "Coding agents", "Human checklist"],
-    inputs: ["Product or variant record", "Rendered product-page URL", "Optional merchant-feed export"],
-    outputs: ["Field-level comparison", "Contradictions by source", "Affected variants", "Suggested system of record and owner"],
-    checks: ["Price and availability", "Identifiers and variants", "Titles and descriptions", "Images", "Shipping and return claims"],
-    boundaries: ["Does not infer the correct value when sources disagree", "Does not publish changes", "Channel eligibility remains controlled by the channel"],
-    projectSlugs: ["schema-org", "google-merchant-product-data-spec", "shopify-storefront-api", "crawlee", "playwright"],
-  },
-  {
-    slug: "purchase-friction-triage",
-    title: "Purchase-friction triage",
-    summary: "Turn an intermittent storefront symptom into a reproducible investigation across product, cart, checkout, browser, and reliability evidence.",
-    category: "Purchase experience",
-    worksWith: ["Claude", "Coding agents", "QA teams"],
-    inputs: ["Affected URL or journey", "Observed error or behavior", "Browser, device, market, and time window when available"],
-    outputs: ["Reproduction matrix", "Observed versus suspected evidence", "Narrowed owner", "Verification plan"],
-    checks: ["Cross-browser behavior", "Console and network failures", "Form and button state", "Performance context", "Accessibility blockers"],
-    boundaries: ["Correlation is not labeled as root cause", "Payment paths require authorized test environments", "No destructive production actions"],
-    projectSlugs: ["playwright", "lighthouse", "web-vitals", "axe-core", "opentelemetry-js", "k6"],
-  },
-  {
-    slug: "ai-citation-gap-investigation",
-    title: "AI citation-gap investigation",
-    summary: "Compare monitored buying questions, cited sources, merchant attribution, and competitor presence to identify an evidence-backed content or catalog hypothesis.",
-    category: "Discovery",
-    worksWith: ["Claude", "Evaluation frameworks", "Human research"],
-    inputs: ["A fixed prompt set", "Target products", "Observed answers with timestamps", "Relevant competitors"],
-    outputs: ["Visibility and citation matrix", "Incorrect or unsupported claims", "Candidate controlled-object changes", "Retest plan"],
-    checks: ["Product appearance", "Fact accuracy", "Merchant control", "Citation source patterns", "Competitor displacement"],
-    boundaries: ["Point-in-time observations remain point-in-time", "No placement guarantee", "Retests show answer changes, not automatically revenue causation"],
-    projectSlugs: ["promptfoo", "schema-org", "google-generative-ai-search-guide", "crawlee", "beseam-ai-visibility-scan"],
-  },
-  {
-    slug: "product-structured-data-validation",
-    title: "Product structured-data validation",
-    summary: "Check whether visible product facts, JSON-LD, platform data, and search-specific requirements describe the same product and offer.",
-    category: "Catalog and product pages",
-    worksWith: ["Claude", "Coding agents", "QA teams"],
-    inputs: ["Rendered product-page URL", "Expected product and variant facts", "Target search or merchant surface"],
-    outputs: ["Parsed entity graph", "Visible-to-markup comparison", "Missing or contradictory fields", "Retest checklist"],
-    checks: ["Product identity", "Offer price and availability", "Variants", "Reviews and aggregate ratings", "Merchant and return-policy relationships"],
-    boundaries: ["Valid markup does not guarantee a rich result", "Markup must match visible content", "Search engines retain eligibility and display control"],
-    projectSlugs: ["schema-org", "json-ld-11", "google-product-structured-data", "google-merchant-product-data-spec", "playwright"],
-  },
-  {
-    slug: "commerce-measurement-reconciliation",
-    title: "Commerce measurement reconciliation",
-    summary: "Reconcile booked orders, observed customer events, and attributed platform results without treating the three as interchangeable revenue totals.",
-    category: "Measurement and growth",
-    worksWith: ["Claude", "Analytics engineers", "Finance and growth teams"],
-    inputs: ["Order-ledger export", "Analytics events", "Channel reports", "Period, timezone, and currency rules"],
-    outputs: ["Transaction-level match table", "Missing and duplicate event evidence", "Attribution-boundary notes", "Owner-specific remediation plan"],
-    checks: ["Transaction identifiers", "Currency and tax handling", "Event sequence", "Consent and browser coverage", "Attribution windows"],
-    boundaries: ["The commerce ledger remains booked revenue", "Attributed revenue is not relabeled as booked revenue", "Modeled values stay visibly modeled"],
-    projectSlugs: ["google-analytics-ecommerce", "shopify-web-pixels-api", "snowplow-javascript-tracker", "opentelemetry-js"],
-  },
-];
-
-export const FIELD_PROBLEMS: FieldbookProblem[] = [
-  {
-    slug: "products-missing-from-ai-answers",
-    title: "Our products do not appear in AI shopping answers",
-    summary: "Separate prompt coverage, product eligibility, source visibility, content completeness, and competitor presence before proposing a fix.",
-    category: "Discovery",
-    signals: ["Competitors appear for category and comparison questions", "The brand appears only for branded queries", "Answers cite publishers or marketplaces but not the merchant"],
-    evidence: ["A stable prompt set and timestamped answers", "Cited URLs and merchant attribution", "Current product facts, schema, availability, and indexability"],
-    firstMoves: ["Confirm the monitored question set represents real buying intent", "Check whether product and merchant facts agree across catalog, page, and structured data", "Identify which sources are cited when the product is absent"],
-    skillSlugs: ["ai-citation-gap-investigation", "ecommerce-technical-seo-geo-audit"],
-    projectSlugs: ["promptfoo", "schema-org", "google-generative-ai-search-guide", "beseam-ai-visibility-scan"],
-  },
-  {
-    slug: "feed-and-product-page-disagree",
-    title: "Our feed and product page disagree",
-    summary: "Find the exact field, variant, source, and observation time before treating the issue as a generic feed problem.",
-    category: "Catalog and product pages",
-    signals: ["Channel disapprovals despite correct-looking platform data", "Different prices or availability across surfaces", "AI answers repeat stale product facts"],
-    evidence: ["Current catalog record", "Rendered page and structured data", "Channel export or diagnostics", "Affected product and variant identifiers"],
-    firstMoves: ["Create a field-level comparison", "Name the authoritative system for each value", "Check for stale syncs, theme rendering, or transformation rules"],
-    skillSlugs: ["feed-pdp-parity-check"],
-    projectSlugs: ["schema-org", "google-merchant-product-data-spec", "shopify-storefront-api", "crawlee", "playwright"],
-  },
-  {
-    slug: "checkout-fails-for-some-visitors",
-    title: "Checkout fails for only some visitors",
-    summary: "Investigate partial failure by browser, device, market, page state, and funnel stage instead of relying on store-wide uptime.",
-    category: "Purchase experience",
-    signals: ["Conversion drops without a total outage", "Support reports cluster around one browser or market", "Add-to-cart or checkout navigation intermittently fails"],
-    evidence: ["Browser and device context", "Console, network, and storefront-event evidence", "Affected URL, product, and time window", "Relevant deployment or incident history"],
-    firstMoves: ["Build a minimal reproduction matrix", "Separate observed error from suspected cause", "Recheck the exact path after the fix"],
-    skillSlugs: ["purchase-friction-triage"],
-    projectSlugs: ["playwright", "web-vitals", "axe-core", "opentelemetry-js", "lighthouse"],
-  },
-  {
-    slug: "revenue-reports-disagree",
-    title: "Shopify, analytics, and ad platforms disagree on revenue",
-    summary: "Keep booked, observed, and attributed values separate while tracing scope, period, currency, identity, and attribution method.",
-    category: "Measurement and growth",
-    signals: ["Channel dashboards claim more revenue than the commerce ledger", "Analytics misses or duplicates purchase events", "Teams reconcile reports manually every week"],
-    evidence: ["Order-ledger totals by period and currency", "Analytics event counts and transaction identifiers", "Channel attribution windows and models", "Consent and tracking coverage"],
-    firstMoves: ["Choose the commerce ledger as booked revenue", "Reconcile transaction IDs before comparing totals", "Document each platform's attribution and observation boundary"],
-    skillSlugs: ["commerce-measurement-reconciliation"],
-    projectSlugs: ["google-analytics-ecommerce", "shopify-web-pixels-api", "snowplow-javascript-tracker", "opentelemetry-js"],
-  },
-  {
-    slug: "theme-change-broke-product-schema",
-    title: "A theme change broke our product structured data",
-    summary: "Compare the rendered page before and after the change, then separate missing markup, contradictory facts, and search-engine eligibility.",
-    category: "Catalog and product pages",
-    signals: ["Rich-result or merchant diagnostics changed after deployment", "Visible product facts remain correct while JSON-LD changed", "Variant, price, or availability markup no longer matches the page"],
-    evidence: ["Rendered HTML from the affected release", "Expected product and variant facts", "Structured-data test output", "Deployment and theme-extension changes"],
-    firstMoves: ["Parse the current Product and Offer graph", "Compare visible facts with markup field by field", "Retest the exact page after a controlled fix"],
-    skillSlugs: ["product-structured-data-validation"],
-    projectSlugs: ["schema-org", "json-ld-11", "google-product-structured-data", "playwright"],
-  },
-];
-
-export function getProblem(slug: string) {
-  return FIELD_PROBLEMS.find((problem) => problem.slug === slug);
-}
-
-export function getSkill(slug: string) {
-  return FIELD_SKILLS.find((skill) => skill.slug === slug);
-}
 
 export function getResource(slug: string) {
   return ECOSYSTEM_RESOURCES.find((resource) => resource.slug === slug);

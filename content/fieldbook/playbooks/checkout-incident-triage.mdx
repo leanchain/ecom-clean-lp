@@ -1,0 +1,40 @@
+---
+title: Partial checkout incident triage
+navTitle: Checkout incident triage
+summary: Coordinate support, QA, storefront, analytics, and reliability evidence for a purchase-path failure affecting only some visitors.
+category: Purchase operations
+kind: playbook
+status: stable
+order: 4
+reviewedAt: 2026-07-25
+relatedSkills:
+  - purchase-friction-triage
+relatedResources:
+  - playwright
+  - opentelemetry-js
+  - sentry-javascript
+  - axe-core
+---
+
+Use this playbook when conversion or support signals suggest a purchase failure but the storefront is not fully down.
+
+## Immediate response
+
+Preserve the affected time window, release context, customer-safe evidence, and any browser or market clustering. Avoid changing multiple systems before a reproducible condition is found.
+
+## Sequence
+
+1. Define the affected step and customer impact.
+2. Build a minimal browser, device, market, and consent matrix.
+3. Reproduce with approved test data.
+4. Correlate browser evidence with traces, errors, and releases.
+5. Identify a controlled mitigation or rollback.
+6. Verify the original failure path.
+7. Add monitoring for the previously invisible step.
+
+## Exit criteria
+
+- The observed failure is reproducible or bounded.
+- Mitigation ownership and customer impact are documented.
+- Verification covers the original affected conditions.
+- Follow-up work addresses detection and regression coverage.

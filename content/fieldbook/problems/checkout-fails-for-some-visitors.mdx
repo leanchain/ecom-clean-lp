@@ -1,0 +1,56 @@
+---
+title: Checkout fails for only some visitors
+navTitle: Partial checkout failure
+summary: Investigate partial failure by browser, device, market, page state, and funnel stage instead of relying on store-wide uptime.
+category: Purchase experience
+kind: problem
+status: stable
+difficulty: advanced
+order: 3
+reviewedAt: 2026-07-25
+relatedSkills:
+  - purchase-friction-triage
+relatedResources:
+  - playwright
+  - web-vitals
+  - axe-core
+  - opentelemetry-js
+  - lighthouse
+---
+
+Partial purchase failures often remain invisible to uptime checks because the storefront still loads and most sessions complete normally.
+
+## What teams usually observe
+
+- Conversion drops without a complete outage.
+- Support reports cluster around one browser, device, market, or payment method.
+- Add-to-cart, cart updates, or checkout navigation intermittently fail.
+- A recent theme, app, tag, or checkout configuration changed.
+
+## Evidence to collect
+
+Capture the affected URL and journey, product, browser, device, market, consent state, time window, console and network output, storefront events, relevant release history, and authorized payment-test context.
+
+## What not to conclude yet
+
+A correlation with a release or app does not prove root cause. Store-wide uptime does not prove that the transaction path works for every state.
+
+## Investigation workflow
+
+1. Build the smallest useful reproduction matrix.
+2. Reproduce the exact step where observed behavior diverges.
+3. Inspect page state, network calls, console errors, and button accessibility.
+4. Compare affected and unaffected conditions.
+5. Narrow the owning component, app, service, or configuration.
+6. Apply a controlled fix and rerun the same path.
+
+<Callout type="warning" title="Authorized testing only">
+Use approved test products, payment modes, and environments. Do not create destructive production orders or handle sensitive payment data outside authorized systems.
+</Callout>
+
+## Verification checklist
+
+- The original failure conditions were retested.
+- The path works across the affected browser or market.
+- Monitoring covers the step that previously failed.
+- The explanation distinguishes observed failure from inferred root cause.
