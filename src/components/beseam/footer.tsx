@@ -63,8 +63,9 @@ export default function BeseamFooter() {
           </div>
         </div>
 
-        <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto_auto_auto] lg:items-center lg:gap-10">
+        <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto_auto_auto_auto] lg:items-center lg:gap-10">
           <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/34">Self-improving commerce intelligence</p>
+          <Link href="/resources" className="text-[12px] text-white/48 hover:text-white">Commerce Fieldbook</Link>
           <Link href="/compare" className="text-[12px] text-white/48 hover:text-white">Compare Beseam</Link>
           <Link href="/manifesto" className="text-[12px] text-white/48 hover:text-white">Manifesto</Link>
           <Link href="/about" className="text-[12px] text-white/48 hover:text-white">Company</Link>

@@ -6,6 +6,16 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Beseam editorial system */
+  --beseam-surface: #f4f1e9;
+  --beseam-panel: #ebe8df;
+  --beseam-panel-hover: #e3e0d7;
+  --beseam-ink: #111318;
+  --beseam-accent: #3154ff;
+  --beseam-accent-soft: #8ea2ff;
+  --beseam-technical: #111318;
+  --beseam-technical-hover: #171a21;
+
   /* Base colors */
   --base-dark: #141414;
   --footer-background: #f2f2f2;
