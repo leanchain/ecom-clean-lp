@@ -272,8 +272,8 @@ export default function ProductionHomepage() {
             </Reveal>
 
             <Reveal delay={0.08} y={18}>
-              <div className="grid gap-0 lg:grid-cols-[7rem_1fr]">
-                <div className="hidden border-y border-l border-black/18 bg-[#e9e6dd] px-4 py-5 lg:flex lg:flex-col lg:justify-between">
+              <div className="grid gap-0 lg:grid-cols-[2rem_1fr]">
+                <div className="hidden border-y border-l border-black/18 bg-[#e9e6dd] px-2 py-5 lg:flex lg:flex-col lg:justify-between">
                   <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-black/48 [writing-mode:vertical-rl]">
                     Live product evidence
                   </span>
@@ -302,7 +302,7 @@ export default function ProductionHomepage() {
           <div className="grid grid-cols-4 items-center gap-x-7 gap-y-5 opacity-62 sm:grid-cols-8">
             {INTEGRATIONS.map((integration) => (
               <div key={integration.name} className="relative h-6">
-                <Image src={integration.src} alt={integration.name} fill sizes="120px" className="object-contain object-left grayscale" />
+                <Image src={integration.src} alt={integration.name} fill sizes="120px" className="object-contain object-left" />
               </div>
             ))}
           </div>
@@ -326,10 +326,10 @@ export default function ProductionHomepage() {
           </Reveal>
 
           <div id="agent-loop" className="relative mt-16 scroll-mt-24 border-y border-black/22">
-            <div className="absolute left-0 right-0 top-[2.2rem] hidden h-px bg-[#3154ff] md:block" aria-hidden="true" />
+            <div className="absolute left-0 right-0 top-[1.6rem] hidden h-px bg-[#3154ff] md:block" aria-hidden="true" />
             <div className="grid md:grid-cols-4">
               {TRACE.map((item, index) => (
-                <div key={item.label} className="relative border-b border-black/18 py-7 md:border-b-0 md:border-r md:px-6 md:py-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                <div key={item.label} className="relative border-b border-black/18 py-5 md:border-b-0 md:border-r md:px-6 md:py-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
                   <span className="relative z-10 inline-flex h-5 items-center bg-[#f4f1e9] pr-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
                     {String(index + 1).padStart(2, "0")} / {item.label}
                   </span>

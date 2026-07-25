@@ -60,14 +60,14 @@ export default function BeseamNavbar() {
       <a href="#main-content" className="absolute left-4 top-2 -translate-y-20 bg-[#111318] px-4 py-2 text-sm font-semibold text-white focus:translate-y-0">
         Skip to content
       </a>
-      <div className="mx-auto max-w-[92rem] px-5 sm:px-8 lg:px-10">
+      <div className="relative mx-auto max-w-[92rem] px-5 sm:px-8 lg:px-10">
         <div className="flex h-[4.5rem] items-center justify-between">
           <Link href="/" className="flex items-center" aria-label="Beseam home">
             <Logo className="text-[#111318]" />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center lg:flex">
-            <div className="group relative">
+            <div className="group">
               <button
                 className="inline-flex min-h-11 items-center gap-1.5 px-4 text-[14px] font-medium text-black/62 transition-colors hover:text-[#111318] focus-visible:ring-2 focus-visible:ring-[#3154ff]"
                 aria-haspopup="true"
@@ -75,7 +75,7 @@ export default function BeseamNavbar() {
                 Products
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true" />
               </button>
-              <div className="pointer-events-none absolute left-1/2 top-[calc(100%+0.55rem)] w-[49rem] -translate-x-1/2 translate-y-2 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <div className="pointer-events-none absolute left-1/2 top-[calc(100%+0.55rem)] w-[49rem] max-w-[calc(100vw-2.5rem)] -translate-x-1/2 translate-y-2 opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
                 <div className="border border-black/22 bg-[#f4f1e9] shadow-[0_24px_60px_rgba(17,19,24,0.14)]">
                   <div className="grid grid-cols-3">
                     {PRODUCT_SYSTEMS.map((system, index) => (
