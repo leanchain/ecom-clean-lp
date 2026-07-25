@@ -33,6 +33,7 @@ const PRODUCT_SYSTEMS = [
 ] as const;
 
 const NAV_LINKS = [
+  { label: "Resources", href: "/resources" },
   { label: "Compare", href: "/compare" },
   { label: "Manifesto", href: "/manifesto" },
   { label: "Company", href: "/about" },

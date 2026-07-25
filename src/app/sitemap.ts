@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { COMPARISONS } from "@/lib/comparisons";
+import { FIELD_PROBLEMS, FIELD_SKILLS } from "@/lib/commerce-fieldbook";
 
 export const dynamic = "force-static";
 
@@ -66,6 +67,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.2,
     },
+    {
+      path: "/resources",
+      changeFrequency: "weekly" as const,
+      priority: 0.85,
+    },
+    {
+      path: "/resources/problems",
+      changeFrequency: "weekly" as const,
+      priority: 0.78,
+    },
+    {
+      path: "/resources/skills",
+      changeFrequency: "weekly" as const,
+      priority: 0.78,
+    },
+    {
+      path: "/resources/projects",
+      changeFrequency: "monthly" as const,
+      priority: 0.72,
+    },
+    ...FIELD_PROBLEMS.map((problem) => ({
+      path: `/resources/problems/${problem.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...FIELD_SKILLS.map((skill) => ({
+      path: `/resources/skills/${skill.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     {
       path: "/compare",
       changeFrequency: "monthly" as const,

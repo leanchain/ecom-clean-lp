@@ -552,6 +552,38 @@ export default function ProductionHomepage() {
         </div>
       </section>
 
+      <section className="border-b border-black/18 bg-[#111318] text-white">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+            <div>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">Commerce Fieldbook</p>
+              <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.7rem,4.1vw,4.1rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+                Solve the problem. Inspect the method. Reuse the workflow.
+              </h2>
+              <p className="mt-7 max-w-lg text-[15px] leading-[1.7] text-white/58">
+                Practical ecommerce problems, evidence-aware agent skills, open-source projects, standards, and primary references curated by Beseam.
+              </p>
+              <Link href="/resources" className="mt-8 inline-flex items-center gap-2 text-[13px] font-semibold text-[#8ea2ff]">
+                Open the Commerce Fieldbook <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="grid border-y border-white/18 md:grid-cols-3">
+              {[
+                ["Problems", "Start with products missing from AI answers, feed conflicts, partial checkout failure, or revenue disagreement.", "/resources/problems"],
+                ["Agent skills", "Use structured workflows with explicit inputs, outputs, checks, evidence requirements, and boundaries.", "/resources/skills"],
+                ["Projects", "Explore open-source tools, open standards, primary documentation, and selected Beseam projects.", "/resources/projects"],
+              ].map(([title, detail, href]) => (
+                <Link key={title} href={href} className="group border-b border-white/18 py-7 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                  <h3 className="text-[18px] font-semibold text-white">{title}</h3>
+                  <p className="mt-4 text-[13px] leading-relaxed text-white/52">{detail}</p>
+                  <span className="mt-7 inline-flex items-center gap-2 text-[12px] font-semibold text-[#8ea2ff]">Explore <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="border-b border-black/18 bg-[#ebe8df]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
