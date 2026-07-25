@@ -5,6 +5,11 @@ export const STORE_HEALTH_FAQS = [
       "Beseam checks the storefront, catalog, customer journeys, AI discovery, campaigns, and order data together. It attaches each issue to the affected product, page, query, journey, channel, or store; ranks the issues by commercial evidence; recommends the next action; and verifies the original signal after the team acts.",
   },
   {
+    question: "What is the first-month promise?",
+    answer:
+      "During an agreed pilot, if Beseam does not identify at least one material revenue leak, show the evidence behind it, and propose a specific fix within the first 30 days, you owe us nothing and the engagement ends. The promise assumes the agreed store and data access are available. It covers the diagnosis and proposed fix, not a guaranteed revenue result.",
+  },
+  {
     question: "Does Beseam replace Shopify, our CMS, analytics, or advertising tools?",
     answer:
       "No. Beseam connects to the systems already in place. Shopify or another commerce platform remains the order and catalog source. Analytics tools keep their own observations. Google and Meta keep channel attribution. Beseam connects the evidence and the work without rewriting those source records.",

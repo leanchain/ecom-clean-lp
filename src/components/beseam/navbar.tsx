@@ -37,6 +37,7 @@ const NAV_LINKS = [
   { label: "Example", href: "/#advanced-intelligence" },
   { label: "Products & access", href: "/#packages" },
   { label: "Compare", href: "/compare" },
+  { label: "Manifesto", href: "/manifesto" },
   { label: "Company", href: "/about" },
 ] as const;
 

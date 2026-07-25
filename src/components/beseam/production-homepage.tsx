@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
+import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import { Reveal } from "@/components/beseam/reveal";
 
 const INTEGRATIONS = [
@@ -591,6 +592,8 @@ export default function ProductionHomepage() {
           </div>
         </div>
       </section>
+
+      <FirstMonthPromise />
 
       <section className="border-b border-black/18 bg-[#f4f1e9]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
