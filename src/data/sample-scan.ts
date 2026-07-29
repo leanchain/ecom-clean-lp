@@ -2,8 +2,9 @@ import type { AnswerCheckResult } from "@/components/beseam/answer-check-types";
 
 // A real scan of a live Shopify store, produced by the same endpoint this page
 // calls. Kept verbatim so the example is the product, not a mock-up. The store
-// is anonymised: identity is supplied by the caller, and its own merchant name
-// is replaced, so the payload does not name it.
+// is anonymised: identity is supplied by the caller, its own merchant name is
+// replaced, and brand tokens are stripped from its own product titles, so the
+// payload does not name it. Third-party merchants stay verbatim.
 export const SAMPLE_SCAN: AnswerCheckResult = {
   domain: "",
   status: "ready",
@@ -215,7 +216,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           url: null,
           ours: true,
           price: "130.00 CHF",
-          title: "Fuego Low-Top Dance Sneakers (Rosé Gold)",
+          title: "Low-Top Dance Sneakers (Rosé Gold)",
           merchant: "This store",
           image_url: null,
         },
@@ -345,7 +346,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           url: null,
           ours: true,
           price: "145.00 CHF",
-          title: "SMOVE Accent Dance Sneaker (White Gold)",
+          title: "Accent Dance Sneaker (White Gold)",
           merchant: "This store",
           image_url: null,
         },

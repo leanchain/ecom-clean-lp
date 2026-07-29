@@ -205,7 +205,8 @@ const PlaceholderBox = ({
 );
 
 export function PdpAnalyzer() {
-  const url = "https://dancingqueens.ch/products/pd804-net-dance-shoes";
+  // Real scanned PDP; host and SKU redacted so the demo store stays anonymous.
+  const url = "https://…/products/net-dance-shoes";
   const overallScore = calculateOverallScore(mockScanResults);
   const potentialScore = calculatePotentialScore(mockScanResults);
 
