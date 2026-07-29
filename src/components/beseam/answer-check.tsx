@@ -16,6 +16,7 @@ import type {
   ShownProduct,
   Step,
 } from "@/components/beseam/answer-check-types";
+import { ChannelIcon } from "@/components/beseam/channel-icon";
 import { SAMPLE_SCAN } from "@/data/sample-scan";
 import useAnalytics from "@/hooks/useAnalytics";
 
@@ -112,6 +113,19 @@ function scoreBand(score: number) {
   };
 }
 
+// The card only ever knows the channel's display label, so map it to a mark.
+const CHANNEL_BRAND_KEYS: Record<string, string> = {
+  chatgpt: "openai_web_search_probe",
+  "chatgpt shopping": "openai_web_search_probe",
+  "google ai mode": "google_ai_mode_readiness",
+  "google shopping": "google_structured_data",
+  gemini: "gemini_grounded_probe",
+  perplexity: "perplexity_search_probe",
+  claude: "claude_web_search_probe",
+  "bing (copilot)": "copilot_consumer_observation",
+  copilot: "copilot_consumer_observation",
+};
+
 function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
   const named = answer.mentioned === true;
   const unknown = answer.mentioned === null || Boolean(answer.error);
@@ -125,6 +139,10 @@ function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
     <span
       className={`inline-flex items-center gap-1.5 border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] ${tone}`}
     >
+      <ChannelIcon
+        channel={CHANNEL_BRAND_KEYS[channel.toLowerCase()] ?? channel}
+        className="h-3 w-3 opacity-70"
+      />
       {unknown ? (
         <span aria-hidden="true">—</span>
       ) : named ? (

@@ -4,31 +4,33 @@ import Link from "next/link";
 import {
   ArrowRight,
   BellRing,
-  Bot,
   Check,
   CircleAlert,
-  MessageSquare,
   RotateCcw,
   Search,
   ShoppingBag,
-  Sparkles,
-  Store,
   Tags,
 } from "lucide-react";
 
 import LiveAnswerCheck from "@/components/beseam/answer-check";
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
+import { ChannelIcon } from "@/components/beseam/channel-icon";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import LeadCaptureForm from "@/components/beseam/lead-capture-form";
 import { Reveal } from "@/components/beseam/reveal";
 
+// Every surface we probe today, in the order a merchant recognises them.
 const SURFACES = [
-  { label: "ChatGPT", icon: MessageSquare },
-  { label: "Microsoft Copilot", icon: Bot },
-  { label: "Perplexity", icon: Search },
-  { label: "Google AI Overviews", icon: Sparkles },
-  { label: "Google Shopping", icon: ShoppingBag },
-  { label: "Your product pages and feeds", icon: Store },
+  { label: "ChatGPT", channel: "openai_web_search_probe" },
+  { label: "Google AI Mode", channel: "google_ai_mode_readiness" },
+  { label: "Google Shopping", channel: "google_structured_data" },
+  { label: "Gemini", channel: "gemini_grounded_probe" },
+  { label: "Microsoft Copilot", channel: "copilot_consumer_observation" },
+  { label: "Perplexity", channel: "perplexity_search_probe" },
+  { label: "Claude", channel: "claude_web_search_probe" },
+  { label: "Alexa Shopping", channel: "alexa_shopping_agent" },
+  { label: "Shopify catalog", channel: "shopify_storefront_mcp" },
+  { label: "Your product pages and feeds", channel: "product_pages" },
 ] as const;
 
 const WHAT_BREAKS = [
@@ -196,14 +198,14 @@ export default function ProductionHomepage() {
             Questions are asked against
           </p>
           <ul className="flex flex-wrap items-center gap-2">
-            {SURFACES.map(({ label, icon: Icon }) => (
+            {SURFACES.map(({ label, channel }) => (
               <li
                 key={label}
                 className="inline-flex items-center gap-2 border border-black/16 bg-[#f7f5ee] px-3 py-1.5"
               >
-                <Icon
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-[#3154ff]"
+                <ChannelIcon
+                  channel={channel}
+                  className="h-3.5 w-3.5 text-black/70"
                 />
                 <span className="text-[13px] font-semibold text-black/70">
                   {label}
