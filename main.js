@@ -325,6 +325,65 @@ async function proxyAnswerCheck(request, url, env) {
   });
 }
 
+// Merchant CDNs serve product images with Cross-Origin-Resource-Policy, so the
+// browser refuses them when they are hotlinked. The worker fetches them
+// server-side and re-serves them from this origin.
+const IMAGE_MAX_BYTES = 3_000_000;
+const IMAGE_CACHE_SECONDS = 604800; // 7 days
+
+async function proxyProductImage(request, url) {
+  const target = clean(url.searchParams.get("u"), 1000);
+  if (!target) return json({ error: "u is required" }, 422);
+
+  let source;
+  try {
+    source = new URL(target);
+  } catch {
+    return json({ error: "invalid url" }, 422);
+  }
+  // https only: no internal addresses, no other schemes.
+  if (source.protocol !== "https:") {
+    return json({ error: "unsupported url" }, 422);
+  }
+
+  const cache = caches.default;
+  const cacheKey = new Request(url.toString(), { method: "GET" });
+  const cached = await cache.match(cacheKey);
+  if (cached) return cached;
+
+  let upstream;
+  try {
+    upstream = await fetch(source.toString(), {
+      headers: {
+        accept: "image/*",
+        "user-agent": "Mozilla/5.0 (compatible; BeseamImageProxy/1.0)",
+      },
+      redirect: "follow",
+      cf: { cacheTtl: IMAGE_CACHE_SECONDS, cacheEverything: true },
+    });
+  } catch {
+    return json({ error: "image unavailable" }, 502);
+  }
+
+  const type = upstream.headers.get("content-type") || "";
+  const length = Number(upstream.headers.get("content-length") || 0);
+  if (!upstream.ok || !type.startsWith("image/") || length > IMAGE_MAX_BYTES) {
+    return json({ error: "image unavailable" }, 502);
+  }
+
+  const response = new Response(upstream.body, {
+    status: 200,
+    headers: {
+      "content-type": type,
+      "cache-control": `public, max-age=${IMAGE_CACHE_SECONDS}, immutable`,
+      "x-content-type-options": "nosniff",
+      "content-security-policy": "default-src 'none'; img-src 'self' data:",
+    },
+  });
+  await cache.put(cacheKey, response.clone());
+  return response;
+}
+
 async function verifyAnswerCheck(url, env) {
   const apiBase = (env.API_BASE_URL || DEFAULT_API_BASE).replace(/\/$/, "");
   const token = clean(url.searchParams.get("token"), 128);
@@ -392,6 +451,13 @@ const worker = {
 
     if (url.pathname === "/api/answer-check") {
       return proxyAnswerCheck(request, url, env);
+    }
+
+    if (
+      url.pathname === "/api/product-image" &&
+      (request.method === "GET" || request.method === "HEAD")
+    ) {
+      return proxyProductImage(request, url);
     }
 
     // Target of the verification email: authorize the paid probe, then send the

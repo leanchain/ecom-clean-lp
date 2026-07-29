@@ -57,7 +57,9 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "97.00 USD",
           title: "Adult Boost Mesh Split Sole Dance Sneakers",
           merchant: "BLOCH Dance US",
-          image_url: null,
+          image_url:
+            "https://us.blochworld.com/cdn/shop/products/7Lk-qL3g_1200x1200.jpg?v=1673522183",
+          link_live: true,
         },
         {
           url: "https://www.danceshopper.com/ballroom-dance-shoes.Ray-Rose-Luna-Practice-Shoes-419",
@@ -66,6 +68,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           title: "Ray Rose Luna (419) Practice Dance Shoes",
           merchant: "DanceShopper",
           image_url: null,
+          link_live: true,
         },
         {
           url: "https://showtimedanceshoes.com/product/heather-split-sole-lipstick/",
@@ -74,6 +77,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           title: "Heather Split-Sole Practice Shoe (International Dance Shoes)",
           merchant: "Showtime Dance Shoes",
           image_url: null,
+          link_live: true,
         },
         {
           url: "https://www.vedance.com/women_s_latin_shoes-international_dance_shoes-mia_t-bar",
@@ -82,6 +86,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           title: "Mia T-Bar (IDS) Latin Dance Shoe",
           merchant: "VEdance LLC",
           image_url: null,
+          link_live: false,
         },
       ],
       error: null,
@@ -108,7 +113,9 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           title:
             "Women's Sparkling Glitter Customized Heel Ballroom Dance Shoes",
           merchant: "Dancing Gaga",
-          image_url: null,
+          image_url:
+            "https://dancinggaga.com/cdn/shop/products/B8.jpg?crop=center&height=1200&v=1649454378&width=1200",
+          link_live: true,
         },
         {
           url: "https://dancinggaga.com/products/womens-sparkling-glitter-heels-latin-with-sequin-dance-shoes-4",
@@ -117,7 +124,9 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           title:
             "Women's Sparkling Glitter 3.5cm/5.5cm Heels Modern Dance Shoes Ballroom",
           merchant: "Dancing Gaga",
-          image_url: null,
+          image_url:
+            "https://dancinggaga.com/cdn/shop/products/1_2601edbd-2d3f-420e-b1de-5ee5f30b8221.jpg?crop=center&height=1200&v=1649495887&width=1200",
+          link_live: true,
         },
         {
           url: "https://www.danceenterprise.co.uk/product-category/dance-shoes/jazz-shoes/glitter-jazz-shoes",
@@ -127,6 +136,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
             "Glitter Jazz / Dance Shoes (Glitter Fabric, full rubber sole)",
           merchant: "Dance Enterprise",
           image_url: null,
+          link_live: true,
         },
         {
           url: "https://www.amazon.com/HXYOO-Glitter-Ballroom-Wedding-S11-1/dp/B09G99XM53",
@@ -135,6 +145,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           title: "Closed Toe Low Heel Glitter Ballroom Dance Shoes (HXYOO)",
           merchant: "Amazon / HXYOO",
           image_url: null,
+          link_live: true,
         },
       ],
       error: null,
@@ -152,6 +163,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           title: "Bryan Watson Men's Latin Shoes (BW111)",
           merchant: "DanceShopper",
           image_url: null,
+          link_live: true,
         },
         {
           url: "https://www.danceshopper.com/mens-ray-rose-dance-shoes",
@@ -160,6 +172,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           title: "Pine Men's Ballroom Shoes",
           merchant: "DanceShopper",
           image_url: null,
+          link_live: true,
         },
         {
           url: "https://www.sodanca.com/products/rory-bl54",
@@ -167,7 +180,9 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "114.00 USD",
           title: 'Rory - BL54 (1.5" wide heel leather lace-up ballroom shoe)',
           merchant: "Só Dança USA",
-          image_url: null,
+          image_url:
+            "https://www.sodanca.com/cdn/shop/files/BL54-black-1.jpg?v=1781278413",
+          link_live: true,
         },
         {
           url: "https://www.sodanca.com/products/rachelle-bl116",
@@ -175,7 +190,9 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "116.00 USD",
           title: 'Rachelle - BL116 (1.5" heel sparkled ballroom shoe)',
           merchant: "Só Dança USA",
-          image_url: null,
+          image_url:
+            "https://www.sodanca.com/cdn/shop/files/BL116-SPKsilver-1.jpg?v=1781641322",
+          link_live: true,
         },
       ],
       error: null,
@@ -192,7 +209,9 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "12.99 USD",
           title: "STOPPERS Heel Protectors (size-specific packs)",
           merchant: "GoGoHeel",
-          image_url: null,
+          image_url:
+            "https://gogoheel.com/wp-content/uploads/2016/10/gogoheel_llc-profile.jpg",
+          link_live: true,
         },
         {
           url: "https://beclickless.com/",
@@ -275,8 +294,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "46.50 USD",
           title: "Leather Juliet Ballet Shoe",
           merchant: "Capezio",
-          image_url:
-            "https://www.capezio.com/media/catalog/product/2/0/2027_pnk_1.jpg",
+          image_url: null,
         },
         {
           url: "https://www.blochworld.com/products/ladies-neo-flex-slip-on-leather-jazz-shoes",
@@ -284,8 +302,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "52.50 EUR",
           title: "Ladies Neo-Flex Slip On Leather Jazz Shoes",
           merchant: "Bloch EU",
-          image_url:
-            "https://www.blochworld.com/media/catalog/product/s/0/s0495l_blk_1.jpg",
+          image_url: null,
         },
         {
           url: "https://dancewearcorner.com/products/bloch-ladies-audeo-lace-up-leather-tap-shoes",
@@ -293,8 +310,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "115.00 USD",
           title: "Ladies Audeo Lace Up Leather Tap Shoes",
           merchant: "DanceWear Corner",
-          image_url:
-            "https://dancewearcorner.com/media/catalog/product/s/0/s0381l_blk_1.jpg",
+          image_url: null,
         },
         {
           url: "https://www.dancedirect.com/so-danca-leather-jazz-shoe-with-neoprene-arch",
@@ -302,8 +318,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "29.99 GBP",
           title: "So Danca Leather Jazz Shoe with Neoprene Arch",
           merchant: "Dance Direct",
-          image_url:
-            "https://www.dancedirect.com/media/catalog/product/s/d/sdjz76_blk_1.jpg",
+          image_url: null,
         },
       ],
       error: null,
@@ -325,7 +340,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "109.00 USD",
           title: "S92307 Silver Glitter & Silver",
           merchant: "Very Fine Dancesport Shoes",
-          image_url: "https://veryfineshoes.com/images/S92307.jpg",
+          image_url: null,
         },
         {
           url: "https://www.supadance.com/style-1535-black-glitter",
@@ -333,7 +348,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "99.00 GBP",
           title: "Style 1535 - Black Glitter",
           merchant: "Supadance",
-          image_url: "https://www.supadance.com/images/1535-black.jpg",
+          image_url: null,
         },
         {
           url: "https://www.internationaldanceshoes.com/s4011-black-notcalf-blacksilver-glitter/",
@@ -341,7 +356,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "110.00 EUR",
           title: "S4011 - Black NotCalf/BlackSilver Glitter",
           merchant: "International Dance Shoes",
-          image_url: "https://www.internationaldanceshoes.com/images/s4011.jpg",
+          image_url: null,
         },
         {
           url: "https://burjushoes.com/adira-rose-gold-glitter-street-sole/",
@@ -349,7 +364,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "149.00 USD",
           title: "Adira - Rose Gold Glitter",
           merchant: "Burju Shoes",
-          image_url: "https://burjushoes.com/images/adira-rosegold.jpg",
+          image_url: null,
         },
       ],
       error: null,
@@ -366,7 +381,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "150.00 CHF",
           title: "Fuego Low-Top Dance Sneakers",
           merchant: "Galaxus",
-          image_url: "https://images.galaxus.media/products/23084477.jpg",
+          image_url: null,
         },
         {
           url: "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEST_5awWKdQlf2XzXJknYFtgxC4WgA0cxorBYSypL3VPZgNx5inVBcvHQI9Kz8P_27TrwarQcpSZkUxkObbfffnFPqdphopv1rjHpFw9IJeC5obIXdaA5pR33ivHvL9rFbIyeQn_fLUIazTKBdE4-m-gct5TLOCZPf-Umx7YVehw==",
@@ -391,8 +406,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "10.00 GBP",
           title: "Original Heel Protectors (Stiletto)",
           merchant: "Supadance",
-          image_url:
-            "https://www.supadance.com/media/catalog/product/h/e/heel_protectors_1.jpg",
+          image_url: null,
         },
         {
           url: "https://www.danceshoesstore.com/Plastic-Heel-Protectors",
@@ -400,8 +414,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "5.95 USD",
           title: "Plastic Heel Protectors (Model P382 Ultra Slim / P575 Tango)",
           merchant: "Dance Shoes Store",
-          image_url:
-            "https://www.danceshoesstore.com/assets/images/accessories/heel_protectors.jpg",
+          image_url: null,
         },
         {
           url: "https://joheela-shop.com/products/heel-protectors-for-slim-stilettos-size-1",
@@ -409,8 +422,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "9.00 USD",
           title: "Heel Protectors for Slim Stilettos (Size 1)",
           merchant: "Joheela",
-          image_url:
-            "https://joheela-shop.com/cdn/shop/files/heel-protectors.jpg",
+          image_url: null,
         },
         {
           url: "https://cleanheels.co.uk/",
@@ -418,8 +430,7 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "3.99 GBP",
           title: "Plain Clear Heel Stoppers",
           merchant: "Clean Heels",
-          image_url:
-            "https://cleanheels.co.uk/cdn/shop/products/clear_heel_stoppers.jpg",
+          image_url: null,
         },
       ],
       error: null,

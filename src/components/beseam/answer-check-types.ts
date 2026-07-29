@@ -21,6 +21,8 @@ export type ShownProduct = {
   image_url: string | null;
   url: string | null;
   ours: boolean;
+  /** False when the page the assistant linked to no longer resolves. */
+  link_live?: boolean;
 };
 
 export type Answer = {

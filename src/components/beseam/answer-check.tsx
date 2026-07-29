@@ -140,7 +140,7 @@ function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
   );
 }
 
-const SHOWN_PRODUCT_LIMIT = 8;
+const SHOWN_PRODUCT_LIMIT = 6;
 
 function shownProducts(answers: Answer[]) {
   const seen = new Set<string>();
@@ -153,47 +153,67 @@ function shownProducts(answers: Answer[]) {
       tiles.push(product);
     }
   }
-  // Anything of yours that did surface leads the shelf.
+  // Anything of yours that did surface leads the shelf; tiles that carry an
+  // image come next, because a shelf of empty boxes says nothing.
   return tiles
-    .sort((a, b) => Number(b.ours) - Number(a.ours))
+    .sort(
+      (a, b) =>
+        Number(b.ours) - Number(a.ours) ||
+        Number(Boolean(b.image_url)) - Number(Boolean(a.image_url)),
+    )
     .slice(0, SHOWN_PRODUCT_LIMIT);
 }
 
-// Merchant CDNs mostly refuse hotlinked images (Cross-Origin-Resource-Policy),
-// so the tile is typographic: rank, product, merchant, price.
-function ProductTile({
-  product,
-  rank,
-}: {
-  product: ShownProduct;
-  rank: number;
-}) {
+// Merchant CDNs refuse hotlinked images (Cross-Origin-Resource-Policy), so the
+// image comes back through our own worker instead of straight from the CDN.
+function ProductTile({ product }: { product: ShownProduct }) {
+  const [broken, setBroken] = useState(false);
+  const src =
+    product.image_url && !broken
+      ? `/api/product-image?u=${encodeURIComponent(product.image_url)}`
+      : null;
+
   return (
-    <li className="flex gap-3 border-t border-black/10 py-2.5 first:border-t-0">
-      <span
-        aria-hidden="true"
-        className="mt-0.5 w-5 shrink-0 font-mono text-[10px] text-black/30"
-      >
-        {String(rank).padStart(2, "0")}
-      </span>
-      <span className="min-w-0 flex-1">
-        <span className="line-clamp-2 text-[12.5px] font-medium leading-snug text-[#111318]">
-          {product.title}
-        </span>
-        <span className="mt-1 flex flex-wrap items-baseline gap-x-2 text-[11px] text-black/50">
-          {product.merchant ? (
-            <span className="truncate">{product.merchant}</span>
-          ) : null}
-          {product.price ? (
-            <span className="font-mono text-black/62">{product.price}</span>
-          ) : null}
-        </span>
+    <li className="border border-black/12">
+      <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-[#f4f1e9]">
+        {src ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={src}
+            alt=""
+            loading="lazy"
+            onError={() => setBroken(true)}
+            className="h-full w-full object-contain mix-blend-multiply"
+          />
+        ) : (
+          <span className="px-2 text-center font-mono text-[9px] uppercase leading-tight tracking-[0.1em] text-black/28">
+            {product.merchant ?? "no image"}
+          </span>
+        )}
         {product.ours ? (
-          <span className="mt-1 inline-block border border-[#1f7a4d]/40 bg-[#1f7a4d]/10 px-1.5 py-px font-mono text-[9px] uppercase tracking-[0.08em] text-[#1a6b43]">
+          <span className="absolute left-0 top-0 bg-[#1f7a4d] px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] text-white">
             yours
           </span>
         ) : null}
-      </span>
+        {product.link_live === false ? (
+          <span className="absolute right-0 top-0 bg-[#d95028] px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] text-white">
+            dead link
+          </span>
+        ) : null}
+      </div>
+      <div className="px-2.5 py-2">
+        <p className="line-clamp-2 text-[12px] font-medium leading-snug text-[#111318]">
+          {product.title}
+        </p>
+        <p className="mt-1 flex items-baseline justify-between gap-2 text-[10.5px] text-black/50">
+          <span className="truncate">{product.merchant ?? "—"}</span>
+          {product.price ? (
+            <span className="shrink-0 font-mono text-black/65">
+              {product.price}
+            </span>
+          ) : null}
+        </p>
+      </div>
     </li>
   );
 }
@@ -450,13 +470,9 @@ function ResultCard({
               <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
                 Products the assistants put in front of the shopper
               </p>
-              <ul className="mt-2 sm:grid sm:grid-cols-2 sm:gap-x-8 lg:block">
-                {products.map((product, index) => (
-                  <ProductTile
-                    key={product.title}
-                    product={product}
-                    rank={index + 1}
-                  />
+              <ul className="mt-3 grid grid-cols-2 gap-2">
+                {products.map((product) => (
+                  <ProductTile key={product.title} product={product} />
                 ))}
               </ul>
             </aside>
