@@ -47,7 +47,7 @@ export default function PlatformAuditPage({
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-end lg:gap-16">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#c04e26]">
                 {platform} · Product data audit
               </p>
               <h1 className="mt-7 max-w-[12ch] font-serif text-[clamp(2.9rem,5vw,4.6rem)] font-normal leading-[0.99] tracking-[-0.045em] text-[#111318]">
@@ -79,7 +79,7 @@ export default function PlatformAuditPage({
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#c04e26]">
                 Platform behaviour
               </p>
               <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.4rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.04em]">
@@ -99,7 +99,7 @@ export default function PlatformAuditPage({
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#c04e26]">
                 Example findings
               </p>
               <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.4rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.04em]">
@@ -149,7 +149,7 @@ export default function PlatformAuditPage({
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#c04e26]">
                 Start here
               </p>
               <h2 className="mt-6 max-w-[13ch] font-serif text-[clamp(2.3rem,3.4vw,3.4rem)] font-normal leading-[1.04] tracking-[-0.04em]">
@@ -175,7 +175,7 @@ export default function PlatformAuditPage({
                 />
                 <Link
                   href="/shopify-store-health"
-                  className="inline-flex min-h-11 items-center justify-center gap-2 text-[14px] font-semibold text-[#151515] underline decoration-black/25 underline-offset-7 hover:decoration-[#3154ff] sm:justify-start"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 text-[14px] font-semibold text-[#151515] underline decoration-black/25 underline-offset-7 hover:decoration-[#e8653a] sm:justify-start"
                 >
                   See continuous store health{" "}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -196,7 +196,7 @@ export default function PlatformAuditPage({
               <Link
                 key={entry.name}
                 href={entry.href}
-                className="inline-flex min-h-11 items-center border border-black/22 px-5 text-[14px] font-medium text-black/72 transition-colors hover:border-[#3154ff] hover:text-[#3154ff]"
+                className="inline-flex min-h-11 items-center border border-black/22 px-5 text-[14px] font-medium text-black/72 transition-colors hover:border-[#c04e26] hover:text-[#c04e26]"
               >
                 {entry.name}
               </Link>

@@ -57,7 +57,7 @@ export default function BeseamNavbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="min-h-11 px-4 py-3 text-[14px] font-medium text-black/62 transition-colors hover:text-[#111318] focus-visible:ring-2 focus-visible:ring-[#3154ff]"
+                className="min-h-11 px-4 py-3 text-[14px] font-medium text-black/62 transition-colors hover:text-[#111318] focus-visible:ring-2 focus-visible:ring-[#c04e26]"
               >
                 {link.label}
               </Link>
@@ -69,7 +69,7 @@ export default function BeseamNavbar() {
               href={APP_LOGIN_URL}
               eventName="login_clicked"
               placement="navbar"
-              className="text-[14px] font-semibold text-black/62 transition-colors hover:text-[#3154ff]"
+              className="text-[14px] font-semibold text-black/62 transition-colors hover:text-[#c04e26]"
             >
               Log in
             </TrackedLink>
