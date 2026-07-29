@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/integrations/google-search-console", changeFrequency: "monthly" as const, priority: 0.65 },
     { path: "/about", changeFrequency: "monthly" as const, priority: 0.7 },
     { path: "/manifesto", changeFrequency: "monthly" as const, priority: 0.75 },
-    { path: "/store-health-review", changeFrequency: "monthly" as const, priority: 0.8 },
+    { path: "/product-visibility-monitoring", changeFrequency: "monthly" as const, priority: 0.8 },
     { path: "/tools/ai-visibility-scan", changeFrequency: "monthly" as const, priority: 0.3 },
     { path: "/privacy-policy", changeFrequency: "yearly" as const, priority: 0.2 },
     { path: "/terms-of-service", changeFrequency: "yearly" as const, priority: 0.2 },

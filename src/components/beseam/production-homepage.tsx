@@ -18,8 +18,6 @@ import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import LeadCaptureForm from "@/components/beseam/lead-capture-form";
 import { Reveal } from "@/components/beseam/reveal";
 
-const ASK_QUESTION = "Which gold dance shoes come in a wide fit under CHF 200?";
-
 const WHAT_BREAKS = [
   {
     title: "The answer names a competitor",
@@ -116,78 +114,6 @@ function EvidenceFigure({
   );
 }
 
-function DemoAnswerCard() {
-  return (
-    <div className="border border-black/22 bg-[#f7f5ee] text-left shadow-[0_24px_70px_rgba(17,19,24,0.12)]">
-      <div className="flex items-start justify-between gap-5 border-b border-black/18 px-5 py-4">
-        <div>
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/45">
-            Question asked to ChatGPT
-          </p>
-          <p className="mt-2 text-[15px] font-semibold leading-snug text-[#111318]">
-            “{ASK_QUESTION}”
-          </p>
-        </div>
-        <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.1em] text-black/42">
-          Dancing Queens
-        </span>
-      </div>
-
-      <div className="grid border-b border-black/18 sm:grid-cols-2">
-        <div className="border-b border-black/14 px-5 py-5 sm:border-b-0 sm:border-r">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#d95028]">
-            Before
-          </p>
-          <p className="mt-3 text-[14px] leading-relaxed text-black/64">
-            The answer names three competitors. Your product is not mentioned.
-          </p>
-          <ul className="mt-4 space-y-2 text-[13px] leading-relaxed text-black/56">
-            <li>Fit and width are missing from the product data</li>
-            <li>Feed price CHF 189, product page CHF 209</li>
-          </ul>
-        </div>
-        <div className="px-5 py-5">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1f7a4d]">
-            After the fix
-          </p>
-          <p className="mt-3 text-[14px] leading-relaxed text-black/64">
-            The same question, asked again after the change. The product is
-            named and linked.
-          </p>
-          <ul className="mt-4 space-y-2 text-[13px] leading-relaxed text-black/56">
-            <li>Fit published: wide, D–EE</li>
-            <li>Feed and page price now agree at CHF 189</li>
-          </ul>
-        </div>
-      </div>
-
-      <dl className="grid sm:grid-cols-2">
-        {[
-          ["Changed", "Two product fields"],
-          ["Published to", "Your store, with revert"],
-          ["Approved by", "Your team, before publish"],
-          ["Re-checked", "Same question, same assistant"],
-        ].map(([term, value], index) => (
-          <div
-            key={term}
-            className={`border-b border-black/14 px-5 py-4 ${index % 2 === 0 ? "sm:border-r" : ""} ${index > 1 ? "sm:border-b-0" : ""}`}
-          >
-            <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-black/42">
-              {term}
-            </dt>
-            <dd className="mt-2 text-[13px] font-semibold leading-snug text-black/70">
-              {value}
-            </dd>
-          </div>
-        ))}
-      </dl>
-      <p className="border-t border-black/14 px-5 py-3 text-[11px] leading-relaxed text-black/42">
-        Example from the Dancing Queens demonstration catalog.
-      </p>
-    </div>
-  );
-}
-
 export default function ProductionHomepage() {
   return (
     <div className="bg-[#f4f1e9] text-[#151515]">
@@ -234,10 +160,7 @@ export default function ProductionHomepage() {
 
           <Reveal delay={0.08} y={18}>
             <div className="mt-10">
-              <LiveAnswerCheck
-                demo={<DemoAnswerCard />}
-                placement="homepage_hero"
-              />
+              <LiveAnswerCheck placement="homepage_hero" />
               <div className="mt-6 text-center">
                 <Link
                   href="#how-it-works"

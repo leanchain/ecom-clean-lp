@@ -27,7 +27,7 @@ export default function ScanForm() {
           and prioritized issues?
         </p>
         <Link
-          href="/store-health-review"
+          href="/product-visibility-monitoring"
           className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-semibold hover:underline"
         >
           Book a 20-minute commerce review

@@ -13,33 +13,33 @@ const DETAILS = [
   {
     title: "Who it is for",
     items: [
-      "Shopify founders and ecommerce leads with a meaningful catalogue",
-      "Teams working across SEO, content, operations and development",
-      "Agencies that need clearer evidence for merchant work",
+      "Ecommerce founders and leads with a growing product catalog",
+      "Teams responsible for product content, feeds, search, and merchandising",
+      "Brands that need to know when an important product disappears from view",
     ],
   },
   {
-    title: "What we review",
+    title: "What we monitor",
     items: [
-      "Your Shopify setup and current Store Health coverage",
-      "Priority AI visibility questions, citations and competitor gaps",
-      "Purchase signals across product, cart, checkout and payment stages",
+      "The catalog record and customer-facing product pages",
+      "Shopping feeds, search results, and product recommendations",
+      "Product presence, price, availability, description, and source freshness",
     ],
   },
   {
     title: "During 20 minutes",
     items: [
-      "Map the changes and failures your team most needs to detect",
-      "Separate fresh evidence from stale, unknown or failed sources",
-      "Agree the first checks and a sensible pilot scope",
+      "Choose the store and products you cannot afford to lose from view",
+      "Define where customers should find those products",
+      "Agree the baseline, monitoring cadence, alerts, and pilot scope",
     ],
   },
   {
     title: "What you receive",
     items: [
-      "A Store Health and AI visibility baseline",
-      "A prioritized first issue list, grounded in available evidence",
-      "A recommendation on ownership and next investigation steps",
+      "A product-level monitoring baseline for the agreed scope",
+      "Change alerts with the previous state and source evidence",
+      "A clear owner, proposed fix, and recovery check",
     ],
   },
 ];
@@ -90,16 +90,16 @@ function ContactFallback() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           ...form,
-          source: "store_health_review",
+          source: "product_visibility_monitoring",
           utm: getUtmValues(),
         }),
       });
 
       if (!response.ok)
-        throw new Error("The review request could not be sent.");
+        throw new Error("The monitoring request could not be sent.");
 
       trackEvent({
-        action: "store_health_review_submitted",
+        action: "product_visibility_monitoring_submitted",
         category: "marketing",
         ...getMarketingProperties("review_fallback_form", "/api/lead"),
       });
@@ -124,8 +124,8 @@ function ContactFallback() {
           We&rsquo;ll be in touch.
         </h2>
         <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-foreground">
-          Thank you. We&rsquo;ll use the details you shared to prepare the next
-          step for your visibility and health review.
+          We&rsquo;ll use the details you shared to prepare the product
+          baseline and monitoring scope for your store.
         </p>
       </div>
     );
@@ -169,7 +169,7 @@ function ContactFallback() {
           />
         </label>
         <label className="text-[13px] font-medium text-foreground sm:col-span-2">
-          Shopify store URL
+          Store URL
           <input
             required
             inputMode="url"
@@ -180,7 +180,7 @@ function ContactFallback() {
               setForm({ ...form, store: event.target.value })
             }
             className={inputClass}
-            placeholder="yourstore.myshopify.com"
+            placeholder="yourstore.com"
           />
         </label>
         <label className="text-[13px] font-medium text-foreground sm:col-span-2">
@@ -193,7 +193,7 @@ function ContactFallback() {
               setForm({ ...form, message: event.target.value })
             }
             className={inputClass}
-            placeholder="What should we look at first?"
+            placeholder="Which products matter most, and where should customers find them?"
           />
         </label>
         <label className="sr-only" aria-hidden="true">
@@ -218,7 +218,7 @@ function ContactFallback() {
         disabled={submitting}
         className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-6 text-[14px] font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)] disabled:cursor-wait disabled:opacity-70"
       >
-        {submitting ? "Sending…" : "Send review request"}
+        {submitting ? "Sending…" : "Send monitoring request"}
       </button>
     </form>
   );
@@ -246,9 +246,9 @@ export default function ReviewContent() {
     if (!trackedOpen.current) {
       trackedOpen.current = true;
       track(
-        "store_health_review_opened",
-        "review_page",
-        "/store-health-review",
+        "product_visibility_monitoring_opened",
+        "monitoring_setup_page",
+        "/product-visibility-monitoring",
       );
     }
 
@@ -275,15 +275,15 @@ export default function ReviewContent() {
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <Reveal className="max-w-3xl">
           <p className="editorial-eyebrow text-primary">
-            20-minute commerce review
+            20-minute monitoring setup
           </p>
           <h1 className="editorial-hero mt-5 text-ink">
-            Start with your store - and how AI sees it.
+            Choose the products you cannot afford to lose from view.
           </h1>
           <p className="editorial-body mt-6 max-w-2xl text-foreground">
-            We look at your Shopify setup, current Store Health coverage and the
-            AI buying questions that matter to your catalog. You leave with a
-            focused first scope, not a generic sales deck.
+            We define the products and discovery paths to monitor, establish
+            the first baseline, and agree how your team should receive and act
+            on visibility-change alerts.
           </p>
         </Reveal>
 
@@ -310,11 +310,11 @@ export default function ReviewContent() {
             <div className="flex flex-col gap-6 rounded-2xl border border-rule bg-panel p-7 sm:flex-row sm:items-center sm:justify-between md:p-9">
               <div className="max-w-xl">
                 <h3 className="text-[20px] font-semibold tracking-tight text-ink">
-                  Choose a time in the Beseam calendar.
+                  Choose a time to set up product visibility monitoring.
                 </h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-foreground">
-                  The secure Cal.com scheduler opens on this page. Pick a
-                  20-minute slot that works for you.
+                  Pick a 20-minute slot. Bring your store URL, the products
+                  that matter most, and the places where customers should find them.
                 </p>
               </div>
               <button

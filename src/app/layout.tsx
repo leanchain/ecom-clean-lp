@@ -11,16 +11,16 @@ import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "optional", preload: true });
 
 export const metadata: Metadata = {
-  title: { default: "Beseam - Autonomous revenue intelligence for commerce", template: "%s | Beseam" },
-  description: "Beseam is a self-improving revenue agent that finds the revenue leaks your commerce stack cannot see, recommends what to change, and learns from the verified outcome.",
+  title: { default: "Beseam - Product visibility monitoring for ecommerce", template: "%s | Beseam" },
+  description: "Beseam monitors each product across product pages, shopping feeds, search results, and product recommendations, then alerts your team when visibility changes.",
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
   publisher: "Beseam",
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://beseam.com"),
   robots: { index: true, follow: true },
   icons: { icon: [{ url: "/favicon/favicon.ico", sizes: "48x48" }, { url: "/favicon/favicon.svg", type: "image/svg+xml" }, { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" }], apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180" }] },
-  openGraph: { title: "Beseam - Autonomous revenue intelligence for commerce", description: "A self-improving revenue agent that finds the revenue leaks your stack cannot see, recommends what to change, and learns from the outcome.", url: "/", siteName: "Beseam", type: "website", images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Beseam autonomous revenue intelligence for commerce" }] },
-  twitter: { card: "summary_large_image", title: "Beseam - Autonomous revenue intelligence for commerce", description: "A self-improving revenue agent that finds the revenue leaks your stack cannot see and learns from the outcome.", images: ["/og-image.png"] },
+  openGraph: { title: "Beseam - Product visibility monitoring for ecommerce", description: "Know when a valuable product disappears, what changed, and whether the fix restored visibility.", url: "/", siteName: "Beseam", type: "website", images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Beseam product visibility monitoring for ecommerce" }] },
+  twitter: { card: "summary_large_image", title: "Beseam - Product visibility monitoring for ecommerce", description: "Know when a valuable product disappears, what changed, and whether the fix restored visibility.", images: ["/og-image.png"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
