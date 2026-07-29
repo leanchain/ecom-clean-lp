@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -p 7002",
+    "dev": "concurrently -k -n next,worker -c cyan,magenta \"npm:dev:next\" \"npm:dev:worker\"",
+    "dev:next": "next dev --turbopack -p ${LP_NEXT_PORT:-7003}",
+    "dev:worker": "wrangler dev --config wrangler.dev.jsonc --port ${LP_PORT:-7002} --var DEV_ORIGIN:http://localhost:${LP_NEXT_PORT:-7003} --var API_BASE_URL:${LOCAL_API_BASE:-http://localhost:8123/api}",
+    "dev:next-only": "next dev --turbopack -p ${LP_PORT:-7002}",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -63,6 +66,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "concurrently": "^9.1.2",
+    "wrangler": "^4.42.0",
     "@next/eslint-plugin-next": "^15.3.0",
     "@tailwindcss/postcss": "^4.1.10",
     "@tailwindcss/typography": "^0.5.16",
