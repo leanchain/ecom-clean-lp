@@ -14,11 +14,21 @@ export type Finding = {
   product: string | null;
 };
 
+export type ShownProduct = {
+  title: string;
+  merchant: string | null;
+  price: string | null;
+  image_url: string | null;
+  url: string | null;
+  ours: boolean;
+};
+
 export type Answer = {
   question: string | null;
   channel_label: string | null;
   mentioned: boolean | null;
   competitors: string[];
+  products?: ShownProduct[];
   error: string | null;
 };
 
