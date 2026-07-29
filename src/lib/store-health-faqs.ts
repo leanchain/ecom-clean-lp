@@ -1,47 +1,47 @@
 export const STORE_HEALTH_FAQS = [
   {
-    question: "What does Beseam do?",
+    question: "What does Beseam monitor?",
     answer:
-      "Beseam checks the storefront, catalog, customer journeys, AI discovery, campaigns, and order data together. It attaches each issue to the affected product, page, query, journey, channel, or store; ranks the issues by commercial evidence; recommends the next action; and verifies the original signal after the team acts.",
+      "Beseam monitors agreed products across the store catalog, product pages, shopping feeds, search results, and product recommendations. It keeps those sources attached to the same product record so each run can be compared with the previous state.",
+  },
+  {
+    question: "How does Beseam know that product visibility changed?",
+    answer:
+      "The first monitoring run establishes a baseline for the agreed products and discovery paths. Later runs compare product presence, title, price, availability, description, structured data, language coverage, and other source evidence with that baseline and the most recent known state.",
+  },
+  {
+    question: "What counts as a product visibility change?",
+    answer:
+      "Examples include a product leaving a shopping feed, disappearing from a tracked search or buying answer, being replaced by a competitor, or showing product facts that no longer agree with the store catalog. Beseam keeps the source and time of the change with the product.",
+  },
+  {
+    question: "How does Beseam decide which alert matters first?",
+    answer:
+      "Beseam considers the commercial priority available for the product, the number and importance of affected discovery paths, the freshness and quality of the evidence, and the scope agreed with the store. High-selling or high-priority products can be placed ahead of minor catalog warnings.",
+  },
+  {
+    question: "How often does Beseam check the catalog?",
+    answer:
+      "The monitoring cadence depends on the source and the agreed scope. Each result records when the source was checked and whether the evidence is fresh, stale, incomplete, or unavailable, so an old result does not appear current.",
+  },
+  {
+    question: "Does Beseam replace Shopify or our feed tools?",
+    answer:
+      "No. Your commerce platform remains the source for catalog and order data, and each channel keeps its own records. Beseam compares those sources over time and points your team to the product-level change that needs attention.",
+  },
+  {
+    question: "What happens after Beseam raises an alert?",
+    answer:
+      "The alert includes the affected product, the previous and current state, the source evidence, the likely cause, and a proposed next step. The owner and approval stay attached to the product, and Beseam reruns the original check after the change.",
+  },
+  {
+    question: "Can Beseam publish product changes without approval?",
+    answer:
+      "No material customer-facing change is published without the access and approval rules agreed for the store. Your team can approve, reject, or edit a proposed change before anything is published.",
   },
   {
     question: "What is the first-month promise?",
     answer:
-      "During an agreed pilot, if Beseam does not identify at least one material revenue leak, show the evidence behind it, and propose a specific fix within the first 30 days, you owe us nothing and the engagement ends. The promise assumes the agreed store and data access are available. It covers the diagnosis and proposed fix, not a guaranteed revenue result.",
-  },
-  {
-    question: "Does Beseam replace Shopify, our CMS, analytics, or advertising tools?",
-    answer:
-      "No. Beseam connects to the systems already in place. Shopify or another commerce platform remains the order and catalog source. Analytics tools keep their own observations. Google and Meta keep channel attribution. Beseam connects the evidence and the work without rewriting those source records.",
-  },
-  {
-    question: "Which Beseam products can we use?",
-    answer:
-      "Every active contract includes Foundation for store state, authoritative revenue, Actions, Impact, and connection health. AI Visibility, Commerce Readiness, Advertising, Analytics, Behavior, Optimization, Reliability, and Creative Studio can be enabled independently for each store. Analytics, Behavior, Optimization, Reliability, and Creative Studio remain marked Beta while each product completes production validation.",
-  },
-  {
-    question: "How does Beseam identify a revenue leak?",
-    answer:
-      "Beseam groups evidence that refers to the same product, page, query, journey, campaign, or store. It shows what is wrong, why the issue outranks the others, whether the value is booked, observed, attributed, or modeled, the source, the freshness of the evidence, and the confidence behind any estimate. Unknown values remain unknown rather than becoming zero.",
-  },
-  {
-    question: "Can Beseam change content for different visitors?",
-    answer:
-      "Behavior and Optimization support experiments and personalization proposals based on intent, friction, navigation, engagement, and commerce signals. The proposal includes the audience, hypothesis, expected outcome, approval state, and measurement plan. Customer-facing changes follow the product access and approval rules set for the store.",
-  },
-  {
-    question: "Can Beseam publish changes or campaigns without approval?",
-    answer:
-      "Beseam can automate monitoring, evidence collection, prioritization, and approved low-risk workflows. Google or Meta publishing, budget changes, and material customer-facing changes keep explicit roles, preflight checks, approval, and audit history. Campaign approval and publishing are Admin-only actions.",
-  },
-  {
-    question: "How do contracts, product access, and credits work?",
-    answer:
-      "Foundation is included with every active Beseam contract. Other products are enabled per tenant and store. Contract pricing covers the scheduled checks included in the agreement. Creative Studio and some on-demand generation or analysis show an estimate before credits are reserved. Google and Meta bill advertising spend directly; Beseam does not mix media spend with software or generation charges.",
-  },
-  {
-    question: "How does Beseam report revenue after a change?",
-    answer:
-      "Beseam keeps booked, observed, attributed, and modeled values separate. Booked revenue comes from authoritative commerce orders. Channel attribution keeps the channel method and window. Modeled opportunity includes its method and confidence. Impact compares equivalent periods and records freshness, completeness, currency, and outside influences.",
+      "During an agreed pilot, if Beseam cannot establish the product baseline, monitor the agreed discovery paths, identify a material visibility issue, and show the evidence and proposed fix within 30 days, you owe us nothing and the engagement ends. The agreed store and data access must remain available during the pilot.",
   },
 ] as const;

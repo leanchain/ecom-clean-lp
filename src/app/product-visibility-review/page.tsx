@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function StoreHealthReviewRedirect() {
+export default function ProductVisibilityReviewRedirect() {
   redirect("/product-visibility-monitoring");
 }

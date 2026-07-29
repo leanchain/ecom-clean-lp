@@ -10,44 +10,15 @@ import {
 
 import { ArrowRight, Check, Loader2, X } from "lucide-react";
 
+import type {
+  Answer,
+  AnswerCheckResult,
+  Step,
+} from "@/components/beseam/answer-check-types";
+import { SAMPLE_SCAN } from "@/data/sample-scan";
 import useAnalytics from "@/hooks/useAnalytics";
 
-type StepState = "pending" | "active" | "done" | "failed" | "skipped";
-
-type Step = {
-  key: string;
-  label: string;
-  state: StepState;
-  detail: string | null;
-};
-
-type Finding = {
-  code: string;
-  title: string;
-  detail: string;
-  product: string | null;
-};
-
-type Answer = {
-  question: string | null;
-  channel_label: string | null;
-  mentioned: boolean | null;
-  competitors: string[];
-  error: string | null;
-};
-
-export type AnswerCheckResult = {
-  domain: string;
-  status: string;
-  brand: string | null;
-  platform: string | null;
-  reject_reason: string | null;
-  steps: Step[];
-  findings: Finding[];
-  questions: string[];
-  answers: Answer[];
-  products_seen: number;
-};
+export type { AnswerCheckResult };
 
 const POLL_MS = 6000;
 const MAX_POLLS = 60; // ~6 minutes, then stop asking
@@ -89,34 +60,177 @@ function StepRow({ step }: { step: Step }) {
   );
 }
 
-function ResultCard({ result }: { result: AnswerCheckResult }) {
-  const missed = result.answers.filter((a) => a.mentioned === false);
-  const named = result.answers.filter((a) => a.mentioned === true);
-  const competitors = Array.from(
-    new Set(result.answers.flatMap((a) => a.competitors ?? [])),
-  ).slice(0, 4);
+const RIVAL_LIMIT = 6;
+
+// "Amazon / EverJoy Daily" and "BLOCH Dance US (official)" are the same rival
+// showing up twice. Collapse to the brand so the tally means something.
+function rivalIdentity(raw: string) {
+  const label = raw
+    .split("/")[0]
+    .replace(/\(.*?\)/g, "")
+    .trim();
+  return { key: label.toLowerCase(), label };
+}
+
+function tallyRivals(answers: Answer[]) {
+  const counts = new Map<string, { label: string; count: number }>();
+  for (const answer of answers) {
+    for (const raw of answer.competitors ?? []) {
+      const { key, label } = rivalIdentity(raw);
+      if (!key) continue;
+      const entry = counts.get(key);
+      if (entry) entry.count += 1;
+      else counts.set(key, { label, count: 1 });
+    }
+  }
+  // "Bloch" and "BLOCH Dance US" are one rival: fold the longer label into the
+  // shorter one it starts with.
+  const entries = Array.from(counts.entries()).sort(
+    (a, b) => a[0].length - b[0].length,
+  );
+  const merged: { key: string; label: string; count: number }[] = [];
+  for (const [key, value] of entries) {
+    const parent = merged.find((item) => key.startsWith(`${item.key} `));
+    if (parent) parent.count += value.count;
+    else merged.push({ key, ...value });
+  }
+  return merged.sort((a, b) => b.count - a.count);
+}
+
+function scoreBand(score: number) {
+  if (score >= 70)
+    return { label: "Strong", text: "text-[#1a6b43]", fill: "bg-[#1f7a4d]" };
+  if (score >= 40)
+    return { label: "Mixed", text: "text-[#3154ff]", fill: "bg-[#3154ff]" };
+  if (score >= 15)
+    return { label: "Weak", text: "text-[#b4611f]", fill: "bg-[#e8653a]" };
+  return {
+    label: "Barely visible",
+    text: "text-[#c04524]",
+    fill: "bg-[#d95028]",
+  };
+}
+
+function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
+  const named = answer.mentioned === true;
+  const unknown = answer.mentioned === null || Boolean(answer.error);
+  const tone = unknown
+    ? "border-black/14 bg-black/[0.03] text-black/42"
+    : named
+      ? "border-[#1f7a4d]/40 bg-[#1f7a4d]/10 text-[#1a6b43]"
+      : "border-[#d95028]/35 bg-[#d95028]/10 text-[#c04524]";
 
   return (
-    <div className="border border-black/22 bg-[#f7f5ee] text-left shadow-[0_24px_70px_rgba(17,19,24,0.12)]">
-      <div className="flex items-start justify-between gap-4 border-b border-black/18 px-5 py-4">
+    <span
+      className={`inline-flex items-center gap-1.5 border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] ${tone}`}
+    >
+      {unknown ? (
+        <span aria-hidden="true">—</span>
+      ) : named ? (
+        <Check className="h-2.5 w-2.5" aria-hidden="true" />
+      ) : (
+        <X className="h-2.5 w-2.5" aria-hidden="true" />
+      )}
+      {channel}
+      <span className="sr-only">
+        {unknown ? "no answer" : named ? "named you" : "did not name you"}
+      </span>
+    </span>
+  );
+}
+
+function ResultCard({
+  result,
+  eyebrow = "Your scan",
+  note,
+}: {
+  result: AnswerCheckResult;
+  eyebrow?: string;
+  note?: string;
+}) {
+  const answers = result.answers;
+  const inFlight =
+    LIVE_STATUSES.has(result.status) ||
+    result.steps.some((step) => step.state === "active");
+  const scored = answers.filter((answer) => answer.mentioned !== null);
+  const named = scored.filter((answer) => answer.mentioned === true).length;
+  const score = scored.length ? Math.round((named / scored.length) * 100) : 0;
+  const band = scoreBand(score);
+  const channels = Array.from(
+    new Set(
+      answers
+        .map((answer) => answer.channel_label)
+        .filter((label): label is string => Boolean(label)),
+    ),
+  );
+  const allRivals = tallyRivals(answers);
+  const rivals = allRivals.slice(0, RIVAL_LIMIT);
+  const rows = result.questions
+    .map((question) => ({
+      question,
+      cells: channels.map(
+        (channel) =>
+          answers.find(
+            (answer) =>
+              answer.question === question && answer.channel_label === channel,
+          ) ?? null,
+      ),
+    }))
+    .filter((row) => row.cells.some(Boolean));
+
+  return (
+    <div className="border border-black/22 bg-white text-left shadow-[0_24px_70px_rgba(17,19,24,0.12)]">
+      <div className="flex flex-wrap items-end justify-between gap-4 px-4 pb-3 pt-3.5 sm:px-5">
         <div>
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/45">
-            Your scan
+          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
+            {eyebrow}
           </p>
-          <p className="mt-2 text-[15px] font-semibold leading-snug text-[#111318]">
+          <p className="mt-1.5 text-[14px] font-semibold leading-snug text-[#111318]">
             {result.brand ?? result.domain}
           </p>
+          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-black/38">
+            {result.domain}
+            {result.platform ? ` · ${result.platform}` : ""}
+          </p>
         </div>
-        <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.1em] text-black/42">
-          {result.domain}
-        </span>
+        {scored.length > 0 ? (
+          <div className="text-right">
+            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
+              Answer visibility score
+            </p>
+            <p className="mt-1 flex items-baseline justify-end gap-1.5">
+              <span className="text-[30px] font-semibold leading-none tracking-[-0.03em] text-[#111318]">
+                {score}
+              </span>
+              <span className="text-[12px] text-black/35">/ 100</span>
+              <span
+                className={`ml-1 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] ${band.text}`}
+              >
+                {band.label}
+              </span>
+            </p>
+          </div>
+        ) : null}
       </div>
 
-      <div className="border-b border-black/18">
-        {result.steps.map((step) => (
-          <StepRow key={step.key} step={step} />
-        ))}
-      </div>
+      {scored.length > 0 ? (
+        <div className="h-[3px] w-full bg-black/8">
+          <div
+            className={`h-full ${band.fill}`}
+            style={{ width: `${Math.max(score, 1.5)}%` }}
+          />
+        </div>
+      ) : null}
+      <div className="border-b border-black/18" />
+
+      {/* The live read stays visible while it is still working. */}
+      {inFlight || answers.length === 0 ? (
+        <div className="border-b border-black/18">
+          {result.steps.map((step) => (
+            <StepRow key={step.key} step={step} />
+          ))}
+        </div>
+      ) : null}
 
       {result.reject_reason ? (
         <p className="px-5 py-4 text-[14px] leading-relaxed text-[#d95028]">
@@ -125,8 +239,8 @@ function ResultCard({ result }: { result: AnswerCheckResult }) {
       ) : null}
 
       {result.findings.length > 0 ? (
-        <div className="border-b border-black/18 px-5 py-4">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#d95028]">
+        <div className="border-b border-black/18 px-4 py-4 sm:px-5">
+          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-[#d95028]">
             What a channel sees today
           </p>
           <ul className="mt-3 space-y-3">
@@ -152,49 +266,115 @@ function ResultCard({ result }: { result: AnswerCheckResult }) {
         </div>
       ) : null}
 
-      {result.answers.length > 0 ? (
-        <>
-          <dl className="grid sm:grid-cols-2">
-            {[
-              ["Questions asked", String(result.questions.length)],
-              [
-                "Answers that named you",
-                `${named.length} of ${result.answers.length}`,
-              ],
-              ["Answers that did not", String(missed.length)],
-              [
-                "Named instead",
-                competitors.length ? competitors.join(", ") : "—",
-              ],
-            ].map(([term, value], index) => (
-              <div
-                key={term}
-                className={`border-b border-black/14 px-5 py-4 ${index % 2 === 0 ? "sm:border-r" : ""}`}
-              >
-                <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-black/42">
-                  {term}
-                </dt>
-                <dd className="mt-2 text-[13px] font-semibold leading-snug text-black/70">
-                  {value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-
-          {missed[0]?.question ? (
-            <div className="px-5 py-4">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/45">
-                Example question you lost
-              </p>
-              <p className="mt-2 text-[14px] leading-snug text-[#111318]">
-                “{missed[0].question}”
-                <span className="mt-1 block text-[12px] text-black/45">
-                  Asked on {missed[0].channel_label}
-                </span>
-              </p>
+      {scored.length > 0 ? (
+        <dl className="grid grid-cols-2 border-b border-black/18 sm:grid-cols-4">
+          {[
+            ["Named you", `${named} of ${scored.length} answers`],
+            ["Questions asked", String(result.questions.length)],
+            ["Assistants", channels.join(", ") || "—"],
+            ["Rivals named instead", String(allRivals.length || 0)],
+          ].map(([term, value], index) => (
+            <div
+              key={term}
+              className={`border-black/12 px-4 py-3 sm:px-5 ${index < 2 ? "border-b sm:border-b-0" : ""} ${index % 2 === 0 ? "border-r" : ""} sm:border-r sm:last:border-r-0`}
+            >
+              <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-black/40">
+                {term}
+              </dt>
+              <dd className="mt-1 text-[13px] font-semibold leading-snug text-black/76">
+                {value}
+              </dd>
             </div>
-          ) : null}
-        </>
+          ))}
+        </dl>
+      ) : null}
+
+      {rows.length > 0 ? (
+        <div className="border-b border-black/18">
+          <p className="px-4 pt-4 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42 sm:px-5">
+            Question by question
+          </p>
+          <ul className="mt-3">
+            {rows.map((row) => {
+              const missedIn = row.cells.filter(
+                (cell): cell is Answer =>
+                  Boolean(cell) && cell?.mentioned === false,
+              );
+              const instead = Array.from(
+                new Set(
+                  missedIn.flatMap((cell) =>
+                    (cell.competitors ?? []).map(
+                      (raw) => rivalIdentity(raw).label,
+                    ),
+                  ),
+                ),
+              )
+                .filter(Boolean)
+                .slice(0, 4);
+
+              return (
+                <li
+                  key={row.question}
+                  className="border-t border-black/12 px-4 py-3 sm:px-5"
+                >
+                  <p className="text-[13px] font-medium leading-snug text-[#111318]">
+                    “{row.question}”
+                  </p>
+                  <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5">
+                    {row.cells.map((cell, index) =>
+                      cell ? (
+                        <ChannelChip
+                          key={channels[index]}
+                          channel={channels[index]}
+                          answer={cell}
+                        />
+                      ) : null,
+                    )}
+                    {instead.length ? (
+                      <span className="text-[11.5px] leading-relaxed text-black/52">
+                        <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/36">
+                          named instead{" "}
+                        </span>
+                        {instead.join(", ")}
+                      </span>
+                    ) : null}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
+
+      {rivals.length > 0 ? (
+        <div className="px-4 py-4 sm:px-5">
+          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
+            Who takes the answers you lose
+          </p>
+          <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
+            {rivals.map((rival) => (
+              <li key={rival.label} className="flex items-center gap-3">
+                <span
+                  className="w-[8.5rem] shrink-0 truncate text-[12.5px] text-black/70"
+                  title={rival.label}
+                >
+                  {rival.label}
+                </span>
+                <span className="h-1 flex-1 bg-black/8">
+                  <span
+                    className="block h-full bg-[#e8653a]"
+                    style={{
+                      width: `${(rival.count / rivals[0].count) * 100}%`,
+                    }}
+                  />
+                </span>
+                <span className="w-7 shrink-0 text-right font-mono text-[10px] text-black/42">
+                  {rival.count}×
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : null}
 
       {result.status === "awaiting_verification" ? (
@@ -203,15 +383,19 @@ function ResultCard({ result }: { result: AnswerCheckResult }) {
           your customers&apos; questions.
         </p>
       ) : null}
+
+      {note ? (
+        <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/52">
+          {note}
+        </p>
+      ) : null}
     </div>
   );
 }
 
 export default function AnswerCheck({
-  demo,
   placement = "homepage_hero",
 }: {
-  demo: React.ReactNode;
   placement?: string;
 }) {
   const { trackEvent } = useAnalytics();
@@ -375,9 +559,17 @@ export default function AnswerCheck({
         <p className="mb-4 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45">
           {result
             ? "Your storefront, read live"
-            : "One question, followed from miss to fix"}
+            : "A real store, scanned with this form"}
         </p>
-        {result ? <ResultCard result={result} /> : demo}
+        {result ? (
+          <ResultCard result={result} />
+        ) : (
+          <ResultCard
+            result={SAMPLE_SCAN}
+            eyebrow="Example scan, real result"
+            note="Dancing Queens is a live Shopify store. This is the unedited output of the scan above: their questions, the two channels, and who got named instead. Enter your domain to get yours."
+          />
+        )}
       </div>
     </div>
   );
