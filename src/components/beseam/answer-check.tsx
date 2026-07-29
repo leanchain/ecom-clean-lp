@@ -160,8 +160,6 @@ function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
   );
 }
 
-const SHOWN_PRODUCT_LIMIT = 6;
-
 function shownProducts(answers: Answer[]) {
   const seen = new Set<string>();
   const tiles: ShownProduct[] = [];
@@ -175,13 +173,12 @@ function shownProducts(answers: Answer[]) {
   }
   // Anything of yours that did surface leads the shelf; tiles that carry an
   // image come next, because a shelf of empty boxes says nothing.
-  return tiles
-    .sort(
-      (a, b) =>
-        Number(b.ours) - Number(a.ours) ||
-        Number(Boolean(b.image_url)) - Number(Boolean(a.image_url)),
-    )
-    .slice(0, SHOWN_PRODUCT_LIMIT);
+  // Every product the assistants surfaced is shown; the shelf scrolls.
+  return tiles.sort(
+    (a, b) =>
+      Number(b.ours) - Number(a.ours) ||
+      Number(Boolean(b.image_url)) - Number(Boolean(a.image_url)),
+  );
 }
 
 // Merchant CDNs refuse hotlinked images (Cross-Origin-Resource-Policy), so the
@@ -406,7 +403,11 @@ function ResultCard({
           <div>
             {rows.length > 0 ? (
               <div>
-                <p className="px-4 pt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60 sm:px-5">
+                <p className="flex items-center gap-2 px-4 pt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60 sm:px-5">
+                  <span
+                    className="h-[3px] w-4 bg-[#e8653a]"
+                    aria-hidden="true"
+                  />
                   Question by question
                 </p>
                 <ul className="mt-3">
@@ -494,17 +495,21 @@ function ResultCard({
           </div>
 
           {products.length > 0 ? (
-            <aside className="flex flex-col border-t border-black/18 px-4 py-4 sm:px-5 lg:border-l lg:border-t-0">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
+            <aside className="flex flex-col border-t border-black/18 px-4 py-4 sm:px-5 lg:min-h-0 lg:border-l lg:border-t-0">
+              <p className="flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
+                <span className="h-[3px] w-4 bg-[#e8653a]" aria-hidden="true" />
                 Products the assistants put in front of the shopper
               </p>
-              {/* Mobile stays bounded so a long shelf scrolls; on desktop the
-                  shelf fills the column height the questions list sets. */}
-              <ul className="mt-3 grid max-h-[22rem] grid-cols-2 gap-2 overflow-y-auto pr-1 sm:max-h-[26rem] lg:max-h-none lg:min-h-0 lg:flex-1 lg:content-start">
-                {products.map((product) => (
-                  <ProductTile key={product.title} product={product} />
-                ))}
-              </ul>
+              {/* Desktop: the shelf is an absolute overlay so it never sets the
+                  row height — it fills whatever the questions column produces
+                  and scrolls past that. Mobile keeps a fixed scroll cap. */}
+              <div className="relative mt-3 flex-1 lg:min-h-0">
+                <ul className="grid max-h-[22rem] grid-cols-2 gap-2 overflow-y-auto pr-1 sm:max-h-[26rem] lg:absolute lg:inset-0 lg:max-h-none">
+                  {products.map((product) => (
+                    <ProductTile key={product.title} product={product} />
+                  ))}
+                </ul>
+              </div>
             </aside>
           ) : null}
         </div>
@@ -620,7 +625,7 @@ export default function AnswerCheck({
   };
 
   const inputClass =
-    "h-12 w-full border border-black/22 bg-white px-4 text-left text-[15px] text-[#151515] outline-none placeholder:text-black/45 focus:border-[#3154ff]";
+    "h-12 w-full border border-black/22 bg-white px-4 text-left text-[15px] text-[#151515] outline-none placeholder:text-black/45 focus:border-[#c04e26]";
 
   return (
     <div>
@@ -659,7 +664,7 @@ export default function AnswerCheck({
           <button
             type="submit"
             disabled={submitting}
-            className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#3154ff] disabled:opacity-70"
+            className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#c04e26] disabled:opacity-70"
           >
             {submitting ? "Reading your store…" : "Scan my store free"}
             <ArrowRight
