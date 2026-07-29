@@ -218,7 +218,8 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "130.00 CHF",
           title: "Low-Top Dance Sneakers (Rosé Gold)",
           merchant: "This store",
-          image_url: null,
+          image_url:
+            "https://cdn.shopify.com/s/files/1/0047/2321/2377/files/1_e2a8e2a6-7392-4ced-b91e-e7291ff3c5fb.png?v=1769175886",
         },
         {
           url: "https://www.dancestep.ch/product-page/brown-satin-latin-shoes",
@@ -348,7 +349,8 @@ export const SAMPLE_SCAN: AnswerCheckResult = {
           price: "145.00 CHF",
           title: "Accent Dance Sneaker (White Gold)",
           merchant: "This store",
-          image_url: null,
+          image_url:
+            "https://cdn.shopify.com/s/files/1/0047/2321/2377/files/1_931ed9fb-25d2-4590-9efd-20e2f8c9f0f8.png?v=1771578038",
         },
         {
           url: "https://tanzschuhe.ch/de/rumpf-leo-sneaker-ru-1534-blk-wht",
