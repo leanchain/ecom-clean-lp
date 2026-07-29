@@ -476,7 +476,8 @@ function ResultCard({
               <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
                 Products the assistants put in front of the shopper
               </p>
-              <ul className="mt-3 grid grid-cols-2 gap-2">
+              {/* Bounded so a long shelf scrolls instead of stretching the card. */}
+              <ul className="mt-3 grid max-h-[22rem] grid-cols-2 gap-2 overflow-y-auto pr-1 sm:max-h-[26rem] lg:max-h-[30rem]">
                 {products.map((product) => (
                   <ProductTile key={product.title} product={product} />
                 ))}
@@ -676,7 +677,7 @@ export default function AnswerCheck({
           <ResultCard
             result={SAMPLE_SCAN}
             eyebrow="Example scan, real result"
-            identity="A dancewear store, kept anonymous"
+            identity="A dancewear store"
             identityMeta="Shopify · scanned with this form"
             note="The unedited output of one real scan: the store's own buying questions, both assistants, and who got named instead. Enter your domain to get yours."
           />
