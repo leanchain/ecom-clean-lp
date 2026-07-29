@@ -271,6 +271,106 @@ async function submitReview(lead, env) {
   return json({ ok: true }, 202);
 }
 
+// Backend that runs the scan. Proxied through the worker so the browser never
+// needs a cross-origin call and the API host stays out of the page source.
+const DEFAULT_API_BASE = "https://api.beseam.com/api";
+
+async function proxyAnswerCheck(request, url, env) {
+  const apiBase = (env.API_BASE_URL || DEFAULT_API_BASE).replace(/\/$/, "");
+
+  if (request.method === "GET") {
+    const domain = clean(url.searchParams.get("domain"), 253);
+    if (!domain) return json({ error: "domain is required" }, 422);
+    return forwardJson(
+      `${apiBase}/monitoring/public/answer-check/${encodeURIComponent(domain)}`,
+      { method: "GET" },
+    );
+  }
+
+  if (request.method !== "POST") {
+    return json({ error: "method not allowed" }, 405);
+  }
+
+  // Same-origin is always fine (this is how the site itself calls it); the
+  // allowlist covers the apex/www split.
+  const origin = request.headers.get("origin");
+  if (origin && origin !== url.origin && !ALLOWED_ORIGINS.has(origin)) {
+    return json({ error: "Origin not allowed." }, 403);
+  }
+
+  let payload;
+  try {
+    payload = await request.json();
+  } catch {
+    return json({ error: "invalid body" }, 400);
+  }
+
+  const domain = clean(payload?.domain, 253);
+  const email = clean(payload?.email, 320);
+  if (!domain) return json({ error: "Enter your store domain." }, 422);
+  if (email && !validEmail(email)) {
+    return json({ error: "Enter a valid work email." }, 422);
+  }
+
+  return forwardJson(`${apiBase}/monitoring/public/answer-check`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      domain,
+      email: email || null,
+      source: clean(payload?.source, 64) || "homepage_hero",
+      // Honeypot passes straight through: the backend decides what to do.
+      website: clean(payload?.website, 200) || null,
+    }),
+  });
+}
+
+async function verifyAnswerCheck(url, env) {
+  const apiBase = (env.API_BASE_URL || DEFAULT_API_BASE).replace(/\/$/, "");
+  const token = clean(url.searchParams.get("token"), 128);
+  const home = new URL(url);
+  home.pathname = "/";
+  home.search = "";
+
+  if (!token) {
+    home.searchParams.set("scan_error", "missing_token");
+    return Response.redirect(home.toString(), 302);
+  }
+
+  try {
+    const response = await fetch(
+      `${apiBase}/monitoring/public/answer-check/verify?token=${encodeURIComponent(token)}`,
+      { method: "POST" },
+    );
+    const payload = await response.json();
+    if (!response.ok || !payload?.domain) {
+      home.searchParams.set("scan_error", "link_used");
+      return Response.redirect(home.toString(), 302);
+    }
+    home.searchParams.set("domain", payload.domain);
+  } catch {
+    home.searchParams.set("scan_error", "unavailable");
+  }
+
+  return Response.redirect(home.toString(), 302);
+}
+
+async function forwardJson(target, init) {
+  try {
+    const response = await fetch(target, init);
+    const body = await response.text();
+    return new Response(body, {
+      status: response.status,
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-store",
+      },
+    });
+  } catch {
+    return json({ error: "The scan service is unavailable right now." }, 502);
+  }
+}
+
 function legacyRedirect(url) {
   const pathname = url.pathname.replace(/\/$/, "") || "/";
   const target =
@@ -289,6 +389,16 @@ function legacyRedirect(url) {
 const worker = {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (url.pathname === "/api/answer-check") {
+      return proxyAnswerCheck(request, url, env);
+    }
+
+    // Target of the verification email: authorize the paid probe, then send the
+    // visitor to the card so they can watch it finish.
+    if (url.pathname === "/scan/verify") {
+      return verifyAnswerCheck(url, env);
+    }
 
     if (request.method === "POST" && url.pathname === "/api/lead") {
       const parsed = await readLead(request, url, null);

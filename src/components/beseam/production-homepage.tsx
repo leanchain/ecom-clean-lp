@@ -12,6 +12,7 @@ import {
   Tags,
 } from "lucide-react";
 
+import LiveAnswerCheck from "@/components/beseam/answer-check";
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import LeadCaptureForm from "@/components/beseam/lead-capture-form";
@@ -115,9 +116,9 @@ function EvidenceFigure({
   );
 }
 
-function AnswerCheck() {
+function DemoAnswerCard() {
   return (
-    <div className="border border-black/22 bg-[#f7f5ee] shadow-[0_24px_70px_rgba(17,19,24,0.12)]">
+    <div className="border border-black/22 bg-[#f7f5ee] text-left shadow-[0_24px_70px_rgba(17,19,24,0.12)]">
       <div className="flex items-start justify-between gap-5 border-b border-black/18 px-5 py-4">
         <div>
           <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/45">
@@ -209,19 +210,6 @@ export default function ProductionHomepage() {
                 one-click revert, then asks again to confirm the answer changed.
               </p>
 
-              <div className="mx-auto mt-10 max-w-3xl text-center [&_input]:text-left">
-                <LeadCaptureForm
-                  mode="store-domain"
-                  source="ai_visibility_scan"
-                  placement="homepage_hero"
-                  storeLabel="Store domain"
-                  storePlaceholder="yourstore.myshopify.com"
-                  buttonLabel="Scan my store free"
-                  helpText="Free scan of your live catalog. No store access needed to see the first findings."
-                  storeFieldId="hero-store-domain"
-                />
-              </div>
-
               <dl className="mx-auto mt-12 grid max-w-4xl grid-cols-3 border-y border-black/18">
                 {[
                   ["Ask", "The assistants your buyers use"],
@@ -245,11 +233,11 @@ export default function ProductionHomepage() {
           </Reveal>
 
           <Reveal delay={0.08} y={18}>
-            <div className="mx-auto mt-16 max-w-[72rem]">
-              <p className="mb-4 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45">
-                One question, followed from miss to fix
-              </p>
-              <AnswerCheck />
+            <div className="mt-10">
+              <LiveAnswerCheck
+                demo={<DemoAnswerCard />}
+                placement="homepage_hero"
+              />
               <div className="mt-6 text-center">
                 <Link
                   href="#how-it-works"
