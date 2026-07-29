@@ -167,11 +167,17 @@ function shownProducts(answers: Answer[]) {
 // Merchant CDNs refuse hotlinked images (Cross-Origin-Resource-Policy), so the
 // image comes back through our own worker instead of straight from the CDN.
 function ProductTile({ product }: { product: ShownProduct }) {
-  const [broken, setBroken] = useState(false);
-  const src =
-    product.image_url && !broken
+  // Stage 1 is the worker proxy (the only thing that beats hotlink blocking).
+  // `next dev` does not run the worker, so fall back to the CDN URL there
+  // before giving up on the image entirely.
+  const [stage, setStage] = useState<"proxy" | "direct" | "none">("proxy");
+  const src = !product.image_url
+    ? null
+    : stage === "proxy"
       ? `/api/product-image?u=${encodeURIComponent(product.image_url)}`
-      : null;
+      : stage === "direct"
+        ? product.image_url
+        : null;
 
   return (
     <li className="border border-black/12">
@@ -182,7 +188,7 @@ function ProductTile({ product }: { product: ShownProduct }) {
             src={src}
             alt=""
             loading="lazy"
-            onError={() => setBroken(true)}
+            onError={() => setStage(stage === "proxy" ? "direct" : "none")}
             className="h-full w-full object-contain mix-blend-multiply"
           />
         ) : (
