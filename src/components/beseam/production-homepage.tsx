@@ -4,11 +4,15 @@ import Link from "next/link";
 import {
   ArrowRight,
   BellRing,
+  Bot,
   Check,
   CircleAlert,
+  MessageSquare,
   RotateCcw,
   Search,
   ShoppingBag,
+  Sparkles,
+  Store,
   Tags,
 } from "lucide-react";
 
@@ -17,6 +21,15 @@ import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import LeadCaptureForm from "@/components/beseam/lead-capture-form";
 import { Reveal } from "@/components/beseam/reveal";
+
+const SURFACES = [
+  { label: "ChatGPT", icon: MessageSquare },
+  { label: "Microsoft Copilot", icon: Bot },
+  { label: "Perplexity", icon: Search },
+  { label: "Google AI Overviews", icon: Sparkles },
+  { label: "Google Shopping", icon: ShoppingBag },
+  { label: "Your product pages and feeds", icon: Store },
+] as const;
 
 const WHAT_BREAKS = [
   {
@@ -182,10 +195,22 @@ export default function ProductionHomepage() {
           <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/48">
             Questions are asked against
           </p>
-          <p className="text-[14px] font-semibold text-black/68">
-            ChatGPT · Microsoft Copilot · Perplexity · Google AI Overviews ·
-            Google Shopping · your own product pages and feeds
-          </p>
+          <ul className="flex flex-wrap items-center gap-2">
+            {SURFACES.map(({ label, icon: Icon }) => (
+              <li
+                key={label}
+                className="inline-flex items-center gap-2 border border-black/16 bg-[#f7f5ee] px-3 py-1.5"
+              >
+                <Icon
+                  aria-hidden="true"
+                  className="h-3.5 w-3.5 text-[#3154ff]"
+                />
+                <span className="text-[13px] font-semibold text-black/70">
+                  {label}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
