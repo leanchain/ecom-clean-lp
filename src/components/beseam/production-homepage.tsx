@@ -118,7 +118,7 @@ function EvidenceFigure({
         />
       </div>
       <figcaption className="grid gap-2 border-x border-b border-black/18 bg-[#f7f5ee] px-4 py-3 sm:grid-cols-[9rem_1fr] sm:px-5">
-        <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#3154ff]">
+        <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/58">
           {label}
         </span>
         <span className="text-[13px] leading-relaxed text-black/62">
@@ -137,7 +137,7 @@ export default function ProductionHomepage() {
           <Reveal>
             <div className="mx-auto max-w-[58rem] text-center">
               <div className="flex items-center justify-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/55">
-                <span className="h-2 w-2 bg-[#e8653a]" aria-hidden="true" />
+                <span className="h-2 w-2 bg-[#111318]" aria-hidden="true" />
                 Answer visibility, fixed at the product level
               </div>
               <h1 className="mx-auto mt-8 max-w-[19ch] font-serif text-[clamp(3rem,5vw,5rem)] font-normal leading-[1] tracking-[-0.045em] text-[#111318]">
@@ -223,7 +223,7 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 border-b border-black/22 pb-14 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
                 How it works
               </p>
               <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
@@ -243,7 +243,7 @@ export default function ProductionHomepage() {
                 key={step.number}
                 className="border-b border-black/18 py-9 md:border-r md:px-7 lg:border-b-0 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
               >
-                <span className="font-mono text-[11px] font-semibold text-[#3154ff]">
+                <span className="font-mono text-[11px] font-semibold text-black/50">
                   {step.number}
                 </span>
                 <h3 className="mt-7 text-[21px] font-semibold leading-snug text-[#111318]">
@@ -258,7 +258,7 @@ export default function ProductionHomepage() {
 
           <div className="mt-12 flex items-start gap-3 border-t border-black/18 pt-6 text-[13px] leading-relaxed text-black/52">
             <RotateCcw
-              className="mt-0.5 h-4 w-4 shrink-0 text-[#3154ff]"
+              className="mt-0.5 h-4 w-4 shrink-0 text-black/70"
               aria-hidden="true"
             />
             Nothing customer-facing is published without your access and your
@@ -275,7 +275,7 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <Reveal>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
                 One product, followed through
               </p>
               <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
@@ -314,7 +314,7 @@ export default function ProductionHomepage() {
                     key={number}
                     className="grid gap-3 border-b border-black/16 py-5 last:border-b-0 sm:grid-cols-[3rem_8rem_1fr] sm:items-start"
                   >
-                    <span className="font-mono text-[10px] text-[#3154ff]">
+                    <span className="font-mono text-[10px] text-black/50">
                       {number}
                     </span>
                     <span className="text-[14px] font-semibold text-black/78">
@@ -348,7 +348,7 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
                 What actually leaves you out
               </p>
               <h2 className="mt-6 max-w-[11ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
@@ -374,7 +374,7 @@ export default function ProductionHomepage() {
                   className="border-b border-black/18 py-7 md:border-r md:px-6 lg:border-b-0 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
                 >
                   <Icon
-                    className="h-5 w-5 text-[#3154ff]"
+                    className="h-5 w-5 text-black/70"
                     strokeWidth={1.7}
                     aria-hidden="true"
                   />
@@ -447,7 +447,7 @@ export default function ProductionHomepage() {
       <section className="border-b border-black/18 bg-[#f4f1e9]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="border-y border-black/24 py-10 lg:py-14">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/58">
               Start with your own catalog
             </p>
             <h2 className="mt-5 max-w-[20ch] font-serif text-[clamp(2.6rem,4.2vw,4.3rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#111318]">
@@ -485,7 +485,7 @@ export default function ProductionHomepage() {
 
           <div className="mt-6 flex items-start gap-3 text-[13px] leading-relaxed text-black/52">
             <CircleAlert
-              className="mt-0.5 h-4 w-4 shrink-0 text-[#3154ff]"
+              className="mt-0.5 h-4 w-4 shrink-0 text-black/70"
               aria-hidden="true"
             />
             The scan reads public pages only. Beseam does not publish

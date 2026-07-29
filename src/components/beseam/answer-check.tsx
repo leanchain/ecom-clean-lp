@@ -35,7 +35,7 @@ function StepRow({ step }: { step: Step }) {
       <X className="h-4 w-4 text-[#d95028]" aria-hidden="true" />
     ) : step.state === "active" ? (
       <Loader2
-        className="h-4 w-4 animate-spin text-[#3154ff]"
+        className="h-4 w-4 animate-spin text-black/55"
         aria-hidden="true"
       />
     ) : (
@@ -53,7 +53,7 @@ function StepRow({ step }: { step: Step }) {
       <span className="flex-1 text-left text-[14px] leading-snug text-black/72">
         {step.label}
         {step.detail ? (
-          <span className="mt-1 block text-[12px] text-black/45">
+          <span className="mt-1 block text-[12px] text-black/60">
             {step.detail}
           </span>
         ) : null}
@@ -99,13 +99,15 @@ function tallyRivals(answers: Answer[]) {
   return merged.sort((a, b) => b.count - a.count);
 }
 
+// Three signals only: green won, red lost, ink in between. Blue is reserved
+// for things you can click.
 function scoreBand(score: number) {
   if (score >= 70)
     return { label: "Strong", text: "text-[#1a6b43]", fill: "bg-[#1f7a4d]" };
   if (score >= 40)
-    return { label: "Mixed", text: "text-[#3154ff]", fill: "bg-[#3154ff]" };
+    return { label: "Mixed", text: "text-[#111318]", fill: "bg-[#111318]" };
   if (score >= 15)
-    return { label: "Weak", text: "text-[#b4611f]", fill: "bg-[#e8653a]" };
+    return { label: "Weak", text: "text-[#c04524]", fill: "bg-[#d95028]" };
   return {
     label: "Barely visible",
     text: "text-[#c04524]",
@@ -130,7 +132,7 @@ function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
   const named = answer.mentioned === true;
   const unknown = answer.mentioned === null || Boolean(answer.error);
   const tone = unknown
-    ? "border-black/14 bg-black/[0.03] text-black/42"
+    ? "border-black/14 bg-black/[0.03] text-black/60"
     : named
       ? "border-[#1f7a4d]/40 bg-[#1f7a4d]/10 text-[#1a6b43]"
       : "border-[#d95028]/35 bg-[#d95028]/10 text-[#c04524]";
@@ -210,17 +212,17 @@ function ProductTile({ product }: { product: ShownProduct }) {
             className="h-full w-full object-contain mix-blend-multiply"
           />
         ) : (
-          <span className="px-2 text-center font-mono text-[9px] uppercase leading-tight tracking-[0.1em] text-black/28">
+          <span className="px-2 text-center font-mono text-[10px] uppercase leading-tight tracking-[0.1em] text-black/45">
             {product.merchant ?? "no image"}
           </span>
         )}
         {product.ours ? (
-          <span className="absolute left-0 top-0 bg-[#1f7a4d] px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] text-white">
+          <span className="absolute left-0 top-0 bg-[#1f7a4d] px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-white">
             yours
           </span>
         ) : null}
         {product.link_live === false ? (
-          <span className="absolute right-0 top-0 bg-[#d95028] px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] text-white">
+          <span className="absolute right-0 top-0 bg-[#d95028] px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-white">
             dead link
           </span>
         ) : null}
@@ -229,7 +231,7 @@ function ProductTile({ product }: { product: ShownProduct }) {
         <p className="line-clamp-2 text-[12px] font-medium leading-snug text-[#111318]">
           {product.title}
         </p>
-        <p className="mt-1 flex items-baseline justify-between gap-2 text-[10.5px] text-black/50">
+        <p className="mt-1 flex items-baseline justify-between gap-2 text-[10.5px] text-black/62">
           <span className="truncate">{product.merchant ?? "—"}</span>
           {product.price ? (
             <span className="shrink-0 font-mono text-black/65">
@@ -290,27 +292,29 @@ function ResultCard({
     <div className="border border-black/22 bg-white text-left shadow-[0_24px_70px_rgba(17,19,24,0.12)]">
       <div className="flex flex-wrap items-end justify-between gap-4 px-4 pb-3 pt-3.5 sm:px-5">
         <div>
-          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
             {eyebrow}
           </p>
           <p className="mt-1.5 text-[14px] font-semibold leading-snug text-[#111318]">
             {identity ?? result.brand ?? result.domain}
           </p>
-          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-black/38">
+          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-black/62">
             {identityMeta ??
               `${result.domain}${result.platform ? ` · ${result.platform}` : ""}`}
           </p>
         </div>
         {scored.length > 0 ? (
           <div className="text-right">
-            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
               Answer visibility score
             </p>
             <p className="mt-1 flex items-baseline justify-end gap-1.5">
-              <span className="text-[30px] font-semibold leading-none tracking-[-0.03em] text-[#111318]">
+              <span
+                className={`text-[30px] font-semibold leading-none tracking-[-0.03em] ${band.text}`}
+              >
                 {score}
               </span>
-              <span className="text-[12px] text-black/35">/ 100</span>
+              <span className="text-[12px] text-black/50">/ 100</span>
               <span
                 className={`ml-1 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] ${band.text}`}
               >
@@ -348,7 +352,7 @@ function ResultCard({
 
       {result.findings.length > 0 ? (
         <div className="border-b border-black/18 px-4 py-4 sm:px-5">
-          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-[#d95028]">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#d95028]">
             What a channel sees today
           </p>
           <ul className="mt-3 space-y-3">
@@ -360,11 +364,11 @@ function ResultCard({
                 <span className="font-semibold text-black/78">
                   {finding.title}
                 </span>
-                <span className="mt-1 block text-black/56">
+                <span className="mt-1 block text-black/64">
                   {finding.detail}
                 </span>
                 {finding.product ? (
-                  <span className="mt-1 block font-mono text-[11px] text-black/40">
+                  <span className="mt-1 block font-mono text-[11px] text-black/60">
                     {finding.product}
                   </span>
                 ) : null}
@@ -386,7 +390,7 @@ function ResultCard({
               key={term}
               className={`border-black/12 px-4 py-3 sm:px-5 ${index < 2 ? "border-b sm:border-b-0" : ""} ${index % 2 === 0 ? "border-r" : ""} sm:border-r sm:last:border-r-0`}
             >
-              <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-black/40">
+              <dt className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/60">
                 {term}
               </dt>
               <dd className="mt-1 text-[13px] font-semibold leading-snug text-black/76">
@@ -402,7 +406,7 @@ function ResultCard({
           <div>
             {rows.length > 0 ? (
               <div>
-                <p className="px-4 pt-4 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42 sm:px-5">
+                <p className="px-4 pt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60 sm:px-5">
                   Question by question
                 </p>
                 <ul className="mt-3">
@@ -442,8 +446,8 @@ function ResultCard({
                             ) : null,
                           )}
                           {instead.length ? (
-                            <span className="text-[11.5px] leading-relaxed text-black/52">
-                              <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/36">
+                            <span className="text-[11.5px] leading-relaxed text-black/62">
+                              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-black/58">
                                 named instead{" "}
                               </span>
                               {instead.join(", ")}
@@ -459,7 +463,7 @@ function ResultCard({
 
             {rivals.length > 0 ? (
               <div className="border-t border-black/12 px-4 py-4 sm:px-5">
-                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
                   Who takes the answers you lose
                 </p>
                 <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
@@ -473,13 +477,13 @@ function ResultCard({
                       </span>
                       <span className="h-1 flex-1 bg-black/8">
                         <span
-                          className="block h-full bg-[#e8653a]"
+                          className="block h-full bg-[#d95028]"
                           style={{
                             width: `${(rival.count / rivals[0].count) * 100}%`,
                           }}
                         />
                       </span>
-                      <span className="w-7 shrink-0 text-right font-mono text-[10px] text-black/42">
+                      <span className="w-7 shrink-0 text-right font-mono text-[10px] text-black/60">
                         {rival.count}×
                       </span>
                     </li>
@@ -490,12 +494,13 @@ function ResultCard({
           </div>
 
           {products.length > 0 ? (
-            <aside className="border-t border-black/18 px-4 py-4 sm:px-5 lg:border-l lg:border-t-0">
-              <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
+            <aside className="flex flex-col border-t border-black/18 px-4 py-4 sm:px-5 lg:border-l lg:border-t-0">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
                 Products the assistants put in front of the shopper
               </p>
-              {/* Bounded so a long shelf scrolls instead of stretching the card. */}
-              <ul className="mt-3 grid max-h-[22rem] grid-cols-2 gap-2 overflow-y-auto pr-1 sm:max-h-[26rem] lg:max-h-[30rem]">
+              {/* Mobile stays bounded so a long shelf scrolls; on desktop the
+                  shelf fills the column height the questions list sets. */}
+              <ul className="mt-3 grid max-h-[22rem] grid-cols-2 gap-2 overflow-y-auto pr-1 sm:max-h-[26rem] lg:max-h-none lg:min-h-0 lg:flex-1 lg:content-start">
                 {products.map((product) => (
                   <ProductTile key={product.title} product={product} />
                 ))}
@@ -506,14 +511,14 @@ function ResultCard({
       ) : null}
 
       {result.status === "awaiting_verification" ? (
-        <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/52">
+        <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
           Final check: we emailed you a link. Click it and we ask the assistants
           your customers&apos; questions.
         </p>
       ) : null}
 
       {note ? (
-        <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/52">
+        <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
           {note}
         </p>
       ) : null}
@@ -615,7 +620,7 @@ export default function AnswerCheck({
   };
 
   const inputClass =
-    "h-12 w-full border border-black/22 bg-white px-4 text-left text-[15px] text-[#151515] outline-none placeholder:text-black/38 focus:border-[#3154ff]";
+    "h-12 w-full border border-black/22 bg-white px-4 text-left text-[15px] text-[#151515] outline-none placeholder:text-black/45 focus:border-[#3154ff]";
 
   return (
     <div>
@@ -676,7 +681,7 @@ export default function AnswerCheck({
 
         <p
           role={error ? "alert" : undefined}
-          className={`mt-3 text-[13px] leading-relaxed ${error ? "text-[#b3261e]" : "text-black/50"}`}
+          className={`mt-3 text-[13px] leading-relaxed ${error ? "text-[#b3261e]" : "text-black/62"}`}
         >
           {error ||
             "We read your live storefront first. The assistant questions run after you confirm by email."}
@@ -684,7 +689,7 @@ export default function AnswerCheck({
       </form>
 
       <div className="mx-auto mt-16 max-w-[72rem]">
-        <p className="mb-4 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45">
+        <p className="mb-4 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/60">
           {result
             ? "Your storefront, read live"
             : "A real store, scanned with this form"}
