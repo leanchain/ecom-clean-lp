@@ -10,6 +10,26 @@ Both workspaces keep the underlying evidence and observation time visible. The
 primary conversion route is `/store-health-review`; the free AI visibility scan
 remains available at `/tools/ai-visibility-scan`.
 
+## Local development
+
+```bash
+npm run dev            # worker on :7002 in front of next dev on :7003
+```
+
+The free scan, the product-image proxy, and the verification link live in the
+Cloudflare Worker (`main.js`), so `next dev` alone answers them with
+"The scan service is unavailable right now." `npm run dev` therefore runs both:
+Wrangler serves `/api/*` and `/scan/verify`, and hands everything else to Next,
+so hot reload still works.
+
+It points at a local API on `http://localhost:8123/api`. Override with:
+
+```bash
+LOCAL_API_BASE=https://api.beseam.com/api npm run dev   # scan against production
+LP_PORT=7012 LP_NEXT_PORT=7013 npm run dev              # different ports
+npm run dev:next-only                                   # Next alone, no /api/*
+```
+
 ## Local validation
 
 Use Bun, matching the repository lockfile:

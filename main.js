@@ -489,6 +489,22 @@ const worker = {
       if (redirect) return redirect;
     }
 
+    // Local development: `npm run dev` runs this worker in front of `next dev`,
+    // so everything that is not an API route is handed to Next (keeping HMR)
+    // instead of the exported ./out directory, which is stale or absent.
+    if (env.DEV_ORIGIN) {
+      const upstream = new URL(url.pathname + url.search, env.DEV_ORIGIN);
+      return fetch(new Request(upstream, request));
+    }
+
+    if (!env.ASSETS) {
+      return new Response(
+        "No ASSETS binding and no DEV_ORIGIN. Run `npm run dev` (worker + next), " +
+          "or deploy with wrangler.jsonc, which serves ./out.",
+        { status: 500, headers: { "content-type": "text/plain" } },
+      );
+    }
+
     return env.ASSETS.fetch(request);
   },
 };
