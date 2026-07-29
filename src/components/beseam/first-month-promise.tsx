@@ -14,7 +14,7 @@ export default function FirstMonthPromise({
       <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
         <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
               The first-month promise
             </p>
             <h2 className="mt-6 max-w-[11ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#111318]">
