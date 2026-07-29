@@ -13,6 +13,7 @@ import { ArrowRight, Check, Loader2, X } from "lucide-react";
 import type {
   Answer,
   AnswerCheckResult,
+  ShownProduct,
   Step,
 } from "@/components/beseam/answer-check-types";
 import { SAMPLE_SCAN } from "@/data/sample-scan";
@@ -139,13 +140,75 @@ function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
   );
 }
 
+const SHOWN_PRODUCT_LIMIT = 8;
+
+function shownProducts(answers: Answer[]) {
+  const seen = new Set<string>();
+  const tiles: ShownProduct[] = [];
+  for (const answer of answers) {
+    for (const product of answer.products ?? []) {
+      const key = product.title.trim().toLowerCase();
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      tiles.push(product);
+    }
+  }
+  // Anything of yours that did surface leads the shelf.
+  return tiles
+    .sort((a, b) => Number(b.ours) - Number(a.ours))
+    .slice(0, SHOWN_PRODUCT_LIMIT);
+}
+
+// Merchant CDNs mostly refuse hotlinked images (Cross-Origin-Resource-Policy),
+// so the tile is typographic: rank, product, merchant, price.
+function ProductTile({
+  product,
+  rank,
+}: {
+  product: ShownProduct;
+  rank: number;
+}) {
+  return (
+    <li className="flex gap-3 border-t border-black/10 py-2.5 first:border-t-0">
+      <span
+        aria-hidden="true"
+        className="mt-0.5 w-5 shrink-0 font-mono text-[10px] text-black/30"
+      >
+        {String(rank).padStart(2, "0")}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="line-clamp-2 text-[12.5px] font-medium leading-snug text-[#111318]">
+          {product.title}
+        </span>
+        <span className="mt-1 flex flex-wrap items-baseline gap-x-2 text-[11px] text-black/50">
+          {product.merchant ? (
+            <span className="truncate">{product.merchant}</span>
+          ) : null}
+          {product.price ? (
+            <span className="font-mono text-black/62">{product.price}</span>
+          ) : null}
+        </span>
+        {product.ours ? (
+          <span className="mt-1 inline-block border border-[#1f7a4d]/40 bg-[#1f7a4d]/10 px-1.5 py-px font-mono text-[9px] uppercase tracking-[0.08em] text-[#1a6b43]">
+            yours
+          </span>
+        ) : null}
+      </span>
+    </li>
+  );
+}
+
 function ResultCard({
   result,
   eyebrow = "Your scan",
+  identity,
+  identityMeta,
   note,
 }: {
   result: AnswerCheckResult;
   eyebrow?: string;
+  identity?: string;
+  identityMeta?: string;
   note?: string;
 }) {
   const answers = result.answers;
@@ -165,6 +228,7 @@ function ResultCard({
   );
   const allRivals = tallyRivals(answers);
   const rivals = allRivals.slice(0, RIVAL_LIMIT);
+  const products = shownProducts(answers);
   const rows = result.questions
     .map((question) => ({
       question,
@@ -186,11 +250,11 @@ function ResultCard({
             {eyebrow}
           </p>
           <p className="mt-1.5 text-[14px] font-semibold leading-snug text-[#111318]">
-            {result.brand ?? result.domain}
+            {identity ?? result.brand ?? result.domain}
           </p>
           <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-black/38">
-            {result.domain}
-            {result.platform ? ` · ${result.platform}` : ""}
+            {identityMeta ??
+              `${result.domain}${result.platform ? ` · ${result.platform}` : ""}`}
           </p>
         </div>
         {scored.length > 0 ? (
@@ -289,91 +353,114 @@ function ResultCard({
         </dl>
       ) : null}
 
-      {rows.length > 0 ? (
-        <div className="border-b border-black/18">
-          <p className="px-4 pt-4 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42 sm:px-5">
-            Question by question
-          </p>
-          <ul className="mt-3">
-            {rows.map((row) => {
-              const missedIn = row.cells.filter(
-                (cell): cell is Answer =>
-                  Boolean(cell) && cell?.mentioned === false,
-              );
-              const instead = Array.from(
-                new Set(
-                  missedIn.flatMap((cell) =>
-                    (cell.competitors ?? []).map(
-                      (raw) => rivalIdentity(raw).label,
-                    ),
-                  ),
-                ),
-              )
-                .filter(Boolean)
-                .slice(0, 4);
+      {rows.length > 0 || products.length > 0 ? (
+        <div className="grid border-b border-black/18 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
+          <div>
+            {rows.length > 0 ? (
+              <div>
+                <p className="px-4 pt-4 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42 sm:px-5">
+                  Question by question
+                </p>
+                <ul className="mt-3">
+                  {rows.map((row) => {
+                    const missedIn = row.cells.filter(
+                      (cell): cell is Answer =>
+                        Boolean(cell) && cell?.mentioned === false,
+                    );
+                    const instead = Array.from(
+                      new Set(
+                        missedIn.flatMap((cell) =>
+                          (cell.competitors ?? []).map(
+                            (raw) => rivalIdentity(raw).label,
+                          ),
+                        ),
+                      ),
+                    )
+                      .filter(Boolean)
+                      .slice(0, 4);
 
-              return (
-                <li
-                  key={row.question}
-                  className="border-t border-black/12 px-4 py-3 sm:px-5"
-                >
-                  <p className="text-[13px] font-medium leading-snug text-[#111318]">
-                    “{row.question}”
-                  </p>
-                  <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5">
-                    {row.cells.map((cell, index) =>
-                      cell ? (
-                        <ChannelChip
-                          key={channels[index]}
-                          channel={channels[index]}
-                          answer={cell}
-                        />
-                      ) : null,
-                    )}
-                    {instead.length ? (
-                      <span className="text-[11.5px] leading-relaxed text-black/52">
-                        <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/36">
-                          named instead{" "}
-                        </span>
-                        {instead.join(", ")}
+                    return (
+                      <li
+                        key={row.question}
+                        className="border-t border-black/12 px-4 py-3 sm:px-5"
+                      >
+                        <p className="text-[13px] font-medium leading-snug text-[#111318]">
+                          “{row.question}”
+                        </p>
+                        <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5">
+                          {row.cells.map((cell, index) =>
+                            cell ? (
+                              <ChannelChip
+                                key={channels[index]}
+                                channel={channels[index]}
+                                answer={cell}
+                              />
+                            ) : null,
+                          )}
+                          {instead.length ? (
+                            <span className="text-[11.5px] leading-relaxed text-black/52">
+                              <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/36">
+                                named instead{" "}
+                              </span>
+                              {instead.join(", ")}
+                            </span>
+                          ) : null}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : null}
+
+            {rivals.length > 0 ? (
+              <div className="border-t border-black/12 px-4 py-4 sm:px-5">
+                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
+                  Who takes the answers you lose
+                </p>
+                <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
+                  {rivals.map((rival) => (
+                    <li key={rival.label} className="flex items-center gap-3">
+                      <span
+                        className="w-[8.5rem] shrink-0 truncate text-[12.5px] text-black/70"
+                        title={rival.label}
+                      >
+                        {rival.label}
                       </span>
-                    ) : null}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ) : null}
+                      <span className="h-1 flex-1 bg-black/8">
+                        <span
+                          className="block h-full bg-[#e8653a]"
+                          style={{
+                            width: `${(rival.count / rivals[0].count) * 100}%`,
+                          }}
+                        />
+                      </span>
+                      <span className="w-7 shrink-0 text-right font-mono text-[10px] text-black/42">
+                        {rival.count}×
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </div>
 
-      {rivals.length > 0 ? (
-        <div className="px-4 py-4 sm:px-5">
-          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
-            Who takes the answers you lose
-          </p>
-          <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
-            {rivals.map((rival) => (
-              <li key={rival.label} className="flex items-center gap-3">
-                <span
-                  className="w-[8.5rem] shrink-0 truncate text-[12.5px] text-black/70"
-                  title={rival.label}
-                >
-                  {rival.label}
-                </span>
-                <span className="h-1 flex-1 bg-black/8">
-                  <span
-                    className="block h-full bg-[#e8653a]"
-                    style={{
-                      width: `${(rival.count / rivals[0].count) * 100}%`,
-                    }}
+          {products.length > 0 ? (
+            <aside className="border-t border-black/18 px-4 py-4 sm:px-5 lg:border-l lg:border-t-0">
+              <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-black/42">
+                Products the assistants put in front of the shopper
+              </p>
+              <ul className="mt-2 sm:grid sm:grid-cols-2 sm:gap-x-8 lg:block">
+                {products.map((product, index) => (
+                  <ProductTile
+                    key={product.title}
+                    product={product}
+                    rank={index + 1}
                   />
-                </span>
-                <span className="w-7 shrink-0 text-right font-mono text-[10px] text-black/42">
-                  {rival.count}×
-                </span>
-              </li>
-            ))}
-          </ul>
+                ))}
+              </ul>
+            </aside>
+          ) : null}
         </div>
       ) : null}
 
@@ -567,7 +654,9 @@ export default function AnswerCheck({
           <ResultCard
             result={SAMPLE_SCAN}
             eyebrow="Example scan, real result"
-            note="Dancing Queens is a live Shopify store. This is the unedited output of the scan above: their questions, the two channels, and who got named instead. Enter your domain to get yours."
+            identity="A dancewear store, kept anonymous"
+            identityMeta="Shopify · scanned with this form"
+            note="The unedited output of one real scan: the store's own buying questions, both assistants, and who got named instead. Enter your domain to get yours."
           />
         )}
       </div>
