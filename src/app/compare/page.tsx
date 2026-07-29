@@ -183,7 +183,7 @@ export default function ComparePage() {
           <div className="border border-white/20 bg-white/5 p-2">
             <Image
               src="/images/product-live/revenue-overview.webp"
-              alt="Real Beseam revenue overview for Dancing Queens"
+              alt="Real Beseam revenue overview for a dancewear store"
               width={1600}
               height={1000}
               className="h-auto w-full"

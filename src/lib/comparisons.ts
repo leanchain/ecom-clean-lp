@@ -142,9 +142,9 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/revenue-analytics.webp",
-      alt: "Beseam revenue analytics workspace showing commerce metrics for the Dancing Queens store",
+      alt: "Beseam revenue analytics workspace showing commerce metrics for a dancewear store",
       caption:
-        "Real Beseam revenue analytics for Dancing Queens. Beseam uses measurement as evidence inside a larger issue-to-action trace.",
+        "Real Beseam revenue analytics for a dancewear store. Beseam uses measurement as evidence inside a larger issue-to-action trace.",
     },
     faqs: [
       {
@@ -270,9 +270,9 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/product-workflow.gif",
-      alt: "Real Beseam product workflow for a Dancing Queens commerce product",
+      alt: "Real Beseam product workflow for a dancewear store product",
       caption:
-        "Real Beseam product workflow. A Clarity-style friction signal for Dancing Queens becomes a governed commerce action instead of a recording left unwatched.",
+        "Real Beseam product workflow. A Clarity-style friction signal for a dancewear store becomes a governed commerce action instead of a recording left unwatched.",
     },
     faqs: [
       {
@@ -399,7 +399,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/product-workflow.gif",
-      alt: "Real Beseam product workflow for a Dancing Queens commerce product",
+      alt: "Real Beseam product workflow for a dancewear store product",
       caption:
         "A real Beseam product workflow. The product, issue, proposed change, and evidence remain connected instead of becoming a detached insight.",
     },
@@ -529,9 +529,9 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/revenue-analytics.webp",
-      alt: "Beseam revenue analytics workspace showing commerce metrics for the Dancing Queens store",
+      alt: "Beseam revenue analytics workspace showing commerce metrics for a dancewear store",
       caption:
-        "Real Beseam revenue analytics. A reliability signal for Dancing Queens is ranked against every other revenue-sensitive issue, not handled alone.",
+        "Real Beseam revenue analytics. A reliability signal for a dancewear store is ranked against every other revenue-sensitive issue, not handled alone.",
     },
     faqs: [
       {
@@ -659,7 +659,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/revenue-overview.webp",
-      alt: "Real Beseam revenue overview for the Dancing Queens commerce store",
+      alt: "Real Beseam revenue overview for a dancewear store",
       caption:
         "Real Beseam revenue overview. Experience evidence is evaluated alongside the rest of the store rather than in isolation.",
     },
@@ -789,7 +789,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/optimization.webp",
-      alt: "Real Beseam optimization workspace for Dancing Queens",
+      alt: "Real Beseam optimization workspace for a dancewear store",
       caption:
         "Real Beseam optimization workspace. An experiment is one governed intervention inside the wider revenue issue trace.",
     },
@@ -922,7 +922,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/optimization.webp",
-      alt: "Real Beseam optimization workspace showing an experiment for Dancing Queens",
+      alt: "Real Beseam optimization workspace showing an experiment for a dancewear store",
       caption:
         "Real Beseam optimization evidence. Beseam treats experimentation as one intervention—not the default answer to every issue.",
     },
@@ -1052,7 +1052,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/revenue-overview.webp",
-      alt: "Real Beseam revenue overview for the Dancing Queens commerce store",
+      alt: "Real Beseam revenue overview for a dancewear store",
       caption:
         "Real Beseam revenue overview. Measurement is the beginning of the decision trace, not the end of the workflow.",
     },
@@ -1184,7 +1184,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/revenue-analytics.webp",
-      alt: "Beseam revenue analytics workspace showing commerce metrics for the Dancing Queens store",
+      alt: "Beseam revenue analytics workspace showing commerce metrics for a dancewear store",
       caption:
         "Real Beseam revenue analytics. Mixpanel-style event evidence becomes part of a larger issue-to-action trace.",
     },
@@ -1316,7 +1316,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/optimization.webp",
-      alt: "Real Beseam optimization workspace for Dancing Queens",
+      alt: "Real Beseam optimization workspace for a dancewear store",
       caption:
         "Real Beseam optimization workspace. A PostHog-style flag or experiment is one governed intervention inside a larger commerce trace.",
     },
@@ -1445,7 +1445,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/revenue-overview.webp",
-      alt: "Real Beseam revenue overview for the Dancing Queens commerce store",
+      alt: "Real Beseam revenue overview for a dancewear store",
       caption:
         "Real Beseam revenue overview. Experience evidence is evaluated alongside the rest of the store rather than in isolation.",
     },
@@ -1573,7 +1573,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/product-workflow.gif",
-      alt: "Real Beseam product workflow for a Dancing Queens commerce product",
+      alt: "Real Beseam product workflow for a dancewear store product",
       caption:
         "Real Beseam product workflow. A LogRocket-style technical finding becomes a governed commerce action instead of an error report left in the queue.",
     },
@@ -1702,9 +1702,9 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/revenue-analytics.webp",
-      alt: "Beseam revenue analytics workspace showing commerce metrics for the Dancing Queens store",
+      alt: "Beseam revenue analytics workspace showing commerce metrics for a dancewear store",
       caption:
-        "Real Beseam revenue analytics. A heatmap signal for Dancing Queens becomes a ranked, owned commerce issue instead of a page left untested.",
+        "Real Beseam revenue analytics. A heatmap signal for a dancewear store becomes a ranked, owned commerce issue instead of a page left untested.",
     },
     faqs: [
       {
@@ -1830,9 +1830,9 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/optimization.webp",
-      alt: "Real Beseam optimization workspace for Dancing Queens",
+      alt: "Real Beseam optimization workspace for a dancewear store",
       caption:
-        "Real Beseam optimization workspace. A friction-score signal for Dancing Queens becomes a ranked, owned commerce issue instead of a leaderboard entry.",
+        "Real Beseam optimization workspace. A friction-score signal for a dancewear store becomes a ranked, owned commerce issue instead of a leaderboard entry.",
     },
     faqs: [
       {
@@ -1961,7 +1961,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     evidence: {
       src: "/images/product-live/revenue-overview.webp",
-      alt: "Real Beseam revenue overview for the Dancing Queens commerce store",
+      alt: "Real Beseam revenue overview for a dancewear store",
       caption:
         "Real Beseam revenue overview. Enterprise measurement becomes evidence inside a larger issue-to-action trace.",
     },
