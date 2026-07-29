@@ -136,7 +136,7 @@ export default function ProductionHomepage() {
             <div className="mx-auto max-w-[58rem] text-center">
               <div className="flex items-center justify-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/55">
                 <span className="h-2 w-2 bg-[#e8653a]" aria-hidden="true" />
-                Software for your catalog, not an SEO retainer
+                Answer visibility, fixed at the product level
               </div>
               <h1 className="mx-auto mt-8 max-w-[19ch] font-serif text-[clamp(3rem,5vw,5rem)] font-normal leading-[1] tracking-[-0.045em] text-[#111318]">
                 When a shopper asks what to buy, your product should be the
