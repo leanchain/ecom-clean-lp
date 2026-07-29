@@ -59,7 +59,7 @@ function FindingItem({ finding, index }: { finding: Finding; index: number }) {
           <p className="max-w-2xl text-[14px] leading-relaxed text-black/62">
             {finding.description}
           </p>
-          <p className="mt-6 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#3154ff]">
+          <p className="mt-6 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#c04e26]">
             Proposed fix
           </p>
           <pre className="mt-3 overflow-x-auto border border-black/20 bg-[#111318] p-4 text-[12px] leading-relaxed text-white/78">

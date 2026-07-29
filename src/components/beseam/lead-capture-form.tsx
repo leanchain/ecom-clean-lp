@@ -127,7 +127,7 @@ export default function LeadCaptureForm({
   };
 
   const inputClass =
-    "h-12 w-full border border-black/22 bg-white px-4 text-[15px] text-[#151515] outline-none placeholder:text-black/38 focus:border-[#3154ff]";
+    "h-12 w-full border border-black/22 bg-white px-4 text-[15px] text-[#151515] outline-none placeholder:text-black/38 focus:border-[#c04e26]";
 
   return (
     <form onSubmit={onSubmit} noValidate className="w-full">
@@ -169,7 +169,7 @@ export default function LeadCaptureForm({
         <button
           type="submit"
           disabled={submitting}
-          className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#3154ff] disabled:opacity-70"
+          className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#c04e26] disabled:opacity-70"
         >
           {submitting ? "Opening scan…" : buttonLabel}
           <ArrowRight
@@ -199,7 +199,7 @@ export default function LeadCaptureForm({
       {fallback ? (
         <a
           href={fallback}
-          className="mt-1 inline-flex items-center gap-2 text-[13px] font-semibold text-[#3154ff] underline underline-offset-4"
+          className="mt-1 inline-flex items-center gap-2 text-[13px] font-semibold text-[#c04e26] underline underline-offset-4"
         >
           Open the scan anyway{" "}
           <ArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
