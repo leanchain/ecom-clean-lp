@@ -137,7 +137,7 @@ export default function ProductionHomepage() {
           <Reveal>
             <div className="mx-auto max-w-[58rem] text-center">
               <div className="flex items-center justify-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/55">
-                <span className="h-2 w-2 bg-[#111318]" aria-hidden="true" />
+                <span className="h-2 w-2 bg-[#e8653a]" aria-hidden="true" />
                 Answer visibility, fixed at the product level
               </div>
               <h1 className="mx-auto mt-8 max-w-[19ch] font-serif text-[clamp(3rem,5vw,5rem)] font-normal leading-[1] tracking-[-0.045em] text-[#111318]">
@@ -179,7 +179,7 @@ export default function ProductionHomepage() {
               <div className="mt-6 text-center">
                 <Link
                   href="#how-it-works"
-                  className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#3154ff]"
+                  className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#e8653a]"
                 >
                   How the loop works <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -223,7 +223,8 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 border-b border-black/22 pb-14 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
+              <p className="flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
+                <span className="h-[3px] w-6 bg-[#e8653a]" aria-hidden="true" />
                 How it works
               </p>
               <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
@@ -243,10 +244,10 @@ export default function ProductionHomepage() {
                 key={step.number}
                 className="border-b border-black/18 py-9 md:border-r md:px-7 lg:border-b-0 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
               >
-                <span className="font-mono text-[11px] font-semibold text-black/50">
+                <span className="block font-serif text-[clamp(3rem,4vw,4.2rem)] leading-[0.85] tracking-[-0.04em] text-[#e8653a]">
                   {step.number}
                 </span>
-                <h3 className="mt-7 text-[21px] font-semibold leading-snug text-[#111318]">
+                <h3 className="mt-6 text-[21px] font-semibold leading-snug text-[#111318]">
                   {step.title}
                 </h3>
                 <p className="mt-4 max-w-sm text-[14px] leading-relaxed text-black/60">
@@ -275,7 +276,8 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <Reveal>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
+              <p className="flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
+                <span className="h-[3px] w-6 bg-[#e8653a]" aria-hidden="true" />
                 One product, followed through
               </p>
               <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
@@ -314,7 +316,7 @@ export default function ProductionHomepage() {
                     key={number}
                     className="grid gap-3 border-b border-black/16 py-5 last:border-b-0 sm:grid-cols-[3rem_8rem_1fr] sm:items-start"
                   >
-                    <span className="font-mono text-[10px] text-black/50">
+                    <span className="font-mono text-[10px] font-semibold text-[#c04e26]">
                       {number}
                     </span>
                     <span className="text-[14px] font-semibold text-black/78">
@@ -343,12 +345,13 @@ export default function ProductionHomepage() {
 
       <section
         id="what-breaks"
-        className="scroll-mt-24 border-b border-black/18"
+        className="scroll-mt-24 border-b border-black/18 bg-[#e6e1d5]"
       >
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
+              <p className="flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
+                <span className="h-[3px] w-6 bg-[#e8653a]" aria-hidden="true" />
                 What actually leaves you out
               </p>
               <h2 className="mt-6 max-w-[11ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
@@ -446,20 +449,23 @@ export default function ProductionHomepage() {
 
       <section className="border-b border-black/18 bg-[#f4f1e9]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
-          <div className="border-y border-black/24 py-10 lg:py-14">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/58">
-              Start with your own catalog
-            </p>
-            <h2 className="mt-5 max-w-[20ch] font-serif text-[clamp(2.6rem,4.2vw,4.3rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#111318]">
-              Find out what the assistants say about your products.
-            </h2>
-            <p className="mt-6 max-w-xl text-[16px] leading-[1.7] text-black/64">
-              Enter your store domain. We ask the buying questions for your
-              category and send you the products that were left out, with the
-              field behind each miss.
-            </p>
+          <div className="grid gap-10 border-y border-black/24 py-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center lg:gap-16 lg:py-14">
+            <div>
+              <p className="flex items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/58">
+                <span className="h-[3px] w-6 bg-[#e8653a]" aria-hidden="true" />
+                Start with your own catalog
+              </p>
+              <h2 className="mt-5 max-w-[20ch] font-serif text-[clamp(2.6rem,4.2vw,4.3rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#111318]">
+                Find out what the assistants say about your products.
+              </h2>
+              <p className="mt-6 max-w-xl text-[16px] leading-[1.7] text-black/64">
+                Enter your store domain. We ask the buying questions for your
+                category and send you the products that were left out, with the
+                field behind each miss.
+              </p>
+            </div>
 
-            <div className="mt-8 max-w-3xl">
+            <div>
               <LeadCaptureForm
                 mode="store-domain"
                 source="ai_visibility_scan"
@@ -470,16 +476,16 @@ export default function ProductionHomepage() {
                 helpText="Free scan of your live catalog. No store access needed to see the first findings."
                 storeFieldId="final-store-domain"
               />
-            </div>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <span className="text-[14px] text-black/52">
-                Want the publishing and monitoring loop set up on your store?
-              </span>
-              <BookReviewCta
-                location="homepage_final"
-                label="Book a 20-minute review"
-              />
+              <div className="mt-8 flex flex-col gap-3 border-t border-black/14 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                <span className="text-[14px] text-black/52">
+                  Want the publishing and monitoring loop set up on your store?
+                </span>
+                <BookReviewCta
+                  location="homepage_final"
+                  label="Book a 20-minute review"
+                />
+              </div>
             </div>
           </div>
 
