@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import TrackedLink from "@/components/beseam/tracked-link";
 import { cn } from "@/lib/utils";
 
-export const REVIEW_URL = "/store-health-review";
+export const REVIEW_URL = "/product-visibility-monitoring";
 
 type BookReviewCtaProps = {
   variant?: "primary" | "secondary";
@@ -31,7 +31,7 @@ export function BookReviewCta({
           className,
         )}
       >
-        {label ?? "Explore the product suite"}
+        {label ?? "See how monitoring works"}
       </TrackedLink>
     );
   }
@@ -48,7 +48,7 @@ export function BookReviewCta({
         className,
       )}
     >
-      {label ?? "Book a 20-minute commerce review"}
+      {label ?? "Book a 20-minute review"}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
     </TrackedLink>
   );

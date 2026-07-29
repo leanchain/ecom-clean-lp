@@ -1,84 +1,88 @@
 import Link from "next/link";
 
-import TrackedLink from "@/components/beseam/tracked-link";
 import Logo from "@/components/beseam/logo";
+import TrackedLink from "@/components/beseam/tracked-link";
 
-const FOOTER_GROUPS = [
-  {
-    title: "Observe",
-    links: [
-      ["AI Visibility", "/ai-visibility-monitoring"],
-      ["Behavior", "/#observe"],
-      ["Reliability", "/#observe"],
-    ],
-  },
-  {
-    title: "Decide",
-    links: [
-      ["Foundation", "/#foundation"],
-      ["Analytics", "/#advanced-intelligence"],
-      ["Optimization", "/#advanced-intelligence"],
-    ],
-  },
-  {
-    title: "Act",
-    links: [
-      ["Commerce Readiness", "/shopify-store-health"],
-      ["Advertising", "/#advertising"],
-      ["Creative Studio", "/#creative-studio"],
-    ],
-  },
+const PAGE_LINKS = [
+  ["How it works", "/#how-it-works"],
+  ["Before and after", "/#answer-check"],
+  ["What leaves you out", "/#what-breaks"],
+  ["First-month promise", "/#promise"],
 ] as const;
 
 export default function BeseamFooter() {
   return (
     <footer className="bg-[#111318] text-white">
       <div className="mx-auto max-w-[92rem] px-5 pb-8 pt-16 sm:px-8 sm:pt-20 lg:px-10">
-        <div className="grid gap-12 border-b border-white/18 pb-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
+        <div className="grid gap-12 border-b border-white/18 pb-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
           <div>
             <Link href="/" aria-label="Beseam home" className="inline-flex">
               <Logo className="text-white" inverted />
             </Link>
-            <p className="mt-7 max-w-md font-serif text-[31px] leading-[1.1] tracking-[-0.03em] text-white/92">
-              Autonomous revenue intelligence for commerce.
+            <p className="mt-7 max-w-md font-serif text-[34px] leading-[1.08] tracking-[-0.03em] text-white/92">
+              Know when a valuable product disappears from view.
             </p>
             <p className="mt-6 max-w-md text-[14px] leading-relaxed text-white/52">
-              A self-improving revenue agent that works above your existing stack, finds the revenue leaks your stack cannot see, and learns from the outcome.
+              Beseam monitors each product across your store, shopping feeds,
+              search results, and product recommendations. Your team sees what
+              changed, who should act, and whether the fix restored visibility.
             </p>
           </div>
 
-          <div className="grid grid-cols-3 border-t border-white/18 lg:border-t-0">
-            {FOOTER_GROUPS.map((group) => (
-              <div key={group.title} className="border-r border-white/18 py-6 pr-4 pl-4 first:pl-0 last:border-r-0 sm:px-6 sm:first:pl-0 sm:last:pr-0">
-                <h2 className="font-serif text-[21px] text-white">{group.title}</h2>
-                <ul className="mt-5 space-y-3">
-                  {group.links.map(([label, href]) => (
-                    <li key={label}>
-                      <Link href={href} className="text-[12px] leading-relaxed text-white/48 transition-colors hover:text-[#8ea2ff] sm:text-[13px]">{label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="grid border-y border-white/18 sm:grid-cols-2">
+            {PAGE_LINKS.map(([label, href]) => (
+              <Link
+                key={label}
+                href={href}
+                className="border-b border-white/14 py-5 text-[14px] font-semibold text-white/62 transition-colors hover:text-[#8ea2ff] sm:border-r sm:px-6 sm:nth-[3]:border-b-0 sm:nth-[4]:border-b-0 sm:nth-[2n]:border-r-0"
+              >
+                {label}
+              </Link>
             ))}
           </div>
         </div>
 
-        <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto_auto_auto_auto] lg:items-center lg:gap-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/34">Self-improving commerce intelligence</p>
-          <Link href="/resources" className="text-[12px] text-white/48 hover:text-white">Commerce Fieldbook</Link>
-          <Link href="/compare" className="text-[12px] text-white/48 hover:text-white">Compare Beseam</Link>
-          <Link href="/manifesto" className="text-[12px] text-white/48 hover:text-white">Manifesto</Link>
-          <Link href="/about" className="text-[12px] text-white/48 hover:text-white">Company</Link>
-          <Link href="/privacy-policy" className="text-[12px] text-white/48 hover:text-white">Privacy</Link>
-          <Link href="/terms-of-service" className="text-[12px] text-white/48 hover:text-white">Terms</Link>
-        </div>
-
-        <div className="flex flex-col gap-4 pt-8 text-[11px] text-white/34 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Beseam. All rights reserved.</p>
-          <TrackedLink href="/tools/ai-visibility-scan" eventName="scanner_tool_clicked" placement="footer_secondary" className="w-fit underline decoration-white/20 underline-offset-5 transition-colors hover:text-[#8ea2ff] hover:decoration-[#8ea2ff]">
-            Check how AI assistants describe your brand
+        <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto_auto_auto] lg:items-center lg:gap-10">
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/34">
+            Product visibility monitoring for ecommerce
+          </p>
+          <Link
+            href="/resources"
+            className="text-[12px] text-white/48 hover:text-white"
+          >
+            Resources
+          </Link>
+          <Link
+            href="/about"
+            className="text-[12px] text-white/48 hover:text-white"
+          >
+            Company
+          </Link>
+          <Link
+            href="/privacy-policy"
+            className="text-[12px] text-white/48 hover:text-white"
+          >
+            Privacy
+          </Link>
+          <Link
+            href="/terms-of-service"
+            className="text-[12px] text-white/48 hover:text-white"
+          >
+            Terms
+          </Link>
+          <TrackedLink
+            href="/product-visibility-monitoring"
+            eventName="monitoring_setup_clicked"
+            placement="footer_secondary"
+            className="w-fit text-[12px] text-[#8ea2ff] underline decoration-white/20 underline-offset-5"
+          >
+            Set up catalog monitoring
           </TrackedLink>
         </div>
+
+        <p className="pt-8 text-[11px] text-white/34">
+          © {new Date().getFullYear()} Beseam. All rights reserved.
+        </p>
       </div>
     </footer>
   );
