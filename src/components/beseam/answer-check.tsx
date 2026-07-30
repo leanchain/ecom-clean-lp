@@ -17,6 +17,7 @@ import type {
   Step,
 } from "@/components/beseam/answer-check-types";
 import { ChannelIcon } from "@/components/beseam/channel-icon";
+import { SAMPLE_LOOP } from "@/data/sample-loop";
 import { SAMPLE_SCAN } from "@/data/sample-scan";
 import useAnalytics from "@/hooks/useAnalytics";
 
@@ -531,6 +532,410 @@ function ResultCard({
   );
 }
 
+// ── Sample loop showcase ────────────────────────────────────────────────────
+// The demo card cycles through the four loop stages for the same store:
+// Find (the real scan), Diagnose (a real PDP audit of its product page),
+// Fix (the audit's top recommendation, still proposed) and Verify (what runs
+// after a publish). Auto-advances until the visitor takes control.
+
+const LOOP_STAGES = [
+  { key: "find", label: "Find", tag: "real scan" },
+  { key: "diagnose", label: "Diagnose", tag: "real audit" },
+  { key: "fix", label: "Fix", tag: "proposed" },
+  { key: "verify", label: "Verify", tag: "after publish" },
+] as const;
+
+const LOOP_ADVANCE_MS = 9000;
+
+const SEVERITY_STYLES: Record<string, string> = {
+  blocker: "bg-[#b3261e] text-white",
+  high: "bg-[#d95028] text-white",
+  medium: "bg-[#e8b13a] text-[#111318]",
+  low: "bg-black/12 text-black/70",
+};
+
+function LoopPanelShell({
+  eyebrow,
+  tag,
+  children,
+}: {
+  eyebrow: string;
+  tag: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="border border-black/22 bg-white text-left shadow-[0_24px_70px_rgba(17,19,24,0.12)]">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/14 px-4 py-3 sm:px-5">
+        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
+          {eyebrow}
+        </p>
+        <span className="bg-[#111318] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-white">
+          {tag}
+        </span>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function LoopProductRow() {
+  const product = SAMPLE_LOOP.product;
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden border border-black/12 bg-[#f4f1e9]">
+        {product.image_url ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={product.image_url}
+            alt=""
+            loading="lazy"
+            className="h-full w-full object-contain mix-blend-multiply"
+          />
+        ) : null}
+      </div>
+      <div>
+        <p className="text-[13px] font-semibold leading-snug text-[#111318]">
+          {product.title}
+        </p>
+        <p className="mt-0.5 font-mono text-[10.5px] text-black/62">
+          This store · {product.price}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function DiagnosePanel() {
+  const d = SAMPLE_LOOP.diagnose;
+  return (
+    <LoopPanelShell
+      eyebrow="Diagnose — the field behind the miss"
+      tag="real audit"
+    >
+      <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
+        <div className="border-b border-black/14 px-4 py-4 sm:px-5 lg:border-b-0 lg:border-r">
+          <LoopProductRow />
+          <div className="mt-5 border-t border-black/14 pt-4">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
+              Answer-readiness score
+            </p>
+            <p className="mt-2 font-serif text-[clamp(2.6rem,3vw,3.4rem)] leading-[0.9] tracking-[-0.03em] text-[#c04e26]">
+              {d.score}
+              <span className="ml-2 font-mono text-[13px] tracking-normal text-black/55">
+                /100 · {d.grade}
+              </span>
+            </p>
+            <p className="mt-2 text-[12px] leading-relaxed text-black/62">
+              {d.failedChecks} of {d.totalChecks} checks failed. {d.source}.
+            </p>
+          </div>
+        </div>
+        <ul className="px-4 py-2 sm:px-5">
+          {d.findings.map((finding) => (
+            <li
+              key={finding.field}
+              className="flex items-start gap-3 border-b border-black/10 py-3 last:border-b-0"
+            >
+              <span
+                className={`mt-0.5 shrink-0 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] ${SEVERITY_STYLES[finding.severity]}`}
+              >
+                {finding.severity}
+              </span>
+              <div>
+                <p className="font-mono text-[11px] font-semibold text-[#111318]">
+                  {finding.field}
+                </p>
+                <p className="mt-0.5 text-[12.5px] leading-relaxed text-black/70">
+                  {finding.issue}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
+        The unedited output of one real audit of this product&apos;s live page —
+        the same engine that runs inside the loop.
+      </p>
+    </LoopPanelShell>
+  );
+}
+
+function FixPanel() {
+  const f = SAMPLE_LOOP.fix;
+  return (
+    <LoopPanelShell eyebrow="Fix — one field, publishable" tag="proposed">
+      <div className="px-4 py-4 sm:px-5">
+        <LoopProductRow />
+        <div className="mt-5 overflow-hidden border border-black/20">
+          <div className="flex flex-wrap items-center justify-between gap-2 bg-[#111318] px-3 py-2">
+            <span className="font-mono text-[10px] text-white/80">
+              proposed change · {f.field}
+            </span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-white/50">
+              product page template
+            </span>
+          </div>
+          <div className="overflow-x-auto bg-[#fafaf7] py-2">
+            {f.diff.map((line) => (
+              <div
+                key={line.text}
+                className={`flex items-start gap-2 px-3 py-0.5 font-mono text-[11.5px] leading-relaxed ${
+                  line.kind === "del"
+                    ? "bg-[#b3261e]/[0.07] text-[#8a1f18]"
+                    : line.kind === "add"
+                      ? "bg-[#1f7a4d]/[0.08] text-[#175c3b]"
+                      : "text-black/55"
+                }`}
+              >
+                <span className="w-3 shrink-0 select-none">
+                  {line.kind === "del" ? "−" : line.kind === "add" ? "+" : " "}
+                </span>
+                <span className="whitespace-pre">{line.text}</span>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-2 border-t border-black/14 bg-white px-3 py-2.5">
+            <span
+              aria-hidden="true"
+              className="inline-flex items-center gap-1.5 bg-[#111318] px-3 py-1.5 text-[12px] font-semibold text-white"
+            >
+              Approve &amp; publish
+            </span>
+            <span
+              aria-hidden="true"
+              className="inline-flex items-center border border-black/25 px-3 py-1.5 text-[12px] font-semibold text-[#111318]"
+            >
+              Revert
+            </span>
+            <span className="ml-auto font-mono text-[10px] text-black/50">
+              awaiting approval · nothing ships without it
+            </span>
+          </div>
+        </div>
+        <div className="mt-4">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
+            Also queued from this audit
+          </p>
+          <ul className="mt-2 divide-y divide-black/10 border border-black/14">
+            {f.alsoQueued.map((item) => (
+              <li
+                key={item.field}
+                className="flex items-start gap-3 px-3 py-2.5"
+              >
+                <span
+                  className={`mt-0.5 shrink-0 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] ${SEVERITY_STYLES[item.severity]}`}
+                >
+                  {item.severity}
+                </span>
+                <div className="min-w-0">
+                  <p className="font-mono text-[11px] font-semibold text-[#111318]">
+                    {item.field}
+                  </p>
+                  <p className="mt-0.5 text-[12.5px] leading-relaxed text-black/70">
+                    {item.change}
+                  </p>
+                </div>
+                <span className="ml-auto mt-0.5 shrink-0 border border-black/20 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] text-black/55">
+                  proposed
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
+        {f.note}
+      </p>
+    </LoopPanelShell>
+  );
+}
+
+function VerifyPanel() {
+  const v = SAMPLE_LOOP.verify;
+  return (
+    <LoopPanelShell
+      eyebrow="Verify — the answer is the proof"
+      tag="after publish"
+    >
+      <div className="px-4 py-4 sm:px-5">
+        <LoopProductRow />
+        <div className="mt-4 border border-black/14 bg-white">
+          <div className="flex items-center gap-2 border-b border-black/10 px-4 py-2.5">
+            <ChannelIcon channel="ChatGPT" className="h-4 w-4" />
+            <span className="text-[12px] font-semibold text-[#111318]">
+              ChatGPT
+            </span>
+            <span className="ml-auto font-mono text-[9px] uppercase tracking-[0.1em] text-black/50">
+              after the fix publishes
+            </span>
+          </div>
+          <div className="space-y-4 px-4 py-4">
+            <div className="flex justify-end">
+              <p className="max-w-[85%] rounded-2xl rounded-br-md bg-[#f1efe9] px-4 py-2.5 text-[13.5px] leading-relaxed text-[#111318]">
+                {v.question}
+              </p>
+            </div>
+            <div className="flex items-start gap-2.5">
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-black/12 bg-white">
+                <ChannelIcon channel="ChatGPT" className="h-4 w-4" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-[13.5px] leading-relaxed text-[#2a2c33]">
+                  {v.answerIntro}
+                </p>
+                <ul className="mt-2.5 space-y-1.5">
+                  {v.answerPoints.map((point) => (
+                    <li
+                      key={point.label}
+                      className="flex gap-2 text-[13.5px] leading-relaxed text-[#2a2c33]"
+                    >
+                      <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-black/40" />
+                      <span>
+                        <strong className="font-semibold">{point.label}</strong>{" "}
+                        — {point.text}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-[13.5px] leading-relaxed text-[#2a2c33]">
+                  {v.answerBridge}
+                </p>
+                <ol className="mt-3 space-y-2">
+                  {v.answerProducts.map((product, index) => (
+                    <li
+                      key={product.title}
+                      className={`flex items-center gap-3 border p-2.5 ${
+                        product.ours
+                          ? "border-[#1f7a4d]/40 bg-[#1f7a4d]/[0.05]"
+                          : "border-black/10 bg-white"
+                      }`}
+                    >
+                      <span className="w-4 shrink-0 font-mono text-[11px] text-black/45">
+                        {index + 1}.
+                      </span>
+                      {product.image_url ? (
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden border border-black/10 bg-[#f4f1e9]">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={product.image_url}
+                            alt=""
+                            loading="lazy"
+                            className="h-full w-full object-contain mix-blend-multiply"
+                          />
+                        </span>
+                      ) : null}
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-[13px] font-medium text-[#111318]">
+                          {product.title}
+                        </span>
+                        <span className="mt-0.5 block font-mono text-[10.5px] text-black/60">
+                          {product.merchant} · {product.price}
+                        </span>
+                      </span>
+                      {product.ours ? (
+                        <span className="shrink-0 bg-[#1f7a4d] px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] text-white">
+                          yours
+                        </span>
+                      ) : null}
+                    </li>
+                  ))}
+                </ol>
+                <p className="mt-3 text-[13.5px] leading-relaxed text-[#2a2c33]">
+                  {v.answerOutro}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
+        {v.note}
+      </p>
+    </LoopPanelShell>
+  );
+}
+
+function SampleLoopShowcase() {
+  const [stage, setStage] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [userControlled, setUserControlled] = useState(false);
+
+  useEffect(() => {
+    if (paused || userControlled) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    const timer = window.setInterval(
+      () => setStage((current) => (current + 1) % LOOP_STAGES.length),
+      LOOP_ADVANCE_MS,
+    );
+    return () => window.clearInterval(timer);
+  }, [paused, userControlled]);
+
+  return (
+    <div
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div
+        role="tablist"
+        aria-label="Loop stages"
+        className="mb-4 grid grid-cols-2 gap-px border border-black/18 bg-black/18 sm:grid-cols-4"
+      >
+        {LOOP_STAGES.map((entry, index) => {
+          const active = index === stage;
+          return (
+            <button
+              key={entry.key}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => {
+                setStage(index);
+                setUserControlled(true);
+              }}
+              className={`px-3 py-2.5 text-left transition-colors ${
+                active ? "bg-[#111318] text-white" : "bg-white hover:bg-black/5"
+              }`}
+            >
+              <span
+                className={`font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-white/60" : "text-black/45"}`}
+              >
+                0{index + 1} · {entry.tag}
+              </span>
+              <span
+                className={`block text-[13px] font-semibold ${active ? "text-white" : "text-[#111318]"}`}
+              >
+                {entry.label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {stage === 0 ? (
+        <ResultCard
+          result={SAMPLE_SCAN}
+          eyebrow="Example scan, real result"
+          identity="A dancewear store"
+          identityMeta="Shopify · scanned with this form"
+          note="The unedited output of one real scan: the store's own buying questions, both assistants, and who got named instead. Enter your domain to get yours."
+        />
+      ) : stage === 1 ? (
+        <DiagnosePanel />
+      ) : stage === 2 ? (
+        <FixPanel />
+      ) : (
+        <VerifyPanel />
+      )}
+    </div>
+  );
+}
+
 export default function AnswerCheck({
   placement = "homepage_hero",
 }: {
@@ -699,17 +1104,7 @@ export default function AnswerCheck({
             ? "Your storefront, read live"
             : "A real store, scanned with this form"}
         </p>
-        {result ? (
-          <ResultCard result={result} />
-        ) : (
-          <ResultCard
-            result={SAMPLE_SCAN}
-            eyebrow="Example scan, real result"
-            identity="A dancewear store"
-            identityMeta="Shopify · scanned with this form"
-            note="The unedited output of one real scan: the store's own buying questions, both assistants, and who got named instead. Enter your domain to get yours."
-          />
-        )}
+        {result ? <ResultCard result={result} /> : <SampleLoopShowcase />}
       </div>
     </div>
   );
