@@ -17,7 +17,7 @@ export default function BeseamFooter() {
         <div className="grid gap-12 border-b border-white/18 pb-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
           <div>
             <Link href="/" aria-label="Beseam home" className="inline-flex">
-              <Logo className="text-white" inverted />
+              <Logo className="text-white" />
             </Link>
             <p className="mt-7 max-w-md font-serif text-[34px] leading-[1.08] tracking-[-0.03em] text-white/92">
               Know when a valuable product disappears from view.
