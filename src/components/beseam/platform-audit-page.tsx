@@ -119,7 +119,7 @@ export default function PlatformAuditPage({
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#e8653a]">
                 What this audit does not do
               </p>
               <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.4rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.04em]">

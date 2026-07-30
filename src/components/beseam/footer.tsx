@@ -34,7 +34,7 @@ export default function BeseamFooter() {
               <Link
                 key={label}
                 href={href}
-                className="border-b border-white/14 py-5 text-[14px] font-semibold text-white/62 transition-colors hover:text-[#8ea2ff] sm:border-r sm:px-6 sm:nth-[3]:border-b-0 sm:nth-[4]:border-b-0 sm:nth-[2n]:border-r-0"
+                className="border-b border-white/14 py-5 text-[14px] font-semibold text-white/62 transition-colors hover:text-[#e8653a] sm:border-r sm:px-6 sm:nth-[3]:border-b-0 sm:nth-[4]:border-b-0 sm:nth-[2n]:border-r-0"
               >
                 {label}
               </Link>
@@ -74,7 +74,7 @@ export default function BeseamFooter() {
             href="/product-visibility-monitoring"
             eventName="monitoring_setup_clicked"
             placement="footer_secondary"
-            className="w-fit text-[12px] text-[#8ea2ff] underline decoration-white/20 underline-offset-5"
+            className="w-fit text-[12px] text-[#e8653a] underline decoration-white/20 underline-offset-5"
           >
             Set up catalog monitoring
           </TrackedLink>

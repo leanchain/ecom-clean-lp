@@ -218,7 +218,7 @@ export default function ProductionHomepage() {
 
       <section
         id="how-it-works"
-        className="scroll-mt-24 border-b border-black/18"
+        className="scroll-mt-24 bg-[image:linear-gradient(to_bottom,#f4f1e9_0%,#f4f1e9_74%,#eeeade_100%)]"
       >
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 border-b border-black/22 pb-14 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
@@ -271,7 +271,7 @@ export default function ProductionHomepage() {
 
       <section
         id="answer-check"
-        className="scroll-mt-24 border-b border-black/18 bg-[#ebe8df]"
+        className="scroll-mt-24 bg-[image:linear-gradient(to_bottom,#eeeade_0%,#eeeade_72%,#e7e2d2_100%)]"
       >
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
@@ -345,7 +345,7 @@ export default function ProductionHomepage() {
 
       <section
         id="what-breaks"
-        className="scroll-mt-24 border-b border-black/18 bg-[#e6e1d5]"
+        className="scroll-mt-24 border-b border-black/18 bg-[image:linear-gradient(to_bottom,#e7e2d2_0%,#e7e2d2_74%,#ded8c6_100%)]"
       >
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
@@ -401,7 +401,7 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-14 lg:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] lg:items-center lg:gap-20">
             <Reveal>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#e8653a]">
                 Ranked by money, not by score
               </p>
               <h2 className="mt-6 max-w-[13ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
@@ -424,7 +424,7 @@ export default function ProductionHomepage() {
                     className="flex gap-3 border-b border-white/14 py-4 text-[14px] text-white/72 last:border-b-0"
                   >
                     <Check
-                      className="mt-0.5 h-4 w-4 shrink-0 text-[#8ea2ff]"
+                      className="mt-0.5 h-4 w-4 shrink-0 text-[#e8653a]"
                       aria-hidden="true"
                     />
                     {item}
@@ -447,7 +447,7 @@ export default function ProductionHomepage() {
 
       <FirstMonthPromise />
 
-      <section className="border-b border-black/18 bg-[#f4f1e9]">
+      <section className="bg-[#f4f1e9]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-10 border-y border-black/24 py-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center lg:gap-16 lg:py-14">
             <div>
