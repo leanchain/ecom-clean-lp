@@ -545,8 +545,6 @@ const LOOP_STAGES = [
   { key: "verify", label: "Verify", tag: "after publish" },
 ] as const;
 
-const LOOP_ADVANCE_MS = 9000;
-
 const SEVERITY_STYLES: Record<string, string> = {
   blocker: "bg-[#b3261e] text-white",
   high: "bg-[#d95028] text-white",
@@ -858,96 +856,104 @@ function VerifyPanel() {
 
 function SampleLoopShowcase() {
   const [stage, setStage] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [userControlled, setUserControlled] = useState(false);
-  const [inView, setInView] = useState(false);
-  const rootRef = useRef<HTMLDivElement | null>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-  // Only advance while most of the card is actually on screen — cycling while
-  // the visitor scrolls elsewhere just means they come back to a random stage.
+  // Scroll-driven: the card pins while the tall wrapper scrolls past, and the
+  // scroll progress through the wrapper selects the stage — scrolling past the
+  // section walks Find → Diagnose → Fix → Verify, then releases.
   useEffect(() => {
-    const node = rootRef.current;
-    if (!node || typeof IntersectionObserver === "undefined") return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.6 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
+    const onScroll = () => {
+      const node = wrapperRef.current;
+      if (!node) return;
+      const scrollable = node.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const progress = Math.min(
+        1,
+        Math.max(0, -node.getBoundingClientRect().top / scrollable),
+      );
+      setStage(
+        Math.min(
+          LOOP_STAGES.length - 1,
+          Math.floor(progress * LOOP_STAGES.length),
+        ),
+      );
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
-  useEffect(() => {
-    if (paused || userControlled || !inView) return;
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
-    const timer = window.setInterval(
-      () => setStage((current) => (current + 1) % LOOP_STAGES.length),
-      LOOP_ADVANCE_MS,
-    );
-    return () => window.clearInterval(timer);
-  }, [paused, userControlled, inView]);
+  // Clicking a tab scrolls to that stage's slice of the wrapper so the scroll
+  // position and the selected stage stay in agreement.
+  const jumpTo = (index: number) => {
+    const node = wrapperRef.current;
+    if (!node) return;
+    const scrollable = node.offsetHeight - window.innerHeight;
+    const top = node.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top: top + ((index + 0.5) / LOOP_STAGES.length) * scrollable,
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <div
-      ref={rootRef}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div
-        role="tablist"
-        aria-label="Loop stages"
-        className="mb-4 grid grid-cols-2 gap-px border border-black/18 bg-black/18 sm:grid-cols-4"
-      >
-        {LOOP_STAGES.map((entry, index) => {
-          const active = index === stage;
-          return (
-            <button
-              key={entry.key}
-              type="button"
-              role="tab"
-              aria-selected={active}
-              onClick={() => {
-                setStage(index);
-                setUserControlled(true);
-              }}
-              className={`px-3 py-2.5 text-left transition-colors ${
-                active ? "bg-[#111318] text-white" : "bg-white hover:bg-black/5"
-              }`}
-            >
-              <span
-                className={`font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-white/60" : "text-black/45"}`}
+    <div ref={wrapperRef} className="h-[280vh]">
+      <div className="sticky top-20">
+        <div
+          role="tablist"
+          aria-label="Loop stages"
+          className="mb-4 grid grid-cols-2 gap-px border border-black/18 bg-black/18 sm:grid-cols-4"
+        >
+          {LOOP_STAGES.map((entry, index) => {
+            const active = index === stage;
+            return (
+              <button
+                key={entry.key}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                onClick={() => jumpTo(index)}
+                className={`px-3 py-2.5 text-left transition-colors ${
+                  active
+                    ? "bg-[#111318] text-white"
+                    : "bg-white hover:bg-black/5"
+                }`}
               >
-                0{index + 1} · {entry.tag}
-              </span>
-              <span
-                className={`block text-[13px] font-semibold ${active ? "text-white" : "text-[#111318]"}`}
-              >
-                {entry.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+                <span
+                  className={`font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-white/60" : "text-black/45"}`}
+                >
+                  0{index + 1} · {entry.tag}
+                </span>
+                <span
+                  className={`block text-[13px] font-semibold ${active ? "text-white" : "text-[#111318]"}`}
+                >
+                  {entry.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
-      {stage === 0 ? (
-        <ResultCard
-          result={SAMPLE_SCAN}
-          eyebrow="Example scan, real result"
-          identity="A dancewear store"
-          identityMeta="Shopify · scanned with this form"
-          note="The unedited output of one real scan: the store's own buying questions, both assistants, and who got named instead. Enter your domain to get yours."
-        />
-      ) : stage === 1 ? (
-        <DiagnosePanel />
-      ) : stage === 2 ? (
-        <FixPanel />
-      ) : (
-        <VerifyPanel />
-      )}
+        {stage === 0 ? (
+          <ResultCard
+            result={SAMPLE_SCAN}
+            eyebrow="Example scan, real result"
+            identity="A dancewear store"
+            identityMeta="Shopify · scanned with this form"
+            note="The unedited output of one real scan: the store's own buying questions, both assistants, and who got named instead. Enter your domain to get yours."
+          />
+        ) : stage === 1 ? (
+          <DiagnosePanel />
+        ) : stage === 2 ? (
+          <FixPanel />
+        ) : (
+          <VerifyPanel />
+        )}
+      </div>
     </div>
   );
 }
