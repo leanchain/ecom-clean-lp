@@ -860,9 +860,24 @@ function SampleLoopShowcase() {
   const [stage, setStage] = useState(0);
   const [paused, setPaused] = useState(false);
   const [userControlled, setUserControlled] = useState(false);
+  const [inView, setInView] = useState(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  // Only advance while most of the card is actually on screen — cycling while
+  // the visitor scrolls elsewhere just means they come back to a random stage.
+  useEffect(() => {
+    const node = rootRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.6 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    if (paused || userControlled) return;
+    if (paused || userControlled || !inView) return;
     if (
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -874,10 +889,11 @@ function SampleLoopShowcase() {
       LOOP_ADVANCE_MS,
     );
     return () => window.clearInterval(timer);
-  }, [paused, userControlled]);
+  }, [paused, userControlled, inView]);
 
   return (
     <div
+      ref={rootRef}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
