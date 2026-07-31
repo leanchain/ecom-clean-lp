@@ -1,4 +1,4 @@
-import { Faustina, Figtree } from "next/font/google";
+import { Figtree, Lora } from "next/font/google";
 import type { Metadata } from "next";
 
 import "./globals.css";
@@ -15,15 +15,11 @@ const figtree = Figtree({
   preload: true,
 });
 
-// Display face. Replaces Lora: sharper, sturdier, and not a training default,
-// while keeping the serif silhouette the page is built around.
-// Only 600/700 are loaded on purpose: display markup asks for `font-normal`,
-// and 400 Faustina is too light to carry a headline, so the closest-match rule
-// resolves it to 600 without touching every call site.
-const faustina = Faustina({
+// Established display face for marketing headings and serif accents.
+const lora = Lora({
   subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-faustina",
+  weight: ["400", "600", "700"],
+  variable: "--font-lora",
   display: "swap",
   preload: true,
 });
@@ -80,7 +76,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${figtree.variable} ${faustina.variable} antialiased`}>
+      <body className={`${figtree.variable} ${lora.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

@@ -32,140 +32,153 @@ const ADVISORS = [
 
 export default function AboutPage() {
   return (
-    <>
-      {/* 1. Hero - why Beseam exists */}
-      <section className="relative overflow-hidden bg-surface">
-        <div className="mx-auto max-w-4xl px-6 py-24 md:py-32">
-          <Reveal>
-            <p className="editorial-eyebrow text-primary">Why Beseam exists</p>
-            <h1 className="editorial-hero mt-5 text-ink">
-              Revenue problems do not respect software boundaries.
-            </h1>
-            <p className="editorial-body mt-6 max-w-2xl text-foreground">
-              Beseam connects the evidence that falls between commerce systems, shows which issue deserves attention first, and carries it from diagnosis to a proposed fix and verified result.
+    <div className="bg-[#fafafa] text-[#151515]">
+      <section className="border-b border-black/18">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-20">
+            <div>
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+                About Beseam
+              </p>
+              <h1 className="mt-7 max-w-[17ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
+                Revenue problems do not respect software boundaries.
+              </h1>
+            </div>
+            <p className="max-w-[64ch] text-[19px] leading-[1.72] text-black/66">
+              Beseam connects the evidence that falls between commerce systems,
+              shows which issue deserves attention first, and carries it from
+              diagnosis to a proposed fix and verified result.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* 2. Founder story - qualitative framing, real background, no inflated metrics */}
-      <section className="border-t border-rule bg-surface">
-        <div className="section-pad mx-auto max-w-6xl px-6">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-16">
-            <Reveal>
-              <p className="editorial-eyebrow text-primary">The founder</p>
-              <h2 className="editorial-heading mt-5 text-ink">
-                Built with the reliability mindset behind large-scale systems.
-              </h2>
-              <div className="editorial-body mt-6 space-y-5 text-foreground">
-                <p>
-                  Beseam was founded by Pankaj Kumar, a former Google and Amazon
-                  engineer focused on measurement, reliability and data
-                  infrastructure.
-                </p>
-                <p>
-                  For the past year, he has worked closely with ecommerce founders and operators on real stores—tracing visibility gaps, product and feed problems, tracking drift, campaign readiness, and purchase friction.
-                </p>
-                <p>
-                  The same pattern kept repeating: every tool could explain its own slice, while the revenue problem lived between them. He founded Beseam to connect that evidence, propose the change, and verify what happened next.
-                </p>
-              </div>
+      <section className="border-b border-black/18 bg-[#f6f6f6]">
+        <div className="mx-auto grid max-w-[92rem] gap-12 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1.2fr)_minmax(20rem,0.8fr)] lg:items-start lg:gap-20 lg:px-10 lg:py-28">
+          <Reveal>
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+              The founder
+            </p>
+            <h2 className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+              Built with the reliability mindset behind large-scale systems.
+            </h2>
+            <div className="mt-8 max-w-[68ch] space-y-6 text-[17px] leading-[1.72] text-black/66">
+              <p>
+                Beseam was founded by Pankaj Kumar, a former Google and Amazon
+                engineer focused on measurement, reliability, and data
+                infrastructure.
+              </p>
+              <p>
+                For the past year, he has worked closely with ecommerce founders
+                and operators on real stores—tracing visibility gaps, product
+                and feed problems, tracking drift, campaign readiness, and
+                purchase friction.
+              </p>
+              <p>
+                The same pattern kept repeating: every tool could explain its
+                own slice, while the revenue problem lived between them. He
+                founded Beseam to connect that evidence, propose the change, and
+                verify what happened next.
+              </p>
+            </div>
+            <Link
+              href="/manifesto"
+              className="mt-9 inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#b8441d] underline decoration-black/20 underline-offset-7 hover:decoration-[#b8441d]"
+            >
+              Read why I am building Beseam
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link
-                href="/manifesto"
-                className="mt-8 inline-flex items-center gap-2 text-[15px] font-semibold text-primary underline-offset-4 hover:underline"
+                href="https://linkedin.com/in/pankaj4u4m"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-black/66 hover:text-[#b8441d]"
               >
-                Read why I am building Beseam
-                <ArrowUpRight className="h-4 w-4" />
+                <Linkedin className="h-4 w-4" aria-hidden="true" />
+                LinkedIn
               </Link>
-              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <Link
-                  href="https://linkedin.com/in/pankaj4u4m"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[15px] font-semibold text-primary hover:underline"
-                >
-                  <Linkedin className="h-4 w-4" />
-                  LinkedIn
-                </Link>
-                <a
-                  href="mailto:pankaj@beseam.com"
-                  className="inline-flex items-center gap-2 text-[15px] font-semibold text-primary hover:underline"
-                >
-                  <Mail className="h-4 w-4" />
-                  pankaj@beseam.com
-                </a>
-              </div>
-            </Reveal>
+              <a
+                href="mailto:pankaj@beseam.com"
+                className="inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-black/66 hover:text-[#b8441d]"
+              >
+                <Mail className="h-4 w-4" aria-hidden="true" />
+                pankaj@beseam.com
+              </a>
+            </div>
+          </Reveal>
 
-            <Reveal delay={0.1}>
-              <figure className="overflow-hidden rounded-2xl border border-rule bg-surface">
-                <div className="relative aspect-[4/5]">
-                  <Image
-                    src="/images/about/pankaj-kumar.jpg"
-                    alt="Pankaj Kumar, founder of Beseam"
-                    fill
-                    sizes="(min-width: 1024px) 38vw, 100vw"
-                    className="object-cover object-center"
-                    priority
-                  />
-                </div>
-                <figcaption className="border-t border-rule px-5 py-4">
-                  <p className="text-[15px] font-semibold tracking-[-0.01em] text-ink">
-                    Pankaj Kumar
-                  </p>
-                  <p className="editorial-label mt-1 text-muted-foreground">
-                    Founder, Beseam
-                  </p>
-                </figcaption>
-              </figure>
-            </Reveal>
-          </div>
+          <Reveal delay={0.08}>
+            <figure className="border border-black/18 bg-white">
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src="/images/about/pankaj-kumar.jpg"
+                  alt="Pankaj Kumar, founder of Beseam"
+                  fill
+                  sizes="(min-width: 1024px) 34vw, 100vw"
+                  className="object-cover object-center"
+                  priority
+                />
+              </div>
+              <figcaption className="border-t border-black/18 px-5 py-4">
+                <p className="text-[15px] font-semibold text-[#111318]">
+                  Pankaj Kumar
+                </p>
+                <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.09em] text-black/62">
+                  Founder, Beseam
+                </p>
+              </figcaption>
+            </figure>
+          </Reveal>
         </div>
       </section>
 
-      {/* 3. Advisors - real people, preserved and re-skinned */}
-      <section className="border-t border-rule bg-surface">
-        <div className="section-pad mx-auto max-w-6xl px-6">
-          <Reveal className="max-w-3xl">
-            <p className="editorial-eyebrow text-primary">Advisors</p>
-            <h2 className="editorial-heading mt-5 text-ink">
-              People who help keep Beseam grounded in real commerce.
+      <section className="border-b border-black/18 bg-[#fafafa]">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <Reveal className="grid gap-10 border-b border-black/22 pb-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+            <h2 className="max-w-[16ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+              Grounded in real commerce.
             </h2>
+            <p className="max-w-[64ch] self-end text-[17px] leading-[1.65] text-black/66">
+              Beseam is advised by operators who have built brands, led
+              ecommerce teams, and worked directly with the systems merchants
+              depend on.
+            </p>
           </Reveal>
 
-          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-2">
-            {ADVISORS.map((advisor, i) => (
+          <div className="grid md:grid-cols-2">
+            {ADVISORS.map((advisor, index) => (
               <Reveal
                 key={advisor.name}
-                delay={i * 0.08}
-                className="flex h-full gap-5 bg-panel p-7 md:p-8"
+                delay={index * 0.06}
+                className="grid gap-5 border-b border-black/18 py-8 md:grid-cols-[5rem_1fr] md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
               >
                 <Image
                   src={advisor.image}
                   alt={advisor.name}
-                  width={72}
-                  height={72}
-                  className="h-[72px] w-[72px] shrink-0 rounded-xl border border-rule object-cover"
+                  width={80}
+                  height={80}
+                  className="h-20 w-20 border border-black/18 object-cover"
                 />
-                <div className="min-w-0">
-                  <h3 className="text-[16px] font-semibold tracking-[-0.01em] text-ink">
+                <div>
+                  <h3 className="text-[17px] font-semibold text-[#111318]">
                     {advisor.name}
                   </h3>
-                  <p className="editorial-label mt-1 text-primary">
+                  <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.08em] text-[#b8441d]">
                     {advisor.role}
                   </p>
-                  <p className="mt-3 text-[14px] leading-relaxed text-foreground">
+                  <p className="mt-4 text-[14px] leading-relaxed text-black/64">
                     {advisor.bio}
                   </p>
                   <a
                     href={advisor.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-primary hover:underline"
+                    className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-[13px] font-semibold text-[#b8441d] underline decoration-black/20 underline-offset-5"
                   >
-                    <Linkedin className="h-3.5 w-3.5" />
+                    <Linkedin className="h-3.5 w-3.5" aria-hidden="true" />
                     LinkedIn
-                    <ArrowUpRight className="h-3.5 w-3.5" />
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                   </a>
                 </div>
               </Reveal>
@@ -174,35 +187,38 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. How Beseam works with your team - reuse the homepage teams section */}
       <TeamsSection />
 
-      {/* 5. Closing CTA - the single conversion, contact preserved */}
-      <section className="border-t border-rule bg-surface">
-        <div className="section-pad mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-[#111318] text-white">
+        <div className="mx-auto grid max-w-[92rem] gap-10 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1.15fr)_auto] lg:items-end lg:gap-20 lg:px-10 lg:py-28">
           <Reveal>
-            <p className="editorial-eyebrow text-primary">Talk to us</p>
-            <h2 className="editorial-heading mt-5 text-ink">
+            <h2 className="max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
               Bring one store. See which issue deserves attention first.
             </h2>
-            <p className="editorial-body mx-auto mt-5 max-w-2xl text-foreground">
-              A 20-minute commerce review looks at the store, the current stack, and the evidence Beseam would need to investigate the first material revenue leak.
+            <p className="mt-7 max-w-[64ch] text-[17px] leading-[1.65] text-white/72">
+              A 20-minute commerce review looks at the store, the current stack,
+              and the evidence Beseam would need to investigate the first
+              material revenue leak.
             </p>
-            <div className="mt-8 flex justify-center">
-              <BookReviewCta variant="primary" location="about_footer" />
-            </div>
-            <p className="mt-6 text-[14px] text-muted-foreground">
+            <p className="mt-5 text-[14px] text-white/62">
               Questions first?{" "}
               <a
                 href="mailto:pankaj@beseam.com"
-                className="font-semibold text-primary hover:underline"
+                className="font-semibold text-[#e8653a] underline underline-offset-4"
               >
                 pankaj@beseam.com
               </a>
             </p>
           </Reveal>
+          <Reveal delay={0.06}>
+            <BookReviewCta
+              variant="primary"
+              location="about_footer"
+              className="bg-white text-[#111318] hover:bg-[#e8653a] hover:text-white"
+            />
+          </Reveal>
         </div>
       </section>
-    </>
+    </div>
   );
 }

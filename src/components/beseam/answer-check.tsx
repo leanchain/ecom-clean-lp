@@ -537,10 +537,10 @@ function ResultCard({
 // after a publish). Auto-advances until the visitor takes control.
 
 const LOOP_STAGES = [
-  { key: "find", label: "Find", tag: "real scan" },
+  { key: "find", label: "Check", tag: "real scan" },
   { key: "diagnose", label: "Diagnose", tag: "real audit" },
   { key: "fix", label: "Fix", tag: "proposed" },
-  { key: "verify", label: "Verify", tag: "after publish" },
+  { key: "verify", label: "Check again", tag: "after publish" },
 ] as const;
 
 const SEVERITY_STYLES: Record<string, string> = {

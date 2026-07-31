@@ -75,7 +75,7 @@ export default function PlatformAuditPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f2f2f2]">
+      <section className="border-b border-black/18 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
@@ -136,7 +136,7 @@ export default function PlatformAuditPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f2f2f2]">
+      <section className="border-b border-black/18 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-20">
             <div>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     absolute: "Beseam | Be the answer when a shopper asks what to buy",
   },
   description:
-    "Beseam runs your customers' buying questions against ChatGPT, Copilot, Perplexity, and Google AI Overviews, traces each miss to the product field behind it, publishes the fix to your store with one-click revert, and asks again to confirm the answer changed.",
+    "Beseam runs your customers' buying questions against ChatGPT, Copilot, Perplexity, and Google AI Overviews, traces each miss to the product field behind it, publishes the fix to your store with one-click revert, and checks again to confirm the answer changed.",
   alternates: { canonical: "/" },
 };
 

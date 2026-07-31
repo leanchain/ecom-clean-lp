@@ -46,15 +46,17 @@ const DETAILS = [
 
 function ReviewDetails() {
   return (
-    <div className="grid overflow-hidden rounded-2xl border border-rule bg-rule md:grid-cols-2">
+    <div className="grid gap-px border border-black/18 bg-black/18 md:grid-cols-2">
       {DETAILS.map((detail) => (
-        <section key={detail.title} className="bg-panel p-7 md:p-8">
-          <h2 className="editorial-label text-primary">{detail.title}</h2>
-          <ul className="mt-4 divide-y divide-rule border-t border-rule">
+        <section key={detail.title} className="bg-[#f6f6f6] p-7 md:p-8">
+          <h2 className="font-mono text-[12px] font-semibold uppercase tracking-[0.1em] text-[#b8441d]">
+            {detail.title}
+          </h2>
+          <ul className="mt-4 divide-y divide-black/16 border-t border-black/18">
             {detail.items.map((item) => (
               <li
                 key={item}
-                className="py-3 text-[14.5px] leading-relaxed text-foreground"
+                className="py-3 text-[14.5px] leading-relaxed text-black/66"
               >
                 {item}
               </li>
@@ -117,29 +119,31 @@ function ContactFallback() {
     return (
       <div
         role="status"
-        className="rounded-2xl border border-rule bg-panel p-8 text-center"
+        className="border border-black/18 bg-[#f6f6f6] p-8 text-center"
       >
-        <p className="editorial-label text-primary">Request received</p>
-        <h2 className="editorial-subheading mt-3 text-ink">
+        <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.1em] text-[#b8441d]">
+          Request received
+        </p>
+        <h2 className="mt-3 font-display text-[32px] font-normal tracking-[-0.02em] text-[#111318]">
           We&rsquo;ll be in touch.
         </h2>
-        <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-foreground">
-          We&rsquo;ll use the details you shared to prepare the product
-          baseline and monitoring scope for your store.
+        <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-black/66">
+          We&rsquo;ll use the details you shared to prepare the product baseline
+          and monitoring scope for your store.
         </p>
       </div>
     );
   }
 
   const inputClass =
-    "mt-1.5 min-h-11 w-full rounded-lg border border-rule bg-panel px-3.5 py-2.5 text-[15px] text-ink outline-none placeholder:text-muted-foreground focus:border-primary";
+    "mt-1.5 min-h-11 w-full border border-black/30 bg-white px-3.5 py-2.5 text-[15px] text-[#111318] outline-none placeholder:text-black/52 focus:border-[#b8441d]";
 
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-2xl border border-rule bg-background p-6 md:p-8"
+      className="border border-black/18 bg-white p-6 md:p-8"
     >
-      <p className="editorial-label text-muted-foreground">
+      <p className="font-mono text-[12px] uppercase tracking-[0.09em] text-black/62">
         Calendar not convenient? Send the essentials
       </p>
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -216,7 +220,7 @@ function ContactFallback() {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-6 text-[14px] font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)] disabled:cursor-wait disabled:opacity-70"
+        className="mt-5 inline-flex min-h-11 items-center justify-center bg-[#111318] px-6 text-[14px] font-semibold text-white transition-colors hover:bg-[#b8441d] disabled:cursor-wait disabled:opacity-70"
       >
         {submitting ? "Sending…" : "Send monitoring request"}
       </button>
@@ -271,50 +275,57 @@ export default function ReviewContent() {
   }, [track]);
 
   return (
-    <div className="bg-surface">
-      <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <Reveal className="max-w-3xl">
-          <p className="editorial-eyebrow text-primary">
-            20-minute monitoring setup
-          </p>
-          <h1 className="editorial-hero mt-5 text-ink">
-            Choose the products you cannot afford to lose from view.
-          </h1>
-          <p className="editorial-body mt-6 max-w-2xl text-foreground">
-            We define the products and discovery paths to monitor, establish
-            the first baseline, and agree how your team should receive and act
-            on visibility-change alerts.
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.08} className="mt-12">
-          <ReviewDetails />
-        </Reveal>
-
-        <Reveal delay={0.08} className="mt-12">
-          <section aria-labelledby="choose-a-time">
-            <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-              <div>
-                <p className="editorial-eyebrow text-muted-foreground">
-                  Choose a time
-                </p>
-                <h2
-                  id="choose-a-time"
-                  className="editorial-subheading mt-2 text-ink"
-                >
-                  Book directly with the founder.
-                </h2>
-              </div>
-              <p className="text-[14px] text-muted-foreground">20 minutes</p>
+    <div className="bg-[#fafafa] text-[#151515]">
+      <section className="border-b border-black/18">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-20">
+            <div>
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+                20-minute monitoring setup
+              </p>
+              <h1 className="mt-7 max-w-[18ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
+                Choose the products you cannot afford to lose from view.
+              </h1>
             </div>
-            <div className="flex flex-col gap-6 rounded-2xl border border-rule bg-panel p-7 sm:flex-row sm:items-center sm:justify-between md:p-9">
+            <p className="max-w-[64ch] text-[19px] leading-[1.72] text-black/66">
+              We define the products and discovery paths to monitor, establish
+              the first baseline, and agree how your team should receive and act
+              on visibility-change alerts.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="border-b border-black/18 bg-[#f6f6f6]">
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
+          <Reveal>
+            <ReviewDetails />
+          </Reveal>
+        </div>
+      </section>
+
+      <section aria-labelledby="choose-a-time">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <Reveal className="grid gap-10 border-b border-black/22 pb-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+            <div>
+              <p className="font-mono text-[12px] uppercase tracking-[0.09em] text-black/62">
+                Choose a time · 20 minutes
+              </p>
+              <h2
+                id="choose-a-time"
+                className="mt-5 max-w-[16ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]"
+              >
+                Book directly with the founder.
+              </h2>
+            </div>
+            <div className="flex flex-col gap-6 self-end border border-black/18 bg-[#f6f6f6] p-7 sm:flex-row sm:items-center sm:justify-between md:p-9">
               <div className="max-w-xl">
-                <h3 className="text-[20px] font-semibold tracking-tight text-ink">
-                  Choose a time to set up product visibility monitoring.
+                <h3 className="text-[20px] font-semibold text-[#111318]">
+                  Set up product visibility monitoring.
                 </h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-foreground">
-                  Pick a 20-minute slot. Bring your store URL, the products
-                  that matter most, and the places where customers should find them.
+                <p className="mt-2 text-[15px] leading-relaxed text-black/66">
+                  Bring your store URL, the products that matter most, and the
+                  places where customers should find them.
                 </p>
               </div>
               <button
@@ -329,18 +340,18 @@ export default function ReviewContent() {
                     "https://cal.com/pankaj.kumar/Beseam",
                   )
                 }
-                className="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full bg-primary px-6 text-[14px] font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)]"
+                className="inline-flex min-h-12 shrink-0 items-center justify-center bg-[#111318] px-6 text-[14px] font-semibold text-white transition-colors hover:bg-[#b8441d]"
               >
                 Open booking calendar
               </button>
             </div>
-          </section>
-        </Reveal>
+          </Reveal>
 
-        <Reveal delay={0.08} className="mx-auto mt-10 max-w-2xl">
-          <ContactFallback />
-        </Reveal>
-      </div>
+          <Reveal delay={0.08} className="mx-auto mt-12 max-w-2xl">
+            <ContactFallback />
+          </Reveal>
+        </div>
+      </section>
     </div>
   );
 }

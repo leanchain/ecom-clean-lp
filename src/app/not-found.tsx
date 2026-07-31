@@ -66,7 +66,7 @@ export default function NotFound() {
         </div>
       </section>
 
-      <section className="flex-1 bg-[#f2f2f2]">
+      <section className="flex-1 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <h2 className="max-w-[18ch] font-serif text-[28px] font-normal leading-[1.06] tracking-[-0.02em] text-[#111318]">
             Try one of these

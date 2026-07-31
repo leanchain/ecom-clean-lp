@@ -59,7 +59,7 @@ export default function BeseamFooter() {
             href="/about"
             className="text-[12px] text-white/62 hover:text-white"
           >
-            Company
+            About
           </Link>
           <Link
             href="/privacy-policy"
