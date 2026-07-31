@@ -78,20 +78,20 @@ export default function ResourcesPage() {
   const searchEntries = getFieldbookSearchIndex();
 
   return (
-    <div className="bg-[var(--beseam-surface)] text-[var(--beseam-ink)]">
+    <div className="bg-ground text-ink-deep">
       <section className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--beseam-accent)]">
+          <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
             Beseam Commerce Fieldbook
           </p>
           <div className="mt-7 grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-20">
             <div>
-              <h1 className="max-w-[11ch] font-serif text-[clamp(3.5rem,6.2vw,6.5rem)] font-normal leading-[0.95] tracking-[-0.055em]">
+              <h1 className="max-w-[18ch] font-serif text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em]">
                 Find the commerce problem in front of you.
               </h1>
               <Link
                 href="/resources/start-here"
-                className="mt-8 inline-flex min-h-12 items-center gap-3 bg-[var(--beseam-technical)] px-5 text-[13px] font-semibold text-white"
+                className="mt-8 inline-flex min-h-12 items-center gap-3 bg-ink-deep px-5 text-[13px] font-semibold text-white"
               >
                 Open the Fieldbook <ArrowRight className="h-4 w-4" />
               </Link>
@@ -106,7 +106,7 @@ export default function ResourcesPage() {
               <div className="mt-8">
                 <FieldbookSearch entries={searchEntries} />
               </div>
-              <p className="mt-5 font-mono text-[9px] uppercase tracking-[0.09em] text-black/42">
+              <p className="mt-5 font-mono text-[12px] uppercase tracking-[0.09em] text-black/62">
                 {problems.length} problem guides · {skills.length} agent skills
                 · {playbooks.length} playbooks · {ECOSYSTEM_RESOURCES.length}{" "}
                 reviewed resources
@@ -116,25 +116,22 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[var(--beseam-panel)]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto grid max-w-[92rem] sm:grid-cols-2 lg:grid-cols-3">
           {SECTIONS.map(({ title, href, description, icon: Icon }) => (
             <Link
               key={href}
               href={href}
-              className="group border-b border-black/16 p-7 transition-colors hover:bg-[var(--beseam-panel-hover)] sm:border-r lg:min-h-[18rem] lg:p-9"
+              className="group border-b border-black/16 p-7 transition-colors hover:bg-panel-white sm:border-r lg:min-h-[18rem] lg:p-9"
             >
-              <Icon
-                className="h-5 w-5 text-[var(--beseam-accent)]"
-                strokeWidth={1.6}
-              />
-              <h2 className="mt-9 font-serif text-[30px] tracking-[-0.035em] text-[var(--beseam-ink)]">
+              <Icon className="h-5 w-5 text-signal-ink" strokeWidth={1.6} />
+              <h2 className="mt-9 font-serif text-[30px] tracking-[-0.02em] text-ink-deep">
                 {title}
               </h2>
-              <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-black/56">
+              <p className="mt-4 max-w-sm text-[13px] leading-relaxed text-black/62">
                 {description}
               </p>
-              <span className="mt-7 inline-flex items-center gap-2 text-[12px] font-semibold text-[var(--beseam-accent)]">
+              <span className="mt-7 inline-flex items-center gap-2 text-[12px] font-semibold text-signal-ink">
                 Browse section{" "}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
@@ -147,10 +144,7 @@ export default function ResourcesPage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.65fr)_minmax(0,1.35fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--beseam-accent)]">
-                Common problems
-              </p>
-              <h2 className="mt-5 max-w-[10ch] font-serif text-[clamp(2.8rem,4vw,4.2rem)] leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.04] tracking-[-0.02em]">
                 Pick the closest symptom.
               </h2>
             </div>
@@ -161,22 +155,22 @@ export default function ResourcesPage() {
                   href={problem.href}
                   className="group grid gap-4 border-b border-black/16 py-5 sm:grid-cols-[2.5rem_13rem_1fr_auto]"
                 >
-                  <span className="font-mono text-[9px] text-black/34">
+                  <span className="font-mono text-[12px] text-black/62">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span>
-                    <span className="font-mono text-[8px] uppercase tracking-[0.08em] text-[var(--beseam-accent)]">
+                    <span className="font-mono text-[12px] uppercase tracking-[0.08em] text-signal-ink">
                       {problem.frontmatter.category}
                     </span>
-                    <span className="mt-1.5 block text-[14px] font-semibold text-[var(--beseam-ink)]">
+                    <span className="mt-1.5 block text-[14px] font-semibold text-ink-deep">
                       {problem.frontmatter.navTitle ??
                         problem.frontmatter.title}
                     </span>
                   </span>
-                  <span className="text-[12px] leading-relaxed text-black/50">
+                  <span className="text-[12px] leading-relaxed text-black/62">
                     {problem.frontmatter.summary}
                   </span>
-                  <ArrowRight className="h-4 w-4 text-[var(--beseam-accent)] transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-4 w-4 text-signal-ink transition-transform group-hover:translate-x-0.5" />
                 </Link>
               ))}
             </div>
@@ -184,20 +178,17 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[var(--beseam-technical)] text-white">
+      <section className="border-b border-black/18 bg-ink-deep text-white">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="flex flex-col gap-6 border-b border-white/16 pb-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--beseam-accent-soft)]">
-                Sources and tools
-              </p>
-              <h2 className="mt-5 font-serif text-[clamp(2.8rem,4vw,4.2rem)] leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[20ch] font-serif text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.04] tracking-[-0.02em]">
                 Read the rule before you change the store.
               </h2>
             </div>
             <Link
               href="/resources/projects"
-              className="inline-flex items-center gap-2 text-[12px] font-semibold text-[var(--beseam-accent-soft)]"
+              className="inline-flex items-center gap-2 text-[12px] font-semibold text-signal"
             >
               Browse all {ECOSYSTEM_RESOURCES.length} resources{" "}
               <ArrowRight className="h-4 w-4" />
@@ -205,20 +196,17 @@ export default function ResourcesPage() {
           </div>
           <div className="grid gap-px bg-white/16 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURED_RESOURCES.map((resource) => (
-              <article
-                key={resource.slug}
-                className="bg-[var(--beseam-technical)] p-6"
-              >
-                <p className="font-mono text-[8px] uppercase tracking-[0.09em] text-white/36">
+              <article key={resource.slug} className="bg-ink-deep p-6">
+                <p className="font-mono text-[12px] uppercase tracking-[0.09em] text-white/72">
                   {resource.category} · {resource.maturity}
                 </p>
                 <h3 className="mt-4 text-[17px] font-semibold">
                   {resource.name}
                 </h3>
-                <p className="mt-3 text-[12px] leading-relaxed text-white/52">
+                <p className="mt-3 text-[12px] leading-relaxed text-white/72">
                   {resource.summary}
                 </p>
-                <p className="mt-5 font-mono text-[8px] uppercase tracking-[0.08em] text-[var(--beseam-accent-soft)]">
+                <p className="mt-5 font-mono text-[12px] uppercase tracking-[0.08em] text-signal">
                   {resource.kind} · {resource.license}
                 </p>
               </article>

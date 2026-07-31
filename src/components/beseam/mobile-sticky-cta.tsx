@@ -6,14 +6,20 @@ import { ArrowRight } from "lucide-react";
 
 import TrackedLink from "@/components/beseam/tracked-link";
 
-const SCAN_URL = "/tools/ai-visibility-scan";
+/**
+ * The hero scan field. The sticky bar scrolls to it and focuses it rather than
+ * routing to a separate scan page, so the label matches what happens.
+ */
+const HERO_FIELD_ID = "answer-check-domain";
+
+/** Roughly one screen of scroll: the bar appears once the hero copy is behind you. */
+const SHOW_AFTER_SCROLL_Y = 600;
 
 export default function MobileStickyCta() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const updateVisibility = () => {
-      const hero = document.getElementById("home-hero");
       const menuOpen = Boolean(document.getElementById("mobile-navigation"));
       const cookieChoicesOpen = Boolean(
         document.querySelector('[aria-label="Cookie choices"]'),
@@ -23,11 +29,9 @@ export default function MobileStickyCta() {
       const footerVisible = footer
         ? footer.getBoundingClientRect().top < window.innerHeight
         : false;
-      const passedHero = hero
-        ? hero.getBoundingClientRect().bottom < 120
-        : window.scrollY > window.innerHeight * 0.8;
+      const scrolledPastHeroCopy = window.scrollY > SHOW_AFTER_SCROLL_Y;
       setVisible(
-        passedHero &&
+        scrolledPastHeroCopy &&
           !menuOpen &&
           !cookieChoicesOpen &&
           !dialogOpen &&
@@ -53,12 +57,19 @@ export default function MobileStickyCta() {
   return (
     <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
       <TrackedLink
-        href={SCAN_URL}
+        href={`/#${HERO_FIELD_ID}`}
         eventName="marketing_primary_cta_clicked"
         eventCategory="conversion"
         placement="mobile_sticky"
         preserveUtm
-        className="flex min-h-12 items-center justify-center gap-3 border border-white/18 bg-[#111318] px-5 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(17,19,24,0.28)]"
+        onClick={(event) => {
+          const field = document.getElementById(HERO_FIELD_ID);
+          if (!field) return;
+          event.preventDefault();
+          field.scrollIntoView({ behavior: "smooth", block: "center" });
+          field.focus({ preventScroll: true });
+        }}
+        className="flex min-h-12 items-center justify-center gap-3 border border-white/18 bg-[#111318] px-5 text-sm font-semibold text-white"
       >
         Scan my store free
         <ArrowRight className="h-4 w-4" />

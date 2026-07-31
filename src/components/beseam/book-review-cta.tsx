@@ -27,7 +27,7 @@ export function BookReviewCta({
         eventName="marketing_secondary_cta_clicked"
         placement={location}
         className={cn(
-          "inline-flex min-h-12 items-center justify-center gap-2 border border-black/25 bg-transparent px-6 text-[15px] font-semibold text-[#151515] transition-colors hover:border-[#c04e26] hover:text-[#c04e26] focus-visible:ring-2 focus-visible:ring-[#c04e26] focus-visible:ring-offset-3",
+          "inline-flex min-h-12 items-center justify-center gap-2 border border-black/40 bg-transparent px-6 text-[15px] font-semibold text-[#151515] transition-colors hover:border-[#b8441d] hover:text-[#b8441d] focus-visible:ring-2 focus-visible:ring-[#b8441d] focus-visible:ring-offset-3",
           className,
         )}
       >
@@ -44,7 +44,7 @@ export function BookReviewCta({
       placement={location}
       preserveUtm
       className={cn(
-        "group inline-flex min-h-12 items-center justify-center gap-3 bg-[#111318] px-7 py-3 text-[15px] font-semibold leading-tight text-white transition-colors hover:bg-[#c04e26] focus-visible:ring-2 focus-visible:ring-[#c04e26] focus-visible:ring-offset-3",
+        "group inline-flex min-h-12 items-center justify-center gap-3 bg-[#111318] px-7 py-3 text-[15px] font-semibold leading-tight text-white transition-colors hover:bg-[#b8441d] focus-visible:ring-2 focus-visible:ring-[#b8441d] focus-visible:ring-offset-3",
         className,
       )}
     >

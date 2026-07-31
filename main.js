@@ -331,6 +331,26 @@ async function proxyAnswerCheck(request, url, env) {
 const IMAGE_MAX_BYTES = 3_000_000;
 const IMAGE_CACHE_SECONDS = 604800; // 7 days
 
+// Shopify's CDN resizes from URL params, so we ask upstream for roughly the
+// size the page renders instead of proxying multi-hundred-KB originals into
+// 48px thumbnails. Callers opt into a smaller step with `w`.
+const IMAGE_WIDTHS = [96, 128, 192, 256, 384, 512, 768, 1024];
+const DEFAULT_IMAGE_WIDTH = 512;
+
+function resizableHost(hostname) {
+  return (
+    hostname === "cdn.shopify.com" ||
+    hostname.endsWith(".myshopify.com") ||
+    hostname.endsWith(".shopifycdn.com")
+  );
+}
+
+function pickImageWidth(raw) {
+  const asked = Number(raw);
+  if (!Number.isFinite(asked) || asked <= 0) return DEFAULT_IMAGE_WIDTH;
+  return IMAGE_WIDTHS.find((w) => w >= asked) || IMAGE_WIDTHS.at(-1);
+}
+
 async function proxyProductImage(request, url) {
   const target = clean(url.searchParams.get("u"), 1000);
   if (!target) return json({ error: "u is required" }, 422);
@@ -346,8 +366,28 @@ async function proxyProductImage(request, url) {
     return json({ error: "unsupported url" }, 422);
   }
 
+  const width = pickImageWidth(url.searchParams.get("w"));
+  const wantsWebp = (request.headers.get("accept") || "").includes(
+    "image/webp",
+  );
+  // Only rewrite hosts we know transform from query params, and never override
+  // sizing the caller already put on the upstream URL.
+  if (
+    resizableHost(source.hostname) &&
+    !source.searchParams.has("width") &&
+    !source.searchParams.has("height")
+  ) {
+    source.searchParams.set("width", String(width));
+    if (wantsWebp) source.searchParams.set("format", "webp");
+  }
+
   const cache = caches.default;
-  const cacheKey = new Request(url.toString(), { method: "GET" });
+  // Same-origin cache key, varied by the size/format actually fetched so a
+  // webp variant is never served to a client that cannot read it.
+  const cacheUrl = new URL(url.toString());
+  cacheUrl.searchParams.set("w", String(width));
+  cacheUrl.searchParams.set("fmt", wantsWebp ? "webp" : "orig");
+  const cacheKey = new Request(cacheUrl.toString(), { method: "GET" });
   const cached = await cache.match(cacheKey);
   if (cached) return cached;
 
@@ -376,6 +416,7 @@ async function proxyProductImage(request, url) {
     headers: {
       "content-type": type,
       "cache-control": `public, max-age=${IMAGE_CACHE_SECONDS}, immutable`,
+      vary: "accept",
       "x-content-type-options": "nosniff",
       "content-security-policy": "default-src 'none'; img-src 'self' data:",
     },

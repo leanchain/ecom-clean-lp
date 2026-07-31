@@ -87,6 +87,24 @@ const STEPS = [
   },
 ] as const;
 
+// The same loop as STEPS, stated as a record of what is kept per product.
+// Deliberately unnumbered: the page carries exactly one 01-04 sequence.
+const RECORD_STAGES = [
+  ["Asked", "Record the answer and whether the product was named."],
+  [
+    "Traced",
+    "Name the product field that caused the miss, and the revenue behind it.",
+  ],
+  [
+    "Published",
+    "Write the approved change to the store, keeping the old value.",
+  ],
+  [
+    "Asked again",
+    "Re-run the same question and record whether the answer moved.",
+  ],
+] as const;
+
 function EvidenceFigure({
   src,
   alt,
@@ -107,6 +125,8 @@ function EvidenceFigure({
   return (
     <figure className={className}>
       <div className="relative aspect-[16/10] overflow-hidden border border-black/18 bg-white">
+        {/* Animated GIF stays a GIF on purpose: it autoplays, where a <video>
+            would need an explicit press to show the loop running. */}
         <Image
           src={src}
           alt={alt}
@@ -117,8 +137,8 @@ function EvidenceFigure({
           className="object-cover object-top"
         />
       </div>
-      <figcaption className="grid gap-2 border-x border-b border-black/18 bg-[#f7f5ee] px-4 py-3 sm:grid-cols-[9rem_1fr] sm:px-5">
-        <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/58">
+      <figcaption className="grid gap-2 border-x border-b border-black/18 bg-[#ffffff] px-4 py-3 sm:grid-cols-[9rem_1fr] sm:px-5">
+        <span className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-black/62">
           {label}
         </span>
         <span className="text-[13px] leading-relaxed text-black/62">
@@ -131,27 +151,35 @@ function EvidenceFigure({
 
 export default function ProductionHomepage() {
   return (
-    <div className="bg-[#f4f1e9] text-[#151515]">
+    <div className="bg-[#fafafa] text-[#151515]">
       <section id="home-hero" className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20 lg:px-10 lg:pb-24 lg:pt-24">
           <Reveal>
             <div className="mx-auto max-w-[58rem] text-center">
-              <div className="flex items-center justify-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/55">
-                <span className="h-2 w-2 bg-[#e8653a]" aria-hidden="true" />
-                Answer visibility, fixed at the product level
+              <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-3">
+                <span
+                  className="h-2 w-2 shrink-0 bg-[#b8441d]"
+                  aria-hidden="true"
+                />
+                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-black/62 sm:tracking-[0.14em]">
+                  <span className="block sm:inline">Answer visibility,</span>{" "}
+                  <span className="block sm:inline">
+                    fixed at the product level
+                  </span>
+                </p>
               </div>
-              <h1 className="mx-auto mt-8 max-w-[19ch] font-serif text-[clamp(3rem,5vw,5rem)] font-normal leading-[1] tracking-[-0.045em] text-[#111318]">
+              <h1 className="mx-auto mt-8 max-w-[19ch] font-display text-[clamp(2.75rem,4.4vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
                 When a shopper asks what to buy, your product should be the
                 answer.
               </h1>
-              <p className="mx-auto mt-8 max-w-2xl text-[18px] leading-[1.65] text-black/68">
+              <p className="mx-auto mt-8 max-w-[64ch] text-[18px] leading-[1.65] text-black/68">
                 Beseam runs those questions against ChatGPT, Copilot,
                 Perplexity, and Google AI Overviews, names the product field
                 that left you out, publishes the fix to your store with
                 one-click revert, then asks again to confirm the answer changed.
               </p>
 
-              <dl className="mx-auto mt-12 grid max-w-4xl grid-cols-3 border-y border-black/18">
+              <dl className="mx-auto mt-12 grid max-w-4xl grid-cols-1 border-y border-black/18 sm:grid-cols-3">
                 {[
                   ["Ask", "The assistants your buyers use"],
                   ["Fix", "Published to your store, revertible"],
@@ -159,9 +187,9 @@ export default function ProductionHomepage() {
                 ].map(([term, value]) => (
                   <div
                     key={term}
-                    className="border-r border-black/18 px-3 py-4 last:border-r-0 sm:px-5 sm:py-5"
+                    className="border-b border-black/18 px-3 py-4 last:border-b-0 sm:border-b-0 sm:border-r sm:px-5 sm:py-5 sm:last:border-r-0"
                   >
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.12em] text-black/45">
+                    <dt className="font-mono text-[12px] uppercase tracking-[0.12em] text-black/62">
                       {term}
                     </dt>
                     <dd className="mt-2 text-[13px] font-semibold leading-snug text-black/78 sm:text-[14px]">
@@ -179,7 +207,7 @@ export default function ProductionHomepage() {
               <div className="mt-6 text-center">
                 <Link
                   href="#how-it-works"
-                  className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#e8653a]"
+                  className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#b8441d]"
                 >
                   How the loop works <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -191,17 +219,17 @@ export default function ProductionHomepage() {
 
       <section
         aria-label="Coverage"
-        className="border-b border-black/18 bg-[#ebe8df]"
+        className="border-b border-black/18 bg-[#f2f2f2]"
       >
         <div className="mx-auto grid max-w-[92rem] gap-4 px-5 py-6 sm:px-8 lg:grid-cols-[16rem_1fr] lg:items-center lg:px-10">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/48">
+          <p className="font-mono text-[12px] font-semibold tracking-[0.02em] text-black/62">
             Questions are asked against
           </p>
           <ul className="flex flex-wrap items-center gap-2">
             {SURFACES.map(({ label, channel }) => (
               <li
                 key={label}
-                className="inline-flex items-center gap-2 border border-black/16 bg-[#f7f5ee] px-3 py-1.5"
+                className="inline-flex items-center gap-2 border border-black/16 bg-[#ffffff] px-3 py-1.5"
               >
                 <ChannelIcon
                   channel={channel}
@@ -216,22 +244,15 @@ export default function ProductionHomepage() {
         </div>
       </section>
 
-      <section
-        id="how-it-works"
-        className="scroll-mt-24 bg-[image:linear-gradient(to_bottom,#f4f1e9_0%,#f4f1e9_74%,#eeeade_100%)]"
-      >
+      <section id="how-it-works" className="scroll-mt-24 bg-[#fafafa]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 border-b border-black/22 pb-14 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
-                <span className="h-[3px] w-6 bg-[#e8653a]" aria-hidden="true" />
-                How it works
-              </p>
-              <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
                 Ask. Trace. Fix. Ask again.
               </h2>
             </div>
-            <p className="max-w-2xl self-end text-[17px] leading-[1.65] text-black/66">
+            <p className="max-w-[64ch] self-end text-[17px] leading-[1.65] text-black/66">
               Reporting tools stop after the first step and hand you a score.
               Beseam carries the same question through to a published change and
               a re-check, so you find out whether the fix worked.
@@ -244,20 +265,20 @@ export default function ProductionHomepage() {
                 key={step.number}
                 className="border-b border-black/18 py-9 md:border-r md:px-7 lg:border-b-0 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
               >
-                <span className="block font-serif text-[clamp(3rem,4vw,4.2rem)] leading-[0.85] tracking-[-0.04em] text-[#e8653a]">
+                <span className="block font-display text-[clamp(2.5rem,3.2vw,3.25rem)] leading-[0.85] tracking-[-0.02em] text-[#b8441d]">
                   {step.number}
                 </span>
                 <h3 className="mt-6 text-[21px] font-semibold leading-snug text-[#111318]">
                   {step.title}
                 </h3>
-                <p className="mt-4 max-w-sm text-[14px] leading-relaxed text-black/60">
+                <p className="mt-4 max-w-sm text-[14px] leading-relaxed text-black/62">
                   {step.detail}
                 </p>
               </article>
             ))}
           </div>
 
-          <div className="mt-12 flex items-start gap-3 border-t border-black/18 pt-6 text-[13px] leading-relaxed text-black/52">
+          <div className="mt-12 flex items-start gap-3 border-t border-black/18 pt-6 text-[13px] leading-relaxed text-black/62">
             <RotateCcw
               className="mt-0.5 h-4 w-4 shrink-0 text-black/70"
               aria-hidden="true"
@@ -269,18 +290,11 @@ export default function ProductionHomepage() {
         </div>
       </section>
 
-      <section
-        id="answer-check"
-        className="scroll-mt-24 bg-[image:linear-gradient(to_bottom,#eeeade_0%,#eeeade_72%,#e7e2d2_100%)]"
-      >
+      <section id="answer-check" className="scroll-mt-24 bg-[#f2f2f2]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <Reveal>
-              <p className="flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
-                <span className="h-[3px] w-6 bg-[#e8653a]" aria-hidden="true" />
-                One product, followed through
-              </p>
-              <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[20ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
                 From a missed answer to a published fix.
               </h2>
               <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-black/64">
@@ -289,45 +303,21 @@ export default function ProductionHomepage() {
                 the same product record.
               </p>
 
-              <div className="mt-9 grid gap-0 border-y border-black/22">
-                {[
-                  [
-                    "01",
-                    "Asked",
-                    "Record the answer and whether the product was named.",
-                  ],
-                  [
-                    "02",
-                    "Traced",
-                    "Name the product field that caused the miss, and the revenue behind it.",
-                  ],
-                  [
-                    "03",
-                    "Published",
-                    "Write the approved change to the store, keeping the old value.",
-                  ],
-                  [
-                    "04",
-                    "Asked again",
-                    "Re-run the same question and record whether the answer moved.",
-                  ],
-                ].map(([number, title, detail]) => (
+              <dl className="mt-9 border-y border-black/22">
+                {RECORD_STAGES.map(([term, detail]) => (
                   <div
-                    key={number}
-                    className="grid gap-3 border-b border-black/16 py-5 last:border-b-0 sm:grid-cols-[3rem_8rem_1fr] sm:items-start"
+                    key={term}
+                    className="grid gap-2 border-b border-black/16 py-5 last:border-b-0 sm:grid-cols-[10rem_1fr] sm:items-start sm:gap-6"
                   >
-                    <span className="font-mono text-[10px] font-semibold text-[#c04e26]">
-                      {number}
-                    </span>
-                    <span className="text-[14px] font-semibold text-black/78">
-                      {title}
-                    </span>
-                    <span className="text-[13px] leading-relaxed text-black/56">
+                    <dt className="text-[14px] font-semibold text-black/78">
+                      {term}
+                    </dt>
+                    <dd className="text-[13px] leading-relaxed text-black/62">
                       {detail}
-                    </span>
+                    </dd>
                   </div>
                 ))}
-              </div>
+              </dl>
             </Reveal>
 
             <Reveal delay={0.08}>
@@ -343,23 +333,16 @@ export default function ProductionHomepage() {
         </div>
       </section>
 
-      <section
-        id="what-breaks"
-        className="scroll-mt-24 border-b border-black/18 bg-[image:linear-gradient(to_bottom,#e7e2d2_0%,#e7e2d2_74%,#ded8c6_100%)]"
-      >
+      <section id="what-breaks" className="scroll-mt-24 bg-[#3d1a10]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="flex items-center gap-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
-                <span className="h-[3px] w-6 bg-[#e8653a]" aria-hidden="true" />
-                What actually leaves you out
-              </p>
-              <h2 className="mt-6 max-w-[11ch] font-serif text-[clamp(2.7rem,4.2vw,4.2rem)] font-normal leading-[1.02] tracking-[-0.04em]">
-                It is almost never the writing.
+              <h2 className="max-w-[22ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-white">
+                If AI can&rsquo;t find the answer, it names someone else.
               </h2>
             </div>
             <div className="self-end">
-              <p className="max-w-2xl text-[17px] leading-[1.65] text-black/66">
+              <p className="max-w-[64ch] text-[17px] leading-[1.65] text-white/78">
                 A product stays active in your store while disappearing from the
                 places customers actually decide. The cause is usually one
                 field: a missing spec, a price that disagrees with itself, a
@@ -368,23 +351,23 @@ export default function ProductionHomepage() {
             </div>
           </Reveal>
 
-          <div className="mt-16 grid border-y border-black/22 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-16 grid border-b border-t-2 border-b-white/20 border-t-[#e8653a] md:grid-cols-2 lg:grid-cols-4">
             {WHAT_BREAKS.map((item) => {
               const Icon = item.icon;
               return (
                 <article
                   key={item.title}
-                  className="border-b border-black/18 py-7 md:border-r md:px-6 lg:border-b-0 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
+                  className="border-b border-white/20 py-7 md:border-r md:px-6 lg:border-b-0 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
                 >
                   <Icon
-                    className="h-5 w-5 text-black/70"
+                    className="h-5 w-5 text-white/80"
                     strokeWidth={1.7}
                     aria-hidden="true"
                   />
-                  <h3 className="mt-8 text-[18px] font-semibold leading-snug text-[#111318]">
+                  <h3 className="mt-8 text-[18px] font-semibold leading-snug text-white">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-[14px] leading-relaxed text-black/60">
+                  <p className="mt-3 text-[14px] leading-relaxed text-white/72">
                     {item.detail}
                   </p>
                 </article>
@@ -401,13 +384,10 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-14 lg:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] lg:items-center lg:gap-20">
             <Reveal>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#e8653a]">
-                Ranked by money, not by score
-              </p>
-              <h2 className="mt-6 max-w-[13ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[20ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
                 You fix the products that pay for the fix.
               </h2>
-              <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-white/62">
+              <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-white/72">
                 Beseam also runs the sessions on your storefront, so a finding
                 carries the traffic and revenue behind it. The work queue is
                 ordered by what the miss costs you, not by a severity label.
@@ -447,15 +427,11 @@ export default function ProductionHomepage() {
 
       <FirstMonthPromise />
 
-      <section className="bg-[#f4f1e9]">
-        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
+      <section className="bg-[#fafafa]">
+        <div className="mx-auto max-w-[92rem] px-5 pb-12 pt-20 sm:px-8 sm:pb-14 sm:pt-24 lg:px-10">
           <div className="grid gap-10 border-y border-black/24 py-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center lg:gap-16 lg:py-14">
             <div>
-              <p className="flex items-center gap-3 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/58">
-                <span className="h-[3px] w-6 bg-[#e8653a]" aria-hidden="true" />
-                Start with your own catalog
-              </p>
-              <h2 className="mt-5 max-w-[20ch] font-serif text-[clamp(2.6rem,4.2vw,4.3rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#111318]">
+              <h2 className="max-w-[20ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
                 Find out what the assistants say about your products.
               </h2>
               <p className="mt-6 max-w-xl text-[16px] leading-[1.7] text-black/64">
@@ -478,7 +454,7 @@ export default function ProductionHomepage() {
               />
 
               <div className="mt-8 flex flex-col gap-3 border-t border-black/14 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                <span className="text-[14px] text-black/52">
+                <span className="text-[14px] text-black/62">
                   Want the publishing and monitoring loop set up on your store?
                 </span>
                 <BookReviewCta
@@ -486,17 +462,17 @@ export default function ProductionHomepage() {
                   label="Book a 20-minute review"
                 />
               </div>
-            </div>
-          </div>
 
-          <div className="mt-6 flex items-start gap-3 text-[13px] leading-relaxed text-black/52">
-            <CircleAlert
-              className="mt-0.5 h-4 w-4 shrink-0 text-black/70"
-              aria-hidden="true"
-            />
-            The scan reads public pages only. Beseam does not publish
-            customer-facing changes without the agreed store access and your
-            approval.
+              <div className="mt-5 flex items-start gap-3 text-[13px] leading-relaxed text-black/62">
+                <CircleAlert
+                  className="mt-0.5 h-4 w-4 shrink-0 text-black/70"
+                  aria-hidden="true"
+                />
+                The scan reads public pages only. Beseam does not publish
+                customer-facing changes without the agreed store access and your
+                approval.
+              </div>
+            </div>
           </div>
         </div>
       </section>

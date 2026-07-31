@@ -7,12 +7,12 @@
 
 :root {
   /* Beseam editorial system */
-  --beseam-surface: #f4f1e9;
-  --beseam-panel: #ebe8df;
-  --beseam-panel-hover: #e3e0d7;
+  --beseam-surface: #fafafa;
+  --beseam-panel: #f2f2f2;
+  --beseam-panel-hover: #e9e9e9;
   --beseam-ink: #111318;
-  --beseam-accent: #3154ff;
-  --beseam-accent-soft: #8ea2ff;
+  --beseam-accent: #b8441d;
+  --beseam-accent-soft: #e8653a;
   --beseam-technical: #111318;
   --beseam-technical-hover: #171a21;
 
@@ -169,6 +169,7 @@
   --surface-subtle: #f3f4f6;
 
   /* Editorial Store Health surfaces */
+  /* Editorial Store Health surfaces */
   --surface: #fbfaf8; /* warm off-white body surface */
   --panel: #ffffff; /* true-white panels */
   --rule: #e7e5e1; /* hairline structural rules */
@@ -176,6 +177,22 @@
   --technical: #17171b; /* owned monitoring/pipeline surface */
   --technical-panel: #202026;
   --technical-rule: #37373f;
+
+  /*
+   * Marketing ground ramp. Chroma-0 neutrals on purpose: the previous ramp
+   * (#f4f1e9 -> #ded8c6) sat in the warm cream/sand band, which reads as
+   * generic warm-paper. Commitment now comes from two drenched acts
+   * (--pigment, --ink-deep) against a neutral ground, not from tinting
+   * every surface.
+   */
+  --ground: #fafafa; /* primary marketing ground */
+  --ground-2: #f2f2f2; /* second act */
+  --ground-3: #e9e9e9; /* third act / coverage strip */
+  --panel-white: #ffffff; /* evidence panels, form fields */
+  --pigment: #3d1a10; /* drenched act: oxblood, same hue family as the signal */
+  --ink-deep: #111318; /* drenched act: product record */
+  --signal: #e8653a; /* signal on dark grounds only (4.70:1 on --pigment) */
+  --signal-ink: #b8441d; /* signal on light grounds (5.18:1 on --ground) */
 
   --font-sans: var(
     --font-figtree,
@@ -190,7 +207,19 @@
       sans-serif
     )
   );
-  --font-serif: "Lora", Georgia, serif;
+  /*
+   * Display face. `font-serif` is kept as a legacy alias so existing markup
+   * keeps working. Faustina replaces Lora: same serif silhouette, sharper and
+   * sturdier, and not a training default. New markup should use `font-display`.
+   */
+  /*
+   * The literal chain is repeated instead of aliasing `var(--font-display)`:
+   * `--font-faustina` is defined on <body> by next/font, so a `:root` custom
+   * property that references it computes to guaranteed-invalid and inherits
+   * down as empty. Every consumer must resolve the axis itself.
+   */
+  --font-display: var(--font-faustina, "Faustina"), Georgia, serif;
+  --font-serif: var(--font-faustina, "Faustina"), Georgia, serif;
   --font-mono: "Fira Code", "Courier New", monospace;
 
   /* Shadow variables */
@@ -308,7 +337,7 @@
 
 /* Typography utilities */
 .font-heading {
-  font-family: var(--font-display, var(--font-figtree));
+  font-family: var(--font-faustina, "Faustina"), Georgia, serif;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
@@ -322,12 +351,20 @@
 
 @theme inline {
   --font-sans: var(--font-figtree);
-  --font-display: var(--font-figtree);
-  --font-heading: var(--font-figtree);
+  --font-display: var(--font-faustina, "Faustina"), Georgia, serif;
+  --font-heading: var(--font-faustina, "Faustina"), Georgia, serif;
   --font-accent: var(--font-figtree);
-  --font-serif: "Lora", Georgia, serif;
+  --font-serif: var(--font-faustina, "Faustina"), Georgia, serif;
   --font-mono: "Fira Code", "Courier New", monospace;
 
+  --color-ground: var(--ground);
+  --color-ground-2: var(--ground-2);
+  --color-ground-3: var(--ground-3);
+  --color-panel-white: var(--panel-white);
+  --color-pigment: var(--pigment);
+  --color-ink-deep: var(--ink-deep);
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
   --radius: 0.625rem;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -675,8 +712,16 @@ html.theme-transition::view-transition-new(root) {
 
 .marketing-grid {
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--rule) 58%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--rule) 58%, transparent) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--rule) 58%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--rule) 58%, transparent) 1px,
+      transparent 1px
+    );
   background-size: 42px 42px;
   mask-image: linear-gradient(to bottom, black, transparent 92%);
 }

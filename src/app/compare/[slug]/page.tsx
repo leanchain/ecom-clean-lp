@@ -101,7 +101,7 @@ export default async function ComparisonPage({
   };
 
   return (
-    <article className="bg-[#f4f1e9] text-[#111318]">
+    <article className="bg-[#fafafa] text-[#111318]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -115,7 +115,7 @@ export default async function ComparisonPage({
         <div className="mx-auto max-w-[92rem] px-5 pb-18 pt-10 sm:px-8 sm:pb-24 sm:pt-14 lg:px-10 lg:pb-28">
           <Link
             href="/compare"
-            className="inline-flex items-center gap-2 text-[12px] font-semibold text-black/52 transition-colors hover:text-[#3154ff]"
+            className="inline-flex items-center gap-2 text-[12px] font-semibold text-black/62 transition-colors hover:text-[#b8441d]"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             All comparisons
@@ -123,10 +123,10 @@ export default async function ComparisonPage({
 
           <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(22rem,0.58fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
                 Beseam vs {comparison.name}
               </p>
-              <h1 className="mt-7 max-w-[15ch] font-serif text-[clamp(3rem,5.7vw,6rem)] font-normal leading-[0.97] tracking-[-0.052em]">
+              <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,5.7vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em]">
                 {comparison.headline}
               </h1>
             </div>
@@ -134,7 +134,7 @@ export default async function ComparisonPage({
               <p className="text-[17px] leading-[1.68] text-black/66">
                 {comparison.intro}
               </p>
-              <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.1em] text-black/40">
+              <p className="mt-5 font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
                 {comparison.category} · reviewed{" "}
                 {formatReviewDate(comparison.lastReviewed)}
               </p>
@@ -143,7 +143,7 @@ export default async function ComparisonPage({
         </div>
       </header>
 
-      <section className="border-b border-black/18 bg-[#ebe8df]">
+      <section className="border-b border-black/18 bg-[#f2f2f2]">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div className="grid border-y border-black/24 lg:grid-cols-3">
             {[
@@ -155,13 +155,13 @@ export default async function ComparisonPage({
                 key={title}
                 className="border-b border-black/18 py-7 lg:border-b-0 lg:border-r lg:px-7 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
               >
-                <span className="font-mono text-[10px] text-black/34">
+                <span className="font-mono text-[12px] text-black/62">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h2 className="mt-5 font-serif text-[27px] leading-[1.05] tracking-[-0.03em]">
+                <h2 className="mt-5 font-serif text-[27px] leading-[1.05] tracking-[-0.02em]">
                   {title}
                 </h2>
-                <p className="mt-5 text-[14px] leading-relaxed text-black/60">
+                <p className="mt-5 text-[14px] leading-relaxed text-black/62">
                   {detail}
                 </p>
               </div>
@@ -174,10 +174,7 @@ export default async function ComparisonPage({
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-16">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
-                Buyer fit
-              </p>
-              <h2 className="mt-6 font-serif text-[38px] leading-[1] tracking-[-0.038em]">
+              <h2 className="max-w-[18ch] font-serif text-[38px] leading-[1.04] tracking-[-0.02em]">
                 Different tools for different decisions.
               </h2>
             </div>
@@ -191,7 +188,7 @@ export default async function ComparisonPage({
                   {comparison.chooseCompetitorWhen.map((item) => (
                     <li
                       key={item}
-                      className="grid grid-cols-[1rem_1fr] gap-3 text-[14px] leading-relaxed text-black/60"
+                      className="grid grid-cols-[1rem_1fr] gap-3 text-[14px] leading-relaxed text-black/62"
                     >
                       <span
                         className="mt-[0.65rem] h-px bg-black/35"
@@ -210,10 +207,10 @@ export default async function ComparisonPage({
                   {comparison.chooseBeseamWhen.map((item) => (
                     <li
                       key={item}
-                      className="grid grid-cols-[1rem_1fr] gap-3 text-[14px] leading-relaxed text-black/60"
+                      className="grid grid-cols-[1rem_1fr] gap-3 text-[14px] leading-relaxed text-black/62"
                     >
                       <span
-                        className="mt-[0.65rem] h-px bg-[#3154ff]"
+                        className="mt-[0.65rem] h-px bg-[#b8441d]"
                         aria-hidden="true"
                       />
                       <span>{item}</span>
@@ -230,16 +227,13 @@ export default async function ComparisonPage({
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div>
             <div className="max-w-2xl">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">
-                Direct comparison
-              </p>
-              <h2 className="mt-6 font-serif text-[38px] leading-[1] tracking-[-0.038em]">
+              <h2 className="max-w-[18ch] font-serif text-[38px] leading-[1.04] tracking-[-0.02em]">
                 Compare the operating model.
               </h2>
             </div>
 
             <div className="mt-12 border-t border-white/22">
-              <div className="hidden grid-cols-[0.72fr_1fr_1fr] border-b border-white/22 py-3 font-mono text-[9px] uppercase tracking-[0.13em] text-white/40 md:grid">
+              <div className="hidden grid-cols-[0.72fr_1fr_1fr] border-b border-white/22 py-3 font-mono text-[12px] uppercase tracking-[0.13em] text-white/72 md:grid">
                 <span>Decision</span>
                 <span>{comparison.name}</span>
                 <span>Beseam</span>
@@ -253,18 +247,18 @@ export default async function ComparisonPage({
                     {row.criterion}
                   </h3>
                   <div>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-white/34 md:hidden">
+                    <span className="font-mono text-[12px] uppercase tracking-[0.1em] text-white/72 md:hidden">
                       {comparison.name}
                     </span>
-                    <p className="mt-1 text-[13px] leading-relaxed text-white/54 md:mt-0">
+                    <p className="mt-1 text-[13px] leading-relaxed text-white/72 md:mt-0">
                       {row.competitor}
                     </p>
                   </div>
                   <div>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-[#8ea2ff] md:hidden">
+                    <span className="font-mono text-[12px] uppercase tracking-[0.1em] text-[#e8653a] md:hidden">
                       Beseam
                     </span>
-                    <p className="mt-1 text-[13px] leading-relaxed text-white/70 md:mt-0">
+                    <p className="mt-1 text-[13px] leading-relaxed text-white/72 md:mt-0">
                       {row.beseam}
                     </p>
                   </div>
@@ -279,10 +273,7 @@ export default async function ComparisonPage({
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div>
             <div className="max-w-2xl">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
-                Practical workflow
-              </p>
-              <h2 className="mt-6 font-serif text-[38px] leading-[1] tracking-[-0.038em]">
+              <h2 className="max-w-[18ch] font-serif text-[38px] leading-[1.04] tracking-[-0.02em]">
                 What happens after the signal appears?
               </h2>
             </div>
@@ -293,11 +284,11 @@ export default async function ComparisonPage({
                   key={item.step}
                   className="grid gap-5 border-b border-black/18 py-7 md:grid-cols-[3rem_12rem_1fr_1fr] md:gap-7"
                 >
-                  <span className="font-mono text-[10px] text-black/34">
+                  <span className="font-mono text-[12px] text-black/62">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="text-[15px] font-semibold">{item.step}</h3>
-                  <p className="text-[13px] leading-relaxed text-black/52">
+                  <p className="text-[13px] leading-relaxed text-black/62">
                     {item.competitor}
                   </p>
                   <p className="text-[13px] leading-relaxed text-black/68">
@@ -310,14 +301,11 @@ export default async function ComparisonPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#ebe8df]">
+      <section className="border-b border-black/18 bg-[#f2f2f2]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div>
-            <div className="max-w-2xl">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
-                Real Beseam evidence
-              </p>
-              <p className="mt-6 text-[14px] leading-relaxed text-black/58">
+            <div className="max-w-[68ch]">
+              <p className="text-[14px] leading-relaxed text-black/62">
                 {comparison.evidence.caption}
               </p>
             </div>
@@ -337,24 +325,21 @@ export default async function ComparisonPage({
       <section className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div className="grid gap-10 border-y border-black/24 py-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
-            <h2 className="font-serif text-[34px] leading-[1.02] tracking-[-0.035em]">
+            <h2 className="font-serif text-[34px] leading-[1.02] tracking-[-0.02em]">
               What Beseam does not replace
             </h2>
-            <p className="max-w-3xl text-[16px] leading-[1.72] text-black/64">
+            <p className="max-w-[68ch] text-[16px] leading-[1.72] text-black/64">
               {comparison.notAReplacementFor}
             </p>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#ebe8df]">
+      <section className="border-b border-black/18 bg-[#f2f2f2]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
-                Questions buyers ask
-              </p>
-              <h2 className="mt-6 font-serif text-[38px] leading-[1] tracking-[-0.038em]">
+              <h2 className="max-w-[18ch] font-serif text-[38px] leading-[1.04] tracking-[-0.02em]">
                 Before you change the stack.
               </h2>
             </div>
@@ -366,11 +351,11 @@ export default async function ComparisonPage({
                 >
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-[16px] font-semibold">
                     {faq.question}
-                    <span className="font-mono text-[15px] text-[#3154ff] group-open:rotate-45">
+                    <span className="font-mono text-[15px] text-[#b8441d] group-open:rotate-45">
                       +
                     </span>
                   </summary>
-                  <p className="max-w-3xl pt-4 text-[14px] leading-relaxed text-black/60">
+                  <p className="max-w-[68ch] pt-4 text-[14px] leading-relaxed text-black/62">
                     {faq.answer}
                   </p>
                 </details>
@@ -384,10 +369,10 @@ export default async function ComparisonPage({
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
             <div>
-              <h2 className="font-serif text-[31px] leading-[1.04] tracking-[-0.035em]">
+              <h2 className="font-serif text-[31px] leading-[1.04] tracking-[-0.02em]">
                 Sources reviewed
               </h2>
-              <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.1em] text-black/40">
+              <p className="mt-4 font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
                 Official product sources ·{" "}
                 {formatReviewDate(comparison.lastReviewed)}
               </p>
@@ -399,7 +384,7 @@ export default async function ComparisonPage({
                     href={source.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="group inline-flex items-start gap-3 text-[14px] font-semibold text-black/66 transition-colors hover:text-[#3154ff]"
+                    className="group inline-flex items-start gap-3 text-[14px] font-semibold text-black/66 transition-colors hover:text-[#b8441d]"
                   >
                     {source.label}
                     <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" />
@@ -415,7 +400,7 @@ export default async function ComparisonPage({
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
             <div>
-              <h2 className="font-serif text-[31px] leading-[1.04] tracking-[-0.035em]">
+              <h2 className="font-serif text-[31px] leading-[1.04] tracking-[-0.02em]">
                 Related comparisons
               </h2>
             </div>
@@ -429,15 +414,15 @@ export default async function ComparisonPage({
                   <span className="text-[14px] font-semibold text-white/88">
                     Beseam vs {item.name}
                   </span>
-                  <span className="text-[13px] leading-relaxed text-white/48">
+                  <span className="text-[13px] leading-relaxed text-white/72">
                     {item.headline}
                   </span>
-                  <ArrowRight className="h-4 w-4 text-[#8ea2ff] transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-4 w-4 text-[#e8653a] transition-transform group-hover:translate-x-0.5" />
                 </Link>
               ))}
               <Link
                 href="/compare"
-                className="group flex items-center gap-2 py-6 text-[13px] font-semibold text-white/70 transition-colors hover:text-white"
+                className="group flex items-center gap-2 py-6 text-[13px] font-semibold text-white/72 transition-colors hover:text-white"
               >
                 See all comparisons
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -451,17 +436,14 @@ export default async function ComparisonPage({
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid border-y border-black/24 lg:grid-cols-[minmax(0,1fr)_19rem]">
             <div className="py-10 pr-0 lg:py-14 lg:pr-16">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
-                Bring your existing stack
-              </p>
-              <h2 className="mt-5 max-w-[16ch] font-serif text-[clamp(2.6rem,4.2vw,4.3rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.1rem,4.2vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
                 Keep the systems that work. Add the decision layer that is
                 missing.
               </h2>
             </div>
             <div className="border-t border-black/24 py-8 lg:border-l lg:border-t-0 lg:py-0 lg:pl-8">
               <div className="flex h-full flex-col justify-center">
-                <p className="text-[14px] leading-relaxed text-black/58">
+                <p className="text-[14px] leading-relaxed text-black/62">
                   Review one store, the tools already in place, and the first
                   revenue issue worth investigating.
                 </p>

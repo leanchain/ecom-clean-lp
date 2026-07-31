@@ -15,7 +15,7 @@ const APP_LOGIN_URL = "https://app.beseam.com/login";
 
 const NAV_LINKS = [
   { label: "How it works", href: "/#how-it-works" },
-  { label: "Before and after", href: "/#answer-check" },
+  { label: "From miss to fix", href: "/#answer-check" },
   { label: "What leaves you out", href: "/#what-breaks" },
   { label: "First-month promise", href: "/#promise" },
 ] as const;
@@ -35,9 +35,8 @@ export default function BeseamNavbar() {
     <header
       className={cn(
         "sticky top-0 z-50 w-full border-b transition-colors duration-200",
-        scrolled
-          ? "border-black/18 bg-[#f4f1e9]/94 backdrop-blur-xl"
-          : "border-transparent bg-[#f4f1e9]",
+        "bg-[#fafafa]",
+        scrolled ? "border-black/18" : "border-transparent",
       )}
     >
       <a
@@ -57,7 +56,7 @@ export default function BeseamNavbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="min-h-11 px-4 py-3 text-[14px] font-medium text-black/62 transition-colors hover:text-[#111318] focus-visible:ring-2 focus-visible:ring-[#c04e26]"
+                className="min-h-11 whitespace-nowrap px-3 py-3 text-[14px] font-medium text-black/62 transition-colors hover:text-[#111318] focus-visible:ring-2 focus-visible:ring-[#b8441d] xl:px-4"
               >
                 {link.label}
               </Link>
@@ -69,20 +68,20 @@ export default function BeseamNavbar() {
               href={APP_LOGIN_URL}
               eventName="login_clicked"
               placement="navbar"
-              className="text-[14px] font-semibold text-black/62 transition-colors hover:text-[#c04e26]"
+              className="text-[14px] font-semibold text-black/62 transition-colors hover:text-[#b8441d]"
             >
               Log in
             </TrackedLink>
             <BookReviewCta
               location="navbar"
-              label="Scan my store free"
-              className="min-h-10 px-4 text-[13px]"
+              label="See how monitoring works"
+              className="min-h-10 whitespace-nowrap px-4 text-[13px]"
             />
           </div>
 
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center border border-black/20 text-[#111318] lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center border border-black/40 text-[#111318] lg:hidden"
             onClick={() => setMobileOpen((open) => !open)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
@@ -100,7 +99,7 @@ export default function BeseamNavbar() {
       {mobileOpen && (
         <div
           id="mobile-navigation"
-          className="border-t border-black/18 bg-[#f4f1e9] lg:hidden"
+          className="border-t border-black/18 bg-[#fafafa] lg:hidden"
         >
           <div className="mx-auto max-w-[92rem] px-5 pb-7 sm:px-8">
             <nav aria-label="Mobile" className="border-b border-black/18 py-3">
@@ -120,13 +119,13 @@ export default function BeseamNavbar() {
                 href={APP_LOGIN_URL}
                 eventName="login_clicked"
                 placement="mobile_nav"
-                className="flex min-h-12 items-center justify-center border border-black/22 text-[14px] font-semibold text-[#111318]"
+                className="flex min-h-12 items-center justify-center border border-black/40 text-[14px] font-semibold text-[#111318]"
               >
                 Log in
               </TrackedLink>
               <BookReviewCta
                 location="mobile_nav"
-                label="Scan my store free"
+                label="See how monitoring works"
                 className="w-full"
               />
             </div>
