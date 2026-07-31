@@ -42,15 +42,15 @@ export default function PlatformAuditPage({
   otherPlatforms,
 }: PlatformAuditPageProps) {
   return (
-    <div className="bg-[#f4f1e9] text-[#151515]">
+    <div className="bg-[#fafafa] text-[#151515]">
       <section className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-end lg:gap-16">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#c04e26]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
                 {platform} · Product data audit
               </p>
-              <h1 className="mt-7 max-w-[12ch] font-serif text-[clamp(2.9rem,5vw,4.6rem)] font-normal leading-[0.99] tracking-[-0.045em] text-[#111318]">
+              <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.5rem,5vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
                 {headline}
               </h1>
             </div>
@@ -75,18 +75,15 @@ export default function PlatformAuditPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#ebe8df]">
+      <section className="border-b border-black/18 bg-[#f2f2f2]">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#c04e26]">
-                Platform behaviour
-              </p>
-              <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.4rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.1rem,3.6vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
                 What {platform} emits, and where it stops.
               </h2>
             </div>
-            <div className="max-w-3xl space-y-5 text-[16px] leading-[1.75] text-black/66">
+            <div className="max-w-[68ch] space-y-5 text-[16px] leading-[1.75] text-black/66">
               {contextParagraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 48)}>{paragraph}</p>
               ))}
@@ -99,13 +96,10 @@ export default function PlatformAuditPage({
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#c04e26]">
-                Example findings
-              </p>
-              <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.4rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.1rem,3.6vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
                 What we usually find on {platform}.
               </h2>
-              <p className="mt-7 max-w-md text-[15px] leading-relaxed text-black/60">
+              <p className="mt-7 max-w-md text-[15px] leading-relaxed text-black/62">
                 Open a finding to see the change it would take to fix it. These
                 are patterns from real stores, not results from yours.
               </p>
@@ -119,10 +113,7 @@ export default function PlatformAuditPage({
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#e8653a]">
-                What this audit does not do
-              </p>
-              <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.4rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.1rem,3.6vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
                 We read your store. We do not change it.
               </h2>
             </div>
@@ -132,10 +123,10 @@ export default function PlatformAuditPage({
                   key={term}
                   className="grid gap-2 border-b border-white/18 py-6 sm:grid-cols-[14rem_1fr] sm:gap-6"
                 >
-                  <dt className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-white/50">
+                  <dt className="font-mono text-[12px] font-semibold uppercase tracking-[0.1em] text-white/72">
                     {term}
                   </dt>
-                  <dd className="text-[14px] leading-relaxed text-white/64">
+                  <dd className="text-[14px] leading-relaxed text-white/72">
                     {detail}
                   </dd>
                 </div>
@@ -145,14 +136,11 @@ export default function PlatformAuditPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#ebe8df]">
+      <section className="border-b border-black/18 bg-[#f2f2f2]">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#c04e26]">
-                Start here
-              </p>
-              <h2 className="mt-6 max-w-[13ch] font-serif text-[clamp(2.3rem,3.4vw,3.4rem)] font-normal leading-[1.04] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.1rem,3.4vw,3.4rem)] font-normal leading-[1.04] tracking-[-0.02em]">
                 Scan one {platform} product page.
               </h2>
             </div>
@@ -175,7 +163,7 @@ export default function PlatformAuditPage({
                 />
                 <Link
                   href="/shopify-store-health"
-                  className="inline-flex min-h-11 items-center justify-center gap-2 text-[14px] font-semibold text-[#151515] underline decoration-black/25 underline-offset-7 hover:decoration-[#e8653a] sm:justify-start"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 text-[14px] font-semibold text-[#151515] underline decoration-black/25 underline-offset-7 hover:decoration-[#b8441d] sm:justify-start"
                 >
                   See continuous store health{" "}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -188,15 +176,15 @@ export default function PlatformAuditPage({
 
       <section>
         <div className="mx-auto max-w-[92rem] px-5 py-12 sm:px-8 sm:py-16 lg:px-10">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45">
+          <h2 className="font-serif text-[26px] font-normal leading-[1.08] tracking-[-0.02em] text-[#111318]">
             Audits for other platforms
-          </p>
+          </h2>
           <div className="mt-6 flex flex-wrap gap-3">
             {otherPlatforms.map((entry) => (
               <Link
                 key={entry.name}
                 href={entry.href}
-                className="inline-flex min-h-11 items-center border border-black/22 px-5 text-[14px] font-medium text-black/72 transition-colors hover:border-[#c04e26] hover:text-[#c04e26]"
+                className="inline-flex min-h-11 items-center border border-black/22 px-5 text-[14px] font-medium text-black/72 transition-colors hover:border-[#b8441d] hover:text-[#b8441d]"
               >
                 {entry.name}
               </Link>

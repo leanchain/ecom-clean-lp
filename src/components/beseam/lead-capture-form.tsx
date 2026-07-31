@@ -72,23 +72,29 @@ export default function LeadCaptureForm({
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [error, setError] = useState("");
+  const [invalidField, setInvalidField] = useState<"store" | "email" | null>(
+    null,
+  );
   const [fallback, setFallback] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setError("");
+    setInvalidField(null);
     setFallback("");
 
     const result = buildDestination(mode, store);
     if ("error" in result && result.error) {
       setError(result.error);
+      setInvalidField("store");
       return;
     }
 
     const trimmedEmail = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmedEmail)) {
       setError("Enter a valid work email so we can send the findings.");
+      setInvalidField("email");
       return;
     }
 
@@ -127,7 +133,8 @@ export default function LeadCaptureForm({
   };
 
   const inputClass =
-    "h-12 w-full border border-black/22 bg-white px-4 text-[15px] text-[#151515] outline-none placeholder:text-black/38 focus:border-[#c04e26]";
+    "h-12 w-full border border-black/40 bg-white px-4 text-[15px] text-[#151515] placeholder:text-black/58 focus:border-[#b8441d] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#b8441d]";
+  const messageId = `${storeFieldId}-message`;
 
   return (
     <form onSubmit={onSubmit} noValidate className="w-full">
@@ -142,15 +149,17 @@ export default function LeadCaptureForm({
             onChange={(event) => {
               setStore(event.target.value);
               if (error) setError("");
+              if (invalidField === "store") setInvalidField(null);
             }}
             placeholder={storePlaceholder}
-            aria-invalid={Boolean(error)}
+            aria-invalid={invalidField === "store"}
+            aria-describedby={messageId}
             className={inputClass}
           />
         </div>
         <div>
           <label className="sr-only" htmlFor={`${storeFieldId}-email`}>
-            Work email
+            Work email (required)
           </label>
           <input
             id={`${storeFieldId}-email`}
@@ -160,16 +169,21 @@ export default function LeadCaptureForm({
             onChange={(event) => {
               setEmail(event.target.value);
               if (error) setError("");
+              if (invalidField === "email") setInvalidField(null);
             }}
-            placeholder="you@yourbrand.com"
-            aria-invalid={Boolean(error)}
+            /* This form sends the findings by email, so the address is required
+               here even though the inline hero scan works without one. */
+            placeholder="you@yourbrand.com (required)"
+            aria-required="true"
+            aria-invalid={invalidField === "email"}
+            aria-describedby={messageId}
             className={inputClass}
           />
         </div>
         <button
           type="submit"
           disabled={submitting}
-          className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#c04e26] disabled:opacity-70"
+          className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#b8441d] disabled:opacity-70"
         >
           {submitting ? "Opening scan…" : buttonLabel}
           <ArrowRight
@@ -190,8 +204,9 @@ export default function LeadCaptureForm({
       </label>
 
       <p
+        id={messageId}
         role={error ? "alert" : undefined}
-        className={`mt-3 text-[13px] leading-relaxed ${error ? "text-[#b3261e]" : "text-black/50"}`}
+        className={`mt-3 max-w-[68ch] text-[13px] leading-relaxed ${error ? "text-[#b3261e]" : "text-black/62"}`}
       >
         {error || helpText}
       </p>
@@ -199,7 +214,7 @@ export default function LeadCaptureForm({
       {fallback ? (
         <a
           href={fallback}
-          className="mt-1 inline-flex items-center gap-2 text-[13px] font-semibold text-[#c04e26] underline underline-offset-4"
+          className="mt-1 inline-flex items-center gap-2 text-[13px] font-semibold text-[#b8441d] underline underline-offset-4"
         >
           Open the scan anyway{" "}
           <ArrowRight aria-hidden="true" className="h-3.5 w-3.5" />

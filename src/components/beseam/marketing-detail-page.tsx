@@ -87,13 +87,13 @@ export default function MarketingDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <section className="border-b border-rule bg-surface">
+      <section className="border-b border-rule bg-ground">
         <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
           <nav
             aria-label="Breadcrumb"
             className="text-[13px] text-muted-foreground"
           >
-            <Link href="/" className="hover:text-primary">
+            <Link href="/" className="hover:text-signal-ink">
               Beseam
             </Link>
             <span aria-hidden className="mx-2">
@@ -104,10 +104,10 @@ export default function MarketingDetailPage({
 
           <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.68fr)] lg:items-end lg:gap-16">
             <div>
-              <p className="text-[14px] font-semibold text-primary">
+              <p className="text-[14px] font-semibold text-signal-ink">
                 {page.eyebrow}
               </p>
-              <h1 className="mt-4 max-w-[17ch] text-balance text-[clamp(2.6rem,5.4vw,5rem)] font-semibold leading-[1] tracking-[-0.035em] text-ink">
+              <h1 className="mt-4 max-w-[17ch] text-balance text-[clamp(2.6rem,5.4vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.02em] text-ink">
                 {page.headline}
               </h1>
             </div>
@@ -121,13 +121,13 @@ export default function MarketingDetailPage({
             </div>
           </div>
 
-          <p className="mt-12 max-w-4xl border-t border-rule pt-6 text-[14px] font-medium leading-relaxed text-ink">
+          <p className="mt-12 max-w-[68ch] border-t border-rule pt-6 text-[14px] font-medium leading-relaxed text-ink">
             {page.proofLine}
           </p>
         </div>
       </section>
 
-      <section className="border-b border-rule bg-background">
+      <section className="border-b border-rule bg-panel-white">
         <div className="section-pad-tight mx-auto max-w-6xl px-6">
           <div className="grid gap-10 lg:grid-cols-[minmax(14rem,0.45fr)_minmax(0,1fr)] lg:gap-16">
             <div>
@@ -144,7 +144,7 @@ export default function MarketingDetailPage({
                   key={observation.title}
                   className="grid gap-3 border-b border-rule py-6 sm:grid-cols-[2.25rem_minmax(0,0.65fr)_minmax(0,1fr)] sm:gap-6"
                 >
-                  <span className="text-[12px] font-semibold tabular-nums text-primary">
+                  <span className="text-[12px] font-semibold tabular-nums text-signal-ink">
                     0{index + 1}
                   </span>
                   <h3 className="text-[17px] font-semibold text-ink">
@@ -160,13 +160,13 @@ export default function MarketingDetailPage({
         </div>
       </section>
 
-      <section className="border-b border-technical-rule bg-technical text-white">
+      <section className="border-b border-technical-rule bg-ink-deep text-white">
         <div className="section-pad-tight mx-auto max-w-6xl px-6">
           <div className="max-w-4xl">
-            <p className="text-[14px] font-semibold text-brand">
+            <p className="text-[14px] font-semibold text-signal">
               The evidence path
             </p>
-            <h2 className="editorial-heading mt-4 text-white">
+            <h2 className="mt-4 max-w-[20ch] text-[clamp(2.1rem,3.6vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-white">
               One trust model across both Beseam workspaces.
             </h2>
           </div>
@@ -179,17 +179,17 @@ export default function MarketingDetailPage({
                   (index === 0 ? "md:pl-0" : "md:border-l")
                 }
               >
-                <span className="text-[12px] font-semibold tabular-nums text-brand">
+                <span className="text-[12px] font-semibold tabular-nums text-signal">
                   {number}
                 </span>
                 <h3 className="mt-4 text-[18px] font-semibold text-white">
                   {title}
                 </h3>
-                <p className="mt-3 text-[13px] leading-relaxed text-white/62">
+                <p className="mt-3 text-[13px] leading-relaxed text-white/72">
                   {body}
                 </p>
                 {index < PIPELINE.length - 1 ? (
-                  <ArrowRight className="absolute -right-2.5 top-7 z-10 hidden h-5 w-5 bg-technical text-brand md:block" />
+                  <ArrowRight className="absolute -right-2.5 top-7 z-10 hidden h-5 w-5 bg-ink-deep text-signal md:block" />
                 ) : null}
               </li>
             ))}
@@ -197,7 +197,7 @@ export default function MarketingDetailPage({
         </div>
       </section>
 
-      <section className="bg-surface">
+      <section className="bg-ground">
         <div className="section-pad-tight mx-auto max-w-6xl px-6">
           <div className="space-y-16">
             {page.sections.map((section, index) => (
@@ -206,7 +206,7 @@ export default function MarketingDetailPage({
                 className="grid gap-8 border-t border-rule pt-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20"
               >
                 <div>
-                  <p className="text-[12px] font-semibold tabular-nums text-primary">
+                  <p className="text-[12px] font-semibold tabular-nums text-signal-ink">
                     0{index + 1}
                   </p>
                   <h2 className="editorial-subheading mt-3 text-ink">
@@ -224,7 +224,7 @@ export default function MarketingDetailPage({
                     >
                       <span
                         aria-hidden
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
+                        className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 bg-signal-ink"
                       />
                       {point}
                     </li>
@@ -236,10 +236,10 @@ export default function MarketingDetailPage({
         </div>
       </section>
 
-      <section className="border-y border-rule bg-background">
+      <section className="border-y border-rule bg-panel-white">
         <div className="section-pad-tight mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
           <div>
-            <p className="text-[14px] font-semibold text-primary">
+            <p className="text-[14px] font-semibold text-signal-ink">
               Current product boundary
             </p>
             <h2 className="editorial-subheading mt-4 text-ink">
@@ -250,7 +250,7 @@ export default function MarketingDetailPage({
             {page.limits.map((limit) => (
               <li
                 key={limit}
-                className="bg-panel px-5 py-5 text-[14px] leading-relaxed text-foreground"
+                className="bg-panel-white px-5 py-5 text-[14px] leading-relaxed text-foreground"
               >
                 {limit}
               </li>
@@ -259,7 +259,7 @@ export default function MarketingDetailPage({
         </div>
       </section>
 
-      <section className="border-b border-rule bg-surface">
+      <section className="border-b border-rule bg-ground">
         <div className="section-pad-tight mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[minmax(0,0.65fr)_minmax(0,1.35fr)] lg:gap-20">
           <div>
             <h2 className="editorial-subheading text-ink">
@@ -272,16 +272,16 @@ export default function MarketingDetailPage({
                 key={faq.question}
                 className="group border-b border-rule"
               >
-                <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 py-5 text-[16px] font-semibold text-ink marker:content-none focus-visible:ring-2 focus-visible:ring-primary">
+                <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 py-5 text-[16px] font-semibold text-ink marker:content-none focus-visible:ring-2 focus-visible:ring-signal-ink">
                   {faq.question}
                   <span
                     aria-hidden
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-rule text-[18px] font-normal text-primary transition-transform group-open:rotate-45"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center border border-rule text-[18px] font-normal text-signal-ink transition-transform group-open:rotate-45"
                   >
                     +
                   </span>
                 </summary>
-                <p className="max-w-3xl pb-6 pr-10 text-[15px] leading-relaxed text-foreground">
+                <p className="max-w-[68ch] pb-6 pr-10 text-[15px] leading-relaxed text-foreground">
                   {faq.answer}
                 </p>
               </details>
@@ -290,9 +290,9 @@ export default function MarketingDetailPage({
         </div>
       </section>
 
-      <section className="border-b border-rule bg-panel">
+      <section className="border-b border-rule bg-ground-2">
         <div className="mx-auto max-w-6xl px-6 py-10">
-          <p className="text-[13px] font-semibold text-muted-foreground">
+          <p className="text-[13px] font-semibold text-black/62">
             Continue exploring Beseam
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
@@ -300,7 +300,7 @@ export default function MarketingDetailPage({
               <Link
                 key={item.href}
                 href={item.href}
-                className="inline-flex min-h-11 items-center rounded-full border border-rule px-5 text-[14px] font-semibold text-ink transition-colors hover:border-primary hover:text-primary"
+                className="inline-flex min-h-11 items-center border border-rule px-5 text-[14px] font-semibold text-ink transition-colors hover:border-signal-ink hover:text-signal-ink"
               >
                 {item.label}
               </Link>
@@ -309,19 +309,19 @@ export default function MarketingDetailPage({
         </div>
       </section>
 
-      <section className="bg-brand text-brand-foreground">
+      <section className="bg-pigment text-white">
         <div className="section-pad mx-auto max-w-6xl px-6">
-          <h2 className="editorial-heading max-w-4xl">
+          <h2 className="max-w-[20ch] text-[clamp(2.1rem,3.6vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.02em]">
             Start with your store - and how AI sees it.
           </h2>
-          <p className="mt-5 max-w-3xl text-[18px] leading-relaxed">
+          <p className="mt-5 max-w-[68ch] text-[18px] leading-relaxed">
             Review your Shopify setup, current monitoring coverage and priority
             AI visibility questions in one focused session.
           </p>
           <div className="mt-8">
             <BookReviewCta
               location={page.slug + "_footer"}
-              className="bg-technical text-white hover:bg-technical-panel"
+              className="bg-ink-deep text-white hover:bg-technical-panel"
             />
           </div>
         </div>

@@ -119,7 +119,7 @@ export default function ManifestoPage() {
   };
 
   return (
-    <div className="bg-[#f4f1e9] text-[#151515]">
+    <div className="bg-[#fafafa] text-[#151515]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -129,10 +129,10 @@ export default function ManifestoPage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
                 The Beseam manifesto
               </p>
-              <h1 className="mt-7 max-w-[10ch] font-serif text-[clamp(3.4rem,6.1vw,6.4rem)] font-normal leading-[0.96] tracking-[-0.05em] text-[#111318]">
+              <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,6.1vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
                 Revenue leaks live in the seams.
               </h1>
             </div>
@@ -143,12 +143,12 @@ export default function ManifestoPage() {
                 lying, and none of them can tell you which problem to fix on
                 Monday.
               </p>
-              <p className="mt-5 text-[17px] leading-[1.7] text-black/60">
+              <p className="mt-5 text-[17px] leading-[1.7] text-black/62">
                 The expensive problems cross the storefront, catalog, customer
                 journey, discovery channel, campaign, and order ledger—so they
                 belong to no single tool, and usually to no single person.
               </p>
-              <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.1em] text-black/42">
+              <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
                 By Pankaj Kumar · Founder, Beseam
               </p>
             </div>
@@ -156,14 +156,11 @@ export default function ManifestoPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#ebe8df]">
+      <section className="border-b border-black/18 bg-[#f2f2f2]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
-                The problem
-              </p>
-              <h2 className="mt-6 max-w-[11ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
                 Commerce teams do not need another place to look.
               </h2>
             </div>
@@ -180,13 +177,13 @@ export default function ManifestoPage() {
                     key={title}
                     className="grid gap-3 border-b border-black/18 py-6 sm:grid-cols-[3rem_13rem_1fr] sm:gap-6"
                   >
-                    <span className="font-mono text-[10px] text-black/38">
+                    <span className="font-mono text-[12px] text-black/62">
                       0{index + 1}
                     </span>
                     <h3 className="text-[16px] font-semibold text-black/82">
                       {title}
                     </h3>
-                    <p className="text-[14px] leading-relaxed text-black/60">
+                    <p className="text-[14px] leading-relaxed text-black/62">
                       {body}
                     </p>
                   </article>
@@ -215,13 +212,13 @@ export default function ManifestoPage() {
                 <p className="text-[14px] font-semibold text-white">
                   Pankaj Kumar
                 </p>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.09em] text-white/42">
+                <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.09em] text-white/72">
                   Founder, Beseam - Automating Revenue
                 </p>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.09em] text-white/42">
+                <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.09em] text-white/72">
                   Ex-Google - 10 Years
                 </p>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.09em] text-white/42">
+                <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.09em] text-white/72">
                   Ex-Amazon - 3 Years
                 </p>
               </figcaption>
@@ -229,13 +226,10 @@ export default function ManifestoPage() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">
-              Why I am doing this
-            </p>
-            <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.9rem,4.6vw,4.7rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+            <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.6vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
               The gap between knowing and fixing is where revenue disappears.
             </h2>
-            <div className="mt-8 max-w-3xl space-y-6 text-[17px] leading-[1.75] text-white/66">
+            <div className="mt-8 max-w-[68ch] space-y-6 text-[17px] leading-[1.75] text-white/72">
               <p>
                 For the past year, I have worked closely with ecommerce founders
                 and operators on real stores. We traced visibility gaps, product
@@ -267,7 +261,7 @@ export default function ManifestoPage() {
             </div>
             <Link
               href="/about"
-              className="mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-[#8ea2ff] underline decoration-white/20 underline-offset-7 hover:decoration-[#8ea2ff]"
+              className="mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-[#e8653a] underline decoration-white/20 underline-offset-7 hover:decoration-[#e8653a]"
             >
               More about the founder and advisors{" "}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -280,10 +274,7 @@ export default function ManifestoPage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
-                The product thesis
-              </p>
-              <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
                 Autonomous where evidence is strong. Human where impact is
                 material.
               </h2>
@@ -294,13 +285,13 @@ export default function ManifestoPage() {
                   key={principle.title}
                   className="grid gap-3 border-b border-black/18 py-6 sm:grid-cols-[3rem_13rem_1fr] sm:gap-6"
                 >
-                  <span className="font-mono text-[10px] text-black/38">
+                  <span className="font-mono text-[12px] text-black/62">
                     0{index + 1}
                   </span>
                   <h3 className="text-[16px] font-semibold text-black/82">
                     {principle.title}
                   </h3>
-                  <p className="text-[14px] leading-relaxed text-black/60">
+                  <p className="text-[14px] leading-relaxed text-black/62">
                     {principle.body}
                   </p>
                 </article>
@@ -310,14 +301,11 @@ export default function ManifestoPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#ebe8df]">
+      <section className="border-b border-black/18 bg-[#f2f2f2]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
-                On AI discovery
-              </p>
-              <h2 className="mt-6 max-w-[12ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
                 Let buyers find you in AI. Let them buy on your store.
               </h2>
             </div>
@@ -337,7 +325,7 @@ export default function ManifestoPage() {
                     key={term}
                     className="grid gap-2 border-b border-black/18 py-6 sm:grid-cols-[16rem_1fr] sm:gap-6"
                   >
-                    <dt className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/46">
+                    <dt className="font-mono text-[12px] font-semibold uppercase tracking-[0.1em] text-black/62">
                       {term}
                     </dt>
                     <dd className="text-[14px] leading-relaxed text-black/62">
@@ -355,10 +343,7 @@ export default function ManifestoPage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#3154ff]">
-                The boundaries
-              </p>
-              <h2 className="mt-6 max-w-[10ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
                 What Beseam should never become.
               </h2>
               <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-black/62">
@@ -373,7 +358,7 @@ export default function ManifestoPage() {
                   key={item}
                   className="grid gap-3 border-b border-black/18 py-6 sm:grid-cols-[3rem_1fr] sm:gap-6"
                 >
-                  <span className="font-mono text-[10px] text-black/38">
+                  <span className="font-mono text-[12px] text-black/62">
                     0{index + 1}
                   </span>
                   <p className="text-[16px] leading-relaxed text-black/68">
@@ -390,13 +375,10 @@ export default function ManifestoPage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8ea2ff]">
-                Fit
-              </p>
-              <h2 className="mt-6 max-w-[11ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em]">
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
                 Who Beseam is not for.
               </h2>
-              <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-white/62">
+              <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-white/72">
                 Saying this early costs us calls and saves you a quarter.
               </p>
             </div>
@@ -406,13 +388,13 @@ export default function ManifestoPage() {
                   key={title}
                   className="grid gap-3 border-b border-white/18 py-6 sm:grid-cols-[3rem_15rem_1fr] sm:gap-6"
                 >
-                  <span className="font-mono text-[10px] text-white/38">
+                  <span className="font-mono text-[12px] text-white/72">
                     0{index + 1}
                   </span>
                   <h3 className="text-[16px] font-semibold text-white/88">
                     {title}
                   </h3>
-                  <p className="text-[14px] leading-relaxed text-white/62">
+                  <p className="text-[14px] leading-relaxed text-white/72">
                     {body}
                   </p>
                 </article>

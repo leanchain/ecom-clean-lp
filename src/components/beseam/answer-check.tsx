@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
   type FormEvent,
+  type KeyboardEvent,
 } from "react";
 
 import { ArrowRight, Check, Loader2, X } from "lucide-react";
@@ -36,7 +37,7 @@ function StepRow({ step }: { step: Step }) {
       <X className="h-4 w-4 text-[#d95028]" aria-hidden="true" />
     ) : step.state === "active" ? (
       <Loader2
-        className="h-4 w-4 animate-spin text-black/55"
+        className="h-4 w-4 animate-spin text-black/62"
         aria-hidden="true"
       />
     ) : (
@@ -54,7 +55,7 @@ function StepRow({ step }: { step: Step }) {
       <span className="flex-1 text-left text-[14px] leading-snug text-black/72">
         {step.label}
         {step.detail ? (
-          <span className="mt-1 block text-[12px] text-black/60">
+          <span className="mt-1 block text-[12px] text-black/62">
             {step.detail}
           </span>
         ) : null}
@@ -101,17 +102,18 @@ function tallyRivals(answers: Answer[]) {
 }
 
 // Three signals only: green won, red lost, ink in between. Blue is reserved
-// for things you can click.
+// for things you can click. The reds are the light-ground signal (#b8441d);
+// #e8653a only ever sits on the dark grounds.
 function scoreBand(score: number) {
   if (score >= 70)
     return { label: "Strong", text: "text-[#1a6b43]", fill: "bg-[#1f7a4d]" };
   if (score >= 40)
     return { label: "Mixed", text: "text-[#111318]", fill: "bg-[#111318]" };
   if (score >= 15)
-    return { label: "Weak", text: "text-[#c04524]", fill: "bg-[#d95028]" };
+    return { label: "Weak", text: "text-[#b8441d]", fill: "bg-[#d95028]" };
   return {
     label: "Barely visible",
-    text: "text-[#c04524]",
+    text: "text-[#b8441d]",
     fill: "bg-[#d95028]",
   };
 }
@@ -133,14 +135,14 @@ function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
   const named = answer.mentioned === true;
   const unknown = answer.mentioned === null || Boolean(answer.error);
   const tone = unknown
-    ? "border-black/14 bg-black/[0.03] text-black/60"
+    ? "border-black/20 bg-black/[0.03] text-black/62"
     : named
       ? "border-[#1f7a4d]/40 bg-[#1f7a4d]/10 text-[#1a6b43]"
-      : "border-[#d95028]/35 bg-[#d95028]/10 text-[#c04524]";
+      : "border-[#b8441d]/45 bg-[#b8441d]/[0.08] text-[#b8441d]";
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] ${tone}`}
+      className={`inline-flex items-center gap-1.5 border px-2 py-0.5 text-[12px] font-medium ${tone}`}
     >
       <ChannelIcon
         channel={CHANNEL_BRAND_KEYS[channel.toLowerCase()] ?? channel}
@@ -199,7 +201,7 @@ function ProductTile({ product }: { product: ShownProduct }) {
 
   return (
     <li className="border border-black/12">
-      <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-[#f4f1e9]">
+      <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-[#fafafa]">
         {src ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -210,17 +212,17 @@ function ProductTile({ product }: { product: ShownProduct }) {
             className="h-full w-full object-contain mix-blend-multiply"
           />
         ) : (
-          <span className="px-2 text-center font-mono text-[10px] uppercase leading-tight tracking-[0.1em] text-black/45">
-            {product.merchant ?? "no image"}
+          <span className="px-2 text-center text-[12px] leading-tight text-black/62">
+            {product.merchant ?? "No image"}
           </span>
         )}
         {product.ours ? (
-          <span className="absolute left-0 top-0 bg-[#1f7a4d] px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-white">
+          <span className="absolute left-0 top-0 bg-[#1f7a4d] px-1.5 py-0.5 text-[12px] font-semibold uppercase tracking-[0.06em] text-white">
             yours
           </span>
         ) : null}
         {product.link_live === false ? (
-          <span className="absolute right-0 top-0 bg-[#d95028] px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-white">
+          <span className="absolute right-0 top-0 bg-[#b8441d] px-1.5 py-0.5 text-[12px] font-semibold uppercase tracking-[0.06em] text-white">
             dead link
           </span>
         ) : null}
@@ -229,7 +231,7 @@ function ProductTile({ product }: { product: ShownProduct }) {
         <p className="line-clamp-2 text-[12px] font-medium leading-snug text-[#111318]">
           {product.title}
         </p>
-        <p className="mt-1 flex items-baseline justify-between gap-2 text-[10.5px] text-black/62">
+        <p className="mt-1 flex items-baseline justify-between gap-2 text-[12px] text-black/62">
           <span className="truncate">{product.merchant ?? "—"}</span>
           {product.price ? (
             <span className="shrink-0 font-mono text-black/65">
@@ -287,35 +289,31 @@ function ResultCard({
     .filter((row) => row.cells.some(Boolean));
 
   return (
-    <div className="border border-black/22 bg-white text-left shadow-[0_24px_70px_rgba(17,19,24,0.12)]">
+    <div className="border border-black/22 bg-white text-left">
       <div className="flex flex-wrap items-end justify-between gap-4 px-4 pb-3 pt-3.5 sm:px-5">
         <div>
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
-            {eyebrow}
-          </p>
+          <p className="text-[12px] font-semibold text-black/62">{eyebrow}</p>
           <p className="mt-1.5 text-[14px] font-semibold leading-snug text-[#111318]">
             {identity ?? result.brand ?? result.domain}
           </p>
-          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-black/62">
+          <p className="mt-0.5 font-mono text-[12px] text-black/62">
             {identityMeta ??
               `${result.domain}${result.platform ? ` · ${result.platform}` : ""}`}
           </p>
         </div>
         {scored.length > 0 ? (
           <div className="text-right">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
+            <p className="text-[12px] font-semibold text-black/62">
               Answer visibility score
             </p>
             <p className="mt-1 flex items-baseline justify-end gap-1.5">
               <span
-                className={`text-[30px] font-semibold leading-none tracking-[-0.03em] ${band.text}`}
+                className={`text-[30px] font-semibold leading-none tracking-[-0.02em] ${band.text}`}
               >
                 {score}
               </span>
-              <span className="text-[12px] text-black/50">/ 100</span>
-              <span
-                className={`ml-1 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] ${band.text}`}
-              >
+              <span className="text-[12px] text-black/62">/ 100</span>
+              <span className={`ml-1 text-[12px] font-semibold ${band.text}`}>
                 {band.label}
               </span>
             </p>
@@ -343,14 +341,14 @@ function ResultCard({
       ) : null}
 
       {result.reject_reason ? (
-        <p className="px-5 py-4 text-[14px] leading-relaxed text-[#d95028]">
+        <p className="px-5 py-4 text-[14px] leading-relaxed text-[#b8441d]">
           {result.reject_reason}
         </p>
       ) : null}
 
       {result.findings.length > 0 ? (
         <div className="border-b border-black/18 px-4 py-4 sm:px-5">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[#d95028]">
+          <p className="text-[12px] font-semibold text-[#b8441d]">
             What a channel sees today
           </p>
           <ul className="mt-3 space-y-3">
@@ -366,7 +364,7 @@ function ResultCard({
                   {finding.detail}
                 </span>
                 {finding.product ? (
-                  <span className="mt-1 block font-mono text-[11px] text-black/60">
+                  <span className="mt-1 block text-[12px] text-black/62">
                     {finding.product}
                   </span>
                 ) : null}
@@ -388,7 +386,7 @@ function ResultCard({
               key={term}
               className={`border-black/12 px-4 py-3 sm:px-5 ${index < 2 ? "border-b sm:border-b-0" : ""} ${index % 2 === 0 ? "border-r" : ""} sm:border-r sm:last:border-r-0`}
             >
-              <dt className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/60">
+              <dt className="text-[12px] font-semibold text-black/62">
                 {term}
               </dt>
               <dd className="mt-1 text-[13px] font-semibold leading-snug text-black/76">
@@ -404,9 +402,9 @@ function ResultCard({
           <div>
             {rows.length > 0 ? (
               <div>
-                <p className="flex items-center gap-2 px-4 pt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60 sm:px-5">
+                <p className="flex items-center gap-2 px-4 pt-4 text-[12px] font-semibold text-black/62 sm:px-5">
                   <span
-                    className="h-[3px] w-4 bg-[#e8653a]"
+                    className="h-[3px] w-4 bg-[#b8441d]"
                     aria-hidden="true"
                   />
                   Question by question
@@ -448,9 +446,9 @@ function ResultCard({
                             ) : null,
                           )}
                           {instead.length ? (
-                            <span className="text-[11.5px] leading-relaxed text-black/62">
-                              <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-black/58">
-                                named instead{" "}
+                            <span className="text-[12px] leading-relaxed text-black/62">
+                              <span className="font-semibold">
+                                Named instead{" "}
                               </span>
                               {instead.join(", ")}
                             </span>
@@ -465,7 +463,7 @@ function ResultCard({
 
             {rivals.length > 0 ? (
               <div className="border-t border-black/12 px-4 py-4 sm:px-5">
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
+                <p className="text-[12px] font-semibold text-black/62">
                   Who takes the answers you lose
                 </p>
                 <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
@@ -485,7 +483,7 @@ function ResultCard({
                           }}
                         />
                       </span>
-                      <span className="w-7 shrink-0 text-right font-mono text-[10px] text-black/60">
+                      <span className="w-8 shrink-0 text-right font-mono text-[12px] text-black/62">
                         {rival.count}×
                       </span>
                     </li>
@@ -497,8 +495,8 @@ function ResultCard({
 
           {products.length > 0 ? (
             <aside className="flex flex-col border-t border-black/18 px-4 py-4 sm:px-5 lg:min-h-0 lg:border-l lg:border-t-0">
-              <p className="flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
-                <span className="h-[3px] w-4 bg-[#e8653a]" aria-hidden="true" />
+              <p className="flex items-center gap-2 text-[12px] font-semibold text-black/62">
+                <span className="h-[3px] w-4 bg-[#b8441d]" aria-hidden="true" />
                 Products the assistants put in front of the shopper
               </p>
               {/* Desktop: the shelf is an absolute overlay so it never sets the
@@ -547,10 +545,13 @@ const LOOP_STAGES = [
 
 const SEVERITY_STYLES: Record<string, string> = {
   blocker: "bg-[#b3261e] text-white",
-  high: "bg-[#d95028] text-white",
+  high: "bg-[#b8441d] text-white",
   medium: "bg-[#e8b13a] text-[#111318]",
   low: "bg-black/12 text-black/70",
 };
+
+const SEVERITY_BADGE =
+  "mt-0.5 shrink-0 px-1.5 py-0.5 text-[12px] font-semibold uppercase tracking-[0.06em]";
 
 function LoopPanelShell({
   eyebrow,
@@ -562,12 +563,10 @@ function LoopPanelShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border border-black/22 bg-white text-left shadow-[0_24px_70px_rgba(17,19,24,0.12)]">
+    <div className="border border-black/22 bg-white text-left">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/14 px-4 py-3 sm:px-5">
-        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
-          {eyebrow}
-        </p>
-        <span className="bg-[#111318] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-white">
+        <p className="text-[12px] font-semibold text-black/62">{eyebrow}</p>
+        <span className="bg-[#111318] px-2 py-0.5 text-[12px] uppercase tracking-[0.06em] text-white">
           {tag}
         </span>
       </div>
@@ -580,7 +579,7 @@ function LoopProductRow() {
   const product = SAMPLE_LOOP.product;
   return (
     <div className="flex items-center gap-3">
-      <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden border border-black/12 bg-[#f4f1e9]">
+      <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden border border-black/12 bg-[#fafafa]">
         {product.image_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -595,8 +594,8 @@ function LoopProductRow() {
         <p className="text-[13px] font-semibold leading-snug text-[#111318]">
           {product.title}
         </p>
-        <p className="mt-0.5 font-mono text-[10.5px] text-black/62">
-          This store · {product.price}
+        <p className="mt-0.5 text-[12px] text-black/62">
+          This store · <span className="font-mono">{product.price}</span>
         </p>
       </div>
     </div>
@@ -614,12 +613,12 @@ function DiagnosePanel() {
         <div className="border-b border-black/14 px-4 py-4 sm:px-5 lg:border-b-0 lg:border-r">
           <LoopProductRow />
           <div className="mt-5 border-t border-black/14 pt-4">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
+            <p className="text-[12px] font-semibold text-black/62">
               Answer-readiness score
             </p>
-            <p className="mt-2 font-serif text-[clamp(2.6rem,3vw,3.4rem)] leading-[0.9] tracking-[-0.03em] text-[#c04e26]">
+            <p className="mt-2 font-serif text-[clamp(2.6rem,3vw,3.4rem)] leading-[0.9] tracking-[-0.02em] text-[#b8441d]">
               {d.score}
-              <span className="ml-2 font-mono text-[13px] tracking-normal text-black/55">
+              <span className="ml-2 font-mono text-[13px] tracking-normal text-black/62">
                 /100 · {d.grade}
               </span>
             </p>
@@ -635,12 +634,12 @@ function DiagnosePanel() {
               className="flex items-start gap-3 border-b border-black/10 py-3 last:border-b-0"
             >
               <span
-                className={`mt-0.5 shrink-0 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] ${SEVERITY_STYLES[finding.severity]}`}
+                className={`${SEVERITY_BADGE} ${SEVERITY_STYLES[finding.severity]}`}
               >
                 {finding.severity}
               </span>
               <div>
-                <p className="font-mono text-[11px] font-semibold text-[#111318]">
+                <p className="font-mono text-[12px] font-semibold text-[#111318]">
                   {finding.field}
                 </p>
                 <p className="mt-0.5 text-[12.5px] leading-relaxed text-black/70">
@@ -667,23 +666,23 @@ function FixPanel() {
         <LoopProductRow />
         <div className="mt-5 overflow-hidden border border-black/20">
           <div className="flex flex-wrap items-center justify-between gap-2 bg-[#111318] px-3 py-2">
-            <span className="font-mono text-[10px] text-white/80">
+            <span className="font-mono text-[12px] text-white/80">
               proposed change · {f.field}
             </span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-white/50">
-              product page template
+            <span className="text-[12px] text-white/72">
+              Product page template
             </span>
           </div>
-          <div className="overflow-x-auto bg-[#fafaf7] py-2">
+          <div className="overflow-x-auto bg-[#fafafa] py-2">
             {f.diff.map((line) => (
               <div
                 key={line.text}
-                className={`flex items-start gap-2 px-3 py-0.5 font-mono text-[11.5px] leading-relaxed ${
+                className={`flex items-start gap-2 px-3 py-0.5 font-mono text-[12px] leading-relaxed ${
                   line.kind === "del"
                     ? "bg-[#b3261e]/[0.07] text-[#8a1f18]"
                     : line.kind === "add"
                       ? "bg-[#1f7a4d]/[0.08] text-[#175c3b]"
-                      : "text-black/55"
+                      : "text-black/62"
                 }`}
               >
                 <span className="w-3 shrink-0 select-none">
@@ -702,17 +701,17 @@ function FixPanel() {
             </span>
             <span
               aria-hidden="true"
-              className="inline-flex items-center border border-black/25 px-3 py-1.5 text-[12px] font-semibold text-[#111318]"
+              className="inline-flex items-center border border-black/40 px-3 py-1.5 text-[12px] font-semibold text-[#111318]"
             >
               Revert
             </span>
-            <span className="ml-auto font-mono text-[10px] text-black/50">
+            <span className="ml-auto text-[12px] text-black/62">
               awaiting approval · nothing ships without it
             </span>
           </div>
         </div>
         <div className="mt-4">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-black/60">
+          <p className="text-[12px] font-semibold text-black/62">
             Also queued from this audit
           </p>
           <ul className="mt-2 divide-y divide-black/10 border border-black/14">
@@ -722,19 +721,19 @@ function FixPanel() {
                 className="flex items-start gap-3 px-3 py-2.5"
               >
                 <span
-                  className={`mt-0.5 shrink-0 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] ${SEVERITY_STYLES[item.severity]}`}
+                  className={`${SEVERITY_BADGE} ${SEVERITY_STYLES[item.severity]}`}
                 >
                   {item.severity}
                 </span>
                 <div className="min-w-0">
-                  <p className="font-mono text-[11px] font-semibold text-[#111318]">
+                  <p className="font-mono text-[12px] font-semibold text-[#111318]">
                     {item.field}
                   </p>
                   <p className="mt-0.5 text-[12.5px] leading-relaxed text-black/70">
                     {item.change}
                   </p>
                 </div>
-                <span className="ml-auto mt-0.5 shrink-0 border border-black/20 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] text-black/55">
+                <span className="ml-auto mt-0.5 shrink-0 border border-black/20 px-1.5 py-0.5 text-[12px] font-semibold uppercase tracking-[0.06em] text-black/62">
                   proposed
                 </span>
               </li>
@@ -764,13 +763,13 @@ function VerifyPanel() {
             <span className="text-[12px] font-semibold text-[#111318]">
               ChatGPT
             </span>
-            <span className="ml-auto font-mono text-[9px] uppercase tracking-[0.1em] text-black/50">
-              after the fix publishes
+            <span className="ml-auto text-[12px] text-black/62">
+              After the fix publishes
             </span>
           </div>
           <div className="space-y-4 px-4 py-4">
             <div className="flex justify-end">
-              <p className="max-w-[85%] rounded-2xl rounded-br-md bg-[#f1efe9] px-4 py-2.5 text-[13.5px] leading-relaxed text-[#111318]">
+              <p className="max-w-[85%] rounded-2xl rounded-br-md bg-[#f2f2f2] px-4 py-2.5 text-[13.5px] leading-relaxed text-[#111318]">
                 {v.question}
               </p>
             </div>
@@ -809,11 +808,11 @@ function VerifyPanel() {
                           : "border-black/10 bg-white"
                       }`}
                     >
-                      <span className="w-4 shrink-0 font-mono text-[11px] text-black/45">
+                      <span className="w-4 shrink-0 font-mono text-[12px] text-black/62">
                         {index + 1}.
                       </span>
                       {product.image_url ? (
-                        <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden border border-black/10 bg-[#f4f1e9]">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden border border-black/10 bg-[#fafafa]">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={product.image_url}
@@ -827,12 +826,13 @@ function VerifyPanel() {
                         <span className="block truncate text-[13px] font-medium text-[#111318]">
                           {product.title}
                         </span>
-                        <span className="mt-0.5 block font-mono text-[10.5px] text-black/60">
-                          {product.merchant} · {product.price}
+                        <span className="mt-0.5 block text-[12px] text-black/62">
+                          {product.merchant} ·{" "}
+                          <span className="font-mono">{product.price}</span>
                         </span>
                       </span>
                       {product.ours ? (
-                        <span className="shrink-0 bg-[#1f7a4d] px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.08em] text-white">
+                        <span className="shrink-0 bg-[#1f7a4d] px-1.5 py-0.5 text-[12px] font-semibold uppercase tracking-[0.06em] text-white">
                           yours
                         </span>
                       ) : null}
@@ -854,14 +854,57 @@ function VerifyPanel() {
   );
 }
 
+function loopTabId(index: number) {
+  return `loop-tab-${LOOP_STAGES[index].key}`;
+}
+
+function loopPanelId(index: number) {
+  return `loop-panel-${LOOP_STAGES[index].key}`;
+}
+
+function LoopStage({ index }: { index: number }) {
+  if (index === 0)
+    return (
+      <ResultCard
+        result={SAMPLE_SCAN}
+        eyebrow="Example scan, real result"
+        identity="A dancewear store"
+        identityMeta="Shopify · scanned with this form"
+        note="The unedited output of one real scan: the store's own buying questions, both assistants, and who got named instead. Enter your domain to get yours."
+      />
+    );
+  if (index === 1) return <DiagnosePanel />;
+  if (index === 2) return <FixPanel />;
+  return <VerifyPanel />;
+}
+
 function SampleLoopShowcase() {
   const [stage, setStage] = useState(0);
+  // Pinning is a desktop-only affordance. Below md the section is ordinary
+  // document flow: no tall wrapper, no sticky card, no scroll-driven staging,
+  // and all four panels stacked so every one of them is reachable by plain
+  // scrolling. `pinned` mirrors the same 768px breakpoint the classes use.
+  const [pinned, setPinned] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Scroll-driven: the card pins while the tall wrapper scrolls past, and the
-  // scroll progress through the wrapper selects the stage — scrolling past the
-  // section walks Find → Diagnose → Fix → Verify, then releases.
   useEffect(() => {
+    const query = window.matchMedia("(min-width: 768px)");
+    const sync = () => setPinned(query.matches);
+    sync();
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
+  }, []);
+
+  // Scroll-driven (desktop only): the card pins while the tall wrapper scrolls
+  // past, and the scroll progress through the wrapper selects the stage —
+  // scrolling past the section walks Find → Diagnose → Fix → Verify, then
+  // releases.
+  useEffect(() => {
+    if (!pinned) {
+      setStage(0);
+      return;
+    }
     const onScroll = () => {
       const node = wrapperRef.current;
       if (!node) return;
@@ -885,38 +928,78 @@ function SampleLoopShowcase() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [pinned]);
 
-  // Clicking a tab scrolls to that stage's slice of the wrapper so the scroll
-  // position and the selected stage stay in agreement.
-  const jumpTo = (index: number) => {
+  // Selecting a stage has to move the scroll position into that stage's slice
+  // of the wrapper, otherwise the next scroll event maps the old position
+  // straight back over the choice. It is a no-op when the position is already
+  // inside the slice, never runs below md (nothing is pinned there), and jumps
+  // instantly when the visitor asked for reduced motion.
+  const select = (index: number) => {
+    setStage(index);
     const node = wrapperRef.current;
-    if (!node) return;
+    if (!pinned || !node) return;
     const scrollable = node.offsetHeight - window.innerHeight;
-    const top = node.getBoundingClientRect().top + window.scrollY;
+    if (scrollable <= 0) return;
+    const slice = scrollable / LOOP_STAGES.length;
+    const start = node.getBoundingClientRect().top + window.scrollY;
+    const sliceStart = start + index * slice;
+    if (window.scrollY >= sliceStart && window.scrollY < sliceStart + slice)
+      return;
     window.scrollTo({
-      top: top + ((index + 0.5) / LOOP_STAGES.length) * scrollable,
-      behavior: "smooth",
+      top: sliceStart + slice / 2,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
     });
   };
 
+  const onTabKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const last = LOOP_STAGES.length - 1;
+    const next =
+      event.key === "ArrowRight"
+        ? stage === last
+          ? 0
+          : stage + 1
+        : event.key === "ArrowLeft"
+          ? stage === 0
+            ? last
+            : stage - 1
+          : event.key === "Home"
+            ? 0
+            : event.key === "End"
+              ? last
+              : -1;
+    if (next < 0) return;
+    event.preventDefault();
+    select(next);
+    tabRefs.current[next]?.focus({ preventScroll: true });
+  };
+
   return (
-    <div ref={wrapperRef} className="h-[280vh]">
-      <div className="sticky top-20">
+    <div ref={wrapperRef} className="h-auto md:h-[240vh]">
+      <div className="static md:sticky md:top-20">
         <div
           role="tablist"
           aria-label="Loop stages"
-          className="mb-4 grid grid-cols-2 gap-px border border-black/18 bg-black/18 sm:grid-cols-4"
+          onKeyDown={onTabKeyDown}
+          className="mb-4 hidden gap-px border border-black/18 bg-black/18 md:grid md:grid-cols-4"
         >
           {LOOP_STAGES.map((entry, index) => {
             const active = index === stage;
             return (
               <button
                 key={entry.key}
+                ref={(node) => {
+                  tabRefs.current[index] = node;
+                }}
+                id={loopTabId(index)}
                 type="button"
                 role="tab"
                 aria-selected={active}
-                onClick={() => jumpTo(index)}
+                aria-controls={loopPanelId(index)}
+                tabIndex={active ? 0 : -1}
+                onClick={() => select(index)}
                 className={`px-3 py-2.5 text-left transition-colors ${
                   active
                     ? "bg-[#111318] text-white"
@@ -924,7 +1007,7 @@ function SampleLoopShowcase() {
                 }`}
               >
                 <span
-                  className={`font-mono text-[9px] uppercase tracking-[0.1em] ${active ? "text-white/60" : "text-black/45"}`}
+                  className={`text-[12px] ${active ? "text-white/72" : "text-black/62"}`}
                 >
                   0{index + 1} · {entry.tag}
                 </span>
@@ -938,21 +1021,25 @@ function SampleLoopShowcase() {
           })}
         </div>
 
-        {stage === 0 ? (
-          <ResultCard
-            result={SAMPLE_SCAN}
-            eyebrow="Example scan, real result"
-            identity="A dancewear store"
-            identityMeta="Shopify · scanned with this form"
-            note="The unedited output of one real scan: the store's own buying questions, both assistants, and who got named instead. Enter your domain to get yours."
-          />
-        ) : stage === 1 ? (
-          <DiagnosePanel />
-        ) : stage === 2 ? (
-          <FixPanel />
-        ) : (
-          <VerifyPanel />
-        )}
+        <div className="space-y-12 md:space-y-0">
+          {LOOP_STAGES.map((entry, index) => (
+            <section
+              key={entry.key}
+              id={loopPanelId(index)}
+              role="tabpanel"
+              aria-labelledby={loopTabId(index)}
+              className={index === stage ? "md:block" : "md:hidden"}
+            >
+              <h3 className="mb-3 text-[15px] font-semibold text-[#111318] md:hidden">
+                <span className="mr-2 font-mono text-[12px] font-semibold text-black/62">
+                  0{index + 1}
+                </span>
+                {entry.label} — {entry.tag}
+              </h3>
+              <LoopStage index={index} />
+            </section>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -1052,7 +1139,7 @@ export default function AnswerCheck({
   };
 
   const inputClass =
-    "h-12 w-full border border-black/22 bg-white px-4 text-left text-[15px] text-[#151515] outline-none placeholder:text-black/45 focus:border-[#c04e26]";
+    "h-12 w-full border border-black/40 bg-white px-4 text-left text-[15px] text-[#151515] placeholder:text-black/58 focus:border-[#b8441d] focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[#b8441d]";
 
   return (
     <div>
@@ -1076,7 +1163,7 @@ export default function AnswerCheck({
           </div>
           <div>
             <label className="sr-only" htmlFor="answer-check-email">
-              Work email
+              Work email (optional)
             </label>
             <input
               id="answer-check-email"
@@ -1091,7 +1178,7 @@ export default function AnswerCheck({
           <button
             type="submit"
             disabled={submitting}
-            className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#c04e26] disabled:opacity-70"
+            className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#b8441d] disabled:opacity-70"
           >
             {submitting ? "Reading your store…" : "Scan my store free"}
             <ArrowRight
@@ -1116,12 +1203,12 @@ export default function AnswerCheck({
           className={`mt-3 text-[13px] leading-relaxed ${error ? "text-[#b3261e]" : "text-black/62"}`}
         >
           {error ||
-            "We read your live storefront first. The assistant questions run after you confirm by email."}
+            "We read your live storefront first. Email is optional: add it and we send a link that runs the assistant questions."}
         </p>
       </form>
 
       <div className="mx-auto mt-16 max-w-[72rem]">
-        <p className="mb-4 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-black/60">
+        <p className="mb-4 text-center text-[12px] font-semibold text-black/62">
           {result
             ? "Your storefront, read live"
             : "A real store, scanned with this form"}

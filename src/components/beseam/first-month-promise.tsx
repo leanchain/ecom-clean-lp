@@ -9,22 +9,19 @@ export default function FirstMonthPromise({
   return (
     <section
       id="promise"
-      className="scroll-mt-24 bg-[image:linear-gradient(to_bottom,#ebe8df_0%,#ebe8df_62%,#f4f1e9_100%)]"
+      className="scroll-mt-24 border-b border-black/18 bg-[#f2f2f2]"
     >
       <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
         <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-black/58">
-              The first-month promise
-            </p>
-            <h2 className="mt-6 max-w-[11ch] font-serif text-[clamp(2.8rem,4.4vw,4.4rem)] font-normal leading-[1.02] tracking-[-0.04em] text-[#111318]">
+            <h2 className="max-w-[20ch] font-display text-[clamp(2rem,3.1vw,2.6rem)] font-normal leading-[1.06] tracking-[-0.02em] text-[#111318]">
               If we cannot set up useful product visibility monitoring in 30
               days, you pay nothing.
             </h2>
           </div>
 
           <div className="self-end">
-            <p className="max-w-2xl text-[17px] leading-[1.7] text-black/66">
+            <p className="max-w-[68ch] text-[17px] leading-[1.7] text-black/66">
               During an agreed pilot, Beseam must establish the product
               baseline, monitor the agreed discovery paths, identify a material
               visibility issue, and show the evidence and proposed fix. If we
@@ -54,7 +51,7 @@ export default function FirstMonthPromise({
                   key={term}
                   className="grid gap-2 border-b border-black/18 py-5 last:border-b-0 sm:grid-cols-[10rem_1fr] sm:gap-8"
                 >
-                  <dt className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/46">
+                  <dt className="font-mono text-[12px] font-semibold uppercase tracking-[0.1em] text-black/62">
                     {term}
                   </dt>
                   <dd className="text-[14px] leading-relaxed text-black/64">
