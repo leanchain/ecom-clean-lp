@@ -1,11 +1,12 @@
-import Link from 'next/link';
+import { readFileSync } from "fs";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { join } from "path";
 
-import { readFileSync } from 'fs';
-import { Calendar } from 'lucide-react';
-import { compileMDX } from 'next-mdx-remote/rsc';
-import { join } from 'path';
+import { Calendar } from "lucide-react";
+import { compileMDX } from "next-mdx-remote/rsc";
 
-import CategoryBadge from '@/components/category-badge';
+import CategoryBadge from "@/components/category-badge";
 
 interface Frontmatter {
   title: string;
@@ -13,12 +14,16 @@ interface Frontmatter {
   date: string;
 }
 
-export default async function PrivacyPolicy() {
-  // Read the MDX file
-  const filePath = join(process.cwd(), './src/app/privacy-policy/index.mdx');
-  const source = readFileSync(filePath, 'utf8');
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "How Beseam collects, uses, shares, and protects personal data across our website and ecommerce visibility services.",
+  alternates: { canonical: "/privacy-policy" },
+};
 
-  // Compile the MDX content
+export default async function PrivacyPolicy() {
+  const filePath = join(process.cwd(), "./src/app/privacy-policy/index.mdx");
+  const source = readFileSync(filePath, "utf8");
   const { content, frontmatter } = await compileMDX<Frontmatter>({
     source,
     options: { parseFrontmatter: true },
@@ -26,14 +31,13 @@ export default async function PrivacyPolicy() {
 
   return (
     <article className="hero-padding-margin container max-w-4xl space-y-6 md:space-y-8">
-      {/* Back button */}
-      <div className="flex flex-col items-center justify-center gap-4">
+      <header className="flex flex-col items-center justify-center gap-4">
         <Link href="/" className="group">
           <CategoryBadge
-            label={new Date(frontmatter.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
+            label={new Date(frontmatter.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
             })}
             icon={<Calendar className="!text-current" />}
           />
@@ -41,9 +45,12 @@ export default async function PrivacyPolicy() {
         <h1 className="text-center text-2xl md:text-4xl lg:text-5xl">
           {frontmatter.title}
         </h1>
-      </div>
+        <p className="max-w-2xl text-center text-base leading-7 text-muted-foreground md:text-lg">
+          {frontmatter.description}
+        </p>
+      </header>
 
-      <div className="prose prose-2xl prose-headings:text-2xl dark:prose-invert max-w-none leading-8">
+      <div className="prose prose-lg prose-headings:scroll-mt-24 dark:prose-invert max-w-none leading-8">
         {content}
       </div>
     </article>

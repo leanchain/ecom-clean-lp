@@ -48,7 +48,10 @@ export default function BeseamNavbar() {
       <div className="mx-auto max-w-[92rem] px-5 sm:px-8 lg:px-10">
         <div className="flex h-[4.5rem] items-center justify-between">
           <Link href="/" className="flex items-center" aria-label="Beseam home">
-            <Logo className="text-[#111318]" />
+            <Logo
+              className="text-[#111318]"
+              markClassName="drop-shadow-none"
+            />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center lg:flex">

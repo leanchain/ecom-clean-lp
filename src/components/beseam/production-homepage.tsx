@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import LiveAnswerCheck from "@/components/beseam/answer-check";
+import GapTrackFigure from "@/components/beseam/gap-track-figure";
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import { ChannelIcon } from "@/components/beseam/channel-icon";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
@@ -63,13 +64,13 @@ const WHAT_BREAKS = [
 const STEPS = [
   {
     number: "01",
-    title: "Ask",
+    title: "Check",
     detail:
       "Beseam runs the buying questions your customers actually ask against the assistants they use, and records what each answer says about your products.",
   },
   {
     number: "02",
-    title: "Trace",
+    title: "Diagnose",
     detail:
       "Each miss is traced to the product data behind it: an absent spec, a price that disagrees with your feed, a variant out of stock. Ranked by sessions and revenue at risk, not by score.",
   },
@@ -81,18 +82,18 @@ const STEPS = [
   },
   {
     number: "04",
-    title: "Verify",
+    title: "Check again",
     detail:
-      "The same question is asked again after the change, and the result is recorded against the product, so you can see whether the answer moved.",
+      "The same question is run again after the change, and the result is recorded against the product, so you can see whether the answer moved.",
   },
 ] as const;
 
 // The same loop as STEPS, stated as a record of what is kept per product.
 // Deliberately unnumbered: the page carries exactly one 01-04 sequence.
 const RECORD_STAGES = [
-  ["Asked", "Record the answer and whether the product was named."],
+  ["Checked", "Record the answer and whether the product was named."],
   [
-    "Traced",
+    "Diagnosed",
     "Name the product field that caused the miss, and the revenue behind it.",
   ],
   [
@@ -100,7 +101,7 @@ const RECORD_STAGES = [
     "Write the approved change to the store, keeping the old value.",
   ],
   [
-    "Asked again",
+    "Checked again",
     "Re-run the same question and record whether the answer moved.",
   ],
 ] as const;
@@ -176,14 +177,15 @@ export default function ProductionHomepage() {
                 Beseam runs those questions against ChatGPT, Copilot,
                 Perplexity, and Google AI Overviews, names the product field
                 that left you out, publishes the fix to your store with
-                one-click revert, then asks again to confirm the answer changed.
+                one-click revert, then checks again to confirm the answer
+                changed.
               </p>
 
               <dl className="mx-auto mt-12 grid max-w-4xl grid-cols-1 border-y border-black/18 sm:grid-cols-3">
                 {[
-                  ["Ask", "The assistants your buyers use"],
+                  ["Check", "The assistants your buyers use"],
                   ["Fix", "Published to your store, revertible"],
-                  ["Verify", "Same question, asked again"],
+                  ["Check again", "Same question, run again"],
                 ].map(([term, value]) => (
                   <div
                     key={term}
@@ -219,7 +221,7 @@ export default function ProductionHomepage() {
 
       <section
         aria-label="Coverage"
-        className="border-b border-black/18 bg-[#f2f2f2]"
+        className="border-b border-black/18 bg-[#f6f6f6]"
       >
         <div className="mx-auto grid max-w-[92rem] gap-4 px-5 py-6 sm:px-8 lg:grid-cols-[16rem_1fr] lg:items-center lg:px-10">
           <p className="font-mono text-[12px] font-semibold tracking-[0.02em] text-black/62">
@@ -244,12 +246,36 @@ export default function ProductionHomepage() {
         </div>
       </section>
 
+      <section
+        id="engine-gaps"
+        className="scroll-mt-24 border-b border-black/18 bg-[#fafafa]"
+      >
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+            <Reveal>
+              <h2 className="max-w-[16ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+                The same product, engine by engine.
+              </h2>
+              <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-black/64">
+                Visibility is not one number. The same catalog can win ChatGPT
+                and lose Claude on the same day, for different reasons — and
+                the reason decides the fix. This is a real merchant&rsquo;s
+                window, exactly as the product shows it.
+              </p>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <GapTrackFigure />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       <section id="how-it-works" className="scroll-mt-24 bg-[#fafafa]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 border-b border-black/22 pb-14 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
-                Ask. Trace. Fix. Ask again.
+                Check. Diagnose. Fix. Check again.
               </h2>
             </div>
             <p className="max-w-[64ch] self-end text-[17px] leading-[1.65] text-black/66">
@@ -290,7 +316,7 @@ export default function ProductionHomepage() {
         </div>
       </section>
 
-      <section id="answer-check" className="scroll-mt-24 bg-[#f2f2f2]">
+      <section id="answer-check" className="scroll-mt-24 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <Reveal>
@@ -385,7 +411,7 @@ export default function ProductionHomepage() {
           <div className="grid gap-14 lg:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] lg:items-center lg:gap-20">
             <Reveal>
               <h2 className="max-w-[20ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-                You fix the products that pay for the fix.
+                Fix the products that cost you the most.
               </h2>
               <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-white/72">
                 Beseam also runs the sessions on your storefront, so a finding
@@ -421,6 +447,121 @@ export default function ProductionHomepage() {
                 caption="Catalog details, answer evidence, sessions, and open work stay attached to the same product."
               />
             </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="honest-numbers"
+        className="scroll-mt-24 border-b border-black/18 bg-[#f6f6f6]"
+      >
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
+          <Reveal>
+            <h2 className="max-w-[20ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+              What the score doesn&rsquo;t say.
+            </h2>
+            <p className="mt-6 max-w-[64ch] text-[16px] leading-[1.7] text-black/64">
+              Most visibility tools round their uncertainty away. Three rules
+              keep our numbers honest:
+            </p>
+          </Reveal>
+
+          <div className="mt-12 grid border-y border-black/22 md:grid-cols-3">
+            {[
+              [
+                "Unmeasured is never zero",
+                "An engine we did not check this window shows as not measured. A 0% always means we asked, and your product was absent from the answer.",
+              ],
+              [
+                "Every percentage states its denominator",
+                "Share of answers means share of that engine’s completed checks in the window — and the window is printed next to the number.",
+              ],
+              [
+                "Losing and being unreadable are different problems",
+                "When an engine names no brands at all, we say so. That is a product-data fix, not a marketing fight — and it comes first.",
+              ],
+            ].map(([term, detail]) => (
+              <div
+                key={term}
+                className="border-b border-black/16 py-7 last:border-b-0 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+              >
+                <h3 className="text-[17px] font-semibold leading-snug text-[#111318]">
+                  {term}
+                </h3>
+                <p className="mt-3 max-w-sm text-[14px] leading-relaxed text-black/62">
+                  {detail}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-14">
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-black/62">
+              The loop, compared
+            </p>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full min-w-[40rem] border-collapse text-left">
+                <thead>
+                  <tr className="border-b-2 border-black/30">
+                    <th className="py-3 pr-4 font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-black/62">
+                      Step
+                    </th>
+                    <th className="py-3 pr-4 text-[14px] font-semibold text-black/78">
+                      Reporting tools
+                    </th>
+                    <th className="py-3 pr-4 text-[14px] font-semibold text-black/78">
+                      An agency retainer
+                    </th>
+                    <th className="border-l border-black/18 py-3 pl-4 text-[14px] font-semibold text-[#111318]">
+                      Beseam
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    [
+                      "Check",
+                      "A score, refreshed on a schedule",
+                      "A quarterly audit",
+                      "Continuous, per prompt, per engine",
+                    ],
+                    [
+                      "Diagnose",
+                      "To a list of cited domains",
+                      "To a slide deck",
+                      "To the product field behind the miss",
+                    ],
+                    [
+                      "Fix",
+                      "—",
+                      "A ticket for your team",
+                      "Published to your store, revertible",
+                    ],
+                    [
+                      "Check again",
+                      "—",
+                      "Next quarter’s report",
+                      "The same question, run again",
+                    ],
+                  ].map(([step, reporting, agency, beseam]) => (
+                    <tr key={step} className="border-b border-black/14">
+                      <td className="py-4 pr-4 font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-black/62">
+                        {step}
+                      </td>
+                      <td className="py-4 pr-4 text-[14px] leading-relaxed text-black/62">
+                        {reporting}
+                      </td>
+                      <td className="py-4 pr-4 text-[14px] leading-relaxed text-black/62">
+                        {agency}
+                      </td>
+                      <td className="border-l border-black/18 py-4 pl-4 text-[14px] font-semibold leading-relaxed text-[#111318]">
+                        {beseam}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>

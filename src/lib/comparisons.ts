@@ -133,7 +133,7 @@ export const COMPARISONS: Comparison[] = [
           "The affected commerce object, proposed change, owner, and approval boundary remain explicit.",
       },
       {
-        step: "Verify",
+        step: "Check again",
         competitor:
           "The analyst returns to reporting and interprets the result.",
         beseam:
@@ -521,7 +521,7 @@ export const COMPARISONS: Comparison[] = [
           "The affected commerce object, proposed change, owner, and approval boundary remain explicit.",
       },
       {
-        step: "Verify",
+        step: "Check again",
         competitor: "The team confirms the error rate drops after release.",
         beseam:
           "Beseam rechecks the original signal and keeps booked, attributed, observed, and modeled money separate.",
@@ -1175,7 +1175,7 @@ export const COMPARISONS: Comparison[] = [
           "The affected commerce object, proposed change, owner, and approval boundary remain explicit.",
       },
       {
-        step: "Verify",
+        step: "Check again",
         competitor:
           "The team returns to Mixpanel and interprets the new funnel.",
         beseam:
@@ -1307,7 +1307,7 @@ export const COMPARISONS: Comparison[] = [
           "The affected commerce object, proposed change, owner, and approval boundary remain explicit.",
       },
       {
-        step: "Verify",
+        step: "Check again",
         competitor:
           "The team reviews the experiment or flag result in PostHog.",
         beseam:
@@ -1952,7 +1952,7 @@ export const COMPARISONS: Comparison[] = [
           "The affected commerce object, proposed change, owner, and approval boundary remain explicit.",
       },
       {
-        step: "Verify",
+        step: "Check again",
         competitor:
           "The analyst returns to reporting and rebuilds the segment.",
         beseam:

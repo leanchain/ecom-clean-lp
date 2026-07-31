@@ -143,7 +143,7 @@ export default async function ComparisonPage({
         </div>
       </header>
 
-      <section className="border-b border-black/18 bg-[#f2f2f2]">
+      <section className="border-b border-black/18 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div className="grid border-y border-black/24 lg:grid-cols-3">
             {[
@@ -301,7 +301,7 @@ export default async function ComparisonPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f2f2f2]">
+      <section className="border-b border-black/18 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div>
             <div className="max-w-[68ch]">
@@ -335,7 +335,7 @@ export default async function ComparisonPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f2f2f2]">
+      <section className="border-b border-black/18 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
             <div>

@@ -1,9 +1,10 @@
-import Link from "next/link";
-
 import { readFileSync } from "fs";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { join } from "path";
+
 import { Calendar } from "lucide-react";
 import { compileMDX } from "next-mdx-remote/rsc";
-import { join } from "path";
 
 import CategoryBadge from "@/components/category-badge";
 
@@ -13,21 +14,24 @@ interface Frontmatter {
   date: string;
 }
 
+export const metadata: Metadata = {
+  title: "Terms and Conditions",
+  description:
+    "The terms that govern access to and use of Beseam's website and ecommerce visibility services.",
+  alternates: { canonical: "/terms-of-service" },
+};
+
 export default async function TermsOfService() {
-  // Read the MDX file
   const filePath = join(process.cwd(), "./src/app/terms-of-service/index.mdx");
   const source = readFileSync(filePath, "utf8");
-
-  // Compile the MDX content
   const { content, frontmatter } = await compileMDX<Frontmatter>({
     source,
     options: { parseFrontmatter: true },
   });
 
   return (
-    <article className="hero-padding-margin container max-w-6xl space-y-6 md:space-y-8">
-      {/* Back button */}
-      <div className="flex flex-col items-center justify-center gap-4">
+    <article className="hero-padding-margin container max-w-4xl space-y-6 md:space-y-8">
+      <header className="flex flex-col items-center justify-center gap-4">
         <Link href="/" className="group">
           <CategoryBadge
             label={new Date(frontmatter.date).toLocaleDateString("en-US", {
@@ -38,12 +42,15 @@ export default async function TermsOfService() {
             icon={<Calendar className="!text-current" />}
           />
         </Link>
-        <h1 className="text-center text-xl md:text-3xl lg:text-3xl">
+        <h1 className="text-center text-2xl md:text-4xl lg:text-5xl">
           {frontmatter.title}
         </h1>
-      </div>
+        <p className="max-w-2xl text-center text-base leading-7 text-muted-foreground md:text-lg">
+          {frontmatter.description}
+        </p>
+      </header>
 
-      <div className="prose prose-lg prose-headings:text-lg dark:prose-invert max-w-none leading-8">
+      <div className="prose prose-lg prose-headings:scroll-mt-24 dark:prose-invert max-w-none leading-8">
         {content}
       </div>
     </article>

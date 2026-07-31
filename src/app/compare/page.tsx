@@ -66,7 +66,7 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f2f2f2]">
+      <section className="border-b border-black/18 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div>
             <div className="max-w-2xl">
