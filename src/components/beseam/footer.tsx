@@ -61,6 +61,12 @@ export default function BeseamFooter() {
           >
             About
           </Link>
+          <a
+            href="mailto:pankaj@beseam.com"
+            className="text-[12px] text-white/62 hover:text-white"
+          >
+            Contact us
+          </a>
           <Link
             href="/privacy-policy"
             className="text-[12px] text-white/62 hover:text-white"

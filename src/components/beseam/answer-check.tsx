@@ -244,7 +244,7 @@ function ProductTile({ product }: { product: ShownProduct }) {
   );
 }
 
-function ResultCard({
+export function ResultCard({
   result,
   eyebrow = "Your scan",
   identity,
