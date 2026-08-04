@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Copy, Printer, RefreshCw, ShieldCheck } from "lucide-react";
 
 import { ResultCard } from "@/components/beseam/answer-check";
+import AuditReportNav from "@/components/beseam/audit-report-nav";
 import type { AnswerCheckResult } from "@/components/beseam/answer-check-types";
 import BookReviewCta from "@/components/beseam/book-review-cta";
 
@@ -96,6 +97,7 @@ export default function PublicAuditReport({
     <div className="bg-[#fafafa] text-[#111318]">
       <section className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 pb-14 pt-14 sm:px-8 sm:pb-18 sm:pt-18 lg:px-10">
+          <AuditReportNav domain={domain} active="audit" />
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)] lg:items-end">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.13em] text-[#b8441d]">

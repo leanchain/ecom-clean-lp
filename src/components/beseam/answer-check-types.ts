@@ -34,6 +34,27 @@ export type Answer = {
   error: string | null;
 };
 
+
+export type BrandEvidenceProduct = {
+  title: string;
+  url: string | null;
+  price: string | null;
+  currency: string | null;
+  available: boolean | null;
+  attributes: string[];
+};
+
+export type BrandEvidence = {
+  market: string | null;
+  sources: string[];
+  products: BrandEvidenceProduct[];
+  catalog_signals: Array<{
+    title: string | null;
+    detail: string | null;
+    product: string | null;
+  }>;
+};
+
 export type AnswerCheckResult = {
   domain: string;
   status: string;
@@ -45,4 +66,5 @@ export type AnswerCheckResult = {
   questions: string[];
   answers: Answer[];
   products_seen: number;
+  brand_evidence?: BrandEvidence;
 };

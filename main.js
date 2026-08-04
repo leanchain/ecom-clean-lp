@@ -22,6 +22,16 @@ const LEAD_SOURCES = new Set([
   "ai_visibility_scan",
   "platform_audit",
   "store_health_review",
+  "product_visibility_monitoring",
+  "contact",
+]);
+
+// Sources where a person is waiting to hear back: notify contact@beseam.com
+// directly instead of only queueing the lead into the marketing list.
+const REVIEW_SOURCES = new Set([
+  "store_health_review",
+  "product_visibility_monitoring",
+  "contact",
 ]);
 
 const UTM_KEYS = new Set([
@@ -208,11 +218,24 @@ async function submitScanLead(lead, env) {
 }
 
 async function submitReview(lead, env) {
-  const { name, email, store, message, utm } = lead;
+  const { source, name, email, store, message, utm } = lead;
+  const requiresStore = source !== "contact";
+  const label =
+    source === "contact"
+      ? "New contact form message"
+      : "New Store Health Review request";
 
-  if (name.length < 2 || store.length < 4) {
+  if (
+    name.length < 2 ||
+    (requiresStore && store.length < 4) ||
+    (!requiresStore && message.length < 3)
+  ) {
     return json(
-      { error: "Name, work email and Shopify store URL are required." },
+      {
+        error: requiresStore
+          ? "Name, work email and Shopify store URL are required."
+          : "Name, work email and a message are required.",
+      },
       400,
     );
   }
@@ -222,26 +245,32 @@ async function submitReview(lead, env) {
   }
 
   const textBody = [
-    "New Store Health Review request",
+    label,
     "",
     "Name: " + name,
     "Work email: " + email,
-    "Shopify store: " + store,
+    store ? "Shopify store: " + store : null,
     "Message: " + (message || "Not provided"),
     "",
     "Attribution:",
     JSON.stringify(utm, null, 2),
-  ].join("\n");
+  ]
+    .filter((line) => line !== null)
+    .join("\n");
 
   const htmlBody =
-    "<h1>New Store Health Review request</h1>" +
+    "<h1>" +
+    escapeHtml(label) +
+    "</h1>" +
     "<p><strong>Name:</strong> " +
     escapeHtml(name) +
     "</p><p><strong>Work email:</strong> " +
     escapeHtml(email) +
-    "</p><p><strong>Shopify store:</strong> " +
-    escapeHtml(store) +
-    "</p><p><strong>Message:</strong><br>" +
+    "</p>" +
+    (store
+      ? "<p><strong>Shopify store:</strong> " + escapeHtml(store) + "</p>"
+      : "") +
+    "<p><strong>Message:</strong><br>" +
     escapeHtml(message || "Not provided").replaceAll("\n", "<br>") +
     "</p><p><strong>Attribution:</strong><br><code>" +
     escapeHtml(JSON.stringify(utm)) +
@@ -252,12 +281,12 @@ async function submitReview(lead, env) {
       to: "contact@beseam.com",
       from: "website@beseam.com",
       replyTo: email,
-      subject: "Store Health Review request - " + store,
+      subject: source === "contact" ? label + " from " + name : label + " - " + store,
       text: textBody,
       html: htmlBody,
     });
   } catch {
-    return json({ error: "Review request could not be delivered." }, 502);
+    return json({ error: "Message could not be delivered." }, 502);
   }
 
   // The booking email is the record that matters; a SendPulse outage must not
@@ -510,7 +539,7 @@ const worker = {
     if (request.method === "POST" && url.pathname === "/api/lead") {
       const parsed = await readLead(request, url, null);
       if (parsed.response) return parsed.response;
-      return parsed.lead.source === "store_health_review"
+      return REVIEW_SOURCES.has(parsed.lead.source)
         ? submitReview(parsed.lead, env)
         : submitScanLead(parsed.lead, env);
     }

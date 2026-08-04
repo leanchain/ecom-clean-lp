@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/integrations/shopify", changeFrequency: "monthly" as const, priority: 0.7 },
     { path: "/integrations/google-search-console", changeFrequency: "monthly" as const, priority: 0.65 },
     { path: "/about", changeFrequency: "monthly" as const, priority: 0.7 },
+    { path: "/contact", changeFrequency: "monthly" as const, priority: 0.6 },
     { path: "/manifesto", changeFrequency: "monthly" as const, priority: 0.75 },
     { path: "/product-visibility-monitoring", changeFrequency: "monthly" as const, priority: 0.8 },
     { path: "/tools/ai-visibility-scan", changeFrequency: "monthly" as const, priority: 0.3 },
