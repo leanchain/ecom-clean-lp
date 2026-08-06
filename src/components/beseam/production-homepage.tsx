@@ -19,6 +19,7 @@ import { ChannelIcon } from "@/components/beseam/channel-icon";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import LeadCaptureForm from "@/components/beseam/lead-capture-form";
 import { Reveal } from "@/components/beseam/reveal";
+import WhyBeseam from "@/components/beseam/why-beseam";
 
 // Every surface we probe today, in the order a merchant recognises them.
 const SURFACES = [
@@ -246,6 +247,8 @@ export default function ProductionHomepage() {
         </div>
       </section>
 
+      <WhyBeseam />
+
       <section
         id="engine-gaps"
         className="scroll-mt-24 border-b border-black/18 bg-[#fafafa]"
@@ -258,9 +261,9 @@ export default function ProductionHomepage() {
               </h2>
               <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-black/64">
                 Visibility is not one number. The same catalog can win ChatGPT
-                and lose Claude on the same day, for different reasons — and
-                the reason decides the fix. This is a real merchant&rsquo;s
-                window, exactly as the product shows it.
+                and lose Claude on the same day, for different reasons — and the
+                reason decides the fix. This is a real merchant&rsquo;s window,
+                exactly as the product shows it.
               </p>
             </Reveal>
             <Reveal delay={0.08}>
@@ -452,54 +455,23 @@ export default function ProductionHomepage() {
       </section>
 
       <section
-        id="honest-numbers"
+        id="compared"
         className="scroll-mt-24 border-b border-black/18 bg-[#f6f6f6]"
       >
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <Reveal>
             <h2 className="max-w-[20ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
-              What the score doesn&rsquo;t say.
+              The loop, compared.
             </h2>
             <p className="mt-6 max-w-[64ch] text-[16px] leading-[1.7] text-black/64">
-              Most visibility tools round their uncertainty away. Three rules
-              keep our numbers honest:
+              A score tells you where you stand. It does not name the field that
+              cost you the answer, it does not ship the change, and it never
+              checks whether the change worked.
             </p>
           </Reveal>
 
-          <div className="mt-12 grid border-y border-black/22 md:grid-cols-3">
-            {[
-              [
-                "Unmeasured is never zero",
-                "An engine we did not check this window shows as not measured. A 0% always means we asked, and your product was absent from the answer.",
-              ],
-              [
-                "Every percentage states its denominator",
-                "Share of answers means share of that engine’s completed checks in the window — and the window is printed next to the number.",
-              ],
-              [
-                "Losing and being unreadable are different problems",
-                "When an engine names no brands at all, we say so. That is a product-data fix, not a marketing fight — and it comes first.",
-              ],
-            ].map(([term, detail]) => (
-              <div
-                key={term}
-                className="border-b border-black/16 py-7 last:border-b-0 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
-              >
-                <h3 className="text-[17px] font-semibold leading-snug text-[#111318]">
-                  {term}
-                </h3>
-                <p className="mt-3 max-w-sm text-[14px] leading-relaxed text-black/62">
-                  {detail}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-14">
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-black/62">
-              The loop, compared
-            </p>
-            <div className="mt-4 overflow-x-auto">
+          <div className="mt-12">
+            <div className="overflow-x-auto">
               <table className="w-full min-w-[40rem] border-collapse text-left">
                 <thead>
                   <tr className="border-b-2 border-black/30">
@@ -562,6 +534,14 @@ export default function ProductionHomepage() {
                 </tbody>
               </table>
             </div>
+
+            <Link
+              href="/resources/start-here/how-we-count"
+              className="mt-8 inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-7 transition-colors hover:decoration-[#b8441d]"
+            >
+              How we count: unmeasured is never zero{" "}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>

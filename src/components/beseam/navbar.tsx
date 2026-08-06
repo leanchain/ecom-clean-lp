@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 const APP_LOGIN_URL = "https://app.beseam.com/login";
 
 const NAV_LINKS = [
+  { label: "Why Beseam", href: "/#why" },
   { label: "How it works", href: "/#how-it-works" },
   { label: "From miss to fix", href: "/#answer-check" },
   { label: "What leaves you out", href: "/#what-breaks" },
@@ -48,10 +49,7 @@ export default function BeseamNavbar() {
       <div className="mx-auto max-w-[92rem] px-5 sm:px-8 lg:px-10">
         <div className="flex h-[4.5rem] items-center justify-between">
           <Link href="/" className="flex items-center" aria-label="Beseam home">
-            <Logo
-              className="text-[#111318]"
-              markClassName="drop-shadow-none"
-            />
+            <Logo className="text-[#111318]" markClassName="drop-shadow-none" />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center lg:flex">

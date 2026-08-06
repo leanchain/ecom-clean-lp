@@ -506,6 +506,11 @@ function legacyRedirect(url) {
     LEGACY_PATHS.get(pathname) ||
     (pathname.startsWith("/alternatives/")
       ? { pathname: "/compare/" + pathname.slice("/alternatives/".length) }
+      : null) ||
+    // The per-platform /audit/* pages were removed; the free scan is the
+    // equivalent entry point.
+    (pathname === "/audit" || pathname.startsWith("/audit/")
+      ? { pathname: "/tools/ai-visibility-scan" }
       : null);
   if (!target) return null;
 

@@ -15,24 +15,25 @@ export default function FirstMonthPromise({
         <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
           <div>
             <h2 className="max-w-[20ch] font-display text-[clamp(2rem,3.1vw,2.6rem)] font-normal leading-[1.06] tracking-[-0.02em] text-[#111318]">
-              If we cannot set up useful product visibility monitoring in 30
-              days, you pay nothing.
+              The first 30 days are free. At day 30, you decide.
             </h2>
           </div>
 
           <div className="self-end">
             <p className="max-w-[68ch] text-[17px] leading-[1.7] text-black/66">
-              During an agreed pilot, Beseam must establish the product
-              baseline, monitor the agreed discovery paths, identify a material
-              visibility issue, and show the evidence and proposed fix. If we
-              cannot, the engagement ends and you owe us nothing.
+              In the pilot window Beseam establishes the product baseline,
+              monitors the agreed discovery paths, and brings you a material
+              visibility issue with the evidence and the proposed fix. There is
+              no fee for that window and no invoice at the end of it. If you do
+              not think it was worth the access you gave us, you say so and we
+              close it. There are no criteria for you to argue against.
             </p>
 
             <dl className="mt-10 border-y border-black/22">
               {[
                 [
                   "You receive",
-                  "A monitored product scope, baseline, alert evidence, and proposed fix",
+                  "A monitored product scope, baseline, alert evidence, and proposed fix — yours to keep whether or not you continue",
                 ],
                 [
                   "We recheck",
@@ -44,8 +45,9 @@ export default function FirstMonthPromise({
                 ],
                 [
                   "What we need",
-                  "The agreed store and data access available during the pilot",
+                  "The agreed store and data access, and an hour from someone who knows the catalog",
                 ],
+                ["Who decides", "You do, at day 30, without giving a reason"],
               ].map(([term, detail]) => (
                 <div
                   key={term}
