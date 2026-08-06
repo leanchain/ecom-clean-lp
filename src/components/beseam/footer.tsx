@@ -4,6 +4,8 @@ import Logo from "@/components/beseam/logo";
 import TrackedLink from "@/components/beseam/tracked-link";
 
 const PAGE_LINKS = [
+  ["Why Beseam", "/#why"],
+  ["Manifesto", "/manifesto"],
   ["How it works", "/#how-it-works"],
   ["From miss to fix", "/#answer-check"],
   ["What leaves you out", "/#what-breaks"],
