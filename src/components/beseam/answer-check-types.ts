@@ -12,6 +12,31 @@ export type Finding = {
   title: string;
   detail: string;
   product: string | null;
+  /** Present on deterministic page-audit findings only. */
+  severity?: "blocker" | "high" | "medium" | "low" | "info";
+  domain?: string;
+  url?: string;
+  evidence?: string[];
+  fix_complexity?: string;
+  source?: "page_audit";
+};
+
+/** Deterministic verdict for one sampled product page. No LLM involved. */
+export type PageAudit = {
+  url: string;
+  title: string | null;
+  ok: boolean;
+  error: string | null;
+  score: number | null;
+  grade: string | null;
+  /** Share of emitted checks that actually ran; a score only claims this much. */
+  coverage: number;
+  degraded: boolean;
+  domain_scores: Record<string, number>;
+  checks_evaluated: number;
+  checks_failed: number;
+  checks_unevaluated: number;
+  findings: Finding[];
 };
 
 export type ShownProduct = {
@@ -33,7 +58,6 @@ export type Answer = {
   products?: ShownProduct[];
   error: string | null;
 };
-
 
 export type BrandEvidenceProduct = {
   title: string;
@@ -67,4 +91,5 @@ export type AnswerCheckResult = {
   answers: Answer[];
   products_seen: number;
   brand_evidence?: BrandEvidence;
+  page_audits?: PageAudit[];
 };
