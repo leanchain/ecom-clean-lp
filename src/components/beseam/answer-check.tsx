@@ -14,6 +14,7 @@ import { ArrowRight, Check, Loader2, X } from "lucide-react";
 import type {
   Answer,
   AnswerCheckResult,
+  Finding,
   ShownProduct,
   Step,
 } from "@/components/beseam/answer-check-types";
@@ -241,6 +242,61 @@ function ProductTile({ product }: { product: ShownProduct }) {
         </p>
       </div>
     </li>
+  );
+}
+
+// The deterministic half of the report: no LLM, no email gate. It sits under the
+// question list because it explains what could keep these pages out of an
+// answer — deliberately not attributed to any single question, because a page
+// check cannot prove which answer it cost.
+function PageChecks({ result }: { result: AnswerCheckResult }) {
+  const audits = result.page_audits ?? [];
+  const pageFindings = (result.findings ?? []).filter(
+    (finding: Finding) => finding.source === "page_audit",
+  );
+  if (!audits.length || !pageFindings.length) return null;
+
+  const evaluated = audits.reduce((sum, a) => sum + a.checks_evaluated, 0);
+  const failed = audits.reduce((sum, a) => sum + a.checks_failed, 0);
+  if (!evaluated) return null;
+  // Coverage is printed beside the count: an unmeasured check is never a pass.
+  const coverage =
+    audits.reduce((sum, a) => sum + a.coverage, 0) / audits.length;
+
+  return (
+    <div className="border-t border-black/12 px-4 py-4 sm:px-5">
+      <p className="flex items-center gap-2 text-[12px] font-semibold text-black/62">
+        <span className="h-[3px] w-4 bg-[#b8441d]" aria-hidden="true" />
+        What could keep these pages out of an answer
+      </p>
+      <p className="mt-2 font-mono text-[12px] text-black/62">
+        {failed} of {evaluated} page checks failed across {audits.length}{" "}
+        {audits.length === 1 ? "page" : "pages"} · {Math.round(coverage * 100)}%
+        of checks could be measured
+      </p>
+      <ul className="mt-3 grid gap-2">
+        {pageFindings.slice(0, 3).map((finding) => (
+          <li key={finding.code} className="flex items-start gap-2">
+            <span
+              className={`${SEVERITY_BADGE} ${SEVERITY_STYLES[finding.severity ?? "low"] ?? SEVERITY_STYLES.low}`}
+            >
+              {finding.severity ?? "low"}
+            </span>
+            <span className="text-[12.5px] leading-relaxed text-black/70">
+              <span className="font-semibold text-[#111318]">
+                {finding.title}
+              </span>{" "}
+              — {finding.detail}
+            </span>
+          </li>
+        ))}
+      </ul>
+      {pageFindings.length > 3 ? (
+        <p className="mt-3 text-[12px] text-black/62">
+          {pageFindings.length - 3} more page findings are in the full report.
+        </p>
+      ) : null}
+    </div>
   );
 }
 
@@ -491,6 +547,8 @@ export function ResultCard({
                 </ul>
               </div>
             ) : null}
+
+            <PageChecks result={result} />
           </div>
 
           {products.length > 0 ? (

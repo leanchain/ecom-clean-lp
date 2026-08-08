@@ -44,7 +44,9 @@ export default function PublicAuditReport({
       defaultDomain;
     setDomain(requested);
     void load(requested).catch((reason: unknown) => {
-      setError(reason instanceof Error ? reason.message : "Could not load audit.");
+      setError(
+        reason instanceof Error ? reason.message : "Could not load audit.",
+      );
     });
   }, [defaultDomain, load]);
 
@@ -74,7 +76,8 @@ export default function PublicAuditReport({
         .filter((question): question is string => Boolean(question)),
     ),
   );
-  const loneWinQuestion = namedQuestions.length === 1 ? namedQuestions[0] : null;
+  const loneWinQuestion =
+    namedQuestions.length === 1 ? namedQuestions[0] : null;
   const assistants = Array.from(
     new Set(
       result?.answers
@@ -82,6 +85,14 @@ export default function PublicAuditReport({
         .filter((label): label is string => Boolean(label)) ?? [],
     ),
   );
+
+  const pageChecks = useMemo(() => {
+    const audits = result?.page_audits ?? [];
+    const evaluated = audits.reduce((sum, a) => sum + a.checks_evaluated, 0);
+    if (!evaluated) return null;
+    const failed = audits.reduce((sum, a) => sum + a.checks_failed, 0);
+    return `${failed} of ${evaluated} page checks failed`;
+  }, [result]);
 
   const copyLink = async () => {
     try {
@@ -107,10 +118,10 @@ export default function PublicAuditReport({
                 What shoppers&apos; assistants say about {brand}.
               </h1>
               <p className="mt-7 max-w-3xl text-[17px] leading-[1.72] text-black/68">
-                We read the public catalog, wrote the buying questions that matter
-                for this category, and asked ChatGPT and Google AI Mode which
-                products they would put in front of a shopper. No store login and
-                no private data were used.
+                We read the public catalog, wrote the buying questions that
+                matter for this category, and asked ChatGPT and Google AI Mode
+                which products they would put in front of a shopper. No store
+                login and no private data were used.
               </p>
             </div>
 
@@ -143,17 +154,28 @@ export default function PublicAuditReport({
           <div className="mt-10 flex flex-wrap items-center gap-2.5">
             {[
               "Public pages only",
-              result ? `${result.products_seen} products sampled` : "Live catalog read",
-              result ? `${result.questions.length} buyer questions` : "Buyer questions",
-              assistants.length ? assistants.join(" + ") : "ChatGPT + Google AI Mode",
-            ].map((label) => (
-              <span
-                key={label}
-                className="inline-flex min-h-8 items-center border border-black/20 bg-white px-3 text-[12px] font-semibold text-black/68"
-              >
-                {label}
-              </span>
-            ))}
+              result
+                ? `${result.products_seen} products sampled`
+                : "Live catalog read",
+              result
+                ? `${result.questions.length} buyer questions`
+                : "Buyer questions",
+              assistants.length
+                ? assistants.join(" + ")
+                : "ChatGPT + Google AI Mode",
+              // One number only: the deterministic audit is evidence the answers
+              // rest on, not a second report competing with them.
+              pageChecks,
+            ]
+              .filter((label): label is string => Boolean(label))
+              .map((label) => (
+                <span
+                  key={label}
+                  className="inline-flex min-h-8 items-center border border-black/20 bg-white px-3 text-[12px] font-semibold text-black/68"
+                >
+                  {label}
+                </span>
+              ))}
             <button
               type="button"
               onClick={copyLink}
@@ -197,8 +219,13 @@ export default function PublicAuditReport({
           />
         ) : (
           <div className="flex min-h-64 items-center justify-center border border-black/18 bg-white">
-            <RefreshCw className="h-5 w-5 animate-spin text-black/50" aria-hidden="true" />
-            <span className="ml-3 text-[14px] text-black/62">Loading the public audit…</span>
+            <RefreshCw
+              className="h-5 w-5 animate-spin text-black/50"
+              aria-hidden="true"
+            />
+            <span className="ml-3 text-[14px] text-black/62">
+              Loading the public audit…
+            </span>
           </div>
         )}
       </section>
@@ -226,9 +253,13 @@ export default function PublicAuditReport({
               key={title}
               className={`py-8 lg:px-8 lg:py-10 ${index > 0 ? "border-t border-black/14 lg:border-l lg:border-t-0" : ""}`}
             >
-              <p className="font-mono text-[12px] font-semibold text-[#b8441d]">{number}</p>
+              <p className="font-mono text-[12px] font-semibold text-[#b8441d]">
+                {number}
+              </p>
               <h2 className="mt-3 text-[18px] font-semibold">{title}</h2>
-              <p className="mt-3 text-[14px] leading-relaxed text-black/64">{body}</p>
+              <p className="mt-3 text-[14px] leading-relaxed text-black/64">
+                {body}
+              </p>
             </div>
           ))}
         </div>
@@ -246,8 +277,8 @@ export default function PublicAuditReport({
             </h2>
             <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/66">
               In 20 minutes, we will walk through the fields behind the misses,
-              show what would change on the store, and agree on the questions that
-              prove whether the work paid off.
+              show what would change on the store, and agree on the questions
+              that prove whether the work paid off.
             </p>
           </div>
           <BookReviewCta
