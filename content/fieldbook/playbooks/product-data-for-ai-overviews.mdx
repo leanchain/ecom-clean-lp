@@ -1,0 +1,52 @@
+---
+title: Product data readiness for AI answers
+navTitle: AI answer data readiness
+summary: Structure and enrich product data before an investigation finds a gap, so buying questions have accurate, citable, merchant-owned facts to draw from.
+category: Discovery operations
+kind: playbook
+status: emerging
+order: 5
+reviewedAt: 2026-08-10
+relatedSkills:
+  - ecommerce-technical-seo-geo-audit
+  - product-structured-data-validation
+  - feed-pdp-parity-check
+  - ai-citation-gap-investigation
+relatedResources:
+  - schema-org
+  - google-product-structured-data
+  - google-merchant-product-data-spec
+  - google-generative-ai-search-guide
+  - beseam-ai-visibility-scan
+---
+
+Run this before the [AI citation investigation playbook](/resources/playbooks/ai-citation-investigation) finds a gap, not instead of it. Generative answer systems assemble buying answers from the feed, the rendered page, structured data, and whichever source they judge clearest — not from ranked links alone. Most of what determines whether a product is usable there is ordinary data hygiene, done ahead of time.
+
+## Owners
+
+- **Catalog:** confirms identifiers, variant structure, and approved attribute values.
+- **Content:** writes buyer-facing facts in plain, specific language.
+- **Storefront/dev:** keeps structured data aligned with the rendered page.
+- **Discovery:** runs the buying-question baseline and owns the retest.
+
+## Steps
+
+1. Confirm GTIN, MPN, SKU, and canonical URL are unique and correct for each product and variant.
+2. Complete `Product` and `Offer` markup: price, currency, availability, images, and variant relationships.
+3. Write the buyer-facing facts a generic question would need — material, size or fit, compatibility, use case — not marketing copy.
+4. Match those facts across the PDP, feed export, and channel diagnostic for the same product and market.
+5. State shipping, returns, and merchant identity consistently across sources.
+6. Check crawl access, robots rules, and indexability on the pages carrying that data.
+7. Run a fixed set of buying questions against the product and record whether it appears and whether the facts are correct.
+8. Log each gap as catalog, markup, content, or selection, and route it to the owning team.
+
+## Done when
+
+- Identifiers, price, and availability match across catalog, PDP, structured data, and feed.
+- `Product` and `Offer` markup validates against the rendered page.
+- Buyer-facing facts are present, accurate, and free of unsupported claims.
+- A baseline buying-question run exists to compare against after future changes.
+
+<Callout type="boundary" title="Readiness is not a placement guarantee">
+This removes known blockers. It does not guarantee inclusion, citation, or ranking in AI Overviews or any other answer system — see the [AI citation investigation playbook](/resources/playbooks/ai-citation-investigation) for what a retest can and cannot show.
+</Callout>
