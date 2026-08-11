@@ -6,12 +6,8 @@ export default function FaqSection() {
       <div className="mx-auto grid max-w-[92rem] gap-12 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20 lg:px-10 lg:py-28">
         <div>
           <h2 className="max-w-[20ch] font-display text-[clamp(2rem,3.1vw,2.6rem)] font-normal leading-[1.06] tracking-[-0.02em] text-[#111318]">
-            Questions about monitoring product visibility.
+            FAQ
           </h2>
-          <p className="mt-7 max-w-[68ch] text-[16px] leading-[1.7] text-black/62">
-            Clear answers about baselines, change alerts, commercial priority,
-            approvals, and recovery checks.
-          </p>
         </div>
         <div className="border-t border-black/25">
           {STORE_HEALTH_FAQS.map((faq) => (

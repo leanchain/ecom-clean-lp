@@ -14,11 +14,10 @@ import { cn } from "@/lib/utils";
 const APP_LOGIN_URL = "https://app.beseam.com/login";
 
 const NAV_LINKS = [
-  { label: "Why Beseam", href: "/#why" },
-  { label: "How it works", href: "/#how-it-works" },
-  { label: "From miss to fix", href: "/#answer-check" },
-  { label: "What leaves you out", href: "/#what-breaks" },
-  { label: "First-month promise", href: "/#promise" },
+  { label: "Example", href: "/#proof" },
+  { label: "Across assistants", href: "/#engine-gaps" },
+  { label: "30-day pilot", href: "/#promise" },
+  { label: "FAQ", href: "/#faq" },
 ] as const;
 
 export default function BeseamNavbar() {
@@ -75,7 +74,7 @@ export default function BeseamNavbar() {
             </TrackedLink>
             <BookReviewCta
               location="navbar"
-              label="See how monitoring works"
+              label="Book a 20-minute review"
               className="min-h-10 whitespace-nowrap px-4 text-[13px]"
             />
           </div>
@@ -126,7 +125,7 @@ export default function BeseamNavbar() {
               </TrackedLink>
               <BookReviewCta
                 location="mobile_nav"
-                label="See how monitoring works"
+                label="Book a 20-minute review"
                 className="w-full"
               />
             </div>

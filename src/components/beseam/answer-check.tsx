@@ -1040,6 +1040,7 @@ function SampleLoopShowcase() {
         <div
           role="tablist"
           aria-label="Loop stages"
+          tabIndex={-1}
           onKeyDown={onTabKeyDown}
           className="mb-4 hidden gap-px border border-black/18 bg-black/18 md:grid md:grid-cols-4"
         >
@@ -1110,7 +1111,6 @@ export default function AnswerCheck({
 }) {
   const { trackEvent } = useAnalytics();
   const [domain, setDomain] = useState("");
-  const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [result, setResult] = useState<AnswerCheckResult | null>(null);
   const [error, setError] = useState("");
@@ -1173,7 +1173,7 @@ export default function AnswerCheck({
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           domain: target,
-          email: email.trim() || null,
+          email: null,
           source: placement,
           website,
         }),
@@ -1202,7 +1202,7 @@ export default function AnswerCheck({
   return (
     <div>
       <form onSubmit={onSubmit} noValidate className="mx-auto w-full max-w-3xl">
-        <div className="grid gap-3 sm:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)_auto]">
+        <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
           <div>
             <label className="sr-only" htmlFor="answer-check-domain">
               Store domain
@@ -1216,20 +1216,6 @@ export default function AnswerCheck({
               }}
               placeholder="yourstore.com"
               aria-invalid={Boolean(error)}
-              className={inputClass}
-            />
-          </div>
-          <div>
-            <label className="sr-only" htmlFor="answer-check-email">
-              Work email (optional)
-            </label>
-            <input
-              id="answer-check-email"
-              type="email"
-              autoComplete="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="you@yourbrand.com"
               className={inputClass}
             />
           </div>
@@ -1261,7 +1247,7 @@ export default function AnswerCheck({
           className={`mt-3 text-[13px] leading-relaxed ${error ? "text-[#b3261e]" : "text-black/62"}`}
         >
           {error ||
-            "We read your live storefront first. Email is optional: add it and we send a link that runs the assistant questions."}
+            "We read your live storefront first. No store access is required for the first check."}
         </p>
       </form>
 

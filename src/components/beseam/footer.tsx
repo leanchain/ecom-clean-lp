@@ -4,12 +4,10 @@ import Logo from "@/components/beseam/logo";
 import TrackedLink from "@/components/beseam/tracked-link";
 
 const PAGE_LINKS = [
-  ["Why Beseam", "/#why"],
-  ["Manifesto", "/manifesto"],
-  ["How it works", "/#how-it-works"],
-  ["From miss to fix", "/#answer-check"],
-  ["What leaves you out", "/#what-breaks"],
-  ["First-month promise", "/#promise"],
+  ["Example", "/#proof"],
+  ["Across assistants", "/#engine-gaps"],
+  ["30-day pilot", "/#promise"],
+  ["FAQ", "/#faq"],
 ] as const;
 
 export default function BeseamFooter() {
@@ -22,12 +20,12 @@ export default function BeseamFooter() {
               <Logo className="text-white" />
             </Link>
             <p className="mt-7 max-w-[20ch] font-display text-[34px] leading-[1.08] tracking-[-0.02em] text-white/92">
-              Know when a valuable product disappears from view.
+              See what AI recommends. Understand why. Test what changes.
             </p>
             <p className="mt-6 max-w-[62ch] text-[14px] leading-relaxed text-white/72">
-              Beseam monitors each product across your store, shopping feeds,
-              search results, and product recommendations. Your team sees what
-              changed, who should act, and whether the fix restored visibility.
+              Beseam runs buying questions against AI assistants, keeps the
+              competing products and answer evidence, and lets you re-check the
+              same question after a product change.
             </p>
           </div>
 
@@ -49,7 +47,7 @@ export default function BeseamFooter() {
 
         <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto_auto_auto] lg:items-center lg:gap-10">
           <p className="font-mono text-[12px] tracking-[0.02em] text-white/72">
-            Product visibility monitoring for ecommerce
+            AI product recommendation testing for ecommerce
           </p>
           <Link
             href="/resources"
@@ -82,12 +80,12 @@ export default function BeseamFooter() {
             Terms
           </Link>
           <TrackedLink
-            href="/product-visibility-monitoring"
-            eventName="monitoring_setup_clicked"
+            href="/#home-hero"
+            eventName="marketing_primary_cta_clicked"
             placement="footer_secondary"
             className="w-fit text-[12px] text-[#e8653a] underline decoration-white/20 underline-offset-5"
           >
-            Set up catalog monitoring
+            Run a free scan
           </TrackedLink>
         </div>
 

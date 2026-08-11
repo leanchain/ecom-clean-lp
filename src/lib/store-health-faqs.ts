@@ -1,47 +1,27 @@
 export const STORE_HEALTH_FAQS = [
   {
-    question: "What does Beseam monitor?",
+    question: "What exactly does Beseam test?",
     answer:
-      "Beseam monitors agreed products across the store catalog, product pages, shopping feeds, search results, and product recommendations. It keeps those sources attached to the same product record so each run can be compared with the previous state.",
+      "Beseam runs buying questions against configured AI assistants and keeps the observed answer, products named, competitors, citations or supporting evidence when available, and the time of the run. The same question can be run again after a product change.",
   },
   {
-    question: "How does Beseam know that product visibility changed?",
+    question: "How do you know why another product was recommended?",
     answer:
-      "The first monitoring run establishes a baseline for the agreed products and discovery paths. Later runs compare product presence, title, price, availability, description, structured data, language coverage, and other source evidence with that baseline and the most recent known state.",
+      "Beseam does not pretend to know an assistant's hidden ranking logic. It compares the observed answer with product and storefront evidence you control, then identifies supported differences or missing facts that are actionable. A suspected cause stays separate from a confirmed fact.",
   },
   {
-    question: "What counts as a product visibility change?",
+    question: "What can Beseam actually change?",
     answer:
-      "Examples include a product leaving a shopping feed, disappearing from a tracked search or buying answer, being replaced by a competitor, or showing product facts that no longer agree with the store catalog. Beseam keeps the source and time of the change with the product.",
+      "With your approval and store access, Beseam can propose and publish supported product-data changes such as titles, descriptions, attributes, or other editable product fields. Customer-facing changes are not published without the approval rules agreed for the store, and the previous value is kept for revert.",
   },
   {
-    question: "How does Beseam decide which alert matters first?",
+    question: "Doesn’t Shopify already show AI channel performance?",
     answer:
-      "Beseam considers the commercial priority available for the product, the number and importance of affected discovery paths, the freshness and quality of the evidence, and the scope agreed with the store. High-selling or high-priority products can be placed ahead of minor catalog warnings.",
+      "Shopify remains the source of truth for your catalog and can report performance from supported AI sales channels. Beseam focuses on the individual buying answer: which products were named, which competitors appeared, what product evidence is connected to the miss, and whether the same question changes after an approved product update.",
   },
   {
-    question: "How often does Beseam check the catalog?",
+    question: "Can Beseam guarantee my product will be recommended?",
     answer:
-      "The monitoring cadence depends on the source and the agreed scope. Each result records when the source was checked and whether the evidence is fresh, stale, incomplete, or unavailable, so an old result does not appear current.",
-  },
-  {
-    question: "Does Beseam replace Shopify or our feed tools?",
-    answer:
-      "No. Your commerce platform remains the source for catalog and order data, and each channel keeps its own records. Beseam compares those sources over time and points your team to the product-level change that needs attention.",
-  },
-  {
-    question: "What happens after Beseam raises an alert?",
-    answer:
-      "The alert includes the affected product, the previous and current state, the source evidence, the likely cause, and a proposed next step. The owner and approval stay attached to the product, and Beseam reruns the original check after the change.",
-  },
-  {
-    question: "Can Beseam publish product changes without approval?",
-    answer:
-      "No material customer-facing change is published without the access and approval rules agreed for the store. Your team can approve, reject, or edit a proposed change before anything is published.",
-  },
-  {
-    question: "What is the first-month promise?",
-    answer:
-      "During an agreed pilot, if Beseam cannot establish the product baseline, monitor the agreed discovery paths, identify a material visibility issue, and show the evidence and proposed fix within 30 days, you owe us nothing and the engagement ends. The agreed store and data access must remain available during the pilot.",
+      "No. Beseam cannot control an AI assistant's recommendation. It records what happened, helps you change product evidence you control, and re-runs the same question so you can see whether the observed answer changed.",
   },
 ] as const;
