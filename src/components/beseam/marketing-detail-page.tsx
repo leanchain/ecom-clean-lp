@@ -44,13 +44,7 @@ export default function MarketingDetailPage({
         name: page.metaTitle,
         description: page.description,
         isPartOf: { "@id": baseUrl + "/#website" },
-        about: {
-          "@id":
-            baseUrl +
-            (page.slug === "ai-visibility-monitoring"
-              ? "/#ai-visibility"
-              : "/#store-health"),
-        },
+        about: { "@id": baseUrl + "/#beseam" },
       },
       {
         "@type": "BreadcrumbList",
@@ -167,7 +161,7 @@ export default function MarketingDetailPage({
               The evidence path
             </p>
             <h2 className="mt-4 max-w-[20ch] text-[clamp(2.1rem,3.6vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-white">
-              One trust model across both Beseam workspaces.
+              One evidence path from observation to action.
             </h2>
           </div>
           <ol className="mt-10 grid border-y border-technical-rule md:grid-cols-4">
@@ -312,11 +306,11 @@ export default function MarketingDetailPage({
       <section className="bg-pigment text-white">
         <div className="section-pad mx-auto max-w-6xl px-6">
           <h2 className="max-w-[20ch] text-[clamp(2.1rem,3.6vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.02em]">
-            Start with your store - and how AI sees it.
+            Start with one store and one question worth answering.
           </h2>
           <p className="mt-5 max-w-[68ch] text-[18px] leading-relaxed">
-            Review your Shopify setup, current monitoring coverage and priority
-            AI visibility questions in one focused session.
+            Bring the products that matter and the buying questions you care
+            about. We will start from the evidence Beseam can actually observe.
           </p>
           <div className="mt-8">
             <BookReviewCta

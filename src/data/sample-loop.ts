@@ -73,7 +73,7 @@ export const SAMPLE_LOOP: SampleLoop = {
       {
         field: "offers.availability",
         issue:
-          "The Offer schema and the visible stock message don't resolve to the same status — assistants drop products they can't confirm as buyable.",
+          "The Offer schema and the visible stock message don't resolve to the same status, leaving buyability ambiguous to systems reading the page.",
         severity: "blocker",
       },
       {
@@ -91,7 +91,7 @@ export const SAMPLE_LOOP: SampleLoop = {
       {
         field: "BreadcrumbList",
         issue:
-          "No breadcrumb schema — the category hierarchy is invisible to AI engines.",
+          "No breadcrumb schema — the page provides less explicit category context to systems reading its structured data.",
         severity: "low",
       },
     ],
@@ -194,6 +194,6 @@ export const SAMPLE_LOOP: SampleLoop = {
         image_url: null,
       },
     ],
-    note: "After the fix publishes, the same question is asked again on a schedule. The answer changing — not the edit — is the proof.",
+    note: "After the fix publishes, the same question is asked again. A changed answer is an observed result to compare with the earlier run, not a guarantee of future placement.",
   },
 };

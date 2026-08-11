@@ -4,19 +4,19 @@ import Reveal from "@/components/beseam/reveal";
 
 const ROLES = [
   {
-    role: "SEO, GEO, and content",
+    role: "Product content and merchandising",
     icon: Search,
-    body: "See answers, citations, competitors, and affected products.",
+    body: "See the buying question, the products that won, and the product evidence worth changing.",
   },
   {
     role: "Ecommerce and operations",
     icon: ShoppingCart,
-    body: "Know what buyers can find and where the purchase journey breaks.",
+    body: "Keep the observed answer, approved product change, and re-check attached to the same product.",
   },
   {
     role: "Developers and agencies",
     icon: Code2,
-    body: "Start with reproducible evidence and a clear investigation path.",
+    body: "Start with reproducible answer evidence and a narrower implementation path.",
   },
 ];
 
@@ -32,9 +32,9 @@ export default function TeamsSection() {
             Built for the people who own ecommerce growth.
           </h2>
           <p className="max-w-[64ch] self-end text-[17px] leading-[1.65] text-black/66">
-            Product visibility crosses content, commerce operations, and
-            implementation. Beseam keeps the evidence and next action in one
-            shared record.
+            AI product recommendations cross content, merchandising, and
+            implementation. Beseam keeps the question, answer, product evidence,
+            approved change, and re-check in one shared record.
           </p>
         </Reveal>
 

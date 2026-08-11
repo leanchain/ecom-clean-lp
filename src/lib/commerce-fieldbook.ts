@@ -913,7 +913,7 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
   },
   {
     slug: "beseam-ai-visibility-scan",
-    name: "Beseam AI Visibility Scan",
+    name: "Beseam AI Product Recommendation Scan",
     kind: "Beseam project",
     category: "Discovery, SEO and GEO",
     maturity: "Emerging",
@@ -921,12 +921,12 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     license: "Hosted tool; not presented as open source",
     url: "/tools/ai-visibility-scan",
     summary:
-      "A focused entry point for checking how configured AI surfaces describe a commerce brand at a point in time.",
+      "A focused entry point for checking how public product information is represented in AI shopping and answer surfaces at a point in time.",
     useCases: [
-      "Initial AI visibility review",
-      "Starting evidence for a commerce investigation",
+      "Initial AI product recommendation review",
+      "Starting evidence for a product-answer investigation",
     ],
-    tags: ["AI visibility", "GEO", "Beseam"],
+    tags: ["AI recommendations", "Product discovery", "Beseam"],
     reviewedAt: FIELD_REVIEW_DATE,
   },
 ];
