@@ -25,9 +25,9 @@ export const STORE_HEALTH_FAQS = [
       "The monitoring cadence depends on the source and the agreed scope. Each result records when the source was checked and whether the evidence is fresh, stale, incomplete, or unavailable, so an old result does not appear current.",
   },
   {
-    question: "Does Beseam replace Shopify or our feed tools?",
+    question: "Doesn’t Shopify already show AI channel performance?",
     answer:
-      "No. Your commerce platform remains the source for catalog and order data, and each channel keeps its own records. Beseam compares those sources over time and points your team to the product-level change that needs attention.",
+      "Shopify remains the source of truth for your catalog and can report performance from supported AI sales channels. Beseam focuses on the individual buying answer: which products were named, which competitors appeared, what product evidence is connected to the miss, and whether the same question changes after an approved product update.",
   },
   {
     question: "What happens after Beseam raises an alert?",
