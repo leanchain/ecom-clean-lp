@@ -2,10 +2,12 @@ import BookReviewCta from "@/components/beseam/book-review-cta";
 import Reveal from "@/components/beseam/reveal";
 
 export default function FirstMonthPromise({
-  showManifestoLink: _showManifestoLink = true,
+  showManifestoLink = true,
 }: {
   showManifestoLink?: boolean;
 }) {
+  void showManifestoLink;
+
   return (
     <section
       id="promise"
@@ -15,39 +17,38 @@ export default function FirstMonthPromise({
         <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
           <div>
             <h2 className="max-w-[20ch] font-display text-[clamp(2rem,3.1vw,2.6rem)] font-normal leading-[1.06] tracking-[-0.02em] text-[#111318]">
-              The first 30 days are free. At day 30, you decide.
+              Try Beseam on your catalog for 30 days.
             </h2>
           </div>
 
           <div className="self-end">
             <p className="max-w-[68ch] text-[17px] leading-[1.7] text-black/66">
-              In the pilot window Beseam establishes the product baseline,
-              monitors the agreed discovery paths, and brings you a material
-              visibility issue with the evidence and the proposed fix. There is
-              no fee for that window and no invoice at the end of it. If you do
-              not think it was worth the access you gave us, you say so and we
-              close it. There are no criteria for you to argue against.
+              We find a buying question where your product loses, keep the
+              answer and competing products, show the product evidence you can
+              change, and re-run the question after the change. There is no fee
+              for the first 30 days. At day 30, you decide whether the work was
+              useful enough to continue.
             </p>
 
             <dl className="mt-10 border-y border-black/22">
               {[
                 [
                   "You receive",
-                  "A monitored product scope, baseline, alert evidence, and proposed fix — yours to keep whether or not you continue",
+                  "The question, observed answer, competing products, product evidence, and proposed change",
                 ],
                 [
-                  "We recheck",
-                  "The original visibility signal after your team makes the change",
+                  "We re-check",
+                  "The same buying question after the approved product change",
                 ],
                 [
-                  "The boundary",
-                  "We promise useful monitoring and diagnosis, not a sales increase",
+                  "We do not promise",
+                  "A recommendation, ranking, traffic increase, or sales increase",
                 ],
                 [
                   "What we need",
-                  "The agreed store and data access, and an hour from someone who knows the catalog",
+                  "The agreed catalog scope and store access if you want us to publish an approved change",
                 ],
-                ["Who decides", "You do, at day 30, without giving a reason"],
+                ["Who decides", "You do, at day 30"],
               ].map(([term, detail]) => (
                 <div
                   key={term}
