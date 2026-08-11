@@ -10,7 +10,7 @@ import TeamsSection from "@/components/beseam/teams-section";
 export const metadata = {
   title: { absolute: "About | Beseam" },
   description:
-    "Why Pankaj Kumar founded Beseam after a year working closely with ecommerce founders and operators, applying a career in measurement and reliability to the revenue problems that cross commerce systems.",
+    "Why Pankaj Kumar founded Beseam to test real ecommerce buying questions against AI assistants, connect observed answers to merchant-controlled product evidence, and re-check after a change.",
 };
 
 const ADVISORS = [
@@ -41,13 +41,13 @@ export default function AboutPage() {
                 About Beseam
               </p>
               <h1 className="mt-7 max-w-[17ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
-                Revenue problems do not respect software boundaries.
+                AI can recommend someone else. Start with the answer.
               </h1>
             </div>
             <p className="max-w-[64ch] text-[19px] leading-[1.72] text-black/66">
-              Beseam connects the evidence that falls between commerce systems,
-              shows which issue deserves attention first, and carries it from
-              diagnosis to a proposed fix and verified result.
+              Beseam runs real buying questions, records the products AI
+              recommends, connects the result to product evidence merchants can
+              change, and asks the same question again after an approved update.
             </p>
           </Reveal>
         </div>
@@ -70,15 +70,15 @@ export default function AboutPage() {
               </p>
               <p>
                 For the past year, he has worked closely with ecommerce founders
-                and operators on real stores—tracing visibility gaps, product
-                and feed problems, tracking drift, campaign readiness, and
-                purchase friction.
+                and operators on real stores, including product data, feeds,
+                discovery, and the answers AI assistants return to shoppers.
               </p>
               <p>
-                The same pattern kept repeating: every tool could explain its
-                own slice, while the revenue problem lived between them. He
-                founded Beseam to connect that evidence, propose the change, and
-                verify what happened next.
+                The same problem kept repeating: a merchant could see its own
+                catalog clearly and still have no useful record of why an AI
+                answer named another product. He founded Beseam to keep the
+                question, observed answer, product evidence, approved change,
+                and re-check together.
               </p>
             </div>
             <Link
@@ -193,12 +193,12 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-[92rem] gap-10 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1.15fr)_auto] lg:items-end lg:gap-20 lg:px-10 lg:py-28">
           <Reveal>
             <h2 className="max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-              Bring one store. See which issue deserves attention first.
+              Bring one store and one buying question that matters.
             </h2>
             <p className="mt-7 max-w-[64ch] text-[17px] leading-[1.65] text-white/72">
-              A 20-minute commerce review looks at the store, the current stack,
-              and the evidence Beseam would need to investigate the first
-              material revenue leak.
+              A 20-minute review looks at the products you care about, the
+              buying questions they should win, and the evidence Beseam can
+              actually observe and test.
             </p>
             <p className="mt-5 text-[14px] text-white/62">
               Questions first?{" "}

@@ -23,14 +23,14 @@ export default function ScanForm() {
       </div>
       <div className="mt-14 border-t border-rule pt-8">
         <p className="text-[15px] text-foreground">
-          Need ongoing visibility and purchase-health monitoring with evidence
-          and prioritized issues?
+          Want to review the buying questions that matter for your products and
+          what you can change when another product is recommended?
         </p>
         <Link
           href="/product-visibility-monitoring"
           className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-semibold hover:underline"
         >
-          Book a 20-minute commerce review
+          Book a 20-minute recommendation review
           <ArrowRight aria-hidden="true" className="h-4 w-4" />
         </Link>
       </div>

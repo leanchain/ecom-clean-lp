@@ -1,4 +1,5 @@
 import { Figtree, Lora } from "next/font/google";
+
 import type { Metadata } from "next";
 
 import "./globals.css";
@@ -26,11 +27,11 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: {
-    default: "Beseam - Product visibility monitoring for ecommerce",
+    default: "Beseam - AI product recommendation testing for ecommerce",
     template: "%s | Beseam",
   },
   description:
-    "Beseam monitors each product across product pages, shopping feeds, search results, and product recommendations, then alerts your team when visibility changes.",
+    "Run real buying questions against AI assistants, see which products were recommended, inspect the product evidence behind the answer, and test the same question again after a change.",
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
   publisher: "Beseam",
@@ -47,9 +48,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Beseam - Product visibility monitoring for ecommerce",
+    title: "Beseam - See why AI picked someone else",
     description:
-      "Know when a valuable product disappears, what changed, and whether the fix restored visibility.",
+      "Run a real buying question, see which products AI recommended, inspect the product evidence you control, and test the same question again after a change.",
     url: "/",
     siteName: "Beseam",
     type: "website",
@@ -58,15 +59,15 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Beseam product visibility monitoring for ecommerce",
+        alt: "Beseam AI product recommendation testing for ecommerce",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam - Product visibility monitoring for ecommerce",
+    title: "Beseam - See why AI picked someone else",
     description:
-      "Know when a valuable product disappears, what changed, and whether the fix restored visibility.",
+      "Run a real buying question, see which products AI recommended, inspect the product evidence you control, and test the same question again after a change.",
     images: ["/og-image.png"],
   },
 };

@@ -360,17 +360,16 @@ export function ResultCard({
         {scored.length > 0 ? (
           <div className="text-right">
             <p className="text-[12px] font-semibold text-black/62">
-              Answer visibility score
+              Questions where you appeared
             </p>
             <p className="mt-1 flex items-baseline justify-end gap-1.5">
               <span
                 className={`text-[30px] font-semibold leading-none tracking-[-0.02em] ${band.text}`}
               >
-                {score}
+                {named}
               </span>
-              <span className="text-[12px] text-black/62">/ 100</span>
-              <span className={`ml-1 text-[12px] font-semibold ${band.text}`}>
-                {band.label}
+              <span className="text-[12px] text-black/62">
+                / {scored.length}
               </span>
             </p>
           </div>
@@ -672,16 +671,17 @@ function DiagnosePanel() {
           <LoopProductRow />
           <div className="mt-5 border-t border-black/14 pt-4">
             <p className="text-[12px] font-semibold text-black/62">
-              Answer-readiness score
+              Product evidence check
             </p>
             <p className="mt-2 font-serif text-[clamp(2.6rem,3vw,3.4rem)] leading-[0.9] tracking-[-0.02em] text-[#b8441d]">
-              {d.score}
+              {d.failedChecks}
               <span className="ml-2 font-mono text-[13px] tracking-normal text-black/62">
-                /100 · {d.grade}
+                of {d.totalChecks} checks need attention
               </span>
             </p>
             <p className="mt-2 text-[12px] leading-relaxed text-black/62">
-              {d.failedChecks} of {d.totalChecks} checks failed. {d.source}.
+              {d.source}. These findings are evidence to investigate, not a
+              hidden-model ranking score.
             </p>
           </div>
         </div>

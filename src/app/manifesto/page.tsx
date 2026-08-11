@@ -1,21 +1,23 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
 
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import Reveal from "@/components/beseam/reveal";
 
 export const metadata: Metadata = {
-  title: { absolute: "The Beseam Manifesto | Revenue leaks live in the seams" },
+  title: {
+    absolute: "The Beseam Manifesto | Test the answer, then test the change",
+  },
   description:
-    "Why Pankaj Kumar is building Beseam: your platform reports one number, your ad accounts another, your analytics a third—and the revenue problems that cross them belong to no one.",
+    "Why Beseam is built around real buying questions, observed AI recommendations, product evidence merchants control, and the same-question re-check after a change.",
   alternates: { canonical: "/manifesto" },
   openGraph: {
-    title: "The Beseam Manifesto | Revenue leaks live in the seams",
+    title: "The Beseam Manifesto | Test the answer, then test the change",
     description:
-      "Why Beseam exists, what an autonomous revenue agent should and should not do, and who this is not for.",
+      "The principles behind Beseam: observe the actual answer, separate evidence from inference, change only what the merchant controls, and test again.",
     url: "/manifesto",
     type: "article",
   },
@@ -23,68 +25,68 @@ export const metadata: Metadata = {
 
 const PROBLEM = [
   [
-    "Three systems, three numbers",
-    "Your commerce platform knows orders and catalog state. Analytics sees events. Each ad account counts its own channel. Assistants describe your brand to buyers you never see. Every one of them is right inside its own boundary.",
+    "Distribution is not the answer",
+    "A product can be present in a catalog and still be absent from the answer a shopper receives. Eligibility, indexing, and recommendation are different things.",
   ],
   [
-    "No system owns the gap",
-    "A broken feed, a thin product page, a wrong answer in an assistant, a campaign pointed at the wrong page, or a checkout failure can cross four tools without ever becoming one owned issue.",
+    "The answer is observable",
+    "You can ask the buying question, record what the assistant said, and keep the products and competitors it named. That is more useful than starting from a generic visibility score.",
   ],
   [
-    "The team becomes the integration",
-    "Operators reconcile exports, screenshots, and opinions, then still have to argue about which problem deserves this week.",
+    "The model is not explainable on demand",
+    "No merchant tool can read a model's hidden ranking logic. The honest job is to separate the observed answer from the product evidence and hypotheses around it.",
   ],
   [
-    "Margin pays for the delay",
-    "When acquisition costs more and contribution margin is thinner, a leak that survives a quarter is not an annoyance. It is the quarter.",
+    "The merchant still controls the evidence",
+    "Titles, descriptions, attributes, availability, structured data, feeds, and product pages remain changeable. Those are the levers worth testing.",
   ],
 ] as const;
 
 const PRINCIPLES = [
   {
-    title: "Observe from the outside",
-    body: "A store can look healthy in every internal dashboard while discovery, product data, campaign readiness, or checkout is already failing for the customer.",
+    title: "Keep the exact question",
+    body: "The prompt matters. Beseam keeps the buying question with the observed answer instead of collapsing many different decisions into one score.",
   },
   {
-    title: "Attach evidence to an object",
-    body: "A finding is only useful when it names the product, page, query, journey, campaign, or order it came from—and keeps them attached to the same issue.",
+    title: "Keep the products that won",
+    body: "A miss is more useful when the competing products, merchants, citations, and exposed evidence stay attached to the same answer.",
   },
   {
-    title: "Rank by money, not by volume",
-    body: "The team should see the issue most likely to cost or make revenue first, not another feed of alerts sorted by time.",
+    title: "Separate evidence from inference",
+    body: "A missing attribute is a fact. Saying it caused a model to rank another product is a hypothesis unless the evidence supports more. Beseam keeps those categories separate.",
   },
   {
-    title: "Propose the change, name the owner",
-    body: "A diagnosis is unfinished until it says which commerce object to change, who changes it, and what approval that change requires.",
+    title: "Change only what you control",
+    body: "Proposed actions should point to merchant-owned product evidence and remain behind an approval boundary before anything customer-facing changes.",
   },
   {
-    title: "Recheck our own work",
-    body: "After the team acts, Beseam rechecks the original signal, keeps booked fact separate from attribution and modeling, and carries the result into the next decision.",
+    title: "Ask the same question again",
+    body: "After a change, Beseam re-runs the original buying question and records the new answer. A changed result is evidence to compare, not a promise of future placement.",
   },
 ] as const;
 
 const AI_STANCE = [
   [
-    "What we watch",
-    "Which questions surface your brand, what assistants claim about your products, which sources they cite, and which competitor appears in your place.",
+    "What we test",
+    "Real buying questions, the answers assistants return, the products they name, and the competitors that appear when your product does not.",
   ],
   [
     "What we change",
-    "The objects you actually control: the product record, the page, the feed, the structured data an assistant reads before it answers.",
+    "Merchant-owned product evidence: the product record, page content, structured data, feed fields, and other approved product information.",
   ],
   [
     "What we will not promise",
-    "Placement inside an answer no vendor controls, or a funnel rebuilt around an interface that is still changing every quarter.",
+    "A guaranteed recommendation, a hidden-model explanation we cannot observe, or a revenue number that one changed answer cannot prove.",
   ],
 ] as const;
 
 const NEVER = [
-  "Hide stale, missing, failed, or uncertain evidence behind a confident score.",
-  "Merge booked, observed, attributed, and modeled revenue into one convenient number.",
-  "Spend budget or publish a material customer-facing change without a named approver.",
-  "Replace the commerce, analytics, or advertising systems that remain your record.",
-  "Call a recommendation finished before the original signal has been checked again.",
-  "Make your own data difficult to leave with.",
+  "Hide the actual question and answer behind a confident visibility score.",
+  "Present a likely cause as if we could see an assistant's hidden ranking logic.",
+  "Publish a material customer-facing product change without the agreed approval.",
+  "Replace Shopify or the commerce systems that remain the merchant's source of truth.",
+  "Call a product-data change successful before the same buying question has been checked again.",
+  "Turn one favorable re-check into a guarantee of future recommendation, traffic, or revenue.",
 ] as const;
 
 const NOT_FOR = [
@@ -110,9 +112,9 @@ export default function ManifestoPage() {
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Revenue leaks live in the seams",
+    headline: "Test the answer, then test the change",
     description:
-      "Why Beseam exists and what autonomous revenue intelligence for commerce should become.",
+      "Why Beseam is built around observed AI product recommendations, merchant-controlled product evidence, and same-question re-checks.",
     author: { "@type": "Person", name: "Pankaj Kumar" },
     publisher: { "@type": "Organization", name: "Beseam" },
     mainEntityOfPage: "https://beseam.com/manifesto",
@@ -133,20 +135,19 @@ export default function ManifestoPage() {
                 The Beseam manifesto
               </p>
               <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,6.1vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
-                Revenue leaks live in the seams.
+                If AI recommends someone else, start with the answer.
               </h1>
             </div>
             <div className="max-w-2xl self-end">
               <p className="text-[20px] leading-[1.65] text-black/68">
-                Your commerce platform reports one number. Your ad accounts
-                report another. Your analytics reports a third. None of them is
-                lying, and none of them can tell you which problem to fix on
-                Monday.
+                Shopify can tell you that a product is in the catalog. An AI
+                assistant can still recommend another product when a shopper
+                asks what to buy. Beseam starts with that observed answer.
               </p>
               <p className="mt-5 text-[17px] leading-[1.7] text-black/62">
-                The expensive problems cross the storefront, catalog, customer
-                journey, discovery channel, campaign, and order ledger—so they
-                belong to no single tool, and usually to no single person.
+                Keep the question, the products that were named, and the
+                evidence you can actually change. Then make the approved change
+                and ask the same question again.
               </p>
               <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
                 By Pankaj Kumar · Founder, Beseam
@@ -161,15 +162,14 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Commerce teams do not need another place to look.
+                Commerce teams do not need another AI score.
               </h2>
             </div>
             <div>
               <p className="max-w-2xl text-[17px] leading-[1.7] text-black/66">
-                They need evidence from different systems to converge on one
-                decision: what is wrong, what it is costing, what should change,
-                who approves it, and whether the original signal improved
-                afterward. A dashboard describes. A decision has an owner.
+                They need to know what happened on a buying question, which
+                products won, what product evidence differs, what the merchant
+                can change, and what the same question returns afterward.
               </p>
               <div className="mt-10 border-t border-black/22">
                 {PROBLEM.map(([title, body], index) => (
@@ -213,7 +213,7 @@ export default function ManifestoPage() {
                   Pankaj Kumar
                 </p>
                 <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.09em] text-white/72">
-                  Founder, Beseam - Automating Revenue
+                  Founder, Beseam - AI recommendation testing
                 </p>
                 <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.09em] text-white/72">
                   Ex-Google - 10 Years
@@ -227,21 +227,21 @@ export default function ManifestoPage() {
 
           <Reveal delay={0.06}>
             <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.6vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-              The gap between knowing and fixing is where revenue disappears.
+              The useful gap is between the answer you observed and the evidence
+              you can change.
             </h2>
             <div className="mt-8 max-w-[68ch] space-y-6 text-[17px] leading-[1.75] text-white/72">
               <p>
                 For the past year, I have worked closely with ecommerce founders
-                and operators on real stores. We traced visibility gaps, product
-                and feed problems, tracking drift, campaign readiness, purchase
-                friction, and the question that follows every dashboard: what
-                should we do first?
+                and operators on real stores. One problem kept getting sharper:
+                a merchant could have complete product data in its own admin and
+                still have no clear record of what an AI assistant told a buyer.
               </p>
               <p>
-                My first instinct was to add more monitoring. That was wrong.
-                The teams I worked with were not short of signals. They were
-                short of a defensible answer to what to fix first, and any proof
-                that the last fix worked.
+                My first instinct was to turn that into another visibility
+                dashboard. That was wrong. The useful unit is the buying
+                question itself: the observed answer, the competing products,
+                the evidence you can change, and the re-check after the change.
               </p>
               <p>
                 Before Beseam, I worked on measurement, reliability, and
@@ -251,12 +251,11 @@ export default function ManifestoPage() {
                 failure somewhere else.
               </p>
               <p>
-                Margins are thinner and acquisition is more expensive than when
-                most of these tools were designed. That is why I am building
-                Beseam: a team should be able to follow one issue from outside
-                evidence to a proposed fix, an accountable owner, an approved
-                change, and a verified result—without rebuilding the
-                investigation every week.
+                That is why I am building Beseam: a team should be able to
+                follow one product from a real buying question to the observed
+                answer, the product evidence worth changing, the approved
+                update, and a same-question re-check without pretending we
+                control the model.
               </p>
             </div>
             <Link
@@ -275,8 +274,7 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Autonomous where evidence is strong. Human where impact is
-                material.
+                Evidence first. Approval before change. Same question after.
               </h2>
             </div>
             <div className="border-t border-black/22">
@@ -306,18 +304,17 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Let buyers find you in AI. Let them buy on your store.
+                Do not optimize for AI in the abstract. Test the buying
+                question.
               </h2>
             </div>
             <div>
               <p className="max-w-2xl text-[17px] leading-[1.7] text-black/66">
-                Assistants now answer product questions before anyone reaches
-                your storefront, using your product data, your pages, and
-                sources you do not control. That deserves watching closely. It
-                is not a reason to rebuild your funnel around an interface that
-                keeps changing, or to chase every new checkout protocol. Fix the
-                product data the assistant reads; keep the purchase where you
-                can measure it.
+                Assistants now answer product questions before many shoppers
+                reach a storefront. The practical response is not to chase every
+                new AI acronym. Ask the buying question, keep the observed
+                answer, compare the products that were named, and work on
+                product evidence the merchant actually controls.
               </p>
               <dl className="mt-10 border-t border-black/22">
                 {AI_STANCE.map(([term, detail]) => (
@@ -347,9 +344,8 @@ export default function ManifestoPage() {
                 What Beseam should never become.
               </h2>
               <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-black/62">
-                Most software calling itself an agent is a report with a chat
-                box. These are the lines we hold, and the ones you should hold
-                us to.
+                These are the lines we hold when the product is dealing with
+                probabilistic answers and customer-facing product changes.
               </p>
             </div>
             <ol className="border-t border-black/22">

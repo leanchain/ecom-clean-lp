@@ -7,23 +7,23 @@ import Reveal from "@/components/beseam/reveal";
 
 const DESTINATIONS = [
   [
-    "How Beseam works",
-    "Observe, decide, act, and verify across the systems you already run.",
-    "/#platform",
+    "See the product workflow",
+    "How Beseam keeps the question, observed answer, product evidence, change, and re-check together.",
+    "/#proof",
   ],
   [
-    "Platform audits",
-    "What your commerce platform emits about your products, and where it stops.",
-    "/audit/shopify",
+    "Run a free scan",
+    "Start with your store and inspect the first product-level evidence Beseam can support.",
+    "/#home-hero",
   ],
   [
-    "Compare the operating model",
-    "Where Beseam sits next to analytics, replay, experimentation, and attribution tools.",
-    "/compare",
+    "AI recommendation testing",
+    "How Beseam tests buying questions without reducing the result to one visibility score.",
+    "/ai-visibility-monitoring",
   ],
   [
     "The manifesto",
-    "Why revenue leaks live between systems, and what we will never build.",
+    "Why Beseam starts with the observed answer and tests the same question again after a change.",
     "/manifesto",
   ],
 ] as const;
