@@ -12,19 +12,24 @@ import { Reveal } from "@/components/beseam/reveal";
 
 const STEPS = [
   {
-    title: "Ask the question",
+    title: "Check",
     detail:
-      "Run the buying question against the assistant. Keep the answer, the products it named, and the evidence with the product record.",
+      "Run the buying question against the configured AI surface. Keep the observed answer, products named, and how the answer was obtained.",
   },
   {
-    title: "Change what you control",
+    title: "Understand",
     detail:
-      "Trace the miss back to product data you can edit. Review the proposed change, approve it, and keep the previous value so you can revert.",
+      "See who appeared instead and compare the product, page, source, and storefront evidence you can actually verify.",
   },
   {
-    title: "Ask again",
+    title: "Fix",
     detail:
-      "Run the same question again after the change. Compare the new answer with the old one instead of guessing whether the fix worked.",
+      "Review the supported change, approve it, and keep the previous value so a customer-facing update can be reverted safely.",
+  },
+  {
+    title: "Check again",
+    detail:
+      "Run the same buying question after the change and compare the new observed answer with the old one instead of guessing whether it worked.",
   },
 ] as const;
 
@@ -110,15 +115,16 @@ export default function ProductionHomepage() {
         className="border-b border-black/18 bg-white"
         aria-label="What the check gives you"
       >
-        <div className="mx-auto grid max-w-[92rem] grid-cols-1 px-5 sm:grid-cols-3 sm:px-8 lg:px-10">
+        <div className="mx-auto grid max-w-[92rem] grid-cols-1 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:px-10">
           {[
-            ["01", "Ask", "The real buying question"],
-            ["02", "Change", "The product data you control"],
-            ["03", "Re-check", "The same question again"],
+            ["01", "Check", "The buying question and observed answer"],
+            ["02", "Understand", "Who won and the evidence behind the difference"],
+            ["03", "Fix", "The supported change you control"],
+            ["04", "Check again", "The same question after the change"],
           ].map(([number, title, detail]) => (
             <div
               key={number}
-              className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-black/14 py-5 last:border-b-0 sm:block sm:border-b-0 sm:border-r sm:px-6 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0"
+              className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-black/14 py-5 last:border-b-0 sm:border-r sm:px-6 sm:[&:nth-child(2)]:border-r-0 lg:block lg:border-b-0 lg:[&:nth-child(2)]:border-r lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
             >
               <span className="font-mono text-[12px] font-semibold text-[#b8441d]">
                 {number}

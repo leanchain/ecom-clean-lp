@@ -1,17 +1,17 @@
 # Beseam Product Marketing Context
 
-**Document version:** v1
-**Last updated:** 2026-07-24
+**Document version:** v2
+**Last updated:** 2026-08-13
 
 ## Product Overview
-**One-liner:** Beseam is autonomous revenue intelligence for commerce: a self-improving revenue agent that finds the revenue leaks your stack cannot see, turns disconnected evidence into one commercially ranked decision, and learns from the outcome.
+**One-liner:** Beseam shows ecommerce teams where AI shopping loses their products, why they lose, what to fix, and whether the fix worked.
 
-**What it does:** Beseam works above the commerce stack a brand already runs—not instead of it. It observes the revenue journey from the outside, attaches each issue to the exact product, page, query, journey, or channel involved, recommends the next action, and verifies the result after the team acts. Each verified result improves the next decision.
+**Homepage wedge:** AI product recommendation testing. Run a real buying question, see which products appeared or won, inspect the evidence behind the answer, change what you control, and run the same question again.
 
-**Product category:** Autonomous revenue intelligence for commerce
-**Product type:** B2B SaaS for ecommerce brands, operators, and agencies
+**Product direction:** Beseam is the control plane for how products are discovered, evaluated, and chosen by AI shopping systems. The merchant-facing loop is **See → Understand → Fix → Prove**. Broader commerce analytics, advertising, behavior, and reliability capabilities can support that loop, but they should not replace the primary landing-page story with a suite or "autonomous revenue agent" pitch.
+
+**Product type:** B2B software for ecommerce brands, operators, and agencies.
 **Business model:** Foundation is included with every active contract. Additional products are enabled independently per tenant and store. Some customer-initiated generation uses credits; advertising media spend remains with Google or Meta.
-
 ## Target Audience
 **Target companies:** Ecommerce brands and multi-store operators with an established commerce platform, catalog, analytics, acquisition channels, and enough operational complexity for issues to fall between tools.
 
@@ -90,9 +90,9 @@
 - "We fixed it, but we cannot prove whether it changed anything."
 - "We find campaign blockers after the budget is approved."
 
-**Words to use:** autonomous revenue intelligence, self-improving revenue agent, revenue leak, commercially ranked decision, commerce object, systems of record, evidence, product, page, store, campaign, customer journey, next action, approval, verify, booked revenue, attributed revenue, modeled opportunity, freshness.
+**Words to use:** shopper questions, AI engines, AI shopping agents, where products appear, where competitors win, why you lost, product evidence, what to fix next, recommended, not recommended, accurate, wrong, same-question re-check, before/after proof, approval, publish, verify, attributed revenue, modeled opportunity, freshness.
 
-**Words to avoid:** revenue surface, commercial system, governed intelligence, seamless, optimize outcomes, unlock, transform, powerful, next-generation, single source of truth, autonomous growth, AI-powered. Use “autonomous” only when the copy also states the evidence, approval, and verification boundaries.
+**Words to avoid:** autonomous revenue intelligence, self-improving revenue agent, revenue surface, commercial system, governed intelligence, seamless, optimize outcomes, unlock, transform, powerful, next-generation, single source of truth, autonomous growth, AI-powered. Technical terms such as monitoring target, claim scope, observation method, MCP, and query execution belong in evidence or technical documentation, not the primary marketing story.
 
 **Glossary:**
 | Term | Meaning |
@@ -124,9 +124,11 @@
 | Complete loop | Finding → recommendation → action → execution → verification → impact |
 
 ## Goals
-**Business goal:** Generate qualified conversations with ecommerce brands and operators.
-**Conversion action:** Book a 20-minute commerce review.
+**Business goal:** Generate qualified conversations with ecommerce brands and operators by proving the product loop before asking them to buy the broader platform.
+**Primary conversion action:** Run the free store / AI visibility check.
+**Secondary conversion action:** Book a 20-minute review when the visitor wants help interpreting or acting on the findings.
 **Current metrics:** Not recorded in this context.
 
 ## Changelog
+- v2 (2026-08-13) — Aligned the canonical marketing context to AI product recommendation testing and **See → Understand → Fix → Prove**; retired the autonomous-revenue-agent language from primary messaging.
 - v1 (2026-07-24) — Created a Beseam-specific positioning, audience, terminology, objections, and proof context from the production blueprint.
