@@ -53,6 +53,7 @@ export type ShownProduct = {
 export type Answer = {
   question: string | null;
   channel_label: string | null;
+  observation_method?: "probe" | "live_serp" | "consumer_sample" | "derived" | "fallback" | null;
   mentioned: boolean | null;
   competitors: string[];
   products?: ShownProduct[];

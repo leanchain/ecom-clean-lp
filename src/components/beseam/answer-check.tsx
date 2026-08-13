@@ -132,6 +132,14 @@ const CHANNEL_BRAND_KEYS: Record<string, string> = {
   copilot: "copilot_consumer_observation",
 };
 
+const OBSERVATION_METHOD_LABEL: Record<NonNullable<Answer["observation_method"]>, string> = {
+  probe: "Probe",
+  live_serp: "Live SERP",
+  consumer_sample: "Consumer sample",
+  derived: "Derived",
+  fallback: "Fallback",
+};
+
 function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
   const named = answer.mentioned === true;
   const unknown = answer.mentioned === null || Boolean(answer.error);
@@ -157,6 +165,11 @@ function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
         <X className="h-2.5 w-2.5" aria-hidden="true" />
       )}
       {channel}
+      {answer.observation_method ? (
+        <span className="border-l border-current/20 pl-1.5 font-mono text-[10px] font-normal opacity-70">
+          {OBSERVATION_METHOD_LABEL[answer.observation_method]}
+        </span>
+      ) : null}
       <span className="sr-only">
         {unknown ? "no answer" : named ? "named you" : "did not name you"}
       </span>
