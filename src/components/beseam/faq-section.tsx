@@ -2,7 +2,7 @@ import { STORE_HEALTH_FAQS } from "@/lib/store-health-faqs";
 
 export default function FaqSection() {
   return (
-    <section id="faq" className="border-y border-black/18 bg-[#fafafa]">
+    <section id="faq" className="scroll-mt-24 bg-[#f6f6f6]">
       <div className="mx-auto grid max-w-[92rem] gap-12 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20 lg:px-10 lg:py-28">
         <div>
           <h2 className="max-w-[20ch] font-display text-[clamp(2rem,3.1vw,2.6rem)] font-normal leading-[1.06] tracking-[-0.02em] text-[#111318]">
