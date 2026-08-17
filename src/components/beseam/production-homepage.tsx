@@ -79,7 +79,7 @@ export default function ProductionHomepage() {
         <div className="mx-auto max-w-[92rem] px-5 pb-20 pt-20 sm:px-8 sm:pb-24 sm:pt-28 lg:px-10 lg:pb-28 lg:pt-32">
           <Reveal>
             <div className="mx-auto max-w-[62rem] text-center">
-              <h1 className="mx-auto max-w-[20ch] text-balance font-display text-[clamp(3rem,5.2vw,5.25rem)] font-normal leading-[0.98] tracking-[-0.025em] text-[#111318]">
+              <h1 className="mx-auto max-w-[18ch] text-balance font-display text-[clamp(3.5rem,7vw,6rem)] font-normal leading-[0.96] tracking-[-0.025em] text-[#111318]">
                 Be the Product AI Recommends.
               </h1>
               <p className="mx-auto mt-8 max-w-[62ch] text-[18px] leading-[1.65] text-black/68 sm:text-[19px]">
