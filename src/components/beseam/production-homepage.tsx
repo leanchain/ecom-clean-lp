@@ -75,26 +75,22 @@ function EvidenceFigure({
 export default function ProductionHomepage() {
   return (
     <div className="bg-[#fafafa] text-[#151515]">
-      <section id="home-hero" className="border-b border-black/18">
-        <div className="mx-auto max-w-[92rem] px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20 lg:px-10 lg:pb-24 lg:pt-24">
+      <section id="home-hero">
+        <div className="mx-auto max-w-[92rem] px-5 pb-20 pt-20 sm:px-8 sm:pb-24 sm:pt-28 lg:px-10 lg:pb-28 lg:pt-32">
           <Reveal>
             <div className="mx-auto max-w-[62rem] text-center">
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
-                AI product recommendation testing
-              </p>
-              <h1 className="mx-auto mt-7 max-w-[17ch] font-display text-[clamp(3rem,5.2vw,5.25rem)] font-normal leading-[0.98] tracking-[-0.025em] text-[#111318]">
-                Your webshop products recommended by AI chatbots.
+              <h1 className="mx-auto max-w-[20ch] text-balance font-display text-[clamp(3rem,5.2vw,5.25rem)] font-normal leading-[0.98] tracking-[-0.025em] text-[#111318]">
+                Be the Product AI Recommends.
               </h1>
               <p className="mx-auto mt-8 max-w-[62ch] text-[18px] leading-[1.65] text-black/68 sm:text-[19px]">
-                Grow webshop sales by making your products the preferred choice
-                for AI chatbots. Automatically track performance, analyse it,
-                and optimise it.
+                Millions of shoppers ask ChatGPT, Gemini, and Perplexity
+                before they buy — make sure it’s your product they hear about.
               </p>
             </div>
           </Reveal>
 
           <Reveal delay={0.08} y={18}>
-            <div className="mx-auto mt-10 max-w-[76rem]">
+            <div className="mx-auto mt-12 max-w-[76rem]">
               <LiveAnswerCheck placement="homepage_hero" />
               <div className="mt-6 text-center">
                 <Link
@@ -110,48 +106,11 @@ export default function ProductionHomepage() {
         </div>
       </section>
 
-      <section
-        className="border-b border-black/18 bg-white"
-        aria-label="What the check gives you"
-      >
-        <div className="mx-auto grid max-w-[92rem] grid-cols-1 px-5 sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:px-10">
-          {[
-            ["01", "Check", "The buying question and observed answer"],
-            ["02", "Understand", "Who won and the evidence behind the difference"],
-            ["03", "Fix", "The supported change you control"],
-            ["04", "Check again", "The same question after the change"],
-          ].map(([number, title, detail]) => (
-            <div
-              key={number}
-              className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-black/14 py-5 last:border-b-0 sm:border-r sm:px-6 sm:[&:nth-child(2)]:border-r-0 lg:block lg:border-b-0 lg:[&:nth-child(2)]:border-r lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
-            >
-              <span className="font-mono text-[12px] font-semibold text-[#b8441d]">
-                {number}
-              </span>
-              <div className="sm:mt-3">
-                <div className="text-[15px] font-semibold text-[#111318]">
-                  {title}
-                </div>
-                <div className="mt-1 text-[13px] leading-relaxed text-black/58">
-                  {detail}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="proof"
-        className="scroll-mt-24 border-b border-black/18 bg-[#f6f6f6]"
-      >
+      <section id="proof" className="scroll-mt-24 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-start lg:gap-20">
             <Reveal>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
-                One product, one trail of evidence
-              </p>
-              <h2 className="mt-6 max-w-[15ch] font-display text-[clamp(2.4rem,3.8vw,4rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
+              <h2 className="max-w-[15ch] text-balance font-display text-[clamp(2.4rem,3.8vw,4rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
                 One question. One change. Test it again.
               </h2>
               <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-black/64">
@@ -160,11 +119,11 @@ export default function ProductionHomepage() {
                 next.
               </p>
 
-              <div className="mt-10 border-y border-black/22">
+              <div className="mt-10 border-t border-black/14">
                 {STEPS.map((step, index) => (
                   <article
                     key={step.title}
-                    className="grid gap-3 border-b border-black/16 py-5 last:border-b-0 sm:grid-cols-[2.75rem_9rem_1fr] sm:gap-5"
+                    className="grid gap-3 border-b border-black/14 py-5 sm:grid-cols-[2.75rem_9rem_1fr] sm:gap-5"
                   >
                     <span className="font-mono text-[12px] font-semibold text-[#b8441d]">
                       0{index + 1}
@@ -193,17 +152,11 @@ export default function ProductionHomepage() {
         </div>
       </section>
 
-      <section
-        id="engine-gaps"
-        className="scroll-mt-24 border-b border-black/18 bg-[#fafafa]"
-      >
+      <section id="engine-gaps" className="scroll-mt-24 bg-white">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-center lg:gap-20">
             <Reveal>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
-                Across assistants
-              </p>
-              <h2 className="mt-6 max-w-[16ch] font-display text-[clamp(2.4rem,3.8vw,4rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
+              <h2 className="max-w-[16ch] text-balance font-display text-[clamp(2.4rem,3.8vw,4rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
                 Same question. Different answers.
               </h2>
               <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-black/64">
@@ -222,17 +175,11 @@ export default function ProductionHomepage() {
 
       <FirstMonthPromise />
 
-      <section
-        id="start"
-        className="scroll-mt-24 border-b border-black/18 bg-white"
-      >
-        <div className="mx-auto max-w-[92rem] px-5 py-14 sm:px-8 lg:px-10 lg:py-16">
+      <section id="start" className="scroll-mt-24 bg-white">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.76fr)_minmax(0,1.24fr)] lg:items-center lg:gap-16">
             <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
-                Start with one store
-              </p>
-              <h2 className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+              <h2 className="max-w-[18ch] text-balance font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
                 See the answers your products are getting now.
               </h2>
               <p className="mt-6 max-w-xl text-[16px] leading-[1.7] text-black/64">
