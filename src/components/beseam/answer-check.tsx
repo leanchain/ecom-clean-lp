@@ -468,8 +468,43 @@ export function ResultCard({
       {rows.length > 0 || products.length > 0 ? (
         <div className="grid border-b border-black/18 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
           <div>
+            {rivals.length > 0 ? (
+              <div className="px-4 py-4 sm:px-5">
+                <p className="flex items-center gap-2 text-[12px] font-semibold text-black/62">
+                  <span
+                    className="h-[3px] w-4 bg-[#b8441d]"
+                    aria-hidden="true"
+                  />
+                  Who takes the answers you lose
+                </p>
+                <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
+                  {rivals.map((rival) => (
+                    <li key={rival.label} className="flex items-center gap-3">
+                      <span
+                        className="w-[8.5rem] shrink-0 truncate text-[12.5px] text-black/70"
+                        title={rival.label}
+                      >
+                        {rival.label}
+                      </span>
+                      <span className="h-1 flex-1 bg-black/8">
+                        <span
+                          className="block h-full bg-[#d95028]"
+                          style={{
+                            width: `${(rival.count / rivals[0].count) * 100}%`,
+                          }}
+                        />
+                      </span>
+                      <span className="w-8 shrink-0 text-right font-mono text-[12px] text-black/62">
+                        {rival.count}×
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
             {rows.length > 0 ? (
-              <div>
+              <div className="border-t border-black/12">
                 <p className="flex items-center gap-2 px-4 pt-4 text-[12px] font-semibold text-black/62 sm:px-5">
                   <span
                     className="h-[3px] w-4 bg-[#b8441d]"
@@ -525,37 +560,6 @@ export function ResultCard({
                       </li>
                     );
                   })}
-                </ul>
-              </div>
-            ) : null}
-
-            {rivals.length > 0 ? (
-              <div className="border-t border-black/12 px-4 py-4 sm:px-5">
-                <p className="text-[12px] font-semibold text-black/62">
-                  Who takes the answers you lose
-                </p>
-                <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
-                  {rivals.map((rival) => (
-                    <li key={rival.label} className="flex items-center gap-3">
-                      <span
-                        className="w-[8.5rem] shrink-0 truncate text-[12.5px] text-black/70"
-                        title={rival.label}
-                      >
-                        {rival.label}
-                      </span>
-                      <span className="h-1 flex-1 bg-black/8">
-                        <span
-                          className="block h-full bg-[#d95028]"
-                          style={{
-                            width: `${(rival.count / rivals[0].count) * 100}%`,
-                          }}
-                        />
-                      </span>
-                      <span className="w-8 shrink-0 text-right font-mono text-[12px] text-black/62">
-                        {rival.count}×
-                      </span>
-                    </li>
-                  ))}
                 </ul>
               </div>
             ) : null}
@@ -1259,8 +1263,7 @@ export default function AnswerCheck({
           role={error ? "alert" : undefined}
           className={`mt-3 text-[13px] leading-relaxed ${error ? "text-[#b3261e]" : "text-black/62"}`}
         >
-          {error ||
-            "We read your live storefront first. No store access is required for the first check."}
+          {error}
         </p>
       </form>
 
