@@ -343,6 +343,25 @@ export function ResultCard({
   );
   const allRivals = tallyRivals(answers);
   const rivals = allRivals.slice(0, RIVAL_LIMIT);
+  const engineScores = channels
+    .map((channel) => {
+      const channelAnswers = answers.filter(
+        (answer) =>
+          answer.channel_label === channel && answer.mentioned !== null,
+      );
+      const namedCount = channelAnswers.filter(
+        (answer) => answer.mentioned === true,
+      ).length;
+      return {
+        channel,
+        named: namedCount,
+        total: channelAnswers.length,
+        pct: channelAnswers.length
+          ? Math.round((namedCount / channelAnswers.length) * 100)
+          : 0,
+      };
+    })
+    .filter((engine) => engine.total > 0);
   const products = shownProducts(answers);
   const rows = result.questions
     .map((question) => ({
@@ -468,8 +487,52 @@ export function ResultCard({
       {rows.length > 0 || products.length > 0 ? (
         <div className="grid border-b border-black/18 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
           <div>
-            {rivals.length > 0 ? (
+            {engineScores.length > 0 ? (
               <div className="px-4 py-4 sm:px-5">
+                <p className="flex items-center gap-2 text-[12px] font-semibold text-black/62">
+                  <span
+                    className="h-[3px] w-4 bg-[#b8441d]"
+                    aria-hidden="true"
+                  />
+                  Named you, by assistant
+                </p>
+                <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
+                  {engineScores.map((engine) => (
+                    <li
+                      key={engine.channel}
+                      className="flex items-center gap-3"
+                    >
+                      <span className="flex w-[8.5rem] shrink-0 items-center gap-1.5 truncate text-[12.5px] text-black/70">
+                        <ChannelIcon
+                          channel={
+                            CHANNEL_BRAND_KEYS[engine.channel.toLowerCase()] ??
+                            engine.channel
+                          }
+                          className="h-3 w-3 shrink-0 opacity-70"
+                        />
+                        <span className="truncate" title={engine.channel}>
+                          {engine.channel}
+                        </span>
+                      </span>
+                      <span className="h-1 flex-1 bg-black/8">
+                        <span
+                          className={`block h-full ${scoreBand(engine.pct).fill}`}
+                          style={{ width: `${Math.max(engine.pct, 1.5)}%` }}
+                        />
+                      </span>
+                      <span className="w-14 shrink-0 text-right font-mono text-[12px] text-black/62">
+                        {engine.named}/{engine.total}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            {rivals.length > 0 ? (
+              <div
+                className={`px-4 py-4 sm:px-5 ${engineScores.length > 0 ? "border-t border-black/12" : ""}`}
+              >
                 <p className="flex items-center gap-2 text-[12px] font-semibold text-black/62">
                   <span
                     className="h-[3px] w-4 bg-[#b8441d]"
