@@ -83,13 +83,12 @@ export default function ProductionHomepage() {
                 AI product recommendation testing
               </p>
               <h1 className="mx-auto mt-7 max-w-[17ch] font-display text-[clamp(3rem,5.2vw,5.25rem)] font-normal leading-[0.98] tracking-[-0.025em] text-[#111318]">
-                See why AI picked someone else.
+                Your webshop products recommended by AI chatbots.
               </h1>
               <p className="mx-auto mt-8 max-w-[62ch] text-[18px] leading-[1.65] text-black/68 sm:text-[19px]">
-                Run a buying question against the assistants your customers use.
-                Beseam shows which products appeared, what the answer relied on,
-                and what in your product data you can change. Fix it, then run
-                the same question again.
+                Grow webshop sales by making your products the preferred choice
+                for AI chatbots. Automatically track performance, analyse it,
+                and optimise it.
               </p>
             </div>
           </Reveal>
