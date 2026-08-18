@@ -6,7 +6,6 @@ import { ArrowRight, CircleAlert } from "lucide-react";
 import LiveAnswerCheck from "@/components/beseam/answer-check";
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
-import GapTrackFigure from "@/components/beseam/gap-track-figure";
 import LeadCaptureForm from "@/components/beseam/lead-capture-form";
 import { Reveal } from "@/components/beseam/reveal";
 
@@ -83,8 +82,8 @@ export default function ProductionHomepage() {
                 Be the Product AI Recommends.
               </h1>
               <p className="mx-auto mt-8 max-w-[62ch] text-[18px] leading-[1.65] text-black/68 sm:text-[19px]">
-                Millions of shoppers ask ChatGPT, Gemini, and Perplexity
-                before they buy — make sure it’s your product they hear about.
+                Millions of shoppers ask ChatGPT, Gemini, and Perplexity before
+                they buy — make sure it’s your product they hear about.
               </p>
             </div>
           </Reveal>
@@ -154,22 +153,19 @@ export default function ProductionHomepage() {
 
       <section id="engine-gaps" className="scroll-mt-24 bg-white">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-center lg:gap-20">
-            <Reveal>
-              <h2 className="max-w-[16ch] text-balance font-display text-[clamp(2.4rem,3.8vw,4rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
+          <Reveal>
+            <div className="mx-auto max-w-[46rem] text-center">
+              <h2 className="mx-auto max-w-[16ch] text-balance font-display text-[clamp(2.4rem,3.8vw,4rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
                 Same question. Different answers.
               </h2>
-              <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-black/64">
+              <p className="mt-7 text-[16px] leading-[1.7] text-black/64">
                 A product can appear in one assistant and disappear in another.
-                Beseam keeps each answer separate so you can see where the
-                product actually lost, instead of hiding the difference inside
-                one score.
+                Beseam keeps ChatGPT, Gemini, Google AI Mode, and Claude
+                separate so you can see where the product actually lost, instead
+                of hiding the difference inside one score.
               </p>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <GapTrackFigure />
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
