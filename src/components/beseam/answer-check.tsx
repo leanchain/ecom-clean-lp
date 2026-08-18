@@ -1016,7 +1016,7 @@ function LoopStage({ index }: { index: number }) {
   return <VerifyPanel />;
 }
 
-function SampleLoopShowcase() {
+export function SampleLoopShowcase() {
   const [stage, setStage] = useState(0);
   // Pinning is a desktop-only affordance. Below md the section is ordinary
   // document flow: no tall wrapper, no sticky card, no scroll-driven staging,
@@ -1330,14 +1330,14 @@ export default function AnswerCheck({
         </p>
       </form>
 
-      <div className="mx-auto mt-16 max-w-[72rem]">
-        <p className="mb-4 text-center text-[12px] font-semibold text-black/62">
-          {result
-            ? "Your storefront, read live"
-            : "A real store, scanned with this form"}
-        </p>
-        {result ? <ResultCard result={result} /> : <SampleLoopShowcase />}
-      </div>
+      {result ? (
+        <div className="mx-auto mt-16 max-w-[72rem]">
+          <p className="mb-4 text-center text-[12px] font-semibold text-black/62">
+            Your storefront, read live
+          </p>
+          <ResultCard result={result} />
+        </div>
+      ) : null}
     </div>
   );
 }

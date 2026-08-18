@@ -9,7 +9,7 @@ import { Reveal } from "@/components/beseam/reveal";
 const ARGUMENT = [
   [
     "The shift",
-    "A buying question now gets answered before anyone reaches your storefront. That answer is assembled from your product data, your pages, and sources you do not control.",
+    "A buying question now gets answered before anyone reaches your storefront. That answer is assembled from your product data, your pages, and sources you do not control. Unlike a search ranking, there is no position four here — the assistant either names your product or it does not.",
   ],
   [
     "The blind spot",
@@ -48,6 +48,17 @@ export default function WhyBeseam() {
               Discovery moved into assistants. Checkout mostly did not. The
               product data those answers are built from is still yours to fix —
               and almost nobody is watching it.
+            </p>
+            <p className="mt-5 max-w-md text-[14px] leading-[1.7] text-white/56">
+              Before Beseam, I spent my career on measurement and reliability at
+              Google and Amazon. Same discipline, smaller and sharper problem.{" "}
+              <Link
+                href="/manifesto"
+                className="underline decoration-white/25 underline-offset-4 hover:decoration-white/60"
+              >
+                Why I&rsquo;m building Beseam
+              </Link>
+              .
             </p>
           </div>
 
