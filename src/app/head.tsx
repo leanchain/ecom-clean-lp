@@ -27,7 +27,7 @@ export default function Head() {
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         description:
-          "AI product recommendation testing for ecommerce: run buying questions, record the products and competitors named, inspect actionable product evidence, and re-run the same question after an approved change.",
+          "Beseam is an AI commerce control plane: visibility into where AI shopping agents find or skip your products, catalog and store-health fixes, campaign readiness, and the analytics, behavior, and proof data to know what worked.",
         publisher: { "@id": baseUrl + "/#organization" },
       },
     ],
