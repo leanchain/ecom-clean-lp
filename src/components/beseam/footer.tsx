@@ -5,7 +5,7 @@ import TrackedLink from "@/components/beseam/tracked-link";
 
 const PAGE_LINKS = [
   ["Example", "/#proof"],
-  ["Across assistants", "/#engine-gaps"],
+  ["Across assistants", "/#benchmarks"],
   ["30-day pilot", "/#promise"],
   ["FAQ", "/#faq"],
 ] as const;
@@ -20,7 +20,7 @@ export default function BeseamFooter() {
               <Logo className="text-white" />
             </Link>
             <p className="mt-7 max-w-[20ch] font-display text-[34px] leading-[1.08] tracking-[-0.02em] text-white/92">
-              See what AI recommends. Understand why. Test what changes.
+              See who AI recommends. Understand why. Fix it.
             </p>
             <p className="mt-6 max-w-[62ch] text-[14px] leading-relaxed text-white/72">
               Beseam runs buying questions against AI assistants, keeps the
@@ -47,7 +47,7 @@ export default function BeseamFooter() {
 
         <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto_auto_auto] lg:items-center lg:gap-10">
           <p className="font-mono text-[12px] tracking-[0.02em] text-white/72">
-            AI product recommendation testing for ecommerce
+            AI shopping visibility & behavior — fixes and proof for ecommerce
           </p>
           <Link
             href="/resources"

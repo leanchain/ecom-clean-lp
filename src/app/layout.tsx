@@ -27,7 +27,8 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: {
-    default: "Beseam - AI product recommendation testing for ecommerce",
+    default:
+      "Beseam - AI shopping visibility & behavior — fixes and proof for ecommerce",
     template: "%s | Beseam",
   },
   description:
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Beseam AI product recommendation testing for ecommerce",
+        alt: "Beseam AI shopping visibility & behavior — fixes and proof for ecommerce",
       },
     ],
   },
