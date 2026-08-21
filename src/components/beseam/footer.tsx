@@ -45,10 +45,16 @@ export default function BeseamFooter() {
           </nav>
         </div>
 
-        <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[1fr_auto_auto_auto_auto_auto] lg:items-center lg:gap-10">
+        <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_auto_auto_auto_auto_auto_auto_auto_auto] lg:items-center lg:gap-10">
           <p className="font-mono text-[12px] tracking-[0.02em] text-white/72">
             AI shopping visibility & behavior — fixes and proof for ecommerce
           </p>
+          <Link
+            href="/platform"
+            className="text-[12px] text-white/62 hover:text-white"
+          >
+            Platform
+          </Link>
           <Link
             href="/resources"
             className="text-[12px] text-white/62 hover:text-white"
@@ -66,6 +72,12 @@ export default function BeseamFooter() {
             className="text-[12px] text-white/62 hover:text-white"
           >
             Contact us
+          </Link>
+          <Link
+            href="/bot"
+            className="text-[12px] text-white/62 hover:text-white"
+          >
+            BeseamBot
           </Link>
           <Link
             href="/privacy-policy"

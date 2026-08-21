@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { CATEGORY_BENCHMARKS } from "@/data/category-benchmarks";
 import { ECOSYSTEM_RESOURCES } from "@/lib/commerce-fieldbook";
 import { COMPARISONS } from "@/lib/comparisons";
 import { getAllFieldbookDocuments } from "@/lib/fieldbook-content";
@@ -22,6 +23,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       path: "/ai-visibility-monitoring",
       changeFrequency: "monthly" as const,
       priority: 0.95,
+    },
+    {
+      path: "/platform",
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
     },
     {
       path: "/purchase-health",
@@ -50,6 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { path: "/about", changeFrequency: "monthly" as const, priority: 0.7 },
     { path: "/contact", changeFrequency: "monthly" as const, priority: 0.6 },
+    { path: "/bot", changeFrequency: "monthly" as const, priority: 0.5 },
     { path: "/manifesto", changeFrequency: "monthly" as const, priority: 0.7 },
     {
       path: "/product-visibility-monitoring",
@@ -102,6 +109,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: document.section === "start-here" ? 0.74 : 0.7,
     })),
+    // Listed only once a real run is published — matches the noindex on the
+    // page itself while the benchmark set is empty.
+    ...(CATEGORY_BENCHMARKS.length > 0
+      ? [
+          {
+            path: "/benchmarks",
+            changeFrequency: "weekly" as const,
+            priority: 0.88,
+          },
+        ]
+      : []),
     { path: "/compare", changeFrequency: "monthly" as const, priority: 0.75 },
     ...COMPARISONS.map((comparison) => ({
       path: `/compare/${comparison.slug}`,
