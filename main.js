@@ -107,6 +107,7 @@ async function readLead(request, url, forcedSource) {
     lead: {
       source,
       email,
+      submissionId: clean(body.submissionId, 100),
       name: clean(body.name, 100),
       store: clean(body.store, 300),
       message: clean(body.message, 2000),
@@ -123,6 +124,81 @@ async function readLead(request, url, forcedSource) {
           : {},
     },
   };
+}
+
+function trevraCaptureConfigured(env) {
+  return Boolean(
+    env.TREVRA_CAPTURE_API_BASE_URL &&
+    env.TREVRA_CAPTURE_SOURCE_ID &&
+    env.TREVRA_CAPTURE_SECRET,
+  );
+}
+
+async function trevraHmac(secret, timestamp, idempotencyKey, raw) {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const input = new TextEncoder().encode(
+    timestamp + "." + idempotencyKey + "." + raw,
+  );
+  const signed = new Uint8Array(await crypto.subtle.sign("HMAC", key, input));
+  return [...signed].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+/**
+ * Canonical GTM write when this deployment has been connected to a Trevra
+ * workspace. The Worker keeps validation/abuse protection; Trevra owns the
+ * durable Person + Submission. A retry reuses the same idempotency key and
+ * exact bytes, so an uncertain first response cannot create two submissions.
+ */
+async function addLeadToTrevra(env, lead) {
+  if (!trevraCaptureConfigured(env)) return false;
+
+  const payload = {
+    kind: lead.source,
+    person: {
+      email: lead.email,
+      ...(lead.name ? { name: lead.name } : {}),
+    },
+    ...(lead.store ? { company: { domain: lead.store } } : {}),
+    ...(lead.message ? { message: lead.message } : {}),
+    ...(Object.keys(lead.utm).length ? { attribution: lead.utm } : {}),
+  };
+  const raw = JSON.stringify(payload);
+  const timestamp = Math.floor(Date.now() / 1000).toString();
+  const idempotencyKey = lead.submissionId || crypto.randomUUID();
+  const signature = await trevraHmac(
+    env.TREVRA_CAPTURE_SECRET,
+    timestamp,
+    idempotencyKey,
+    raw,
+  );
+  const endpoint =
+    env.TREVRA_CAPTURE_API_BASE_URL.replace(/\/$/, "") +
+    "/api/intake/v1/submissions";
+  const send = () =>
+    fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-trevra-source": env.TREVRA_CAPTURE_SOURCE_ID,
+        "x-trevra-timestamp": timestamp,
+        "x-trevra-idempotency-key": idempotencyKey,
+        "x-trevra-signature": "sha256=" + signature,
+      },
+      body: raw,
+    });
+
+  let response = await send();
+  if (response.status >= 500) response = await send();
+  if (!response.ok) {
+    throw new Error("Trevra capture rejected the lead: " + response.status);
+  }
+  return true;
 }
 
 let sendPulseToken = null;
@@ -208,9 +284,13 @@ async function addLeadToSendPulse(env, lead) {
 
 async function submitScanLead(lead, env) {
   try {
+    if (await addLeadToTrevra(env, lead)) return json({ ok: true }, 202);
+    // Cutover fallback only. Once Trevra credentials are installed in
+    // production this branch stops receiving traffic and can be removed after
+    // the live source has been verified.
     await addLeadToSendPulse(env, lead);
   } catch (error) {
-    console.error("[lead] SendPulse capture failed", lead.source, error);
+    console.error("[lead] canonical lead capture failed", lead.source, error);
     return json({ error: "We could not store your email right now." }, 502);
   }
 
@@ -240,7 +320,18 @@ async function submitReview(lead, env) {
     );
   }
 
-  if (!env.REVIEW_EMAIL) {
+  let capturedByTrevra = false;
+  try {
+    capturedByTrevra = await addLeadToTrevra(env, lead);
+  } catch (error) {
+    console.error("[lead] Trevra capture failed for review request", error);
+    return json({ error: "We could not store your request right now." }, 502);
+  }
+
+  // Before Trevra is configured, keep the previous deployment contract intact:
+  // review email is the only durable notification path. After cutover, Trevra
+  // is the record and email becomes best-effort notification only.
+  if (!env.REVIEW_EMAIL && !capturedByTrevra) {
     return json({ error: "Review requests are temporarily unavailable." }, 503);
   }
 
@@ -276,25 +367,40 @@ async function submitReview(lead, env) {
     escapeHtml(JSON.stringify(utm)) +
     "</code></p>";
 
-  try {
-    await env.REVIEW_EMAIL.send({
-      to: "contact@beseam.com",
-      from: "website@beseam.com",
-      replyTo: email,
-      subject: source === "contact" ? label + " from " + name : label + " - " + store,
-      text: textBody,
-      html: htmlBody,
-    });
-  } catch {
-    return json({ error: "Message could not be delivered." }, 502);
+  if (env.REVIEW_EMAIL) {
+    try {
+      await env.REVIEW_EMAIL.send({
+        to: "contact@beseam.com",
+        from: "website@beseam.com",
+        replyTo: email,
+        subject:
+          source === "contact"
+            ? label + " from " + name
+            : label + " - " + store,
+        text: textBody,
+        html: htmlBody,
+      });
+    } catch (error) {
+      if (!capturedByTrevra)
+        return json({ error: "Message could not be delivered." }, 502);
+      console.error(
+        "[lead] review notification email failed after Trevra capture",
+        error,
+      );
+    }
   }
 
-  // The booking email is the record that matters; a SendPulse outage must not
-  // fail a review request that has already been delivered.
-  try {
-    await addLeadToSendPulse(env, lead);
-  } catch (error) {
-    console.error("[lead] SendPulse capture failed for review request", error);
+  if (!capturedByTrevra) {
+    // Legacy cutover fallback only; Trevra-configured deployments do not create
+    // a second lead database in SendPulse.
+    try {
+      await addLeadToSendPulse(env, lead);
+    } catch (error) {
+      console.error(
+        "[lead] SendPulse capture failed for review request",
+        error,
+      );
+    }
   }
 
   return json({ ok: true }, 202);

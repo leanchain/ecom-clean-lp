@@ -1,3 +1,13 @@
+import {
+  Brain,
+  ListTodo,
+  Radar,
+  RefreshCw,
+  Sparkles,
+  Store,
+  TrendingUp,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type { Metadata } from "next";
 
 export type MarketingFaq = {
@@ -13,8 +23,18 @@ export type MarketingPageData = {
   description: string;
   intro: string;
   proofLine: string;
-  observations: Array<{ title: string; detail: string }>;
-  sections: Array<{ title: string; body: string; points: string[] }>;
+  // Optional heading/intro override for the observations grid. Falls back to
+  // "What Beseam uses" / evidence-source framing, which fits the single-topic
+  // evidence pages but not a capability directory like /platform.
+  observationsHeading?: string;
+  observationsIntro?: string;
+  observations: Array<{ title: string; detail: string; icon?: LucideIcon }>;
+  sections: Array<{
+    title: string;
+    body: string;
+    points: string[];
+    icon?: LucideIcon;
+  }>;
   limits: string[];
   faqs: MarketingFaq[];
   related: Array<{ label: string; href: string }>;
@@ -675,6 +695,112 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
     related: [
       { label: "Shopify integration", href: "/integrations/shopify" },
       { label: "Evidence freshness", href: "/monitoring-coverage" },
+    ],
+  },
+  platform: {
+    slug: "platform",
+    eyebrow: "The full platform",
+    headline:
+      "Every capability Beseam has, built around one loop: check, fix, prove.",
+    metaTitle:
+      "The Beseam Platform: AI Visibility, Store Health, Analytics & Fixes | Beseam",
+    description:
+      "See every capability inside Beseam: AI shopping visibility, product and store health, behavior and analytics, campaign readiness, and creative - all connected to one check, fix, and re-check loop.",
+    intro:
+      "Beseam started with one question: why AI recommended someone else. That question sits inside a wider system that also watches store health, shopper behavior, and campaign readiness - and turns any of it into one queue of approved, provable fixes instead of a separate dashboard for each.",
+    proofLine:
+      "Every capability below feeds the same evidence trail: the question or issue, what changed, who approved it, and what happened when it was checked again.",
+    observationsHeading: "The platform, by category",
+    observationsIntro:
+      "Four groups of capability. Every one of them still answers the same four questions: what happened, why, what to fix, and whether it worked.",
+    observations: [
+      {
+        title: "Diagnose",
+        icon: Radar,
+        detail:
+          "Visibility into where AI shopping agents find or skip your products, catalog and content evidence, store health, and brand identity - the full picture of what a shopper or an assistant actually sees.",
+      },
+      {
+        title: "Act",
+        icon: ListTodo,
+        detail:
+          "One queue for every recommended fix - owner, execution, and verification - plus Google and Meta campaign readiness checks before a dollar is spent.",
+      },
+      {
+        title: "Measure",
+        icon: TrendingUp,
+        detail:
+          "Booked, observed, attributed, and modeled outcomes kept separate and honest, rolled into the one decision that matters most for the store right now.",
+      },
+      {
+        title: "Go deeper",
+        icon: Brain,
+        detail:
+          "Revenue, funnel, cohort, and journey analytics; session and heatmap behavior; experimentation; uptime and error monitoring; and AI-generated product and brand imagery - entitled per contract, not bundled by default.",
+      },
+    ],
+    sections: [
+      {
+        title: "One loop underneath every capability.",
+        icon: RefreshCw,
+        body: "Every surface in Beseam - visibility, store health, behavior, analytics - answers the same four questions: what is happening, why, what to fix, and whether the fix worked. A new capability adds a data source to that loop; it never starts a separate one.",
+        points: [
+          "Check - observe the current state from real evidence, not a synthetic score.",
+          "Understand - see the products, competitors, or store issues behind it.",
+          "Fix and check again - publish an approved change, then re-run the same test.",
+        ],
+      },
+      {
+        title: "Diagnose and act cover the store you can control.",
+        icon: Store,
+        body: "Visibility, Products, Store Health, Inspection, and Brand watch what a shopper or an assistant can see. Actions and Campaign Readiness turn a finding into a queued, owned, and verified fix - or a safe ad spend.",
+        points: [
+          "Visibility and Products: where you are named, where you lose, and the catalog evidence behind it.",
+          "Store Health and Inspection: whether the storefront itself is fast, crawlable, and safe to sell on.",
+          "Brand: the approved identity and evidence reused across every surface above.",
+        ],
+      },
+      {
+        title:
+          "Behavior, analytics, and creative make the fix better - they do not replace it.",
+        icon: Sparkles,
+        body: "Advanced Intelligence and Creative Studio are entitled add-ons, not a second product. Session and funnel data explain why a fix mattered; Creative Studio produces the assets a fix might need.",
+        points: [
+          "Analytics and Behavior: revenue, funnel, cohort, journey, session, and heatmap evidence.",
+          "Optimization and Reliability: experimentation, personalization, uptime, and error monitoring.",
+          "Creative Studio: AI-generated product, brand, and advertising imagery, synced back to the catalog.",
+        ],
+      },
+    ],
+    limits: [
+      "Not every capability is enabled for every store; each is entitled per contract, not bundled by default.",
+      "Behavior, analytics, and creative surfaces inform a fix - they do not publish one on their own.",
+      "No composite score across capabilities; each domain keeps its own evidence and freshness state.",
+      "Automated resolution stays limited to product and store changes that are explicitly supported and approved.",
+    ],
+    faqs: [
+      {
+        question: "Do I need every capability to get value from Beseam?",
+        answer:
+          "No. Most stores start with the visibility loop alone - check, understand, fix, check again. Store health, behavior, analytics, and creative are entitled add-ons you turn on when there is a specific question they can answer.",
+      },
+      {
+        question:
+          "Does adding more data sources mean less control over what gets published?",
+        answer:
+          "No. Regardless of which capability raised a finding, every fix goes through the same approval step before it reaches a customer, and the previous value is always kept.",
+      },
+      {
+        question:
+          "How is this different from stitching together separate analytics, monitoring, and AI-visibility tools?",
+        answer:
+          "Those tools each stop at reporting. Beseam ties every finding, from any capability, to an owned fix and a re-check against the same evidence - so you know whether it worked, not just what changed.",
+      },
+    ],
+    related: [
+      { label: "AI visibility monitoring", href: "/ai-visibility-monitoring" },
+      { label: "Shopify store health", href: "/shopify-store-health" },
+      { label: "See the loop in action", href: "/#proof" },
     ],
   },
 };

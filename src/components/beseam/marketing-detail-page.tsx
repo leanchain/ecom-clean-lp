@@ -126,29 +126,36 @@ export default function MarketingDetailPage({
           <div className="grid gap-10 lg:grid-cols-[minmax(14rem,0.45fr)_minmax(0,1fr)] lg:gap-16">
             <div>
               <h2 className="editorial-subheading text-ink">
-                What Beseam uses
+                {page.observationsHeading ?? "What Beseam uses"}
               </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-foreground">
-                Concrete evidence contributing to this Beseam workspace.
+                {page.observationsIntro ??
+                  "Concrete evidence contributing to this Beseam workspace."}
               </p>
             </div>
             <div className="border-t border-rule">
-              {page.observations.map((observation, index) => (
-                <article
-                  key={observation.title}
-                  className="grid gap-3 border-b border-rule py-6 sm:grid-cols-[2.25rem_minmax(0,0.65fr)_minmax(0,1fr)] sm:gap-6"
-                >
-                  <span className="text-[12px] font-semibold tabular-nums text-signal-ink">
-                    0{index + 1}
-                  </span>
-                  <h3 className="text-[17px] font-semibold text-ink">
-                    {observation.title}
-                  </h3>
-                  <p className="text-[14px] leading-relaxed text-foreground">
-                    {observation.detail}
-                  </p>
-                </article>
-              ))}
+              {page.observations.map((observation, index) => {
+                const Icon = observation.icon;
+                return (
+                  <article
+                    key={observation.title}
+                    className="grid gap-3 border-b border-rule py-6 sm:grid-cols-[2.25rem_minmax(0,0.65fr)_minmax(0,1fr)] sm:gap-6"
+                  >
+                    <span className="flex flex-col items-start gap-1.5 text-[12px] font-semibold tabular-nums text-signal-ink">
+                      {Icon ? (
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      ) : null}
+                      0{index + 1}
+                    </span>
+                    <h3 className="text-[17px] font-semibold text-ink">
+                      {observation.title}
+                    </h3>
+                    <p className="text-[14px] leading-relaxed text-foreground">
+                      {observation.detail}
+                    </p>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -194,38 +201,49 @@ export default function MarketingDetailPage({
       <section className="bg-ground">
         <div className="section-pad-tight mx-auto max-w-6xl px-6">
           <div className="space-y-16">
-            {page.sections.map((section, index) => (
-              <article
-                key={section.title}
-                className="grid gap-8 border-t border-rule pt-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20"
-              >
-                <div>
-                  <p className="text-[12px] font-semibold tabular-nums text-signal-ink">
-                    0{index + 1}
-                  </p>
-                  <h2 className="editorial-subheading mt-3 text-ink">
-                    {section.title}
-                  </h2>
-                  <p className="mt-4 text-[15px] leading-relaxed text-foreground">
-                    {section.body}
-                  </p>
-                </div>
-                <ul className="border-t border-rule">
-                  {section.points.map((point) => (
-                    <li
-                      key={point}
-                      className="flex gap-3 border-b border-rule py-5 text-[15px] leading-relaxed text-foreground"
-                    >
-                      <span
-                        aria-hidden
-                        className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 bg-signal-ink"
-                      />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+            {page.sections.map((section, index) => {
+              const SectionIcon = section.icon;
+              return (
+                <article
+                  key={section.title}
+                  className="grid gap-8 border-t border-rule pt-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20"
+                >
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <p className="text-[12px] font-semibold tabular-nums text-signal-ink">
+                        0{index + 1}
+                      </p>
+                      {SectionIcon ? (
+                        <SectionIcon
+                          className="h-5 w-5 text-signal-ink"
+                          aria-hidden="true"
+                        />
+                      ) : null}
+                    </div>
+                    <h2 className="editorial-subheading mt-3 text-ink">
+                      {section.title}
+                    </h2>
+                    <p className="mt-4 text-[15px] leading-relaxed text-foreground">
+                      {section.body}
+                    </p>
+                  </div>
+                  <ul className="border-t border-rule">
+                    {section.points.map((point) => (
+                      <li
+                        key={point}
+                        className="flex gap-3 border-b border-rule py-5 text-[15px] leading-relaxed text-foreground"
+                      >
+                        <span
+                          aria-hidden
+                          className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 bg-signal-ink"
+                        />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

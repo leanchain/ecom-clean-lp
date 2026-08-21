@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 
 import { Mail } from "lucide-react";
 
@@ -20,6 +20,9 @@ function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const submissionRef = useRef<{ fingerprint: string; id: string } | null>(
+    null,
+  );
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -33,13 +36,24 @@ function ContactForm() {
     setError("");
 
     try {
+      const payload = {
+        ...form,
+        source: "contact",
+        utm: getUtmValues(),
+      };
+      const fingerprint = JSON.stringify(payload);
+      if (
+        !submissionRef.current ||
+        submissionRef.current.fingerprint !== fingerprint
+      ) {
+        submissionRef.current = { fingerprint, id: crypto.randomUUID() };
+      }
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          ...form,
-          source: "contact",
-          utm: getUtmValues(),
+          ...payload,
+          submissionId: submissionRef.current.id,
         }),
       });
 

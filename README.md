@@ -36,7 +36,7 @@ Use Bun, matching the repository lockfile:
 
 ```bash
 bun install
-bunx prettier --check src
+bun run test:worker
 bunx tsc --noEmit
 bun run build
 ```
@@ -52,10 +52,29 @@ Before deployment:
 
 1. Confirm that the Worker named `beseam` owns `beseam.com`.
 2. Authenticate Wrangler for the intended Cloudflare account.
-3. Enable Email Sending for the zone and verify `website@beseam.com`.
-4. Confirm that `contact@beseam.com` is an allowed destination.
-5. Set the public analytics and Cal.com values in the deployment environment.
-6. Run `bun run build`, then `npx wrangler deploy`.
+3. In the Beseam Trevra workspace, create a **Lead capture** source for the website.
+4. Store its Trevra connection values in Worker secrets:
 
-The email binding is declared as `REVIEW_EMAIL` in `wrangler.jsonc`. If it is
-unavailable, the form returns an error rather than showing a false success.
+   ```bash
+   npx wrangler secret put TREVRA_CAPTURE_API_BASE_URL
+   npx wrangler secret put TREVRA_CAPTURE_SOURCE_ID
+   npx wrangler secret put TREVRA_CAPTURE_SECRET
+   ```
+
+   `TREVRA_CAPTURE_API_BASE_URL` is the Trevra API origin, without `/api` at the end.
+   The signing secret is shown by Trevra only when the source is created or rotated.
+
+5. Enable Email Sending for the zone and verify `website@beseam.com` while review notifications are still desired.
+6. Confirm that `contact@beseam.com` is an allowed notification destination.
+7. Set the public analytics and Cal.com values in the deployment environment.
+8. Run `bun run build`, then `npx wrangler deploy`.
+
+When all three Trevra capture values are configured, `/api/lead` writes its
+canonical Person + inbound Submission to Trevra and does **not** duplicate that
+lead into SendPulse. Browser forms attach one stable `submissionId` to an unchanged
+logical form submission, and the Worker reuses it as Trevra's idempotency key across
+browser retries and its own transient retry. Review email is then best-effort notification only. If the
+Trevra values are absent, the Worker deliberately retains the previous
+SendPulse/email path so deploying this code before provisioning the Capture
+Source cannot black-hole production leads. Remove that fallback only after the
+live Trevra source has been verified.

@@ -15,7 +15,7 @@ const APP_LOGIN_URL = "https://app.beseam.com/login";
 
 const NAV_LINKS = [
   { label: "Example", href: "/#proof" },
-  { label: "Across assistants", href: "/#engine-gaps" },
+  { label: "Across assistants", href: "/#benchmarks" },
   { label: "30-day pilot", href: "/#promise" },
   { label: "FAQ", href: "/#faq" },
 ] as const;

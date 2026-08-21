@@ -1,0 +1,166 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import worker from "./main.js";
+
+const TREVRA_ENV = {
+  TREVRA_CAPTURE_API_BASE_URL: "https://trevra.example",
+  TREVRA_CAPTURE_SOURCE_ID: "cap_beseam_test",
+  TREVRA_CAPTURE_SECRET: "trv_capture_test_secret_for_worker_tests",
+};
+
+function leadRequest(body) {
+  return new Request("https://beseam.com/api/lead", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
+async function withFetch(fake, run) {
+  const previous = globalThis.fetch;
+  globalThis.fetch = fake;
+  try {
+    return await run();
+  } finally {
+    globalThis.fetch = previous;
+  }
+}
+
+test("configured /api/lead writes canonical GTM data to Trevra and not SendPulse", async () => {
+  const calls = [];
+  const response = await withFetch(
+    async (url, init) => {
+      calls.push({ url: String(url), init });
+      return new Response(JSON.stringify({ submissionId: "sub_1" }), {
+        status: 202,
+        headers: { "content-type": "application/json" },
+      });
+    },
+    () =>
+      worker.fetch(
+        leadRequest({
+          source: "store_health_review",
+          email: "founder@example.com",
+          name: "Founder",
+          store: "https://shop.example.com",
+          message: "Please review my store",
+          utm: { utm_source: "linkedin" },
+        }),
+        TREVRA_ENV,
+      ),
+  );
+
+  assert.equal(response.status, 202);
+  assert.equal(calls.length, 1);
+  assert.equal(
+    calls[0].url,
+    "https://trevra.example/api/intake/v1/submissions",
+  );
+  assert.ok(!calls[0].url.includes("sendpulse"));
+  const body = JSON.parse(calls[0].init.body);
+  assert.deepEqual(body, {
+    kind: "store_health_review",
+    person: { email: "founder@example.com", name: "Founder" },
+    company: { domain: "https://shop.example.com" },
+    message: "Please review my store",
+    attribution: { utm_source: "linkedin" },
+  });
+  assert.equal(calls[0].init.headers["x-trevra-source"], "cap_beseam_test");
+  assert.match(
+    calls[0].init.headers["x-trevra-signature"],
+    /^sha256=[a-f0-9]{64}$/,
+  );
+});
+
+test("one transient Trevra retry reuses the same idempotency key and exact body", async () => {
+  const calls = [];
+  let attempt = 0;
+  const response = await withFetch(
+    async (url, init) => {
+      calls.push({ url: String(url), init });
+      attempt += 1;
+      return new Response("{}", { status: attempt === 1 ? 503 : 202 });
+    },
+    () =>
+      worker.fetch(
+        leadRequest({
+          source: "ai_visibility_scan",
+          email: "scan@example.com",
+          submissionId: "submission-browser-001",
+        }),
+        TREVRA_ENV,
+      ),
+  );
+
+  assert.equal(response.status, 202);
+  assert.equal(calls.length, 2);
+  assert.equal(
+    calls[0].init.headers["x-trevra-idempotency-key"],
+    "submission-browser-001",
+  );
+  assert.equal(
+    calls[0].init.headers["x-trevra-idempotency-key"],
+    calls[1].init.headers["x-trevra-idempotency-key"],
+  );
+  assert.equal(calls[0].init.body, calls[1].init.body);
+  assert.equal(
+    calls[0].init.headers["x-trevra-signature"],
+    calls[1].init.headers["x-trevra-signature"],
+  );
+});
+
+test("browser retry of the same logical submission keeps the Trevra idempotency key", async () => {
+  const calls = [];
+  await withFetch(
+    async (url, init) => {
+      calls.push({ url: String(url), init });
+      return new Response("{}", { status: 202 });
+    },
+    async () => {
+      const body = {
+        source: "contact",
+        email: "retry@example.com",
+        name: "Retry Person",
+        message: "Same logical form",
+        submissionId: "submission-browser-retry-001",
+      };
+      await worker.fetch(leadRequest(body), TREVRA_ENV);
+      await worker.fetch(leadRequest(body), TREVRA_ENV);
+    },
+  );
+
+  assert.equal(calls.length, 2);
+  assert.equal(
+    calls[0].init.headers["x-trevra-idempotency-key"],
+    "submission-browser-retry-001",
+  );
+  assert.equal(
+    calls[1].init.headers["x-trevra-idempotency-key"],
+    "submission-browser-retry-001",
+  );
+  assert.equal(calls[0].init.body, calls[1].init.body);
+});
+
+test("answer-check remains an e-commerce proxy rather than a Trevra route", async () => {
+  const calls = [];
+  const response = await withFetch(
+    async (url, init) => {
+      calls.push({ url: String(url), init });
+      return new Response(JSON.stringify({ status: "ok" }), {
+        status: 200,
+        headers: { "content-type": "application/json" },
+      });
+    },
+    () =>
+      worker.fetch(
+        new Request("https://beseam.com/api/answer-check?domain=example.com"),
+        { ...TREVRA_ENV, API_BASE_URL: "https://api.beseam.test/api" },
+      ),
+  );
+
+  assert.equal(response.status, 200);
+  assert.equal(
+    calls[0].url,
+    "https://api.beseam.test/api/monitoring/public/answer-check/example.com",
+  );
+});
