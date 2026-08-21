@@ -50,8 +50,12 @@ export default function WhyBeseam() {
               and almost nobody is watching it.
             </p>
             <p className="mt-5 max-w-md text-[14px] leading-[1.7] text-white/56">
-              Before Beseam, I spent my career on measurement and reliability at
-              Google and Amazon. Same discipline, smaller and sharper problem.{" "}
+              For the past year I worked closely with ecommerce operators on
+              real stores. The same problem kept getting sharper: complete
+              product data in the admin, and still no record of what an AI
+              assistant told a buyer. Before Beseam, I spent my career on
+              measurement and reliability at Google and Amazon — same
+              discipline, smaller and sharper problem.{" "}
               <Link
                 href="/manifesto"
                 className="underline decoration-white/25 underline-offset-4 hover:decoration-white/60"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 
 import { ArrowRight } from "lucide-react";
 
@@ -77,6 +77,9 @@ export default function LeadCaptureForm({
   );
   const [fallback, setFallback] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const submissionRef = useRef<{ fingerprint: string; id: string } | null>(
+    null,
+  );
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -102,15 +105,26 @@ export default function LeadCaptureForm({
     setSubmitting(true);
 
     try {
+      const payload = {
+        email: trimmedEmail,
+        store: result.store,
+        source,
+        website,
+        utm: getUtmValues(),
+      };
+      const fingerprint = JSON.stringify(payload);
+      if (
+        !submissionRef.current ||
+        submissionRef.current.fingerprint !== fingerprint
+      ) {
+        submissionRef.current = { fingerprint, id: crypto.randomUUID() };
+      }
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          email: trimmedEmail,
-          store: result.store,
-          source,
-          website,
-          utm: getUtmValues(),
+          ...payload,
+          submissionId: submissionRef.current.id,
         }),
       });
 
