@@ -44,7 +44,7 @@ export default function CategoryBenchmarksSection() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
           <p className="text-[13px] leading-relaxed text-black/64">
             <span className="mr-3 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
-              AI benchmark
+              Discovery benchmark
             </span>
             Across {BENCHMARK_RUN.questions} shopper questions,{" "}
             <strong className="font-semibold text-[#111318]">

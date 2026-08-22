@@ -1352,7 +1352,7 @@ export default function AnswerCheck({
             disabled={submitting}
             className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#b8441d] disabled:opacity-70"
           >
-            {submitting ? "Reading your store…" : "Scan my store free"}
+            {submitting ? "Reading your store…" : "Check my store"}
             <ArrowRight
               aria-hidden="true"
               className="h-4 w-4 transition-transform group-hover:translate-x-0.5"

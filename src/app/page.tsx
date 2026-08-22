@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     absolute: "Beseam | Make products easier to find, choose, and buy",
   },
   description:
-    "See where products lose shoppers across AI, search, onsite discovery, product pages, and conversion. Beseam shows what to fix, helps make the change, and measures what happened next.",
+    "Beseam connects discovery, store, shopper behavior, and revenue signals to show where products lose ground, what should happen next, and what changed after you act.",
   alternates: { canonical: "/" },
 };
 

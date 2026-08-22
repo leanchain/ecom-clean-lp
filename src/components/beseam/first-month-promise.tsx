@@ -16,41 +16,29 @@ export default function FirstMonthPromise({
         <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
           <div>
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
-              Our guarantee
+              Free for 30 days
             </p>
             <h2 className="mt-4 max-w-[20ch] font-display text-[clamp(2rem,3.1vw,2.6rem)] font-normal leading-[1.06] tracking-[-0.02em] text-[#111318]">
-              Let Beseam find one worthwhile fix and prove what changed: free
-              for 30 days.
+              Find one worthwhile improvement. Make it. Measure what changed.
             </h2>
           </div>
 
           <div className="self-end">
-            <p className="max-w-[68ch] text-[17px] leading-[1.7] text-black/66">
-              Start with your store. Beseam finds a commercially meaningful
-              problem, brings together the evidence, helps you make a supported
-              change, and measures the relevant signal again. You pay nothing
-              for the first 30 days. Then you decide whether Beseam earned the
-              right to continue.
+            <p className="max-w-[54ch] text-[17px] leading-[1.7] text-black/66">
+              Give Beseam 30 days to find an opportunity, help you act on it,
+              and measure the result.
             </p>
+
             <dl className="mt-10 border-y border-black/22">
               {[
                 [
-                  "You receive",
-                  "A prioritized issue, supporting evidence, proposed change, and before/after measurement",
+                  "You get",
+                  "Evidence, a prioritized action, and before/after measurement",
                 ],
                 [
-                  "We re-check",
-                  "The original discovery or conversion signal after the approved change",
+                  "You stay in control",
+                  "Nothing customer-facing changes without your approval",
                 ],
-                [
-                  "We do not promise",
-                  "Recommendation placement or a guaranteed traffic, conversion, or sales increase",
-                ],
-                [
-                  "What we need",
-                  "Your store domain to start. Store access or analytics connections only when the work needs them",
-                ],
-                ["Who decides", "You do, at day 30"],
               ].map(([term, detail]) => (
                 <div
                   key={term}
@@ -75,7 +63,7 @@ export default function FirstMonthPromise({
                 preserveUtm
                 className="inline-flex min-h-11 items-center justify-center bg-[#111318] px-5 text-[14px] font-semibold text-white transition-colors hover:bg-[#b8441d]"
               >
-                Start my free 30 days
+                Start free for 30 days
               </TrackedLink>
               <TrackedLink
                 href="/product-visibility-monitoring"
