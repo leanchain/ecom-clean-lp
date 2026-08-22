@@ -949,6 +949,11 @@ export default function HeroSurfaceShift() {
   const foregroundExitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
+  const pointerForegroundFrameRef = useRef<number | null>(null);
+  const pointerForegroundTargetRef = useRef(INITIAL_AUTO_HUB_ID ? 1 : 0);
+  const cardExitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cardRevealFrameRef = useRef<number | null>(null);
+  const cardVisibleRef = useRef(false);
   const foregroundSvgRef = useRef<SVGSVGElement>(null);
   const foregroundProgressRef = useRef(INITIAL_AUTO_HUB_ID ? 1 : 0);
   const renderedForegroundHubRef = useRef<string | null>(INITIAL_AUTO_HUB_ID);
@@ -976,6 +981,7 @@ export default function HeroSurfaceShift() {
   } | null>(null);
   const [activeSatellite, setActiveSatellite] = useState<number | null>(null);
   const [cardState, setCardState] = useState<CardState>(null);
+  const [cardVisible, setCardVisible] = useState(false);
   const [cardPosition, setCardPosition] = useState({ left: 0, top: 0 });
   const [autoJourneyIndex, setAutoJourneyIndex] = useState(0);
   const [autoPhase, setAutoPhase] = useState<
@@ -1132,6 +1138,48 @@ export default function HeroSurfaceShift() {
     );
   }, []);
 
+  const easePointerForegroundProgress = useCallback(
+    (value: number) => {
+      const target = Math.max(0, Math.min(1, value));
+      pointerForegroundTargetRef.current = target;
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        if (pointerForegroundFrameRef.current !== null) {
+          cancelAnimationFrame(pointerForegroundFrameRef.current);
+          pointerForegroundFrameRef.current = null;
+        }
+        setForegroundProgress(target);
+        return;
+      }
+
+      if (pointerForegroundFrameRef.current !== null) return;
+      let previousTime = performance.now();
+
+      const animate = (now: number) => {
+        const current = foregroundProgressRef.current;
+        const nextTarget = pointerForegroundTargetRef.current;
+        const delta = nextTarget - current;
+        const elapsed = Math.min(48, Math.max(1, now - previousTime));
+        previousTime = now;
+        const timeConstant = delta >= 0 ? 190 : 360;
+        const blend = 1 - Math.exp(-elapsed / timeConstant);
+        const next = current + delta * blend;
+
+        if (Math.abs(delta) <= 0.004) {
+          setForegroundProgress(nextTarget);
+          pointerForegroundFrameRef.current = null;
+          return;
+        }
+
+        setForegroundProgress(next);
+        pointerForegroundFrameRef.current = requestAnimationFrame(animate);
+      };
+
+      pointerForegroundFrameRef.current = requestAnimationFrame(animate);
+    },
+    [setForegroundProgress],
+  );
+
   const setSupportProgress = useCallback((value: number) => {
     const clamped = Math.max(0, Math.min(1, value));
     svgRef.current?.style.setProperty("--kg-support", clamped.toFixed(3));
@@ -1156,6 +1204,18 @@ export default function HeroSurfaceShift() {
       if (autoResumeTimerRef.current) {
         clearTimeout(autoResumeTimerRef.current);
         autoResumeTimerRef.current = null;
+      }
+      if (pointerForegroundFrameRef.current !== null) {
+        cancelAnimationFrame(pointerForegroundFrameRef.current);
+        pointerForegroundFrameRef.current = null;
+      }
+      if (cardExitTimerRef.current) {
+        clearTimeout(cardExitTimerRef.current);
+        cardExitTimerRef.current = null;
+      }
+      if (cardRevealFrameRef.current !== null) {
+        cancelAnimationFrame(cardRevealFrameRef.current);
+        cardRevealFrameRef.current = null;
       }
     },
     [],
@@ -1449,18 +1509,44 @@ export default function HeroSurfaceShift() {
     closeTimerRef.current = null;
   }, []);
 
+  const cancelCardExit = useCallback(() => {
+    if (!cardExitTimerRef.current) return;
+    clearTimeout(cardExitTimerRef.current);
+    cardExitTimerRef.current = null;
+  }, []);
+
+  const revealCard = useCallback(() => {
+    cancelCardExit();
+    if (cardVisibleRef.current) return;
+    if (cardRevealFrameRef.current !== null) {
+      cancelAnimationFrame(cardRevealFrameRef.current);
+    }
+    setCardVisible(false);
+    cardRevealFrameRef.current = requestAnimationFrame(() => {
+      cardRevealFrameRef.current = null;
+      cardVisibleRef.current = true;
+      setCardVisible(true);
+    });
+  }, [cancelCardExit]);
+
   const clearSelection = useCallback(() => {
     cancelClose();
+    cancelCardExit();
     activeHubRef.current = null;
     activeTargetRef.current = null;
     setActiveHubId(null);
     setActiveCapability(null);
     setActiveSatellite(null);
-    setCardState(null);
+    cardVisibleRef.current = false;
+    setCardVisible(false);
+    cardExitTimerRef.current = setTimeout(() => {
+      setCardState(null);
+      cardExitTimerRef.current = null;
+    }, 240);
     if (!autoContextHubRef.current) {
-      setForegroundProgress(pointerProximityRef.current);
+      easePointerForegroundProgress(pointerProximityRef.current);
     }
-  }, [cancelClose, setForegroundProgress]);
+  }, [cancelCardExit, cancelClose, easePointerForegroundProgress]);
 
   const scheduleClose = useCallback(() => {
     if (closeTimerRef.current) return;
@@ -1495,10 +1581,11 @@ export default function HeroSurfaceShift() {
       setActiveCapability(null);
       setActiveSatellite(null);
       setCardState({ kind: "hub", hubId });
-      setForegroundProgress(1);
+      easePointerForegroundProgress(1);
       positionCard(element);
+      revealCard();
     },
-    [cancelClose, positionCard, setForegroundProgress],
+    [cancelClose, easePointerForegroundProgress, positionCard, revealCard],
   );
 
   const selectCapability = useCallback(
@@ -1516,10 +1603,11 @@ export default function HeroSurfaceShift() {
         hubId: node.hubId,
         index: node.index,
       });
-      setForegroundProgress(1);
+      easePointerForegroundProgress(1);
       positionCard(element);
+      revealCard();
     },
-    [cancelClose, positionCard, setForegroundProgress],
+    [cancelClose, easePointerForegroundProgress, positionCard, revealCard],
   );
 
   const clearFocus = useCallback(() => {
@@ -1544,9 +1632,9 @@ export default function HeroSurfaceShift() {
     pointerProximityRef.current = 0;
     setPointerApproachHubId(null);
     if (!activeHubRef.current && !autoContextHubRef.current) {
-      setForegroundProgress(0);
+      easePointerForegroundProgress(0);
     }
-  }, [setForegroundProgress]);
+  }, [easePointerForegroundProgress]);
   useEffect(() => {
     clearFocus();
     clearSelection();
@@ -1808,9 +1896,9 @@ export default function HeroSurfaceShift() {
         }
 
         if (activeHubRef.current || withinInteractionNeighborhood) {
-          setForegroundProgress(1);
+          easePointerForegroundProgress(1);
         } else {
-          setForegroundProgress(pointerProgress);
+          easePointerForegroundProgress(pointerProgress);
           if (pointerProgress <= 0.02 && pointerApproachHubRef.current) {
             pointerApproachHubRef.current = null;
             setPointerApproachHubId(null);
@@ -1863,7 +1951,7 @@ export default function HeroSurfaceShift() {
         setPointerApproachHubId(target.hubId);
         setActiveCapability(null);
         setActiveSatellite(target.index);
-        setForegroundProgress(1);
+        easePointerForegroundProgress(1);
       });
     },
     [
@@ -1879,7 +1967,7 @@ export default function HeroSurfaceShift() {
       scheduleClose,
       selectCapability,
       selectHub,
-      setForegroundProgress,
+      easePointerForegroundProgress,
     ],
   );
   const activeHub = activeHubId ? hubById[activeHubId] : null;
@@ -1905,12 +1993,12 @@ export default function HeroSurfaceShift() {
     }
 
     if (renderedForegroundHubRef.current) {
-      setForegroundProgress(0);
+      easePointerForegroundProgress(0);
       foregroundExitTimerRef.current = setTimeout(() => {
         renderedForegroundHubRef.current = null;
         setRenderedForegroundHubId(null);
         foregroundExitTimerRef.current = null;
-      }, 520);
+      }, 760);
     }
 
     return () => {
@@ -1919,7 +2007,7 @@ export default function HeroSurfaceShift() {
         foregroundExitTimerRef.current = null;
       }
     };
-  }, [desiredForegroundHubId, setForegroundProgress]);
+  }, [desiredForegroundHubId, easePointerForegroundProgress]);
 
   useEffect(() => {
     foregroundSvgRef.current?.style.setProperty(
@@ -2338,6 +2426,7 @@ export default function HeroSurfaceShift() {
 
       {cardContent ? (
         <div
+          data-visible={cardVisible ? "true" : "false"}
           className="hero-kg-card pointer-events-auto absolute z-30 w-[218px] border border-black/20 bg-[#fbfbf8]/97 p-3 font-mono shadow-[0_16px_46px_rgba(17,19,24,0.1)] backdrop-blur-[10px]"
           style={{ left: cardPosition.left, top: cardPosition.top }}
           onPointerEnter={() => {
@@ -2749,9 +2838,20 @@ export default function HeroSurfaceShift() {
           from { transform: scale(.55); opacity: 0; }
           to { transform: scale(1); opacity: .66; }
         }
-        @keyframes hero-kg-card-in {
-          from { opacity: 0; transform: translateY(4px) scale(.985); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
+        .hero-kg-card {
+          opacity: 0;
+          transform: translateY(5px) scale(.982);
+          transform-origin: 18px 18px;
+          transition:
+            left 180ms cubic-bezier(.2,.8,.2,1),
+            top 180ms cubic-bezier(.2,.8,.2,1),
+            opacity 180ms cubic-bezier(.2,.8,.2,1),
+            transform 240ms cubic-bezier(.16,1,.3,1);
+          will-change: left, top, opacity, transform;
+        }
+        .hero-kg-card[data-visible="true"] {
+          opacity: 1;
+          transform: translateY(0) scale(1);
         }
         @media (max-width: 1100px) {
           .hero-kg-cap-label {
@@ -2787,6 +2887,7 @@ export default function HeroSurfaceShift() {
           .hero-kg-sat-item,
           .hero-kg-card {
             animation: none;
+            transition: none;
           }
         }
       `}</style>
