@@ -1,27 +1,27 @@
 export const STORE_HEALTH_FAQS = [
   {
-    question: "What exactly does Beseam test?",
+    question: "What does Beseam connect?",
     answer:
-      "Beseam runs buying questions against configured AI assistants and keeps the observed answer, products named, competitors, citations or supporting evidence when available, and the time of the run. The same question can be run again after a product change.",
+      "Beseam brings together signals from discovery, onsite search and merchandising, product and catalog data, shopper behavior, conversion, and revenue. The exact signals available depend on the store and integrations you connect.",
   },
   {
-    question: "How do you know why another product was recommended?",
+    question: "How does Beseam decide what to work on first?",
     answer:
-      "Beseam does not pretend to know an assistant's hidden ranking logic. It compares the observed answer with product and storefront evidence you control, then identifies supported differences or missing facts that are actionable. A suspected cause stays separate from a confirmed fact.",
+      "Beseam compares the signals around an outcome, weighs the likely commercial impact and the strength of the evidence, then prioritizes an opportunity you can act on. Suspected causes stay separate from confirmed facts.",
   },
   {
     question: "What can Beseam actually change?",
     answer:
-      "With your approval and store access, Beseam can propose and publish supported product-data changes such as titles, descriptions, attributes, or other editable product fields. Customer-facing changes are not published without the approval rules agreed for the store, and the previous value is kept for revert.",
+      "With your approval and the right store access, Beseam can help change supported product data, content, merchandising, and other editable store experiences. What can be published depends on the connected platform and the approval rules you choose.",
   },
   {
-    question: "Doesn’t Shopify already show AI channel performance?",
+    question: "Do I approve changes before they go live?",
     answer:
-      "Shopify remains the source of truth for your catalog and can report performance from supported AI sales channels. Beseam focuses on the individual buying answer: which products were named, which competitors appeared, what product evidence is connected to the miss, and whether the same question changes after an approved product update.",
+      "Yes. Customer-facing changes follow the approval rules agreed for your store. Beseam keeps the evidence, proposed action, and previous value connected so supported changes can be reviewed and reverted when needed.",
   },
   {
-    question: "Can Beseam guarantee my product will be recommended?",
+    question: "What happens during the free 30 days?",
     answer:
-      "No. Beseam cannot control an AI assistant's recommendation. It records what happened, helps you change product evidence you control, and re-runs the same question so you can see whether the observed answer changed.",
+      "Start with your domain. Beseam looks for a worthwhile opportunity, brings together the supporting evidence, helps you act on a supported change, and measures the relevant signals afterward. You decide whether it earned the right to continue.",
   },
 ] as const;

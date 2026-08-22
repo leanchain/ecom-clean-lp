@@ -9,22 +9,38 @@ const CONNECTED_PROBLEMS = [
     signal: "Before the click",
     title: "Your product disappears from discovery.",
     detail:
-      "The problem may sit in missing product facts, weak category evidence, inconsistent availability, or stronger competitor representation. Beseam brings those signals together before deciding what is worth changing.",
-    evidence: "Product facts · availability · category evidence · competitors",
+      "Missing product facts, availability, or stronger competitor evidence may be behind it.",
   },
   {
     signal: "On your store",
     title: "Shoppers cannot find the right product.",
     detail:
-      "The problem may sit in catalog data, onsite ranking, merchandising, filters, recommendations, or the language shoppers use. Beseam connects the behavior to the product and store context around it.",
-    evidence: "Catalog · onsite search · merchandising · behavior",
+      "Catalog data, ranking, merchandising, or shopper language may be getting in the way.",
   },
   {
     signal: "At the decision",
-    title: "A product gets attention but does not convert.",
+    title: "Attention does not turn into a sale.",
     detail:
-      "The problem may be missing decision evidence, unclear shipping, weak creative, trust gaps, price context, or checkout friction. Beseam helps narrow the problem before proposing a supported change.",
-    evidence: "PDP evidence · creative · trust · checkout · conversion",
+      "Trust, shipping, creative, price context, or checkout friction may be holding it back.",
+  },
+] as const;
+
+const EVIDENCE_TRACE = [
+  {
+    label: "Shopper signal",
+    value: "Search: “waterproof jacket” → “commuting”",
+  },
+  {
+    label: "Store evidence",
+    value: "Commuter-ready attributes are missing or buried.",
+  },
+  {
+    label: "Opportunity",
+    value: "Make commuter fit explicit and surface the strongest matches.",
+  },
+  {
+    label: "Measure",
+    value: "Compare search exits, product visits, and conversion.",
   },
 ] as const;
 
@@ -45,17 +61,46 @@ export default function WhyBeseam() {
                 See what&rsquo;s behind the problem.
               </h2>
             </div>
-            <p className="max-w-[60ch] text-[16px] leading-[1.75] text-white/72">
-              A weak result is rarely isolated. What looks like an AI visibility
-              problem, a search problem, or a conversion problem can be connected
-              to product data, merchandising, content, creative, behavior, or
-              something further downstream.
+            <p className="max-w-[50ch] text-[16px] leading-[1.75] text-white/72">
+              The symptom and the thing worth changing often live in different
+              parts of commerce.
             </p>
           </div>
         </Reveal>
 
-        <Reveal delay={0.08}>
-          <div className="mt-14 grid border-t border-white/24 lg:grid-cols-3">
+        <Reveal delay={0.06}>
+          <div className="mt-12 border border-white/18 bg-white/[0.025]">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/14 px-5 py-3 sm:px-6">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#e8653a]">
+                Example trace
+              </p>
+              <p className="text-[12px] text-white/46">Onsite discovery</p>
+            </div>
+            <div className="grid lg:grid-cols-4">
+              {EVIDENCE_TRACE.map((item, index) => (
+                <div
+                  key={item.label}
+                  className="relative border-b border-white/14 px-5 py-5 last:border-b-0 sm:px-6 lg:min-h-32 lg:border-b-0 lg:border-r lg:last:border-r-0"
+                >
+                  <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-white/46">
+                    {item.label}
+                  </p>
+                  <p className="mt-3 max-w-[28ch] text-[15px] font-medium leading-[1.45] text-white/88">
+                    {item.value}
+                  </p>
+                  {index < EVIDENCE_TRACE.length - 1 ? (
+                    <span className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 items-center justify-center bg-[#111318] text-[#e8653a] lg:flex">
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </span>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div className="mt-12 grid border-t border-white/24 lg:grid-cols-3">
             {CONNECTED_PROBLEMS.map((problem, index) => (
               <article
                 key={problem.title}
@@ -75,21 +120,16 @@ export default function WhyBeseam() {
                 <p className="mt-4 text-[14px] leading-[1.75] text-white/68">
                   {problem.detail}
                 </p>
-                <p className="mt-5 font-mono text-[11px] leading-relaxed text-white/44">
-                  {problem.evidence}
-                </p>
               </article>
             ))}
           </div>
         </Reveal>
 
-        <Reveal delay={0.12}>
+        <Reveal delay={0.14}>
           <div className="mt-10 flex flex-col gap-5 border-t border-white/16 pt-8 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
-            <p className="max-w-[72ch] text-[13px] leading-[1.7] text-white/52">
-              Beseam grew out of seeing ecommerce teams diagnose a problem in one
-              system, make a change in another, and lose the evidence in between.
-              The goal is to keep the problem, the approved change, and the
-              measured result connected.
+            <p className="max-w-[62ch] text-[13px] leading-[1.7] text-white/52">
+              Beseam keeps the signal, evidence, action, and measured result
+              connected.
             </p>
             <Link
               href="/manifesto"
