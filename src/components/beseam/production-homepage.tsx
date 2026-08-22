@@ -67,8 +67,6 @@ const OPERATING_LOOP = [
       "Measure discovery, behavior, conversion, orders, revenue, incrementality, and impact where supported, then use what happened to improve the next decision.",
   },
 ] as const;
-  },
-] as const;
 
 export default function ProductionHomepage() {
   return (
@@ -225,7 +223,6 @@ export default function ProductionHomepage() {
             </ol>
           </Reveal>
         </div>
-      </section>
       </section>
 
       <section id="ai-check" className="scroll-mt-24 bg-[#faf1eb]">
