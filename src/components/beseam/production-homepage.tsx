@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import LiveAnswerCheck from "@/components/beseam/answer-check";
 import CategoryBenchmarksSection from "@/components/beseam/category-benchmarks-section";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
+import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
 import { Reveal } from "@/components/beseam/reveal";
 import TrackedLink from "@/components/beseam/tracked-link";
 import WhyBeseam from "@/components/beseam/why-beseam";
@@ -65,8 +66,9 @@ const STEPS = [
 export default function ProductionHomepage() {
   return (
     <div className="bg-[#fafafa] text-[#151515]">
-      <section id="home-hero">
-        <div className="mx-auto max-w-[92rem] px-5 pb-20 pt-20 sm:px-8 sm:pb-24 sm:pt-28 lg:px-10 lg:pb-28 lg:pt-32">
+      <section id="home-hero" className="relative isolate overflow-hidden">
+        <HeroSurfaceShift />
+        <div className="relative z-10 mx-auto max-w-[92rem] px-5 pb-20 pt-20 sm:px-8 sm:pb-24 sm:pt-28 lg:px-10 lg:pb-28 lg:pt-32">
           <Reveal>
             <div className="mx-auto max-w-[76rem] text-center">
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
