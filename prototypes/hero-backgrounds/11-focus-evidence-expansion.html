@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Focus evidence expansion</title>
+<style>
+*{box-sizing:border-box}
+:root{--ink:#111318;--paper:#fafafa;--accent:#b8441d}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+.hero{height:94svh;min-height:620px;position:relative;overflow:hidden;display:grid;place-items:center;isolation:isolate}
+.graph{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.copy{position:relative;z-index:5;text-align:center;width:min(960px,88vw);pointer-events:none;margin-top:-2vh}
+.ey{font:600 10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.15em;color:var(--accent);text-transform:uppercase}
+.copy h1{font:400 clamp(54px,6.8vw,96px)/.96 Georgia,serif;letter-spacing:-.037em;margin:24px auto;max-width:14ch}
+.copy p{font-size:17px;line-height:1.62;color:#111318a8;max-width:750px;margin:auto}
+.actions{margin-top:27px;display:flex;gap:20px;justify-content:center;align-items:center}.btn{background:var(--ink);color:#fff;padding:13px 20px;font-weight:650;font-size:13px}.link{font-weight:650;font-size:13px;text-decoration:underline;text-underline-offset:6px}
+.wash{position:absolute;z-index:3;left:50%;top:50%;width:min(900px,64vw);height:70%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,#fafafa 0 35%,#fafafaf5 48%,#fafafabb 66%,#fafafa00 84%);pointer-events:none}
+.edge{fill:none;stroke:var(--ink);stroke-width:.55;stroke-opacity:.027;transition:stroke-opacity .16s,stroke-width .16s,stroke .16s}
+.edge.weak{stroke-dasharray:2 10;stroke-opacity:.018}
+.edge.near{stroke-opacity:.11}
+.edge.connected{stroke:var(--accent);stroke-opacity:.2;stroke-width:.8}
+.journey{fill:none;stroke:var(--accent);stroke-width:.75;stroke-opacity:.06;stroke-linecap:round;stroke-dasharray:10 18;animation:drift 20s linear infinite}
+.cap-edge{stroke:var(--ink);stroke-width:.42;stroke-opacity:.012;transition:stroke-opacity .16s,stroke .16s}.capability{pointer-events:all;cursor:default;transition:opacity .16s}.cap-hit{fill:transparent;pointer-events:all}.cap-dot{fill:var(--ink);opacity:.055;transition:opacity .16s,transform .16s,fill .16s;transform-box:fill-box;transform-origin:center}.cap-label{font:600 3.65px ui-monospace,SFMono-Regular,Menlo,monospace;fill:var(--ink);opacity:0;letter-spacing:.025em;pointer-events:none;transition:opacity .16s}.capability.near .cap-dot{opacity:.18;transform:scale(1.25)}.capability.parent-active .cap-dot{opacity:.22}.capability.parent-active+.cap-edge,.cap-edge.parent-active{stroke-opacity:.04}.capability:hover .cap-dot,.capability.active .cap-dot{fill:var(--accent);opacity:.95;transform:scale(2)}.capability:hover .cap-label,.capability.active .cap-label{opacity:.78}.capability:hover .cap-hit{stroke:var(--accent);stroke-width:.4;stroke-opacity:.13}
+.hub{cursor:default;pointer-events:all;transition:opacity .16s,filter .16s}.hub-hit{fill:transparent;pointer-events:all}.hub-ring{fill:var(--paper);stroke:var(--ink);stroke-width:.62;stroke-opacity:.16;transition:.16s}.hub-core{fill:var(--ink);opacity:.28;transition:.16s}.hub-label{font:600 4.4px ui-monospace,SFMono-Regular,Menlo,monospace;fill:var(--ink);opacity:.095;letter-spacing:.04em;transition:.16s}.hub.near .hub-ring{stroke-opacity:.3}.hub.near .hub-core{opacity:.48}.hub.near .hub-label{opacity:.24}.hub.selected{filter:drop-shadow(0 5px 8px rgba(17,19,24,.08))}.hub.selected .hub-ring{stroke:var(--accent);stroke-opacity:.78}.hub.selected .hub-core{fill:var(--accent);opacity:.92;transform:scale(1.45);transform-box:fill-box;transform-origin:center}.hub.selected .hub-label{opacity:.72;font-size:5px}
+.graph.context .edge:not(.near):not(.connected){stroke-opacity:.012}.graph.context .capability:not(.near):not(.parent-active):not(.active){opacity:.32}.graph.context .hub:not(.near):not(.selected){opacity:.42}
+.lens{fill:none;stroke:var(--ink);stroke-width:.5;stroke-opacity:0;stroke-dasharray:2 10;transition:stroke-opacity .16s}.graph.context .lens{stroke-opacity:.045}
+.sat-zone{fill:transparent;pointer-events:all}.sat-item{pointer-events:all;cursor:default}.sat-hit{fill:transparent;pointer-events:all}.sat-edge{stroke:var(--accent);stroke-width:.65;stroke-opacity:0;transition:stroke-opacity .2s}.sat-dot{fill:var(--accent);opacity:0;transition:opacity .2s,transform .2s;transform-box:fill-box;transform-origin:center}.sat-label{font:600 4px ui-monospace,SFMono-Regular,Menlo,monospace;fill:var(--ink);opacity:0;transition:opacity .2s}.sat-value{font:700 3.8px ui-monospace,SFMono-Regular,Menlo,monospace;fill:var(--accent);opacity:0;transition:opacity .2s}.satellites.open .sat-edge{stroke-opacity:.19}.satellites.open .sat-dot{opacity:.62}.satellites.open .sat-label{opacity:.32}.satellites.open .sat-value{opacity:.72}.satellites.open .sat-item:hover .sat-dot{opacity:1;transform:scale(1.8)}.satellites.open .sat-item:hover .sat-label{opacity:.8}.satellites.open .sat-item:hover .sat-value{opacity:1}.satellites.open .sat-item:hover .sat-hit{stroke:var(--accent);stroke-width:.45;stroke-opacity:.16}
+.evidence{position:absolute;z-index:8;width:218px;background:rgba(251,251,248,.97);border:1px solid #cecec8;box-shadow:0 16px 46px rgba(17,19,24,.1);padding:10px 11px;opacity:0;transform:translateY(5px) scale(.985);pointer-events:none;transition:opacity .16s,transform .16s;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;backdrop-filter:blur(10px)}
+.evidence.on{opacity:1;transform:none;pointer-events:auto}.evidence h3{font:700 8.5px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;margin:0 0 8px}.metric{display:grid;grid-template-columns:1fr auto;column-gap:10px;padding:5px 0;border-top:1px solid #e4e4df;font-size:8.5px;color:#575752}.metric strong{color:var(--ink);font-weight:700}.bar{grid-column:1/-1;height:2px;background:#e7e5df;margin-top:4px}.bar i{display:block;height:100%;background:var(--accent)}.cap-desc{border-top:1px solid #e4e4df;padding-top:7px;font-size:7.8px;line-height:1.45;color:#6b6a65}
+.scroll-cue{position:absolute;z-index:6;left:50%;bottom:15px;transform:translateX(-50%);width:1px;height:24px;background:linear-gradient(#11131800,#11131840);pointer-events:none}
+@keyframes drift{to{stroke-dashoffset:-56}}
+@media(max-width:760px){.hero{height:92svh}.copy h1{font-size:clamp(46px,13vw,68px)}.copy p{font-size:15px}.hub-label{display:none}.wash{width:82vw}.evidence{display:none}}
+@media(prefers-reduced-motion:reduce){.journey{animation:none}}
+</style>
+</head>
+<body>
+<section class="hero" id="hero">
+  <svg class="graph" id="graph" viewBox="0 0 1800 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g id="edges"></g>
+    <g id="journeys"></g>
+    <g id="capabilityEdges"></g>
+    <g id="capabilities"></g>
+    <g id="hubs"></g>
+    <g id="satellites" class="satellites"></g>
+    <circle id="lens" class="lens" r="116" />
+  </svg>
+  <div class="wash"></div>
+  <div class="copy">
+    <div class="ey">Commerce discovery + conversion</div>
+    <h1>Make your products easier to find, choose, and buy.</h1>
+    <p>Beseam shows where your products lose shoppers across AI, search, onsite discovery, product pages, and conversion: then shows you what to fix, helps you make the change, and measures what happened next.</p>
+    <div class="actions"><span class="btn">Start for free →</span><span class="link">Run a free AI check</span></div>
+  </div>
+  <div id="evidence" class="evidence"></div>
+  <div class="scroll-cue"></div>
+</section>
+<script>
+const hubs=[
+ {id:'ai',label:'AI answers',x:170,y:158,sats:[['ChatGPT','68'],['Gemini','61'],['AI Mode','72'],['citations','54']],metrics:[['ChatGPT visibility','68 / 100',68],['Gemini visibility','61 / 100',61],['Google AI Mode','72 / 100',72]]},
+ {id:'search',label:'Search',x:365,y:108,sats:[['JSON-LD','83%'],['indexable','100%'],['queries','74%'],['snippets','66%']],metrics:[['JSON-LD coverage','83%',83],['Indexability','100%',100],['Query match','74%',74]]},
+ {id:'catalog',label:'Catalog',x:590,y:245,sats:[['fields','91%'],['freshness','96%'],['variants','88%'],['stock','94%']],metrics:[['Completeness','91%',91],['Freshness','96%',96],['Variant coverage','88%',88]]},
+ {id:'brand',label:'Brand',x:770,y:112,sats:[['claims','86%'],['identity','94%'],['trust','71%'],['evidence','79%']],metrics:[['Approved claims','86%',86],['Identity coverage','94%',94],['Trust evidence','71%',71]]},
+ {id:'truth',label:'Product truth',x:840,y:315,sats:[['price','100%'],['shipping','80%'],['reviews','60%'],['facts','89%']],metrics:[['Evidence coverage','5 / 7',71],['Shipping facts','4 / 5',80],['Structured facts','89%',89]]},
+ {id:'creative',label:'Creative',x:1040,y:118,sats:[['images','82%'],['video','46%'],['brand fit','91%'],['assets','24']],metrics:[['Product image coverage','82%',82],['Brand consistency','91%',91],['Video coverage','46%',46]]},
+ {id:'campaigns',label:'Campaigns',x:1245,y:155,sats:[['Google Ads','82%'],['Meta Ads','76%'],['landing','91%'],['tracking','88%']],metrics:[['Google Ads readiness','82%',82],['Meta Ads readiness','76%',76],['Landing readiness','91%',91]]},
+ {id:'onsite',label:'Onsite search',x:1085,y:330,sats:[['retrieval','86%'],['top 3','64%'],['zero result','3.8%'],['filters','77%']],metrics:[['Retrieval coverage','86%',86],['Top-3 placement','64%',64],['Zero-result rate','3.8%',38]]},
+ {id:'recs',label:'Recommendations',x:1325,y:315,sats:[['coverage','84%'],['affinity','73%'],['rules','12'],['lift','+12%']],metrics:[['Catalog coverage','84%',84],['Affinity confidence','73%',73],['Measured lift','+12%',62]]},
+ {id:'pdp',label:'Product page',x:925,y:500,sats:[['evidence','5/7'],['policy','82%'],['trust','60%'],['content','89%']],metrics:[['Decision evidence','5 / 7',71],['Policy clarity','82%',82],['Trust coverage','60%',60]]},
+ {id:'behavior',label:'Behavior',x:1225,y:500,sats:[['engagement','18%'],['friction','7.2%'],['searches','426'],['replay','128']],metrics:[['Interaction rate','18%',58],['Friction sessions','7.2%',28],['Searches observed','426',76]]},
+ {id:'checkout',label:'Checkout',x:1490,y:385,sats:[['complete','72%'],['payment','97%'],['drop-off','28%'],['errors','1.4%']],metrics:[['Completion','72%',72],['Payment success','97%',97],['Drop-off','28%',28]]},
+ {id:'revenue',label:'Revenue',x:1630,y:210,sats:[['orders','184'],['CVR','3.6%'],['AOV','$84'],['impact','+8.4%']],metrics:[['Orders','184',74],['Conversion rate','3.6%',60],['Observed impact','+8.4%',68]]}
+];
+const hubById=Object.fromEntries(hubs.map(h=>[h.id,h]));
+const links=[
+ ['ai','search'],['ai','catalog'],['search','catalog'],['search','brand'],['catalog','brand'],['catalog','truth'],['brand','truth'],['brand','creative'],['truth','creative'],['truth','onsite'],['truth','pdp'],['creative','campaigns'],['campaigns','revenue'],['onsite','recs'],['onsite','behavior'],['recs','behavior'],['recs','checkout'],['pdp','behavior'],['pdp','checkout'],['behavior','checkout'],['checkout','revenue'],['search','behavior'],['catalog','campaigns'],['brand','campaigns'],['creative','pdp'],['revenue','recs']
+];
+const weak=[['ai','brand'],['search','campaigns'],['catalog','recs'],['creative','behavior'],['truth','revenue'],['pdp','revenue']];
+const capabilities={
+ ai:[
+  ['Visibility checks','Production','On-demand product and brand visibility checks across AI shopping surfaces.','visibility.workspace'],
+  ['Visibility schedule','Production','Recurring visibility monitoring across prompt families and shopping surfaces.','jobs.visibility_schedule'],
+  ['Answer coverage','68 / 100','How consistently products appear in relevant assistant answers.','visibility.workspace'],
+  ['Competitor observation','54% overlap','Products and brands appearing instead of or alongside yours.','visibility.workspace'],
+  ['Citation evidence','12 sources','Evidence sources supporting observed assistant recommendations.','visibility.workspace']
+ ],
+ search:[
+  ['Search Console sync','Production','Scheduled Google Search Console evidence for discovery and query performance.','jobs.search_console_sync'],
+  ['Indexability','100%','Whether important product surfaces can be reached and indexed.','commerce.store_health'],
+  ['Structured data','83%','Product JSON-LD and structured commerce facts available to search systems.','commerce.inspection'],
+  ['Query coverage','74%','How much of the relevant shopping-query universe is supported.','visibility.workspace'],
+  ['Snippet support','66%','Page evidence that can support useful search-result presentation.','commerce.inspection']
+ ],
+ catalog:[
+  ['Catalog sync','Production','Canonical product ingestion used by the rest of the commerce system.','foundation.catalog_sync'],
+  ['Product workspace','Production','Synced product and variant truth available for diagnosis and fixes.','commerce.products'],
+  ['Product proposals','Beta','Generated product-field fixes for merchant review.','commerce.product_proposals'],
+  ['Product publishing','Beta','Approved product changes written back to the merchant store.','commerce.product_publish'],
+  ['Variant coverage','88%','Coverage of variant-level product truth.','commerce.products'],
+  ['Availability parity','94%','Agreement between catalog availability and visible storefront state.','commerce.products']
+ ],
+ brand:[
+  ['Brand profile','Production','Approved brand identity and evidence reused across commerce decisions.','commerce.brand'],
+  ['Brand refresh','Beta','Regenerate or refresh brand evidence when the merchant chooses.','commerce.brand_generate'],
+  ['Approved claims','86%','Claims that have enough supporting evidence to reuse safely.','commerce.brand'],
+  ['Trust evidence','71%','Policies, proof and credibility signals attached to the brand.','commerce.brand'],
+  ['Brand consistency','94%','Consistency between approved brand context and generated output.','commerce.brand']
+ ],
+ truth:[
+  ['Offer truth','96%','Canonical price, availability and offer-state agreement.','commerce.products'],
+  ['Price parity','100%','Price consistency across catalog, schema and visible product page.','commerce.inspection'],
+  ['Shipping facts','80%','Shipping information available as structured and visible evidence.','commerce.inspection'],
+  ['Review visibility','60%','Whether trust and review evidence is visible where shoppers decide.','commerce.inspection'],
+  ['Schema parity','89%','Agreement between structured product data and rendered product evidence.','commerce.inspection'],
+  ['Verification','Beta','Re-check a prior finding after a change is made.','commerce.inspection_verification_run']
+ ],
+ creative:[
+  ['Creative Studio','Beta','Product, brand, organic and advertising creative workspace.','creative.studio'],
+  ['Image generation','Beta','Credit-metered product and campaign image generation.','creative.image_generate'],
+  ['Video generation','Beta','Credit-metered product and campaign video generation.','creative.video_generate'],
+  ['Media review','Beta','Review and moderation before assets are promoted.','creative.studio'],
+  ['Asset library','Beta','Saved and reusable creative assets tied to store context.','creative.studio'],
+  ['Organic content','Beta','Creative and content workflows for non-paid commerce surfaces.','creative.studio']
+ ],
+ campaigns:[
+  ['Google readiness','Experimental','Preflight catalog, tracking, landing and account readiness for Google Ads.','advertising.google.readiness'],
+  ['Google drafts','Experimental','Create and edit Google Ads campaign drafts before publishing.','advertising.google.draft'],
+  ['Google publish','Experimental','Controlled publishing of approved Google Ads campaigns.','advertising.google.publish'],
+  ['Meta readiness','Experimental','Preflight catalog, tracking, landing and account readiness for Meta Ads.','advertising.meta.readiness'],
+  ['Meta drafts','Experimental','Create and edit Meta campaign drafts before publishing.','advertising.meta.draft'],
+  ['Ad creative','Experimental','Generate campaign copy and creative variants from product context.','advertising.creative_generate'],
+  ['Campaign performance','Experimental','Read campaign performance back into the commerce system.','advertising.google.performance + advertising.meta.performance'],
+  ['Media spend','Experimental','External Google and Meta advertising spend used in commercial measurement.','advertising.external_spend']
+ ],
+ onsite:[
+  ['Retrieval coverage','86%','How consistently relevant products can be retrieved for store search.','advanced.recommendations'],
+  ['Search placement','64% top 3','Where relevant products appear in onsite search results.','advanced.recommendations'],
+  ['Zero-result rate','3.8%','Shopping searches that return no useful product result.','advanced.analytics'],
+  ['Search behavior','Beta','Observed shopper search events and downstream behavior.','advanced.analytics'],
+  ['Merchandising signals','Beta','Rules and product signals that influence discovery.','advanced.recommendations']
+ ],
+ recs:[
+  ['Recommendation placements','Beta','Storefront recommendation surfaces managed by Beseam.','advanced.recommendations'],
+  ['Merchandising rules','Beta','Pin, block and boost controls over recommendation output.','advanced.recommendations'],
+  ['Product affinity','73%','Behavior-derived strength between products and shopper intent.','jobs.recommendations_affinity'],
+  ['Catalog coverage','84%','How much of the relevant catalog can participate in recommendations.','advanced.recommendations'],
+  ['Holdout attribution','Beta','Measure recommendation incrementality against holdout traffic.','advanced.recommendations']
+ ],
+ pdp:[
+  ['Page inspection','Experimental','Product-page evidence and structural diagnosis.','commerce.inspection'],
+  ['Page audit','Experimental','Focused audit of a product page and its decision evidence.','commerce.inspection_page_audit_run'],
+  ['Post-fix verification','Experimental','Re-check whether a prior page finding is actually fixed.','commerce.inspection_verification_run'],
+  ['Policy visibility','82%','Shipping, returns and other decision policies visible to shoppers.','commerce.inspection'],
+  ['Trust visibility','60%','Reviews and trust evidence visible at the decision point.','commerce.inspection'],
+  ['Structured parity','89%','Agreement between visible page content and structured product facts.','commerce.inspection']
+ ],
+ behavior:[
+  ['Beseam tracker','Beta','First-party navigation, engagement, commerce and friction events.','processing.behavior_source_tracker'],
+  ['ShopifyQL','Beta','Shopify behavioral data rolled into the shared evidence model.','processing.behavior_source_shopifyql'],
+  ['GA4','Beta','Google Analytics behavioral evidence joined into commerce analysis.','processing.behavior_source_ga4'],
+  ['Microsoft Clarity','Beta','Clarity behavioral evidence available to the shared behavior layer.','processing.behavior_source_clarity'],
+  ['PostHog','Beta','PostHog behavioral evidence available to the shared behavior layer.','processing.behavior_source_posthog'],
+  ['Session replay','Beta','Replay evidence for understanding shopper friction.','advanced.behavior'],
+  ['Heatmaps','Beta','Heatmap and zone evidence for interaction analysis.','advanced.behavior']
+ ],
+ checkout:[
+  ['Checkout events','Beta','Observed commerce events through the purchase path.','processing.tracker_ingestion'],
+  ['Payment success','97%','Observed payment completion across tracked checkout sessions.','advanced.analytics'],
+  ['Drop-off','28%','Observed shopper loss during the checkout path.','advanced.analytics'],
+  ['Runtime errors','Beta','Errors that may interfere with conversion.','advanced.reliability'],
+  ['Reliability alerts','Beta','Monitoring and incidents tied to storefront health.','advanced.reliability']
+ ],
+ revenue:[
+  ['Commerce ledger','Production','Canonical ledger of orders and revenue used for impact measurement.','foundation.commerce_ledger'],
+  ['Impact measurement','Production','Before-and-after commercial measurement tied to completed actions.','foundation.impact_measurement'],
+  ['Attribution','Beta','Separate observed and attributed commercial outcomes.','advanced.analytics'],
+  ['Funnels','Beta','Commerce-funnel performance across the shopper journey.','advanced.analytics'],
+  ['Cohorts','Beta','Cohort-level commercial performance and retention analysis.','advanced.analytics'],
+  ['Revenue reconciliation','Beta','Reconcile tracked and commerce-source revenue evidence.','advanced.analytics']
+ ]
+};
+const NS='http://www.w3.org/2000/svg';
+const graph=document.getElementById('graph'),hero=document.getElementById('hero'),edgeG=document.getElementById('edges'),capEdgeG=document.getElementById('capabilityEdges'),capG=document.getElementById('capabilities'),hubG=document.getElementById('hubs'),satG=document.getElementById('satellites'),journeyG=document.getElementById('journeys'),lens=document.getElementById('lens'),card=document.getElementById('evidence');
+function el(name,attrs={}){const e=document.createElementNS(NS,name);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));return e}
+function curve(a,b,bend=0){const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;const dx=b.x-a.x,dy=b.y-a.y,len=Math.max(1,Math.hypot(dx,dy));const nx=-dy/len,ny=dx/len;const c=18+Math.min(34,len*.045)+bend;return `M${a.x} ${a.y} Q${mx+nx*c} ${my+ny*c} ${b.x} ${b.y}`}
+const edgeEls=[];
+[...links.map(x=>[...x,false]),...weak.map(x=>[...x,true])].forEach(([aId,bId,isWeak],i)=>{const a=hubById[aId],b=hubById[bId];const p=el('path',{class:`edge${isWeak?' weak':''}`,'data-a':aId,'data-b':bId,d:curve(a,b,(i%3-1)*6)});edgeG.append(p);edgeEls.push({el:p,a,b,aId,bId})});
+[['ai','catalog','truth','onsite','checkout','revenue'],['search','catalog','pdp','behavior','checkout','revenue']].forEach((ids,i)=>{let d='';ids.forEach((id,j)=>{const h=hubById[id];if(j===0)d=`M${h.x} ${h.y}`;else{const prev=hubById[ids[j-1]],mx=(prev.x+h.x)/2,my=(prev.y+h.y)/2;d+=` Q${mx} ${my+(i?24:-24)} ${h.x} ${h.y}`}});journeyG.append(el('path',{class:'journey',d,style:`animation-delay:${i*-7}s`}))});
+const capabilityEls=[];
+hubs.forEach((h,hi)=>{
+ const items=capabilities[h.id]||[];
+ items.forEach((cap,i)=>{
+  const count=items.length;
+  const angle=-2.55+(i/Math.max(1,count-1))*5.1+(hi%3-1)*.12;
+  const rad=30+((i*23+hi*11)%50);
+  const x=h.x+Math.cos(angle)*rad,y=h.y+Math.sin(angle)*rad;
+  const line=el('line',{class:'cap-edge','data-parent':h.id,x1:h.x,y1:h.y,x2:x,y2:y});capEdgeG.append(line);
+  const g=el('g',{class:'capability','data-parent':h.id,'data-cap-index':i,transform:`translate(${x} ${y})`});
+  g.append(el('circle',{class:'cap-hit',r:8.5}));
+  g.append(el('circle',{class:'cap-dot',r:(.72+(i%3)*.14).toFixed(2)}));
+  const t=el('text',{class:'cap-label',x:4.2,y:-3.8});t.textContent=cap[0];g.append(t);capG.append(g);
+  capabilityEls.push({el:g,line,x,y,parent:h.id,cap,index:i});
+ });
+});
+hubs.forEach((h,i)=>{const g=el('g',{class:'hub','data-id':h.id,transform:`translate(${h.x} ${h.y})`});g.append(el('circle',{class:'hub-hit',r:17}));g.append(el('circle',{class:'hub-ring',r:i===4?4.8:4.2}));g.append(el('circle',{class:'hub-core',r:i===4?1.9:1.65}));const t=el('text',{class:'hub-label',x:7.5,y:h.y>420?12:-6.5});t.textContent=h.label;g.append(t);hubG.append(g)});
+function graphPoint(ev){const r=graph.getBoundingClientRect();return{x:(ev.clientX-r.left)/r.width*1800,y:(ev.clientY-r.top)/r.height*760}}
+function focusAt(x,y){graph.classList.add('context');lens.setAttribute('cx',x);lens.setAttribute('cy',y);capabilityEls.forEach(c=>c.el.classList.toggle('near',(c.x-x)**2+(c.y-y)**2<13500));document.querySelectorAll('.hub').forEach(g=>{const h=hubById[g.dataset.id];g.classList.toggle('near',(h.x-x)**2+(h.y-y)**2<18000)});edgeEls.forEach(e=>{const mx=(e.a.x+e.b.x)/2,my=(e.a.y+e.b.y)/2;e.el.classList.toggle('near',(mx-x)**2+(my-y)**2<19000)})}
+function openSatellites(h){satG.innerHTML='';satG.classList.remove('open');satG.append(el('circle',{class:'sat-zone',cx:h.x,cy:h.y,r:91}));h.sats.forEach((item,i)=>{const angle=-1.8+i*(1.12),rad=50+(i%2)*13,x=h.x+Math.cos(angle)*rad,y=h.y+Math.sin(angle)*rad;satG.append(el('line',{class:'sat-edge',x1:h.x,y1:h.y,x2:x,y2:y}));const itemG=el('g',{class:'sat-item','data-sat':item[0]});itemG.append(el('circle',{class:'sat-hit',cx:x,cy:y,r:11}));itemG.append(el('circle',{class:'sat-dot',cx:x,cy:y,r:1.7}));const label=el('text',{class:'sat-label',x:x+4.5,y:y-4});label.textContent=item[0];itemG.append(label);const value=el('text',{class:'sat-value',x:x+4.5,y:y+2.5});value.textContent=item[1];itemG.append(value);satG.append(itemG)});requestAnimationFrame(()=>satG.classList.add('open'))}
+function positionCard(node){const b=node.getBoundingClientRect(),hr=hero.getBoundingClientRect();let left=b.left-hr.left+24,top=b.top-hr.top-24;if(left+228>hr.width)left=b.left-hr.left-238;if(top+165>hr.height)top=b.top-hr.top-145;if(top<10)top=10;card.style.left=`${left}px`;card.style.top=`${top}px`;card.classList.add('on')}
+function showCard(h,node){card.innerHTML=`<h3>${h.label}</h3>${h.metrics.map(m=>`<div class="metric"><span>${m[0]}</span><strong>${m[1]}</strong><div class="bar"><i style="width:${Math.min(m[2],100)}%"></i></div></div>`).join('')}`;positionCard(node)}
+function showCapabilityCard(item,node){const [label,value,description]=item.cap;card.innerHTML=`<h3>${label}</h3><div class="metric"><span>Status / signal</span><strong>${value}</strong></div><div class="cap-desc">${description}</div>`;positionCard(node)}
+let closeTimer=null;
+function cancelClose(){if(closeTimer){clearTimeout(closeTimer);closeTimer=null}}
+let activeHubId=null;
+function setCapabilityParent(id){capabilityEls.forEach(c=>{const on=c.parent===id;c.el.classList.toggle('parent-active',on);c.line.classList.toggle('parent-active',on)})}
+function select(id,node){cancelClose();activeHubId=id;const h=hubById[id];document.querySelectorAll('.hub').forEach(g=>g.classList.toggle('selected',g.dataset.id===id));edgeEls.forEach(e=>e.el.classList.toggle('connected',e.aId===id||e.bId===id));setCapabilityParent(id);openSatellites(h);showCard(h,node)}
+function clearSelect(){cancelClose();activeHubId=null;document.querySelectorAll('.hub').forEach(g=>g.classList.remove('selected'));edgeEls.forEach(e=>e.el.classList.remove('connected'));capabilityEls.forEach(c=>{c.el.classList.remove('parent-active','active');c.line.classList.remove('parent-active')});satG.classList.remove('open');setTimeout(()=>{if(!satG.classList.contains('open'))satG.innerHTML=''},180);card.classList.remove('on')}
+function scheduleClose(){cancelClose();closeTimer=setTimeout(clearSelect,150)}
+hero.addEventListener('mousemove',ev=>{const p=graphPoint(ev);focusAt(p.x,p.y)});hero.addEventListener('mouseleave',()=>{graph.classList.remove('context');capabilityEls.forEach(c=>c.el.classList.remove('near'));edgeEls.forEach(e=>e.el.classList.remove('near'));document.querySelectorAll('.hub').forEach(g=>g.classList.remove('near'));clearSelect()});
+document.querySelectorAll('.hub').forEach(g=>{g.addEventListener('mouseenter',()=>select(g.dataset.id,g));g.addEventListener('mouseleave',scheduleClose)});
+capabilityEls.forEach(item=>{item.el.addEventListener('mouseenter',()=>{cancelClose();if(activeHubId!==item.parent){const hubNode=document.querySelector(`.hub[data-id="${item.parent}"]`);select(item.parent,hubNode)}capabilityEls.forEach(c=>c.el.classList.toggle('active',c===item));showCapabilityCard(item,item.el)});item.el.addEventListener('mouseleave',scheduleClose)});
+satG.addEventListener('mouseenter',cancelClose);satG.addEventListener('mouseleave',scheduleClose);card.addEventListener('mouseenter',cancelClose);card.addEventListener('mouseleave',scheduleClose);
+</script>
+</body>
+</html>
