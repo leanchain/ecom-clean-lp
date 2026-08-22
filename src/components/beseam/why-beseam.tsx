@@ -4,28 +4,22 @@ import { ArrowRight } from "lucide-react";
 
 import { Reveal } from "@/components/beseam/reveal";
 
-// The argument, in the order it has to be believed. Kept as one numbered
-// sequence so the page reads as a position, not a feature list.
 const ARGUMENT = [
   [
-    "The shift",
-    "A buying question now gets answered before anyone reaches your storefront. That answer is assembled from your product data, your pages, and sources you do not control. Unlike a search ranking, there is no position four here — the assistant either names your product or it does not.",
+    "See the loss",
+    "A product can disappear before the click or a shopper can fail to find and choose it onsite. Beseam brings external discovery and onsite behavior into the same commerce picture.",
   ],
   [
-    "The blind spot",
-    "Your platform reports one number, your ad accounts another, your analytics a third. None of them can tell you what an assistant said about your product this morning, or which competitor it named instead.",
+    "Find the cause",
+    "Compare product and store facts, competitor evidence, search and discovery behavior, and conversion signals to narrow the problem to something you can actually change.",
   ],
   [
-    "Why it stays broken",
-    "Discovery work runs on a quarterly loop. An audit lands, someone ships half of it, nobody rechecks. By the time anyone knows whether it worked, the catalog, the campaigns and the assistants have all moved.",
+    "Ship the fix",
+    "Turn the diagnosis into approved work across product data, content, merchandising, and supported store experiences. Publish or hand it off, with the previous value kept when Beseam makes the change.",
   ],
   [
-    "What we do instead",
-    "Close the loop. Check continuously, trace each miss to the product field behind it, propose the exact change, then run the same question again. The loop is the product.",
-  ],
-  [
-    "What we will not claim",
-    "Placement inside an answer no vendor controls. A revenue number in the contract. Nothing customer-facing ships without your store access and a named approver.",
+    "Prove the result",
+    "Re-check the original discovery signal and measure downstream behavior, conversion, orders, or revenue separately. Keep observed results distinct from modeled estimates and unsupported causal claims.",
   ],
 ] as const;
 
@@ -39,23 +33,23 @@ export default function WhyBeseam() {
         <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
           <div>
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#e8653a]">
-              Why Beseam exists
+              From signal to shipped work
             </p>
             <h2 className="mt-7 max-w-[16ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-              Shoppers stopped starting at your store.
+              Another dashboard does not fix your store.
             </h2>
             <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-white/72">
-              Discovery moved into assistants. Checkout mostly did not. The
-              product data those answers are built from is still yours to fix —
-              and almost nobody is watching it.
+              Discovery, catalog, onsite search, conversion, and analytics are
+              usually measured in separate places. Beseam connects the evidence
+              so the output is not another report: it is the next piece of work
+              worth doing.
             </p>
             <p className="mt-5 max-w-md text-[14px] leading-[1.7] text-white/56">
-              For the past year I worked closely with ecommerce operators on
-              real stores. The same problem kept getting sharper: complete
-              product data in the admin, and still no record of what an AI
-              assistant told a buyer. Before Beseam, I spent my career on
-              measurement and reliability at Google and Amazon — same
-              discipline, smaller and sharper problem.{" "}
+              I kept seeing ecommerce teams find a problem in one tool, make a
+              change somewhere else, and lose the proof in between. Beseam is
+              built to keep the problem, the approved fix, and the measured
+              result together. Before Beseam, I worked on measurement and
+              reliability at Google and Amazon.{" "}
               <Link
                 href="/manifesto"
                 className="underline decoration-white/25 underline-offset-4 hover:decoration-white/60"
@@ -85,16 +79,16 @@ export default function WhyBeseam() {
             ))}
 
             <p className="mt-8 max-w-[64ch] text-[15px] leading-[1.7] text-white/72">
-              The check at the top of this page is the product running against
-              live assistants, not a recorded demo. We run it on ourselves
-              first.
+              The free AI check on this page is one live external-discovery
+              signal, not the whole product. Inside Beseam, that signal joins
+              store, product, search, behavior, conversion, and impact evidence.
             </p>
 
             <Link
-              href="/manifesto"
+              href="/platform"
               className="mt-6 inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-[#e8653a] underline decoration-white/20 underline-offset-7 hover:decoration-[#e8653a]"
             >
-              Read the manifesto{" "}
+              See the platform{" "}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>

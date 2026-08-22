@@ -19,6 +19,7 @@ import type {
   Step,
 } from "@/components/beseam/answer-check-types";
 import { ChannelIcon } from "@/components/beseam/channel-icon";
+import TrackedLink from "@/components/beseam/tracked-link";
 import { SAMPLE_LOOP } from "@/data/sample-loop";
 import { SAMPLE_SCAN } from "@/data/sample-scan";
 import useAnalytics from "@/hooks/useAnalytics";
@@ -27,6 +28,7 @@ export type { AnswerCheckResult };
 
 const POLL_MS = 6000;
 const MAX_POLLS = 60; // ~6 minutes, then stop asking
+const APP_REGISTER_URL = "https://app.beseam.com/register";
 
 const LIVE_STATUSES = new Set(["running", "queued", "validating"]);
 
@@ -132,7 +134,10 @@ const CHANNEL_BRAND_KEYS: Record<string, string> = {
   copilot: "copilot_consumer_observation",
 };
 
-const OBSERVATION_METHOD_LABEL: Record<NonNullable<Answer["observation_method"]>, string> = {
+const OBSERVATION_METHOD_LABEL: Record<
+  NonNullable<Answer["observation_method"]>,
+  string
+> = {
   probe: "Probe",
   live_serp: "Live SERP",
   consumer_sample: "Consumer sample",
@@ -158,7 +163,7 @@ function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
         className="h-3 w-3 opacity-70"
       />
       {unknown ? (
-        <span aria-hidden="true">—</span>
+        <span aria-hidden="true">-</span>
       ) : named ? (
         <Check className="h-2.5 w-2.5" aria-hidden="true" />
       ) : (
@@ -246,7 +251,7 @@ function ProductTile({ product }: { product: ShownProduct }) {
           {product.title}
         </p>
         <p className="mt-1 flex items-baseline justify-between gap-2 text-[12px] text-black/62">
-          <span className="truncate">{product.merchant ?? "—"}</span>
+          <span className="truncate">{product.merchant ?? ", "}</span>
           {product.price ? (
             <span className="shrink-0 font-mono text-black/65">
               {product.price}
@@ -260,7 +265,7 @@ function ProductTile({ product }: { product: ShownProduct }) {
 
 // The deterministic half of the report: no LLM, no email gate. It sits under the
 // question list because it explains what could keep these pages out of an
-// answer — deliberately not attributed to any single question, because a page
+// answer: deliberately not attributed to any single question, because a page
 // check cannot prove which answer it cost.
 function PageChecks({ result }: { result: AnswerCheckResult }) {
   const audits = result.page_audits ?? [];
@@ -299,7 +304,7 @@ function PageChecks({ result }: { result: AnswerCheckResult }) {
               <span className="font-semibold text-[#111318]">
                 {finding.title}
               </span>{" "}
-              — {finding.detail}
+              : {finding.detail}
             </span>
           </li>
         ))}
@@ -319,12 +324,14 @@ export function ResultCard({
   identity,
   identityMeta,
   note,
+  continueHref,
 }: {
   result: AnswerCheckResult;
   eyebrow?: string;
   identity?: string;
   identityMeta?: string;
   note?: string;
+  continueHref?: string;
 }) {
   const answers = result.answers;
   const inFlight =
@@ -436,7 +443,7 @@ export function ResultCard({
       {result.findings.length > 0 ? (
         <div className="border-b border-black/18 px-4 py-4 sm:px-5">
           <p className="text-[12px] font-semibold text-[#b8441d]">
-            What a channel sees today
+            What AI systems can read from your store
           </p>
           <ul className="mt-3 space-y-3">
             {result.findings.slice(0, 4).map((finding, index) => (
@@ -466,7 +473,7 @@ export function ResultCard({
           {[
             ["Named you", `${named} of ${scored.length} answers`],
             ["Questions asked", String(result.questions.length)],
-            ["Assistants", channels.join(", ") || "—"],
+            ["Assistants", channels.join(", ") || "-"],
             ["Rivals named instead", String(allRivals.length || 0)],
           ].map(([term, value], index) => (
             <div
@@ -538,7 +545,7 @@ export function ResultCard({
                     className="h-[3px] w-4 bg-[#b8441d]"
                     aria-hidden="true"
                   />
-                  Who takes the answers you lose
+                  Competitors named when you were not
                 </p>
                 <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
                   {rivals.map((rival) => (
@@ -637,7 +644,7 @@ export function ResultCard({
                 Products the assistants put in front of the shopper
               </p>
               {/* Desktop: the shelf is an absolute overlay so it never sets the
-                  row height — it fills whatever the questions column produces
+                  row height: it fills whatever the questions column produces
                   and scrolls past that. Mobile keeps a fixed scroll cap. */}
               <div className="relative mt-3 flex-1 lg:min-h-0">
                 <ul className="grid max-h-[22rem] grid-cols-2 gap-2 overflow-y-auto pr-1 sm:max-h-[26rem] lg:absolute lg:inset-0 lg:max-h-none">
@@ -648,6 +655,47 @@ export function ResultCard({
               </div>
             </aside>
           ) : null}
+        </div>
+      ) : null}
+
+      {continueHref &&
+      scored.length > 0 &&
+      !inFlight &&
+      !result.reject_reason ? (
+        <div className="grid gap-5 border-t border-black/18 bg-[#faf1eb] px-4 py-5 sm:px-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+          <div>
+            <p className="text-[14px] font-semibold text-[#111318]">
+              Turn this signal into a fix.
+            </p>
+            <p className="mt-1 max-w-[62ch] text-[13px] leading-relaxed text-black/64">
+              Connect your store to combine this scan with product, search,
+              discovery, behavior, and conversion evidence. Beseam prioritizes
+              what to change and measures the relevant signal again afterward.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
+            <TrackedLink
+              href={continueHref}
+              eventName="scan_continue_clicked"
+              eventCategory="conversion"
+              placement="answer_check_result"
+              preserveUtm
+              className="group inline-flex min-h-11 items-center justify-center gap-2 bg-[#111318] px-5 text-[13px] font-semibold text-white transition-colors hover:bg-[#b8441d]"
+            >
+              Find what to fix next
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            </TrackedLink>
+            <TrackedLink
+              href="/product-visibility-monitoring"
+              eventName="scan_review_clicked"
+              eventCategory="conversion"
+              placement="answer_check_result"
+              preserveUtm
+              className="inline-flex min-h-11 items-center justify-center px-2 text-[13px] font-semibold text-[#111318] underline decoration-black/30 underline-offset-6 hover:decoration-[#b8441d]"
+            >
+              Prefer a walkthrough? Book a review
+            </TrackedLink>
+          </div>
         </div>
       ) : null}
 
@@ -743,7 +791,7 @@ function DiagnosePanel() {
   const d = SAMPLE_LOOP.diagnose;
   return (
     <LoopPanelShell
-      eyebrow="Diagnose — the field behind the miss"
+      eyebrow="Diagnose: the field behind the miss"
       tag="real audit"
     >
       <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
@@ -789,7 +837,7 @@ function DiagnosePanel() {
         </ul>
       </div>
       <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
-        The unedited output of one real audit of this product&apos;s live page —
+        The unedited output of one real audit of this product&apos;s live page ,
         the same engine that runs inside the loop.
       </p>
     </LoopPanelShell>
@@ -799,7 +847,7 @@ function DiagnosePanel() {
 function FixPanel() {
   const f = SAMPLE_LOOP.fix;
   return (
-    <LoopPanelShell eyebrow="Fix — one field, publishable" tag="proposed">
+    <LoopPanelShell eyebrow="Fix: one field, publishable" tag="proposed">
       <div className="px-4 py-4 sm:px-5">
         <LoopProductRow />
         <div className="mt-5 overflow-hidden border border-black/20">
@@ -890,7 +938,7 @@ function VerifyPanel() {
   const v = SAMPLE_LOOP.verify;
   return (
     <LoopPanelShell
-      eyebrow="Verify — the answer is the proof"
+      eyebrow="Verify: the answer is the proof"
       tag="after publish"
     >
       <div className="px-4 py-4 sm:px-5">
@@ -928,7 +976,7 @@ function VerifyPanel() {
                       <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-black/40" />
                       <span>
                         <strong className="font-semibold">{point.label}</strong>{" "}
-                        — {point.text}
+                        : {point.text}
                       </span>
                     </li>
                   ))}
@@ -1035,7 +1083,7 @@ export function SampleLoopShowcase() {
   }, []);
 
   // Scroll-driven (desktop only): the card pins while the tall wrapper scrolls
-  // past, and the scroll progress through the wrapper selects the stage —
+  // past, and the scroll progress through the wrapper selects the stage ,
   // scrolling past the section walks Find → Diagnose → Fix → Verify, then
   // releases.
   useEffect(() => {
@@ -1173,7 +1221,7 @@ export function SampleLoopShowcase() {
                 <span className="mr-2 font-mono text-[12px] font-semibold text-black/62">
                   0{index + 1}
                 </span>
-                {entry.label} — {entry.tag}
+                {entry.label}: {entry.tag}
               </h3>
               <LoopStage index={index} />
             </section>
@@ -1205,7 +1253,7 @@ export default function AnswerCheck({
     return (await response.json()) as AnswerCheckResult;
   }, []);
 
-  // A verification click lands back here with ?domain= — show that scan.
+  // A verification click lands back here with ?domain=: show that scan.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const fromEmail = params.get("domain");
@@ -1333,9 +1381,12 @@ export default function AnswerCheck({
       {result ? (
         <div className="mx-auto mt-16 max-w-[72rem]">
           <p className="mb-4 text-center text-[12px] font-semibold text-black/62">
-            Your storefront, read live
+            Live scan of your store
           </p>
-          <ResultCard result={result} />
+          <ResultCard
+            result={result}
+            continueHref={`${APP_REGISTER_URL}?scan_domain=${encodeURIComponent(result.domain)}`}
+          />
         </div>
       ) : null}
     </div>

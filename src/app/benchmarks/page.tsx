@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description:
     "Real shopper questions run against ChatGPT, Gemini, and Google AI Mode across electronics, supplements, apparel, and food. Which brands got named, how little the engines agree, and the method behind every figure.",
   alternates: { canonical: "/benchmarks" },
-  // Stays out of the index until there is at least one published run — an
+  // Stays out of the index until there is at least one published run: an
   // empty proof page is a liability, not a landing page.
   robots: hasBenchmarks ? undefined : { index: false, follow: true },
 };
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const METHOD = [
   [
     "The question",
-    "A question a real shopper would type, asked verbatim on every engine. Published exactly as it was asked — never rewritten afterwards to fit the result.",
+    "A question a real shopper would type, asked verbatim on every engine. Published exactly as it was asked: never rewritten afterwards to fit the result.",
   ],
   [
     "The engines",
@@ -46,7 +46,7 @@ const METHOD = [
   ],
   [
     "What is not claimed",
-    "Being named is not a ranking and not an endorsement, and a brand that went unnamed is not judged here — only recorded as absent from that answer.",
+    "Being named is not a ranking and not an endorsement, and a brand that went unnamed is not judged here: only recorded as absent from that answer.",
   ],
 ] as const;
 
@@ -77,7 +77,7 @@ export default function BenchmarksPage() {
               We asked {BENCHMARK_RUN.questions} real shopper questions across{" "}
               {categories.join(", ").toLowerCase()} on{" "}
               {BENCHMARK_RUN.engines.join(", ")}, and kept every answer. In an
-              AI answer there is no position four — a brand is named or it is
+              AI answer there is no position four: a brand is named or it is
               absent. What came back is that the engines mostly do not agree on
               who belongs in the answer.
             </p>

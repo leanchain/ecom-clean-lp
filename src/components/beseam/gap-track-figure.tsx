@@ -1,17 +1,17 @@
 import { CircleAlert } from "lucide-react";
 
 /**
- * Fig. 1 — the engine gap track. One hairline track per AI engine carrying two
+ * Fig. 1: the engine gap track. One hairline track per AI engine carrying two
  * dots: the merchant (filled, emerald) and their closest competitor (hollow,
- * slate). The segment between them is tinted by sign — emerald where the
+ * slate). The segment between them is tinted by sign: emerald where the
  * merchant leads, rose where they trail.
  *
  * Register note: this component is a quotation from the product, not part of
- * the editorial chrome — it uses the app's data palette (emerald/slate/rose),
+ * the editorial chrome: it uses the app's data palette (emerald/slate/rose),
  * tabular numerals, and a stated denominator. Terracotta never appears here.
  *
  * Numbers are a real 30-day window from a live merchant workspace (rival
- * names withheld). Update them from that workspace — never invent values.
+ * names withheld). Update them from that workspace: never invent values.
  */
 const ROWS = [
   { engine: "ChatGPT", you: 81, rival: 19 },
@@ -21,12 +21,12 @@ const ROWS = [
     engine: "Claude",
     you: 6,
     rival: 8,
-    note: "Fewer than half of Claude's answers named any brand at all — an answer-data gap, not a competitor win. The fix is product data, not marketing.",
+    note: "Fewer than half of Claude's answers named any brand at all: an answer-data gap, not a competitor win. The fix is product data, not marketing.",
   },
 ] as const;
 
-const YOU = "#059669"; // emerald — the merchant, always
-const RIVAL = "#64748b"; // slate — competitors, never a saturated hue
+const YOU = "#059669"; // emerald: the merchant, always
+const RIVAL = "#64748b"; // slate: competitors, never a saturated hue
 const LEAD = "#10b981";
 const TRAIL = "#f43f5e";
 
@@ -138,14 +138,14 @@ export default function GapTrackFigure() {
           <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/55">
             Not measured
           </span>{" "}
-          Microsoft Copilot — no completed checks in this window. Shown as
+          Microsoft Copilot: no completed checks in this window. Shown as
           absent, never as 0%.
         </p>
       </div>
 
       <figcaption className="grid gap-2 border-x border-b border-black/18 bg-white px-4 py-3 sm:grid-cols-[9rem_1fr] sm:px-5">
         <span className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-black/62">
-          Fig. 1 — engine gaps
+          Fig. 1: engine gaps
         </span>
         <span className="text-[13px] leading-relaxed text-black/62">
           One dancewear merchant, 30 days of real shopper prompts. Each

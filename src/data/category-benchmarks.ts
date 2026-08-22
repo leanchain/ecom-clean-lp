@@ -1,5 +1,5 @@
 /**
- * Category benchmarks — what AI assistants actually answered for real shopper
+ * Category benchmarks: what AI assistants actually answered for real shopper
  * questions in high-volume categories.
  *
  * OBSERVATIONS OF PUBLIC BRANDS, not customer data. No merchant permission is
@@ -8,8 +8,8 @@
  *
  * GENERATED, NOT HAND-WRITTEN. Every entry below comes from a completed run of
  * the same connectors the product uses:
- *   backend/scripts/marketing/category_benchmark_run.py   — asks the engines
- *   backend/scripts/marketing/category_benchmark_emit.py  — emits these entries
+ *   backend/scripts/marketing/category_benchmark_run.py  : asks the engines
+ *   backend/scripts/marketing/category_benchmark_emit.py : emits these entries
  * Re-run those to refresh; never edit a number here by hand, and never add an
  * entry that did not come from a real run.
  *
@@ -18,7 +18,7 @@
  *   2. Every figure states its question, date, engines, and denominator.
  *   3. An engine with no completed answer is excluded, never shown as zero.
  *   4. Report what was observed. Never editorialise about a named brand, and
- *      never imply an unnamed brand is inferior — only that it was not named.
+ *      never imply an unnamed brand is inferior: only that it was not named.
  */
 
 export type BenchmarkBrand = {
@@ -36,7 +36,7 @@ export type CategoryBenchmark = {
   question: string;
   /** ISO date the run completed. */
   askedOn: string;
-  /** Engines that returned a completed answer — the denominator. */
+  /** Engines that returned a completed answer: the denominator. */
   engines: string[];
   /** Brands named, most engines first. */
   brands: BenchmarkBrand[];
@@ -66,7 +66,7 @@ export const BENCHMARK_RUN = {
    * brand, so it carries no figure.
    */
   notMeasured:
-    "Perplexity was not asked — no API key configured. One ChatGPT probe timed out. One question (running shoes under $150) completed without either engine naming a brand and is therefore not charted.",
+    "Perplexity was not asked: no API key configured. One ChatGPT probe timed out. One question (running shoes under $150) completed without either engine naming a brand and is therefore not charted.",
 } as const;
 
 export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [

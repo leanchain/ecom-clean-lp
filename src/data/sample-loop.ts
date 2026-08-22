@@ -2,7 +2,7 @@
 // scan came from. Diagnose is the frozen, unedited output of a real PDP audit
 // run against the store's live Rosé Gold sneaker page (same engine the
 // platform runs; brand tokens stripped, nothing else touched). Fix is the
-// audit's own top recommendation — still `proposed`, nothing has been
+// audit's own top recommendation: still `proposed`, nothing has been
 // published to the store. Verify describes what runs after a publish and
 // carries no fabricated result.
 
@@ -85,27 +85,27 @@ export const SAMPLE_LOOP: SampleLoop = {
       {
         field: "offers.shippingDetails",
         issue:
-          "No OfferShippingDetails in the Offer schema — required for shipping annotations in Google Search.",
+          "No OfferShippingDetails in the Offer schema: required for shipping annotations in Google Search.",
         severity: "high",
       },
       {
         field: "BreadcrumbList",
         issue:
-          "No breadcrumb schema — the page provides less explicit category context to systems reading its structured data.",
+          "No breadcrumb schema: the page provides less explicit category context to systems reading its structured data.",
         severity: "low",
       },
     ],
   },
   fix: {
     field: "offers.availability",
-    // The Offer schema already declares InStock; the page never says it — the
+    // The Offer schema already declares InStock; the page never says it: the
     // fix adds the visible stock line so both resolve to the same status.
     diff: [
       { kind: "context", text: '<p class="product-price">CHF 130.00</p>' },
       { kind: "del", text: "(no visible stock status on the page)" },
       {
         kind: "add",
-        text: '<p class="stock-status">In stock — ready to ship</p>',
+        text: '<p class="stock-status">In stock: ready to ship</p>',
       },
       {
         kind: "context",
@@ -132,13 +132,13 @@ export const SAMPLE_LOOP: SampleLoop = {
         severity: "low",
       },
     ],
-    note: "Every change from the audit is queued as its own proposed action — approved, published and reverted one field at a time.",
+    note: "Every change from the audit is queued as its own proposed action: approved, published and reverted one field at a time.",
   },
   verify: {
     question: "What dance shoes are best for beginners?",
     channels: ["ChatGPT", "Google AI Mode"],
     answerIntro:
-      "Good question — it depends mostly on the style you're starting with:",
+      "Good question: it depends mostly on the style you're starting with:",
     answerPoints: [
       {
         label: "Ballet",
@@ -150,7 +150,7 @@ export const SAMPLE_LOOP: SampleLoop = {
       },
       {
         label: "Salsa & social dancing",
-        text: "dance sneakers or suede-sole shoes — the most forgiving choice for long social nights.",
+        text: "dance sneakers or suede-sole shoes: the most forgiving choice for long social nights.",
       },
       {
         label: "Hip-hop & studio classes",
@@ -158,9 +158,9 @@ export const SAMPLE_LOOP: SampleLoop = {
       },
     ],
     answerBridge:
-      "If you're not sure which style will stick, a low-top dance sneaker is the safest first pair — comfortable, flexible, and it works across styles. A few options that come up often:",
+      "If you're not sure which style will stick, a low-top dance sneaker is the safest first pair: comfortable, flexible, and it works across styles. A few options that come up often:",
     answerOutro:
-      "Whichever you pick, prioritise fit and a sole that matches your dance floor — you can always specialise once you know your style.",
+      "Whichever you pick, prioritise fit and a sole that matches your dance floor: you can always specialise once you know your style.",
     // The rivals here are the real products the assistant named in the scan;
     // the store's own sneaker is placed where the fix aims to put it.
     answerProducts: [

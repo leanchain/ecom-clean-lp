@@ -8,10 +8,10 @@ import { STORE_HEALTH_FAQS } from "@/lib/store-health-faqs";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Beseam | See why AI picked someone else",
+    absolute: "Beseam | Make products easier to find, choose, and buy",
   },
   description:
-    "Run real buying questions against AI assistants, see which products won and why, change the product data you control, and test the same question again.",
+    "See where products lose shoppers across AI, search, onsite discovery, product pages, and conversion. Beseam shows what to fix, helps make the change, and measures what happened next.",
   alternates: { canonical: "/" },
 };
 
@@ -19,7 +19,7 @@ export default function Home() {
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    name: "Questions about Beseam AI product recommendation testing",
+    name: "Questions about Beseam ecommerce discovery and conversion optimization",
     mainEntity: STORE_HEALTH_FAQS.map((faq) => ({
       "@type": "Question",
       name: faq.question,

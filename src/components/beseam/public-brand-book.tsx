@@ -79,7 +79,11 @@ function intentFor(question: string) {
         "Tests whether the brand can be discovered when a shopper names a market and is ready to buy.",
     };
   }
-  if (/best value|kit|bundle|worth the money|under \$|under €|under chf/.test(lower)) {
+  if (
+    /best value|kit|bundle|worth the money|under \$|under €|under chf/.test(
+      lower,
+    )
+  ) {
     return {
       label: "Value and bundle choice",
       reason:
@@ -93,7 +97,9 @@ function intentFor(question: string) {
         "Tests whether the catalog expresses a decisive constraint clearly enough to qualify for the answer.",
     };
   }
-  if (/itchy|shedding|thinning|dry|sensitive|loss|problem|concern/.test(lower)) {
+  if (
+    /itchy|shedding|thinning|dry|sensitive|loss|problem|concern/.test(lower)
+  ) {
     return {
       label: "Problem and suitability",
       reason:
@@ -152,7 +158,9 @@ export default function PublicBrandBook({
     const payload = await response.json().catch(() => null);
     if (!response.ok) {
       throw new Error(
-        payload?.detail || payload?.error || "This brand evidence is not available yet.",
+        payload?.detail ||
+          payload?.error ||
+          "This brand evidence is not available yet.",
       );
     }
     setResult(payload as AnswerCheckResult);
@@ -166,7 +174,9 @@ export default function PublicBrandBook({
     setDomain(requested);
     void load(requested).catch((reason: unknown) => {
       setError(
-        reason instanceof Error ? reason.message : "Could not load brand evidence.",
+        reason instanceof Error
+          ? reason.message
+          : "Could not load brand evidence.",
       );
     });
   }, [defaultDomain, load]);
@@ -181,7 +191,11 @@ export default function PublicBrandBook({
   const buyingMoments = useMemo(
     () =>
       Array.from(
-        new Set((result?.questions ?? []).map((question) => intentFor(question).label)),
+        new Set(
+          (result?.questions ?? []).map(
+            (question) => intentFor(question).label,
+          ),
+        ),
       ),
     [result?.questions],
   );
@@ -210,10 +224,11 @@ export default function PublicBrandBook({
                 Why these questions belong to {brand}.
               </h1>
               <p className="mt-7 max-w-3xl text-[17px] leading-[1.72] text-black/68">
-                This is the evidence layer behind the audit: the public products,
-                category vocabulary, market context, and buying moments used to
-                frame the five unbranded questions. It is designed to make every
-                query inspectable—not merely plausible-sounding.
+                This is the evidence layer behind the audit: the public
+                products, category vocabulary, market context, and buying
+                moments used to frame the five unbranded questions. It is
+                designed to make every query inspectable, not merely
+                plausible-sounding.
               </p>
             </div>
 
@@ -227,7 +242,8 @@ export default function PublicBrandBook({
               </p>
               <p className="mt-3 text-[13px] leading-relaxed text-black/62">
                 They do not name {brand}, because the audit measures whether an
-                assistant discovers the brand before the shopper already knows it.
+                assistant discovers the brand before the shopper already knows
+                it.
               </p>
             </aside>
           </div>
@@ -239,7 +255,8 @@ export default function PublicBrandBook({
             </span>
             <span className="inline-flex min-h-8 items-center gap-2 border border-black/20 bg-white px-3 text-[12px] font-semibold text-black/68">
               <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
-              {evidence?.market || "Market inferred only when public evidence supports it"}
+              {evidence?.market ||
+                "Market inferred only when public evidence supports it"}
             </span>
             <span className="inline-flex min-h-8 items-center border border-black/20 bg-white px-3 text-[12px] font-semibold text-black/68">
               {result?.questions.length || 0} traceable questions
@@ -279,7 +296,10 @@ export default function PublicBrandBook({
           </div>
         ) : !result ? (
           <div className="flex min-h-64 items-center justify-center border border-black/18 bg-white">
-            <RefreshCw className="h-5 w-5 animate-spin text-black/50" aria-hidden="true" />
+            <RefreshCw
+              className="h-5 w-5 animate-spin text-black/50"
+              aria-hidden="true"
+            />
             <span className="ml-3 text-[14px] text-black/62">
               Loading the evidence ledger…
             </span>
@@ -339,9 +359,9 @@ export default function PublicBrandBook({
                   </h2>
                 </div>
                 <p className="max-w-xl text-[14px] leading-relaxed text-black/62">
-                  The questions stay unbranded and recommendation-answerable, then
-                  spread across comparison, constraints, suitability, locality,
-                  and value.
+                  The questions stay unbranded and recommendation-answerable,
+                  then spread across comparison, constraints, suitability,
+                  locality, and value.
                 </p>
               </div>
 
@@ -362,14 +382,16 @@ export default function PublicBrandBook({
                           “{question}”
                         </p>
                         <div className="mt-3 flex flex-wrap gap-2">
-                          {words(question).slice(0, 6).map((word) => (
-                            <span
-                              key={word}
-                              className="border border-black/14 bg-[#fafafa] px-2 py-0.5 font-mono text-[11px] text-black/58"
-                            >
-                              {word}
-                            </span>
-                          ))}
+                          {words(question)
+                            .slice(0, 6)
+                            .map((word) => (
+                              <span
+                                key={word}
+                                className="border border-black/14 bg-[#fafafa] px-2 py-0.5 font-mono text-[11px] text-black/58"
+                              >
+                                {word}
+                              </span>
+                            ))}
                         </div>
                       </div>
                       <div className="border-l-2 border-[#b8441d] pl-4">
@@ -385,9 +407,9 @@ export default function PublicBrandBook({
                           </p>
                         ) : (
                           <p className="mt-2 text-[12px] leading-relaxed text-[#b8441d]">
-                            No close product-title match in the public sample. The
-                            category connection currently depends on prose rather
-                            than a clearly structured product label.
+                            No close product-title match in the public sample.
+                            The category connection currently depends on prose
+                            rather than a clearly structured product label.
                           </p>
                         )}
                       </div>
@@ -412,7 +434,9 @@ export default function PublicBrandBook({
                       className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-black/12 px-5 py-4 last:border-b-0"
                     >
                       <div className="min-w-0 flex-1">
-                        <p className="text-[14px] font-semibold">{product.title}</p>
+                        <p className="text-[14px] font-semibold">
+                          {product.title}
+                        </p>
                         <p className="mt-1 text-[12px] text-black/52">
                           {product.attributes.length
                             ? `Structured attributes: ${product.attributes.join(", ")}`
@@ -431,7 +455,9 @@ export default function PublicBrandBook({
                             : "text-[#1f7a4d]"
                         }`}
                       >
-                        {product.available === false ? "Unavailable" : "Publicly listed"}
+                        {product.available === false
+                          ? "Unavailable"
+                          : "Publicly listed"}
                       </span>
                       {product.url ? (
                         <a
@@ -441,7 +467,10 @@ export default function PublicBrandBook({
                           aria-label={`Open ${product.title}`}
                           className="inline-flex h-9 w-9 items-center justify-center border border-black/18 hover:border-[#b8441d] hover:text-[#b8441d]"
                         >
-                          <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                          <ExternalLink
+                            className="h-3.5 w-3.5"
+                            aria-hidden="true"
+                          />
                         </a>
                       ) : null}
                     </div>
@@ -475,13 +504,15 @@ export default function PublicBrandBook({
                   Interpretation boundary
                 </div>
                 <h2 className="mt-4 max-w-[26ch] font-display text-[clamp(2rem,3vw,3.2rem)] font-normal leading-[1.03] tracking-[-0.025em]">
-                  This page explains relevance. It does not pretend to be search-volume data.
+                  This page explains relevance. It does not pretend to be
+                  search-volume data.
                 </h2>
                 <p className="mt-5 max-w-3xl text-[14px] leading-relaxed text-white/64">
-                  The audit asks commercially valid questions supported by public
-                  storefront evidence. It does not claim exact monthly demand,
-                  customer demographics, or private conversion performance. Those
-                  require analytics and search-demand data beyond a public audit.
+                  The audit asks commercially valid questions supported by
+                  public storefront evidence. It does not claim exact monthly
+                  demand, customer demographics, or private conversion
+                  performance. Those require analytics and search-demand data
+                  beyond a public audit.
                 </p>
               </div>
               <div className="flex flex-col justify-center gap-3 border-t border-white/14 px-6 py-8 lg:border-l lg:border-t-0">

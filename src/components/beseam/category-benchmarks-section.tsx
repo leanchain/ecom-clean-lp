@@ -2,107 +2,114 @@ import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
 
-import CategoryBenchmarkFigure from "@/components/beseam/category-benchmark";
-import { Reveal } from "@/components/beseam/reveal";
 import { BENCHMARK_RUN, CATEGORY_BENCHMARKS } from "@/data/category-benchmarks";
 
-const BRANDS_PER_FIGURE = 6;
+const SCORED_BENCHMARKS = CATEGORY_BENCHMARKS.map((benchmark) => ({
+  ...benchmark,
+  singleEngineBrands: benchmark.brands.filter((brand) => brand.engines === 1)
+    .length,
+}));
 
-/**
- * The homepage shows two questions, chosen for the two halves of the finding
- * rather than by position in the data:
- *
- *   1. The widest disagreement — the most brands named with no brand named by
- *      every engine. "The engines cannot agree who belongs in this answer."
- *   2. The strongest consensus — the most brands named by every engine.
- *      "They can agree, and you are not on the list."
- *
- * Derived, not hand-picked, so a re-run cannot silently leave a stale example
- * on the page.
- */
-function pickHomepageBenchmarks(all: typeof CATEGORY_BENCHMARKS) {
-  const unanimous = (b: (typeof CATEGORY_BENCHMARKS)[number]) =>
-    b.brands.filter((brand) => brand.engines === b.engines.length).length;
+const CATEGORIES = Array.from(
+  new Set(SCORED_BENCHMARKS.map((benchmark) => benchmark.category)),
+);
 
-  const widestDisagreement = [...all].sort(
-    (a, b) => unanimous(a) - unanimous(b) || b.brands.length - a.brands.length,
-  )[0];
+const BY_CATEGORY = CATEGORIES.map((category) =>
+  SCORED_BENCHMARKS.filter((benchmark) => benchmark.category === category).sort(
+    (a, b) =>
+      b.singleEngineBrands - a.singleEngineBrands ||
+      b.brands.length - a.brands.length,
+  ),
+);
 
-  const strongestConsensus = [...all]
-    .filter((b) => b.slug !== widestDisagreement?.slug)
-    .sort(
-      (a, b) =>
-        unanimous(b) - unanimous(a) || b.brands.length - a.brands.length,
-    )[0];
+const HIGHLIGHTS = Array.from(
+  { length: Math.max(...BY_CATEGORY.map((benchmarks) => benchmarks.length)) },
+  (_, index) =>
+    BY_CATEGORY.map((benchmarks) => benchmarks[index]).filter(Boolean),
+).flat();
 
-  return [widestDisagreement, strongestConsensus].filter(Boolean);
-}
-
-/**
- * Homepage cut of the published category benchmarks. Renders nothing while
- * none have been published — an empty proof section is worse than no proof
- * section, and the site never ships a placeholder figure.
- */
 export default function CategoryBenchmarksSection() {
   if (CATEGORY_BENCHMARKS.length === 0) return null;
 
-  const shown = pickHomepageBenchmarks(CATEGORY_BENCHMARKS);
   const soloShare = Math.round(
     (BENCHMARK_RUN.singleEngineOnly / BENCHMARK_RUN.namings) * 100,
   );
-  const everyShare = Math.round(
-    (BENCHMARK_RUN.everyEngine / BENCHMARK_RUN.namings) * 100,
-  );
 
   return (
-    <section id="benchmarks" className="scroll-mt-24 bg-[#f6f6f6]">
-      <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-start lg:gap-20">
-          <Reveal>
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
-              Category benchmarks
-            </p>
-            <h2 className="mt-7 max-w-[17ch] text-balance font-display text-[clamp(2.4rem,3.8vw,4rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
-              Winning one assistant tells you nothing about the rest.
-            </h2>
-            <p className="mt-7 max-w-xl text-[16px] leading-[1.7] text-black/64">
-              We asked {BENCHMARK_RUN.questions} real shopper questions across
-              electronics, supplements, apparel, and food on{" "}
-              {BENCHMARK_RUN.engines.join(", ")} —{" "}
-              {BENCHMARK_RUN.answersCompleted} completed answers. Of the{" "}
-              {BENCHMARK_RUN.namings} brand namings that came back,{" "}
-              <strong className="font-semibold text-[#111318]">
-                {soloShare}% appeared on exactly one engine
-              </strong>{" "}
-              and only {everyShare}% on all three.
-            </p>
-            <p className="mt-5 max-w-xl text-[16px] leading-[1.7] text-black/64">
-              There is no position four in an answer. A brand is named or it is
-              absent — and being named by ChatGPT is not evidence that Gemini or
-              AI Mode will name you at all. Below: the question the engines
-              disagreed on most, and the one where they agreed hardest.
-            </p>
-            <Link
-              href="/benchmarks"
-              className="mt-8 inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#b8441d]"
-            >
-              See all {CATEGORY_BENCHMARKS.length} questions and the method
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </Reveal>
-
-          <Reveal delay={0.08} className="grid gap-10">
-            {shown.map((benchmark, index) => (
-              <CategoryBenchmarkFigure
-                key={benchmark.slug}
-                benchmark={benchmark}
-                index={index}
-                maxBrands={BRANDS_PER_FIGURE}
-              />
-            ))}
-          </Reveal>
+    <section
+      id="benchmarks"
+      className="scroll-mt-24 border-y border-black/16 bg-[#f6f6f6]"
+    >
+      <div className="mx-auto max-w-[92rem] px-5 py-5 sm:px-8 lg:px-10">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+          <p className="text-[13px] leading-relaxed text-black/64">
+            <span className="mr-3 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+              AI benchmark
+            </span>
+            Across {BENCHMARK_RUN.questions} shopper questions,{" "}
+            <strong className="font-semibold text-[#111318]">
+              {soloShare}% of brand namings appeared on only one assistant.
+            </strong>
+          </p>
+          <Link
+            href="/benchmarks"
+            className="inline-flex min-h-9 shrink-0 items-center gap-2 text-[12px] font-semibold text-[#111318] underline decoration-black/25 underline-offset-5 hover:decoration-[#b8441d]"
+          >
+            See all {CATEGORY_BENCHMARKS.length} questions and method
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </Link>
         </div>
       </div>
+
+      <div className="overflow-hidden border-t border-black/12 py-3">
+        <div className="benchmark-marquee flex w-max items-center motion-reduce:animate-none">
+          {[0, 1].map((copyIndex) => (
+            <div
+              key={copyIndex}
+              aria-hidden={copyIndex === 1 ? "true" : undefined}
+              className="flex shrink-0 items-center"
+            >
+              {HIGHLIGHTS.map((benchmark) => (
+                <Link
+                  key={`${copyIndex}-${benchmark.slug}`}
+                  href={`/benchmarks#${benchmark.slug}`}
+                  tabIndex={copyIndex === 1 ? -1 : undefined}
+                  className="group flex shrink-0 items-center whitespace-nowrap pr-12 text-[12px] text-black/58 transition-colors hover:text-[#111318]"
+                >
+                  <span className="mr-2 font-mono font-semibold uppercase tracking-[0.08em] text-black/44 transition-colors group-hover:text-[#b8441d]">
+                    {benchmark.category}
+                  </span>
+                  <span className="mr-2 text-black/72 underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-black/30">
+                    “{benchmark.question}”
+                  </span>
+                  <span>
+                    {benchmark.singleEngineBrands} of {benchmark.brands.length}{" "}
+                    brands appeared on one assistant
+                  </span>
+                </Link>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes beseam-benchmark-marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .benchmark-marquee {
+          animation: beseam-benchmark-marquee 200s linear infinite;
+        }
+        .benchmark-marquee:hover {
+          animation-play-state: paused;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .benchmark-marquee {
+            animation: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }
