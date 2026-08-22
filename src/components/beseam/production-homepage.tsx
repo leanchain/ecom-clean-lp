@@ -9,6 +9,7 @@ import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
 import { Reveal } from "@/components/beseam/reveal";
 import TrackedLink from "@/components/beseam/tracked-link";
 import WhyBeseam from "@/components/beseam/why-beseam";
+import { BENCHMARK_RUN, CATEGORY_BENCHMARKS } from "@/data/category-benchmarks";
 
 const APP_REGISTER_URL = "https://app.beseam.com/register";
 
@@ -72,6 +73,10 @@ const OPERATING_LOOP = [
 ] as const;
 
 export default function ProductionHomepage() {
+  const benchmarkSoloShare = Math.round(
+    (BENCHMARK_RUN.singleEngineOnly / BENCHMARK_RUN.namings) * 100,
+  );
+
   return (
     <div className="bg-[#fafafa] text-[#151515]">
       <section
@@ -112,7 +117,7 @@ export default function ProductionHomepage() {
                   placement="homepage_hero"
                   className="inline-flex min-h-12 w-full items-center justify-center px-5 text-[15px] font-semibold text-[#111318] underline decoration-black/30 underline-offset-7 hover:decoration-[#b8441d] sm:w-auto"
                 >
-                  Run a free AI check
+                  Check my store
                 </TrackedLink>
               </div>
             </div>
@@ -247,7 +252,7 @@ export default function ProductionHomepage() {
         </div>
       </section>
       <section id="ai-check" className="scroll-mt-24 bg-[#faf1eb]">
-        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-[92rem] px-5 pb-8 pt-20 sm:px-8 sm:pb-10 sm:pt-24 lg:px-10 lg:pb-12 lg:pt-28">
           <Reveal>
             <div className="mx-auto max-w-[72rem] text-center">
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
@@ -266,20 +271,29 @@ export default function ProductionHomepage() {
           <Reveal delay={0.08} y={18}>
             <div className="mx-auto mt-12 max-w-[76rem]">
               <LiveAnswerCheck placement="homepage_ai_check" />
-              <div className="mt-4 flex justify-center text-center">
+              <div className="mx-auto mt-6 flex max-w-[66rem] flex-col items-center justify-between gap-3 border-t border-black/14 pt-5 text-center sm:flex-row sm:text-left">
+                <p className="text-[13px] leading-relaxed text-black/64">
+                  <span className="mr-3 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+                    Discovery benchmark
+                  </span>
+                  Across {BENCHMARK_RUN.questions} shopper questions,{" "}
+                  <strong className="font-semibold text-[#111318]">
+                    {benchmarkSoloShare}% of brand namings appeared on only one
+                    assistant.
+                  </strong>
+                </p>
                 <Link
-                  href="#benchmarks"
-                  className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#b8441d]"
+                  href="/benchmarks"
+                  className="inline-flex min-h-9 shrink-0 items-center gap-2 text-[12px] font-semibold text-[#111318] underline decoration-black/25 underline-offset-5 hover:decoration-[#b8441d]"
                 >
-                  See a discovery benchmark
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  See benchmark and method
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
-
       <CategoryBenchmarksSection />
 
       <FirstMonthPromise />

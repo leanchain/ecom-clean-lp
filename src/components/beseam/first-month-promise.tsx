@@ -12,7 +12,7 @@ export default function FirstMonthPromise({
 
   return (
     <section id="promise" className="scroll-mt-24 bg-[#faf1eb]">
-      <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+      <div className="mx-auto max-w-[92rem] px-5 pb-20 pt-12 sm:px-8 sm:pb-24 sm:pt-16 lg:px-10 lg:pb-28 lg:pt-16">
         <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
           <div>
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
