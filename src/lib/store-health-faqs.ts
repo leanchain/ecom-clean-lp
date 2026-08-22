@@ -1,8 +1,8 @@
 export const STORE_HEALTH_FAQS = [
   {
-    question: "What does Beseam connect?",
+    question: "What do I need to connect to get started?",
     answer:
-      "Beseam brings together signals from discovery, onsite search and merchandising, product and catalog data, shopper behavior, conversion, and revenue. The exact signals available depend on the store and integrations you connect.",
+      "Start with your domain. Store or analytics access is only needed when Beseam needs additional evidence or permission to support a change.",
   },
   {
     question: "How does Beseam decide what to work on first?",
@@ -20,8 +20,8 @@ export const STORE_HEALTH_FAQS = [
       "Yes. Customer-facing changes follow the approval rules agreed for your store. Beseam keeps the evidence, proposed action, and previous value connected so supported changes can be reviewed and reverted when needed.",
   },
   {
-    question: "What happens during the free 30 days?",
+    question: "How does Beseam measure whether a change worked?",
     answer:
-      "Start with your domain. Beseam looks for a worthwhile opportunity, brings together the supporting evidence, helps you act on a supported change, and measures the relevant signals afterward. You decide whether it earned the right to continue.",
+      "Beseam compares the relevant signals before and after a change, such as discovery, shopper behavior, conversion, or revenue when those signals are available. It keeps the evidence connected and avoids claiming impact that the data does not support.",
   },
 ] as const;

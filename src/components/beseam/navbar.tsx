@@ -16,7 +16,7 @@ const APP_REGISTER_URL = "https://app.beseam.com/register";
 const NAV_LINKS = [
   { label: "How it works", href: "/#proof" },
   { label: "What Beseam sees", href: "/#scope" },
-  { label: "Results", href: "/#ai-check" },
+  { label: "Live check", href: "/#ai-check" },
   { label: "30 days free", href: "/#promise" },
 ] as const;
 
@@ -25,7 +25,7 @@ export default function BeseamNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => setScrolled(window.scrollY > 32);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
@@ -34,9 +34,10 @@ export default function BeseamNavbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b transition-colors duration-200",
-        "bg-[#fafafa]",
-        scrolled ? "border-black/18" : "border-transparent",
+        "sticky z-50 mx-auto border transition-all duration-200",
+        scrolled
+          ? "top-3 w-[calc(100%-1.5rem)] max-w-[95rem] rounded-[18px] border-black/14 bg-[#fafafa]/72 shadow-lg backdrop-blur-2xl"
+          : "top-0 w-full border-x-transparent border-t-transparent border-b-black/10 bg-[#fafafa]/92 backdrop-blur-md",
       )}
     >
       <a
@@ -45,8 +46,19 @@ export default function BeseamNavbar() {
       >
         Skip to content
       </a>
-      <div className="mx-auto max-w-[92rem] px-5 sm:px-8 lg:px-10">
-        <div className="flex h-[4.5rem] items-center justify-between">
+
+      <div
+        className={cn(
+          "mx-auto max-w-[92rem] transition-all duration-200",
+          scrolled ? "px-3 sm:px-4 lg:px-5" : "px-4 sm:px-6 lg:px-8",
+        )}
+      >
+        <div
+          className={cn(
+            "flex items-center justify-between transition-all duration-200",
+            scrolled ? "h-14" : "h-16",
+          )}
+        >
           <Link href="/" className="flex items-center" aria-label="Beseam home">
             <Logo className="text-[#111318]" markClassName="drop-shadow-none" />
           </Link>
@@ -63,7 +75,12 @@ export default function BeseamNavbar() {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-5 lg:flex">
+          <div
+            className={cn(
+              "hidden items-center lg:flex",
+              scrolled ? "gap-3" : "gap-5",
+            )}
+          >
             <TrackedLink
               href={APP_LOGIN_URL}
               eventName="login_clicked"
@@ -105,7 +122,10 @@ export default function BeseamNavbar() {
       {mobileOpen && (
         <div
           id="mobile-navigation"
-          className="border-t border-black/18 bg-[#fafafa] lg:hidden"
+          className={cn(
+            "border-t border-black/18 lg:hidden",
+            scrolled ? "bg-[#fafafa]/88 backdrop-blur-2xl" : "bg-[#fafafa]",
+          )}
         >
           <div className="mx-auto max-w-[92rem] px-5 pb-7 sm:px-8">
             <nav aria-label="Mobile" className="border-b border-black/18 py-3">

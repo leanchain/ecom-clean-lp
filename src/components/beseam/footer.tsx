@@ -4,11 +4,10 @@ import Logo from "@/components/beseam/logo";
 import TrackedLink from "@/components/beseam/tracked-link";
 
 const APP_REGISTER_URL = "https://app.beseam.com/register";
-
 const PAGE_LINKS = [
-  ["How it works", "/#proof"],
   ["What Beseam sees", "/#scope"],
-  ["Results", "/#ai-check"],
+  ["How it works", "/#proof"],
+  ["Live check", "/#ai-check"],
   ["30 days free", "/#promise"],
 ] as const;
 
@@ -25,8 +24,8 @@ export default function BeseamFooter() {
               Make products easier to find, choose, and buy.
             </p>
             <p className="mt-6 max-w-[62ch] text-[14px] leading-relaxed text-white/72">
-              Beseam connects discovery, store, behavior, and revenue signals to
-              decide what should happen next and learn from the result.
+              See where products lose ground, decide what to change, and measure
+              what happened next.
             </p>
           </div>
 
@@ -46,10 +45,7 @@ export default function BeseamFooter() {
           </nav>
         </div>
 
-        <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_auto_auto_auto_auto_auto_auto_auto_auto] lg:items-center lg:gap-10">
-          <p className="font-mono text-[12px] tracking-[0.02em] text-white/72">
-            Discovery, store, behavior and revenue
-          </p>
+        <div className="flex flex-wrap items-center gap-x-10 gap-y-4 border-b border-white/18 py-8">
           <Link
             href="/platform"
             className="text-[12px] text-white/62 hover:text-white"
