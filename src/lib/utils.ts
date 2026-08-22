@@ -1,5 +1,5 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -21,7 +21,11 @@ export interface GtagEvent {
 // Declare global gtag function
 declare global {
   interface Window {
-    gtag: (command: 'config' | 'event' | 'js' | 'set', targetId: string | Date, config?: unknown) => void;
+    gtag: (
+      command: "config" | "event" | "js" | "set",
+      targetId: string | Date,
+      config?: unknown,
+    ) => void;
     dataLayer: unknown[];
   }
 }

@@ -20,7 +20,7 @@ import type {
   BrandEvidenceProduct,
 } from "@/components/beseam/answer-check-types";
 import AuditReportNav from "@/components/beseam/audit-report-nav";
-import BookReviewCta from "@/components/beseam/book-review-cta";
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
 
 const STOP_WORDS = new Set([
   "what",
@@ -183,7 +183,10 @@ export default function PublicBrandBook({
 
   const brand = result?.brand || domain;
   const evidence = result?.brand_evidence;
-  const products = evidence?.products ?? [];
+  const products = useMemo(
+    () => evidence?.products ?? [],
+    [evidence?.products],
+  );
   const categoryVocabulary = useMemo(
     () => vocabulary(result?.questions ?? [], products),
     [products, result?.questions],

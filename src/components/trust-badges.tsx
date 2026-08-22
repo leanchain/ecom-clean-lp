@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import {
   Shield,
   Lock,
@@ -9,7 +10,6 @@ import {
   FileText,
   Users,
   CheckCircle2,
-  Server,
 } from "lucide-react";
 
 const TrustBadges = () => {

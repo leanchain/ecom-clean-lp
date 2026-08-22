@@ -4,10 +4,22 @@ export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://beseam.com";
+  const publicAgents = [
+    "BeseamBot",
+    "OAI-SearchBot",
+    "ChatGPT-User",
+    "GPTBot",
+    "Claude-SearchBot",
+    "Claude-User",
+    "ClaudeBot",
+    "PerplexityBot",
+    "Perplexity-User",
+  ];
+
   return {
     rules: [
       {
-        userAgent: "BeseamBot",
+        userAgent: publicAgents,
         allow: "/",
         disallow: ["/api/"],
       },
@@ -17,7 +29,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: baseUrl + "/sitemap.xml",
-    host: baseUrl,
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

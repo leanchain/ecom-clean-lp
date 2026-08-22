@@ -1,28 +1,26 @@
 "use client";
 
-import Link from "next/link";
 import React, { useMemo } from "react";
+
+import Link from "next/link";
+
 import {
   ArrowRight,
   CircleAlert,
   CircleCheckBig,
   Home,
-  ListChecks,
   MoveRight,
-  Sparkles,
   ThumbsDown,
   ThumbsUp,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -31,6 +29,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 type RelatedAlternative = {
   slug: string;
@@ -521,14 +521,13 @@ function SourceButtons({
   );
 }
 
+void SourceButtons;
+
 export function AlternativeArticle(props: AlternativeArticleProps) {
   const {
     name,
     description,
     category,
-    website,
-    docsUrl,
-    shopifyAppUrl,
     comparisonUrl,
     pricing,
     pricingDetails,

@@ -27,10 +27,10 @@ export default function ScanForm() {
           what you can change when another product is recommended?
         </p>
         <Link
-          href="/product-visibility-monitoring"
+          href="/contact"
           className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-semibold hover:underline"
         >
-          Book a 20-minute recommendation review
+          Talk through the scan
           <ArrowRight aria-hidden="true" className="h-4 w-4" />
         </Link>
       </div>

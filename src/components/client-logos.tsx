@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import AutoScroll from "embla-carousel-auto-scroll";
 
 import {

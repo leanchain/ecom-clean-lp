@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
+
 import { motion, AnimatePresence } from "framer-motion";
-import React from "react";
 import {
   BarChart3,
   BookOpen,
@@ -156,7 +156,9 @@ const AuditMockup = () => (
             <span className="text-[18px] font-black leading-none text-foreground">
               {m.value}
             </span>
-            <span className={`text-[10px] font-black ${m.up ? "text-emerald-600" : "text-red-500"}`}>
+            <span
+              className={`text-[10px] font-black ${m.up ? "text-emerald-600" : "text-red-500"}`}
+            >
               {m.delta}
             </span>
           </div>
@@ -176,13 +178,20 @@ const AuditMockup = () => (
         className="flex items-center gap-3 rounded-xl border border-border/40 bg-muted/20 px-3 py-2"
       >
         <div className="flex-1 min-w-0">
-          <p className="text-[12px] font-bold text-foreground truncate">{p.name}</p>
+          <p className="text-[12px] font-bold text-foreground truncate">
+            {p.name}
+          </p>
           <div className="mt-1 h-1.5 w-full rounded-full bg-muted overflow-hidden">
-            <div className="h-full rounded-full bg-indigo-500/70" style={{ width: `${p.score}%` }} />
+            <div
+              className="h-full rounded-full bg-indigo-500/70"
+              style={{ width: `${p.score}%` }}
+            />
           </div>
         </div>
         <div className="flex items-center gap-1 shrink-0">
-          <span className="text-[12px] font-black text-foreground">{p.score}</span>
+          <span className="text-[12px] font-black text-foreground">
+            {p.score}
+          </span>
           {p.trend ? (
             <TrendingUp className="size-3 text-emerald-500" />
           ) : (
@@ -201,8 +210,12 @@ const EnhanceMockup = () => (
   <div className="space-y-2.5">
     <div className="flex items-center justify-between mb-3">
       <div>
-        <h3 className="text-sm font-black text-foreground">Upgrade Playbooks</h3>
-        <p className="text-[11px] text-muted-foreground/60">3 ready · 2 pending review</p>
+        <h3 className="text-sm font-black text-foreground">
+          Upgrade Playbooks
+        </h3>
+        <p className="text-[11px] text-muted-foreground/60">
+          3 ready · 2 pending review
+        </p>
       </div>
       <div className="flex items-center gap-1.5 rounded-lg bg-muted/60 border border-border/40 px-2.5 py-1.5">
         <Search className="size-3 text-muted-foreground/50" />
@@ -249,35 +262,57 @@ const EnhanceMockup = () => (
       >
         <div className="flex items-center justify-between px-3.5 py-2.5">
           <div className="flex items-center gap-2.5">
-            <div className={`h-7 w-7 rounded-lg flex items-center justify-center ${pb.expanded ? "bg-emerald-500/15 text-emerald-600" : "bg-muted text-muted-foreground/40"}`}>
+            <div
+              className={`h-7 w-7 rounded-lg flex items-center justify-center ${pb.expanded ? "bg-emerald-500/15 text-emerald-600" : "bg-muted text-muted-foreground/40"}`}
+            >
               <BookOpen className="size-3.5" />
             </div>
             <div>
-              <p className="text-[12px] font-bold text-foreground leading-tight">{pb.product}</p>
+              <p className="text-[12px] font-bold text-foreground leading-tight">
+                {pb.product}
+              </p>
               <p className="text-[10px] text-muted-foreground/60">
-                {pb.steps.length || "3"} improvements · <span className="text-emerald-600 font-black">{pb.impact}</span>
+                {pb.steps.length || "3"} improvements ·{" "}
+                <span className="text-emerald-600 font-black">{pb.impact}</span>
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className={`text-[9px] font-black px-2 py-0.5 rounded-full ${pb.sColor}`}>{pb.status}</span>
-            <ChevronRight className={`size-3.5 text-muted-foreground/30 transition-transform ${pb.expanded ? "rotate-90" : ""}`} />
+            <span
+              className={`text-[9px] font-black px-2 py-0.5 rounded-full ${pb.sColor}`}
+            >
+              {pb.status}
+            </span>
+            <ChevronRight
+              className={`size-3.5 text-muted-foreground/30 transition-transform ${pb.expanded ? "rotate-90" : ""}`}
+            />
           </div>
         </div>
         {pb.expanded && (
           <div className="border-t border-emerald-200/30 px-3.5 py-2.5 space-y-1.5">
             {pb.steps.map((s, si) => (
-              <div key={si} className="flex items-center justify-between rounded-lg bg-white/50 dark:bg-white/5 border border-emerald-200/20 px-3 py-2">
+              <div
+                key={si}
+                className="flex items-center justify-between rounded-lg bg-white/50 dark:bg-white/5 border border-emerald-200/20 px-3 py-2"
+              >
                 <div className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  <span className="text-[11px] font-semibold text-foreground/90">{s.label}</span>
+                  <span className="text-[11px] font-semibold text-foreground/90">
+                    {s.label}
+                  </span>
                 </div>
-                <span className="text-[10px] font-black text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded-md ml-2 shrink-0">{s.pts}</span>
+                <span className="text-[10px] font-black text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded-md ml-2 shrink-0">
+                  {s.pts}
+                </span>
               </div>
             ))}
             <div className="flex gap-2 pt-1">
-              <button className="flex-1 rounded-full bg-primary py-2 text-[11px] font-black text-primary-foreground">Deploy All</button>
-              <button className="flex-1 rounded-full border-2 border-border/40 py-2 text-[11px] font-black text-muted-foreground">Review Diff</button>
+              <button className="flex-1 rounded-full bg-primary py-2 text-[11px] font-black text-primary-foreground">
+                Deploy All
+              </button>
+              <button className="flex-1 rounded-full border-2 border-border/40 py-2 text-[11px] font-black text-muted-foreground">
+                Review Diff
+              </button>
             </div>
           </div>
         )}
@@ -294,7 +329,9 @@ const IncidentMockup = () => (
     <div className="flex items-center justify-between mb-3">
       <div>
         <h3 className="text-sm font-black text-foreground">Incidents</h3>
-        <p className="text-[11px] text-muted-foreground/60">1 active · 2 resolved this week</p>
+        <p className="text-[11px] text-muted-foreground/60">
+          1 active · 2 resolved this week
+        </p>
       </div>
       <span className="flex h-2 w-2 relative">
         <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-red-500 opacity-75" />
@@ -303,26 +340,42 @@ const IncidentMockup = () => (
     </div>
     <div className="rounded-xl border-2 border-red-200/60 dark:border-red-900/30 bg-red-50/50 dark:bg-red-950/20 overflow-hidden">
       <div className="flex items-center justify-between px-3.5 py-2 border-b border-red-200/30 bg-red-100/30 dark:bg-red-950/30">
-        <span className="text-[10px] font-black uppercase tracking-widest text-red-700 dark:text-red-400">Active - INC-041</span>
-        <span className="rounded-full bg-red-500 px-2 py-0.5 text-[9px] font-black text-white">HIGH</span>
+        <span className="text-[10px] font-black uppercase tracking-widest text-red-700 dark:text-red-400">
+          Active - INC-041
+        </span>
+        <span className="rounded-full bg-red-500 px-2 py-0.5 text-[9px] font-black text-white">
+          HIGH
+        </span>
       </div>
       <div className="px-3.5 py-3 space-y-2.5">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-[13px] font-black text-red-700 dark:text-red-400">Nimbus Trail Runner</p>
+            <p className="text-[13px] font-black text-red-700 dark:text-red-400">
+              Nimbus Trail Runner
+            </p>
             <div className="flex items-center gap-1 mt-0.5">
               <ArrowDownRight className="size-3 text-red-500" />
-              <span className="text-[12px] font-black text-red-600">Conversion Rate −12%</span>
+              <span className="text-[12px] font-black text-red-600">
+                Conversion Rate −12%
+              </span>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-[9px] font-semibold text-muted-foreground/50 uppercase tracking-widest">Source</p>
-            <p className="text-[11px] font-black text-foreground/80">Dev Team</p>
+            <p className="text-[9px] font-semibold text-muted-foreground/50 uppercase tracking-widest">
+              Source
+            </p>
+            <p className="text-[11px] font-black text-foreground/80">
+              Dev Team
+            </p>
           </div>
         </div>
         <div className="rounded-lg bg-white/60 dark:bg-black/20 border border-red-200/20 px-3 py-2">
-          <p className="text-[9px] font-black uppercase tracking-widest text-red-700/40 mb-0.5">Root Cause</p>
-          <p className="text-[11px] font-semibold text-foreground/90">Theme publish removed FAQ module from PDP template</p>
+          <p className="text-[9px] font-black uppercase tracking-widest text-red-700/40 mb-0.5">
+            Root Cause
+          </p>
+          <p className="text-[11px] font-semibold text-foreground/90">
+            Theme publish removed FAQ module from PDP template
+          </p>
         </div>
         <div className="flex gap-2">
           <button className="flex items-center gap-1.5 flex-1 justify-center rounded-full bg-red-500 py-2 text-[11px] font-black text-white">
@@ -334,13 +387,19 @@ const IncidentMockup = () => (
         </div>
       </div>
     </div>
-    <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/40">Recently Resolved</p>
+    <p className="text-[9px] font-black uppercase tracking-widest text-muted-foreground/40">
+      Recently Resolved
+    </p>
     <div className="flex items-center justify-between rounded-xl border border-border/40 bg-muted/30 px-3.5 py-2.5">
       <div className="flex items-center gap-2.5">
         <CheckCircle2 className="size-3.5 text-emerald-500 shrink-0" />
         <div>
-          <p className="text-[12px] font-bold text-foreground/80">Alpine Pro Jacket</p>
-          <p className="text-[10px] text-muted-foreground/60">Add-to-Cart −7% · SEO Agency</p>
+          <p className="text-[12px] font-bold text-foreground/80">
+            Alpine Pro Jacket
+          </p>
+          <p className="text-[10px] text-muted-foreground/60">
+            Add-to-Cart −7% · SEO Agency
+          </p>
         </div>
       </div>
       <div className="text-right">
@@ -359,11 +418,16 @@ const HistoryMockup = () => (
     <div className="flex items-center justify-between mb-3">
       <div>
         <h3 className="text-sm font-black text-foreground">Change History</h3>
-        <p className="text-[11px] text-muted-foreground/60">14 changes this month</p>
+        <p className="text-[11px] text-muted-foreground/60">
+          14 changes this month
+        </p>
       </div>
       <div className="flex gap-1">
         {["All", "+", "−"].map((f, fi) => (
-          <button key={fi} className={`rounded-full px-2.5 py-1 text-[10px] font-black ${fi === 0 ? "bg-foreground text-background" : "border border-border/40 text-muted-foreground/60"}`}>
+          <button
+            key={fi}
+            className={`rounded-full px-2.5 py-1 text-[10px] font-black ${fi === 0 ? "bg-foreground text-background" : "border border-border/40 text-muted-foreground/60"}`}
+          >
             {f}
           </button>
         ))}
@@ -375,27 +439,69 @@ const HistoryMockup = () => (
     <div className="relative pl-5">
       <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border/40" />
       {[
-        { date: "Today 14:32", action: "FAQ section added via schema.org", product: "Alpine Pro Jacket", impact: "+18 pts", author: "Beseam AI", authorColor: "text-primary", positive: true },
-        { date: "Yesterday 09:15", action: "Spring copy refresh", product: "Nimbus Trail Runner", impact: "+5 pts", author: "SEO Agency", authorColor: "text-blue-600", positive: true },
-        { date: "Feb 20 16:48", action: "Theme layout updated (global)", product: "All PDPs", impact: "−3 pts avg", author: "Dev Team", authorColor: "text-amber-600", positive: false },
-        { date: "Feb 18 11:05", action: "Schema markup added", product: "Summit Daypack 25L", impact: "+22 pts", author: "Beseam AI", authorColor: "text-primary", positive: true },
+        {
+          date: "Today 14:32",
+          action: "FAQ section added via schema.org",
+          product: "Alpine Pro Jacket",
+          impact: "+18 pts",
+          author: "Beseam AI",
+          authorColor: "text-primary",
+          positive: true,
+        },
+        {
+          date: "Yesterday 09:15",
+          action: "Spring copy refresh",
+          product: "Nimbus Trail Runner",
+          impact: "+5 pts",
+          author: "SEO Agency",
+          authorColor: "text-blue-600",
+          positive: true,
+        },
+        {
+          date: "Feb 20 16:48",
+          action: "Theme layout updated (global)",
+          product: "All PDPs",
+          impact: "−3 pts avg",
+          author: "Dev Team",
+          authorColor: "text-amber-600",
+          positive: false,
+        },
+        {
+          date: "Feb 18 11:05",
+          action: "Schema markup added",
+          product: "Summit Daypack 25L",
+          impact: "+22 pts",
+          author: "Beseam AI",
+          authorColor: "text-primary",
+          positive: true,
+        },
       ].map((e, i) => (
         <div key={i} className="relative pb-2">
-          <div className={`absolute -left-[13px] h-2 w-2 rounded-full border-2 border-background ring-1 mt-[13px] ${e.positive ? "bg-emerald-500 ring-emerald-500/40" : "bg-red-500 ring-red-500/40"}`} />
+          <div
+            className={`absolute -left-[13px] h-2 w-2 rounded-full border-2 border-background ring-1 mt-[13px] ${e.positive ? "bg-emerald-500 ring-emerald-500/40" : "bg-red-500 ring-red-500/40"}`}
+          />
           <div className="rounded-xl border border-border/40 bg-muted/30 hover:bg-muted/50 px-3 py-2.5 transition-colors">
             <div className="flex items-start justify-between gap-2">
               <div className="flex-1 min-w-0">
-                <p className="text-[12px] font-bold text-foreground leading-tight truncate">{e.action}</p>
+                <p className="text-[12px] font-bold text-foreground leading-tight truncate">
+                  {e.action}
+                </p>
                 <p className="text-[10px] text-muted-foreground/60 mt-0.5">
                   {e.product} <span className="opacity-30 mx-1">·</span>
-                  <span className={`font-black ${e.authorColor}`}>{e.author}</span>
+                  <span className={`font-black ${e.authorColor}`}>
+                    {e.author}
+                  </span>
                 </p>
               </div>
               <div className="text-right shrink-0">
-                <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-md border ${e.positive ? "text-emerald-600 bg-emerald-500/10 border-emerald-500/20" : "text-red-500 bg-red-500/10 border-red-500/20"}`}>
+                <span
+                  className={`text-[10px] font-black px-1.5 py-0.5 rounded-md border ${e.positive ? "text-emerald-600 bg-emerald-500/10 border-emerald-500/20" : "text-red-500 bg-red-500/10 border-red-500/20"}`}
+                >
                   {e.impact}
                 </span>
-                <p className="text-[9px] text-muted-foreground/40 mt-0.5">{e.date}</p>
+                <p className="text-[9px] text-muted-foreground/40 mt-0.5">
+                  {e.date}
+                </p>
               </div>
             </div>
           </div>
@@ -444,7 +550,9 @@ const DashboardChrome = ({
         <span className="h-2.5 w-2.5 rounded-full bg-amber-300/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
         <div className="ml-3 flex items-center gap-1 rounded-md bg-background/70 border border-border/40 px-3 py-1 mx-auto">
-          <span className="text-[9px] text-muted-foreground/40 font-medium">beseam.io/dashboard/</span>
+          <span className="text-[9px] text-muted-foreground/40 font-medium">
+            beseam.io/dashboard/
+          </span>
           <AnimatePresence mode="wait">
             <motion.span
               key={activeTab}
@@ -463,7 +571,9 @@ const DashboardChrome = ({
             <span className="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 opacity-60" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
           </span>
-          <span className="text-[8px] font-black uppercase tracking-widest text-emerald-600">Live</span>
+          <span className="text-[8px] font-black uppercase tracking-widest text-emerald-600">
+            Live
+          </span>
         </div>
       </div>
 
@@ -483,7 +593,9 @@ const DashboardChrome = ({
                 <div
                   key={item.id}
                   className={`relative flex h-8 w-full items-center justify-center rounded-lg border transition-all duration-300 ${
-                    isActive ? `${tab.sidebarActiveClass} border` : "border-transparent text-muted-foreground/40"
+                    isActive
+                      ? `${tab.sidebarActiveClass} border`
+                      : "border-transparent text-muted-foreground/40"
                   }`}
                   title={item.label}
                 >
@@ -578,7 +690,9 @@ export default function DashboardScroll() {
       const scrollable = sectionH - winH;
       if (scrollable <= 0) return;
       const progress = Math.max(0, Math.min(0.9999, scrolled / scrollable));
-      setActiveTab(Math.min(Math.floor(progress * tabs.length), tabs.length - 1));
+      setActiveTab(
+        Math.min(Math.floor(progress * tabs.length), tabs.length - 1),
+      );
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -626,7 +740,6 @@ export default function DashboardScroll() {
         {/* Left + Right */}
         <div className="flex-1 min-h-0 flex items-center px-8">
           <div className="w-full max-w-6xl mx-auto flex gap-14 items-center">
-
             {/* Left: text */}
             <div className="w-[40%] shrink-0">
               <AnimatePresence mode="wait">
@@ -640,10 +753,14 @@ export default function DashboardScroll() {
                 >
                   {/* Step number + badge */}
                   <div className="flex items-center gap-3">
-                    <span className={`text-6xl font-black opacity-10 leading-none select-none ${tab.colorClass}`}>
+                    <span
+                      className={`text-6xl font-black opacity-10 leading-none select-none ${tab.colorClass}`}
+                    >
                       {String(activeTab + 1).padStart(2, "0")}
                     </span>
-                    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold border ${tab.bgClass} ${tab.colorClass} ${tab.borderClass}`}>
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold border ${tab.bgClass} ${tab.colorClass} ${tab.borderClass}`}
+                    >
                       <tab.icon className="h-3.5 w-3.5" />
                       {tab.title}
                     </span>
@@ -663,10 +780,16 @@ export default function DashboardScroll() {
                   <ul className="space-y-3">
                     {tab.bullets.map((bullet, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <div className={`mt-0.5 h-4 w-4 shrink-0 rounded-full flex items-center justify-center ${tab.bgClass} border ${tab.borderClass}`}>
-                          <CheckCircle2 className={`h-2.5 w-2.5 ${tab.colorClass}`} />
+                        <div
+                          className={`mt-0.5 h-4 w-4 shrink-0 rounded-full flex items-center justify-center ${tab.bgClass} border ${tab.borderClass}`}
+                        >
+                          <CheckCircle2
+                            className={`h-2.5 w-2.5 ${tab.colorClass}`}
+                          />
                         </div>
-                        <span className="text-sm text-muted-foreground/90">{bullet}</span>
+                        <span className="text-sm text-muted-foreground/90">
+                          {bullet}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -704,8 +827,8 @@ export default function DashboardScroll() {
                 i === activeTab
                   ? `w-8 ${t.dotClass}`
                   : i < activeTab
-                  ? `w-2 ${t.dotClass} opacity-30`
-                  : "w-1.5 bg-muted-foreground/20"
+                    ? `w-2 ${t.dotClass} opacity-30`
+                    : "w-1.5 bg-muted-foreground/20"
               }`}
             />
           ))}
@@ -752,11 +875,18 @@ export default function DashboardScroll() {
             transition={{ duration: 0.25 }}
             className="mb-6"
           >
-            <p className="text-foreground/80 leading-relaxed mb-4">{tab.description}</p>
+            <p className="text-foreground/80 leading-relaxed mb-4">
+              {tab.description}
+            </p>
             <ul className="space-y-2 mb-6">
               {tab.bullets.map((bullet, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <div className={`mt-0.5 h-3.5 w-3.5 shrink-0 rounded-full flex items-center justify-center ${tab.bgClass} border ${tab.borderClass}`}>
+                <li
+                  key={i}
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
+                >
+                  <div
+                    className={`mt-0.5 h-3.5 w-3.5 shrink-0 rounded-full flex items-center justify-center ${tab.bgClass} border ${tab.borderClass}`}
+                  >
                     <CheckCircle2 className={`h-2 w-2 ${tab.colorClass}`} />
                   </div>
                   {bullet}

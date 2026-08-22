@@ -94,15 +94,21 @@ const StepVisual = ({ index }: { index: number }) => {
         <div className="space-y-2 my-2">
           <div className="flex items-center gap-2 text-[11px]">
             <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            <span className="text-muted-foreground">+ FAQ section with schema</span>
+            <span className="text-muted-foreground">
+              + FAQ section with schema
+            </span>
           </div>
           <div className="flex items-center gap-2 text-[11px]">
             <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            <span className="text-muted-foreground">+ Deep product narrative</span>
+            <span className="text-muted-foreground">
+              + Deep product narrative
+            </span>
           </div>
           <div className="flex items-center gap-2 text-[11px]">
             <span className="h-2 w-2 rounded-full bg-amber-500" />
-            <span className="text-muted-foreground">~ Updated meta description</span>
+            <span className="text-muted-foreground">
+              ~ Updated meta description
+            </span>
           </div>
         </div>
         <div className="flex items-center justify-between">
@@ -143,7 +149,9 @@ const StepVisual = ({ index }: { index: number }) => {
         </div>
       </div>
       <div className="flex items-center justify-between">
-        <span className="text-[11px] text-muted-foreground">48h post-deploy</span>
+        <span className="text-[11px] text-muted-foreground">
+          48h post-deploy
+        </span>
         <span className="bg-primary text-primary-foreground rounded-full px-2 py-0.5 text-[11px] font-semibold">
           Scale to catalog
         </span>
@@ -172,15 +180,16 @@ const HowItWorks = () => {
               How it works
             </h2>
             <p className="text-muted-foreground/90 mx-auto max-w-2xl text-lg md:text-xl leading-relaxed">
-              From audit to auto-rollback in three steps. A closed-loop system designed for safety and scale.
+              From audit to auto-rollback in three steps. A closed-loop system
+              designed for safety and scale.
             </p>
           </motion.div>
         </div>
 
         <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-3">
           {steps.map((step, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -201,7 +210,10 @@ const HowItWorks = () => {
               </p>
               <ul className="mt-auto space-y-3">
                 {step.bullets?.map((item, bulletIndex) => (
-                  <li key={bulletIndex} className="flex gap-3 text-sm text-muted-foreground/90 leading-snug">
+                  <li
+                    key={bulletIndex}
+                    className="flex gap-3 text-sm text-muted-foreground/90 leading-snug"
+                  >
                     <div className="mt-1.5 flex h-1.5 w-1.5 shrink-0 items-center justify-center rounded-full bg-primary" />
                     <span>{item}</span>
                   </li>

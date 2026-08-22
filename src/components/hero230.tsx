@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+
 import Image from "next/image";
-import { TypingAnimation } from "@/components/typing-animation";
-import { AnalyzerInput } from "@/components/sections/analyzer-input";
+import Link from "next/link";
 
 import { motion } from "framer-motion";
+
+import { AnalyzerInput } from "@/components/sections/analyzer-input";
+import { TypingAnimation } from "@/components/typing-animation";
 
 const platforms = [
   { name: "Google", logo: "/images/ai-platforms/google.svg" },

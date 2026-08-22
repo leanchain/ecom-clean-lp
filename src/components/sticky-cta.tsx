@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+
 import Link from "next/link";
+
 import { ArrowRight, X, Sparkles } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 const StickyCTA = () => {
@@ -39,7 +42,8 @@ const StickyCTA = () => {
                   Get found on AI search. Convert more. Deploy safely.
                 </p>
                 <p className="text-sm text-muted-foreground hidden sm:block">
-                  Free audit · AI visibility score · Conversion insights · Built-in rollback
+                  Free audit · AI visibility score · Conversion insights ·
+                  Built-in rollback
                 </p>
               </div>
             </div>
@@ -51,7 +55,11 @@ const StickyCTA = () => {
                 asChild
                 className="rounded-full"
               >
-                <Link href="https://app.beseam.com/analyze" target="_blank" rel="noopener noreferrer">
+                <Link
+                  href="https://app.beseam.com/analyze"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Try Free Audit
                 </Link>
               </Button>

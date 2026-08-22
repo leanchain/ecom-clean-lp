@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+
 import { motion } from "framer-motion";
 import {
   CheckCircle2,
@@ -124,7 +125,7 @@ export default function FeaturedPartners({
                     { icon: Zap, label: "Faster iteration" },
                     { icon: TrendingUp, label: "Higher conversion" },
                     { icon: Shield, label: "Revenue protection" },
-                  ].map(({ icon: Icon, label }) => (
+                  ].map(({ label }) => (
                     <li key={label} className="flex items-start gap-2.5">
                       <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-secondary/10">
                         <CheckCircle2 className="h-3 w-3 text-secondary" />

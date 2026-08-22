@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import { PdpAnalyzer } from "@/components/pdp-analyzer";
 
 export const metadata: Metadata = {
@@ -10,4 +11,3 @@ export const metadata: Metadata = {
 export default function PdpAnalyzerPage() {
   return <PdpAnalyzer />;
 }
-

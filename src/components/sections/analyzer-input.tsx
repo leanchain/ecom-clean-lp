@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sparkles, ArrowRight, Loader2 } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+
+import { Sparkles, ArrowRight } from "lucide-react";
+
 import AnimatedBorderContainer from "@/components/ui/animated-border-container";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 export const AnalyzerInput = () => {

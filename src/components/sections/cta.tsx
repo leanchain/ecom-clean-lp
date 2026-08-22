@@ -31,7 +31,11 @@ const CTA = () => {
             wrapperClassName="w-fit"
             className="gap-2.5 pe-3 [&_svg]:transition-transform hover:[&_svg]:translate-x-0.25"
           >
-            <Link href="https://app.beseam.com/analyze" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://app.beseam.com/analyze"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Run Free PDP Audit
               <span className="bg-background text-foreground rounded-full p-2">
                 <ChevronRight />

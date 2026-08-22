@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import type React from 'react';
-import { useRef, useState, useEffect } from 'react';
+import type React from "react";
+import { useRef, useState, useEffect } from "react";
 
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
 
-import { Button } from './ui/button';
+import { Button } from "./ui/button";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 interface AnimatedBorderButtonProps {
   children: React.ReactNode;
@@ -17,10 +17,10 @@ interface AnimatedBorderButtonProps {
   borderWidth?: number;
   animationDuration?: number;
   gap?: number;
-  rounded?: 'md' | 'full';
+  rounded?: "md" | "full";
   asChild?: boolean;
   wrapperClassName?: string;
-  buttonSize?: 'sm' | 'default' | 'lg' | 'icon';
+  buttonSize?: "sm" | "default" | "lg" | "icon";
   fullWidth?: boolean;
 }
 
@@ -28,20 +28,20 @@ export default function AnimatedBorderButton({
   children,
   className,
   onClick,
-  borderColor = 'var(--primary)',
+  borderColor = "var(--primary)",
   borderWidth = 2,
   animationDuration = 0.25,
-  rounded = 'full',
+  rounded = "full",
   asChild = false,
   wrapperClassName,
-  buttonSize = 'lg',
+  buttonSize = "lg",
   fullWidth = true,
 }: AnimatedBorderButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const pathRef = useRef<SVGRectElement>(null);
   const [, setPathLength] = useState(0);
 
-  const borderRadius = rounded === 'full' ? '32' : '6';
+  const borderRadius = rounded === "full" ? "32" : "6";
 
   // Calculate the path length once the component mounts
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function AnimatedBorderButton({
   return (
     <div
       className={cn(
-        'relative cursor-pointer transition-transform',
+        "relative cursor-pointer transition-transform",
         wrapperClassName,
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -79,7 +79,7 @@ export default function AnimatedBorderButton({
             strokeWidth={borderWidth}
             initial={{ pathLength: 0 }}
             animate={{ pathLength: isHovered ? 1 : 0 }}
-            transition={{ duration: animationDuration, ease: 'easeInOut' }}
+            transition={{ duration: animationDuration, ease: "easeInOut" }}
           />
         </svg>
       </div>
@@ -87,8 +87,8 @@ export default function AnimatedBorderButton({
       <Button
         size={buttonSize}
         className={cn(
-          fullWidth ? 'w-full' : 'w-auto',
-          rounded === 'full' ? 'rounded-full' : 'rounded-md',
+          fullWidth ? "w-full" : "w-auto",
+          rounded === "full" ? "rounded-full" : "rounded-md",
           className,
         )}
         asChild={asChild}

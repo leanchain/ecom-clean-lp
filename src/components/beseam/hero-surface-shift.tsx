@@ -1660,12 +1660,7 @@ export default function HeroSurfaceShift() {
             pointerApproachHubRef.current = nearestPointerHubId;
             setPointerApproachHubId(nearestPointerHubId);
           }
-        } else if (pointerApproachHubRef.current) {
-          pointerApproachHubRef.current = null;
-          setPointerApproachHubId(null);
         }
-
-        setForegroundProgress(activeHubRef.current ? 1 : pointerProgress);
 
         currentSvg
           .querySelectorAll<SVGPathElement>(".hero-kg-focus-edge")
@@ -1697,6 +1692,7 @@ export default function HeroSurfaceShift() {
               kind: "satellite";
               key: string;
               distance: number;
+              hubId: string;
               index: number;
             };
 
@@ -1706,7 +1702,6 @@ export default function HeroSurfaceShift() {
             nearest = candidate;
           }
         };
-
         const currentTarget = activeTargetRef.current;
         if (currentTarget) {
           const [kind, hubId, indexValue] = currentTarget.split(":");
@@ -1717,7 +1712,7 @@ export default function HeroSurfaceShift() {
             const hub = hubById[hubId];
             if (hub) {
               keepDistance = Math.sqrt(squaredDistance(hub, point)) * scale;
-              keepRadius = 30;
+              keepRadius = 38;
             }
           } else if (kind === "cap") {
             const index = Number(indexValue);
@@ -1727,7 +1722,7 @@ export default function HeroSurfaceShift() {
             );
             if (node) {
               keepDistance = Math.sqrt(squaredDistance(node, point)) * scale;
-              keepRadius = 25;
+              keepRadius = 34;
             }
           } else if (kind === "sat") {
             const hub = hubById[hubId];
@@ -1742,7 +1737,7 @@ export default function HeroSurfaceShift() {
               );
               keepDistance =
                 Math.sqrt(squaredDistance(satellite, point)) * scale;
-              keepRadius = 25;
+              keepRadius = 34;
             }
           }
 
@@ -1752,10 +1747,11 @@ export default function HeroSurfaceShift() {
           }
         }
 
-        let withinActiveNeighborhood = false;
-        const activeId = activeHubRef.current;
-        if (activeId) {
-          const hub = hubById[activeId];
+        let withinInteractionNeighborhood = false;
+        const interactionHubId =
+          activeHubRef.current ?? pointerApproachHubRef.current;
+        if (interactionHubId) {
+          const hub = hubById[interactionHubId];
           let farthestChildDistance = 0;
 
           hub.satellites.forEach((_, index) => {
@@ -1772,25 +1768,26 @@ export default function HeroSurfaceShift() {
             );
             const distance =
               Math.sqrt(squaredDistance(satellite, point)) * scale;
-            if (distance <= 20) {
+            if (distance <= 30) {
               consider({
                 kind: "satellite",
-                key: `sat:${activeId}:${index}`,
+                key: `sat:${interactionHubId}:${index}`,
                 distance,
+                hubId: interactionHubId,
                 index,
               });
             }
           });
 
           capabilityNodes
-            .filter((node) => node.hubId === activeId)
+            .filter((node) => node.hubId === interactionHubId)
             .forEach((node) => {
               farthestChildDistance = Math.max(
                 farthestChildDistance,
                 Math.sqrt(squaredDistance(node, hub)),
               );
               const distance = Math.sqrt(squaredDistance(node, point)) * scale;
-              if (distance > 21) return;
+              if (distance > 32) return;
               const element = currentSvg.querySelector(
                 `[data-capability="${node.hubId}:${node.index}"]`,
               );
@@ -1806,13 +1803,23 @@ export default function HeroSurfaceShift() {
 
           const pointerDistance =
             Math.sqrt(squaredDistance(hub, point)) * scale;
-          const neighborhoodRadius = farthestChildDistance * scale + 36;
-          withinActiveNeighborhood = pointerDistance <= neighborhoodRadius;
+          const neighborhoodRadius = farthestChildDistance * scale + 54;
+          withinInteractionNeighborhood = pointerDistance <= neighborhoodRadius;
+        }
+
+        if (activeHubRef.current || withinInteractionNeighborhood) {
+          setForegroundProgress(1);
+        } else {
+          setForegroundProgress(pointerProgress);
+          if (pointerProgress <= 0.02 && pointerApproachHubRef.current) {
+            pointerApproachHubRef.current = null;
+            setPointerApproachHubId(null);
+          }
         }
 
         layoutHubs.forEach((hub) => {
           const distance = Math.sqrt(squaredDistance(hub, point)) * scale;
-          if (distance > 21) return;
+          if (distance > 28) return;
           const element = currentSvg.querySelector(`[data-hub="${hub.id}"]`);
           if (!element) return;
           consider({
@@ -1823,9 +1830,10 @@ export default function HeroSurfaceShift() {
             element,
           });
         });
+
         const target = nearest as HoverTarget | null;
         if (!target) {
-          if (withinActiveNeighborhood) {
+          if (withinInteractionNeighborhood) {
             cancelClose();
             return;
           }
@@ -1849,9 +1857,13 @@ export default function HeroSurfaceShift() {
           selectHub(target.hubId, target.element);
           return;
         }
+
         activeTargetRef.current = target.key;
+        pointerApproachHubRef.current = target.hubId;
+        setPointerApproachHubId(target.hubId);
         setActiveCapability(null);
         setActiveSatellite(target.index);
+        setForegroundProgress(1);
       });
     },
     [
