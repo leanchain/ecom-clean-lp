@@ -5,13 +5,15 @@ import type { Metadata } from "next";
 
 import FieldbookShell from "@/components/beseam/fieldbook/fieldbook-shell";
 import { getFieldbookDocuments } from "@/lib/fieldbook-content";
+import { FIELDBOOK_SOCIAL_IMAGE, buildPublicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Ecommerce Problems | Beseam Commerce Fieldbook" },
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Ecommerce Problems | Beseam Commerce Fieldbook",
   description:
     "Evidence-first investigation paths for common ecommerce discovery, catalog, purchase, and measurement problems.",
-  alternates: { canonical: "/resources/problems" },
-};
+  path: "/resources/problems",
+  image: FIELDBOOK_SOCIAL_IMAGE,
+});
 
 export default function ProblemsIndexPage() {
   const problems = getFieldbookDocuments("problems");

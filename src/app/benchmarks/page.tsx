@@ -8,20 +8,17 @@ import CategoryBenchmarkFigure, {
 } from "@/components/beseam/category-benchmark";
 import { Reveal } from "@/components/beseam/reveal";
 import { BENCHMARK_RUN, CATEGORY_BENCHMARKS } from "@/data/category-benchmarks";
+import { SITE_URL, buildPublicMetadata } from "@/lib/seo";
 
 const hasBenchmarks = CATEGORY_BENCHMARKS.length > 0;
 
-export const metadata: Metadata = {
-  title: {
-    absolute: "AI category benchmarks | Which brands assistants actually name",
-  },
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Product Discovery Benchmarks | Beseam",
   description:
-    "Real shopper questions run against ChatGPT, Gemini, and Google AI Mode across electronics, supplements, apparel, and food. Which brands got named, how little the engines agree, and the method behind every figure.",
-  alternates: { canonical: "/benchmarks" },
-  // Stays out of the index until there is at least one published run: an
-  // empty proof page is a liability, not a landing page.
-  robots: hasBenchmarks ? undefined : { index: false, follow: true },
-};
+    "Public shopper questions across AI assistants show how variable one part of product discovery can be. See observed answers, category figures, dates, and methodology.",
+  path: "/benchmarks",
+  noIndex: !hasBenchmarks,
+});
 
 const METHOD = [
   [
@@ -61,9 +58,43 @@ export default function BenchmarksPage() {
   const categories = Array.from(
     new Set(CATEGORY_BENCHMARKS.map((b) => b.category)),
   );
+  const datasetJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "@id": `${SITE_URL}/benchmarks#dataset`,
+    name: "Beseam product discovery benchmark",
+    description:
+      "Observed brand namings from public shopper questions asked across configured AI shopping and answer surfaces, with the exact questions, dates, engines, and denominators published.",
+    url: `${SITE_URL}/benchmarks`,
+    creator: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    dateModified: BENCHMARK_RUN.askedOn,
+    temporalCoverage: BENCHMARK_RUN.askedOn,
+    isAccessibleForFree: true,
+    inLanguage: "en",
+    keywords: [
+      "product discovery benchmark",
+      "AI shopping",
+      "ecommerce",
+      ...categories,
+    ],
+    measurementTechnique:
+      "The same public shopper question is asked across the configured engines. Only completed answers are counted, and each published figure states its denominator.",
+    variableMeasured: [
+      "Brand namings by shopper question",
+      "Number of engines naming each brand",
+      "Completed answer count",
+    ],
+  };
 
   return (
     <div className="bg-[#fafafa] text-[#151515]">
+      {hasBenchmarks ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetJsonLd) }}
+        />
+      ) : null}
       <section>
         <div className="mx-auto max-w-[92rem] px-5 pb-16 pt-20 sm:px-8 sm:pt-28 lg:px-10">
           <Reveal>
@@ -71,15 +102,15 @@ export default function BenchmarksPage() {
               Category benchmarks · {formatBenchmarkDate(BENCHMARK_RUN.askedOn)}
             </p>
             <h1 className="mt-7 max-w-[20ch] text-balance font-display text-[clamp(2.6rem,5vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
-              Winning one assistant tells you nothing about the rest.
+              AI shopping answers often disagree on which brands belong.
             </h1>
             <p className="mt-8 max-w-[68ch] text-[17px] leading-[1.7] text-black/68">
-              We asked {BENCHMARK_RUN.questions} real shopper questions across{" "}
+              This benchmark looks at one part of product discovery: the brands
+              named in AI shopping answers. We asked {BENCHMARK_RUN.questions}{" "}
+              real shopper questions across{" "}
               {categories.join(", ").toLowerCase()} on{" "}
-              {BENCHMARK_RUN.engines.join(", ")}, and kept every answer. In an
-              AI answer there is no position four: a brand is named or it is
-              absent. What came back is that the engines mostly do not agree on
-              who belongs in the answer.
+              {BENCHMARK_RUN.engines.join(", ")}, kept every completed answer,
+              and found that the engines often disagree on which brands belong.
             </p>
           </Reveal>
 
@@ -139,9 +170,10 @@ export default function BenchmarksPage() {
                 How every figure on this page is produced.
               </h2>
               <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-black/64">
-                The same check that runs on a customer&rsquo;s catalog, pointed
-                at a public category instead. You can re-run any of these
-                yourself and compare.
+                The same discovery check shown on the Beseam homepage, pointed
+                at a public category instead of a customer store. The date and
+                denominator stay attached so the result can be interpreted in
+                context.
               </p>
             </Reveal>
 
@@ -163,10 +195,10 @@ export default function BenchmarksPage() {
               </dl>
 
               <Link
-                href="/#home-hero"
+                href="/#ai-check"
                 className="mt-9 inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#b8441d]"
               >
-                Run this on your own catalog
+                Check my store
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </Reveal>

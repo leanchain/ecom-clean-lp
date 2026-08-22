@@ -1,12 +1,13 @@
-import { readFileSync } from "fs";
-import type { Metadata } from "next";
 import Link from "next/link";
+
+import { readFileSync } from "fs";
+import { Calendar } from "lucide-react";
+import type { Metadata } from "next";
+import { compileMDX } from "next-mdx-remote/rsc";
 import { join } from "path";
 
-import { Calendar } from "lucide-react";
-import { compileMDX } from "next-mdx-remote/rsc";
-
 import CategoryBadge from "@/components/category-badge";
+import { buildPublicMetadata } from "@/lib/seo";
 
 interface Frontmatter {
   title: string;
@@ -14,12 +15,12 @@ interface Frontmatter {
   date: string;
 }
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Privacy Policy | Beseam",
   description:
-    "How Beseam collects, uses, shares, and protects personal data across our website and ecommerce visibility services.",
-  alternates: { canonical: "/privacy-policy" },
-};
+    "How Beseam collects, uses, shares, and protects personal data across our website and ecommerce services.",
+  path: "/privacy-policy",
+});
 
 export default async function PrivacyPolicy() {
   const filePath = join(process.cwd(), "./src/app/privacy-policy/index.mdx");

@@ -4,13 +4,15 @@ import type { Metadata } from "next";
 
 import FieldbookDocumentPage from "@/components/beseam/fieldbook/fieldbook-document";
 import { getFieldbookDocument } from "@/lib/fieldbook-content";
+import { FIELDBOOK_SOCIAL_IMAGE, buildPublicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Start Here | Beseam Commerce Fieldbook" },
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Start Here | Beseam Commerce Fieldbook",
   description:
     "How to use the Commerce Fieldbook, its evidence model, agent skills, and editorial boundaries.",
-  alternates: { canonical: "/resources/start-here" },
-};
+  path: "/resources/start-here",
+  image: FIELDBOOK_SOCIAL_IMAGE,
+});
 
 export default function StartHerePage() {
   const document = getFieldbookDocument("start-here", "overview");

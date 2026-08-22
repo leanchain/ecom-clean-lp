@@ -1,6 +1,9 @@
 {
   "name": "Beseam",
   "short_name": "Beseam",
+  "description": "Observe, understand, decide, act, and learn across ecommerce.",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/favicon/web-app-manifest-192x192.png",

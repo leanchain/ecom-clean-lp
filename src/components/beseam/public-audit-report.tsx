@@ -5,9 +5,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Copy, Printer, RefreshCw, ShieldCheck } from "lucide-react";
 
 import { ResultCard } from "@/components/beseam/answer-check";
-import AuditReportNav from "@/components/beseam/audit-report-nav";
 import type { AnswerCheckResult } from "@/components/beseam/answer-check-types";
-import BookReviewCta from "@/components/beseam/book-review-cta";
+import AuditReportNav from "@/components/beseam/audit-report-nav";
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
 
 const POLL_MS = 6000;
 const MAX_POLLS = 60;

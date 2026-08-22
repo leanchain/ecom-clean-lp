@@ -9,16 +9,10 @@ export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://beseam.com";
-  const lastModified = new Date();
   const fieldbookDocuments = getAllFieldbookDocuments();
 
   const routes = [
     { path: "/", changeFrequency: "weekly" as const, priority: 1 },
-    {
-      path: "/shopify-store-health",
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
     {
       path: "/ai-visibility-monitoring",
       changeFrequency: "monthly" as const,
@@ -29,39 +23,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.85,
     },
-    {
-      path: "/purchase-health",
-      changeFrequency: "monthly" as const,
-      priority: 0.5,
-    },
-    {
-      path: "/discoverability-health",
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-    {
-      path: "/monitoring-coverage",
-      changeFrequency: "monthly" as const,
-      priority: 0.45,
-    },
-    {
-      path: "/integrations/shopify",
-      changeFrequency: "monthly" as const,
-      priority: 0.75,
-    },
-    {
-      path: "/integrations/google-search-console",
-      changeFrequency: "monthly" as const,
-      priority: 0.55,
-    },
     { path: "/about", changeFrequency: "monthly" as const, priority: 0.7 },
     { path: "/contact", changeFrequency: "monthly" as const, priority: 0.6 },
     { path: "/bot", changeFrequency: "monthly" as const, priority: 0.5 },
-    { path: "/manifesto", changeFrequency: "monthly" as const, priority: 0.7 },
     {
-      path: "/product-visibility-monitoring",
+      path: "/manifesto",
       changeFrequency: "monthly" as const,
-      priority: 0.85,
+      priority: 0.7,
+      lastModified: new Date("2026-08-22"),
     },
     {
       path: "/tools/ai-visibility-scan",
@@ -103,11 +72,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       path: `/resources/projects/${resource.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.62,
+      lastModified: new Date(resource.reviewedAt),
     })),
     ...fieldbookDocuments.map((document) => ({
       path: document.href,
       changeFrequency: "monthly" as const,
       priority: document.section === "start-here" ? 0.74 : 0.7,
+      lastModified: new Date(document.frontmatter.reviewedAt),
     })),
     // Listed only once a real run is published: matches the noindex on the
     // page itself while the benchmark set is empty.
@@ -134,8 +105,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   return uniqueRoutes.map(({ path, ...route }) => ({
-    url: baseUrl + path,
-    lastModified,
+    url: new URL(path, baseUrl).toString(),
     ...route,
   }));
 }

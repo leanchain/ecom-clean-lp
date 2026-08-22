@@ -4,8 +4,8 @@ import { useRef, useState, type FormEvent } from "react";
 
 import { Mail } from "lucide-react";
 
-import BookReviewCta from "@/components/beseam/book-review-cta";
-import Reveal from "@/components/beseam/reveal";
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
+import { Reveal } from "@/components/beseam/reveal";
 import useAnalytics from "@/hooks/useAnalytics";
 import {
   getMarketingProperties,

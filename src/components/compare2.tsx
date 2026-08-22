@@ -1,19 +1,23 @@
 "use client";
 
 import React from "react";
-import { X, Check, ArrowRight } from "lucide-react";
+
 import Link from "next/link";
+
+import { X, Check, ArrowRight } from "lucide-react";
 
 const rows = [
   {
     scenario: "Your PDPs aren't showing up in ChatGPT or Perplexity",
-    without: "No visibility into why. No structured data, no FAQ schema, no framework for AI readiness.",
+    without:
+      "No visibility into why. No structured data, no FAQ schema, no framework for AI readiness.",
     with: "AI visibility score + prioritized schema fixes. See exactly what's missing for each platform.",
     pillar: "Discovery",
   },
   {
     scenario: "Knowing which PDP changes actually lift conversion",
-    without: "Deploy and hope. Wait weeks for analytics to show anything meaningful.",
+    without:
+      "Deploy and hope. Wait weeks for analytics to show anything meaningful.",
     with: "Per-change KPI window tied to each update. Know the impact of every improvement.",
     pillar: "Conversion",
   },
@@ -49,12 +53,11 @@ const Compare2 = () => {
             </p>
             <h2 className="font-heading mb-4 text-3xl font-bold tracking-tight md:text-5xl">
               The alternative is guesswork,
-              <br />
-              a spreadsheet, and a post-mortem.
+              <br />a spreadsheet, and a post-mortem.
             </h2>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-              Without Beseam: no AI visibility, no conversion attribution, and you
-              find out something broke in next week&apos;s report.
+              Without Beseam: no AI visibility, no conversion attribution, and
+              you find out something broke in next week&apos;s report.
             </p>
           </div>
 
@@ -80,11 +83,15 @@ const Compare2 = () => {
                 className={`grid grid-cols-[1fr_1fr_1fr] ${i < rows.length - 1 ? "border-b" : ""}`}
               >
                 <div className="p-5 text-sm font-semibold text-foreground">
-                  <span className={`mb-2 inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
-                    row.pillar === "Discovery" ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-950/40" :
-                    row.pillar === "Conversion" ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40" :
-                    "bg-amber-50 text-amber-600 dark:bg-amber-950/40"
-                  }`}>
+                  <span
+                    className={`mb-2 inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
+                      row.pillar === "Discovery"
+                        ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-950/40"
+                        : row.pillar === "Conversion"
+                          ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40"
+                          : "bg-amber-50 text-amber-600 dark:bg-amber-950/40"
+                    }`}
+                  >
                     {row.pillar}
                   </span>
                   <div>{row.scenario}</div>

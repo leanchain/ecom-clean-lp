@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
+
 import Link from "next/link";
-import { ArrowRight, Check, Play, Mail } from "lucide-react";
+
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Check, Play, Mail } from "lucide-react";
+
 import AnimatedBorderButton from "@/components/animated-border-button";
+import { Button } from "@/components/ui/button";
 
 const FinalCta = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +30,7 @@ const FinalCta = () => {
       {/* Background patterns */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       <div className="absolute left-1/2 top-0 -z-10 h-[500px] w-[800px] -translate-x-1/2 bg-white/10 blur-[100px] rounded-full" />
-      
+
       <div className="container relative z-10">
         <div className="mx-auto max-w-4xl text-center">
           <motion.div
@@ -37,23 +40,27 @@ const FinalCta = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="font-heading mb-8 text-4xl font-bold text-white md:text-5xl lg:text-7xl tracking-tight drop-shadow-sm">
-              Get found. Convert more. <span className="italic text-white/90">Deploy without the risk.</span>
+              Get found. Convert more.{" "}
+              <span className="italic text-white/90">
+                Deploy without the risk.
+              </span>
             </h2>
 
             <p className="mb-12 text-lg text-white/90 md:text-xl max-w-2xl mx-auto leading-relaxed">
               Get a free AI visibility + conversion audit, see your prioritized
-              upgrade playbook, and deploy improvements with built-in KPI guardrails.
+              upgrade playbook, and deploy improvements with built-in KPI
+              guardrails.
             </p>
           </motion.div>
 
           {/* Email Capture Form */}
           {!isSubmitted ? (
-            <motion.form 
+            <motion.form
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              onSubmit={handleSubmit} 
+              onSubmit={handleSubmit}
               className="mb-10 mx-auto max-w-lg"
             >
               <div className="flex flex-col sm:flex-row gap-4">
@@ -84,7 +91,7 @@ const FinalCta = () => {
               </div>
             </motion.form>
           ) : (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               className="mb-10 mx-auto max-w-lg rounded-3xl bg-white p-10 shadow-2xl border border-white/20"
@@ -97,14 +104,15 @@ const FinalCta = () => {
                   Check your email!
                 </p>
                 <p className="text-muted-foreground text-lg">
-                  We&apos;ve sent your access link to <span className="font-semibold text-foreground">{email}</span>
+                  We&apos;ve sent your access link to{" "}
+                  <span className="font-semibold text-foreground">{email}</span>
                 </p>
               </div>
             </motion.div>
           )}
 
           {/* Feature Checklist */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -124,13 +132,15 @@ const FinalCta = () => {
                 <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm shadow-inner">
                   <Check className="h-3.5 w-3.5 text-white" />
                 </div>
-                <span className="text-sm md:text-base tracking-wide">{item}</span>
+                <span className="text-sm md:text-base tracking-wide">
+                  {item}
+                </span>
               </div>
             ))}
           </motion.div>
 
           {/* Alternative CTA */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

@@ -7,6 +7,7 @@ import {
   getFieldbookDocument,
   getFieldbookDocuments,
 } from "@/lib/fieldbook-content";
+import { FIELDBOOK_SOCIAL_IMAGE, buildPublicMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return getFieldbookDocuments("start-here")
@@ -22,13 +23,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const document = getFieldbookDocument("start-here", slug);
   if (!document) return {};
-  return {
-    title: {
-      absolute: `${document.frontmatter.title} | Beseam Commerce Fieldbook`,
-    },
+  return buildPublicMetadata({
+    title: `${document.frontmatter.title} | Beseam`,
     description: document.frontmatter.summary,
-    alternates: { canonical: document.href },
-  };
+    path: document.href,
+    image: FIELDBOOK_SOCIAL_IMAGE,
+    type: "article",
+    modifiedTime: document.frontmatter.reviewedAt,
+    section: "Commerce Fieldbook",
+    tags: [document.frontmatter.category, document.frontmatter.kind],
+  });
 }
 
 export default async function StartHereDocumentPage({

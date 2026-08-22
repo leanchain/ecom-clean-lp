@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "BeseamBot: Beseam website audit crawler",
+import type { Metadata } from "next";
+
+import { buildPublicMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPublicMetadata({
+  title: "BeseamBot | Beseam Website Audit Crawler",
   description:
     "Official information about BeseamBot, Beseam's public website audit crawler, including its User-Agent, robots.txt behavior, throttling, and contact details.",
-  alternates: { canonical: "/bot" },
-};
+  path: "/bot",
+});
 
 const USER_AGENT = "BeseamBot/1.0 (+https://beseam.com/bot)";
 
@@ -27,8 +30,9 @@ export default function BotPage() {
             <div>
               <p className="max-w-[64ch] text-[19px] leading-[1.72] text-black/66">
                 BeseamBot is Beseam&apos;s website audit crawler. It visits
-                public ecommerce pages to measure crawlability, structured data,
-                links, page evidence, and AI-shopping and search readiness.
+                public ecommerce pages to inspect crawlability, structured data,
+                links, rendered page evidence, and technical signals that can
+                affect product discovery and store experience.
               </p>
               <div className="mt-7 border border-black/18 bg-white px-5 py-4">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/48">

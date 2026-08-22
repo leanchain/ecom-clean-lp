@@ -12,10 +12,9 @@ import { cn } from "@/lib/utils";
 
 const APP_LOGIN_URL = "https://app.beseam.com/login";
 const APP_REGISTER_URL = "https://app.beseam.com/register";
-
 const NAV_LINKS = [
-  { label: "How it works", href: "/#proof" },
   { label: "What Beseam sees", href: "/#scope" },
+  { label: "How it works", href: "/#proof" },
   { label: "Live check", href: "/#ai-check" },
   { label: "30 days free", href: "/#promise" },
 ] as const;

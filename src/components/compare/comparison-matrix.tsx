@@ -1,5 +1,7 @@
 import React from "react";
+
 import { Check, X, Minus } from "lucide-react";
+
 import {
   Table,
   TableBody,

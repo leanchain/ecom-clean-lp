@@ -1,12 +1,13 @@
-import { readFileSync } from "fs";
-import type { Metadata } from "next";
 import Link from "next/link";
+
+import { readFileSync } from "fs";
+import { Calendar } from "lucide-react";
+import type { Metadata } from "next";
+import { compileMDX } from "next-mdx-remote/rsc";
 import { join } from "path";
 
-import { Calendar } from "lucide-react";
-import { compileMDX } from "next-mdx-remote/rsc";
-
 import CategoryBadge from "@/components/category-badge";
+import { buildPublicMetadata } from "@/lib/seo";
 
 interface Frontmatter {
   title: string;
@@ -14,12 +15,12 @@ interface Frontmatter {
   date: string;
 }
 
-export const metadata: Metadata = {
-  title: "Terms and Conditions",
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Terms and Conditions | Beseam",
   description:
-    "The terms that govern access to and use of Beseam's website and ecommerce visibility services.",
-  alternates: { canonical: "/terms-of-service" },
-};
+    "The terms that govern access to and use of Beseam's website and ecommerce services.",
+  path: "/terms-of-service",
+});
 
 export default async function TermsOfService() {
   const filePath = join(process.cwd(), "./src/app/terms-of-service/index.mdx");

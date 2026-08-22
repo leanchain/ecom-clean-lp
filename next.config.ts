@@ -7,7 +7,7 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   turbopack: {
-    root: "./",
+    root: process.cwd(),
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 

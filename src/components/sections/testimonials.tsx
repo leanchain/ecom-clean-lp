@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import { Star, Quote, BarChart2, Clock, Ruler } from "lucide-react";
 
 interface CaseStudy {
@@ -64,7 +65,8 @@ const caseStudies: CaseStudy[] = [
       "Theme change broke FAQ modules across 200 PDPs. No way to isolate root cause - revenue was silently dropping.",
     solution:
       "AI-upgraded PDPs with FAQs and schema via Beseam. When theme change caused regression, Beseam pinpointed the cause and guided rollback.",
-    impact: "Regression detected in 3.8h → rolled back → baseline recovered same day",
+    impact:
+      "Regression detected in 3.8h → rolled back → baseline recovered same day",
     timeframe: "Single incident",
     measurement: "Rev/session vs. 7-day rolling baseline",
     quote:

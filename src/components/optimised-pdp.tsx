@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import {
   ArrowDownRight,
   CheckCircle2,
@@ -81,12 +82,7 @@ const benefitBullets = [
   "Drop-in sections that match your brand and slot straight into Shopify, composable and headless stacks.",
 ];
 
-const AnnotationCard = ({
-  index,
-  title,
-  description,
-  side,
-}: AnnotationCardProps) => {
+const AnnotationCard = ({ index, title, description }: AnnotationCardProps) => {
   return (
     <div className="relative rounded-3xl bg-background/90 px-4 py-3 text-left shadow-sm ring-1 ring-border/60">
       <div className="flex items-start justify-between gap-3">
@@ -455,6 +451,8 @@ const LegacyOptimisedPdp = () => {
     </section>
   );
 };
+
+void LegacyOptimisedPdp;
 
 const OptimisedPdp = () => {
   return (

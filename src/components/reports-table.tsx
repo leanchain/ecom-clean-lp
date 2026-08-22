@@ -1,14 +1,21 @@
-'use client';
+"use client";
 
-import React, { useState, useMemo } from 'react';
-import Link from 'next/link';
-import { formatDistanceToNow } from 'date-fns';
-import { SlidersHorizontal, X } from 'lucide-react';
+import React, { useState, useMemo } from "react";
 
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Separator } from '@/components/ui/separator';
+import Link from "next/link";
+
+import { formatDistanceToNow } from "date-fns";
+import { SlidersHorizontal, X } from "lucide-react";
+
+import { FaviconImage } from "@/components/favicon-image";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -16,9 +23,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { cn } from '@/lib/utils';
-import { FaviconImage } from '@/components/favicon-image';
+} from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                               */
@@ -39,7 +45,7 @@ export interface ReportEntry {
 /*  Filter config                                                       */
 /* ------------------------------------------------------------------ */
 
-type FilterKey = 'discovery' | 'conversion' | 'issues';
+type FilterKey = "discovery" | "conversion" | "issues";
 type FilterValue = string;
 type ActiveFilters = Record<FilterKey, Set<FilterValue>>;
 
@@ -49,60 +55,69 @@ const FILTER_GROUPS: {
   options: { value: string; label: string }[];
 }[] = [
   {
-    key: 'discovery',
-    label: 'Discovery Score (AI Search)',
+    key: "discovery",
+    label: "Discovery Score (AI Search)",
     options: [
-      { value: 'good', label: 'Good - 70+' },
-      { value: 'average', label: 'Average - 40–69' },
-      { value: 'poor', label: 'Poor - below 40' },
-      { value: 'none', label: 'Not yet analyzed' },
+      { value: "good", label: "Good - 70+" },
+      { value: "average", label: "Average - 40–69" },
+      { value: "poor", label: "Poor - below 40" },
+      { value: "none", label: "Not yet analyzed" },
     ],
   },
   {
-    key: 'conversion',
-    label: 'Conversion Score',
+    key: "conversion",
+    label: "Conversion Score",
     options: [
-      { value: 'good', label: 'Good - 70+' },
-      { value: 'average', label: 'Average - 40–69' },
-      { value: 'poor', label: 'Poor - below 40' },
-      { value: 'none', label: 'Not yet analyzed' },
+      { value: "good", label: "Good - 70+" },
+      { value: "average", label: "Average - 40–69" },
+      { value: "poor", label: "Poor - below 40" },
+      { value: "none", label: "Not yet analyzed" },
     ],
   },
   {
-    key: 'issues',
-    label: 'Issues',
+    key: "issues",
+    label: "Issues",
     options: [
-      { value: 'has_p1', label: 'Has P1 issues' },
-      { value: 'p1_free', label: 'P1-free only' },
-      { value: 'has_p2', label: 'Has P2 issues' },
-      { value: 'clean', label: 'No issues at all' },
+      { value: "has_p1", label: "Has P1 issues" },
+      { value: "p1_free", label: "P1-free only" },
+      { value: "has_p2", label: "Has P2 issues" },
+      { value: "clean", label: "No issues at all" },
     ],
   },
 ];
 
-function scoreCategory(score: number | null): 'good' | 'average' | 'poor' | 'none' {
-  if (score == null) return 'none';
-  if (score >= 70) return 'good';
-  if (score >= 40) return 'average';
-  return 'poor';
+function scoreCategory(
+  score: number | null,
+): "good" | "average" | "poor" | "none" {
+  if (score == null) return "none";
+  if (score >= 70) return "good";
+  if (score >= 40) return "average";
+  return "poor";
 }
 
 function matchesFilters(report: ReportEntry, filters: ActiveFilters): boolean {
   // Discovery
-  if (filters.discovery.size > 0 && !filters.discovery.has(scoreCategory(report.discovery_score))) {
+  if (
+    filters.discovery.size > 0 &&
+    !filters.discovery.has(scoreCategory(report.discovery_score))
+  ) {
     return false;
   }
   // Conversion
-  if (filters.conversion.size > 0 && !filters.conversion.has(scoreCategory(report.conversion_score))) {
+  if (
+    filters.conversion.size > 0 &&
+    !filters.conversion.has(scoreCategory(report.conversion_score))
+  ) {
     return false;
   }
   // Issues
   if (filters.issues.size > 0) {
     const issueMatches = Array.from(filters.issues).some((val) => {
-      if (val === 'has_p1') return report.p1_count > 0;
-      if (val === 'p1_free') return report.p1_count === 0;
-      if (val === 'has_p2') return report.p2_count > 0;
-      if (val === 'clean') return report.p1_count === 0 && report.p2_count === 0;
+      if (val === "has_p1") return report.p1_count > 0;
+      if (val === "p1_free") return report.p1_count === 0;
+      if (val === "has_p2") return report.p2_count > 0;
+      if (val === "clean")
+        return report.p1_count === 0 && report.p2_count === 0;
       return false;
     });
     if (!issueMatches) return false;
@@ -127,15 +142,27 @@ function ScoreCell({
     <div className="flex flex-col items-center gap-1">
       {score != null ? (
         <div className="flex items-baseline gap-1">
-          <span className={cn('font-black text-2xl tabular-nums tracking-tighter', colorCls)}>
+          <span
+            className={cn(
+              "font-black text-2xl tabular-nums tracking-tighter",
+              colorCls,
+            )}
+          >
             {Math.round(score)}
           </span>
-          <span className={cn('text-[10px] font-bold opacity-50', colorCls)}>/100</span>
+          <span className={cn("text-[10px] font-bold opacity-50", colorCls)}>
+            /100
+          </span>
         </div>
       ) : (
         <span className="text-xl font-bold text-muted-foreground/40"> - </span>
       )}
-      <span className={cn('text-[8px] font-black uppercase tracking-widest opacity-70', colorCls)}>
+      <span
+        className={cn(
+          "text-[8px] font-black uppercase tracking-widest opacity-70",
+          colorCls,
+        )}
+      >
         {label}
       </span>
     </div>
@@ -237,9 +264,14 @@ export function ReportsTable({ reports }: { reports: ReportEntry[] }) {
     issues: new Set(),
   });
 
-  const totalActive = filters.discovery.size + filters.conversion.size + filters.issues.size;
+  const totalActive =
+    filters.discovery.size + filters.conversion.size + filters.issues.size;
 
-  const handleFilterChange = (key: FilterKey, value: string, checked: boolean) => {
+  const handleFilterChange = (
+    key: FilterKey,
+    value: string,
+    checked: boolean,
+  ) => {
     setFilters((prev) => {
       const next = new Set(prev[key]);
       if (checked) next.add(value);
@@ -250,7 +282,7 @@ export function ReportsTable({ reports }: { reports: ReportEntry[] }) {
 
   const filtered = useMemo(
     () => reports.filter((r) => matchesFilters(r, filters)),
-    [reports, filters]
+    [reports, filters],
   );
 
   if (reports.length === 0) return null;
@@ -295,7 +327,10 @@ export function ReportsTable({ reports }: { reports: ReportEntry[] }) {
           <TableBody>
             {filtered.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center py-16 text-muted-foreground text-sm">
+                <TableCell
+                  colSpan={5}
+                  className="text-center py-16 text-muted-foreground text-sm"
+                >
                   No audits match the current filters.
                 </TableCell>
               </TableRow>
@@ -303,10 +338,13 @@ export function ReportsTable({ reports }: { reports: ReportEntry[] }) {
               filtered.map((report) => {
                 const url = new URL(report.url);
                 const domain = url.hostname;
-                const path = url.pathname !== '/' ? url.pathname : '';
-                const timeAgo = formatDistanceToNow(new Date(report.completed_at), {
-                  addSuffix: true,
-                });
+                const path = url.pathname !== "/" ? url.pathname : "";
+                const timeAgo = formatDistanceToNow(
+                  new Date(report.completed_at),
+                  {
+                    addSuffix: true,
+                  },
+                );
 
                 return (
                   <TableRow
@@ -331,7 +369,7 @@ export function ReportsTable({ reports }: { reports: ReportEntry[] }) {
                             {domain}
                           </span>
                           <span className="text-[10px] font-bold text-muted-foreground/60 truncate max-w-[200px]">
-                            {path || 'Homepage'}
+                            {path || "Homepage"}
                           </span>
                         </div>
                       </Link>

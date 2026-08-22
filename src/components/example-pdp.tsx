@@ -235,6 +235,8 @@ const productInfoSectionsOld = [
   },
 ];
 
+void productInfoSectionsOld;
+
 const productInfoSections = [
   {
     title: "The product benefits",
@@ -574,7 +576,7 @@ const HeroSection = () => {
     setSelectedUpgrades((prev) =>
       prev.includes(title)
         ? prev.filter((item) => item !== title)
-        : [...prev, title]
+        : [...prev, title],
     );
     setShowUpgrades(true);
   };
@@ -721,7 +723,7 @@ const HeroSection = () => {
                     <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
                       {combineWithProducts.map((item) => {
                         const isSelected = selectedUpgrades.includes(
-                          item.title
+                          item.title,
                         );
                         return (
                           <label

@@ -12,7 +12,6 @@ import {
 } from "@/lib/marketing-analytics";
 import { cn } from "@/lib/utils";
 
-export const REVIEW_URL = "/product-visibility-monitoring";
 const CAL_LINK = "pankaj.kumar/Beseam";
 const CAL_NAMESPACE = "Beseam";
 
@@ -56,7 +55,7 @@ export function BookReviewCta({
   if (variant === "secondary") {
     return (
       <TrackedLink
-        href="/#products"
+        href="/#proof"
         eventName="marketing_secondary_cta_clicked"
         placement={location}
         className={cn(
@@ -64,7 +63,7 @@ export function BookReviewCta({
           className,
         )}
       >
-        {label ?? "See how monitoring works"}
+        {label ?? "See how Beseam works"}
       </TrackedLink>
     );
   }
@@ -81,7 +80,7 @@ export function BookReviewCta({
         className,
       )}
     >
-      {label ?? "Book a 20-minute review"}
+      {label ?? "Book a 20-minute store review"}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
     </button>
   );
