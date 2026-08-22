@@ -109,7 +109,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: document.section === "start-here" ? 0.74 : 0.7,
     })),
-    // Listed only once a real run is published — matches the noindex on the
+    // Listed only once a real run is published: matches the noindex on the
     // page itself while the benchmark set is empty.
     ...(CATEGORY_BENCHMARKS.length > 0
       ? [

@@ -1,5 +1,7 @@
-import BookReviewCta from "@/components/beseam/book-review-cta";
+import TrackedLink from "@/components/beseam/tracked-link";
 import Reveal from "@/components/beseam/reveal";
+
+const APP_REGISTER_URL = "https://app.beseam.com/register";
 
 export default function FirstMonthPromise({
   showManifestoLink = true,
@@ -17,36 +19,37 @@ export default function FirstMonthPromise({
               Our guarantee
             </p>
             <h2 className="mt-4 max-w-[20ch] font-display text-[clamp(2rem,3.1vw,2.6rem)] font-normal leading-[1.06] tracking-[-0.02em] text-[#111318]">
-              We&rsquo;ll show you the exact fix — free, for 30 days.
+              Let Beseam find one worthwhile fix and prove what changed: free
+              for 30 days.
             </h2>
           </div>
 
           <div className="self-end">
             <p className="max-w-[68ch] text-[17px] leading-[1.7] text-black/66">
-              We find a buying question where your product loses, keep the
-              answer and competing products, show the product evidence you can
-              change, and re-run the question after the change. There is no fee
-              for the first 30 days. At day 30, you decide whether the work was
-              useful enough to continue.
+              We start with one store or product problem that affects discovery
+              or conversion. Beseam brings the evidence together, proposes a
+              supported change, and measures the relevant signal again after
+              approved work. You pay nothing for the first 30 days. Then you
+              decide whether Beseam earned the right to continue.
             </p>
 
             <dl className="mt-10 border-y border-black/22">
               {[
                 [
                   "You receive",
-                  "The question, observed answer, competing products, product evidence, and proposed change",
+                  "A prioritized issue, supporting evidence, proposed change, and before/after measurement",
                 ],
                 [
                   "We re-check",
-                  "The same buying question after the approved product change",
+                  "The original discovery or conversion signal after the approved change",
                 ],
                 [
                   "We do not promise",
-                  "A recommendation, ranking, traffic increase, or sales increase",
+                  "Recommendation placement or a guaranteed traffic, conversion, or sales increase",
                 ],
                 [
                   "What we need",
-                  "The agreed catalog scope and store access if you want us to publish an approved change",
+                  "Your store domain to start. Store access or analytics connections only when the work needs them",
                 ],
                 ["Who decides", "You do, at day 30"],
               ].map(([term, detail]) => (
@@ -64,11 +67,28 @@ export default function FirstMonthPromise({
               ))}
             </dl>
 
-            <BookReviewCta
-              location="first_month_promise"
-              label="Book a 20-minute review"
-              className="mt-8 w-full sm:w-auto"
-            />
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <TrackedLink
+                href={APP_REGISTER_URL}
+                eventName="free_pilot_clicked"
+                eventCategory="conversion"
+                placement="first_month_promise"
+                preserveUtm
+                className="inline-flex min-h-11 items-center justify-center bg-[#111318] px-5 text-[14px] font-semibold text-white transition-colors hover:bg-[#b8441d]"
+              >
+                Start my free 30 days
+              </TrackedLink>
+              <TrackedLink
+                href="/product-visibility-monitoring"
+                eventName="pilot_review_clicked"
+                eventCategory="conversion"
+                placement="first_month_promise"
+                preserveUtm
+                className="inline-flex min-h-11 items-center justify-center px-2 text-[14px] font-semibold text-[#111318] underline decoration-black/30 underline-offset-6 hover:decoration-[#b8441d]"
+              >
+                Prefer a walkthrough? Book 20 minutes
+              </TrackedLink>
+            </div>
           </div>
         </Reveal>
       </div>

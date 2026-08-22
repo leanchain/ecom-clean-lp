@@ -138,7 +138,7 @@ export default function PublicAuditReport({
               </p>
               {loneWinQuestion ? (
                 <p className="mt-3 text-[13px] leading-relaxed text-black/62">
-                  The only win came for “{loneWinQuestion}” — evidence that
+                  The only win came for “{loneWinQuestion}”: evidence that
                   explicit local intent is working while broader category
                   discovery is not.
                 </p>
@@ -236,7 +236,7 @@ export default function PublicAuditReport({
             [
               "01",
               "Identity",
-              "Make every public product record say VEDIC LAB—not a placeholder vendor—so assistants can connect products to the brand cleanly.",
+              "Make every public product record say VEDIC LAB, not a placeholder vendor, so assistants can connect products to the brand cleanly.",
             ],
             [
               "02",

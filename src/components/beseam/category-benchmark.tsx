@@ -6,18 +6,18 @@ import type { CategoryBenchmark } from "@/data/category-benchmarks";
  *
  * The figure is built around the finding, not around a rank: a brand is either
  * in an answer or it is not, and the engines mostly disagree about who is in.
- * Each brand row carries one pip per engine — filled where that engine named
- * the brand — so agreement and disagreement are readable at a glance.
+ * Each brand row carries one pip per engine: filled where that engine named
+ * the brand: so agreement and disagreement are readable at a glance.
  *
  * Register note: like `gap-track-figure.tsx`, this is a quotation from the
- * product rather than editorial chrome — data palette, tabular numerals, a
+ * product rather than editorial chrome: data palette, tabular numerals, a
  * stated denominator, method printed under the figure. Terracotta never
  * appears inside the frame.
  */
 
-const NAMED = "#334155"; // slate — an engine that named the brand
-const ABSENT = "#cbd5e1"; // pale slate — an engine that did not
-const CONSENSUS = "#047857"; // emerald — named by every engine that answered
+const NAMED = "#334155"; // slate: an engine that named the brand
+const ABSENT = "#cbd5e1"; // pale slate: an engine that did not
+const CONSENSUS = "#047857"; // emerald: named by every engine that answered
 
 const MONTHS = [
   "Jan",
@@ -58,7 +58,7 @@ export default function CategoryBenchmarkFigure({
   const soloCount = brands.filter((b) => b.engines === 1).length;
 
   return (
-    <figure>
+    <figure id={benchmark.slug} className="scroll-mt-24">
       <div className="border border-black/18 bg-white px-4 py-5 sm:px-6">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 border-b border-black/12 pb-3">
           <span className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-black/62">
@@ -132,13 +132,13 @@ export default function CategoryBenchmarkFigure({
 
       <figcaption className="grid gap-2 border-x border-b border-black/18 bg-white px-4 py-3 sm:grid-cols-[9rem_1fr] sm:px-5">
         <span className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-black/62">
-          Fig. {index + 1} — {category.toLowerCase()}
+          Fig. {index + 1}: {category.toLowerCase()}
         </span>
         <span className="text-[13px] leading-relaxed text-black/62">
           Asked verbatim on {engines.join(", ")}, {formatBenchmarkDate(askedOn)}
           . One pip per engine, filled where that engine named the brand; green
-          where every engine did. Public brands, observed — no customer data,
-          and no ranking is implied.
+          where every engine did. Public brands, observed: no customer data, and
+          no ranking is implied.
         </span>
       </figcaption>
     </figure>

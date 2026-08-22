@@ -3,11 +3,13 @@ import Link from "next/link";
 import Logo from "@/components/beseam/logo";
 import TrackedLink from "@/components/beseam/tracked-link";
 
+const APP_REGISTER_URL = "https://app.beseam.com/register";
+
 const PAGE_LINKS = [
-  ["Example", "/#proof"],
-  ["Across assistants", "/#benchmarks"],
-  ["30-day pilot", "/#promise"],
-  ["FAQ", "/#faq"],
+  ["How it works", "/#proof"],
+  ["What Beseam fixes", "/#scope"],
+  ["Results", "/#ai-check"],
+  ["30 days free", "/#promise"],
 ] as const;
 
 export default function BeseamFooter() {
@@ -20,12 +22,12 @@ export default function BeseamFooter() {
               <Logo className="text-white" />
             </Link>
             <p className="mt-7 max-w-[20ch] font-display text-[34px] leading-[1.08] tracking-[-0.02em] text-white/92">
-              See who AI recommends. Understand why. Fix it.
+              Make products easier to find, choose, and buy.
             </p>
             <p className="mt-6 max-w-[62ch] text-[14px] leading-relaxed text-white/72">
-              Beseam runs buying questions against AI assistants, keeps the
-              competing products and answer evidence, and lets you re-check the
-              same question after a product change.
+              Beseam finds where products lose shoppers across discovery and
+              conversion, turns the problem into prioritized work, and measures
+              what changed after the fix.
             </p>
           </div>
 
@@ -47,7 +49,7 @@ export default function BeseamFooter() {
 
         <div className="grid gap-8 border-b border-white/18 py-8 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_auto_auto_auto_auto_auto_auto_auto_auto] lg:items-center lg:gap-10">
           <p className="font-mono text-[12px] tracking-[0.02em] text-white/72">
-            AI shopping visibility & behavior — fixes and proof for ecommerce
+            Ecommerce discovery, conversion, fixes and proof
           </p>
           <Link
             href="/platform"
@@ -92,18 +94,31 @@ export default function BeseamFooter() {
             Terms
           </Link>
           <TrackedLink
-            href="/#home-hero"
+            href={APP_REGISTER_URL}
             eventName="marketing_primary_cta_clicked"
+            eventCategory="conversion"
             placement="footer_secondary"
+            preserveUtm
             className="w-fit text-[12px] text-[#e8653a] underline decoration-white/20 underline-offset-5"
           >
-            Run a free scan
+            Start for free
           </TrackedLink>
         </div>
 
-        <p className="pt-8 text-[12px] text-white/62">
-          © {new Date().getFullYear()} Beseam. All rights reserved.
-        </p>
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-8 text-[12px] text-white/62">
+          <p>© {new Date().getFullYear()} Beseam. All rights reserved.</p>
+          <p className="inline-flex items-center gap-2">
+            <span>Made with love in Switzerland</span>
+            <span
+              aria-label="Swiss flag"
+              role="img"
+              className="relative inline-block h-4 w-4 shrink-0 bg-[#d52b1e]"
+            >
+              <span className="absolute left-1/2 top-[3px] h-[10px] w-[3px] -translate-x-1/2 bg-white" />
+              <span className="absolute left-[3px] top-1/2 h-[3px] w-[10px] -translate-y-1/2 bg-white" />
+            </span>
+          </p>
+        </div>
       </div>
     </footer>
   );

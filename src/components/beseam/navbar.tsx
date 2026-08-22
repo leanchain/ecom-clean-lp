@@ -4,20 +4,20 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 
-import BookReviewCta from "@/components/beseam/book-review-cta";
 import Logo from "@/components/beseam/logo";
 import TrackedLink from "@/components/beseam/tracked-link";
 import { cn } from "@/lib/utils";
 
 const APP_LOGIN_URL = "https://app.beseam.com/login";
+const APP_REGISTER_URL = "https://app.beseam.com/register";
 
 const NAV_LINKS = [
-  { label: "Example", href: "/#proof" },
-  { label: "Across assistants", href: "/#benchmarks" },
-  { label: "30-day pilot", href: "/#promise" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "How it works", href: "/#proof" },
+  { label: "What Beseam fixes", href: "/#scope" },
+  { label: "Results", href: "/#ai-check" },
+  { label: "30 days free", href: "/#promise" },
 ] as const;
 
 export default function BeseamNavbar() {
@@ -72,11 +72,17 @@ export default function BeseamNavbar() {
             >
               Log in
             </TrackedLink>
-            <BookReviewCta
-              location="navbar"
-              label="Book a 20-minute review"
-              className="min-h-10 whitespace-nowrap px-4 text-[13px]"
-            />
+            <TrackedLink
+              href={APP_REGISTER_URL}
+              eventName="marketing_primary_cta_clicked"
+              eventCategory="conversion"
+              placement="navbar"
+              preserveUtm
+              className="group inline-flex min-h-10 items-center justify-center gap-2 whitespace-nowrap bg-[#111318] px-4 text-[13px] font-semibold text-white transition-colors hover:bg-[#b8441d] focus-visible:ring-2 focus-visible:ring-[#b8441d] focus-visible:ring-offset-3"
+            >
+              Start for free
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            </TrackedLink>
           </div>
 
           <button
@@ -123,11 +129,18 @@ export default function BeseamNavbar() {
               >
                 Log in
               </TrackedLink>
-              <BookReviewCta
-                location="mobile_nav"
-                label="Book a 20-minute review"
-                className="w-full"
-              />
+              <TrackedLink
+                href={APP_REGISTER_URL}
+                eventName="marketing_primary_cta_clicked"
+                eventCategory="conversion"
+                placement="mobile_nav"
+                preserveUtm
+                onClick={() => setMobileOpen(false)}
+                className="flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-5 text-[14px] font-semibold text-white"
+              >
+                Start for free
+                <ArrowRight className="h-4 w-4" />
+              </TrackedLink>
             </div>
           </div>
         </div>

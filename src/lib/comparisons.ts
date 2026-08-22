@@ -58,7 +58,7 @@ export const COMPARISONS: Comparison[] = [
     headline:
       "Google Analytics reports the journey. Beseam decides what should change.",
     intro:
-      "GA4 is a broad measurement system for acquisition, events, engagement, and conversions. Beseam works above the commerce stack to connect storefront, catalog, AI discovery, campaigns, behavior, reliability, and booked revenue—then ranks the issue that deserves action.",
+      "GA4 is a broad measurement system for acquisition, events, engagement, and conversions. Beseam works above the commerce stack to connect storefront, catalog, AI discovery, campaigns, behavior, reliability, and booked revenue, then ranks the issue that deserves action.",
     competitorSummary:
       "Choose Google Analytics for broad traffic, acquisition, event, and conversion reporting with a widely supported ecosystem.",
     beseamSummary:
@@ -578,7 +578,7 @@ export const COMPARISONS: Comparison[] = [
     competitorSummary:
       "Choose Contentsquare for mature experience analytics, journey exploration, zoning, replay, and large-scale digital experience programs.",
     beseamSummary:
-      "Choose Beseam when the decision must cross experience, catalog, discovery, advertising, operations, and revenue—and end in an owned, verified action.",
+      "Choose Beseam when the decision must cross experience, catalog, discovery, advertising, operations, and revenue, and end in an owned, verified action.",
     useTogetherSummary:
       "Use Contentsquare for deep experience analysis and Beseam for the wider commerce decision. A qualified finding can move into Beseam's issue, ownership, and verification model without pretending the products are interchangeable.",
     chooseCompetitorWhen: [
@@ -707,7 +707,7 @@ export const COMPARISONS: Comparison[] = [
     competitorSummary:
       "Choose Amplitude when product teams need self-serve behavioral analytics, cohorts, retention, experimentation, and product development workflows.",
     beseamSummary:
-      "Choose Beseam when the unit of work is a commerce product, page, query, campaign, or store issue—and the decision must include revenue consequence and action ownership.",
+      "Choose Beseam when the unit of work is a commerce product, page, query, campaign, or store issue, and the decision must include revenue consequence and action ownership.",
     useTogetherSummary:
       "Amplitude can remain the product analytics and experimentation environment. Beseam can surface the commerce issue that deserves analysis or an experiment and verify the result across the wider stack.",
     chooseCompetitorWhen: [
@@ -849,7 +849,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "The experimentation backlog is driven by opinion rather than cross-system commercial evidence.",
-      "The right intervention may be a catalog, campaign, content, reliability, or product change—not necessarily an A/B test.",
+      "The right intervention may be a catalog, campaign, content, reliability, or product change, not necessarily an A/B test.",
       "You want the result to improve how the next commerce issue is prioritized.",
     ],
     notAReplacementFor:
@@ -924,7 +924,7 @@ export const COMPARISONS: Comparison[] = [
       src: "/images/product-live/optimization.webp",
       alt: "Real Beseam optimization workspace showing an experiment for a dancewear store",
       caption:
-        "Real Beseam optimization evidence. Beseam treats experimentation as one intervention—not the default answer to every issue.",
+        "Real Beseam optimization evidence. Beseam treats experimentation as one intervention, not the default answer to every issue.",
     },
     faqs: [
       {

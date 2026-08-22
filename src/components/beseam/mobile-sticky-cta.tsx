@@ -6,11 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 import TrackedLink from "@/components/beseam/tracked-link";
 
-/**
- * The hero scan field. The sticky bar scrolls to it and focuses it rather than
- * routing to a separate scan page, so the label matches what happens.
- */
-const HERO_FIELD_ID = "answer-check-domain";
+const APP_REGISTER_URL = "https://app.beseam.com/register";
 
 /** Roughly one screen of scroll: the bar appears once the hero copy is behind you. */
 const SHOW_AFTER_SCROLL_Y = 600;
@@ -57,21 +53,14 @@ export default function MobileStickyCta() {
   return (
     <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
       <TrackedLink
-        href={`/#${HERO_FIELD_ID}`}
+        href={APP_REGISTER_URL}
         eventName="marketing_primary_cta_clicked"
         eventCategory="conversion"
         placement="mobile_sticky"
         preserveUtm
-        onClick={(event) => {
-          const field = document.getElementById(HERO_FIELD_ID);
-          if (!field) return;
-          event.preventDefault();
-          field.scrollIntoView({ behavior: "smooth", block: "center" });
-          field.focus({ preventScroll: true });
-        }}
         className="flex min-h-12 items-center justify-center gap-3 border border-white/18 bg-[#111318] px-5 text-sm font-semibold text-white"
       >
-        Scan my store free
+        Start for free
         <ArrowRight className="h-4 w-4" />
       </TrackedLink>
     </div>

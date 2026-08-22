@@ -496,7 +496,7 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
   },
   {
     slug: "robots-exclusion-protocol",
-    name: "Robots Exclusion Protocol — RFC 9309",
+    name: "Robots Exclusion Protocol: RFC 9309",
     kind: "Open standard",
     category: "Discovery, SEO and GEO",
     maturity: "Reference",

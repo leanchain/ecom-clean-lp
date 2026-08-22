@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "BeseamBot — Beseam website audit crawler",
+  title: "BeseamBot: Beseam website audit crawler",
   description:
     "Official information about BeseamBot, Beseam's public website audit crawler, including its User-Agent, robots.txt behavior, throttling, and contact details.",
   alternates: { canonical: "/bot" },
@@ -26,9 +26,9 @@ export default function BotPage() {
             </div>
             <div>
               <p className="max-w-[64ch] text-[19px] leading-[1.72] text-black/66">
-                BeseamBot is Beseam&apos;s website audit crawler. It visits public
-                ecommerce pages to measure crawlability, structured data, links,
-                page evidence, and AI-shopping and search readiness.
+                BeseamBot is Beseam&apos;s website audit crawler. It visits
+                public ecommerce pages to measure crawlability, structured data,
+                links, page evidence, and AI-shopping and search readiness.
               </p>
               <div className="mt-7 border border-black/18 bg-white px-5 py-4">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/48">
@@ -61,9 +61,10 @@ export default function BotPage() {
               Why it visits
             </p>
             <p className="mt-5 text-[16px] leading-[1.72] text-black/66">
-              Beseam uses crawl evidence for store audits and monitoring. A crawl
-              may cover a merchant storefront or a publicly accessible competitor
-              storefront when it is part of a Beseam analysis workflow.
+              Beseam uses crawl evidence for store audits and monitoring. A
+              crawl may cover a merchant storefront or a publicly accessible
+              competitor storefront when it is part of a Beseam analysis
+              workflow.
             </p>
           </div>
           <div>
@@ -71,8 +72,9 @@ export default function BotPage() {
               Operator
             </p>
             <p className="mt-5 text-[16px] leading-[1.72] text-black/66">
-              Beseam operates BeseamBot. This page at beseam.com is the canonical
-              public description linked directly from the crawler User-Agent.
+              Beseam operates BeseamBot. This page at beseam.com is the
+              canonical public description linked directly from the crawler
+              User-Agent.
             </p>
           </div>
         </div>
@@ -109,8 +111,12 @@ export default function BotPage() {
                 ],
               ].map(([title, body]) => (
                 <div key={title} className="border-t border-black/22 pt-5">
-                  <h3 className="text-[16px] font-semibold text-[#111318]">{title}</h3>
-                  <p className="mt-3 text-[15px] leading-[1.68] text-black/62">{body}</p>
+                  <h3 className="text-[16px] font-semibold text-[#111318]">
+                    {title}
+                  </h3>
+                  <p className="mt-3 text-[15px] leading-[1.68] text-black/62">
+                    {body}
+                  </p>
                 </div>
               ))}
             </div>
@@ -157,8 +163,8 @@ export default function BotPage() {
                 Questions about BeseamBot traffic?
               </h2>
               <p className="mt-4 max-w-[62ch] text-[16px] leading-[1.7] text-black/62">
-                If you see traffic you do not expect, include the affected domain
-                and approximate time so we can investigate the crawl.
+                If you see traffic you do not expect, include the affected
+                domain and approximate time so we can investigate the crawl.
               </p>
             </div>
             <Link
