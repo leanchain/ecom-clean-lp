@@ -72,10 +72,7 @@ export function getFieldbookNavigation(): FieldbookNavGroup[] {
     },
     {
       title: "Community",
-      items: [
-        { title: "Case files", href: "/resources/case-files" },
-        { title: "Contribute", href: "/resources/contribute" },
-      ],
+      items: [{ title: "Contribute", href: "/resources/contribute" }],
     },
   ];
 }

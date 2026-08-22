@@ -46,6 +46,12 @@ export type Comparison = {
   lastReviewed: string;
 };
 
+export type PracticalComparison = {
+  reviewedAt: string;
+  source: ComparisonSource;
+  rows: ComparisonRow[];
+};
+
 type AiVisibilitySeed = {
   slug: string;
   name: string;
@@ -162,7 +168,7 @@ function buildAiVisibilityComparison(seed: AiVisibilitySeed): Comparison {
       },
     ],
     sources: seed.sources,
-    lastReviewed: "2026-07-31",
+    lastReviewed: "2026-08-22",
   };
 }
 
@@ -544,7 +550,7 @@ export const COMPARISONS: Comparison[] = [
         url: "https://developers.google.com/analytics",
       },
     ],
-    lastReviewed: "2026-07-25",
+    lastReviewed: "2026-08-22",
   },
   {
     slug: "microsoft-clarity",
@@ -673,7 +679,7 @@ export const COMPARISONS: Comparison[] = [
         url: "https://learn.microsoft.com/en-us/clarity/faq",
       },
     ],
-    lastReviewed: "2026-07-25",
+    lastReviewed: "2026-08-22",
   },
   {
     slug: "hotjar",
@@ -801,7 +807,7 @@ export const COMPARISONS: Comparison[] = [
         url: "https://www.hotjar.com/product/heatmaps/",
       },
     ],
-    lastReviewed: "2026-07-25",
+    lastReviewed: "2026-08-22",
   },
   {
     slug: "noibu",
@@ -933,7 +939,7 @@ export const COMPARISONS: Comparison[] = [
         url: "https://www.noibu.com/product/sessions",
       },
     ],
-    lastReviewed: "2026-07-25",
+    lastReviewed: "2026-08-22",
   },
   {
     slug: "contentsquare",
@@ -1061,7 +1067,7 @@ export const COMPARISONS: Comparison[] = [
         url: "https://support.contentsquare.com/hc/en-us/articles/37271708114577-Product-offerings",
       },
     ],
-    lastReviewed: "2026-07-25",
+    lastReviewed: "2026-08-22",
   },
   {
     slug: "amplitude",
@@ -1194,7 +1200,7 @@ export const COMPARISONS: Comparison[] = [
         url: "https://www.amplitude.com/amplitude-experiment",
       },
     ],
-    lastReviewed: "2026-07-25",
+    lastReviewed: "2026-08-22",
   },
   {
     slug: "vwo",
@@ -1457,7 +1463,7 @@ export const COMPARISONS: Comparison[] = [
         url: "https://kb.triplewhale.com/en/articles/10290427-portfolio-attribution",
       },
     ],
-    lastReviewed: "2026-07-25",
+    lastReviewed: "2026-08-22",
   },
   {
     slug: "mixpanel",
@@ -2368,6 +2374,366 @@ export const COMPARISONS: Comparison[] = [
 export const COMPARISON_SLUGS = COMPARISONS.map(
   (comparison) => comparison.slug,
 );
+
+const BESEAM_PRACTICAL = {
+  owner:
+    "Ecommerce or commerce operations, with product, growth, marketing, or engineering involved as the question requires.",
+  setup:
+    "Connect the relevant store and evidence sources around the commercial question being investigated.",
+  output:
+    "An evidence-backed decision, owned action, approval boundary, and re-check of the original signal.",
+  pricing:
+    "No public self-serve price on beseam.com; scope starts with a commerce review.",
+} as const;
+
+export const PRACTICAL_COMPARISONS: Record<string, PracticalComparison> = {
+  profound: {
+    reviewedAt: "2026-08-22",
+    source: {
+      label: "Profound pricing",
+      url: "https://www.tryprofound.com/pricing",
+    },
+    rows: [
+      {
+        criterion: "Typical owner",
+        competitor: "SEO, AEO, brand, and search marketing teams monitoring AI visibility.",
+        beseam: BESEAM_PRACTICAL.owner,
+      },
+      {
+        criterion: "Setup",
+        competitor: "Configure the brand, competitors, prompts, and answer engines to monitor on a recurring basis.",
+        beseam: BESEAM_PRACTICAL.setup,
+      },
+      {
+        criterion: "Primary output",
+        competitor: "AI visibility, share-of-voice, citation, sentiment, and competitive monitoring views.",
+        beseam: BESEAM_PRACTICAL.output,
+      },
+      {
+        criterion: "Replace or keep?",
+        competitor: "Keep Profound when specialist multi-engine AI visibility monitoring is a core workflow.",
+        beseam: "Use Beseam alongside it when a visibility gap needs to become a store-level decision, change, and re-check.",
+      },
+      {
+        criterion: "Pricing model",
+        competitor: "Public Starter and Growth plans with prompt and engine limits, plus custom Enterprise pricing.",
+        beseam: BESEAM_PRACTICAL.pricing,
+      },
+    ],
+  },
+  "peec-ai": {
+    reviewedAt: "2026-08-22",
+    source: {
+      label: "Peec AI pricing",
+      url: "https://peec.ai/pricing",
+    },
+    rows: [
+      {
+        criterion: "Typical owner",
+        competitor: "SEO, content, and marketing teams; agency plans support multiple client projects.",
+        beseam: BESEAM_PRACTICAL.owner,
+      },
+      {
+        criterion: "Setup",
+        competitor: "Create projects, allocate prompts, choose models, and configure markets for recurring tracking.",
+        beseam: BESEAM_PRACTICAL.setup,
+      },
+      {
+        criterion: "Primary output",
+        competitor: "Visibility, share of voice, sentiment, position, competitor, cited-domain, and chat analysis.",
+        beseam: BESEAM_PRACTICAL.output,
+      },
+      {
+        criterion: "Replace or keep?",
+        competitor: "Keep Peec AI when focused AI-search analytics and prompt monitoring are the main job.",
+        beseam: "Use Beseam when the finding must be tied to the affected commerce object and carried through action and verification.",
+      },
+      {
+        criterion: "Pricing model",
+        competitor: "Tiered mainly by tracked prompts, models, and projects, with custom Enterprise coverage.",
+        beseam: BESEAM_PRACTICAL.pricing,
+      },
+    ],
+  },
+  "otterly-ai": {
+    reviewedAt: "2026-08-22",
+    source: {
+      label: "Otterly.AI pricing",
+      url: "https://otterly.ai/pricing",
+    },
+    rows: [
+      {
+        criterion: "Typical owner",
+        competitor: "SEO and marketing teams, plus agencies managing AI-search visibility for clients.",
+        beseam: BESEAM_PRACTICAL.owner,
+      },
+      {
+        criterion: "Setup",
+        competitor: "Choose search prompts, workspaces, and AI engines; tracking runs on the configured prompt set.",
+        beseam: BESEAM_PRACTICAL.setup,
+      },
+      {
+        criterion: "Primary output",
+        competitor: "AI-search visibility, citations, brand reporting, audits, and recommendation-to-do workflows.",
+        beseam: BESEAM_PRACTICAL.output,
+      },
+      {
+        criterion: "Replace or keep?",
+        competitor: "Keep Otterly.AI when prompt tracking and specialist GEO recommendations are the central workflow.",
+        beseam: "Use Beseam when the recommendation needs to stay attached to store evidence, ownership, execution, and the next answer check.",
+      },
+      {
+        criterion: "Pricing model",
+        competitor: "Prompt-based Lite, Standard, and Premium plans with add-ons, plus custom Enterprise pricing.",
+        beseam: BESEAM_PRACTICAL.pricing,
+      },
+    ],
+  },
+  "google-analytics": {
+    reviewedAt: "2026-08-22",
+    source: {
+      label: "Google Analytics 360",
+      url: "https://marketingplatform.google.com/about/analytics-360/",
+    },
+    rows: [
+      {
+        criterion: "Typical owner",
+        competitor: "Analytics, marketing, growth, and data teams measuring acquisition and onsite behavior.",
+        beseam: BESEAM_PRACTICAL.owner,
+      },
+      {
+        criterion: "Setup",
+        competitor: "Instrument sites or apps with events, key events, campaign parameters, consent, and reporting conventions.",
+        beseam: BESEAM_PRACTICAL.setup,
+      },
+      {
+        criterion: "Primary output",
+        competitor: "Reports, explorations, audiences, attribution views, event data, and downstream analytics exports.",
+        beseam: BESEAM_PRACTICAL.output,
+      },
+      {
+        criterion: "Replace or keep?",
+        competitor: "Usually keep GA4 as an analytics source of record.",
+        beseam: "Beseam is designed to sit alongside GA4 and keep its measurements attached to the commerce decision and follow-up action.",
+      },
+      {
+        criterion: "Pricing model",
+        competitor: "Standard Google Analytics is free; Analytics 360 is an enterprise contract sold through Google or sales partners.",
+        beseam: BESEAM_PRACTICAL.pricing,
+      },
+    ],
+  },
+  "microsoft-clarity": {
+    reviewedAt: "2026-08-22",
+    source: {
+      label: "Microsoft Clarity pricing",
+      url: "https://clarity.microsoft.com/pricing",
+    },
+    rows: [
+      {
+        criterion: "Typical owner",
+        competitor: "Product, UX, marketing, CRO, and small teams that want visual behavior evidence quickly.",
+        beseam: BESEAM_PRACTICAL.owner,
+      },
+      {
+        criterion: "Setup",
+        competitor: "Add the Clarity tracking code or use a supported integration, then collect session and heatmap data.",
+        beseam: BESEAM_PRACTICAL.setup,
+      },
+      {
+        criterion: "Primary output",
+        competitor: "Session recordings, heatmaps, behavior signals, segmentation, and Copilot-assisted summaries.",
+        beseam: BESEAM_PRACTICAL.output,
+      },
+      {
+        criterion: "Replace or keep?",
+        competitor: "Keep Clarity when free visual behavior evidence is useful to the team.",
+        beseam: "Use Beseam to connect that behavior signal with the affected commerce object, other evidence, and the action taken next.",
+      },
+      {
+        criterion: "Pricing model",
+        competitor: "Free forever, with no paid upgrade tier or traffic limit advertised by Microsoft.",
+        beseam: BESEAM_PRACTICAL.pricing,
+      },
+    ],
+  },
+  hotjar: {
+    reviewedAt: "2026-08-22",
+    source: {
+      label: "Contentsquare plans and pricing",
+      url: "https://contentsquare.com/pricing/",
+    },
+    rows: [
+      {
+        criterion: "Typical owner",
+        competitor: "Product, UX, research, CRO, and marketing teams studying how people experience a site.",
+        beseam: BESEAM_PRACTICAL.owner,
+      },
+      {
+        criterion: "Setup",
+        competitor: "Install the tracking tag, select the site or project, and configure recordings, heatmaps, surveys, or research workflows.",
+        beseam: BESEAM_PRACTICAL.setup,
+      },
+      {
+        criterion: "Primary output",
+        competitor: "Heatmaps, session replay, funnels, surveys, feedback, and user-research evidence.",
+        beseam: BESEAM_PRACTICAL.output,
+      },
+      {
+        criterion: "Replace or keep?",
+        competitor: "Keep the Hotjar capabilities now delivered within Contentsquare when qualitative behavior evidence is valuable.",
+        beseam: "Use Beseam when that evidence must be reconciled with discovery, store, conversion, and revenue signals before action.",
+      },
+      {
+        criterion: "Pricing model",
+        competitor: "Hotjar is now part of Contentsquare; current plans run through Contentsquare's Free, Growth, Pro, and Enterprise structure.",
+        beseam: BESEAM_PRACTICAL.pricing,
+      },
+    ],
+  },
+  noibu: {
+    reviewedAt: "2026-08-22",
+    source: {
+      label: "Noibu platform overview",
+      url: "https://help.noibu.com/articles/3221688523-noibu-overview",
+    },
+    rows: [
+      {
+        criterion: "Typical owner",
+        competitor: "Ecommerce, product, engineering, and optimization teams responsible for storefront reliability and conversion friction.",
+        beseam: BESEAM_PRACTICAL.owner,
+      },
+      {
+        criterion: "Setup",
+        competitor: "Shopify stores can deploy through the Noibu app; other setups use Noibu's collection script and platform configuration.",
+        beseam: BESEAM_PRACTICAL.setup,
+      },
+      {
+        criterion: "Primary output",
+        competitor: "Revenue-prioritized ecommerce errors, session context, performance monitoring, and technical investigation evidence.",
+        beseam: BESEAM_PRACTICAL.output,
+      },
+      {
+        criterion: "Replace or keep?",
+        competitor: "Keep Noibu when deep ecommerce error detection and technical diagnosis are core requirements.",
+        beseam: "Use Beseam when reliability evidence needs to sit beside discovery, behavior, campaigns, orders, and the wider commerce decision.",
+      },
+      {
+        criterion: "Pricing model",
+        competitor: "Sales-led commercial model; the reviewed official product material does not publish a self-serve plan price.",
+        beseam: BESEAM_PRACTICAL.pricing,
+      },
+    ],
+  },
+  contentsquare: {
+    reviewedAt: "2026-08-22",
+    source: {
+      label: "Contentsquare pricing",
+      url: "https://contentsquare.com/pricing/",
+    },
+    rows: [
+      {
+        criterion: "Typical owner",
+        competitor: "Digital experience, product, UX, CRO, analytics, and enterprise optimization teams.",
+        beseam: BESEAM_PRACTICAL.owner,
+      },
+      {
+        criterion: "Setup",
+        competitor: "Deploy the web tag or app SDK, configure projects, and select the experience, feedback, or product analytics products required.",
+        beseam: BESEAM_PRACTICAL.setup,
+      },
+      {
+        criterion: "Primary output",
+        competitor: "Session replay, heatmaps, journeys, impact analysis, feedback, product analytics, and experience monitoring.",
+        beseam: BESEAM_PRACTICAL.output,
+      },
+      {
+        criterion: "Replace or keep?",
+        competitor: "Keep Contentsquare when deep digital-experience analysis is an established team workflow.",
+        beseam: "Use Beseam to connect qualified experience findings with commerce-wide evidence, ownership, action, and verification.",
+      },
+      {
+        criterion: "Pricing model",
+        competitor: "Free and Growth self-serve tiers are available for several products; Pro and Enterprise are sales-led and usage-dependent.",
+        beseam: BESEAM_PRACTICAL.pricing,
+      },
+    ],
+  },
+  amplitude: {
+    reviewedAt: "2026-08-22",
+    source: {
+      label: "Amplitude pricing",
+      url: "https://www.amplitude.com/pricing",
+    },
+    rows: [
+      {
+        criterion: "Typical owner",
+        competitor: "Product, growth, analytics, and data teams measuring digital-product adoption and behavior.",
+        beseam: BESEAM_PRACTICAL.owner,
+      },
+      {
+        criterion: "Setup",
+        competitor: "Instrument events and identity, define the tracking plan, then manage cohorts, governance, and product analytics views.",
+        beseam: BESEAM_PRACTICAL.setup,
+      },
+      {
+        criterion: "Primary output",
+        competitor: "Product analytics, funnels, cohorts, retention, session replay, experimentation, and AI-assisted analysis.",
+        beseam: BESEAM_PRACTICAL.output,
+      },
+      {
+        criterion: "Replace or keep?",
+        competitor: "Keep Amplitude when product analytics and experimentation are core operating systems for the team.",
+        beseam: "Use Beseam when those signals need to be reconciled with storefront, discovery, campaign, reliability, order, and revenue evidence.",
+      },
+      {
+        criterion: "Pricing model",
+        competitor: "Free and self-serve Plus options, with Growth and Enterprise using custom event-based pricing.",
+        beseam: BESEAM_PRACTICAL.pricing,
+      },
+    ],
+  },
+  "triple-whale": {
+    reviewedAt: "2026-08-22",
+    source: {
+      label: "Triple Whale pricing",
+      url: "https://www.triplewhale.com/pricing",
+    },
+    rows: [
+      {
+        criterion: "Typical owner",
+        competitor: "DTC founders, growth and performance teams, ecommerce operators, and agencies managing channel performance.",
+        beseam: BESEAM_PRACTICAL.owner,
+      },
+      {
+        criterion: "Setup",
+        competitor: "Connect ecommerce and marketing channels, install Triple Pixel where required, and configure attribution and reporting views.",
+        beseam: BESEAM_PRACTICAL.setup,
+      },
+      {
+        criterion: "Primary output",
+        competitor: "Attribution, business reporting, first-party measurement, BI, AI analysis, and increasingly governed automated actions.",
+        beseam: BESEAM_PRACTICAL.output,
+      },
+      {
+        criterion: "Replace or keep?",
+        competitor: "Keep Triple Whale when DTC attribution and channel-performance operations are central to the stack.",
+        beseam: "Use Beseam when the commercial question crosses attribution, discovery, store behavior, product data, reliability, and action ownership.",
+      },
+      {
+        criterion: "Pricing model",
+        competitor: "Free and paid packages; current paid pricing scales by package and annual GMV, with enterprise terms for larger brands.",
+        beseam: BESEAM_PRACTICAL.pricing,
+      },
+    ],
+  },
+};
+
+export function getPracticalComparison(
+  slug: string,
+): PracticalComparison | undefined {
+  return PRACTICAL_COMPARISONS[slug];
+}
 
 export function getComparison(slug: string): Comparison | undefined {
   return COMPARISONS.find((comparison) => comparison.slug === slug);

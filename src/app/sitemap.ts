@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date("2026-08-22"),
     },
     {
-      path: "/tools/ai-visibility-scan",
+      path: "/scan",
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },

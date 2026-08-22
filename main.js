@@ -3,21 +3,6 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.beseam.com",
 ]);
 
-const LEGACY_PATHS = new Map([
-  ["/demo", { pathname: "/store-health-review" }],
-  ["/product", { pathname: "/shopify-store-health" }],
-  ["/scan", { pathname: "/tools/ai-visibility-scan" }],
-  ["/free-scan", { pathname: "/tools/ai-visibility-scan" }],
-  ["/ai-visibility-scan", { pathname: "/tools/ai-visibility-scan" }],
-  ["/pdp-analyzer", { pathname: "/tools/ai-visibility-scan" }],
-  ["/example-pdp", { pathname: "/tools/ai-visibility-scan" }],
-  ["/optimised-pdp", { pathname: "/tools/ai-visibility-scan" }],
-  ["/reports", { pathname: "/tools/ai-visibility-scan" }],
-  ["/alternatives", { pathname: "/compare" }],
-  ["/comparison", { pathname: "/compare" }],
-  ["/old", { pathname: "/" }],
-]);
-
 const LEAD_SOURCES = new Set([
   "ai_visibility_scan",
   "platform_audit",
@@ -563,13 +548,13 @@ async function proxyProductImage(request, url) {
 async function verifyAnswerCheck(url, env) {
   const apiBase = (env.API_BASE_URL || DEFAULT_API_BASE).replace(/\/$/, "");
   const token = clean(url.searchParams.get("token"), 128);
-  const home = new URL(url);
-  home.pathname = "/";
-  home.search = "";
+  const scan = new URL(url);
+  scan.pathname = "/scan";
+  scan.search = "";
 
   if (!token) {
-    home.searchParams.set("scan_error", "missing_token");
-    return Response.redirect(home.toString(), 302);
+    scan.searchParams.set("scan_error", "missing_token");
+    return Response.redirect(scan.toString(), 302);
   }
 
   try {
@@ -579,15 +564,15 @@ async function verifyAnswerCheck(url, env) {
     );
     const payload = await response.json();
     if (!response.ok || !payload?.domain) {
-      home.searchParams.set("scan_error", "link_used");
-      return Response.redirect(home.toString(), 302);
+      scan.searchParams.set("scan_error", "link_used");
+      return Response.redirect(scan.toString(), 302);
     }
-    home.searchParams.set("domain", payload.domain);
+    scan.searchParams.set("domain", payload.domain);
   } catch {
-    home.searchParams.set("scan_error", "unavailable");
+    scan.searchParams.set("scan_error", "unavailable");
   }
 
-  return Response.redirect(home.toString(), 302);
+  return Response.redirect(scan.toString(), 302);
 }
 
 async function forwardJson(target, init) {
@@ -604,26 +589,6 @@ async function forwardJson(target, init) {
   } catch {
     return json({ error: "The scan service is unavailable right now." }, 502);
   }
-}
-
-function legacyRedirect(url) {
-  const pathname = url.pathname.replace(/\/$/, "") || "/";
-  const target =
-    LEGACY_PATHS.get(pathname) ||
-    (pathname.startsWith("/alternatives/")
-      ? { pathname: "/compare/" + pathname.slice("/alternatives/".length) }
-      : null) ||
-    // The per-platform /audit/* pages were removed; the free scan is the
-    // equivalent entry point.
-    (pathname === "/audit" || pathname.startsWith("/audit/")
-      ? { pathname: "/tools/ai-visibility-scan" }
-      : null);
-  if (!target) return null;
-
-  const destination = new URL(url);
-  destination.pathname = target.pathname;
-  destination.hash = target.hash || "";
-  return Response.redirect(destination.toString(), 301);
 }
 
 const worker = {
@@ -654,22 +619,6 @@ const worker = {
         ? submitReview(parsed.lead, env)
         : submitScanLead(parsed.lead, env);
     }
-
-    // Legacy endpoint kept for anything still posting the old shape.
-    if (
-      request.method === "POST" &&
-      url.pathname === "/api/store-health-review"
-    ) {
-      const parsed = await readLead(request, url, "store_health_review");
-      if (parsed.response) return parsed.response;
-      return submitReview(parsed.lead, env);
-    }
-
-    if (request.method === "GET" || request.method === "HEAD") {
-      const redirect = legacyRedirect(url);
-      if (redirect) return redirect;
-    }
-
     // Local development: `npm run dev` runs this worker in front of `next dev`,
     // so everything that is not an API route is handed to Next (keeping HMR)
     // instead of the exported ./out directory, which is stale or absent.

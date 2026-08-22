@@ -7,7 +7,7 @@ const FOOTER_GROUPS = [
     label: "Product",
     links: [
       ["Platform", "/platform"],
-      ["Beseam Bot", "/bot"],
+      ["AI shopping discovery", "/ai-visibility-monitoring"],
       ["Compare", "/compare"],
     ],
   },
@@ -83,6 +83,9 @@ export default function BeseamFooter() {
               className="transition-colors hover:text-white"
             >
               Terms
+            </Link>
+            <Link href="/bot" className="transition-colors hover:text-white">
+              BeseamBot
             </Link>
           </div>
 

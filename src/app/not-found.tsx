@@ -12,9 +12,9 @@ const DESTINATIONS = [
     "/#proof",
   ],
   [
-    "Run the free AI shopping check",
+    "Run the free AI discovery scan",
     "Ask real shopper questions, see which products get named, and inspect the evidence behind the result.",
-    "/#ai-check",
+    "/scan",
   ],
   [
     "AI shopping discovery",
