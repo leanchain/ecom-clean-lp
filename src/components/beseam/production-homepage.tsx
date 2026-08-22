@@ -226,19 +226,6 @@ export default function ProductionHomepage() {
           </Reveal>
         </div>
       </section>
-                    </h3>
-                  </div>
-                  <p className="text-balance text-[19px] font-medium leading-[1.25] tracking-[-0.01em] text-[#111318]">
-                    {step.lead}
-                  </p>
-                  <p className="text-[14px] leading-relaxed text-black/62">
-                    {step.detail}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
-        </div>
       </section>
 
       <section id="ai-check" className="scroll-mt-24 bg-[#faf1eb]">
