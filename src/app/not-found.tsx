@@ -2,28 +2,28 @@ import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
 
-import BookReviewCta from "@/components/beseam/book-review-cta";
-import Reveal from "@/components/beseam/reveal";
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
+import { Reveal } from "@/components/beseam/reveal";
 
 const DESTINATIONS = [
   [
-    "See the product workflow",
-    "How Beseam keeps the question, observed answer, product evidence, change, and re-check together.",
+    "See how Beseam works",
+    "How one commercial question moves through Observe, Understand, Decide, Act, and Learn.",
     "/#proof",
   ],
   [
-    "Run a free scan",
-    "Start with your store and inspect the first product-level evidence Beseam can support.",
-    "/#home-hero",
+    "Run the free AI shopping check",
+    "Ask real shopper questions, see which products get named, and inspect the evidence behind the result.",
+    "/#ai-check",
   ],
   [
-    "AI recommendation testing",
-    "How Beseam tests buying questions without reducing the result to one visibility score.",
+    "AI shopping discovery",
+    "See how Beseam keeps the question, observed answer, competitors, and product evidence together.",
     "/ai-visibility-monitoring",
   ],
   [
     "The manifesto",
-    "Why Beseam starts with the observed answer and tests the same question again after a change.",
+    "Why Beseam keeps evidence, decisions, controlled actions, and learning connected.",
     "/manifesto",
   ],
 ] as const;

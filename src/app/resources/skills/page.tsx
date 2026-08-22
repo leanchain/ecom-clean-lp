@@ -5,13 +5,15 @@ import type { Metadata } from "next";
 
 import FieldbookShell from "@/components/beseam/fieldbook/fieldbook-shell";
 import { getFieldbookDocuments } from "@/lib/fieldbook-content";
+import { FIELDBOOK_SOCIAL_IMAGE, buildPublicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Agent Skills | Beseam Commerce Fieldbook" },
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Agent Skills | Beseam Commerce Fieldbook",
   description:
     "Versioned, evidence-aware ecommerce workflows for Claude, coding agents, other assistants, and human operators.",
-  alternates: { canonical: "/resources/skills" },
-};
+  path: "/resources/skills",
+  image: FIELDBOOK_SOCIAL_IMAGE,
+});
 
 export default function SkillsIndexPage() {
   const skills = getFieldbookDocuments("skills");
@@ -41,7 +43,7 @@ export default function SkillsIndexPage() {
                 {skill.frontmatter.category}
               </span>
               <span className="font-mono text-[8px] uppercase tracking-[0.08em] text-black/36">
-                v{skill.frontmatter.version} · {skill.frontmatter.status}
+                v{skill.frontmatter.version}
               </span>
             </div>
             <h2 className="mt-5 text-[18px] font-semibold leading-snug text-[var(--beseam-ink)]">

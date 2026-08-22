@@ -2,30 +2,17 @@ import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
 
-import { BookReviewCta } from "@/components/beseam/book-review-cta";
+import TrackedLink from "@/components/beseam/tracked-link";
 import type { MarketingPageData } from "@/lib/marketing-pages";
 
+const APP_REGISTER_URL = "https://app.beseam.com/register";
+
 const PIPELINE = [
-  [
-    "01",
-    "Connect the source",
-    "Use the store, search or storefront evidence already in scope.",
-  ],
-  [
-    "02",
-    "Check freshness",
-    "Confirm the source is configured, working and recent enough.",
-  ],
-  [
-    "03",
-    "Keep provenance",
-    "Attach the source record, affected scope and observation time.",
-  ],
-  [
-    "04",
-    "Route the issue",
-    "Give the right owner an investigation path and next action.",
-  ],
+  ["01", "Observe", "See what is happening from the evidence in scope."],
+  ["02", "Understand", "Connect the signals that may explain the pattern."],
+  ["03", "Decide", "Choose the most worthwhile next move."],
+  ["04", "Act", "Make an approved change with the previous state retained."],
+  ["05", "Learn", "Compare the relevant signals before and after."],
 ];
 
 export default function MarketingDetailPage({
@@ -44,7 +31,7 @@ export default function MarketingDetailPage({
         name: page.metaTitle,
         description: page.description,
         isPartOf: { "@id": baseUrl + "/#website" },
-        about: { "@id": baseUrl + "/#beseam" },
+        about: { "@id": baseUrl + "/#organization" },
       },
       {
         "@type": "BreadcrumbList",
@@ -101,7 +88,7 @@ export default function MarketingDetailPage({
               <p className="text-[14px] font-semibold text-signal-ink">
                 {page.eyebrow}
               </p>
-              <h1 className="mt-4 max-w-[17ch] text-balance text-[clamp(2.6rem,5.4vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.02em] text-ink">
+              <h1 className="mt-4 max-w-[17ch] text-balance font-display text-[clamp(2.6rem,5.4vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-ink">
                 {page.headline}
               </h1>
             </div>
@@ -110,7 +97,17 @@ export default function MarketingDetailPage({
                 {page.intro}
               </p>
               <div className="mt-7">
-                <BookReviewCta location={page.slug + "_hero"} />
+                <TrackedLink
+                  href={APP_REGISTER_URL}
+                  eventName="marketing_primary_cta_clicked"
+                  eventCategory="conversion"
+                  placement={page.slug + "_hero"}
+                  preserveUtm
+                  className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#b8441d]"
+                >
+                  Start for free
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </TrackedLink>
               </div>
             </div>
           </div>
@@ -126,11 +123,11 @@ export default function MarketingDetailPage({
           <div className="grid gap-10 lg:grid-cols-[minmax(14rem,0.45fr)_minmax(0,1fr)] lg:gap-16">
             <div>
               <h2 className="editorial-subheading text-ink">
-                {page.observationsHeading ?? "What Beseam uses"}
+                {page.observationsHeading ?? "What Beseam sees here"}
               </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-foreground">
                 {page.observationsIntro ??
-                  "Concrete evidence contributing to this Beseam workspace."}
+                  "The evidence this page contributes to the wider Beseam system."}
               </p>
             </div>
             <div className="border-t border-rule">
@@ -161,42 +158,44 @@ export default function MarketingDetailPage({
         </div>
       </section>
 
-      <section className="border-b border-technical-rule bg-ink-deep text-white">
-        <div className="section-pad-tight mx-auto max-w-6xl px-6">
-          <div className="max-w-4xl">
-            <p className="text-[14px] font-semibold text-signal">
-              The evidence path
-            </p>
-            <h2 className="mt-4 max-w-[20ch] text-[clamp(2.1rem,3.6vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.02em] text-white">
-              One evidence path from observation to action.
-            </h2>
+      {page.slug === "platform" ? (
+        <section className="border-b border-technical-rule bg-ink-deep text-white">
+          <div className="section-pad-tight mx-auto max-w-6xl px-6">
+            <div className="max-w-4xl">
+              <p className="text-[14px] font-semibold text-signal">
+                How Beseam works
+              </p>
+              <h2 className="mt-4 max-w-[20ch] font-display text-[clamp(2.1rem,3.6vw,3.5rem)] font-normal leading-[1.06] tracking-[-0.02em] text-white">
+                Observe. Understand. Decide. Act. Learn.
+              </h2>
+            </div>
+            <ol className="mt-10 grid border-y border-technical-rule md:grid-cols-5">
+              {PIPELINE.map(([number, title, body], index) => (
+                <li
+                  key={number}
+                  className={
+                    "relative border-b border-technical-rule py-7 md:border-b-0 md:px-6 " +
+                    (index === 0 ? "md:pl-0" : "md:border-l")
+                  }
+                >
+                  <span className="text-[12px] font-semibold tabular-nums text-signal">
+                    {number}
+                  </span>
+                  <h3 className="mt-4 text-[18px] font-semibold text-white">
+                    {title}
+                  </h3>
+                  <p className="mt-3 text-[13px] leading-relaxed text-white/72">
+                    {body}
+                  </p>
+                  {index < PIPELINE.length - 1 ? (
+                    <ArrowRight className="absolute -right-2.5 top-7 z-10 hidden h-5 w-5 bg-ink-deep text-signal md:block" />
+                  ) : null}
+                </li>
+              ))}
+            </ol>
           </div>
-          <ol className="mt-10 grid border-y border-technical-rule md:grid-cols-4">
-            {PIPELINE.map(([number, title, body], index) => (
-              <li
-                key={number}
-                className={
-                  "relative border-b border-technical-rule py-7 md:border-b-0 md:px-6 " +
-                  (index === 0 ? "md:pl-0" : "md:border-l")
-                }
-              >
-                <span className="text-[12px] font-semibold tabular-nums text-signal">
-                  {number}
-                </span>
-                <h3 className="mt-4 text-[18px] font-semibold text-white">
-                  {title}
-                </h3>
-                <p className="mt-3 text-[13px] leading-relaxed text-white/72">
-                  {body}
-                </p>
-                {index < PIPELINE.length - 1 ? (
-                  <ArrowRight className="absolute -right-2.5 top-7 z-10 hidden h-5 w-5 bg-ink-deep text-signal md:block" />
-                ) : null}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <section className="bg-ground">
         <div className="section-pad-tight mx-auto max-w-6xl px-6">
@@ -301,40 +300,62 @@ export default function MarketingDetailPage({
           </div>
         </div>
       </section>
-
-      <section className="border-b border-rule bg-ground-2">
-        <div className="mx-auto max-w-6xl px-6 py-10">
-          <p className="text-[13px] font-semibold text-black/62">
-            Continue exploring Beseam
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            {page.related.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="inline-flex min-h-11 items-center border border-rule px-5 text-[14px] font-semibold text-ink transition-colors hover:border-signal-ink hover:text-signal-ink"
+      {page.related.length > 0 ? (
+        <section className="border-b border-rule bg-panel-white">
+          <div className="section-pad-tight mx-auto max-w-6xl px-6">
+            <div className="grid gap-8 lg:grid-cols-[minmax(14rem,0.45fr)_minmax(0,1fr)] lg:gap-16">
+              <div>
+                <p className="text-[14px] font-semibold text-signal-ink">
+                  Keep exploring
+                </p>
+                <h2 className="editorial-subheading mt-4 text-ink">
+                  Related evidence and workflows
+                </h2>
+              </div>
+              <nav
+                aria-label={`Related to ${page.eyebrow}`}
+                className="border-t border-rule"
               >
-                {item.label}
-              </Link>
-            ))}
+                {page.related.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="group flex min-h-14 items-center justify-between gap-5 border-b border-rule py-4 text-[15px] font-semibold text-ink"
+                  >
+                    {item.label}
+                    <ArrowRight
+                      className="h-4 w-4 shrink-0 text-signal-ink transition-transform group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <section className="bg-pigment text-white">
         <div className="section-pad mx-auto max-w-6xl px-6">
-          <h2 className="max-w-[20ch] text-[clamp(2.1rem,3.6vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.02em]">
-            Start with one store and one question worth answering.
+          <h2 className="max-w-[20ch] font-display text-[clamp(2.1rem,3.6vw,3.5rem)] font-normal leading-[1.06] tracking-[-0.02em]">
+            Start with one store and one worthwhile improvement.
           </h2>
           <p className="mt-5 max-w-[68ch] text-[18px] leading-relaxed">
-            Bring the products that matter and the buying questions you care
-            about. We will start from the evidence Beseam can actually observe.
+            Connect the evidence you already have, choose what is worth
+            changing, and measure the relevant signals after you act.
           </p>
           <div className="mt-8">
-            <BookReviewCta
-              location={page.slug + "_footer"}
-              className="bg-ink-deep text-white hover:bg-technical-panel"
-            />
+            <TrackedLink
+              href={APP_REGISTER_URL}
+              eventName="marketing_primary_cta_clicked"
+              eventCategory="conversion"
+              placement={page.slug + "_footer"}
+              preserveUtm
+              className="group inline-flex min-h-12 items-center justify-center gap-2 bg-ink-deep px-6 text-[15px] font-semibold text-white transition-colors hover:bg-technical-panel"
+            >
+              Start for free
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </TrackedLink>
           </div>
         </div>
       </section>

@@ -1,26 +1,71 @@
-import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+
 import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
 
-import BookReviewCta from "@/components/beseam/book-review-cta";
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import { COMPARISONS } from "@/lib/comparisons";
+import { buildPublicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Compare Beseam with analytics and optimization platforms",
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Compare Beseam with AI Discovery, Analytics, and Commerce Tools",
   description:
-    "Evidence-led comparisons between Beseam and the analytics, behavior, experience, experimentation, and commerce platforms teams already use.",
-  alternates: { canonical: "/compare" },
-  openGraph: {
-    title: "Compare Beseam with analytics and optimization platforms",
+    "Evidence-led comparisons across AI discovery and visibility, analytics, behavior, experimentation, commerce measurement, and reliability, showing where specialist tools are stronger and where Beseam differs.",
+  path: "/compare",
+  image: "/images/social/compare.png",
+});
+
+const COMPARISON_LAYERS = [
+  {
+    title: "AI discovery surfaces",
+    eyebrow: "Discovery",
     description:
-      "See where each platform is stronger, where Beseam differs, and when the tools belong in the same commerce stack.",
-    url: "/compare",
-    type: "website",
+      "Tools built to measure how brands appear across ChatGPT, AI search, answer engines, citations, and competitor recommendations.",
+    categories: ["AI discovery & visibility"],
   },
-};
+  {
+    title: "Analytics & behavior",
+    eyebrow: "Evidence",
+    description:
+      "Systems that explain traffic, sessions, journeys, friction, and digital experience after a shopper reaches the store.",
+    categories: [
+      "Web analytics",
+      "Behavior analytics",
+      "Experience analytics",
+      "Session replay & product analytics",
+    ],
+  },
+  {
+    title: "Experimentation & product",
+    eyebrow: "Intervention",
+    description:
+      "Platforms for product analytics, hypotheses, feature delivery, experiments, rollouts, and learning from controlled changes.",
+    categories: [
+      "Product analytics",
+      "Experimentation",
+      "All-in-one product platform",
+    ],
+  },
+  {
+    title: "Commerce & reliability",
+    eyebrow: "Commercial truth",
+    description:
+      "Tools that measure ecommerce performance, attribution, and technical failures that can block or distort revenue.",
+    categories: ["Commerce analytics", "Ecommerce error monitoring"],
+  },
+] as const;
+
+const HIGH_INTENT_COMPARISON_SLUGS = new Set([
+  "google-analytics",
+  "microsoft-clarity",
+  "hotjar",
+]);
 
 export default function ComparePage() {
+  const comparisonIndex = new Map(
+    COMPARISONS.map((comparison, index) => [comparison.slug, index]),
+  );
+
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -59,7 +104,8 @@ export default function ComparePage() {
                 where Beseam differs, and when both belong in the same stack.
               </p>
               <p className="mt-5 font-mono text-[12px] uppercase tracking-[0.11em] text-black/62">
-                Official product sources · reviewed 25 July 2026
+                Official product sources · AI discovery set reviewed 22 August
+                2026
               </p>
             </div>
           </div>
@@ -71,88 +117,134 @@ export default function ComparePage() {
           <div>
             <div className="max-w-2xl">
               <h2 className="font-serif text-[34px] leading-[1.02] tracking-[-0.02em]">
-                Fifteen high-intent comparisons.
+                {COMPARISONS.length} comparisons across four layers.
               </h2>
               <p className="mt-5 text-[14px] leading-relaxed text-black/62">
-                Analytics, behavior, experience, experimentation, commerce
+                Discovery, analytics, behavior, experimentation, commerce
                 measurement, and reliability each solve a different part of the
-                problem.
+                same commercial problem.
               </p>
             </div>
 
-            <div className="mt-12">
-              <div className="grid grid-cols-1 border-l border-t border-black/24 md:grid-cols-3">
-                {COMPARISONS.map((comparison, index) => (
-                  <Link
-                    key={comparison.slug}
-                    href={`/compare/${comparison.slug}`}
-                    className="group flex flex-col justify-between gap-8 border-b border-r border-black/18 p-6 transition-colors hover:bg-panel-white sm:p-7"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="font-mono text-[12px] text-black/62">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <span className="font-mono text-[12px] uppercase tracking-[0.09em] text-[#b8441d]">
-                          {comparison.category}
-                        </span>
-                      </div>
-                      <h3 className="mt-5 text-[19px] font-semibold text-black/84">
-                        {comparison.name}
-                        {index < 3 && (
-                          <span className="ml-1 text-[#b8441d]">*</span>
-                        )}
-                      </h3>
-                      <p className="mt-3 text-[13px] leading-relaxed text-black/62">
-                        {comparison.headline}
+            <div className="mt-14 space-y-16">
+              {COMPARISON_LAYERS.map((layer) => {
+                const comparisons = COMPARISONS.filter((comparison) =>
+                  layer.categories.some(
+                    (category) => category === comparison.category,
+                  ),
+                );
+
+                return (
+                  <div key={layer.title}>
+                    <div className="grid gap-5 border-t border-black/24 pt-5 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-10">
+                      <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+                        {layer.eyebrow}
                       </p>
+                      <div className="max-w-2xl">
+                        <h3 className="font-serif text-[28px] leading-[1.05] tracking-[-0.02em]">
+                          {layer.title}
+                        </h3>
+                        <p className="mt-3 text-[14px] leading-relaxed text-black/62">
+                          {layer.description}
+                        </p>
+                      </div>
                     </div>
-                    <span className="inline-flex items-center gap-2 text-[12px] font-semibold text-[#b8441d]">
-                      Compare
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                    </span>
-                  </Link>
-                ))}
-              </div>
-              <p className="mt-4 font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
-                * Highest search intent
+
+                    <div className="mt-7 grid grid-cols-1 border-l border-t border-black/24 md:grid-cols-3">
+                      {comparisons.map((comparison) => {
+                        const index = comparisonIndex.get(comparison.slug) ?? 0;
+                        const isHighIntent = HIGH_INTENT_COMPARISON_SLUGS.has(
+                          comparison.slug,
+                        );
+
+                        return (
+                          <Link
+                            key={comparison.slug}
+                            href={`/compare/${comparison.slug}`}
+                            className="group flex flex-col justify-between gap-8 border-b border-r border-black/18 p-6 transition-colors hover:bg-panel-white sm:p-7"
+                          >
+                            <div>
+                              <div className="flex items-center justify-between gap-3">
+                                <span className="font-mono text-[12px] text-black/62">
+                                  {String(index + 1).padStart(2, "0")}
+                                </span>
+                                <span className="font-mono text-[12px] uppercase tracking-[0.09em] text-[#b8441d]">
+                                  {comparison.category}
+                                </span>
+                              </div>
+                              <h4 className="mt-5 text-[19px] font-semibold text-black/84">
+                                {comparison.name}
+                                {isHighIntent && (
+                                  <span className="ml-1 text-[#b8441d]">*</span>
+                                )}
+                              </h4>
+                              <p className="mt-3 text-[13px] leading-relaxed text-black/62">
+                                {comparison.headline}
+                              </p>
+                            </div>
+                            <span className="inline-flex items-center gap-2 text-[12px] font-semibold text-[#b8441d]">
+                              Compare
+                              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+
+              <p className="font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
+                * Highest search intent among the existing comparison set
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-black/18">
+      <section className="border-b border-black/18 bg-[#111318] text-white">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.6vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Reporting, evidence, experimentation, and action are different
-                jobs.
+                Observe, understand, decide, act, and learn.
               </h2>
             </div>
 
-            <div className="grid border-y border-black/24 md:grid-cols-3">
+            <div className="grid border-y border-white/22 md:grid-cols-2 lg:grid-cols-5">
               {[
                 [
-                  "Systems of record",
-                  "Analytics and commerce platforms preserve events, attribution, orders, and operational truth.",
+                  "Observe",
+                  "See what is happening across discovery, behavior, commerce, and revenue.",
                 ],
                 [
-                  "Specialist evidence",
-                  "Behavior and experience platforms reveal what visitors did and where the digital journey broke down.",
+                  "Understand",
+                  "Connect the evidence and identify what may explain the pattern.",
                 ],
                 [
-                  "Beseam's job",
-                  "Connect the evidence, rank the revenue issue, assign the change, and verify the original signal.",
+                  "Decide",
+                  "Choose what deserves intervention and what should stay unchanged.",
                 ],
-              ].map(([title, detail]) => (
+                [
+                  "Act",
+                  "Make the supported change with ownership and control.",
+                ],
+                [
+                  "Learn",
+                  "Check the original signal again and carry the result into the next decision.",
+                ],
+              ].map(([title, detail], index) => (
                 <div
                   key={title}
-                  className="border-b border-black/18 py-7 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+                  className="border-b border-white/16 py-7 md:border-r md:px-6 lg:border-b-0 lg:last:border-r-0 lg:last:pr-0"
                 >
-                  <h3 className="text-[17px] font-semibold">{title}</h3>
-                  <p className="mt-4 text-[14px] leading-relaxed text-black/62">
+                  <span className="font-mono text-[11px] text-[#e8653a]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-4 text-[17px] font-semibold text-white/92">
+                    {title}
+                  </h3>
+                  <p className="mt-3 text-[14px] leading-relaxed text-white/68">
                     {detail}
                   </p>
                 </div>
@@ -161,33 +253,7 @@ export default function ComparePage() {
           </div>
         </div>
       </section>
-
-      <section className="border-b border-black/18 bg-[#111318] text-white">
-        <div className="mx-auto grid max-w-[92rem] gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center lg:gap-20 lg:px-10">
-          <div>
-            <h2 className="max-w-[18ch] font-serif text-[clamp(2.1rem,4.2vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-              Compare the operating model, not a feature checklist.
-            </h2>
-            <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-white/72">
-              Every comparison includes the other platform's strengths, Beseam's
-              boundaries, a practical workflow, and a real Beseam product
-              screen.
-            </p>
-          </div>
-          <div className="border border-white/20 bg-white/5 p-2">
-            <Image
-              src="/images/product-live/revenue-overview.webp"
-              alt="Real Beseam revenue overview for a dancewear store"
-              width={1600}
-              height={1000}
-              className="h-auto w-full"
-              priority
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-black/18">
+      <section className="border-b border-black/18 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid border-y border-black/24 lg:grid-cols-[minmax(0,1fr)_19rem]">
             <div className="py-10 pr-0 lg:py-14 lg:pr-16">
@@ -200,7 +266,8 @@ export default function ComparePage() {
               <div className="flex h-full flex-col justify-center">
                 <p className="text-[14px] leading-relaxed text-black/62">
                   A 20-minute review covers one store, the systems already in
-                  place, and the first revenue issue worth investigating.
+                  place, and the first commercial question worth taking from
+                  evidence to action.
                 </p>
                 <BookReviewCta
                   location="comparison_hub"

@@ -2,16 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ArrowUpRight, Linkedin, Mail } from "lucide-react";
+import type { Metadata } from "next";
 
-import BookReviewCta from "@/components/beseam/book-review-cta";
-import Reveal from "@/components/beseam/reveal";
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
+import { Reveal } from "@/components/beseam/reveal";
 import TeamsSection from "@/components/beseam/teams-section";
+import { SITE_URL, buildPublicMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: { absolute: "About | Beseam" },
+export const metadata: Metadata = buildPublicMetadata({
+  title: "About Beseam",
   description:
-    "Why Pankaj Kumar founded Beseam to test real ecommerce buying questions against AI assistants, connect observed answers to merchant-controlled product evidence, and re-check after a change.",
-};
+    "Why Beseam was founded to keep what ecommerce teams observe, understand, decide, act on, and learn connected to the evidence behind it.",
+  path: "/about",
+});
 
 const ADVISORS = [
   {
@@ -31,8 +34,62 @@ const ADVISORS = [
 ];
 
 export default function AboutPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": `${SITE_URL}/about#webpage`,
+        url: `${SITE_URL}/about`,
+        name: "About Beseam",
+        description:
+          "Why Beseam was founded and the people building a system that keeps evidence connected from observation through learning.",
+        about: { "@id": `${SITE_URL}/#organization` },
+        mainEntity: { "@id": `${SITE_URL}/about#pankaj-kumar` },
+        inLanguage: "en",
+      },
+      {
+        "@type": "Person",
+        "@id": `${SITE_URL}/about#pankaj-kumar`,
+        name: "Pankaj Kumar",
+        url: `${SITE_URL}/about`,
+        jobTitle: "Founder",
+        worksFor: { "@id": `${SITE_URL}/#organization` },
+        sameAs: ["https://linkedin.com/in/pankaj4u4m"],
+        knowsAbout: [
+          "Ecommerce",
+          "Decision systems",
+          "Measurement",
+          "Reliability engineering",
+          "Data infrastructure",
+        ],
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: `${SITE_URL}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "About",
+            item: `${SITE_URL}/about`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="bg-[#fafafa] text-[#151515]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-20">
@@ -41,13 +98,13 @@ export default function AboutPage() {
                 About Beseam
               </p>
               <h1 className="mt-7 max-w-[17ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
-                AI can recommend someone else. Start with the answer.
+                Commerce teams have data. Knowing what to change next is harder.
               </h1>
             </div>
             <p className="max-w-[64ch] text-[19px] leading-[1.72] text-black/66">
-              Beseam runs real buying questions, records the products AI
-              recommends, connects the result to product evidence merchants can
-              change, and asks the same question again after an approved update.
+              Beseam was built to keep scattered commerce evidence connected
+              through one operating loop: Observe, Understand, Decide, Act, and
+              Learn.
             </p>
           </Reveal>
         </div>
@@ -70,15 +127,16 @@ export default function AboutPage() {
               </p>
               <p>
                 For the past year, he has worked closely with ecommerce founders
-                and operators on real stores, including product data, feeds,
-                discovery, and the answers AI assistants return to shoppers.
+                and operators on real stores, including product data, discovery,
+                storefront behavior, conversion, and the systems teams use to
+                act.
               </p>
               <p>
-                The same problem kept repeating: a merchant could see its own
-                catalog clearly and still have no useful record of why an AI
-                answer named another product. He founded Beseam to keep the
-                question, observed answer, product evidence, approved change,
-                and re-check together.
+                The same problem kept repeating: teams had plenty of signals but
+                a weak connection between what happened, what was worth
+                changing, who should act, and what changed afterwards. Beseam
+                was founded to keep that evidence, decision, action, and
+                measurement together.
               </p>
             </div>
             <Link
@@ -193,12 +251,12 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-[92rem] gap-10 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1.15fr)_auto] lg:items-end lg:gap-20 lg:px-10 lg:py-28">
           <Reveal>
             <h2 className="max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-              Bring one store and one buying question that matters.
+              Bring one store and one commercial question that matters.
             </h2>
             <p className="mt-7 max-w-[64ch] text-[17px] leading-[1.65] text-white/72">
-              A 20-minute review looks at the products you care about, the
-              buying questions they should win, and the evidence Beseam can
-              actually observe and test.
+              A 20-minute review starts with the products and commercial
+              question that matter most, then looks at the evidence Beseam can
+              actually observe and what would be worth doing next.
             </p>
             <p className="mt-5 text-[14px] text-white/62">
               Questions first?{" "}

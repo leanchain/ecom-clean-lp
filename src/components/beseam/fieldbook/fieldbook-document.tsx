@@ -11,6 +11,7 @@ import {
   getFieldbookDocument,
   type FieldbookDocument,
 } from "@/lib/fieldbook-content";
+import { SITE_URL } from "@/lib/seo";
 
 export default async function FieldbookDocumentPage({
   document,
@@ -30,9 +31,68 @@ export default async function FieldbookDocumentPage({
     );
   const isSkill = document.section === "skills";
   const copyText = `# ${document.frontmatter.title}\n\n${document.frontmatter.summary}\n\n${document.content}`;
+  const sectionLabel =
+    document.section === "start-here"
+      ? "Start here"
+      : document.section === "problems"
+        ? "Problems"
+        : document.section === "skills"
+          ? "Agent skills"
+          : document.section === "playbooks"
+            ? "Playbooks"
+            : "Commerce Fieldbook";
+  const sectionHref =
+    document.section === "pages"
+      ? "/resources"
+      : `/resources/${document.section}`;
+  const breadcrumbs = [
+    { name: "Home", item: `${SITE_URL}/` },
+    { name: "Commerce Fieldbook", item: `${SITE_URL}/resources` },
+    ...(sectionHref !== "/resources" && sectionHref !== document.href
+      ? [{ name: sectionLabel, item: `${SITE_URL}${sectionHref}` }]
+      : []),
+    { name: document.frontmatter.title, item: `${SITE_URL}${document.href}` },
+  ];
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${SITE_URL}${document.href}#article`,
+        headline: document.frontmatter.title,
+        description: document.frontmatter.summary,
+        mainEntityOfPage: { "@id": `${SITE_URL}${document.href}` },
+        author: { "@id": `${SITE_URL}/#organization` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        dateModified: document.frontmatter.reviewedAt,
+        inLanguage: "en",
+        isAccessibleForFree: true,
+        articleSection: sectionLabel,
+        keywords: [
+          document.frontmatter.category,
+          document.frontmatter.kind,
+          ...(document.frontmatter.worksWith ?? []),
+        ],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${SITE_URL}${document.href}#breadcrumb`,
+        itemListElement: breadcrumbs.map((crumb, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: crumb.name,
+          item: crumb.item,
+        })),
+      },
+    ],
+  };
 
   return (
     <FieldbookShell currentHref={document.href} headings={document.headings}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <FieldbookDocumentHeader document={document} />
       {isSkill && (
         <SkillActions
@@ -62,7 +122,7 @@ export default async function FieldbookDocumentPage({
                   className="group bg-[var(--beseam-surface)] p-5 transition-colors hover:bg-[var(--beseam-panel)]"
                 >
                   <p className="font-mono text-[8px] uppercase tracking-[0.09em] text-[var(--beseam-accent)]">
-                    {related.frontmatter.kind} · {related.frontmatter.status}
+                    {related.frontmatter.kind}
                   </p>
                   <h3 className="mt-3 text-[15px] font-semibold text-[var(--beseam-ink)]">
                     {related.frontmatter.title}
@@ -88,7 +148,7 @@ export default async function FieldbookDocumentPage({
                 >
                   <div>
                     <p className="font-mono text-[8px] uppercase tracking-[0.08em] text-black/38">
-                      {resource.kind} · {resource.maturity}
+                      {resource.kind}
                     </p>
                     <h3 className="mt-1.5 text-[13px] font-semibold text-[var(--beseam-ink)]">
                       {resource.name}

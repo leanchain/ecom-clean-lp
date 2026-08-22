@@ -665,12 +665,13 @@ export function ResultCard({
         <div className="grid gap-5 border-t border-black/18 bg-[#faf1eb] px-4 py-5 sm:px-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <div>
             <p className="text-[14px] font-semibold text-[#111318]">
-              Turn this signal into a fix.
+              Turn this discovery signal into a better decision.
             </p>
             <p className="mt-1 max-w-[62ch] text-[13px] leading-relaxed text-black/64">
               Connect your store to combine this scan with product, search,
-              discovery, behavior, and conversion evidence. Beseam prioritizes
-              what to change and measures the relevant signal again afterward.
+              behavior, conversion, and revenue evidence. Use that context to
+              understand what may explain the signal, decide what to do, act
+              with control, and learn from what changes afterward.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
@@ -682,18 +683,18 @@ export function ResultCard({
               preserveUtm
               className="group inline-flex min-h-11 items-center justify-center gap-2 bg-[#111318] px-5 text-[13px] font-semibold text-white transition-colors hover:bg-[#b8441d]"
             >
-              Find what to fix next
+              Start for free
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </TrackedLink>
             <TrackedLink
-              href="/product-visibility-monitoring"
+              href="/contact"
               eventName="scan_review_clicked"
               eventCategory="conversion"
               placement="answer_check_result"
               preserveUtm
               className="inline-flex min-h-11 items-center justify-center px-2 text-[13px] font-semibold text-[#111318] underline decoration-black/30 underline-offset-6 hover:decoration-[#b8441d]"
             >
-              Prefer a walkthrough? Book a review
+              Prefer a walkthrough? Contact us
             </TrackedLink>
           </div>
         </div>
@@ -1083,9 +1084,8 @@ export function SampleLoopShowcase() {
   }, []);
 
   // Scroll-driven (desktop only): the card pins while the tall wrapper scrolls
-  // past, and the scroll progress through the wrapper selects the stage ,
-  // scrolling past the section walks Find → Diagnose → Fix → Verify, then
-  // releases.
+  // past, and scroll progress through the wrapper selects the scan stage before
+  // releasing the section.
   useEffect(() => {
     if (!pinned) {
       setStage(0);

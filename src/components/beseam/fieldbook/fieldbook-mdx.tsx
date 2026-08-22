@@ -45,7 +45,7 @@ export function Callout({
     boundary: "Boundary",
     warning: "Warning",
     operator: "Operator check",
-    experimental: "Experimental",
+    experimental: "Working note",
   } as const;
   return (
     <aside

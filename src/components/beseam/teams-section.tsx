@@ -1,22 +1,22 @@
 import { Code2, Search, ShoppingCart } from "lucide-react";
 
-import Reveal from "@/components/beseam/reveal";
+import { Reveal } from "@/components/beseam/reveal";
 
 const ROLES = [
   {
     role: "Product content and merchandising",
     icon: Search,
-    body: "See the buying question, the products that won, and the product evidence worth changing.",
+    body: "See where products are hard to find or choose, then inspect the product and merchandising evidence worth changing.",
   },
   {
     role: "Ecommerce and operations",
     icon: ShoppingCart,
-    body: "Keep the observed answer, approved product change, and re-check attached to the same product.",
+    body: "Connect shopper behavior, store friction, approved actions, and measured outcomes around the same commercial question.",
   },
   {
     role: "Developers and agencies",
     icon: Code2,
-    body: "Start with reproducible answer evidence and a narrower implementation path.",
+    body: "Start with supported evidence, affected scope, and a narrower implementation path instead of a generic issue report.",
   },
 ];
 
@@ -32,9 +32,9 @@ export default function TeamsSection() {
             Built for the people who own ecommerce growth.
           </h2>
           <p className="max-w-[64ch] self-end text-[17px] leading-[1.65] text-black/66">
-            AI product recommendations cross content, merchandising, and
-            implementation. Beseam keeps the question, answer, product evidence,
-            approved change, and re-check in one shared record.
+            Discovery, merchandising, store behavior, conversion, and
+            implementation cross team boundaries. Beseam keeps the evidence,
+            decision, action, and measurement connected in one operating record.
           </p>
         </Reveal>
 

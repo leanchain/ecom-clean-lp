@@ -26,10 +26,6 @@ export default function FieldbookDocumentHeader({
         {frontmatter.summary}
       </p>
       <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 border-t border-black/14 pt-5 font-mono text-[9px] uppercase tracking-[0.08em] text-black/42">
-        <span className="inline-flex items-center gap-2">
-          <span className="h-1.5 w-1.5 bg-[var(--beseam-accent)]" />
-          {frontmatter.status}
-        </span>
         {frontmatter.version && (
           <span className="inline-flex items-center gap-2">
             <GitBranch className="h-3 w-3" />

@@ -10,6 +10,11 @@ import {
   getAllFieldbookDocuments,
   type FieldbookHeading,
 } from "@/lib/fieldbook-content";
+import {
+  FIELDBOOK_SOCIAL_IMAGE,
+  SITE_URL,
+  buildPublicMetadata,
+} from "@/lib/seo";
 
 const HEADINGS: FieldbookHeading[] = [
   {
@@ -46,11 +51,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const resource = getResource(slug);
   if (!resource) return {};
-  return {
-    title: { absolute: `${resource.name} | Beseam Commerce Fieldbook` },
+  return buildPublicMetadata({
+    title: `${resource.name} | Beseam`,
     description: resource.summary,
-    alternates: { canonical: `/resources/projects/${slug}` },
-  };
+    path: `/resources/projects/${slug}`,
+    image: FIELDBOOK_SOCIAL_IMAGE,
+    type: "article",
+    modifiedTime: resource.reviewedAt,
+    section: "Commerce Fieldbook",
+    tags: [resource.category, resource.kind, ...resource.tags],
+  });
 }
 
 export default async function ResourcePage({
@@ -73,12 +83,72 @@ export default async function ResourcePage({
       candidate.category === resource.category,
   ).slice(0, 4);
   const external = resource.url.startsWith("http");
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${SITE_URL}/resources/projects/${resource.slug}#article`,
+        headline: resource.name,
+        description: resource.summary,
+        mainEntityOfPage: {
+          "@id": `${SITE_URL}/resources/projects/${resource.slug}`,
+        },
+        author: { "@id": `${SITE_URL}/#organization` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        dateModified: resource.reviewedAt,
+        articleSection: "Projects and references",
+        inLanguage: "en",
+        isAccessibleForFree: true,
+        keywords: [resource.category, resource.kind, ...resource.tags],
+        citation: resource.url,
+        about: {
+          "@type": "Thing",
+          name: resource.name,
+          url: resource.url,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: `${SITE_URL}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Commerce Fieldbook",
+            item: `${SITE_URL}/resources`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Projects and references",
+            item: `${SITE_URL}/resources/projects`,
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            name: resource.name,
+            item: `${SITE_URL}/resources/projects/${resource.slug}`,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <FieldbookShell
       currentHref={`/resources/projects/${resource.slug}`}
       headings={HEADINGS}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="border-b border-black/18 pb-10">
         <div className="flex flex-wrap items-center gap-2 font-mono text-[9px] uppercase tracking-[0.1em] text-black/42">
           <Link
@@ -99,9 +169,6 @@ export default async function ResourcePage({
         <div className="mt-7 flex flex-wrap gap-2">
           <span className="border border-black/16 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.08em] text-[var(--beseam-accent)]">
             {resource.kind}
-          </span>
-          <span className="border border-black/16 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.08em] text-black/46">
-            {resource.maturity}
           </span>
           <span className="border border-black/16 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.08em] text-black/46">
             Reviewed {resource.reviewedAt}
@@ -204,7 +271,7 @@ export default async function ResourcePage({
                 className="group bg-[var(--beseam-surface)] p-5 transition-colors hover:bg-[var(--beseam-panel)]"
               >
                 <p className="font-mono text-[8px] uppercase tracking-[0.08em] text-[var(--beseam-accent)]">
-                  {document.frontmatter.kind} · {document.frontmatter.status}
+                  {document.frontmatter.kind}
                 </p>
                 <h3 className="mt-3 text-[14px] font-semibold text-[var(--beseam-ink)]">
                   {document.frontmatter.title}

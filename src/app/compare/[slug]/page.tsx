@@ -1,11 +1,13 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 
-import BookReviewCta from "@/components/beseam/book-review-cta";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import type { Metadata } from "next";
+
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import { COMPARISONS, getComparison } from "@/lib/comparisons";
+import { buildPublicMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -23,29 +25,17 @@ export async function generateMetadata({
 
   if (!comparison) return {};
 
-  return {
+  return buildPublicMetadata({
     title: comparison.metaTitle,
     description: comparison.metaDescription,
-    alternates: { canonical: `/compare/${comparison.slug}` },
-    openGraph: {
-      title: comparison.metaTitle,
-      description: comparison.metaDescription,
-      url: `/compare/${comparison.slug}`,
-      type: "article",
-      images: [
-        {
-          url: comparison.evidence.src,
-          alt: comparison.evidence.alt,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: comparison.metaTitle,
-      description: comparison.metaDescription,
-      images: [comparison.evidence.src],
-    },
-  };
+    path: `/compare/${comparison.slug}`,
+    image: "/images/social/compare.png",
+    imageAlt: `Beseam vs ${comparison.name}`,
+    type: "article",
+    modifiedTime: comparison.lastReviewed,
+    section: "Platform comparisons",
+    tags: [comparison.name, comparison.category, "ecommerce decisions"],
+  });
 }
 
 export default async function ComparisonPage({
@@ -61,6 +51,34 @@ export default async function ComparisonPage({
   const related = COMPARISONS.filter(
     (item) => item.slug !== comparison.slug,
   ).slice(0, 3);
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `https://beseam.com/compare/${comparison.slug}#article`,
+    headline: comparison.metaTitle,
+    description: comparison.metaDescription,
+    mainEntityOfPage: {
+      "@id": `https://beseam.com/compare/${comparison.slug}`,
+    },
+    author: { "@id": "https://beseam.com/#organization" },
+    publisher: { "@id": "https://beseam.com/#organization" },
+    dateModified: comparison.lastReviewed,
+    articleSection: "Platform comparisons",
+    inLanguage: "en",
+    isAccessibleForFree: true,
+    image: {
+      "@type": "ImageObject",
+      url: "https://beseam.com/images/social/compare.png",
+      width: 1200,
+      height: 630,
+    },
+    about: [
+      { "@type": "Thing", name: comparison.name },
+      { "@type": "Thing", name: comparison.category },
+      { "@type": "Thing", name: "Ecommerce decision making" },
+    ],
+  };
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -102,6 +120,10 @@ export default async function ComparisonPage({
 
   return (
     <article className="bg-[#fafafa] text-[#111318]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -437,15 +459,15 @@ export default async function ComparisonPage({
           <div className="grid border-y border-black/24 lg:grid-cols-[minmax(0,1fr)_19rem]">
             <div className="py-10 pr-0 lg:py-14 lg:pr-16">
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.1rem,4.2vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Keep the systems that work. Add the decision layer that is
-                missing.
+                Keep the systems that work. Connect the evidence they leave
+                apart.
               </h2>
             </div>
             <div className="border-t border-black/24 py-8 lg:border-l lg:border-t-0 lg:py-0 lg:pl-8">
               <div className="flex h-full flex-col justify-center">
                 <p className="text-[14px] leading-relaxed text-black/62">
                   Review one store, the tools already in place, and the first
-                  revenue issue worth investigating.
+                  commercial question worth taking from evidence to action.
                 </p>
                 <BookReviewCta
                   location={`comparison_${comparison.slug}`}

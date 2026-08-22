@@ -5,94 +5,129 @@ import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
-import Reveal from "@/components/beseam/reveal";
+import { Reveal } from "@/components/beseam/reveal";
+
+const MANIFESTO_URL = "https://beseam.com/manifesto";
+const MANIFESTO_IMAGE = "https://beseam.com/images/social/manifesto.png";
+const MANIFESTO_MODIFIED = "2026-08-22";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "The Beseam Manifesto | Test the answer, then test the change",
+    absolute: "Beseam Manifesto | The useful unit is a decision you can trace",
   },
   description:
-    "Why Beseam is built around real buying questions, observed AI recommendations, product evidence merchants control, and the same-question re-check after a change.",
+    "Why Beseam keeps observation, understanding, decisions, actions, and learning connected to the evidence behind them.",
   alternates: { canonical: "/manifesto" },
+  authors: [{ name: "Pankaj Kumar", url: "/about" }],
+  creator: "Pankaj Kumar",
+  publisher: "Beseam",
+  category: "Ecommerce",
   openGraph: {
-    title: "The Beseam Manifesto | Test the answer, then test the change",
+    title: "Beseam Manifesto | The useful unit is a decision you can trace",
     description:
-      "The principles behind Beseam: observe the actual answer, separate evidence from inference, change only what the merchant controls, and test again.",
+      "The principles behind Beseam: observe the evidence, separate fact from inference, decide with context, act with control, and learn from what changes.",
     url: "/manifesto",
+    siteName: "Beseam",
     type: "article",
+    modifiedTime: MANIFESTO_MODIFIED,
+    authors: ["https://beseam.com/about"],
+    section: "Company",
+    tags: [
+      "decision making",
+      "ecommerce",
+      "product discovery",
+      "conversion",
+      "revenue measurement",
+    ],
+    images: [
+      {
+        url: MANIFESTO_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "The Beseam Manifesto: the useful unit is a decision you can trace",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Beseam Manifesto | The useful unit is a decision you can trace",
+    description:
+      "Observe what is happening, understand what may explain it, decide, act with control, and learn from what changes.",
+    images: [MANIFESTO_IMAGE],
   },
 };
 
 const PROBLEM = [
   [
-    "Distribution is not the answer",
-    "A product can be present in a catalog and still be absent from the answer a shopper receives. Eligibility, indexing, and recommendation are different things.",
+    "Signals live in different systems",
+    "Discovery, store behavior, product data, conversion, and revenue are usually measured separately even when they describe the same commercial problem.",
   ],
   [
-    "The answer is observable",
-    "You can ask the buying question, record what the assistant said, and keep the products and competitors it named. That is more useful than starting from a generic visibility score.",
+    "A symptom is not a cause",
+    "A drop in discovery, search exits, or conversion is observable. Why it happened may still be a hypothesis until the supporting evidence is strong enough.",
   ],
   [
-    "The model is not explainable on demand",
-    "No merchant tool can read a model's hidden ranking logic. The honest job is to separate the observed answer from the product evidence and hypotheses around it.",
+    "A finding is not a decision",
+    "A long list of issues is not useful by itself. Teams need to know which problem or opportunity is worth acting on first and why.",
   ],
   [
-    "The merchant still controls the evidence",
-    "Titles, descriptions, attributes, availability, structured data, feeds, and product pages remain changeable. Those are the levers worth testing.",
+    "A change is not proof",
+    "Before-and-after evidence can show what moved after an action. It should not be stretched into an exact causal claim the data cannot support.",
   ],
 ] as const;
 
 const PRINCIPLES = [
   {
-    title: "Keep the exact question",
-    body: "The prompt matters. Beseam keeps the buying question with the observed answer instead of collapsing many different decisions into one score.",
-  },
-  {
-    title: "Keep the products that won",
-    body: "A miss is more useful when the competing products, merchants, citations, and exposed evidence stay attached to the same answer.",
+    title: "Keep the source evidence",
+    body: "A conclusion should stay connected to the observation, source, affected scope, and time that support it instead of collapsing into one opaque score.",
   },
   {
     title: "Separate evidence from inference",
-    body: "A missing attribute is a fact. Saying it caused a model to rank another product is a hypothesis unless the evidence supports more. Beseam keeps those categories separate.",
+    body: "A missing attribute, failed event, or changed conversion rate can be a fact. The explanation around it should remain a hypothesis until the evidence supports more.",
   },
   {
-    title: "Change only what you control",
-    body: "Proposed actions should point to merchant-owned product evidence and remain behind an approval boundary before anything customer-facing changes.",
+    title: "Decide what deserves attention",
+    body: "Beseam should help a team decide what deserves attention now, not reward the product for producing the longest list of findings.",
   },
   {
-    title: "Ask the same question again",
-    body: "After a change, Beseam re-runs the original buying question and records the new answer. A changed result is evidence to compare, not a promise of future placement.",
+    title: "Keep people in control",
+    body: "Supported customer-facing actions stay behind the approval rules agreed for the store, with the previous state retained when the workflow supports it.",
+  },
+  {
+    title: "Measure after the action",
+    body: "Beseam compares the relevant discovery, behavior, conversion, or revenue signals before and after a change and keeps uncertainty explicit.",
   },
 ] as const;
 
-const AI_STANCE = [
+const SCOPE_STANCE = [
   [
-    "What we test",
-    "Real buying questions, the answers assistants return, the products they name, and the competitors that appear when your product does not.",
+    "What we observe",
+    "External discovery, onsite discovery, product and store evidence, shopper behavior, conversion, orders, and revenue when those signals are available.",
   ],
   [
-    "What we change",
-    "Merchant-owned product evidence: the product record, page content, structured data, feed fields, and other approved product information.",
+    "What we act on",
+    "Supported product data, content, merchandising, creative, campaigns, and store experiences that the merchant can review and control.",
   ],
   [
     "What we will not promise",
-    "A guaranteed recommendation, a hidden-model explanation we cannot observe, or a revenue number that one changed answer cannot prove.",
+    "An exact cause when the evidence only supports a hypothesis, or a guaranteed revenue outcome from one observed before-and-after change.",
   ],
 ] as const;
 
 const NEVER = [
-  "Hide the actual question and answer behind a confident visibility score.",
-  "Present a likely cause as if we could see an assistant's hidden ranking logic.",
-  "Publish a material customer-facing product change without the agreed approval.",
-  "Replace Shopify or the commerce systems that remain the merchant's source of truth.",
-  "Call a product-data change successful before the same buying question has been checked again.",
-  "Turn one favorable re-check into a guarantee of future recommendation, traffic, or revenue.",
+  "Hide the supporting evidence behind one confident composite score.",
+  "Present a likely cause as if it were a confirmed fact.",
+  "Optimize one surface while ignoring the rest of the commerce path.",
+  "Publish a material customer-facing change without the agreed approval.",
+  "Call an action successful before the relevant signals have been measured again.",
+  "Turn a favorable before-and-after result into a guarantee of future traffic, conversion, or revenue.",
 ] as const;
 
 const NOT_FOR = [
   [
     "Stores the admin still answers",
-    "If a post-purchase survey and an afternoon in your admin still tell you what to fix, buy the tool when the problem outgrows the spreadsheet. Not before.",
+    "If a few checks in your admin still tell you what deserves attention, buy the tool when the problem outgrows the spreadsheet. Not before.",
   ],
   [
     "Teams who want an unsupervised agent",
@@ -100,31 +135,106 @@ const NOT_FOR = [
   ],
   [
     "Teams shopping for a replacement stack",
-    "Your commerce platform, analytics, and ad accounts stay in place and stay authoritative. Beseam works above them or not at all.",
+    "Your commerce platform, analytics, and ad accounts stay in place and stay authoritative. Beseam works across them or not at all.",
   ],
   [
     "Anyone who wants a revenue number in the contract",
-    "We commit to the diagnosis, the proposed fix, the approval path, and the recheck. Nobody honest can commit to the lift.",
+    "We commit to the evidence, the decision, the approval path, and the measurement. Nobody honest can commit to the lift.",
   ],
 ] as const;
 
 export default function ManifestoPage() {
-  const articleJsonLd = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: "Test the answer, then test the change",
-    description:
-      "Why Beseam is built around observed AI product recommendations, merchant-controlled product evidence, and same-question re-checks.",
-    author: { "@type": "Person", name: "Pankaj Kumar" },
-    publisher: { "@type": "Organization", name: "Beseam" },
-    mainEntityOfPage: "https://beseam.com/manifesto",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${MANIFESTO_URL}#article`,
+        headline: "The useful unit is a decision you can trace.",
+        description:
+          "Why Beseam keeps what teams observe, understand, decide, act on, and learn connected to the evidence behind it.",
+        image: {
+          "@type": "ImageObject",
+          url: MANIFESTO_IMAGE,
+          width: 1200,
+          height: 630,
+        },
+        author: { "@id": "https://beseam.com/about#pankaj-kumar" },
+        publisher: { "@id": "https://beseam.com/#organization" },
+        mainEntityOfPage: { "@id": MANIFESTO_URL },
+        dateModified: MANIFESTO_MODIFIED,
+        inLanguage: "en",
+        isAccessibleForFree: true,
+        keywords: [
+          "decision making",
+          "ecommerce",
+          "product discovery",
+          "onsite commerce",
+          "shopper behavior",
+          "conversion",
+          "revenue measurement",
+        ],
+        about: [
+          { "@type": "Thing", name: "Ecommerce decision making" },
+          { "@type": "Thing", name: "Ecommerce" },
+          { "@type": "Thing", name: "Product discovery" },
+          { "@type": "Thing", name: "Conversion optimization" },
+        ],
+      },
+      {
+        "@type": "WebPage",
+        "@id": MANIFESTO_URL,
+        url: MANIFESTO_URL,
+        name: "Beseam Manifesto | The useful unit is a decision you can trace",
+        about: { "@id": "https://beseam.com/#organization" },
+        primaryImageOfPage: { "@id": `${MANIFESTO_URL}#primaryimage` },
+        dateModified: MANIFESTO_MODIFIED,
+        inLanguage: "en",
+      },
+      {
+        "@type": "ImageObject",
+        "@id": `${MANIFESTO_URL}#primaryimage`,
+        url: MANIFESTO_IMAGE,
+        contentUrl: MANIFESTO_IMAGE,
+        width: 1200,
+        height: 630,
+        caption: "The Beseam Manifesto",
+      },
+      {
+        "@type": "Person",
+        "@id": "https://beseam.com/about#pankaj-kumar",
+        name: "Pankaj Kumar",
+        url: "https://beseam.com/about",
+        jobTitle: "Founder",
+        worksFor: { "@id": "https://beseam.com/#organization" },
+        sameAs: ["https://linkedin.com/in/pankaj4u4m"],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${MANIFESTO_URL}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://beseam.com/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Manifesto",
+            item: MANIFESTO_URL,
+          },
+        ],
+      },
+    ],
   };
 
   return (
-    <div className="bg-[#fafafa] text-[#151515]">
+    <article className="bg-[#fafafa] text-[#151515]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
       <section className="border-b border-black/18">
@@ -135,22 +245,23 @@ export default function ManifestoPage() {
                 The Beseam manifesto
               </p>
               <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,6.1vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
-                If AI recommends someone else, start with the answer.
+                The useful unit is a decision you can trace.
               </h1>
             </div>
             <div className="max-w-2xl self-end">
               <p className="text-[20px] leading-[1.65] text-black/68">
-                Shopify can tell you that a product is in the catalog. An AI
-                assistant can still recommend another product when a shopper
-                asks what to buy. Beseam starts with that observed answer.
+                Beseam connects discovery, store, behavior, and revenue evidence
+                so one commercial question can move through Observe, Understand,
+                Decide, Act, and Learn without losing the context behind it.
               </p>
               <p className="mt-5 text-[17px] leading-[1.7] text-black/62">
-                Keep the question, the products that were named, and the
-                evidence you can actually change. Then make the approved change
-                and ask the same question again.
+                Observe what is happening. Understand what may explain it.
+                Decide what is worth doing. Act with control. Learn from the
+                signals that move afterward.
               </p>
               <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
-                By Pankaj Kumar · Founder, Beseam
+                By Pankaj Kumar · Founder, Beseam · Updated{" "}
+                <time dateTime={MANIFESTO_MODIFIED}>22 August 2026</time>
               </p>
             </div>
           </Reveal>
@@ -162,14 +273,14 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Commerce teams do not need another AI score.
+                Commerce teams do not need more disconnected reporting.
               </h2>
             </div>
             <div>
               <p className="max-w-2xl text-[17px] leading-[1.7] text-black/66">
-                They need to know what happened on a buying question, which
-                products won, what product evidence differs, what the merchant
-                can change, and what the same question returns afterward.
+                They need to know what is happening, what may explain it, what
+                is worth changing, who should act, and what changed after the
+                action. The evidence should stay attached all the way through.
               </p>
               <div className="mt-10 border-t border-black/22">
                 {PROBLEM.map(([title, body], index) => (
@@ -213,7 +324,7 @@ export default function ManifestoPage() {
                   Pankaj Kumar
                 </p>
                 <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.09em] text-white/72">
-                  Founder, Beseam - AI recommendation testing
+                  Founder, Beseam
                 </p>
                 <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.09em] text-white/72">
                   Ex-Google - 10 Years
@@ -227,21 +338,19 @@ export default function ManifestoPage() {
 
           <Reveal delay={0.06}>
             <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.6vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-              The useful gap is between the answer you observed and the evidence
-              you can change.
+              The useful gap is between a signal and a decision you can defend.
             </h2>
             <div className="mt-8 max-w-[68ch] space-y-6 text-[17px] leading-[1.75] text-white/72">
               <p>
                 For the past year, I have worked closely with ecommerce founders
-                and operators on real stores. One problem kept getting sharper:
-                a merchant could have complete product data in its own admin and
-                still have no clear record of what an AI assistant told a buyer.
+                and operators on real stores across product data, discovery,
+                storefront behavior, conversion, and the systems teams use to
+                act.
               </p>
               <p>
-                My first instinct was to turn that into another visibility
-                dashboard. That was wrong. The useful unit is the buying
-                question itself: the observed answer, the competing products,
-                the evidence you can change, and the re-check after the change.
+                The repeated problem was not a lack of dashboards. It was the
+                weak connection between a signal, the evidence around it, the
+                decision a team made, and what happened after the action.
               </p>
               <p>
                 Before Beseam, I worked on measurement, reliability, and
@@ -251,18 +360,16 @@ export default function ManifestoPage() {
                 failure somewhere else.
               </p>
               <p>
-                That is why I am building Beseam: a team should be able to
-                follow one product from a real buying question to the observed
-                answer, the product evidence worth changing, the approved
-                update, and a same-question re-check without pretending we
-                control the model.
+                That is why I am building Beseam: to keep what teams observe,
+                what they understand, what they decide, what they act on, and
+                what they learn connected to the evidence behind each step.
               </p>
             </div>
             <Link
               href="/about"
               className="mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-[#e8653a] underline decoration-white/20 underline-offset-7 hover:decoration-[#e8653a]"
             >
-              More about the founder and advisors{" "}
+              More about the founder and advisors
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </Reveal>
@@ -274,7 +381,7 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Evidence first. Approval before change. Same question after.
+                Evidence first. Approval before change. Measurement after.
               </h2>
             </div>
             <div className="border-t border-black/22">
@@ -304,20 +411,19 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Do not optimize for AI in the abstract. Test the buying
-                question.
+                Do not optimize one commerce surface in isolation.
               </h2>
             </div>
             <div>
               <p className="max-w-2xl text-[17px] leading-[1.7] text-black/66">
-                Assistants now answer product questions before many shoppers
-                reach a storefront. The practical response is not to chase every
-                new AI acronym. Ask the buying question, keep the observed
-                answer, compare the products that were named, and work on
-                product evidence the merchant actually controls.
+                A product can lose ground before the visit, in onsite search, on
+                the product page, at checkout, or after a change that never gets
+                measured. The practical response is to connect the evidence that
+                matters to the same commercial question and act on what the
+                merchant can actually control.
               </p>
               <dl className="mt-10 border-t border-black/22">
-                {AI_STANCE.map(([term, detail]) => (
+                {SCOPE_STANCE.map(([term, detail]) => (
                   <div
                     key={term}
                     className="grid gap-2 border-b border-black/18 py-6 sm:grid-cols-[16rem_1fr] sm:gap-6"
@@ -345,7 +451,8 @@ export default function ManifestoPage() {
               </h2>
               <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-black/62">
                 These are the lines we hold when the product is dealing with
-                probabilistic answers and customer-facing product changes.
+                connected evidence, uncertain explanations, and customer-facing
+                changes.
               </p>
             </div>
             <ol className="border-t border-black/22">
@@ -401,6 +508,6 @@ export default function ManifestoPage() {
       </section>
 
       <FirstMonthPromise showManifestoLink={false} />
-    </div>
+    </article>
   );
 }

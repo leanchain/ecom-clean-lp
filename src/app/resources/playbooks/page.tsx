@@ -5,13 +5,15 @@ import type { Metadata } from "next";
 
 import FieldbookShell from "@/components/beseam/fieldbook/fieldbook-shell";
 import { getFieldbookDocuments } from "@/lib/fieldbook-content";
+import { FIELDBOOK_SOCIAL_IMAGE, buildPublicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Commerce Playbooks | Beseam Commerce Fieldbook" },
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Commerce Playbooks | Beseam Commerce Fieldbook",
   description:
     "Coordinated ecommerce investigation and verification sequences for catalog, storefront, discovery, and purchase operations.",
-  alternates: { canonical: "/resources/playbooks" },
-};
+  path: "/resources/playbooks",
+  image: FIELDBOOK_SOCIAL_IMAGE,
+});
 
 export default function PlaybooksPage() {
   const playbooks = getFieldbookDocuments("playbooks");
@@ -41,7 +43,7 @@ export default function PlaybooksPage() {
             </span>
             <span>
               <span className="font-mono text-[8px] uppercase tracking-[0.09em] text-[var(--beseam-accent)]">
-                {playbook.frontmatter.category} · {playbook.frontmatter.status}
+                {playbook.frontmatter.category}
               </span>
               <span className="mt-2 block text-[17px] font-semibold text-[var(--beseam-ink)]">
                 {playbook.frontmatter.title}
