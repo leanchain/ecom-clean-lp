@@ -942,13 +942,8 @@ export default function HeroSurfaceShift() {
   const pointerProximityRef = useRef(0);
   const autoJourneyPathRef = useRef<SVGPathElement>(null);
   const autoSignalRef = useRef<HTMLDivElement>(null);
-  const autoSignalPositionRef = useRef<Point | null>(null);
-  const autoSignalFrameTimeRef = useRef<number | null>(null);
-  const autoSignalGeometryRef = useRef<{
-    matrix: DOMMatrix;
-    rootLeft: number;
-    rootTop: number;
-  } | null>(null);
+  const autoSignalAnimationRef = useRef<Animation | null>(null);
+  const autoVisualFrameTimeRef = useRef(0);
   const autoVisualRef = useRef<{ full: string | null; soft: string | null }>({
     full: null,
     soft: null,
@@ -1096,52 +1091,20 @@ export default function HeroSurfaceShift() {
       });
     });
   }, [graphHeight, graphLayout, layoutHubs, layoutName]);
-  const setAutoSignalPosition = useCallback(
-    (point: Point, smooth: boolean, now = performance.now()) => {
-      const marker = autoSignalRef.current;
-      if (!marker) return;
+  const setAutoSignalPosition = useCallback((point: Point) => {
+    const marker = autoSignalRef.current;
+    const root = rootRef.current;
+    const matrix = svgRef.current?.getScreenCTM();
+    if (!marker || !root || !matrix) return;
 
-      let geometry = autoSignalGeometryRef.current;
-      if (!geometry) {
-        const root = rootRef.current;
-        const matrix = svgRef.current?.getScreenCTM();
-        if (!root || !matrix) return;
-        const bounds = root.getBoundingClientRect();
-        geometry = {
-          matrix,
-          rootLeft: bounds.left,
-          rootTop: bounds.top,
-        };
-        autoSignalGeometryRef.current = geometry;
-      }
+    const bounds = root.getBoundingClientRect();
+    const screenPoint = new DOMPoint(point.x, point.y).matrixTransform(matrix);
+    const x = screenPoint.x - bounds.left;
+    const y = screenPoint.y - bounds.top;
 
-      const screenPoint = new DOMPoint(point.x, point.y).matrixTransform(
-        geometry.matrix,
-      );
-      const target = {
-        x: screenPoint.x - geometry.rootLeft,
-        y: screenPoint.y - geometry.rootTop,
-      };
-      const previous = autoSignalPositionRef.current;
-      const lastFrame = autoSignalFrameTimeRef.current;
-      let display = target;
-
-      if (smooth && previous && lastFrame !== null) {
-        const delta = Math.max(1, Math.min(40, now - lastFrame));
-        const alpha = 1 - Math.exp(-delta / 58);
-        display = {
-          x: previous.x + (target.x - previous.x) * alpha,
-          y: previous.y + (target.y - previous.y) * alpha,
-        };
-      }
-
-      autoSignalPositionRef.current = display;
-      autoSignalFrameTimeRef.current = now;
-      marker.style.transform = `translate3d(${display.x}px, ${display.y}px, 0) translate(-50%, -50%)`;
-      marker.style.opacity = "1";
-    },
-    [],
-  );
+    marker.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    marker.style.opacity = "1";
+  }, []);
   const setForegroundProgress = useCallback((value: number) => {
     const clamped = Math.max(0, Math.min(1, value));
     foregroundProgressRef.current = clamped;
@@ -1245,10 +1208,9 @@ export default function HeroSurfaceShift() {
       autoPhase === "ending"
         ? autoJourney.nodes[autoJourney.nodes.length - 1]
         : autoJourney.nodes[0];
-    autoSignalGeometryRef.current = null;
-    autoSignalPositionRef.current = null;
-    autoSignalFrameTimeRef.current = null;
-    setAutoSignalPosition(hubById[hubId], false);
+    autoSignalAnimationRef.current?.cancel();
+    autoSignalAnimationRef.current = null;
+    setAutoSignalPosition(hubById[hubId]);
   }, [
     autoJourney,
     autoJourneyVisible,
@@ -1261,17 +1223,38 @@ export default function HeroSurfaceShift() {
     if (!autoJourneyVisible || autoPhase !== "traveling") return;
 
     const path = autoJourneyPathRef.current;
-    if (!path || !autoSignalRef.current) return;
+    const marker = autoSignalRef.current;
+    const root = rootRef.current;
+    const matrix = svgRef.current?.getScreenCTM();
+    if (!path || !marker || !root || !matrix) return;
 
     const journeyNodeCount = Math.max(1, autoJourney.nodes.length);
     const duration = journeyNodeCount * 5400;
     const length = path.getTotalLength();
-    const startedAt = performance.now();
     const activationRadius = Math.max(150, focusRadius * 0.64);
+    const bounds = root.getBoundingClientRect();
+    const sampleCount = Math.min(280, Math.max(96, Math.ceil(length / 5)));
+    const keyframes: Keyframe[] = [];
 
-    autoSignalGeometryRef.current = null;
-    autoSignalPositionRef.current = null;
-    autoSignalFrameTimeRef.current = null;
+    for (let index = 0; index < sampleCount; index += 1) {
+      const offset = index / (sampleCount - 1);
+      const point = path.getPointAtLength(length * offset);
+      const screenPoint = new DOMPoint(point.x, point.y).matrixTransform(matrix);
+      keyframes.push({
+        offset,
+        transform: `translate3d(${screenPoint.x - bounds.left}px, ${screenPoint.y - bounds.top}px, 0)`,
+      });
+    }
+
+    autoSignalAnimationRef.current?.cancel();
+    const markerAnimation = marker.animate(keyframes, {
+      duration,
+      easing: "linear",
+      fill: "forwards",
+    });
+    autoSignalAnimationRef.current = markerAnimation;
+    autoVisualFrameTimeRef.current = 0;
+    marker.style.opacity = "1";
 
     const updateWaypoint = (hubId: HubId) => {
       if (autoContextHubRef.current === hubId) return;
@@ -1282,45 +1265,53 @@ export default function HeroSurfaceShift() {
       setAutoApproachHubId(hubId);
     };
 
-    const moveSignal = (now: number) => {
-      const progress = Math.min(1, (now - startedAt) / duration);
-      const point = path.getPointAtLength(length * progress);
-      setAutoSignalPosition(point, true, now);
+    const updateVisuals = (now: number) => {
+      const animationTime = markerAnimation.currentTime;
+      const elapsed =
+        typeof animationTime === "number" ? animationTime : Math.max(0, now);
+      const progress = Math.min(1, elapsed / duration);
 
-      let nearestHubId: HubId | null = null;
-      let nearestDistance = Number.POSITIVE_INFINITY;
-      autoJourney.nodes.forEach((hubId) => {
-        const hub = hubById[hubId];
-        const distance = Math.sqrt(squaredDistance(point, hub));
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nearestHubId = hubId;
+      if (now - autoVisualFrameTimeRef.current >= 34 || progress >= 1) {
+        autoVisualFrameTimeRef.current = now;
+        const point = path.getPointAtLength(length * progress);
+        let nearestHubId: HubId | null = null;
+        let nearestDistance = Number.POSITIVE_INFINITY;
+
+        autoJourney.nodes.forEach((hubId) => {
+          const hub = hubById[hubId];
+          const distance = Math.sqrt(squaredDistance(point, hub));
+          if (distance < nearestDistance) {
+            nearestDistance = distance;
+            nearestHubId = hubId;
+          }
+        });
+
+        if (nearestHubId) {
+          updateWaypoint(nearestHubId);
+          const nodeProgress = proximityProgress(
+            nearestDistance,
+            activationRadius,
+          );
+          const supportProgress =
+            0.32 +
+            proximityProgress(nearestDistance, activationRadius * 1.4) * 0.68;
+          setForegroundProgress(nodeProgress);
+          setSupportProgress(supportProgress);
         }
-      });
-
-      if (nearestHubId) {
-        updateWaypoint(nearestHubId);
-        const nodeProgress = proximityProgress(
-          nearestDistance,
-          activationRadius,
-        );
-        const supportProgress =
-          0.32 +
-          proximityProgress(nearestDistance, activationRadius * 1.4) * 0.68;
-        setForegroundProgress(nodeProgress);
-        setSupportProgress(supportProgress);
       }
 
       if (progress < 1) {
-        autoTravelFrameRef.current = requestAnimationFrame(moveSignal);
+        autoTravelFrameRef.current = requestAnimationFrame(updateVisuals);
         return;
       }
 
       autoTravelFrameRef.current = null;
       const finalHubId = autoJourney.nodes[autoJourney.nodes.length - 1];
-      autoSignalPositionRef.current = null;
-      autoSignalFrameTimeRef.current = null;
-      setAutoSignalPosition(hubById[finalHubId], false, now);
+      markerAnimation.finish();
+      markerAnimation.commitStyles?.();
+      markerAnimation.cancel();
+      autoSignalAnimationRef.current = null;
+      setAutoSignalPosition(hubById[finalHubId]);
       autoContextHubRef.current = finalHubId;
       setAutoContextHubId(finalHubId);
       autoVisualRef.current = { full: finalHubId, soft: finalHubId };
@@ -1331,13 +1322,15 @@ export default function HeroSurfaceShift() {
       setAutoPhase("ending");
     };
 
-    const startPoint = path.getPointAtLength(0);
-    setAutoSignalPosition(startPoint, false, startedAt);
-    autoTravelFrameRef.current = requestAnimationFrame(moveSignal);
+    autoTravelFrameRef.current = requestAnimationFrame(updateVisuals);
     return () => {
       if (autoTravelFrameRef.current !== null) {
         cancelAnimationFrame(autoTravelFrameRef.current);
         autoTravelFrameRef.current = null;
+      }
+      if (autoSignalAnimationRef.current === markerAnimation) {
+        markerAnimation.cancel();
+        autoSignalAnimationRef.current = null;
       }
     };
   }, [
@@ -2048,7 +2041,7 @@ export default function HeroSurfaceShift() {
         <div
           ref={autoSignalRef}
           key={`auto-signal-${autoJourney.id}`}
-          className="hero-kg-auto-signal absolute left-0 top-0 z-20 flex items-center gap-1.5"
+          className="hero-kg-auto-signal absolute left-0 top-0 z-20 grid place-items-center"
         >
           <User
             aria-hidden="true"
@@ -2056,7 +2049,6 @@ export default function HeroSurfaceShift() {
             size={17}
             strokeWidth={2}
           />
-          <span className="hero-kg-auto-user-label">user</span>
         </div>
       ) : null}
 
@@ -2306,26 +2298,20 @@ export default function HeroSurfaceShift() {
           filter: drop-shadow(0 0 3px rgba(184,68,29,.2));
         }
         .hero-kg-auto-signal {
+          width: 18px;
+          height: 18px;
+          margin-left: -9px;
+          margin-top: -9px;
           opacity: 0;
           pointer-events: none;
           will-change: transform;
-          transform: translate3d(0, 0, 0) translate(-50%, -50%);
+          transform: translate3d(0, 0, 0);
           backface-visibility: hidden;
           contain: layout paint style;
         }
         .hero-kg-auto-user-icon {
           flex: 0 0 auto;
           color: ${ACCENT};
-        }
-        .hero-kg-auto-user-label {
-        .hero-kg-auto-user-label {
-          color: ${ACCENT};
-          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-          font-size: 11px;
-          font-weight: 700;
-          line-height: 1;
-          letter-spacing: 0.025em;
-          white-space: nowrap;
         }
         .hero-kg-support-edges path {
           stroke: ${ACCENT};
@@ -2337,6 +2323,8 @@ export default function HeroSurfaceShift() {
           filter: drop-shadow(0 0 3px rgba(184,68,29,.12));
           transition: stroke-opacity 90ms linear;
         }
+        .hero-kg-capability-edges line {
+          --kg-spot: 0;
           stroke: ${ACCENT};
           stroke-width: 0.62;
           stroke-opacity: calc(var(--kg-spot, 0) * .24);
