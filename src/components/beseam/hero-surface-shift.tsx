@@ -1231,6 +1231,7 @@ export default function HeroSurfaceShift() {
     const journeyNodeCount = Math.max(1, autoJourney.nodes.length);
     const duration = journeyNodeCount * 5400;
     const length = path.getTotalLength();
+    const startedAt = performance.now();
     const activationRadius = Math.max(150, focusRadius * 0.64);
     const bounds = root.getBoundingClientRect();
     const sampleCount = Math.min(280, Math.max(96, Math.ceil(length / 5)));
@@ -1239,7 +1240,9 @@ export default function HeroSurfaceShift() {
     for (let index = 0; index < sampleCount; index += 1) {
       const offset = index / (sampleCount - 1);
       const point = path.getPointAtLength(length * offset);
-      const screenPoint = new DOMPoint(point.x, point.y).matrixTransform(matrix);
+      const screenPoint = new DOMPoint(point.x, point.y).matrixTransform(
+        matrix,
+      );
       keyframes.push({
         offset,
         transform: `translate3d(${screenPoint.x - bounds.left}px, ${screenPoint.y - bounds.top}px, 0)`,
@@ -1268,7 +1271,9 @@ export default function HeroSurfaceShift() {
     const updateVisuals = (now: number) => {
       const animationTime = markerAnimation.currentTime;
       const elapsed =
-        typeof animationTime === "number" ? animationTime : Math.max(0, now);
+        typeof animationTime === "number"
+          ? animationTime
+          : Math.max(0, now - startedAt);
       const progress = Math.min(1, elapsed / duration);
 
       if (now - autoVisualFrameTimeRef.current >= 34 || progress >= 1) {
@@ -2040,7 +2045,6 @@ export default function HeroSurfaceShift() {
       {autoJourneyVisible ? (
         <div
           ref={autoSignalRef}
-          key={`auto-signal-${autoJourney.id}`}
           className="hero-kg-auto-signal absolute left-0 top-0 z-20 grid place-items-center"
         >
           <User

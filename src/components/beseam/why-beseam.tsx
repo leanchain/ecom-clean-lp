@@ -4,23 +4,28 @@ import { ArrowRight } from "lucide-react";
 
 import { Reveal } from "@/components/beseam/reveal";
 
-const ARGUMENT = [
-  [
-    "See the loss",
-    "A product can disappear before the click or a shopper can fail to find and choose it onsite. Beseam brings external discovery and onsite behavior into the same commerce picture.",
-  ],
-  [
-    "Narrow the problem",
-    "Compare product and store facts, competitor evidence, search and discovery behavior, and conversion signals to narrow the problem to something you can actually change.",
-  ],
-  [
-    "Ship the fix",
-    "Turn the diagnosis into approved work across product data, content, merchandising, creative, and supported store experiences. Publish or hand it off, with the previous value kept when Beseam makes the change.",
-  ],
-  [
-    "Prove the result",
-    "Re-check the original discovery signal and measure downstream behavior, conversion, orders, or revenue separately. Keep observed results distinct from modeled estimates and unsupported causal claims.",
-  ],
+const CONNECTED_PROBLEMS = [
+  {
+    signal: "Before the click",
+    title: "Your product disappears from discovery.",
+    detail:
+      "The problem may sit in missing product facts, weak category evidence, inconsistent availability, or stronger competitor representation. Beseam brings those signals together before deciding what is worth changing.",
+    evidence: "Product facts · availability · category evidence · competitors",
+  },
+  {
+    signal: "On your store",
+    title: "Shoppers cannot find the right product.",
+    detail:
+      "The problem may sit in catalog data, onsite ranking, merchandising, filters, recommendations, or the language shoppers use. Beseam connects the behavior to the product and store context around it.",
+    evidence: "Catalog · onsite search · merchandising · behavior",
+  },
+  {
+    signal: "At the decision",
+    title: "A product gets attention but does not convert.",
+    detail:
+      "The problem may be missing decision evidence, unclear shipping, weak creative, trust gaps, price context, or checkout friction. Beseam helps narrow the problem before proposing a supported change.",
+    evidence: "PDP evidence · creative · trust · checkout · conversion",
+  },
 ] as const;
 
 export default function WhyBeseam() {
@@ -30,67 +35,68 @@ export default function WhyBeseam() {
       className="scroll-mt-24 border-b border-black/18 bg-[#111318] text-white"
     >
       <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
-        <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
-          <div>
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#e8653a]">
-              From signal to shipped work
-            </p>
-            <h2 className="mt-7 max-w-[16ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-              See what&rsquo;s behind the problem.
-            </h2>
-            <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-white/72">
-              Discovery, catalog, brand, onsite search, creative, conversion,
-              and analytics usually live in separate tools. Beseam connects the
-              evidence so the output is not another report: it is the next piece
-              of work worth doing.
-            </p>
-            <p className="mt-5 max-w-md text-[14px] leading-[1.7] text-white/56">
-              I kept seeing ecommerce teams find a problem in one tool, make a
-              change somewhere else, and lose the proof in between. Beseam is
-              built to keep the problem, the approved fix, and the measured
-              result together. Before Beseam, I worked on measurement and
-              reliability at Google and Amazon.{" "}
-              <Link
-                href="/manifesto"
-                className="underline decoration-white/25 underline-offset-4 hover:decoration-white/60"
-              >
-                Why I&rsquo;m building Beseam
-              </Link>
-              .
+        <Reveal>
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
+            <div>
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#e8653a]">
+                Connected evidence
+              </p>
+              <h2 className="mt-7 max-w-[16ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
+                See what&rsquo;s behind the problem.
+              </h2>
+            </div>
+            <p className="max-w-[60ch] text-[16px] leading-[1.75] text-white/72">
+              A weak result is rarely isolated. What looks like an AI visibility
+              problem, a search problem, or a conversion problem can be connected
+              to product data, merchandising, content, creative, behavior, or
+              something further downstream.
             </p>
           </div>
+        </Reveal>
 
-          <div className="border-t border-white/22">
-            {ARGUMENT.map(([title, body], index) => (
+        <Reveal delay={0.08}>
+          <div className="mt-14 grid border-t border-white/24 lg:grid-cols-3">
+            {CONNECTED_PROBLEMS.map((problem, index) => (
               <article
-                key={title}
-                className="grid gap-3 border-b border-white/18 py-6 sm:grid-cols-[3rem_13rem_1fr] sm:gap-6"
+                key={problem.title}
+                className="border-b border-white/18 py-7 lg:border-b-0 lg:border-l lg:px-8 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0"
               >
-                <span className="font-mono text-[12px] text-white/72">
-                  0{index + 1}
-                </span>
-                <h3 className="text-[16px] font-semibold text-white/88">
-                  {title}
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-[12px] text-[#e8653a]">
+                    0{index + 1}
+                  </span>
+                  <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-white/54">
+                    {problem.signal}
+                  </p>
+                </div>
+                <h3 className="mt-5 max-w-[20ch] text-balance text-[20px] font-semibold leading-[1.25] text-white/92">
+                  {problem.title}
                 </h3>
-                <p className="text-[14px] leading-relaxed text-white/72">
-                  {body}
+                <p className="mt-4 text-[14px] leading-[1.75] text-white/68">
+                  {problem.detail}
+                </p>
+                <p className="mt-5 font-mono text-[11px] leading-relaxed text-white/44">
+                  {problem.evidence}
                 </p>
               </article>
             ))}
+          </div>
+        </Reveal>
 
-            <p className="mt-8 max-w-[64ch] text-[15px] leading-[1.7] text-white/72">
-              The free AI check on this page is one live external-discovery
-              signal, not the whole product. Inside Beseam, that signal joins
-              store, product, brand, search, behavior, creative, conversion, and
-              impact evidence.
+        <Reveal delay={0.12}>
+          <div className="mt-10 flex flex-col gap-5 border-t border-white/16 pt-8 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+            <p className="max-w-[72ch] text-[13px] leading-[1.7] text-white/52">
+              Beseam grew out of seeing ecommerce teams diagnose a problem in one
+              system, make a change in another, and lose the evidence in between.
+              The goal is to keep the problem, the approved change, and the
+              measured result connected.
             </p>
-
             <Link
-              href="/platform"
-              className="mt-6 inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-[#e8653a] underline decoration-white/20 underline-offset-7 hover:decoration-[#e8653a]"
+              href="/manifesto"
+              className="inline-flex min-h-10 shrink-0 items-center gap-2 text-[13px] font-semibold text-[#e8653a] underline decoration-white/20 underline-offset-6 hover:decoration-[#e8653a]"
             >
-              See the platform{" "}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              Why I&rsquo;m building Beseam
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
         </Reveal>

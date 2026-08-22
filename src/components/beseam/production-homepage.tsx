@@ -35,32 +35,38 @@ const COMMERCE_SCOPE = [
       "Re-check the relevant signal and connect approved changes to behavior, conversion, orders, revenue, or incrementality where the evidence supports it.",
     signals: "Conversion · orders · revenue · attribution · impact",
   },
+const OPERATING_LOOP = [
+  {
+    title: "Observe",
+    lead: "See what is happening across commerce.",
+    detail:
+      "Watch AI and search discovery, onsite search, recommendations, product pages, campaigns, shopper behavior, checkout, competitors, and revenue in one connected picture.",
+  },
+  {
+    title: "Understand",
+    lead: "Connect the signals around the outcome.",
+    detail:
+      "Bring catalog and brand truth together with shopper journeys, search intent, friction, attribution, and product evidence to understand what may be driving the result.",
+  },
+  {
+    title: "Decide",
+    lead: "Choose what should happen next.",
+    detail:
+      "Prioritize opportunities, predict likely shopper needs, improve ranking and recommendations, choose merchandising or personalization, and decide what is worth testing.",
+  },
+  {
+    title: "Act",
+    lead: "Turn the decision into approved work.",
+    detail:
+      "Change product data, content, merchandising, recommendations, creative, campaigns, and supported store experiences, with approval where customer-facing work is involved.",
+  },
+  {
+    title: "Learn",
+    lead: "Measure the result and feed it back in.",
+    detail:
+      "Measure discovery, behavior, conversion, orders, revenue, incrementality, and impact where supported, then use what happened to improve the next decision.",
+  },
 ] as const;
-
-const STEPS = [
-  {
-    title: "Find",
-    lead: "Find the problem worth fixing.",
-    detail:
-      "Bring together external discovery, product, catalog and brand evidence, onsite behavior, and conversion signals so the problem is visible in one place.",
-  },
-  {
-    title: "Prioritize",
-    lead: "Know what matters commercially.",
-    detail:
-      "Tie the issue to the products, shoppers, demand, and business outcome it affects. Not every gap deserves the same attention.",
-  },
-  {
-    title: "Fix",
-    lead: "Make the change, not another report.",
-    detail:
-      "Beseam prepares supported changes to product data, content, merchandising, creative, and supported store experiences. You approve customer-facing work before it ships.",
-  },
-  {
-    title: "Prove",
-    lead: "Measure what changed.",
-    detail:
-      "Re-check the relevant discovery or onsite signal and measure behavior, conversion, orders, or revenue separately, with the evidence behind the result.",
   },
 ] as const;
 
@@ -172,67 +178,33 @@ export default function ProductionHomepage() {
 
       <WhyBeseam />
 
-      <section id="ai-check" className="scroll-mt-24 bg-[#faf1eb]">
-        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
-          <Reveal>
-            <div className="mx-auto max-w-[72rem] text-center">
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
-                One external-discovery signal
-              </p>
-              <h2 className="mx-auto mt-7 max-w-[18ch] text-balance font-display text-[clamp(2.6rem,4.4vw,4.8rem)] font-normal leading-[1] tracking-[-0.025em] text-[#111318]">
-                See why AI picked someone else.
-              </h2>
-              <p className="mx-auto mt-7 max-w-[68ch] text-[17px] leading-[1.7] text-black/64">
-                A buying question can reveal where your product disappears and
-                which competitors get put in front of the shopper instead. Run
-                the live check below. Inside Beseam, this signal joins product,
-                catalog, brand, store, behavior, conversion, and impact
-                evidence.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.08} y={18}>
-            <div className="mx-auto mt-12 max-w-[76rem]">
-              <LiveAnswerCheck placement="homepage_ai_check" />
-              <div className="mt-6 flex justify-center text-center">
-                <Link
-                  href="#benchmarks"
-                  className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#b8441d]"
-                >
-                  See the AI benchmark
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <CategoryBenchmarksSection />
-
       <section id="proof" className="scroll-mt-24 bg-white">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal>
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-end lg:gap-16">
-              <h2 className="max-w-[15ch] text-balance font-display text-[clamp(2.4rem,3.8vw,4rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
-                From problem to measured change.
-              </h2>
-              <p className="max-w-[56ch] text-[17px] leading-[1.65] text-black/64">
-                The useful product is not another dashboard. It is knowing where
-                commerce is being lost, which change deserves attention, getting
-                that work shipped safely, and measuring the relevant signal
-                again afterward.
+              <div>
+                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+                  How Beseam works
+                </p>
+                <h2 className="mt-7 max-w-[15ch] text-balance font-display text-[clamp(2.4rem,3.8vw,4rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
+                  Observe. Understand. Decide. Act. Learn.
+                </h2>
+              </div>
+              <p className="max-w-[58ch] text-[17px] leading-[1.65] text-black/64">
+                Beseam is a continuous commerce intelligence loop. It watches how
+                shoppers discover and move through your business, connects the
+                evidence, decides what should happen next, helps put that decision
+                into action, and learns from the result.
               </p>
             </div>
           </Reveal>
 
           <Reveal delay={0.08}>
-            <ol className="mt-14 grid border-t-2 border-[#111318] sm:grid-cols-2 lg:grid-cols-4">
-              {STEPS.map((step, index) => (
+            <ol className="mt-14 grid border-t-2 border-[#111318] sm:grid-cols-2 lg:grid-cols-5">
+              {OPERATING_LOOP.map((step, index) => (
                 <li
                   key={step.title}
-                  className="relative flex flex-col gap-3 border-b border-black/14 py-7 sm:border-b-0 sm:px-7 sm:first:pl-0 sm:last:pr-0 lg:border-l lg:border-black/14 lg:first:border-l-0"
+                  className="relative flex flex-col gap-3 border-b border-black/14 py-7 sm:px-7 sm:[&:nth-child(odd)]:pl-0 lg:border-b-0 lg:border-l lg:border-black/14 lg:px-6 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0"
                 >
                   <div className="flex items-baseline gap-3">
                     <span className="font-mono text-[12px] font-semibold tabular-nums text-[#b8441d]">
@@ -254,6 +226,61 @@ export default function ProductionHomepage() {
           </Reveal>
         </div>
       </section>
+                    </h3>
+                  </div>
+                  <p className="text-balance text-[19px] font-medium leading-[1.25] tracking-[-0.01em] text-[#111318]">
+                    {step.lead}
+                  </p>
+                  <p className="text-[14px] leading-relaxed text-black/62">
+                    {step.detail}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        </div>
+      </section>
+
+      <section id="ai-check" className="scroll-mt-24 bg-[#faf1eb]">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <Reveal>
+            <div className="mx-auto max-w-[72rem] text-center">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+                Try one signal
+              </p>
+              <h2 className="mx-auto mt-7 max-w-[18ch] text-balance font-display text-[clamp(2.6rem,4.4vw,4.8rem)] font-normal leading-[1] tracking-[-0.025em] text-[#111318]">
+                See why AI picked someone else.
+              </h2>
+              <p className="mx-auto mt-7 max-w-[62ch] text-[17px] leading-[1.7] text-black/64">
+                Ask a buying question your customer might ask. See whether your
+                products appear, who gets recommended instead, and what Beseam
+                can investigate next.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.08} y={18}>
+            <div className="mx-auto mt-12 max-w-[76rem]">
+              <LiveAnswerCheck placement="homepage_ai_check" />
+              <p className="mx-auto mt-6 max-w-[64ch] text-center text-[13px] leading-[1.7] text-black/52">
+                AI visibility is one signal Beseam connects with product, store,
+                behavior, conversion, and commercial evidence.
+              </p>
+              <div className="mt-4 flex justify-center text-center">
+                <Link
+                  href="#benchmarks"
+                  className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#b8441d]"
+                >
+                  See the AI benchmark
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <CategoryBenchmarksSection />
 
       <FirstMonthPromise />
     </div>
