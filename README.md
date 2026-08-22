@@ -7,8 +7,8 @@ It presents two equal, connected product stories:
 - AI Visibility (GEO): answer-engine visibility, product accuracy, merchant control, citations and competitors.
 
 Both workspaces keep the underlying evidence and observation time visible. The
-primary conversion route is `/store-health-review`; the free AI visibility scan
-remains available at `/tools/ai-visibility-scan`.
+primary conversion route is the homepage journey; the free AI discovery scan
+is available at `/scan`.
 
 ## Local development
 

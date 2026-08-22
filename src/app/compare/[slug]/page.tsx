@@ -6,7 +6,11 @@ import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
-import { COMPARISONS, getComparison } from "@/lib/comparisons";
+import {
+  COMPARISONS,
+  getComparison,
+  getPracticalComparison,
+} from "@/lib/comparisons";
 import { buildPublicMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -48,6 +52,7 @@ export default async function ComparisonPage({
 
   if (!comparison) notFound();
 
+  const practical = getPracticalComparison(slug);
   const related = COMPARISONS.filter(
     (item) => item.slug !== comparison.slug,
   ).slice(0, 3);
@@ -191,6 +196,89 @@ export default async function ComparisonPage({
           </div>
         </div>
       </section>
+
+      <section className="border-b border-black/18">
+        <div className="mx-auto max-w-[92rem] px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
+          <div className="grid gap-8 border-y border-black/24 py-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
+            <div>
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+                Stack boundary
+              </p>
+              <h2 className="mt-4 font-serif text-[34px] leading-[1.02] tracking-[-0.02em]">
+                What Beseam does not replace
+              </h2>
+            </div>
+            <p className="max-w-[68ch] self-end text-[16px] leading-[1.72] text-black/64">
+              {comparison.notAReplacementFor}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {practical ? (
+        <section className="border-b border-black/18 bg-[#f6f6f6]">
+          <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
+            <div className="grid gap-12 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
+              <div>
+                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+                  Buying reality
+                </p>
+                <h2 className="mt-5 max-w-[15ch] font-serif text-[38px] leading-[1.04] tracking-[-0.02em]">
+                  What changes in practice.
+                </h2>
+                <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.1em] text-black/58">
+                  Checked {formatReviewDate(practical.reviewedAt)}
+                </p>
+              </div>
+
+              <div>
+                <div className="border-t border-black/24">
+                  <div className="hidden grid-cols-[0.72fr_1fr_1fr] border-b border-black/18 py-3 font-mono text-[11px] uppercase tracking-[0.12em] text-black/58 md:grid">
+                    <span>Practical question</span>
+                    <span>{comparison.name}</span>
+                    <span>Beseam</span>
+                  </div>
+                  {practical.rows.map((row) => (
+                    <div
+                      key={row.criterion}
+                      className="grid gap-4 border-b border-black/18 py-6 md:grid-cols-[0.72fr_1fr_1fr] md:gap-8"
+                    >
+                      <h3 className="text-[14px] font-semibold text-black/82">
+                        {row.criterion}
+                      </h3>
+                      <div>
+                        <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-black/54 md:hidden">
+                          {comparison.name}
+                        </span>
+                        <p className="mt-1 text-[13px] leading-relaxed text-black/62 md:mt-0">
+                          {row.competitor}
+                        </p>
+                      </div>
+                      <div>
+                        <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-[#b8441d] md:hidden">
+                          Beseam
+                        </span>
+                        <p className="mt-1 text-[13px] leading-relaxed text-black/68 md:mt-0">
+                          {row.beseam}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href={practical.source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 text-[12px] font-semibold text-black/62 transition-colors hover:text-[#b8441d]"
+                >
+                  {practical.source.label}
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
@@ -340,19 +428,6 @@ export default async function ComparisonPage({
                 className="h-auto w-full"
               />
             </figure>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-black/18">
-        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
-          <div className="grid gap-10 border-y border-black/24 py-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
-            <h2 className="font-serif text-[34px] leading-[1.02] tracking-[-0.02em]">
-              What Beseam does not replace
-            </h2>
-            <p className="max-w-[68ch] text-[16px] leading-[1.72] text-black/64">
-              {comparison.notAReplacementFor}
-            </p>
           </div>
         </div>
       </section>

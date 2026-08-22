@@ -25,17 +25,17 @@ Shared: `book-review-cta.tsx` (new) — single CTA component, label "Book a Stor
 
 ## Navbar / footer
 - `navbar.tsx` (rewrite): Product `#product` · How it works `#how-it-works` · Who it's for `#teams` · About `/about` · Log in (`app.beseam.com/login`) · **Book a Store Health Review**. Remove Recent Reports / Free Scan / Fix Sprint / scan.
-- `footer.tsx` (rewrite): remove scan + Recent Reports; product story, one review CTA, links (Product/How it works/Who it's for/About/Review/Login/Privacy/Terms + low-prominence "AI visibility scan" → `/tools/ai-visibility-scan`).
+- `footer.tsx` (rewrite): remove scan + Recent Reports; product story, one review CTA, links (Product/How it works/Who it's for/About/Review/Login/Privacy/Terms). **Superseded 2026-08-22:** the canonical standalone tool is `/tools/ai-discovery-scan`, using the same live-check experience as the homepage; the old standalone visibility-scan route has been removed.
 
 ## Routes
 - **`src/app/store-health-review/page.tsx`** (new, canonical) — what the review covers / who / what happens after / Cal.com embed (reuse `namespace="Beseam" calLink="pankaj.kumar/Beseam"` from `/demo`) + short contact-form fallback (name, work email, store URL, optional message) + success state. `next.config` redirect `/demo` → `/store-health-review`.
-- **`src/app/tools/ai-visibility-scan/page.tsx`** (new, low-prominence) — relocate the store-domain scan form (from old hero) → `app.beseam.com/store`. Footer-linked only.
+- **AI discovery scan route** — **superseded 2026-08-22:** the canonical page is `/tools/ai-discovery-scan`; the duplicate standalone lead form and old compatibility route were removed.
 - **`src/app/about/page.tsx`** (rewrite) — same visual system; founder story/experience/motivation/advisors(with permission)/contact; drop inflated cards.
 - **`src/app/product/page.tsx`** (new) — fuller product page reusing model/how-it-works/evidence sections. (Nav "Product" points to `#product` anchor; `/product` is the deep page.)
 - Retire from render (leave files, stop importing): stats-bar, alert-ticker, detection, comparison, testimonials, proof, seo-scan, pricing, before-after-ai, outcomes, trust, workspace-preview, mid-page-cta.
 
 ## Metadata / SEO (`src/app/layout.tsx`, `head.tsx`, `sitemap.ts`)
-Title stays "Beseam — Store Health for Shopify"; rewrite description + OG/Twitter to review-led Store Health (drop scan-first); JSON-LD Organization/WebSite honest (no `aggregateRating`); add `/store-health-review`, `/product`, `/tools/ai-visibility-scan` to sitemap; canonical `https://beseam.com`.
+Title stays "Beseam — Store Health for Shopify"; rewrite description + OG/Twitter to review-led Store Health (drop scan-first); JSON-LD Organization/WebSite honest (no `aggregateRating`); canonical `https://beseam.com`. **Superseded 2026-08-22:** list `/tools/ai-discovery-scan` in the sitemap; the old visibility-scan route is not published.
 
 ## Consolidate tracking.beseam.com (`landings/beseam-tracking-lp`)
 Static export → only Netlify/CF redirects work. Update existing `netlify.toml [[redirects]]` `to = "https://beseam.com/#purchase-health"` (force 301, UTMs auto-forward); add `public/_redirects` (`/* https://beseam.com/#purchase-health 301!`) for the Cloudflare target; set layout metadata `robots: noindex`. Keep repo; do NOT delete (deployment ownership unknown — flag).

@@ -12,7 +12,7 @@ Not "a self-improving revenue agent". Not a dashboard. A team with an unfair ins
 
 | Rung | What it is | Price | Purpose |
 |---|---|---|---|
-| 1 | Free AI visibility scan (`/tools/ai-visibility-scan`) | £0 | Lead capture, already built, currently buried |
+| 1 | Free AI discovery scan (`/tools/ai-discovery-scan`) | £0 | Live scan using the same check experience as the homepage |
 | 2 | **Store teardown** — fixed-fee diagnostic, 5 working days, written findings + prioritised fixes | fixed, published | Qualifies buyers with money; produces case-study material |
 | 3 | **Monthly operating retainer** — we run detection + remediation, you approve | published band | The revenue |
 | 4 | Platform seat (later) | — | Not sold yet; do not advertise self-serve you cannot support |

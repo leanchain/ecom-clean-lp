@@ -55,15 +55,27 @@ const COMPARISON_LAYERS = [
   },
 ] as const;
 
-const HIGH_INTENT_COMPARISON_SLUGS = new Set([
+const FEATURED_COMPARISON_SLUGS = [
+  "profound",
+  "triple-whale",
   "google-analytics",
-  "microsoft-clarity",
   "hotjar",
-]);
+  "microsoft-clarity",
+  "noibu",
+] as const;
+
+const FEATURED_COMPARISON_SLUG_SET = new Set<string>(
+  FEATURED_COMPARISON_SLUGS,
+);
 
 export default function ComparePage() {
   const comparisonIndex = new Map(
     COMPARISONS.map((comparison, index) => [comparison.slug, index]),
+  );
+  const featuredComparisons = FEATURED_COMPARISON_SLUGS.map((slug) =>
+    COMPARISONS.find((comparison) => comparison.slug === slug),
+  ).filter((comparison): comparison is (typeof COMPARISONS)[number] =>
+    Boolean(comparison),
   );
 
   const itemListJsonLd = {
@@ -114,25 +126,75 @@ export default function ComparePage() {
 
       <section className="border-b border-black/18 bg-[#f6f6f6]">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <div className="grid gap-8 border-t border-black/24 pt-5 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-10">
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+              Start here
+            </p>
+            <div className="max-w-2xl">
+              <h2 className="font-serif text-[34px] leading-[1.02] tracking-[-0.02em]">
+                Most likely comparisons.
+              </h2>
+              <p className="mt-4 text-[14px] leading-relaxed text-black/62">
+                Six tools that most clearly frame where Beseam belongs in an
+                ecommerce stack: AI discovery, attribution, analytics, behavior,
+                and storefront reliability.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 border-l border-t border-black/24 md:grid-cols-3">
+            {featuredComparisons.map((comparison) => (
+              <Link
+                key={comparison.slug}
+                href={`/compare/${comparison.slug}`}
+                className="group flex flex-col justify-between gap-8 border-b border-r border-black/18 bg-white p-6 transition-colors hover:bg-[#fffdfb] sm:p-7"
+              >
+                <div>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.09em] text-[#b8441d]">
+                    {comparison.category}
+                  </span>
+                  <h3 className="mt-5 text-[20px] font-semibold text-black/84">
+                    Beseam vs {comparison.name}
+                  </h3>
+                  <p className="mt-3 text-[13px] leading-relaxed text-black/62">
+                    {comparison.headline}
+                  </p>
+                </div>
+                <span className="inline-flex items-center gap-2 text-[12px] font-semibold text-[#b8441d]">
+                  Compare
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-black/18">
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div>
             <div className="max-w-2xl">
               <h2 className="font-serif text-[34px] leading-[1.02] tracking-[-0.02em]">
-                {COMPARISONS.length} comparisons across four layers.
+                More tools in the stack.
               </h2>
               <p className="mt-5 text-[14px] leading-relaxed text-black/62">
-                Discovery, analytics, behavior, experimentation, commerce
-                measurement, and reliability each solve a different part of the
-                same commercial problem.
+                {COMPARISONS.length - featuredComparisons.length} additional
+                comparisons across discovery, analytics, behavior,
+                experimentation, commerce measurement, and reliability.
               </p>
             </div>
 
             <div className="mt-14 space-y-16">
               {COMPARISON_LAYERS.map((layer) => {
-                const comparisons = COMPARISONS.filter((comparison) =>
-                  layer.categories.some(
-                    (category) => category === comparison.category,
-                  ),
+                const comparisons = COMPARISONS.filter(
+                  (comparison) =>
+                    !FEATURED_COMPARISON_SLUG_SET.has(comparison.slug) &&
+                    layer.categories.some(
+                      (category) => category === comparison.category,
+                    ),
                 );
+
+                if (comparisons.length === 0) return null;
 
                 return (
                   <div key={layer.title}>
@@ -153,9 +215,6 @@ export default function ComparePage() {
                     <div className="mt-7 grid grid-cols-1 border-l border-t border-black/24 md:grid-cols-3">
                       {comparisons.map((comparison) => {
                         const index = comparisonIndex.get(comparison.slug) ?? 0;
-                        const isHighIntent = HIGH_INTENT_COMPARISON_SLUGS.has(
-                          comparison.slug,
-                        );
 
                         return (
                           <Link
@@ -174,9 +233,6 @@ export default function ComparePage() {
                               </div>
                               <h4 className="mt-5 text-[19px] font-semibold text-black/84">
                                 {comparison.name}
-                                {isHighIntent && (
-                                  <span className="ml-1 text-[#b8441d]">*</span>
-                                )}
                               </h4>
                               <p className="mt-3 text-[13px] leading-relaxed text-black/62">
                                 {comparison.headline}
@@ -194,9 +250,6 @@ export default function ComparePage() {
                 );
               })}
 
-              <p className="font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
-                * Highest search intent among the existing comparison set
-              </p>
             </div>
           </div>
         </div>
