@@ -457,12 +457,12 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "Product workspace",
       "Production",
-      "Synced product and variant truth available for diagnosis and fixes.",
+      "Synced product and variant truth available for diagnosis and decisions.",
     ],
     [
       "Product proposals",
       "Beta",
-      "Generated product-field fixes prepared for merchant review.",
+      "Supported product-field changes prepared for merchant review.",
     ],
     [
       "Product publishing",
@@ -679,9 +679,9 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
       "Focused audit of a product page and its decision evidence.",
     ],
     [
-      "Post-fix verification",
+      "Post-change verification",
       "Experimental",
-      "Re-check whether a prior page finding is actually fixed.",
+      "Re-check a prior page finding after an approved change.",
     ],
     [
       "Policy visibility",
@@ -822,7 +822,7 @@ const WEAK_LINKS = [
 type JourneyDefinition = {
   id: string;
   nodes: readonly HubId[];
-  supportByNode: Partial<Record<HubId, readonly HubId[]>>;
+  supportByNode?: Partial<Record<HubId, readonly HubId[]>>;
 };
 
 const JOURNEYS: readonly JourneyDefinition[] = [
@@ -881,6 +881,16 @@ function curve(a: Hub, b: Hub, bend = 0) {
   return `M ${a.x} ${a.y} Q ${mx + nx * control} ${my + ny * control} ${b.x} ${b.y}`;
 }
 
+function journeySegmentCommand(a: Hub, b: Hub, offset: number) {
+  const mx = (a.x + b.x) / 2;
+  const my = (a.y + b.y) / 2;
+  return `Q ${mx} ${my + offset} ${b.x} ${b.y}`;
+}
+
+function journeySegmentPath(a: Hub, b: Hub, offset: number) {
+  return `M ${a.x} ${a.y} ${journeySegmentCommand(a, b, offset)}`;
+}
+
 function journeyPath(
   ids: readonly string[],
   offset: number,
@@ -890,9 +900,7 @@ function journeyPath(
     const hub = hubById[id];
     if (index === 0) return `M ${hub.x} ${hub.y}`;
     const previous = hubById[ids[index - 1]];
-    const mx = (previous.x + hub.x) / 2;
-    const my = (previous.y + hub.y) / 2;
-    return `${path} Q ${mx} ${my + offset} ${hub.x} ${hub.y}`;
+    return `${path} ${journeySegmentCommand(previous, hub, offset)}`;
   }, "");
 }
 
@@ -1222,124 +1230,200 @@ export default function HeroSurfaceShift() {
   useEffect(() => {
     if (!autoJourneyVisible || autoPhase !== "traveling") return;
 
-    const path = autoJourneyPathRef.current;
     const marker = autoSignalRef.current;
     const root = rootRef.current;
     const matrix = svgRef.current?.getScreenCTM();
-    if (!path || !marker || !root || !matrix) return;
+    if (!marker || !root || !matrix) return;
 
-    const journeyNodeCount = Math.max(1, autoJourney.nodes.length);
-    const duration = journeyNodeCount * 5400;
-    const length = path.getTotalLength();
-    const startedAt = performance.now();
     const activationRadius = Math.max(150, focusRadius * 0.64);
+    const journeyOffset =
+      (autoJourneyIndex % 2 === 0 ? -22 : 22) * verticalScale;
+    const segmentDuration = 5400;
+    const arrivalHoldDuration = 1100;
     const bounds = root.getBoundingClientRect();
-    const sampleCount = Math.min(280, Math.max(96, Math.ceil(length / 5)));
-    const keyframes: Keyframe[] = [];
+    let cancelled = false;
+    let arrivalTimer: number | null = null;
+    let arrivalHoldResolve: (() => void) | null = null;
+    let activeSegmentResolve: (() => void) | null = null;
 
-    for (let index = 0; index < sampleCount; index += 1) {
-      const offset = index / (sampleCount - 1);
-      const point = path.getPointAtLength(length * offset);
-      const screenPoint = new DOMPoint(point.x, point.y).matrixTransform(
-        matrix,
-      );
-      keyframes.push({
-        offset,
-        transform: `translate3d(${screenPoint.x - bounds.left}px, ${screenPoint.y - bounds.top}px, 0)`,
-      });
-    }
-
-    autoSignalAnimationRef.current?.cancel();
-    const markerAnimation = marker.animate(keyframes, {
-      duration,
-      easing: "linear",
-      fill: "forwards",
-    });
-    autoSignalAnimationRef.current = markerAnimation;
-    autoVisualFrameTimeRef.current = 0;
-    marker.style.opacity = "1";
-
-    const updateWaypoint = (hubId: HubId) => {
-      if (autoContextHubRef.current === hubId) return;
+    const activateNode = (hubId: HubId, full: boolean) => {
       autoContextHubRef.current = hubId;
-      autoVisualRef.current = { full: null, soft: hubId };
+      autoVisualRef.current = {
+        full: full ? hubId : null,
+        soft: hubId,
+      };
       setAutoContextHubId(hubId);
-      setAutoFocusHubId(null);
+      setAutoFocusHubId(full ? hubId : null);
       setAutoApproachHubId(hubId);
+      if (full) {
+        setForegroundProgress(1);
+        setSupportProgress(1);
+      }
     };
 
-    const updateVisuals = (now: number) => {
-      const animationTime = markerAnimation.currentTime;
-      const elapsed =
-        typeof animationTime === "number"
-          ? animationTime
-          : Math.max(0, now - startedAt);
-      const progress = Math.min(1, elapsed / duration);
+    const holdAtNode = () =>
+      new Promise<void>((resolve) => {
+        arrivalHoldResolve = resolve;
+        arrivalTimer = window.setTimeout(() => {
+          arrivalTimer = null;
+          arrivalHoldResolve = null;
+          resolve();
+        }, arrivalHoldDuration);
+      });
 
-      if (now - autoVisualFrameTimeRef.current >= 34 || progress >= 1) {
-        autoVisualFrameTimeRef.current = now;
-        const point = path.getPointAtLength(length * progress);
-        let nearestHubId: HubId | null = null;
-        let nearestDistance = Number.POSITIVE_INFINITY;
+    const animateSegment = (fromId: HubId, toId: HubId) =>
+      new Promise<void>((resolve) => {
+        activeSegmentResolve = resolve;
+        const from = hubById[fromId];
+        const to = hubById[toId];
+        const segmentPath = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "path",
+        );
+        segmentPath.setAttribute(
+          "d",
+          journeySegmentPath(from, to, journeyOffset),
+        );
+        const length = segmentPath.getTotalLength();
+        const sampleCount = Math.min(120, Math.max(36, Math.ceil(length / 5)));
+        const keyframes: Keyframe[] = [];
 
-        autoJourney.nodes.forEach((hubId) => {
-          const hub = hubById[hubId];
-          const distance = Math.sqrt(squaredDistance(point, hub));
-          if (distance < nearestDistance) {
-            nearestDistance = distance;
-            nearestHubId = hubId;
-          }
-        });
-
-        if (nearestHubId) {
-          updateWaypoint(nearestHubId);
-          const nodeProgress = proximityProgress(
-            nearestDistance,
-            activationRadius,
+        for (let index = 0; index < sampleCount; index += 1) {
+          const offset = index / (sampleCount - 1);
+          const point = segmentPath.getPointAtLength(length * offset);
+          const screenPoint = new DOMPoint(point.x, point.y).matrixTransform(
+            matrix,
           );
-          const supportProgress =
-            0.32 +
-            proximityProgress(nearestDistance, activationRadius * 1.4) * 0.68;
-          setForegroundProgress(nodeProgress);
-          setSupportProgress(supportProgress);
+          keyframes.push({
+            offset,
+            transform: `translate3d(${screenPoint.x - bounds.left}px, ${screenPoint.y - bounds.top}px, 0)`,
+          });
         }
-      }
 
-      if (progress < 1) {
+        activateNode(fromId, true);
+        autoSignalAnimationRef.current?.cancel();
+        const markerAnimation = marker.animate(keyframes, {
+          duration: segmentDuration,
+          easing: "linear",
+          fill: "forwards",
+        });
+        autoSignalAnimationRef.current = markerAnimation;
+        autoVisualFrameTimeRef.current = 0;
+        marker.style.opacity = "1";
+        const startedAt = performance.now();
+
+        const finishSegment = () => {
+          if (activeSegmentResolve !== resolve) return;
+          activeSegmentResolve = null;
+          autoTravelFrameRef.current = null;
+          markerAnimation.finish();
+          markerAnimation.commitStyles?.();
+          markerAnimation.cancel();
+          if (autoSignalAnimationRef.current === markerAnimation) {
+            autoSignalAnimationRef.current = null;
+          }
+          setAutoSignalPosition(to);
+          activateNode(toId, true);
+          resolve();
+        };
+
+        const updateVisuals = (now: number) => {
+          if (cancelled) return;
+          const animationTime = markerAnimation.currentTime;
+          const elapsed =
+            typeof animationTime === "number"
+              ? animationTime
+              : Math.max(0, now - startedAt);
+          const progress = Math.min(1, elapsed / segmentDuration);
+
+          if (now - autoVisualFrameTimeRef.current >= 34 || progress >= 1) {
+            autoVisualFrameTimeRef.current = now;
+            const point = segmentPath.getPointAtLength(length * progress);
+            const fromDistance = Math.sqrt(squaredDistance(point, from));
+            const toDistance = Math.sqrt(squaredDistance(point, to));
+            const departureProgress = proximityProgress(
+              fromDistance,
+              activationRadius,
+            );
+            const arrivalProgress = proximityProgress(
+              toDistance,
+              activationRadius,
+            );
+            const useDestination = arrivalProgress > departureProgress;
+            const visualHubId = useDestination ? toId : fromId;
+            const nodeProgress = useDestination
+              ? arrivalProgress
+              : departureProgress;
+            const supportDistance = useDestination ? toDistance : fromDistance;
+            const supportProgress =
+              0.32 +
+              proximityProgress(supportDistance, activationRadius * 1.4) * 0.68;
+
+            activateNode(visualHubId, false);
+            setForegroundProgress(nodeProgress);
+            setSupportProgress(supportProgress);
+          }
+
+          if (progress >= 1) {
+            finishSegment();
+            return;
+          }
+
+          autoTravelFrameRef.current = requestAnimationFrame(updateVisuals);
+        };
+
         autoTravelFrameRef.current = requestAnimationFrame(updateVisuals);
+      });
+
+    const runJourney = async () => {
+      const nodes = autoJourney.nodes;
+      if (nodes.length === 0) {
+        if (!cancelled) setAutoPhase("ending");
+        return;
+      }
+      if (nodes.length === 1) {
+        setAutoSignalPosition(hubById[nodes[0]]);
+        activateNode(nodes[0], true);
+        if (!cancelled) setAutoPhase("ending");
         return;
       }
 
-      autoTravelFrameRef.current = null;
-      const finalHubId = autoJourney.nodes[autoJourney.nodes.length - 1];
-      markerAnimation.finish();
-      markerAnimation.commitStyles?.();
-      markerAnimation.cancel();
-      autoSignalAnimationRef.current = null;
-      setAutoSignalPosition(hubById[finalHubId]);
-      autoContextHubRef.current = finalHubId;
-      setAutoContextHubId(finalHubId);
-      autoVisualRef.current = { full: finalHubId, soft: finalHubId };
-      setAutoFocusHubId(finalHubId);
-      setAutoApproachHubId(finalHubId);
-      setForegroundProgress(1);
-      setSupportProgress(1);
-      setAutoPhase("ending");
+      for (let index = 0; index < nodes.length - 1; index += 1) {
+        if (cancelled) return;
+        await animateSegment(nodes[index], nodes[index + 1]);
+        if (cancelled) return;
+
+        if (index < nodes.length - 2) {
+          await holdAtNode();
+          if (cancelled) return;
+        }
+      }
+
+      if (!cancelled) setAutoPhase("ending");
     };
 
-    autoTravelFrameRef.current = requestAnimationFrame(updateVisuals);
+    void runJourney();
+
     return () => {
+      cancelled = true;
       if (autoTravelFrameRef.current !== null) {
         cancelAnimationFrame(autoTravelFrameRef.current);
         autoTravelFrameRef.current = null;
       }
-      if (autoSignalAnimationRef.current === markerAnimation) {
-        markerAnimation.cancel();
-        autoSignalAnimationRef.current = null;
+      if (arrivalTimer !== null) {
+        window.clearTimeout(arrivalTimer);
+        arrivalTimer = null;
       }
+      arrivalHoldResolve?.();
+      arrivalHoldResolve = null;
+      activeSegmentResolve?.();
+      activeSegmentResolve = null;
+      autoSignalAnimationRef.current?.cancel();
+      autoSignalAnimationRef.current = null;
     };
   }, [
     autoJourney,
+    autoJourneyIndex,
     autoJourneyVisible,
     autoPhase,
     focusRadius,
@@ -1347,8 +1431,8 @@ export default function HeroSurfaceShift() {
     setAutoSignalPosition,
     setForegroundProgress,
     setSupportProgress,
+    verticalScale,
   ]);
-
   const cancelClose = useCallback(() => {
     if (!closeTimerRef.current) return;
     clearTimeout(closeTimerRef.current);
@@ -1363,8 +1447,11 @@ export default function HeroSurfaceShift() {
     setActiveCapability(null);
     setActiveSatellite(null);
     setCardState(null);
-    setForegroundProgress(pointerProximityRef.current);
+    if (!autoContextHubRef.current) {
+      setForegroundProgress(pointerProximityRef.current);
+    }
   }, [cancelClose, setForegroundProgress]);
+
   const scheduleClose = useCallback(() => {
     if (closeTimerRef.current) return;
     closeTimerRef.current = setTimeout(clearSelection, 420);
@@ -1446,9 +1533,10 @@ export default function HeroSurfaceShift() {
     pointerApproachHubRef.current = null;
     pointerProximityRef.current = 0;
     setPointerApproachHubId(null);
-    if (!activeHubRef.current) setForegroundProgress(0);
+    if (!activeHubRef.current && !autoContextHubRef.current) {
+      setForegroundProgress(0);
+    }
   }, [setForegroundProgress]);
-
   useEffect(() => {
     clearFocus();
     clearSelection();
@@ -1823,7 +1911,7 @@ export default function HeroSurfaceShift() {
     : null;
   const autoSupportHubIds: readonly HubId[] =
     autoJourneyVisible && autoContextHubId
-      ? (autoJourney.supportByNode[autoContextHubId] ?? [])
+      ? (autoJourney.supportByNode?.[autoContextHubId] ?? [])
       : [];
   const autoSupportAnchor =
     autoJourneyVisible && autoContextHubId ? hubById[autoContextHubId] : null;
@@ -2063,6 +2151,11 @@ export default function HeroSurfaceShift() {
           data-layout={layoutName}
           viewBox={`0 0 ${graphLayout.width} ${graphHeight}`}
           preserveAspectRatio="xMidYMid meet"
+          style={
+            {
+              "--kg-expand": foregroundProgressRef.current,
+            } as React.CSSProperties
+          }
           className="hero-kg-foreground pointer-events-none absolute inset-0 z-20 h-full w-full"
         >
           <g className="hero-kg-foreground-neighbor-edges" fill="none">
