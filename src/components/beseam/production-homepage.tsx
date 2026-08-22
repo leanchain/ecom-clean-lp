@@ -66,11 +66,14 @@ const STEPS = [
 export default function ProductionHomepage() {
   return (
     <div className="bg-[#fafafa] text-[#151515]">
-      <section id="home-hero" className="relative isolate overflow-hidden">
+      <section
+        id="home-hero"
+        className="relative isolate min-h-[94svh] overflow-hidden"
+      >
         <HeroSurfaceShift />
-        <div className="relative z-10 mx-auto max-w-[92rem] px-5 pb-20 pt-20 sm:px-8 sm:pb-24 sm:pt-28 lg:px-10 lg:pb-28 lg:pt-32">
-          <Reveal>
-            <div className="mx-auto max-w-[76rem] text-center">
+        <div className="pointer-events-none relative z-10 mx-auto flex min-h-[94svh] max-w-[92rem] items-center justify-center px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <Reveal className="w-full">
+            <div className="mx-auto w-full max-w-[76rem] text-center">
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
                 Commerce discovery + conversion
               </p>
@@ -83,7 +86,7 @@ export default function ProductionHomepage() {
                 shows you what to fix, helps you make the change, and measures
                 what happened next.
               </p>
-              <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <div className="pointer-events-auto mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <TrackedLink
                   href={APP_REGISTER_URL}
                   eventName="marketing_primary_cta_clicked"
