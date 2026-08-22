@@ -684,9 +684,14 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
       "Re-check a prior page finding after an approved change.",
     ],
     [
-      "Policy visibility",
-      "82%",
-      "Shipping, returns and other decision policies visible to shoppers.",
+      "Structured parity",
+      "89%",
+      "Agreement between visible page content and structured product facts.",
+    ],
+    [
+      "Size & fit",
+      "Beta",
+      "Fit guidance and size recommendations that help shoppers choose the right variant.",
     ],
     [
       "Trust visibility",
@@ -869,6 +874,7 @@ const JOURNEYS: readonly JourneyDefinition[] = [
   },
 ];
 
+const INITIAL_AUTO_HUB_ID: HubId | null = JOURNEYS[0]?.nodes[0] ?? null;
 function curve(a: Hub, b: Hub, bend = 0) {
   const mx = (a.x + b.x) / 2;
   const my = (a.y + b.y) / 2;
@@ -944,8 +950,8 @@ export default function HeroSurfaceShift() {
     null,
   );
   const foregroundSvgRef = useRef<SVGSVGElement>(null);
-  const foregroundProgressRef = useRef(0);
-  const renderedForegroundHubRef = useRef<string | null>(null);
+  const foregroundProgressRef = useRef(INITIAL_AUTO_HUB_ID ? 1 : 0);
+  const renderedForegroundHubRef = useRef<string | null>(INITIAL_AUTO_HUB_ID);
   const pointerApproachHubRef = useRef<string | null>(null);
   const pointerProximityRef = useRef(0);
   const autoJourneyPathRef = useRef<SVGPathElement>(null);
@@ -953,10 +959,10 @@ export default function HeroSurfaceShift() {
   const autoSignalAnimationRef = useRef<Animation | null>(null);
   const autoVisualFrameTimeRef = useRef(0);
   const autoVisualRef = useRef<{ full: string | null; soft: string | null }>({
-    full: null,
-    soft: null,
+    full: INITIAL_AUTO_HUB_ID,
+    soft: INITIAL_AUTO_HUB_ID,
   });
-  const autoContextHubRef = useRef<HubId | null>(null);
+  const autoContextHubRef = useRef<HubId | null>(INITIAL_AUTO_HUB_ID);
   const pendingFocusRef = useRef<Point | null>(null);
   const smoothedFocusRef = useRef<Point | null>(null);
   const activeHubRef = useRef<string | null>(null);
@@ -975,18 +981,22 @@ export default function HeroSurfaceShift() {
   const [autoPhase, setAutoPhase] = useState<
     "waiting" | "traveling" | "ending"
   >("waiting");
-  const [autoFocusHubId, setAutoFocusHubId] = useState<string | null>(null);
-  const [autoApproachHubId, setAutoApproachHubId] = useState<string | null>(
-    null,
+  const [autoFocusHubId, setAutoFocusHubId] = useState<string | null>(
+    INITIAL_AUTO_HUB_ID,
   );
-  const [autoContextHubId, setAutoContextHubId] = useState<HubId | null>(null);
+  const [autoApproachHubId, setAutoApproachHubId] = useState<string | null>(
+    INITIAL_AUTO_HUB_ID,
+  );
+  const [autoContextHubId, setAutoContextHubId] = useState<HubId | null>(
+    INITIAL_AUTO_HUB_ID,
+  );
   const [autoInteractionPaused, setAutoInteractionPaused] = useState(false);
   const [pointerApproachHubId, setPointerApproachHubId] = useState<
     string | null
   >(null);
   const [renderedForegroundHubId, setRenderedForegroundHubId] = useState<
     string | null
-  >(null);
+  >(INITIAL_AUTO_HUB_ID);
   useEffect(() => {
     let frame = 0;
     const updateLayout = () => {
