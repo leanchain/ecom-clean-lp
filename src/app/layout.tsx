@@ -8,6 +8,7 @@ import BeseamFooter from "@/components/beseam/footer";
 import BeseamNavbar from "@/components/beseam/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
+import { HOME_SOCIAL_IMAGE, SITE_URL } from "@/lib/seo";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -27,19 +28,27 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: {
-    default:
-      "Beseam - AI shopping visibility & behavior: fixes and proof for ecommerce",
+    default: "Beseam | Make products easier to find, choose, and buy",
     template: "%s | Beseam",
   },
   description:
-    "Run real buying questions against AI assistants, see which products were recommended, inspect the product evidence behind the answer, and test the same question again after a change.",
+    "Beseam shows where products lose shoppers across discovery and the store, helps teams understand what may explain it, make supported changes, and measure what changed in behavior, conversion, orders, and revenue.",
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
   publisher: "Beseam",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://beseam.com",
-  ),
-  robots: { index: true, follow: true },
+  metadataBase: new URL(SITE_URL),
+  manifest: "/favicon/site.webmanifest",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon/favicon.ico", sizes: "48x48" },
@@ -49,36 +58,70 @@ export const metadata: Metadata = {
     apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Beseam - See why AI picked someone else",
+    title: "Beseam - Make products easier to find, choose, and buy",
     description:
-      "Run a real buying question, see which products AI recommended, inspect the product evidence you control, and test the same question again after a change.",
+      "See where products lose shoppers, understand what may explain it, make supported changes, and measure what happened next.",
     url: "/",
     siteName: "Beseam",
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: HOME_SOCIAL_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Beseam AI shopping visibility & behavior: fixes and proof for ecommerce",
+        alt: "Beseam connecting discovery, store, behavior, and revenue evidence",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam - See why AI picked someone else",
+    title: "Beseam - Make products easier to find, choose, and buy",
     description:
-      "Run a real buying question, see which products AI recommended, inspect the product evidence you control, and test the same question again after a change.",
-    images: ["/og-image.png"],
+      "See where products lose shoppers, understand what may explain it, make supported changes, and measure what happened next.",
+    images: [HOME_SOCIAL_IMAGE],
   },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const siteJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: "Beseam",
+        url: `${SITE_URL}/`,
+        description:
+          "Beseam connects discovery, store, shopper behavior, conversion, orders, and revenue so teams can understand commercial problems, decide what deserves action, make supported changes, and measure what changed afterward.",
+        sameAs: ["https://www.linkedin.com/company/beseam/"],
+        logo: {
+          "@type": "ImageObject",
+          url: `${SITE_URL}/favicon/apple-touch-icon.png`,
+          width: 180,
+          height: 180,
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: `${SITE_URL}/`,
+        name: "Beseam",
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        inLanguage: "en",
+      },
+    ],
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${figtree.variable} ${lora.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

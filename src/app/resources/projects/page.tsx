@@ -7,13 +7,15 @@ import {
   FIELD_REVIEW_DATE,
   RESOURCE_CATEGORIES,
 } from "@/lib/commerce-fieldbook";
+import { FIELDBOOK_SOCIAL_IMAGE, buildPublicMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Projects and References | Beseam Commerce Fieldbook" },
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Projects and References | Beseam Commerce Fieldbook",
   description:
     "A reviewed index of agent skills, commerce platforms, standards, primary documentation, testing tools, and operational references.",
-  alternates: { canonical: "/resources/projects" },
-};
+  path: "/resources/projects",
+  image: FIELDBOOK_SOCIAL_IMAGE,
+});
 
 export default function ProjectsPage() {
   return (
@@ -30,13 +32,13 @@ export default function ProjectsPage() {
             <p className="max-w-2xl text-[17px] leading-relaxed text-black/62">
               {ECOSYSTEM_RESOURCES.length} reviewed resources across{" "}
               {RESOURCE_CATEGORIES.length} operational categories. Every entry
-              names its maintainer, license or usage boundary, maturity, and
+              names its maintainer, license or usage boundary, review date, and
               practical reason for inclusion.
             </p>
             <p className="mt-4 text-[12px] leading-relaxed text-black/46">
               Beseam curates the index; it does not repackage external work as
-              its own. Emerging and experimental material is labeled so it is
-              not mistaken for a settled standard.
+              its own. The official source remains authoritative for current
+              releases, compatibility, support, and usage terms.
             </p>
             <p className="mt-4 font-mono text-[8px] uppercase tracking-[0.09em] text-[var(--beseam-accent)]">
               Catalog review date · {FIELD_REVIEW_DATE}

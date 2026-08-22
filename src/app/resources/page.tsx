@@ -18,13 +18,19 @@ import {
 } from "@/lib/commerce-fieldbook";
 import { getFieldbookDocuments } from "@/lib/fieldbook-content";
 import { getFieldbookSearchIndex } from "@/lib/fieldbook-navigation";
+import {
+  FIELDBOOK_SOCIAL_IMAGE,
+  SITE_URL,
+  buildPublicMetadata,
+} from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Commerce Fieldbook | Beseam" },
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Commerce Fieldbook | Beseam",
   description:
     "Commerce problem guides, agent skills, team playbooks, open-source projects, standards, and official references maintained by Beseam.",
-  alternates: { canonical: "/resources" },
-};
+  path: "/resources",
+  image: FIELDBOOK_SOCIAL_IMAGE,
+});
 
 const SECTIONS = [
   {
@@ -76,9 +82,59 @@ export default function ResourcesPage() {
   const skills = getFieldbookDocuments("skills");
   const playbooks = getFieldbookDocuments("playbooks");
   const searchEntries = getFieldbookSearchIndex();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${SITE_URL}/resources#webpage`,
+        url: `${SITE_URL}/resources`,
+        name: "Beseam Commerce Fieldbook",
+        description:
+          "Commerce problem guides, agent skills, team playbooks, projects, standards, and primary references maintained by Beseam.",
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": `${SITE_URL}/#organization` },
+        inLanguage: "en",
+        mainEntity: { "@id": `${SITE_URL}/resources#sections` },
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${SITE_URL}/resources#sections`,
+        numberOfItems: SECTIONS.length,
+        itemListElement: SECTIONS.map((section, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: section.title,
+          url: `${SITE_URL}${section.href}`,
+          description: section.description,
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: `${SITE_URL}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Commerce Fieldbook",
+            item: `${SITE_URL}/resources`,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <div className="bg-ground text-ink-deep">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
@@ -198,7 +254,7 @@ export default function ResourcesPage() {
             {FEATURED_RESOURCES.map((resource) => (
               <article key={resource.slug} className="bg-ink-deep p-6">
                 <p className="font-mono text-[12px] uppercase tracking-[0.09em] text-white/72">
-                  {resource.category} · {resource.maturity}
+                  {resource.category}
                 </p>
                 <h3 className="mt-4 text-[17px] font-semibold">
                   {resource.name}

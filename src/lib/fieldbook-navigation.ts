@@ -47,8 +47,6 @@ export function getFieldbookNavigation(): FieldbookNavGroup[] {
         ...skills.map((document) => ({
           title: document.frontmatter.navTitle ?? document.frontmatter.title,
           href: document.href,
-          badge:
-            document.frontmatter.status === "emerging" ? "Emerging" : undefined,
         })),
       ],
     },
@@ -95,7 +93,6 @@ export function getFieldbookSearchIndex(): FieldbookSearchEntry[] {
         resource.maintainer,
         resource.license,
         resource.kind,
-        resource.maturity,
         ...resource.tags,
         ...resource.useCases,
       ].join(" "),
@@ -117,7 +114,7 @@ export function getFieldbookSearchIndex(): FieldbookSearchEntry[] {
       href: "/resources/projects",
       title: "Projects and references index",
       summary:
-        "Browse the reviewed ecosystem catalog by category, resource type, maturity, maintainer, and use case.",
+        "Browse the reviewed ecosystem catalog by category, resource type, maintainer, usage boundary, and use case.",
       section: "Projects and references",
       category: "Ecosystem",
       keywords:

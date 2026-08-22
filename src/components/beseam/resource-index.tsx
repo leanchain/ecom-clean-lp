@@ -9,7 +9,6 @@ import { ArrowRight, Search, X } from "lucide-react";
 import {
   RESOURCE_CATEGORIES,
   RESOURCE_KINDS,
-  RESOURCE_MATURITIES,
   type EcosystemResource,
 } from "@/lib/commerce-fieldbook";
 
@@ -23,7 +22,6 @@ export default function ResourceIndex({
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(ALL);
   const [kind, setKind] = useState(ALL);
-  const [maturity, setMaturity] = useState(ALL);
 
   useEffect(() => {
     const initialQuery = new URLSearchParams(window.location.search).get(
@@ -42,7 +40,6 @@ export default function ResourceIndex({
         resource.license,
         resource.category,
         resource.kind,
-        resource.maturity,
         ...resource.tags,
         ...resource.useCases,
       ]
@@ -52,27 +49,23 @@ export default function ResourceIndex({
       return (
         (!normalizedQuery || searchable.includes(normalizedQuery)) &&
         (category === ALL || resource.category === category) &&
-        (kind === ALL || resource.kind === kind) &&
-        (maturity === ALL || resource.maturity === maturity)
+        (kind === ALL || resource.kind === kind)
       );
     });
-  }, [category, kind, maturity, query, resources]);
+  }, [category, kind, query, resources]);
 
-  const hasFilters = Boolean(
-    query || category !== ALL || kind !== ALL || maturity !== ALL,
-  );
+  const hasFilters = Boolean(query || category !== ALL || kind !== ALL);
 
   function resetFilters() {
     setQuery("");
     setCategory(ALL);
     setKind(ALL);
-    setMaturity(ALL);
   }
 
   return (
     <div>
       <div className="border border-black/18 bg-ground-2 p-4 sm:p-5">
-        <div className="grid gap-3 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,0.7fr))]">
+        <div className="grid gap-3 lg:grid-cols-[minmax(0,1.5fr)_repeat(2,minmax(0,0.75fr))]">
           <label className="relative block">
             <span className="sr-only">Search resources</span>
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-black/62" />
@@ -95,12 +88,6 @@ export default function ResourceIndex({
             value={kind}
             onChange={setKind}
             options={RESOURCE_KINDS}
-          />
-          <FilterSelect
-            label="Maturity"
-            value={maturity}
-            onChange={setMaturity}
-            options={RESOURCE_MATURITIES}
           />
         </div>
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-black/14 pt-4">
@@ -133,9 +120,6 @@ export default function ResourceIndex({
                   <p className="font-mono text-[12px] uppercase tracking-[0.09em] text-black/62">
                     {resource.category}
                   </p>
-                  <span className="border border-black/16 px-2 py-1 font-mono text-[12px] uppercase tracking-[0.08em] text-black/62">
-                    {resource.maturity}
-                  </span>
                 </div>
                 <h2 className="mt-5 flex items-start gap-2 text-[20px] font-semibold leading-snug text-ink-deep">
                   <span>{resource.name}</span>

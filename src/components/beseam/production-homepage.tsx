@@ -9,7 +9,7 @@ import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
 import { Reveal } from "@/components/beseam/reveal";
 import TrackedLink from "@/components/beseam/tracked-link";
 import WhyBeseam from "@/components/beseam/why-beseam";
-import { BENCHMARK_RUN, CATEGORY_BENCHMARKS } from "@/data/category-benchmarks";
+import { BENCHMARK_RUN } from "@/data/category-benchmarks";
 
 const APP_REGISTER_URL = "https://app.beseam.com/register";
 
@@ -40,35 +40,63 @@ const COMMERCE_PATH = [
   { title: "Revenue", detail: "Orders · Attribution · Impact" },
 ] as const;
 
+const EXPLORE_LINKS = [
+  {
+    label: "Platform",
+    href: "/platform",
+    detail:
+      "See the evidence layers, operating loop, capabilities, and product boundaries.",
+  },
+  {
+    label: "Commerce Fieldbook",
+    href: "/resources",
+    detail:
+      "Use problems, agent skills, playbooks, projects, and primary references.",
+  },
+  {
+    label: "Compare Beseam",
+    href: "/compare",
+    detail:
+      "See where analytics and optimization tools are stronger and where Beseam differs.",
+  },
+  {
+    label: "Manifesto",
+    href: "/manifesto",
+    detail:
+      "Read the principles behind evidence, decisions, controlled action, and measurement.",
+  },
+] as const;
+
 const OPERATING_LOOP = [
   {
     title: "Observe",
     lead: "See what is happening.",
-    detail: "Connect discovery, store, behavior, competitors, and revenue.",
+    detail:
+      "Connect discovery, store, shopper behavior, conversion, orders, and revenue around the same commercial question.",
   },
   {
     title: "Understand",
     lead: "See what may be driving it.",
     detail:
-      "Join product and brand truth with journeys, intent, friction, and attribution.",
+      "Join product and brand truth with shopper journeys, friction, competitor context, and attribution without overstating causality.",
   },
   {
     title: "Decide",
     lead: "Choose what should happen next.",
     detail:
-      "Prioritize opportunities, predict needs, rank, recommend, personalize, or test.",
+      "Compare evidence, affected scope, urgency, and commercial value to choose what deserves action.",
   },
   {
     title: "Act",
     lead: "Put the decision into action.",
     detail:
-      "Change product data, content, merchandising, creative, campaigns, or store experience.",
+      "Change supported product data, content, merchandising, creative, campaigns, or store experience under merchant approval.",
   },
   {
     title: "Learn",
     lead: "Measure and improve.",
     detail:
-      "Feed discovery, behavior, conversion, and revenue outcomes into the next decision.",
+      "Measure the relevant discovery, behavior, conversion, order, and revenue signals after the action and feed the result into the next decision.",
   },
 ] as const;
 
@@ -94,9 +122,10 @@ export default function ProductionHomepage() {
                 Make your products easier to find, choose, and buy.
               </h1>
               <p className="mx-auto mt-8 max-w-[68ch] text-[18px] leading-[1.65] text-black/68 sm:text-[19px]">
-                Beseam connects discovery, store, behavior, and revenue signals
-                to show where products lose ground, what to do next, and what
-                changed after you act.
+                Beseam connects what happens across AI, search, onsite
+                discovery, product pages, behavior, conversion, and revenue so
+                you can observe what is happening, understand what may explain
+                it, decide, act, and learn from what changes.
               </p>
               <div className="pointer-events-auto mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <TrackedLink
@@ -251,6 +280,47 @@ export default function ProductionHomepage() {
           </Reveal>
         </div>
       </section>
+
+      <section className="border-y border-black/18 bg-[#f6f6f6]">
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <Reveal>
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-16">
+              <div>
+                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+                  Explore Beseam
+                </p>
+                <h2 className="mt-5 max-w-[16ch] font-display text-[clamp(2rem,3.2vw,3rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+                  Go deeper on the system, evidence, and point of view.
+                </h2>
+              </div>
+              <nav
+                aria-label="Explore Beseam"
+                className="grid border-t border-black/22 sm:grid-cols-2"
+              >
+                {EXPLORE_LINKS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="group border-b border-black/18 py-6 sm:px-6 sm:odd:border-r"
+                  >
+                    <span className="flex items-center justify-between gap-3 text-[16px] font-semibold text-[#111318]">
+                      {item.label}
+                      <ArrowRight
+                        className="h-4 w-4 text-[#b8441d] transition-transform group-hover:translate-x-1"
+                        aria-hidden="true"
+                      />
+                    </span>
+                    <span className="mt-3 block max-w-[44ch] text-[13px] leading-relaxed text-black/60">
+                      {item.detail}
+                    </span>
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <section id="ai-check" className="scroll-mt-24 bg-[#faf1eb]">
         <div className="mx-auto max-w-[92rem] px-5 pb-8 pt-20 sm:px-8 sm:pb-10 sm:pt-24 lg:px-10 lg:pb-12 lg:pt-28">
           <Reveal>
