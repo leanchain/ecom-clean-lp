@@ -36,7 +36,7 @@ export default function WhyBeseam() {
               From signal to shipped work
             </p>
             <h2 className="mt-7 max-w-[16ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-              Another dashboard does not fix your store.
+              See what&rsquo;s behind the problem.
             </h2>
             <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-white/72">
               Discovery, catalog, brand, onsite search, creative, conversion,
