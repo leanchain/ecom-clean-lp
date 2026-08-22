@@ -10,12 +10,12 @@ const ARGUMENT = [
     "A product can disappear before the click or a shopper can fail to find and choose it onsite. Beseam brings external discovery and onsite behavior into the same commerce picture.",
   ],
   [
-    "Find the cause",
+    "Narrow the problem",
     "Compare product and store facts, competitor evidence, search and discovery behavior, and conversion signals to narrow the problem to something you can actually change.",
   ],
   [
     "Ship the fix",
-    "Turn the diagnosis into approved work across product data, content, merchandising, and supported store experiences. Publish or hand it off, with the previous value kept when Beseam makes the change.",
+    "Turn the diagnosis into approved work across product data, content, merchandising, creative, and supported store experiences. Publish or hand it off, with the previous value kept when Beseam makes the change.",
   ],
   [
     "Prove the result",
@@ -39,10 +39,10 @@ export default function WhyBeseam() {
               Another dashboard does not fix your store.
             </h2>
             <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-white/72">
-              Discovery, catalog, onsite search, conversion, and analytics are
-              usually measured in separate places. Beseam connects the evidence
-              so the output is not another report: it is the next piece of work
-              worth doing.
+              Discovery, catalog, brand, onsite search, creative, conversion,
+              and analytics usually live in separate tools. Beseam connects the
+              evidence so the output is not another report: it is the next piece
+              of work worth doing.
             </p>
             <p className="mt-5 max-w-md text-[14px] leading-[1.7] text-white/56">
               I kept seeing ecommerce teams find a problem in one tool, make a
@@ -81,7 +81,8 @@ export default function WhyBeseam() {
             <p className="mt-8 max-w-[64ch] text-[15px] leading-[1.7] text-white/72">
               The free AI check on this page is one live external-discovery
               signal, not the whole product. Inside Beseam, that signal joins
-              store, product, search, behavior, conversion, and impact evidence.
+              store, product, brand, search, behavior, creative, conversion, and
+              impact evidence.
             </p>
 
             <Link

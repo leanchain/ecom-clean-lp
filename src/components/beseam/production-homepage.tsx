@@ -14,25 +14,26 @@ const APP_REGISTER_URL = "https://app.beseam.com/register";
 
 const COMMERCE_SCOPE = [
   {
-    eyebrow: "Find",
-    title: "Get found before the visit.",
+    eyebrow: "Before the click",
+    title: "Know how demand reaches your products.",
     detail:
-      "See where products appear, disappear, or lose across AI assistants, AI search, search engines, feeds, and other discovery surfaces.",
-    signals: "AI discovery · search · feeds · competitors · reachability",
+      "See how AI answers, search, feeds, competitors, and other discovery surfaces shape whether shoppers find your products before they visit.",
+    signals: "AI answers · search · feeds · competitors · reachability",
   },
   {
-    eyebrow: "Choose",
-    title: "Help shoppers find and choose the right product.",
+    eyebrow: "On your store",
+    title: "See where shoppers lose the thread.",
     detail:
-      "See where onsite search, recommendations, merchandising, product pages, or product information make the right item harder to find or compare.",
-    signals: "Onsite search · recommendations · merchandising · PDPs",
+      "Connect onsite search, recommendations, merchandising, product pages, product information, and shopper behavior so friction is visible in context.",
+    signals:
+      "Onsite search · recommendations · merchandising · PDPs · behavior",
   },
   {
-    eyebrow: "Buy",
-    title: "Remove what stops the purchase.",
+    eyebrow: "After the change",
+    title: "Know whether the fix mattered.",
     detail:
-      "See where shoppers hesitate, abandon, or fail to convert, then connect approved changes to behavior, conversion, orders, and revenue.",
-    signals: "Behavior · conversion · checkout · orders · revenue",
+      "Re-check the relevant signal and connect approved changes to behavior, conversion, orders, revenue, or incrementality where the evidence supports it.",
+    signals: "Conversion · orders · revenue · attribution · impact",
   },
 ] as const;
 
@@ -41,7 +42,7 @@ const STEPS = [
     title: "Find",
     lead: "Find the problem worth fixing.",
     detail:
-      "Bring together external discovery, product and store evidence, onsite behavior, and conversion signals so the problem is visible in one place.",
+      "Bring together external discovery, product, catalog and brand evidence, onsite behavior, and conversion signals so the problem is visible in one place.",
   },
   {
     title: "Prioritize",
@@ -53,7 +54,7 @@ const STEPS = [
     title: "Fix",
     lead: "Make the change, not another report.",
     detail:
-      "Beseam prepares supported changes to product data, content, merchandising, and supported store experiences. You approve customer-facing work before it ships.",
+      "Beseam prepares supported changes to product data, content, merchandising, creative, and supported store experiences. You approve customer-facing work before it ships.",
   },
   {
     title: "Prove",
@@ -74,7 +75,7 @@ export default function ProductionHomepage() {
         <div className="pointer-events-none relative z-10 mx-auto flex min-h-[94svh] max-w-[92rem] items-center justify-center px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="w-full">
             <div className="mx-auto w-full max-w-[76rem] text-center">
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d] lg:-translate-y-4">
                 Commerce discovery + conversion
               </p>
               <h1 className="mx-auto mt-7 max-w-[18ch] text-balance font-display text-[clamp(3.5rem,7vw,6rem)] font-normal leading-[0.96] tracking-[-0.025em] text-[#111318]">
@@ -122,17 +123,18 @@ export default function ProductionHomepage() {
             <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
               <div>
                 <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
-                  One commerce system
+                  One connected commerce system
                 </p>
                 <h2 className="mt-7 max-w-[18ch] text-balance font-display text-[clamp(2.4rem,3.8vw,4rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
-                  See what&rsquo;s getting in the way. Fix it. Prove it worked.
+                  See the whole path from discovery to revenue.
                 </h2>
               </div>
               <p className="max-w-[62ch] text-[17px] leading-[1.7] text-black/64">
-                Beseam looks across the path from discovery to purchase, finds
-                the problems most worth changing, turns them into approved work,
-                and measures the relevant result afterward. The output is not
-                another score. It is the next fix worth making.
+                Beseam connects what shoppers see before they reach your store
+                with what happens once they arrive, what you change, and what
+                happens afterward. The output is not another isolated score. It
+                is a clearer view of where commerce is being lost and what is
+                worth fixing next.
               </p>
             </div>
           </Reveal>
@@ -184,7 +186,8 @@ export default function ProductionHomepage() {
                 A buying question can reveal where your product disappears and
                 which competitors get put in front of the shopper instead. Run
                 the live check below. Inside Beseam, this signal joins product,
-                store, onsite search, behavior, and conversion evidence.
+                catalog, brand, store, behavior, conversion, and impact
+                evidence.
               </p>
             </div>
           </Reveal>

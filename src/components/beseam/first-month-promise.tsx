@@ -26,11 +26,13 @@ export default function FirstMonthPromise({
 
           <div className="self-end">
             <p className="max-w-[68ch] text-[17px] leading-[1.7] text-black/66">
-              We start with one store or product problem that affects discovery
-              or conversion. Beseam brings the evidence together, proposes a
-              supported change, and measures the relevant signal again after
-              approved work. You pay nothing for the first 30 days. Then you
-              decide whether Beseam earned the right to continue.
+              We start with one commercially meaningful problem somewhere from
+              discovery through conversion. Beseam brings the evidence together,
+              proposes a supported change, and measures the relevant signal
+              again after approved work. The fix might be product data, content,
+              merchandising, creative, or a supported store experience. You pay
+              nothing for the first 30 days. Then you decide whether Beseam
+              earned the right to continue.
             </p>
 
             <dl className="mt-10 border-y border-black/22">
