@@ -31,6 +31,19 @@ const APP_REGISTER_URL = "https://app.beseam.com/register";
 const APP_REPORT_URL = "https://app.beseam.com/report";
 
 const LIVE_STATUSES = new Set(["running", "queued", "validating"]);
+const PENDING_PAGE_AUDIT_STATUSES = new Set(["queued", "running"]);
+
+// `awaiting_verification` is not a resting state: the free five-PDP sample keeps
+// landing behind it, and its findings only reach the card on a later fetch. Poll
+// on the work that is actually outstanding rather than on the status word alone,
+// so a still-active progress step can never spin forever.
+export function isScanInFlight(result: AnswerCheckResult) {
+  return (
+    LIVE_STATUSES.has(result.status) ||
+    PENDING_PAGE_AUDIT_STATUSES.has(result.page_audits_status ?? "") ||
+    result.steps.some((step) => step.state === "active")
+  );
+}
 
 function faviconHost(raw: string | null | undefined): string | null {
   const value = (raw ?? "").trim().toLowerCase();
@@ -1749,9 +1762,7 @@ export function ResultCard({
   verificationGate?: React.ReactNode;
 }) {
   const answers = result.answers;
-  const inFlight =
-    LIVE_STATUSES.has(result.status) ||
-    result.steps.some((step) => step.state === "active");
+  const inFlight = isScanInFlight(result);
   const scored = answers.filter((answer) => answer.mentioned !== null);
   const showProgress = inFlight || answers.length === 0;
   const [shareStatus, setShareStatus] = useState<"idle" | "shared" | "copied" | "failed">("idle");
@@ -2486,8 +2497,7 @@ export default function AnswerCheck({
   }, [load]);
   // Poll while either the free PDP sample or the verified live probe is running.
   useEffect(() => {
-    const pageAuditsRunning = result?.page_audits_status === "queued" || result?.page_audits_status === "running";
-    if (!result || (!LIVE_STATUSES.has(result.status) && !pageAuditsRunning)) return;
+    if (!result || !isScanInFlight(result)) return;
     if (pollCount.current >= MAX_POLLS) return;
 
     const timer = setTimeout(() => {
