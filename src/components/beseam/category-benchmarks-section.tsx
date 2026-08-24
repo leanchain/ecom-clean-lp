@@ -7,8 +7,9 @@ import { BENCHMARK_RUN, CATEGORY_BENCHMARKS } from "@/data/category-benchmarks";
 
 const SCORED_BENCHMARKS = CATEGORY_BENCHMARKS.map((benchmark) => ({
   ...benchmark,
-  singleEngineBrands: benchmark.brands.filter((brand) => brand.engines === 1)
-    .length,
+  singleEngineBrands: benchmark.brands.filter(
+    (brand) => brand.namedBy.length === 1,
+  ).length,
 }));
 
 const CATEGORIES = Array.from(

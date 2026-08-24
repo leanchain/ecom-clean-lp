@@ -9,14 +9,15 @@
  * GENERATED, NOT HAND-WRITTEN. Every entry below comes from a completed run of
  * the same connectors the product uses:
  *   backend/scripts/marketing/category_benchmark_run.py  : asks the engines
- *   backend/scripts/marketing/category_benchmark_emit.py : emits these entries
+ *   backend/scripts/marketing/category_benchmark_emit.py : emits this file
  * Re-run those to refresh; never edit a number here by hand, and never add an
  * entry that did not come from a real run.
  *
  * HARD RULES (same as `gap-track-figure.tsx`):
  *   1. Real completed runs only. No invented, rounded-up, or filled-in values.
  *   2. Every figure states its question, date, engines, and denominator.
- *   3. An engine with no completed answer is excluded, never shown as zero.
+ *   3. An engine with no completed answer is excluded, never shown as zero. An
+ *      engine that answered and named nothing keeps its column and reads empty.
  *   4. Report what was observed. Never editorialise about a named brand, and
  *      never imply an unnamed brand is inferior: only that it was not named.
  */
@@ -24,8 +25,8 @@
 export type BenchmarkBrand = {
   /** Brand exactly as the assistant named it. */
   brand: string;
-  /** How many of the engines below named this brand. */
-  engines: number;
+  /** Engines that named this brand, in the figure's column order. */
+  namedBy: string[];
 };
 
 export type CategoryBenchmark = {
@@ -42,32 +43,64 @@ export type CategoryBenchmark = {
   brands: BenchmarkBrand[];
 };
 
+/** How one engine behaved across every charted question. */
+export type BenchmarkEngine = {
+  engine: string;
+  /** Charted questions this engine returned a completed answer for. */
+  answers: number;
+  /** Brand namings across those answers. */
+  namings: number;
+  /** Namings no other engine repeated on the same question. */
+  soleNamings: number;
+  /** Completed answers that named no brand at all. */
+  silentAnswers: number;
+};
+
 /**
- * Run-level totals. Percentages are computed from these, never stored
- * pre-rounded, so the arithmetic on the page is always checkable.
+ * Run-level totals over the charted questions. Percentages are computed from
+ * these on the page, never stored pre-rounded, so the arithmetic is checkable.
  */
 export const BENCHMARK_RUN = {
   askedOn: "2026-08-19",
   engines: ["ChatGPT", "Gemini", "Google AI Mode"],
   /** Questions that produced at least one completed answer naming a brand. */
   questions: 15,
-  /** Completed answers behind the whole run. */
-  answersCompleted: 47,
+  /** Completed answers behind those questions. */
+  answersCompleted: 45,
   /** Distinct brand-per-question namings across the run. */
   namings: 153,
-  /** Namings that appeared on exactly one of the three engines. */
+  /** Namings that appeared on exactly one engine. */
   singleEngineOnly: 108,
+  /** Namings that two engines agreed on. */
+  twoEngines: 28,
   /** Namings that appeared on every engine that answered. */
   everyEngine: 17,
-  /**
-   * Disclosed rather than dropped: Perplexity had no API key configured, so it
-   * was not asked at all. One ChatGPT probe timed out. "What are the best
-   * running shoes under $150?" completed on two engines but neither named a
-   * brand, so it carries no figure.
-   */
-  notMeasured:
-    "Perplexity was not asked: no API key configured. One ChatGPT probe timed out. One question (running shoes under $150) completed without either engine naming a brand and is therefore not charted.",
 } as const;
+
+/** One row per engine, over the same charted questions. */
+export const BENCHMARK_ENGINES: BenchmarkEngine[] = [
+  {
+    engine: "ChatGPT",
+    answers: 15,
+    namings: 125,
+    soleNamings: 84,
+    silentAnswers: 0,
+  },
+  {
+    engine: "Gemini",
+    answers: 15,
+    namings: 41,
+    soleNamings: 9,
+    silentAnswers: 2,
+  },
+  {
+    engine: "Google AI Mode",
+    answers: 15,
+    namings: 49,
+    soleNamings: 15,
+    silentAnswers: 3,
+  },
+];
 
 export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
   {
@@ -77,10 +110,10 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Sony", engines: 2 },
-      { brand: "JBL", engines: 1 },
-      { brand: "Sennheiser", engines: 1 },
-      { brand: "soundcore (Anker)", engines: 1 },
+      { brand: "Sony", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "JBL", namedBy: ["ChatGPT"] },
+      { brand: "Sennheiser", namedBy: ["ChatGPT"] },
+      { brand: "soundcore (Anker)", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -90,13 +123,13 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Roborock", engines: 3 },
-      { brand: "Shark", engines: 3 },
-      { brand: "iRobot", engines: 3 },
-      { brand: "Dreame", engines: 2 },
-      { brand: "Ecovacs", engines: 2 },
-      { brand: "Neato", engines: 1 },
-      { brand: "eufy (Anker)", engines: 1 },
+      { brand: "Roborock", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "Shark", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "iRobot", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "Dreame", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "Ecovacs", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "Neato", namedBy: ["ChatGPT"] },
+      { brand: "eufy (Anker)", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -106,14 +139,14 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "ASUS", engines: 3 },
-      { brand: "Lenovo", engines: 2 },
-      { brand: "ViewSonic", engines: 2 },
-      { brand: "AOC", engines: 1 },
-      { brand: "Acer", engines: 1 },
-      { brand: "Arzopa", engines: 1 },
-      { brand: "Dell", engines: 1 },
-      { brand: "LG", engines: 1 },
+      { brand: "ASUS", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "Lenovo", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "ViewSonic", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "AOC", namedBy: ["ChatGPT"] },
+      { brand: "Acer", namedBy: ["ChatGPT"] },
+      { brand: "Arzopa", namedBy: ["Google AI Mode"] },
+      { brand: "Dell", namedBy: ["ChatGPT"] },
+      { brand: "LG", namedBy: ["Google AI Mode"] },
     ],
   },
   {
@@ -123,16 +156,16 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Keychron", engines: 2 },
-      { brand: "AKKO", engines: 1 },
-      { brand: "ANNE PRO (Obinslab)", engines: 1 },
-      { brand: "AULA", engines: 1 },
-      { brand: "Ajazz", engines: 1 },
-      { brand: "DURGOD", engines: 1 },
-      { brand: "HAVIT", engines: 1 },
-      { brand: "Redragon", engines: 1 },
-      { brand: "Royal Kludge", engines: 1 },
-      { brand: "Tecware", engines: 1 },
+      { brand: "Keychron", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "AKKO", namedBy: ["ChatGPT"] },
+      { brand: "ANNE PRO (Obinslab)", namedBy: ["ChatGPT"] },
+      { brand: "AULA", namedBy: ["Gemini"] },
+      { brand: "Ajazz", namedBy: ["Gemini"] },
+      { brand: "DURGOD", namedBy: ["ChatGPT"] },
+      { brand: "HAVIT", namedBy: ["ChatGPT"] },
+      { brand: "Redragon", namedBy: ["ChatGPT"] },
+      { brand: "Royal Kludge", namedBy: ["ChatGPT"] },
+      { brand: "Tecware", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -142,17 +175,20 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Transparent Labs", engines: 3 },
-      { brand: "Nutricost", engines: 2 },
-      { brand: "Optimum Nutrition", engines: 2 },
-      { brand: "Thorne", engines: 2 },
-      { brand: "BulkSupplements", engines: 1 },
-      { brand: "Kaged Muscle", engines: 1 },
-      { brand: "Legion Athletics", engines: 1 },
-      { brand: "Momentous", engines: 1 },
-      { brand: "MuscleTech", engines: 1 },
-      { brand: "NAKED Nutrition (Naked Creatine)", engines: 1 },
-      { brand: "Sports Research (Creapure®)", engines: 1 },
+      {
+        brand: "Transparent Labs",
+        namedBy: ["ChatGPT", "Gemini", "Google AI Mode"],
+      },
+      { brand: "Nutricost", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "Optimum Nutrition", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "Thorne", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "BulkSupplements", namedBy: ["ChatGPT"] },
+      { brand: "Kaged Muscle", namedBy: ["ChatGPT"] },
+      { brand: "Legion Athletics", namedBy: ["ChatGPT"] },
+      { brand: "Momentous", namedBy: ["ChatGPT"] },
+      { brand: "MuscleTech", namedBy: ["ChatGPT"] },
+      { brand: "NAKED Nutrition (Naked Creatine)", namedBy: ["ChatGPT"] },
+      { brand: "Sports Research (Creapure®)", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -162,15 +198,18 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Pure Encapsulations", engines: 3 },
-      { brand: "Thorne", engines: 3 },
-      { brand: "Doctor's Best", engines: 2 },
-      { brand: "Jarrow Formulas", engines: 1 },
-      { brand: "Life Extension", engines: 1 },
-      { brand: "NOW Foods", engines: 1 },
-      { brand: "Natural Vitality", engines: 1 },
-      { brand: "Natural Vitality (CALM Sleep)", engines: 1 },
-      { brand: "Nature Made", engines: 1 },
+      {
+        brand: "Pure Encapsulations",
+        namedBy: ["ChatGPT", "Gemini", "Google AI Mode"],
+      },
+      { brand: "Thorne", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "Doctor's Best", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "Jarrow Formulas", namedBy: ["ChatGPT"] },
+      { brand: "Life Extension", namedBy: ["ChatGPT"] },
+      { brand: "NOW Foods", namedBy: ["ChatGPT"] },
+      { brand: "Natural Vitality", namedBy: ["Google AI Mode"] },
+      { brand: "Natural Vitality (CALM Sleep)", namedBy: ["ChatGPT"] },
+      { brand: "Nature Made", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -180,18 +219,18 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Naked Nutrition", engines: 2 },
-      { brand: "Optimum Nutrition", engines: 2 },
-      { brand: "Orgain", engines: 2 },
-      { brand: "Ritual", engines: 2 },
-      { brand: "Anthony's Goods", engines: 1 },
-      { brand: "Garden of Life", engines: 1 },
-      { brand: "KOS", engines: 1 },
-      { brand: "Natural Force", engines: 1 },
-      { brand: "OWYN", engines: 1 },
-      { brand: "Transparent Labs", engines: 1 },
-      { brand: "Vega", engines: 1 },
-      { brand: "Vital Proteins", engines: 1 },
+      { brand: "Naked Nutrition", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "Optimum Nutrition", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "Orgain", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "Ritual", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "Anthony's Goods", namedBy: ["ChatGPT"] },
+      { brand: "Garden of Life", namedBy: ["ChatGPT"] },
+      { brand: "KOS", namedBy: ["ChatGPT"] },
+      { brand: "Natural Force", namedBy: ["ChatGPT"] },
+      { brand: "OWYN", namedBy: ["ChatGPT"] },
+      { brand: "Transparent Labs", namedBy: ["Gemini"] },
+      { brand: "Vega", namedBy: ["ChatGPT"] },
+      { brand: "Vital Proteins", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -201,17 +240,20 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "LMNT", engines: 3 },
-      { brand: "Nuun", engines: 3 },
-      { brand: "Skratch Labs", engines: 3 },
-      { brand: "Liquid I.V.", engines: 2 },
-      { brand: "GU Energy Labs", engines: 1 },
-      { brand: "Gatorade (Endurance)", engines: 1 },
-      { brand: "Pedialyte", engines: 1 },
-      { brand: "SOS Hydration", engines: 1 },
-      { brand: "SaltStick", engines: 1 },
-      { brand: "Tailwind Nutrition", engines: 1 },
-      { brand: "Ultima Replenisher", engines: 1 },
+      { brand: "LMNT", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "Nuun", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      {
+        brand: "Skratch Labs",
+        namedBy: ["ChatGPT", "Gemini", "Google AI Mode"],
+      },
+      { brand: "Liquid I.V.", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "GU Energy Labs", namedBy: ["ChatGPT"] },
+      { brand: "Gatorade (Endurance)", namedBy: ["ChatGPT"] },
+      { brand: "Pedialyte", namedBy: ["ChatGPT"] },
+      { brand: "SOS Hydration", namedBy: ["ChatGPT"] },
+      { brand: "SaltStick", namedBy: ["Gemini"] },
+      { brand: "Tailwind Nutrition", namedBy: ["ChatGPT"] },
+      { brand: "Ultima Replenisher", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -221,14 +263,14 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Icebreaker", engines: 2 },
-      { brand: "Smartwool", engines: 2 },
-      { brand: "Black Diamond", engines: 1 },
-      { brand: "Ibex", engines: 1 },
-      { brand: "Minus33", engines: 1 },
-      { brand: "Ortovox", engines: 1 },
-      { brand: "Unbound Merino", engines: 1 },
-      { brand: "Woolx", engines: 1 },
+      { brand: "Icebreaker", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "Smartwool", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "Black Diamond", namedBy: ["Gemini"] },
+      { brand: "Ibex", namedBy: ["Gemini"] },
+      { brand: "Minus33", namedBy: ["ChatGPT"] },
+      { brand: "Ortovox", namedBy: ["ChatGPT"] },
+      { brand: "Unbound Merino", namedBy: ["ChatGPT"] },
+      { brand: "Woolx", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -238,16 +280,16 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Patagonia", engines: 3 },
-      { brand: "REI Co-op", engines: 3 },
-      { brand: "Showers Pass", engines: 2 },
-      { brand: "Arc'teryx", engines: 1 },
-      { brand: "Chrome Industries", engines: 1 },
-      { brand: "Marmot", engines: 1 },
-      { brand: "Mountain Hardwear", engines: 1 },
-      { brand: "POC", engines: 1 },
-      { brand: "Rains", engines: 1 },
-      { brand: "Rapha", engines: 1 },
+      { brand: "Patagonia", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "REI Co-op", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "Showers Pass", namedBy: ["Gemini", "Google AI Mode"] },
+      { brand: "Arc'teryx", namedBy: ["ChatGPT"] },
+      { brand: "Chrome Industries", namedBy: ["Gemini"] },
+      { brand: "Marmot", namedBy: ["ChatGPT"] },
+      { brand: "Mountain Hardwear", namedBy: ["Google AI Mode"] },
+      { brand: "POC", namedBy: ["Google AI Mode"] },
+      { brand: "Rains", namedBy: ["ChatGPT"] },
+      { brand: "Rapha", namedBy: ["Gemini"] },
     ],
   },
   {
@@ -257,15 +299,18 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Brooks", engines: 3 },
-      { brand: "New Balance", engines: 3 },
-      { brand: "Nike", engines: 3 },
-      { brand: "Altra", engines: 2 },
-      { brand: "HOKA", engines: 2 },
-      { brand: "ASICS", engines: 1 },
-      { brand: "Hoka", engines: 1 },
-      { brand: "Saucony", engines: 1 },
-      { brand: "Skechers", engines: 1 },
+      { brand: "Brooks", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      {
+        brand: "New Balance",
+        namedBy: ["ChatGPT", "Gemini", "Google AI Mode"],
+      },
+      { brand: "Nike", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "Altra", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "HOKA", namedBy: ["ChatGPT", "Gemini"] },
+      { brand: "ASICS", namedBy: ["ChatGPT"] },
+      { brand: "Hoka", namedBy: ["Google AI Mode"] },
+      { brand: "Saucony", namedBy: ["ChatGPT"] },
+      { brand: "Skechers", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -275,19 +320,22 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "California Olive Ranch", engines: 2 },
-      { brand: "Graza", engines: 2 },
-      { brand: "Bertolli", engines: 1 },
-      { brand: "Cobram Estate", engines: 1 },
-      { brand: "Colavita", engines: 1 },
-      { brand: "Filippo Berio", engines: 1 },
-      { brand: "Kirkland Signature (Costco)", engines: 1 },
-      { brand: "La Tourangelle", engines: 1 },
-      { brand: "Lucini", engines: 1 },
-      { brand: "Lucini Italia", engines: 1 },
-      { brand: "O-Live & Co.", engines: 1 },
-      { brand: "Partanna", engines: 1 },
-      { brand: "Pompeian", engines: 1 },
+      {
+        brand: "California Olive Ranch",
+        namedBy: ["ChatGPT", "Google AI Mode"],
+      },
+      { brand: "Graza", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "Bertolli", namedBy: ["ChatGPT"] },
+      { brand: "Cobram Estate", namedBy: ["Google AI Mode"] },
+      { brand: "Colavita", namedBy: ["ChatGPT"] },
+      { brand: "Filippo Berio", namedBy: ["ChatGPT"] },
+      { brand: "Kirkland Signature (Costco)", namedBy: ["ChatGPT"] },
+      { brand: "La Tourangelle", namedBy: ["ChatGPT"] },
+      { brand: "Lucini", namedBy: ["ChatGPT"] },
+      { brand: "Lucini Italia", namedBy: ["Google AI Mode"] },
+      { brand: "O-Live & Co.", namedBy: ["ChatGPT"] },
+      { brand: "Partanna", namedBy: ["Google AI Mode"] },
+      { brand: "Pompeian", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -297,19 +345,19 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Lavazza", engines: 3 },
-      { brand: "Intelligentsia", engines: 2 },
-      { brand: "Blue Bottle", engines: 1 },
-      { brand: "Blue Bottle Coffee", engines: 1 },
-      { brand: "Counter Culture", engines: 1 },
-      { brand: "Death Wish", engines: 1 },
-      { brand: "Kicking Horse", engines: 1 },
-      { brand: "Peet's", engines: 1 },
-      { brand: "Starbucks", engines: 1 },
-      { brand: "Stumptown", engines: 1 },
-      { brand: "Stumptown Coffee Roasters", engines: 1 },
-      { brand: "Verve Coffee Roasters", engines: 1 },
-      { brand: "illy", engines: 1 },
+      { brand: "Lavazza", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "Intelligentsia", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "Blue Bottle", namedBy: ["ChatGPT"] },
+      { brand: "Blue Bottle Coffee", namedBy: ["Google AI Mode"] },
+      { brand: "Counter Culture", namedBy: ["ChatGPT"] },
+      { brand: "Death Wish", namedBy: ["ChatGPT"] },
+      { brand: "Kicking Horse", namedBy: ["ChatGPT"] },
+      { brand: "Peet's", namedBy: ["ChatGPT"] },
+      { brand: "Starbucks", namedBy: ["ChatGPT"] },
+      { brand: "Stumptown", namedBy: ["ChatGPT"] },
+      { brand: "Stumptown Coffee Roasters", namedBy: ["Google AI Mode"] },
+      { brand: "Verve Coffee Roasters", namedBy: ["ChatGPT"] },
+      { brand: "illy", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -319,19 +367,19 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Barebells", engines: 3 },
-      { brand: "ALOHA", engines: 2 },
-      { brand: "BUILT", engines: 1 },
-      { brand: "CLIF BUILDER'S", engines: 1 },
-      { brand: "FULFIL", engines: 1 },
-      { brand: "GHOST", engines: 1 },
-      { brand: "Grenade (Carb Killa)", engines: 1 },
-      { brand: "KIND", engines: 1 },
-      { brand: "No Cow", engines: 1 },
-      { brand: "ONE Brands", engines: 1 },
-      { brand: "Pure Protein", engines: 1 },
-      { brand: "Quest Nutrition", engines: 1 },
-      { brand: "RXBAR", engines: 1 },
+      { brand: "Barebells", namedBy: ["ChatGPT", "Gemini", "Google AI Mode"] },
+      { brand: "ALOHA", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "BUILT", namedBy: ["ChatGPT"] },
+      { brand: "CLIF BUILDER'S", namedBy: ["ChatGPT"] },
+      { brand: "FULFIL", namedBy: ["Google AI Mode"] },
+      { brand: "GHOST", namedBy: ["ChatGPT"] },
+      { brand: "Grenade (Carb Killa)", namedBy: ["ChatGPT"] },
+      { brand: "KIND", namedBy: ["ChatGPT"] },
+      { brand: "No Cow", namedBy: ["ChatGPT"] },
+      { brand: "ONE Brands", namedBy: ["ChatGPT"] },
+      { brand: "Pure Protein", namedBy: ["ChatGPT"] },
+      { brand: "Quest Nutrition", namedBy: ["ChatGPT"] },
+      { brand: "RXBAR", namedBy: ["ChatGPT"] },
     ],
   },
   {
@@ -341,21 +389,21 @@ export const CATEGORY_BENCHMARKS: CategoryBenchmark[] = [
     askedOn: "2026-08-19",
     engines: ["ChatGPT", "Gemini", "Google AI Mode"],
     brands: [
-      { brand: "Chilli No. 5", engines: 2 },
-      { brand: "Cholula", engines: 2 },
-      { brand: "TRUFF", engines: 2 },
-      { brand: "Yellowbird", engines: 2 },
-      { brand: "Elijah's Xtreme", engines: 1 },
-      { brand: "HEATONIST", engines: 1 },
-      { brand: "Hot Ones", engines: 1 },
-      { brand: "Hot Ones (Heatonist)", engines: 1 },
-      { brand: "Independent", engines: 1 },
-      { brand: "Kiri & Sons", engines: 1 },
-      { brand: "Man Crates", engines: 1 },
-      { brand: "Melinda's", engines: 1 },
-      { brand: "The Good Hurt (Thoughtfully)", engines: 1 },
-      { brand: "Thoughtfully", engines: 1 },
-      { brand: "Thoughtfully (Smokehouse)", engines: 1 },
+      { brand: "Chilli No. 5", namedBy: ["Gemini", "Google AI Mode"] },
+      { brand: "Cholula", namedBy: ["ChatGPT", "Google AI Mode"] },
+      { brand: "TRUFF", namedBy: ["Gemini", "Google AI Mode"] },
+      { brand: "Yellowbird", namedBy: ["Gemini", "Google AI Mode"] },
+      { brand: "Elijah's Xtreme", namedBy: ["Google AI Mode"] },
+      { brand: "HEATONIST", namedBy: ["Google AI Mode"] },
+      { brand: "Hot Ones", namedBy: ["Gemini"] },
+      { brand: "Hot Ones (Heatonist)", namedBy: ["ChatGPT"] },
+      { brand: "Independent", namedBy: ["ChatGPT"] },
+      { brand: "Kiri & Sons", namedBy: ["ChatGPT"] },
+      { brand: "Man Crates", namedBy: ["ChatGPT"] },
+      { brand: "Melinda's", namedBy: ["ChatGPT"] },
+      { brand: "The Good Hurt (Thoughtfully)", namedBy: ["ChatGPT"] },
+      { brand: "Thoughtfully", namedBy: ["Google AI Mode"] },
+      { brand: "Thoughtfully (Smokehouse)", namedBy: ["ChatGPT"] },
     ],
   },
 ];

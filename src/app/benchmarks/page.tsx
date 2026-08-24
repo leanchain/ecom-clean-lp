@@ -1,13 +1,19 @@
 import Link from "next/link";
 
-import { ArrowRight, CircleAlert } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 
 import CategoryBenchmarkFigure, {
+  BENCHMARK_INK,
+  engineLabel,
   formatBenchmarkDate,
 } from "@/components/beseam/category-benchmark";
 import { Reveal } from "@/components/beseam/reveal";
-import { BENCHMARK_RUN, CATEGORY_BENCHMARKS } from "@/data/category-benchmarks";
+import {
+  BENCHMARK_ENGINES,
+  BENCHMARK_RUN,
+  CATEGORY_BENCHMARKS,
+} from "@/data/category-benchmarks";
 import { SITE_URL, buildPublicMetadata } from "@/lib/seo";
 
 const hasBenchmarks = CATEGORY_BENCHMARKS.length > 0;
@@ -15,7 +21,7 @@ const hasBenchmarks = CATEGORY_BENCHMARKS.length > 0;
 export const metadata: Metadata = buildPublicMetadata({
   title: "Product Discovery Benchmarks | Beseam",
   description:
-    "Public shopper questions across AI assistants show how variable one part of product discovery can be. See observed answers, category figures, dates, and methodology.",
+    "Public shopper questions across AI assistants show how variable one part of product discovery can be. See which engine named which brand, with dates, denominators, and methodology.",
   path: "/benchmarks",
   noIndex: !hasBenchmarks,
 });
@@ -27,7 +33,7 @@ const METHOD = [
   ],
   [
     "The engines",
-    "Each assistant is asked the same question and kept separate. An engine that returned no completed answer is excluded from the figure rather than shown as zero.",
+    "Each assistant is asked the same question and kept in its own column, so every mark on this page is attributable to the engine that made it.",
   ],
   [
     "The denominator",
@@ -47,13 +53,62 @@ const METHOD = [
   ],
 ] as const;
 
+const WORDS = ["", "one", "two", "three", "four", "five"];
+
+/** Agreement steps read light to dark; the top step is the figures' consensus green. */
+const SPREAD_RAMP = ["#cbd5e1", "#94a3b8", "#64748b", "#475569"];
+
 export default function BenchmarksPage() {
+  const engineCount = BENCHMARK_RUN.engines.length;
+
+  // Derived from the entries themselves, so the bar and the ledger can never
+  // drift from the rows printed underneath them.
+  const spreadCounts = new Map<number, number>();
+  for (const benchmark of CATEGORY_BENCHMARKS) {
+    for (const brand of benchmark.brands) {
+      const named = brand.namedBy.length;
+      spreadCounts.set(named, (spreadCounts.get(named) ?? 0) + 1);
+    }
+  }
+  const totalNamings = Array.from(spreadCounts.values()).reduce(
+    (sum, count) => sum + count,
+    0,
+  );
+  const spread = Array.from(spreadCounts.entries())
+    .sort((a, b) => a[0] - b[0])
+    .map(([engines, count]) => ({
+      engines,
+      count,
+      share: totalNamings > 0 ? count / totalNamings : 0,
+      color:
+        engines === engineCount
+          ? BENCHMARK_INK.consensus
+          : SPREAD_RAMP[Math.min(engines - 1, SPREAD_RAMP.length - 1)],
+      label:
+        engines === engineCount
+          ? `All ${WORDS[engines] ?? engines} engines`
+          : engines === 1
+            ? "One engine only"
+            : `${(WORDS[engines] ?? `${engines}`).replace(/^./, (c) => c.toUpperCase())} engines`,
+    }));
   const soloShare = Math.round(
-    (BENCHMARK_RUN.singleEngineOnly / BENCHMARK_RUN.namings) * 100,
+    ((spreadCounts.get(1) ?? 0) / (totalNamings || 1)) * 100,
   );
-  const everyShare = Math.round(
-    (BENCHMARK_RUN.everyEngine / BENCHMARK_RUN.namings) * 100,
+
+  const engineRows = BENCHMARK_ENGINES.map((engine) => ({
+    ...engine,
+    perAnswer: engine.answers > 0 ? engine.namings / engine.answers : 0,
+    soleShare: engine.namings > 0 ? engine.soleNamings / engine.namings : 0,
+  }));
+  const widest = Math.max(...engineRows.map((engine) => engine.namings), 1);
+  const loudest = engineRows.reduce((a, b) =>
+    b.perAnswer > a.perAnswer ? b : a,
   );
+  const quietest = engineRows.reduce((a, b) =>
+    b.perAnswer < a.perAnswer ? b : a,
+  );
+  const spreadRatio =
+    quietest.perAnswer > 0 ? loudest.perAnswer / quietest.perAnswer : 0;
 
   const categories = Array.from(
     new Set(CATEGORY_BENCHMARKS.map((b) => b.category)),
@@ -79,10 +134,10 @@ export default function BenchmarksPage() {
       ...categories,
     ],
     measurementTechnique:
-      "The same public shopper question is asked across the configured engines. Only completed answers are counted, and each published figure states its denominator.",
+      "The same public shopper question is asked across the configured engines. Only completed answers are counted, each naming is attributed to the engine that made it, and each published figure states its denominator.",
     variableMeasured: [
       "Brand namings by shopper question",
-      "Number of engines naming each brand",
+      "Engines naming each brand",
       "Completed answer count",
     ],
   };
@@ -95,13 +150,11 @@ export default function BenchmarksPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetJsonLd) }}
         />
       ) : null}
+
       <section>
         <div className="mx-auto max-w-[92rem] px-5 pb-16 pt-20 sm:px-8 sm:pt-28 lg:px-10">
           <Reveal>
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
-              Category benchmarks · {formatBenchmarkDate(BENCHMARK_RUN.askedOn)}
-            </p>
-            <h1 className="mt-7 max-w-[20ch] text-balance font-display text-[clamp(2.6rem,5vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
+            <h1 className="max-w-[20ch] text-balance font-display text-[clamp(2.6rem,5vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
               AI shopping answers often disagree on which brands belong.
             </h1>
             <p className="mt-8 max-w-[68ch] text-[17px] leading-[1.7] text-black/68">
@@ -110,55 +163,244 @@ export default function BenchmarksPage() {
               real shopper questions across{" "}
               {categories.join(", ").toLowerCase()} on{" "}
               {BENCHMARK_RUN.engines.join(", ")}, kept every completed answer,
-              and found that the engines often disagree on which brands belong.
+              and recorded which engine named which brand.
+            </p>
+            <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.12em] text-black/55">
+              <span className="tabular-nums">
+                {formatBenchmarkDate(BENCHMARK_RUN.askedOn)}
+              </span>
+              <span className="px-2 text-black/28">/</span>
+              <span className="tabular-nums">{engineCount}</span> engines
+              <span className="px-2 text-black/28">/</span>
+              <span className="tabular-nums">
+                {BENCHMARK_RUN.answersCompleted}
+              </span>{" "}
+              completed answers
+              <span className="px-2 text-black/28">/</span>
+              <span className="tabular-nums">{totalNamings}</span> brand namings
             </p>
           </Reveal>
 
           <Reveal delay={0.06}>
-            <dl className="mt-12 grid gap-px border border-black/18 bg-black/12 sm:grid-cols-3">
-              {[
-                [
-                  `${BENCHMARK_RUN.answersCompleted}`,
-                  "completed answers behind this page",
-                ],
-                [
-                  `${soloShare}%`,
-                  `of the ${BENCHMARK_RUN.namings} brand namings appeared on exactly one engine`,
-                ],
-                [
-                  `${everyShare}%`,
-                  "were named by all three engines that answered",
-                ],
-              ].map(([figure, label]) => (
-                <div key={label} className="bg-white px-5 py-7">
-                  <dt className="font-display text-[clamp(2.2rem,4vw,3.2rem)] leading-none tabular-nums text-[#111318]">
-                    {figure}
-                  </dt>
-                  <dd className="mt-3 text-[14px] leading-relaxed text-black/64">
-                    {label}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <figure className="mt-14 border-t-2 border-[#111318] pt-6">
+              <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+                <h2 className="max-w-[26ch] text-balance font-display text-[clamp(1.7rem,2.6vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.015em] text-[#111318]">
+                  {soloShare}% of brand namings came from a single engine.
+                </h2>
+                <span className="font-mono text-[12px] uppercase tracking-[0.1em] text-black/55">
+                  <span className="tabular-nums">{totalNamings}</span> namings,
+                  by engines naming
+                </span>
+              </figcaption>
 
-            <p className="mt-6 flex max-w-[74ch] items-start gap-2.5 text-[13px] leading-relaxed text-black/62">
-              <CircleAlert
-                className="mt-0.5 h-4 w-4 shrink-0 text-[#d97706]"
-                aria-hidden="true"
-              />
-              {BENCHMARK_RUN.notMeasured}
+              <div className="mt-6 flex h-14 gap-[2px] border border-black/18 bg-white p-[3px]">
+                {spread.map((step) => (
+                  <span
+                    key={step.engines}
+                    className="h-full"
+                    style={{
+                      flexBasis: `${step.share * 100}%`,
+                      backgroundColor: step.color,
+                    }}
+                    aria-hidden="true"
+                  />
+                ))}
+              </div>
+
+              <dl className="mt-5 grid gap-x-8 gap-y-6 sm:grid-cols-3">
+                {spread.map((step) => (
+                  <div key={step.engines}>
+                    <dt className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-black/62">
+                      <span
+                        className="h-2.5 w-2.5 rounded-[2px]"
+                        style={{ backgroundColor: step.color }}
+                        aria-hidden="true"
+                      />
+                      {step.label}
+                    </dt>
+                    <dd className="mt-2 flex items-baseline gap-2.5">
+                      <span className="font-display text-[clamp(1.7rem,2.6vw,2.3rem)] leading-none tabular-nums text-[#111318]">
+                        {step.count}
+                      </span>
+                      <span className="font-mono text-[12px] tabular-nums text-black/55">
+                        {Math.round(step.share * 100)}%
+                      </span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </figure>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="border-y border-black/14 bg-white">
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <Reveal>
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
+              <h2 className="max-w-[18ch] text-balance font-display text-[clamp(2rem,3.1vw,3rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+                The engines do not answer alike.
+              </h2>
+              <p className="max-w-[62ch] text-[16px] leading-[1.7] text-black/64">
+                Across the same {BENCHMARK_RUN.questions} questions,{" "}
+                {loudest.engine} put {spreadRatio.toFixed(1)}× as many brands in
+                front of a shopper per answer as {quietest.engine}. Where an
+                engine answered and named nothing at all, that is recorded too.
+              </p>
+            </div>
+
+            <table className="mt-10 w-full border-collapse text-left">
+              <caption className="sr-only">
+                Per-engine totals across the {BENCHMARK_RUN.questions} charted
+                questions
+              </caption>
+              <thead>
+                <tr className="border-b-2 border-[#111318] font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-black/54">
+                  <th scope="col" className="py-3 pr-4 font-semibold">
+                    Engine
+                  </th>
+                  <th
+                    scope="col"
+                    className="hidden py-3 pr-4 text-right font-semibold sm:table-cell"
+                  >
+                    Answers
+                  </th>
+                  <th scope="col" className="py-3 pr-4 font-semibold">
+                    Brands named
+                  </th>
+                  <th
+                    scope="col"
+                    className="py-3 pr-4 text-right font-semibold"
+                  >
+                    Per answer
+                  </th>
+                  <th
+                    scope="col"
+                    className="hidden py-3 pr-4 text-right font-semibold sm:table-cell"
+                  >
+                    Named by it alone
+                  </th>
+                  <th
+                    scope="col"
+                    className="hidden py-3 text-right font-semibold lg:table-cell"
+                  >
+                    Answered, named nothing
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {engineRows.map((engine) => (
+                  <tr
+                    key={engine.engine}
+                    className="border-b border-black/12 align-middle"
+                  >
+                    <th
+                      scope="row"
+                      className="py-4 pr-4 text-[15px] font-semibold text-[#111318]"
+                    >
+                      {engine.engine}
+                    </th>
+                    <td className="hidden py-4 pr-4 text-right font-mono text-[13px] tabular-nums text-black/70 sm:table-cell">
+                      {engine.answers}
+                    </td>
+                    <td className="py-4 pr-4">
+                      <span className="flex items-center gap-3">
+                        <span
+                          className="h-2.5 w-full max-w-[18rem] shrink bg-black/[0.07]"
+                          aria-hidden="true"
+                        >
+                          <span
+                            className="block h-full"
+                            style={{
+                              width: `${(engine.namings / widest) * 100}%`,
+                              backgroundColor: BENCHMARK_INK.named,
+                            }}
+                          />
+                        </span>
+                        <span className="w-8 shrink-0 font-mono text-[13px] tabular-nums text-[#111318]">
+                          {engine.namings}
+                        </span>
+                      </span>
+                    </td>
+                    <td className="py-4 pr-4 text-right font-mono text-[13px] tabular-nums text-[#111318]">
+                      {engine.perAnswer.toFixed(1)}
+                    </td>
+                    <td className="hidden py-4 pr-4 text-right font-mono text-[13px] tabular-nums text-black/70 sm:table-cell">
+                      {engine.soleNamings}
+                      <span className="text-black/40">
+                        {" "}
+                        ({Math.round(engine.soleShare * 100)}%)
+                      </span>
+                    </td>
+                    <td className="hidden py-4 text-right font-mono text-[13px] tabular-nums text-black/70 lg:table-cell">
+                      {engine.silentAnswers}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <p className="mt-4 max-w-[80ch] text-[13px] leading-relaxed text-black/58">
+              One row per engine over the same {BENCHMARK_RUN.questions}{" "}
+              questions, {formatBenchmarkDate(BENCHMARK_RUN.askedOn)}. A naming
+              is one brand in one answer; &ldquo;named by it alone&rdquo; counts
+              the brands no other engine repeated on that question. Volume is
+              not quality, and this is not a ranking of the engines.
             </p>
           </Reveal>
         </div>
       </section>
 
       <section className="bg-[#f6f6f6]">
-        <div className="mx-auto grid max-w-[92rem] gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2 lg:gap-14 lg:px-10">
-          {CATEGORY_BENCHMARKS.map((benchmark, index) => (
-            <Reveal key={benchmark.slug} delay={(index % 2) * 0.05}>
-              <CategoryBenchmarkFigure benchmark={benchmark} index={index} />
-            </Reveal>
-          ))}
+        <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+          <Reveal>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b-2 border-[#111318] pb-4">
+              <h2 className="max-w-[24ch] text-balance font-display text-[clamp(1.7rem,2.6vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.015em] text-[#111318]">
+                Every question, and which engine named what.
+              </h2>
+              <p className="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-black/58">
+                <span className="flex items-center gap-2">
+                  <span
+                    className="h-2.5 w-2.5 rounded-[2px]"
+                    style={{ backgroundColor: BENCHMARK_INK.named }}
+                    aria-hidden="true"
+                  />
+                  Named
+                </span>
+                <span className="flex items-center gap-2">
+                  <span
+                    className="h-2.5 w-2.5 rounded-[2px]"
+                    style={{ backgroundColor: BENCHMARK_INK.consensus }}
+                    aria-hidden="true"
+                  />
+                  Named by all {WORDS[engineCount] ?? engineCount}
+                </span>
+                <span className="flex items-center gap-2">
+                  <span
+                    className="h-px w-2.5"
+                    style={{ backgroundColor: BENCHMARK_INK.absent }}
+                    aria-hidden="true"
+                  />
+                  Not named
+                </span>
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-14">
+            {CATEGORY_BENCHMARKS.map((benchmark, index) => (
+              <Reveal key={benchmark.slug} delay={(index % 2) * 0.05}>
+                <CategoryBenchmarkFigure benchmark={benchmark} index={index} />
+              </Reveal>
+            ))}
+          </div>
+
+          <p className="mt-10 max-w-[80ch] text-[13px] leading-relaxed text-black/58">
+            Columns run in the same order on every figure:{" "}
+            {BENCHMARK_RUN.engines.map(engineLabel).join(", ")}. An engine that
+            returned no completed answer is left out of the question entirely
+            rather than shown as a zero.
+          </p>
         </div>
       </section>
 
