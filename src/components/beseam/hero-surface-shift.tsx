@@ -35,7 +35,16 @@ type CardState =
 const ACCENT = "#b8441d";
 const INK = "#111318";
 const PAPER = "#fafafa";
-const INTERNAL_MATURITY = new Set(["Beta", "Experimental", "Production"]);
+const FOREGROUND_SPREAD = 1.3;
+// One motion scale. Values JS ramps every frame (--kg-spot, --kg-expand) get a
+// short linear TRACK so CSS never eases an already-eased ramp; class flips
+// (active, selected, connected) get STATE; whole layers get LAYER.
+const TRACK = "110ms linear";
+const STATE = "240ms cubic-bezier(.22,.61,.36,1)";
+// Colour moves faster than the rest: ink -> accent passes through a muddy brown
+// at the midpoint, so the hue crosses before the eye can read it.
+const COLOR = "140ms cubic-bezier(.22,.61,.36,1)";
+const LAYER = "380ms cubic-bezier(.22,.61,.36,1)";
 const HUBS: readonly Hub[] = [
   {
     id: "ai",
@@ -269,6 +278,27 @@ type GraphLayout = {
   capabilityRadius: number;
   satelliteRadius: number;
   positions: Record<HubId, Point>;
+};
+type ForegroundLabelSide = "left" | "right";
+type ForegroundLabelPlacement = {
+  side: ForegroundLabelSide;
+  centerY: number;
+};
+type ForegroundLabelItem = ForegroundLabelPlacement & {
+  key: string;
+  desiredY: number;
+  height: number;
+};
+
+const FOREGROUND_TYPE: Record<
+  GraphLayoutName,
+  { capability: number; hub: number; satellite: number; value: number }
+> = {
+  mobile: { capability: 8, hub: 8, satellite: 8, value: 7 },
+  tablet: { capability: 13.5, hub: 14, satellite: 14, value: 12 },
+  desktop: { capability: 14.5, hub: 15, satellite: 15, value: 13 },
+  wide: { capability: 13, hub: 13.5, satellite: 13.5, value: 11.5 },
+  ultrawide: { capability: 11.5, hub: 12, satellite: 12, value: 10.5 },
 };
 
 const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
@@ -929,8 +959,87 @@ function satellitePoint(
   };
 }
 
+type HeroExclusion = {
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+};
+
+function heroExclusionRect(
+  layoutName: GraphLayoutName,
+  canvasWidth: number,
+  canvasHeight: number,
+): HeroExclusion | null {
+  if (
+    layoutName !== "desktop" &&
+    layoutName !== "wide" &&
+    layoutName !== "ultrawide"
+  ) {
+    return null;
+  }
+  return {
+    left: canvasWidth * 0.28,
+    right: canvasWidth * 0.72,
+    top: canvasHeight * 0.18,
+    bottom: canvasHeight * 0.76,
+  };
+}
+
+// Foreground nodes fan out from their hub, nothing else.
+function foregroundPoint(hub: Point, point: Point) {
+  return {
+    x: hub.x + (point.x - hub.x) * FOREGROUND_SPREAD,
+    y: hub.y + (point.y - hub.y) * FOREGROUND_SPREAD,
+  };
+}
+
 function squaredDistance(a: Point, b: Point) {
   return (a.x - b.x) ** 2 + (a.y - b.y) ** 2;
+}
+
+function distributeForegroundLabels(
+  items: readonly ForegroundLabelItem[],
+  minY: number,
+  maxY: number,
+  gap: number,
+) {
+  const placed = [...items]
+    .sort((a, b) => a.desiredY - b.desiredY)
+    .map((item) => ({ ...item, centerY: item.desiredY }));
+  if (!placed.length) return new Map<string, ForegroundLabelPlacement>();
+
+  let cursor = minY;
+  for (const item of placed) {
+    const half = item.height / 2;
+    item.centerY = Math.max(item.desiredY, cursor + half);
+    cursor = item.centerY + half + gap;
+  }
+
+  let nextTop = maxY;
+  for (let index = placed.length - 1; index >= 0; index -= 1) {
+    const item = placed[index];
+    const half = item.height / 2;
+    item.centerY = Math.min(item.centerY, nextTop - half);
+    nextTop = item.centerY - half - gap;
+  }
+
+  cursor = minY;
+  for (const item of placed) {
+    const half = item.height / 2;
+    item.centerY = Math.max(item.centerY, cursor + half);
+    cursor = item.centerY + half + gap;
+  }
+
+  return new Map(
+    placed.map((item) => [
+      item.key,
+      {
+        side: item.side,
+        centerY: item.centerY,
+      } satisfies ForegroundLabelPlacement,
+    ]),
+  );
 }
 
 function proximityProgress(distance: number, radius: number) {
@@ -952,8 +1061,6 @@ export default function HeroSurfaceShift() {
   const pointerForegroundFrameRef = useRef<number | null>(null);
   const pointerForegroundTargetRef = useRef(INITIAL_AUTO_HUB_ID ? 1 : 0);
   const cardExitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const cardRevealFrameRef = useRef<number | null>(null);
-  const cardVisibleRef = useRef(false);
   const foregroundSvgRef = useRef<SVGSVGElement>(null);
   const foregroundProgressRef = useRef(INITIAL_AUTO_HUB_ID ? 1 : 0);
   const renderedForegroundHubRef = useRef<string | null>(INITIAL_AUTO_HUB_ID);
@@ -981,8 +1088,6 @@ export default function HeroSurfaceShift() {
   } | null>(null);
   const [activeSatellite, setActiveSatellite] = useState<number | null>(null);
   const [cardState, setCardState] = useState<CardState>(null);
-  const [cardVisible, setCardVisible] = useState(false);
-  const [cardPosition, setCardPosition] = useState({ left: 0, top: 0 });
   const [autoJourneyIndex, setAutoJourneyIndex] = useState(0);
   const [autoPhase, setAutoPhase] = useState<
     "waiting" | "traveling" | "ending"
@@ -1048,11 +1153,20 @@ export default function HeroSurfaceShift() {
             : 2.6;
   const verticalScale = shortViewport ? 0.82 : 1;
   const graphHeight = Math.round(graphLayout.height * verticalScale);
+  const heroExclusion = useMemo(
+    () => heroExclusionRect(layoutName, graphLayout.width, graphHeight),
+    [graphHeight, graphLayout.width, layoutName],
+  );
   const layoutHubs = useMemo<Hub[]>(
     () =>
       HUBS.map((hub) => {
         const position = graphLayout.positions[hub.id];
-        return { ...hub, x: position.x, y: position.y * verticalScale };
+        const centre = graphLayout.width / 2;
+        return {
+          ...hub,
+          x: centre + (position.x - centre) * 0.9,
+          y: position.y * verticalScale,
+        };
       }),
     [graphLayout, verticalScale],
   );
@@ -1066,18 +1180,6 @@ export default function HeroSurfaceShift() {
   );
 
   const capabilityNodes = useMemo<CapabilityNode[]>(() => {
-    const heroExclusion =
-      layoutName === "desktop" ||
-      layoutName === "wide" ||
-      layoutName === "ultrawide"
-        ? {
-            left: graphLayout.width * 0.28,
-            right: graphLayout.width * 0.72,
-            top: graphHeight * 0.18,
-            bottom: graphHeight * 0.76,
-          }
-        : null;
-
     return layoutHubs.flatMap((hub, hubIndex) => {
       const capabilities = (CAPABILITIES[hub.id] ?? []).slice(
         0,
@@ -1114,7 +1216,7 @@ export default function HeroSurfaceShift() {
         return { hubId: hub.id, index, x, y, capability };
       });
     });
-  }, [graphHeight, graphLayout, layoutHubs, layoutName]);
+  }, [graphHeight, graphLayout, heroExclusion, layoutHubs, layoutName]);
   const setAutoSignalPosition = useCallback((point: Point) => {
     const marker = autoSignalRef.current;
     const root = rootRef.current;
@@ -1132,10 +1234,13 @@ export default function HeroSurfaceShift() {
   const setForegroundProgress = useCallback((value: number) => {
     const clamped = Math.max(0, Math.min(1, value));
     foregroundProgressRef.current = clamped;
+    // Both layers read the same progress: the focus layer fades in on it, the
+    // ambient graph steps down by it, so the two always cross-fade.
     foregroundSvgRef.current?.style.setProperty(
       "--kg-expand",
       clamped.toFixed(3),
     );
+    svgRef.current?.style.setProperty("--kg-expand", clamped.toFixed(3));
   }, []);
 
   const easePointerForegroundProgress = useCallback(
@@ -1212,10 +1317,6 @@ export default function HeroSurfaceShift() {
       if (cardExitTimerRef.current) {
         clearTimeout(cardExitTimerRef.current);
         cardExitTimerRef.current = null;
-      }
-      if (cardRevealFrameRef.current !== null) {
-        cancelAnimationFrame(cardRevealFrameRef.current);
-        cardRevealFrameRef.current = null;
       }
     },
     [],
@@ -1515,20 +1616,6 @@ export default function HeroSurfaceShift() {
     cardExitTimerRef.current = null;
   }, []);
 
-  const revealCard = useCallback(() => {
-    cancelCardExit();
-    if (cardVisibleRef.current) return;
-    if (cardRevealFrameRef.current !== null) {
-      cancelAnimationFrame(cardRevealFrameRef.current);
-    }
-    setCardVisible(false);
-    cardRevealFrameRef.current = requestAnimationFrame(() => {
-      cardRevealFrameRef.current = null;
-      cardVisibleRef.current = true;
-      setCardVisible(true);
-    });
-  }, [cancelCardExit]);
-
   const clearSelection = useCallback(() => {
     cancelClose();
     cancelCardExit();
@@ -1537,8 +1624,6 @@ export default function HeroSurfaceShift() {
     setActiveHubId(null);
     setActiveCapability(null);
     setActiveSatellite(null);
-    cardVisibleRef.current = false;
-    setCardVisible(false);
     cardExitTimerRef.current = setTimeout(() => {
       setCardState(null);
       cardExitTimerRef.current = null;
@@ -1550,28 +1635,13 @@ export default function HeroSurfaceShift() {
 
   const scheduleClose = useCallback(() => {
     if (closeTimerRef.current) return;
-    closeTimerRef.current = setTimeout(clearSelection, 420);
+    // Short enough that letting go of a node starts the cross-fade straight
+    // away, long enough to survive skimming between a hub and its own nodes.
+    closeTimerRef.current = setTimeout(clearSelection, 160);
   }, [clearSelection]);
 
-  const positionCard = useCallback((element: Element) => {
-    const hero = svgRef.current?.parentElement;
-    if (!hero) return;
-
-    const anchor = element.getBoundingClientRect();
-    const bounds = hero.getBoundingClientRect();
-    let left = anchor.left - bounds.left + 24;
-    let top = anchor.top - bounds.top - 24;
-
-    if (left + 228 > bounds.width) left = anchor.left - bounds.left - 238;
-    if (top + 170 > bounds.height) top = anchor.top - bounds.top - 148;
-    if (left < 10) left = 10;
-    if (top < 10) top = 10;
-
-    setCardPosition({ left, top });
-  }, []);
-
   const selectHub = useCallback(
-    (hubId: string, element: Element) => {
+    (hubId: string) => {
       cancelClose();
       const targetKey = `hub:${hubId}`;
       if (activeTargetRef.current === targetKey) return;
@@ -1582,14 +1652,12 @@ export default function HeroSurfaceShift() {
       setActiveSatellite(null);
       setCardState({ kind: "hub", hubId });
       easePointerForegroundProgress(1);
-      positionCard(element);
-      revealCard();
     },
-    [cancelClose, easePointerForegroundProgress, positionCard, revealCard],
+    [cancelClose, easePointerForegroundProgress],
   );
 
   const selectCapability = useCallback(
-    (node: CapabilityNode, element: Element) => {
+    (node: CapabilityNode) => {
       cancelClose();
       const targetKey = `cap:${node.hubId}:${node.index}`;
       if (activeTargetRef.current === targetKey) return;
@@ -1604,10 +1672,8 @@ export default function HeroSurfaceShift() {
         index: node.index,
       });
       easePointerForegroundProgress(1);
-      positionCard(element);
-      revealCard();
     },
-    [cancelClose, easePointerForegroundProgress, positionCard, revealCard],
+    [cancelClose, easePointerForegroundProgress],
   );
 
   const clearFocus = useCallback(() => {
@@ -1660,7 +1726,6 @@ export default function HeroSurfaceShift() {
         const currentMatrix = currentSvg?.getScreenCTM();
         if (!point || !currentSvg || !currentMatrix) return;
 
-        currentSvg.classList.add("hero-kg-context");
         const previousFocus = smoothedFocusRef.current;
         const smoothPoint = previousFocus
           ? {
@@ -1742,6 +1807,10 @@ export default function HeroSurfaceShift() {
           pointerActivationRadius,
         );
         pointerProximityRef.current = pointerProgress;
+        // Only dim the ambient web while the pointer is actually approaching a
+        // hub. Adding this unconditionally left the graph blank whenever the
+        // pointer sat in open space, until it left the hero entirely.
+        currentSvg.classList.toggle("hero-kg-context", pointerProgress > 0.02);
 
         if (nearestPointerHubId && pointerProgress > 0.02) {
           if (pointerApproachHubRef.current !== nearestPointerHubId) {
@@ -1937,12 +2006,12 @@ export default function HeroSurfaceShift() {
         if (target.key === activeTargetRef.current) return;
 
         if (target.kind === "capability") {
-          selectCapability(target.node, target.element);
+          selectCapability(target.node);
           return;
         }
 
         if (target.kind === "hub") {
-          selectHub(target.hubId, target.element);
+          selectHub(target.hubId);
           return;
         }
 
@@ -1987,6 +2056,33 @@ export default function HeroSurfaceShift() {
     }
 
     if (desiredForegroundHubId) {
+      const rendered = renderedForegroundHubRef.current;
+      const swapping =
+        rendered !== null &&
+        rendered !== desiredForegroundHubId &&
+        foregroundProgressRef.current > 0.05 &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (swapping) {
+        // Hovering a second hub used to swap the cluster underneath a progress
+        // value that was already 1, so the new one appeared fully expanded with
+        // no animation. Retract first, then draw the new cluster in, the same
+        // way the auto journey arrives at a node.
+        pointerForegroundTargetRef.current = 0;
+        if (pointerForegroundFrameRef.current !== null) {
+          cancelAnimationFrame(pointerForegroundFrameRef.current);
+          pointerForegroundFrameRef.current = null;
+        }
+        setForegroundProgress(0);
+        foregroundExitTimerRef.current = setTimeout(() => {
+          renderedForegroundHubRef.current = desiredForegroundHubId;
+          setRenderedForegroundHubId(desiredForegroundHubId);
+          foregroundExitTimerRef.current = null;
+          easePointerForegroundProgress(1);
+        }, 140);
+        return;
+      }
+
       renderedForegroundHubRef.current = desiredForegroundHubId;
       setRenderedForegroundHubId(desiredForegroundHubId);
       return;
@@ -2007,41 +2103,101 @@ export default function HeroSurfaceShift() {
         foregroundExitTimerRef.current = null;
       }
     };
-  }, [desiredForegroundHubId, easePointerForegroundProgress]);
+  }, [
+    desiredForegroundHubId,
+    easePointerForegroundProgress,
+    setForegroundProgress,
+  ]);
 
   useEffect(() => {
-    foregroundSvgRef.current?.style.setProperty(
-      "--kg-expand",
-      foregroundProgressRef.current.toFixed(3),
-    );
+    const expand = foregroundProgressRef.current.toFixed(3);
+    foregroundSvgRef.current?.style.setProperty("--kg-expand", expand);
+    svgRef.current?.style.setProperty("--kg-expand", expand);
   }, [renderedForegroundHubId]);
 
   const foregroundHub = renderedForegroundHubId
     ? hubById[renderedForegroundHubId]
     : null;
+  const foregroundType = FOREGROUND_TYPE[layoutName];
+  const foregroundLabelPlacements = useMemo(() => {
+    const empty = new Map<string, ForegroundLabelPlacement>();
+    if (!foregroundHub) return empty;
+
+    const lanes: Record<ForegroundLabelSide, ForegroundLabelItem[]> = {
+      left: [],
+      right: [],
+    };
+    const pickSide = (x: number): ForegroundLabelSide => {
+      if (x > graphLayout.width * 0.82) return "left";
+      if (x < graphLayout.width * 0.18) return "right";
+      return x >= foregroundHub.x ? "right" : "left";
+    };
+
+    capabilityNodes
+      .filter((node) => node.hubId === foregroundHub.id)
+      .forEach((node) => {
+        const { x, y } = foregroundPoint(foregroundHub, node);
+        const side = pickSide(x);
+        lanes[side].push({
+          key: `cap:${node.hubId}:${node.index}`,
+          side,
+          centerY: y,
+          desiredY: y,
+          height: foregroundType.capability * 1.25,
+        });
+      });
+
+    foregroundHub.satellites.forEach((_, index) => {
+      const point = foregroundPoint(
+        foregroundHub,
+        satellitePoint(
+          foregroundHub,
+          index,
+          graphLayout.satelliteRadius,
+          graphLayout.width,
+          graphHeight,
+        ),
+      );
+      const side = pickSide(point.x);
+      lanes[side].push({
+        key: `sat:${foregroundHub.id}:${index}`,
+        side,
+        centerY: point.y,
+        desiredY: point.y,
+        height: foregroundType.satellite + foregroundType.value + 5,
+      });
+    });
+
+    const hubSide = pickSide(foregroundHub.x + 1);
+    lanes[hubSide].push({
+      key: `hub:${foregroundHub.id}`,
+      side: hubSide,
+      centerY: foregroundHub.y,
+      desiredY: foregroundHub.y,
+      height: foregroundType.hub * 1.3,
+    });
+
+    const minY = 20;
+    const maxY = graphHeight - 20;
+    const gap = Math.max(5, foregroundType.capability * 0.35);
+    return new Map([
+      ...distributeForegroundLabels(lanes.left, minY, maxY, gap),
+      ...distributeForegroundLabels(lanes.right, minY, maxY, gap),
+    ]);
+  }, [
+    capabilityNodes,
+    foregroundHub,
+    foregroundType,
+    graphHeight,
+    graphLayout.satelliteRadius,
+    graphLayout.width,
+  ]);
   const autoSupportHubIds: readonly HubId[] =
     autoJourneyVisible && autoContextHubId
       ? (autoJourney.supportByNode?.[autoContextHubId] ?? [])
       : [];
   const autoSupportAnchor =
     autoJourneyVisible && autoContextHubId ? hubById[autoContextHubId] : null;
-  const cardContent = useMemo(() => {
-    if (!cardState) return null;
-    const hub = hubById[cardState.hubId];
-    if (cardState.kind === "hub") {
-      return { title: hub.label, metrics: hub.metrics, description: null };
-    }
-
-    const capability = CAPABILITIES[cardState.hubId]?.[cardState.index];
-    if (!capability) return null;
-    const showSignal = !INTERNAL_MATURITY.has(capability[1]);
-    return {
-      title: capability[0],
-      metrics: showSignal ? [["Signal", capability[1], 0] as Metric] : [],
-      description: capability[2],
-    };
-  }, [cardState, hubById]);
-
   return (
     <div
       ref={rootRef}
@@ -2054,7 +2210,7 @@ export default function HeroSurfaceShift() {
         data-short={shortViewport || undefined}
         viewBox={`0 0 ${graphLayout.width} ${graphHeight}`}
         preserveAspectRatio="xMidYMid meet"
-        className={`pointer-events-none absolute inset-0 h-full w-full ${autoJourneyVisible ? "hero-kg-auto-running" : ""}`}
+        className={`pointer-events-none absolute inset-0 h-full w-full ${autoJourneyVisible ? "hero-kg-auto-running" : ""} ${renderedForegroundHubId ? "hero-kg-focused" : ""}`}
         onPointerMove={handlePointerMove}
         onPointerLeave={() => {
           holdAutoJourney();
@@ -2233,6 +2389,7 @@ export default function HeroSurfaceShift() {
           cx="0"
           cy="0"
           r={focusRadius}
+          fill="none"
         />
       </svg>
 
@@ -2309,17 +2466,20 @@ export default function HeroSurfaceShift() {
           <g className="hero-kg-capability-edges">
             {capabilityNodes
               .filter((node) => node.hubId === foregroundHub.id)
-              .map((node) => (
-                <line
-                  key={`foreground-edge-${node.hubId}-${node.index}`}
-                  x1={foregroundHub.x}
-                  y1={foregroundHub.y}
-                  x2={node.x}
-                  y2={node.y}
-                  pathLength={1}
-                  className="hero-kg-parent-active hero-kg-foreground-cap-edge"
-                />
-              ))}
+              .map((node) => {
+                const { x, y } = foregroundPoint(foregroundHub, node);
+                return (
+                  <line
+                    key={`foreground-edge-${node.hubId}-${node.index}`}
+                    x1={foregroundHub.x}
+                    y1={foregroundHub.y}
+                    x2={x}
+                    y2={y}
+                    pathLength={1}
+                    className="hero-kg-parent-active hero-kg-foreground-cap-edge"
+                  />
+                );
+              })}
           </g>
 
           <g className="hero-kg-capabilities">
@@ -2329,11 +2489,18 @@ export default function HeroSurfaceShift() {
                 const isActive =
                   activeCapability?.hubId === node.hubId &&
                   activeCapability.index === node.index;
-                const labelOnLeft = node.x > graphLayout.width * 0.82;
+                const { x, y } = foregroundPoint(foregroundHub, node);
+                const placement = foregroundLabelPlacements.get(
+                  `cap:${node.hubId}:${node.index}`,
+                );
+                const labelOnLeft = placement?.side === "left";
+                const labelY = placement
+                  ? placement.centerY - y + foregroundType.capability * 0.32
+                  : -4.4;
                 return (
                   <g
                     key={`foreground-cap-${node.hubId}-${node.index}`}
-                    transform={`translate(${node.x} ${node.y})`}
+                    transform={`translate(${x} ${y})`}
                     className={`hero-kg-capability hero-kg-parent-active hero-kg-foreground-capability ${isActive ? "hero-kg-active" : ""}`}
                   >
                     <circle
@@ -2342,8 +2509,8 @@ export default function HeroSurfaceShift() {
                     />
                     <text
                       className="hero-kg-cap-label"
-                      x={labelOnLeft ? -5.2 : 5.2}
-                      y={-4.4}
+                      x={labelOnLeft ? -7.5 : 7.5}
+                      y={labelY}
                       textAnchor={labelOnLeft ? "end" : "start"}
                     >
                       {node.capability[0]}
@@ -2353,38 +2520,61 @@ export default function HeroSurfaceShift() {
               })}
           </g>
 
-          <g
-            transform={`translate(${foregroundHub.x} ${foregroundHub.y})`}
-            className="hero-kg-hub hero-kg-selected hero-kg-foreground-hub"
-          >
-            <circle
-              className="hero-kg-hub-ring"
-              r={(foregroundHub.id === "truth" ? 4.8 : 4.2) * nodeScale}
-            />
-            <circle
-              className="hero-kg-hub-core"
-              r={(foregroundHub.id === "truth" ? 1.9 : 1.65) * nodeScale}
-            />
-            <text
-              className="hero-kg-hub-label"
-              x="7.5"
-              y={foregroundHub.y > graphHeight * 0.58 ? 12 : -6.5}
-            >
-              {foregroundHub.label}
-            </text>
-          </g>
+          {(() => {
+            const placement = foregroundLabelPlacements.get(
+              `hub:${foregroundHub.id}`,
+            );
+            const labelOnLeft = placement?.side === "left";
+            const labelY = placement
+              ? placement.centerY - foregroundHub.y + foregroundType.hub * 0.32
+              : foregroundHub.y > graphHeight * 0.58
+                ? 12
+                : -6.5;
+            return (
+              <g
+                transform={`translate(${foregroundHub.x} ${foregroundHub.y})`}
+                className="hero-kg-hub hero-kg-selected hero-kg-foreground-hub"
+              >
+                <circle
+                  className="hero-kg-hub-ring"
+                  r={(foregroundHub.id === "truth" ? 4.8 : 4.2) * nodeScale}
+                />
+                <circle
+                  className="hero-kg-hub-core"
+                  r={(foregroundHub.id === "truth" ? 1.9 : 1.65) * nodeScale}
+                />
+                <text
+                  className="hero-kg-hub-label"
+                  x={labelOnLeft ? -9 : 9}
+                  y={labelY}
+                  textAnchor={labelOnLeft ? "end" : "start"}
+                >
+                  {foregroundHub.label}
+                </text>
+              </g>
+            );
+          })()}
 
           <g className="hero-kg-expanded hero-kg-expanded-foreground">
             {foregroundHub.satellites.map(([label, value], index) => {
-              const { x, y } = satellitePoint(
+              const { x, y } = foregroundPoint(
                 foregroundHub,
-                index,
-                graphLayout.satelliteRadius,
-                graphLayout.width,
-                graphHeight,
+                satellitePoint(
+                  foregroundHub,
+                  index,
+                  graphLayout.satelliteRadius,
+                  graphLayout.width,
+                  graphHeight,
+                ),
               );
               const active = activeHub ? activeSatellite === index : false;
-              const labelOnLeft = x > graphLayout.width * 0.82;
+              const placement = foregroundLabelPlacements.get(
+                `sat:${foregroundHub.id}:${index}`,
+              );
+              const labelOnLeft = placement?.side === "left";
+              const blockCenterY = placement?.centerY ?? y;
+              const labelY = blockCenterY - y - (foregroundType.value + 3) / 2;
+              const valueY = labelY + foregroundType.value + 3;
               return (
                 <g key={`foreground-sat-${foregroundHub.id}-${label}`}>
                   <line
@@ -2402,16 +2592,16 @@ export default function HeroSurfaceShift() {
                     <circle className="hero-kg-sat-dot" r={2.9 * nodeScale} />
                     <text
                       className="hero-kg-sat-label"
-                      x={labelOnLeft ? -5.5 * nodeScale : 5.5 * nodeScale}
-                      y={-3.6 * nodeScale}
+                      x={labelOnLeft ? -6.5 * nodeScale : 6.5 * nodeScale}
+                      y={labelY}
                       textAnchor={labelOnLeft ? "end" : "start"}
                     >
                       {label}
                     </text>
                     <text
                       className="hero-kg-sat-value"
-                      x={labelOnLeft ? -5.5 * nodeScale : 5.5 * nodeScale}
-                      y={3.2 * nodeScale}
+                      x={labelOnLeft ? -6.5 * nodeScale : 6.5 * nodeScale}
+                      y={valueY}
                       textAnchor={labelOnLeft ? "end" : "start"}
                     >
                       {value}
@@ -2424,72 +2614,45 @@ export default function HeroSurfaceShift() {
         </svg>
       ) : null}
 
-      {cardContent ? (
-        <div
-          data-visible={cardVisible ? "true" : "false"}
-          className="hero-kg-card pointer-events-auto absolute z-30 w-[218px] border border-black/20 bg-[#fbfbf8]/97 p-3 font-mono shadow-[0_16px_46px_rgba(17,19,24,0.1)] backdrop-blur-[10px]"
-          style={{ left: cardPosition.left, top: cardPosition.top }}
-          onPointerEnter={() => {
-            holdAutoJourney();
-            cancelClose();
-          }}
-          onPointerLeave={() => {
-            holdAutoJourney();
-            scheduleClose();
-          }}
-        >
-          <p className="text-[9px] font-bold uppercase tracking-[0.1em] text-[#111318]">
-            {cardContent.title}
-          </p>
-          {cardContent.metrics.length ? (
-            <div className="mt-2">
-              {cardContent.metrics.map(([label, value, score]) => (
-                <div
-                  key={`${label}-${value}`}
-                  className="grid grid-cols-[1fr_auto] gap-x-2 border-t border-black/10 py-[6px] text-[9px] text-black/62"
-                >
-                  <span>{label}</span>
-                  <strong className="font-bold text-[#111318]">{value}</strong>
-                  {score > 0 ? (
-                    <span className="col-span-2 mt-1 h-[2px] bg-black/8">
-                      <span
-                        className="block h-full bg-[#b8441d]"
-                        style={{ width: `${Math.min(score, 100)}%` }}
-                      />
-                    </span>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          ) : null}
-          {cardContent.description ? (
-            <p className="mt-2 border-t border-black/10 pt-2 text-[8px] leading-[1.45] text-black/56">
-              {cardContent.description}
-            </p>
-          ) : null}
-        </div>
-      ) : null}
-
       <style>{`
+        /* One opacity ladder for the whole graph, in one place.
+           ambient  edge .05 / .09   node .34-.62   label .30-.46
+           live     edge .16 / .26   node .60-.80   label .32
+           focus    edge .12 / .30   node .55-.85   label .26-.38
+           active                    node .75-.80   label .34-.40
+           Labels stay well under the hero copy: nodes carry the emphasis, text
+           never competes with the headline.
+           Ambient sits behind the headline and never competes with it. Live is
+           the auto-journey and hover state. Focus is the expanded cluster and
+           always outranks ambient. The focus layer fades in once, on the layer
+           itself, so no child ever double-fades. */
+        .hero-kg-main-edges path {
+          stroke: ${INK};
+          stroke-width: 0.78;
+          stroke-opacity: 0.09;
+          vector-effect: non-scaling-stroke;
+          transition: stroke-opacity ${STATE}, stroke-width ${STATE}, stroke ${COLOR};
+        }
+        .hero-kg-main-edges path.hero-kg-weak {
           stroke-dasharray: 2 10;
-          stroke-opacity: 0.052;
+          stroke-opacity: 0.05;
         }
         .hero-kg-auto-running .hero-kg-main-edges path {
-          stroke-opacity: 0.038;
+          stroke-opacity: 0.045;
         }
         .hero-kg-auto-running .hero-kg-main-edges path.hero-kg-weak {
-          stroke-opacity: 0.018;
+          stroke-opacity: 0.025;
         }
         .hero-kg-main-edges path.hero-kg-near {
-          stroke-opacity: 0.12;
+          stroke-opacity: 0.16;
         }
         .hero-kg-main-edges path.hero-kg-connected {
           stroke: ${ACCENT};
-          stroke-opacity: 0.22;
+          stroke-opacity: 0.26;
           stroke-width: 0.82;
         }
         .hero-kg-context .hero-kg-main-edges path:not(.hero-kg-near):not(.hero-kg-connected) {
-          stroke-opacity: 0.012;
+          stroke-opacity: 0.015;
         }
         .hero-kg-journeys path {
           stroke: ${ACCENT};
@@ -2497,13 +2660,13 @@ export default function HeroSurfaceShift() {
           stroke-opacity: 0;
           stroke-linecap: round;
           vector-effect: non-scaling-stroke;
-          transition: stroke-opacity 260ms cubic-bezier(.2,.8,.2,1);
+          transition: stroke-opacity ${LAYER};
         }
         .hero-kg-journeys path.hero-kg-journey-active {
           stroke-width: 1.35;
-          stroke-opacity: 0.34;
+          stroke-opacity: 0.26;
           stroke-dasharray: none;
-          filter: drop-shadow(0 0 3px rgba(184,68,29,.2));
+          filter: drop-shadow(0 0 3px rgba(184,68,29,.12));
         }
         .hero-kg-auto-signal {
           width: 18px;
@@ -2524,34 +2687,33 @@ export default function HeroSurfaceShift() {
         .hero-kg-support-edges path {
           stroke: ${ACCENT};
           stroke-width: 0.82;
-          stroke-opacity: calc(.04 + var(--kg-support, 0) * .34);
+          stroke-opacity: calc(.04 + var(--kg-support, 0) * .22);
           stroke-dasharray: 2 8;
           stroke-linecap: round;
           vector-effect: non-scaling-stroke;
-          filter: drop-shadow(0 0 3px rgba(184,68,29,.12));
-          transition: stroke-opacity 90ms linear;
+          transition: stroke-opacity ${TRACK};
         }
         .hero-kg-capability-edges line {
           --kg-spot: 0;
           stroke: ${ACCENT};
           stroke-width: 0.62;
-          stroke-opacity: calc(var(--kg-spot, 0) * .24);
+          stroke-opacity: calc(var(--kg-spot, 0) * .18);
           vector-effect: non-scaling-stroke;
-          transition: stroke-opacity 90ms linear;
+          transition: stroke-opacity ${TRACK};
         }
         .hero-kg-capability-edges line.hero-kg-parent-active {
-          stroke-opacity: 0.3;
+          stroke-opacity: 0.22;
         }
         .hero-kg-capability {
           --kg-spot: 0;
         }
         .hero-kg-cap-dot {
           fill: ${ACCENT};
-          opacity: calc(var(--kg-spot, 0) * .4);
+          opacity: calc(var(--kg-spot, 0) * .34);
           transform: scale(calc(.72 + var(--kg-spot, 0) * .28));
           transform-box: fill-box;
           transform-origin: center;
-          transition: opacity 90ms linear, transform 110ms linear, fill 160ms ease;
+          transition: opacity ${TRACK}, transform ${STATE}, fill ${COLOR};
         }
         .hero-kg-cap-label {
           fill: ${INK};
@@ -2559,40 +2721,43 @@ export default function HeroSurfaceShift() {
           font-size: 7.2px;
           font-weight: 620;
           letter-spacing: 0.02em;
-          opacity: clamp(0, calc((var(--kg-spot, 0) - .48) * 1.85), .72);
+          /* Ambient capability labels stay hidden. The focus layer spreads its
+             nodes, so the same text sits at different coordinates in the two
+             layers -- showing both during the cross-fade read as labels being
+             printed twice and then replaced. Dots and edges carry the ambient
+             layer; text belongs to the focus layer only. */
+          opacity: 0;
           pointer-events: none;
-          transition: opacity 100ms linear;
+          transition: opacity ${TRACK};
         }
         .hero-kg-capability.hero-kg-active .hero-kg-cap-dot {
           fill: ${ACCENT};
-          opacity: 1;
+          opacity: 0.75;
           transform: scale(1.7);
         }
-        .hero-kg-capability.hero-kg-active .hero-kg-cap-label {
-          opacity: 0.96;
-        }
+
         .hero-kg-hub {
           --kg-spot: 0;
-          transition: opacity 180ms ease, filter 220ms ease;
+          transition: opacity ${STATE}, filter ${STATE};
         }
         .hero-kg-hub-ring {
           fill: ${PAPER};
           stroke: ${INK};
           stroke-width: 0.78;
-          stroke-opacity: calc(.42 + var(--kg-spot, 0) * .16);
+          stroke-opacity: calc(.34 + var(--kg-spot, 0) * .16);
           transform: scale(calc(1 + var(--kg-spot, 0) * .055));
           transform-box: fill-box;
           transform-origin: center;
           vector-effect: non-scaling-stroke;
-          transition: stroke 160ms ease, stroke-opacity 100ms linear, transform 110ms linear;
+          transition: stroke ${COLOR}, stroke-opacity ${TRACK}, transform ${STATE};
         }
         .hero-kg-hub-core {
           fill: ${INK};
-          opacity: calc(.58 + var(--kg-spot, 0) * .18);
+          opacity: calc(.4 + var(--kg-spot, 0) * .22);
           transform: scale(calc(1 + var(--kg-spot, 0) * .1));
           transform-box: fill-box;
           transform-origin: center;
-          transition: opacity 100ms linear, transform 110ms linear, fill 160ms ease;
+          transition: opacity ${TRACK}, transform ${STATE}, fill ${COLOR};
         }
         .hero-kg-hub-label {
           fill: ${INK};
@@ -2600,54 +2765,53 @@ export default function HeroSurfaceShift() {
           font-size: 8px;
           font-weight: 600;
           letter-spacing: 0.04em;
-          opacity: calc(.3 + var(--kg-spot, 0) * .14);
-          transition: opacity 100ms linear;
+          opacity: calc(.3 + var(--kg-spot, 0) * .16);
+          transition: opacity ${TRACK};
         }
         .hero-kg-hub.hero-kg-auto-muted {
-          opacity: 0.42;
+          opacity: 0.38;
         }
         .hero-kg-hub.hero-kg-auto-muted .hero-kg-hub-ring {
-          stroke-opacity: 0.3;
+          stroke-opacity: 0.26;
           transform: scale(.9);
         }
         .hero-kg-hub.hero-kg-auto-muted .hero-kg-hub-core {
-          opacity: 0.44;
+          opacity: 0.34;
           transform: scale(.9);
         }
         .hero-kg-hub.hero-kg-auto-muted .hero-kg-hub-label {
           font-size: 7.4px;
-          opacity: 0.2;
+          opacity: 0.18;
         }
         .hero-kg-hub.hero-kg-auto-support {
-          opacity: calc(.44 + var(--kg-support, 0) * .5);
-          filter: drop-shadow(0 0 calc(2px + var(--kg-support, 0) * 5px) rgba(184,68,29,.14));
+          opacity: calc(.5 + var(--kg-support, 0) * .4);
         }
         .hero-kg-hub.hero-kg-auto-support .hero-kg-hub-ring {
           stroke: ${ACCENT};
-          stroke-opacity: calc(.28 + var(--kg-support, 0) * .5);
+          stroke-opacity: calc(.3 + var(--kg-support, 0) * .3);
           transform: scale(calc(.94 + var(--kg-support, 0) * .1));
         }
         .hero-kg-hub.hero-kg-auto-support .hero-kg-hub-core {
           fill: ${ACCENT};
-          opacity: calc(.38 + var(--kg-support, 0) * .5);
+          opacity: calc(.34 + var(--kg-support, 0) * .3);
           transform: scale(calc(.94 + var(--kg-support, 0) * .18));
         }
         .hero-kg-hub.hero-kg-auto-support .hero-kg-hub-label {
-          opacity: calc(.24 + var(--kg-support, 0) * .46);
+          opacity: calc(.26 + var(--kg-support, 0) * .26);
         }
         .hero-kg-hub.hero-kg-selected {
           filter: drop-shadow(0 4px 7px rgba(17,19,24,0.07));
         }
         .hero-kg-hub.hero-kg-selected .hero-kg-hub-ring {
           stroke: ${ACCENT};
-          stroke-opacity: 0.82;
+          stroke-opacity: 0.72;
         }
         .hero-kg-hub.hero-kg-selected .hero-kg-hub-core {
           fill: ${ACCENT};
-          opacity: 0.9;
+          opacity: 0.8;
         }
         .hero-kg-hub.hero-kg-selected .hero-kg-hub-label {
-          opacity: 0.82;
+          opacity: 0.32;
         }
         .hero-kg-sat-dot {
           fill: ${ACCENT};
@@ -2674,126 +2838,132 @@ export default function HeroSurfaceShift() {
           stroke-dasharray: 2 10;
           vector-effect: non-scaling-stroke;
           pointer-events: none;
-          transition: stroke-opacity 120ms ease;
+          transition: stroke-opacity ${STATE};
         }
         .hero-kg-lens.hero-kg-visible {
           stroke-opacity: 0.05;
         }
+        /* The grey twin of whatever the focus layer is showing. It rides the same
+           progress in reverse, so the accent node loses exactly the percentage
+           the grey one gains -- no hold, no gap on the way back. */
+        .hero-kg-hub.hero-kg-base-shadowed,
         .hero-kg-capability.hero-kg-base-shadowed,
         .hero-kg-capability-edges line.hero-kg-base-shadowed {
-          opacity: 0 !important;
-          stroke-opacity: 0 !important;
+          opacity: calc(1 - var(--kg-expand, 0));
+          transition: opacity ${TRACK};
         }
-        .hero-kg-hub.hero-kg-base-shadowed .hero-kg-hub-label {
-          opacity: 0 !important;
+
+        /* While a focus cluster is up the ambient graph steps down by the same
+           progress the focus layer fades in on, so the focused hub is always the
+           strongest node on screen and the two states cross-fade. */
+        .hero-kg-focused {
+          opacity: calc(1 - var(--kg-expand, 0) * .62);
+          transition: opacity ${TRACK};
+          will-change: opacity;
         }
+
+        /* Focus layer: one fade for the whole layer, constant values underneath. */
         .hero-kg-foreground {
           --kg-expand: 0;
-          filter: drop-shadow(0 6px 14px rgba(17,19,24,0.06));
-        }
-        .hero-kg-foreground .hero-kg-expanded,
-        .hero-kg-foreground .hero-kg-sat-item,
-        .hero-kg-foreground .hero-kg-sat-dot {
-          animation: none;
+          opacity: clamp(0, calc(var(--kg-expand) * 1.35), .9);
+          filter: none;
+          transition: opacity ${TRACK};
+          will-change: opacity;
         }
         .hero-kg-foreground-neighbor-edge {
           stroke: ${INK};
           stroke-width: 0.9;
-          stroke-opacity: calc(var(--kg-expand) * .3);
+          stroke-opacity: 0.22;
           stroke-dasharray: 1;
           stroke-dashoffset: calc(1 - var(--kg-expand));
           stroke-linecap: round;
           vector-effect: non-scaling-stroke;
-          transition: stroke-dashoffset 110ms linear, stroke-opacity 110ms linear;
+          transition: stroke-dashoffset ${TRACK};
         }
         .hero-kg-foreground-neighbor-edge-weak {
           stroke-width: 0.72;
-          stroke-opacity: calc(var(--kg-expand) * .15);
+          stroke-opacity: 0.12;
           stroke-dasharray: 2 8;
           stroke-dashoffset: 0;
         }
-        .hero-kg-foreground-cap-edge {
+        /* Outranks .hero-kg-capability-edges line.hero-kg-parent-active, which
+           would otherwise hand the focus layer the ambient opacity and kill the
+           draw-on that the neighbour and satellite edges use. */
+        .hero-kg-foreground .hero-kg-capability-edges line.hero-kg-foreground-cap-edge {
           stroke: ${ACCENT};
           stroke-width: 0.82;
-          stroke-opacity: calc(var(--kg-expand) * .38);
+          stroke-opacity: 0.3;
           stroke-dasharray: 1;
           stroke-dashoffset: calc(1 - var(--kg-expand));
           vector-effect: non-scaling-stroke;
-          transition: stroke-dashoffset 90ms linear, stroke-opacity 90ms linear;
-        }
-        .hero-kg-foreground-capability {
-          opacity: var(--kg-expand);
-          transition: opacity 90ms linear;
+          transition: stroke-dashoffset ${TRACK};
         }
         .hero-kg-foreground-capability .hero-kg-cap-dot {
           fill: ${ACCENT};
-          opacity: calc(.26 + var(--kg-expand) * .72);
-          transform: scale(calc(.72 + var(--kg-expand) * .28));
-          transition: opacity 90ms linear, transform 100ms linear, fill 160ms ease;
+          opacity: 0.55;
+          transform: scale(calc(.86 + var(--kg-expand) * .14));
+          transition: opacity ${STATE}, transform ${STATE};
         }
         .hero-kg-foreground-capability .hero-kg-cap-label {
           font-size: 8.2px;
-          opacity: clamp(0, calc((var(--kg-expand) - .3) * 1.65), .96);
-          transition: opacity 100ms linear;
+          opacity: 0.26;
+          transition: opacity ${STATE};
         }
         .hero-kg-foreground-capability.hero-kg-active .hero-kg-cap-dot {
-          fill: ${ACCENT};
-          opacity: 1;
-          transform: scale(calc(1 + var(--kg-expand) * .75));
+          opacity: 0.8;
+          transform: scale(1.75);
         }
-        .hero-kg-foreground-hub {
-          opacity: calc(.18 + var(--kg-expand) * .82);
-          transition: opacity 90ms linear, filter 100ms linear;
+        .hero-kg-foreground-capability.hero-kg-active .hero-kg-cap-label {
+          opacity: 0.4;
         }
         .hero-kg-foreground-hub .hero-kg-hub-ring {
           stroke: ${ACCENT};
-          stroke-opacity: calc(.3 + var(--kg-expand) * .7);
+          stroke-opacity: 0.72;
           transform: scale(calc(.98 + var(--kg-expand) * .07));
-          transition: stroke-opacity 90ms linear, transform 100ms linear;
+          transition: transform ${TRACK};
         }
         .hero-kg-foreground-hub .hero-kg-hub-core {
           fill: ${ACCENT};
-          opacity: calc(.34 + var(--kg-expand) * .66);
+          opacity: 0.85;
           transform: scale(calc(.96 + var(--kg-expand) * .42));
-          transition: opacity 90ms linear, transform 100ms linear;
+          transition: transform ${TRACK};
         }
         .hero-kg-foreground-hub .hero-kg-hub-label {
-          opacity: clamp(.15, calc(.15 + var(--kg-expand) * .8), .95);
+          opacity: 0.32;
           font-size: 8.4px;
-          transition: opacity 100ms linear;
+          transition: opacity ${STATE};
         }
         .hero-kg-foreground .hero-kg-expanded-foreground .hero-kg-sat-edge {
           stroke: ${ACCENT};
           stroke-width: 0.78;
-          stroke-opacity: calc(var(--kg-expand) * .42);
+          stroke-opacity: 0.3;
           stroke-dasharray: 1;
           stroke-dashoffset: calc(1 - var(--kg-expand));
           vector-effect: non-scaling-stroke;
-          transition: stroke-dashoffset 90ms linear, stroke-opacity 90ms linear;
-        }
-        .hero-kg-foreground .hero-kg-sat-item {
-          opacity: clamp(0, calc((var(--kg-expand) - .08) * 1.1), 1);
-          transition: opacity 90ms linear;
+          transition: stroke-dashoffset ${TRACK};
         }
         .hero-kg-foreground .hero-kg-sat-dot {
-          opacity: calc(.18 + var(--kg-expand) * .8);
-          transform: scale(calc(.62 + var(--kg-expand) * .38));
-          transition: opacity 90ms linear, transform 100ms linear;
+          opacity: 0.55;
+          transform: scale(calc(.86 + var(--kg-expand) * .14));
+          transition: opacity ${STATE}, transform ${STATE};
         }
-        .hero-kg-foreground .hero-kg-sat-label,
+        .hero-kg-foreground .hero-kg-sat-label {
+          opacity: 0.3;
+          transition: opacity ${STATE};
+        }
         .hero-kg-foreground .hero-kg-sat-value {
-          opacity: clamp(0, calc((var(--kg-expand) - .36) * 1.8), 1);
-          transition: opacity 100ms linear;
+          opacity: 0.38;
+          transition: opacity ${STATE};
         }
         .hero-kg-foreground .hero-kg-sat-item.hero-kg-active .hero-kg-sat-dot {
-          opacity: 1;
-          transform: scale(calc(1 + var(--kg-expand) * .8));
+          opacity: 0.8;
+          transform: scale(1.8);
         }
         .hero-kg-center-wash {
           width: min(820px, 54vw);
           height: 68%;
           background: radial-gradient(ellipse at center, rgba(250,250,250,0.965) 0%, rgba(250,250,250,0.72) 40%, rgba(250,250,250,0.26) 66%, rgba(250,250,250,0) 100%);
-          transition: width 320ms cubic-bezier(.2,.8,.2,1), height 320ms cubic-bezier(.2,.8,.2,1);
+          transition: width ${LAYER}, height ${LAYER};
         }
         svg[data-layout="tablet"] .hero-kg-cap-label { font-size: 7.8px; }
         svg[data-layout="tablet"] .hero-kg-sat-label { font-size: 9.5px; }
@@ -2810,49 +2980,23 @@ export default function HeroSurfaceShift() {
         .hero-kg-center-wash-tablet { width: 78vw; height: 68%; }
         .hero-kg-center-wash-wide { width: min(980px, 50vw); height: 70%; }
         .hero-kg-center-wash-ultrawide { width: min(1040px, 42vw); height: 68%; }
-        svg[data-layout="ultrawide"] .hero-kg-sat-label { font-size: 11px; }
-        svg[data-layout="ultrawide"] .hero-kg-sat-value { font-size: 9.5px; }
-        .hero-kg-center-wash-mobile { width: 88vw; height: 64%; }
-        .hero-kg-center-wash-tablet { width: 78vw; height: 68%; }
-        .hero-kg-center-wash-wide { width: min(980px, 50vw); height: 70%; }
-        .hero-kg-center-wash-ultrawide { width: min(1040px, 42vw); height: 68%; }
-        @keyframes hero-kg-drift {
-          to { stroke-dashoffset: -56; }
-        }
-        @keyframes hero-kg-expanded-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes hero-kg-edge-draw {
-          from { stroke-dashoffset: 90; opacity: 0; }
-          to { stroke-dashoffset: 0; opacity: 1; }
-        }
-        @keyframes hero-kg-sat-pop {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        .hero-kg-expanded .hero-kg-sat-dot {
-          animation: hero-kg-dot-bloom 300ms cubic-bezier(.16,1,.3,1) both;
-        }
-        @keyframes hero-kg-dot-bloom {
-          from { transform: scale(.55); opacity: 0; }
-          to { transform: scale(1); opacity: .66; }
-        }
-        .hero-kg-card {
-          opacity: 0;
-          transform: translateY(5px) scale(.982);
-          transform-origin: 18px 18px;
-          transition:
-            left 180ms cubic-bezier(.2,.8,.2,1),
-            top 180ms cubic-bezier(.2,.8,.2,1),
-            opacity 180ms cubic-bezier(.2,.8,.2,1),
-            transform 240ms cubic-bezier(.16,1,.3,1);
-          will-change: left, top, opacity, transform;
-        }
-        .hero-kg-card[data-visible="true"] {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
+        svg[data-layout="tablet"].hero-kg-foreground .hero-kg-cap-label { font-size: 13.5px; }
+        svg[data-layout="tablet"].hero-kg-foreground .hero-kg-hub-label { font-size: 14px; }
+        svg[data-layout="tablet"].hero-kg-foreground .hero-kg-sat-label { font-size: 14px; }
+        svg[data-layout="tablet"].hero-kg-foreground .hero-kg-sat-value { font-size: 12px; }
+        svg[data-layout="desktop"].hero-kg-foreground .hero-kg-cap-label { font-size: 14.5px; }
+        svg[data-layout="desktop"].hero-kg-foreground .hero-kg-hub-label { font-size: 15px; }
+        svg[data-layout="desktop"].hero-kg-foreground .hero-kg-sat-label { font-size: 15px; }
+        svg[data-layout="desktop"].hero-kg-foreground .hero-kg-sat-value { font-size: 13px; }
+        svg[data-layout="wide"].hero-kg-foreground .hero-kg-cap-label { font-size: 13px; }
+        svg[data-layout="wide"].hero-kg-foreground .hero-kg-hub-label { font-size: 13.5px; }
+        svg[data-layout="wide"].hero-kg-foreground .hero-kg-sat-label { font-size: 13.5px; }
+        svg[data-layout="wide"].hero-kg-foreground .hero-kg-sat-value { font-size: 11.5px; }
+        svg[data-layout="ultrawide"].hero-kg-foreground .hero-kg-cap-label { font-size: 11.5px; }
+        svg[data-layout="ultrawide"].hero-kg-foreground .hero-kg-hub-label { font-size: 12px; }
+        svg[data-layout="ultrawide"].hero-kg-foreground .hero-kg-sat-label { font-size: 12px; }
+        svg[data-layout="ultrawide"].hero-kg-foreground .hero-kg-sat-value { font-size: 10.5px; }
+
         @media (max-width: 1100px) {
           .hero-kg-cap-label {
             font-size: 5.2px;
@@ -2873,19 +3017,23 @@ export default function HeroSurfaceShift() {
             font-size: 8px;
             opacity: 0.42;
           }
-          .hero-kg-card {
-            display: none;
-          }
           .hero-kg-main-edges path {
             stroke-opacity: 0.09;
           }
         }
         @media (prefers-reduced-motion: reduce) {
           .hero-kg-journeys path,
-          .hero-kg-expanded,
-          .hero-kg-expanded .hero-kg-sat-edge,
           .hero-kg-sat-item,
-          .hero-kg-card {
+          .hero-kg-foreground,
+          .hero-kg-focused,
+          .hero-kg-hub,
+          .hero-kg-hub-ring,
+          .hero-kg-hub-core,
+          .hero-kg-hub-label,
+          .hero-kg-capability,
+          .hero-kg-cap-dot,
+          .hero-kg-cap-label,
+          .hero-kg-main-edges path {
             animation: none;
             transition: none;
           }
