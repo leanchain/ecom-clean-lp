@@ -84,7 +84,7 @@ export default function CategoryBenchmarkFigure({
   // Identical templates on every row keep the columns aligned while each row
   // stays its own hover target.
   const columns = {
-    gridTemplateColumns: `minmax(0,1fr) repeat(${engineCount}, minmax(3.5rem,4.5rem))`,
+    gridTemplateColumns: `minmax(0,1fr) repeat(${engineCount}, minmax(3rem,4.25rem))`,
   };
 
   return (
@@ -146,11 +146,12 @@ export default function CategoryBenchmarkFigure({
                 className="grid items-center gap-x-2 border-b border-black/10 py-2 transition-colors last:border-b-0 hover:bg-black/[0.03]"
                 style={columns}
               >
+                {/* Names wrap rather than truncate: a clipped brand is the one
+                    fact the row exists to carry. */}
                 <span
-                  className={`truncate text-[14px] ${
+                  className={`pr-2 text-[14px] leading-snug ${
                     consensus ? "font-semibold text-[#111318]" : "text-black/82"
                   }`}
-                  title={row.brand}
                 >
                   {row.brand}
                 </span>
@@ -198,9 +199,8 @@ export default function CategoryBenchmarkFigure({
         </span>
         <span className="text-[13px] leading-relaxed text-black/62">
           Asked verbatim on {engines.join(", ")}, {formatBenchmarkDate(askedOn)}
-          . One column per engine, marked where that engine named the brand;
-          green where every engine did, a rule where it did not. Public brands,
-          observed: no customer data, and no ranking is implied.
+          . Public brands, observed: no customer data, and no ranking is
+          implied.
         </span>
       </figcaption>
     </figure>

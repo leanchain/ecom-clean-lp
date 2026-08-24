@@ -397,9 +397,11 @@ export default function BenchmarksPage() {
 
           <p className="mt-10 max-w-[80ch] text-[13px] leading-relaxed text-black/58">
             Columns run in the same order on every figure:{" "}
-            {BENCHMARK_RUN.engines.map(engineLabel).join(", ")}. An engine that
-            returned no completed answer is left out of the question entirely
-            rather than shown as a zero.
+            {BENCHMARK_RUN.engines.map(engineLabel).join(", ")}. The number
+            under an engine is how many brands it named for that question, so a
+            column of rules under a 0 is an engine that answered and named
+            nothing. An engine that returned no completed answer is left out of
+            the question entirely rather than shown as a zero.
           </p>
         </div>
       </section>
