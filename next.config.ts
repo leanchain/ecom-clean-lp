@@ -6,6 +6,9 @@ const withMDX = createMDX({
 });
 
 const nextConfig: NextConfig = {
+  // Dev writes to .next-dev (set via NEXT_DIST_DIR in package.json scripts) so
+  // `npm run build` into .next never clobbers a running dev server's HMR.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   turbopack: {
     root: process.cwd(),
   },

@@ -164,3 +164,69 @@ test("answer-check remains an e-commerce proxy rather than a Trevra route", asyn
     "https://api.beseam.test/api/monitoring/public/answer-check/example.com",
   );
 });
+
+test("/scan/verify is handled by the worker and sends missing tokens to the scan page", async () => {
+  const response = await worker.fetch(
+    new Request("https://beseam.com/scan/verify"),
+    TREVRA_ENV,
+  );
+
+  assert.equal(response.status, 302);
+  assert.equal(
+    response.headers.get("location"),
+    "https://beseam.com/scan?scan_error=missing_token",
+  );
+});
+
+test("/scan/verify consumes a valid token and returns to the scan page", async () => {
+  const calls = [];
+  const response = await withFetch(
+    async (url, init) => {
+      calls.push({ url: String(url), init });
+      return new Response(JSON.stringify({ domain: "shop.example" }), {
+        status: 200,
+        headers: { "content-type": "application/json" },
+      });
+    },
+    () =>
+      worker.fetch(
+        new Request("https://beseam.com/scan/verify?token=test-token"),
+        { ...TREVRA_ENV, API_BASE_URL: "https://api.beseam.test/api" },
+      ),
+  );
+
+  assert.equal(response.status, 302);
+  assert.equal(calls.length, 1);
+  assert.equal(
+    calls[0].url,
+    "https://api.beseam.test/api/monitoring/public/answer-check/verify?token=test-token",
+  );
+  assert.equal(calls[0].init.method, "POST");
+  assert.equal(
+    response.headers.get("location"),
+    "https://beseam.com/scan?domain=shop.example",
+  );
+});
+
+test("/scan/verify returns a PDP verification to the originating report", async () => {
+  const response = await withFetch(
+    async () =>
+      new Response(JSON.stringify({ domain: "shop.example" }), {
+        status: 200,
+        headers: { "content-type": "application/json" },
+      }),
+    () =>
+      worker.fetch(
+        new Request(
+          "https://beseam.com/scan/verify?token=test-token&report_id=3909086518540540",
+        ),
+        { ...TREVRA_ENV, API_BASE_URL: "https://api.beseam.test/api" },
+      ),
+  );
+
+  assert.equal(response.status, 302);
+  assert.equal(
+    response.headers.get("location"),
+    "https://app.beseam.com/report/3909086518540540",
+  );
+});

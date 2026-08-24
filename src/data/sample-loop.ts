@@ -1,10 +1,9 @@
-// The Diagnose/Fix/Verify stages of the loop for the same store the sample
-// scan came from. Diagnose is the frozen, unedited output of a real PDP audit
-// run against the store's live Rosé Gold sneaker page (same engine the
-// platform runs; brand tokens stripped, nothing else touched). Fix is the
-// audit's own top recommendation: still `proposed`, nothing has been
-// published to the store. Verify describes what runs after a publish and
-// carries no fabricated result.
+// Frozen evidence for one store moving through the public operating loop.
+// Observe comes from the sample scan. Understand uses a real PDP audit of the
+// live product page. Decide and Act use the audit's proposed change, which stays
+// a proposal until approval. Learn shows the same-question measurement pattern
+// after a publish; it is an example of what gets compared, not a promise of
+// future placement.
 
 export type LoopFinding = {
   field: string;

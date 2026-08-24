@@ -6,6 +6,7 @@ import "./globals.css";
 import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
 import BeseamFooter from "@/components/beseam/footer";
 import BeseamNavbar from "@/components/beseam/navbar";
+import ChatWidget from "@/components/chat-widget";
 import { ThemeProvider } from "@/components/theme-provider";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 import { HOME_SOCIAL_IMAGE, SITE_URL } from "@/lib/seo";
@@ -114,7 +115,6 @@ export default function RootLayout({
       },
     ],
   };
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${figtree.variable} ${lora.variable} antialiased`}>
@@ -129,6 +129,7 @@ export default function RootLayout({
         >
           <CookieConsentProvider>
             <AnalyticsScripts />
+            <ChatWidget />
             <div
               data-theme-scope="public"
               className="flex min-h-screen flex-col bg-background"
