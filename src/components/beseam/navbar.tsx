@@ -35,7 +35,7 @@ export default function BeseamNavbar() {
       className={cn(
         "sticky z-50 mx-auto border transition-all duration-200",
         scrolled
-          ? "top-3 w-[calc(100%-1.5rem)] max-w-[95rem] rounded-[18px] border-black/14 bg-[#fafafa]/72 shadow-lg backdrop-blur-2xl"
+          ? "top-3 w-[calc(100%-1.5rem)] max-w-[95rem] rounded-none border-black/14 bg-[#fafafa]/72 shadow-lg backdrop-blur-2xl"
           : "top-0 w-full border-x-transparent border-t-transparent border-b-black/10 bg-[#fafafa]/92 backdrop-blur-md",
       )}
     >

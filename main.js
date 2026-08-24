@@ -548,6 +548,7 @@ async function proxyProductImage(request, url) {
 async function verifyAnswerCheck(url, env) {
   const apiBase = (env.API_BASE_URL || DEFAULT_API_BASE).replace(/\/$/, "");
   const token = clean(url.searchParams.get("token"), 128);
+  const reportId = clean(url.searchParams.get("report_id"), 32);
   const scan = new URL(url);
   scan.pathname = "/scan";
   scan.search = "";
@@ -566,6 +567,9 @@ async function verifyAnswerCheck(url, env) {
     if (!response.ok || !payload?.domain) {
       scan.searchParams.set("scan_error", "link_used");
       return Response.redirect(scan.toString(), 302);
+    }
+    if (/^\d+$/.test(reportId)) {
+      return Response.redirect(`https://app.beseam.com/report/${reportId}`, 302);
     }
     scan.searchParams.set("domain", payload.domain);
   } catch {
