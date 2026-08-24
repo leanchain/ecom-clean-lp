@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
   type FormEvent,
+  type ReactNode,
 } from "react";
 
 import {
@@ -1572,7 +1573,18 @@ function AiAuditDisclosure({ result }: { result: AnswerCheckResult }) {
       summary={`${findings.length} observed ${findings.length === 1 ? "gap" : "gaps"}${urgent.length ? ` · ${urgent.length} worth attention first` : ""}`}
     >
       {grouped.length > 0 ? (
-        <div className="grid gap-px bg-black/14 sm:grid-cols-2 xl:grid-cols-3">
+        // The track count follows the number of groups. Hardcoding two and three
+        // columns painted the grid's own gap colour across every empty track,
+        // so a single group rendered as a card beside a grey slab.
+        <div
+          className={`grid gap-px bg-black/14 ${
+            grouped.length === 1
+              ? ""
+              : grouped.length === 2
+                ? "sm:grid-cols-2"
+                : "sm:grid-cols-2 xl:grid-cols-3"
+          }`}
+        >
           {grouped.map(([area, areaFindings], areaIndex) => {
             const areaUrgent = areaFindings.filter(
               (finding) =>
@@ -1581,7 +1593,7 @@ function AiAuditDisclosure({ result }: { result: AnswerCheckResult }) {
             return (
               <section
                 key={area}
-                className={`bg-white p-5 sm:p-6 ${grouped.length % 3 === 2 && areaIndex === grouped.length - 1 ? "xl:col-span-2" : ""}`}
+                className={`bg-white p-5 sm:p-6 ${grouped.length > 2 && grouped.length % 3 === 2 && areaIndex === grouped.length - 1 ? "xl:col-span-2" : ""}`}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -1807,8 +1819,13 @@ export function ResultCard({
               className={`h-2 w-2 rounded-full ${inFlight ? "bg-[#111318]" : scored.length ? "bg-[#1f7a4d]" : "bg-[#6f6862]"}`}
               aria-hidden="true"
             />
+            {/* Name the stage that is actually outstanding. Reporting "live
+                answer check running" over ten finished answers contradicted the
+                evidence sitting directly underneath it. */}
             {inFlight
-              ? "Live answer check running"
+              ? scored.length
+                ? "Product pages still inspecting"
+                : "Live answer check running"
               : scored.length
                 ? "Live evidence complete"
                 : "Scan complete"}
@@ -2027,8 +2044,15 @@ function ScanTakeaway({ result }: { result: AnswerCheckResult }) {
 
 export default function AnswerCheck({
   placement = "homepage_hero",
+  formNote,
 }: {
   placement?: string;
+  /**
+   * Reassurance shown directly under the field. It has to render between the
+   * form and the result, or a scanned store pushes it a full card away from the
+   * ask it is reassuring.
+   */
+  formNote?: ReactNode;
 }) {
   const { trackEvent } = useAnalytics();
   const [domain, setDomain] = useState("");
@@ -2264,6 +2288,8 @@ export default function AnswerCheck({
           </button>
         ) : null}
       </form>
+
+      {formNote}
 
       {result ? (
         <div className="mx-auto mt-14 max-w-[72rem]">

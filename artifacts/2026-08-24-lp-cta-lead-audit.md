@@ -54,7 +54,7 @@ Target should be `/scan`.
 ## OK — CTAs that check out
 
 - `/#promise` (navbar "30 days free") → `first-month-promise.tsx:15` `id="promise"`, rendered at `production-homepage.tsx:369`. Not broken.
-- `/#proof`, `/#ai-check`, `/#scope`, `#main-content` anchors all present.
+- `/#proof`, `/#ai-check`, `/#benchmarks`, `#main-content` anchors all present. (`/#scope` was retired when the scope section was folded into `/#proof`.)
 - All 16 `/compare/[slug]`, all resources `[slug]` routes resolve from their content sources.
 - Footer / nav / not-found destinations all resolve.
 - `BookReviewCta` primary = Cal.com embed (`pankaj.kumar/Beseam`), UTMs attached; secondary = `/#proof`.

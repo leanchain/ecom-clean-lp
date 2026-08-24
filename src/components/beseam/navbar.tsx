@@ -11,9 +11,9 @@ import TrackedLink from "@/components/beseam/tracked-link";
 import { APP_LOGIN_URL, APP_REGISTER_URL } from "@/lib/app-urls";
 import { cn } from "@/lib/utils";
 const NAV_LINKS = [
-  { label: "What Beseam sees", href: "/#scope" },
-  { label: "How it works", href: "/#proof" },
   { label: "Live check", href: "/#ai-check" },
+  { label: "Benchmark", href: "/#benchmarks" },
+  { label: "How it works", href: "/#proof" },
   { label: "30 days free", href: "/#promise" },
 ] as const;
 
