@@ -8,9 +8,7 @@
 /coverage
 
 # next.js
-/.next/
-/.next-dev/
-/.next.stale.bak/
+/.next*
 /out/
 # production
 /build
@@ -25,7 +23,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env
+.env.*
+!.env.example
 /*.png
 .playwright-mcp
 
