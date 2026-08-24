@@ -2649,10 +2649,10 @@ export default function HeroSurfaceShift() {
           stroke-opacity: 0.05;
         }
         .hero-kg-auto-running .hero-kg-main-edges path {
-          stroke-opacity: 0.045;
+          stroke-opacity: 0.065;
         }
         .hero-kg-auto-running .hero-kg-main-edges path.hero-kg-weak {
-          stroke-opacity: 0.025;
+          stroke-opacity: 0.035;
         }
         .hero-kg-main-edges path.hero-kg-near {
           stroke-opacity: 0.16;
@@ -2780,19 +2780,19 @@ export default function HeroSurfaceShift() {
           transition: opacity ${TRACK};
         }
         .hero-kg-hub.hero-kg-auto-muted {
-          opacity: 0.38;
+          opacity: 0.48;
         }
         .hero-kg-hub.hero-kg-auto-muted .hero-kg-hub-ring {
-          stroke-opacity: 0.26;
+          stroke-opacity: 0.3;
           transform: scale(.9);
         }
         .hero-kg-hub.hero-kg-auto-muted .hero-kg-hub-core {
-          opacity: 0.34;
+          opacity: 0.4;
           transform: scale(.9);
         }
         .hero-kg-hub.hero-kg-auto-muted .hero-kg-hub-label {
           font-size: 7.4px;
-          opacity: 0.18;
+          opacity: 0.24;
         }
         .hero-kg-hub.hero-kg-auto-support {
           opacity: calc(.5 + var(--kg-support, 0) * .4);
@@ -3035,7 +3035,19 @@ export default function HeroSurfaceShift() {
             opacity: 0.42;
           }
           .hero-kg-main-edges path {
-            stroke-opacity: 0.09;
+            stroke-opacity: 0.1;
+          }
+          .hero-kg-auto-running .hero-kg-main-edges path {
+            stroke-opacity: 0.08;
+          }
+          .hero-kg-auto-running .hero-kg-main-edges path.hero-kg-weak {
+            stroke-opacity: 0.04;
+          }
+          .hero-kg-hub.hero-kg-auto-muted {
+            opacity: 0.56;
+          }
+          .hero-kg-hub.hero-kg-auto-muted .hero-kg-hub-label {
+            opacity: 0.3;
           }
         }
         @media (prefers-reduced-motion: reduce) {
