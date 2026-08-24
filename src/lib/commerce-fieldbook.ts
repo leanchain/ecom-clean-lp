@@ -919,7 +919,7 @@ export const ECOSYSTEM_RESOURCES: EcosystemResource[] = [
     maturity: "Emerging",
     maintainer: "Beseam",
     license: "Hosted tool; not presented as open source",
-    url: "/tools/ai-discovery-scan",
+    url: "/scan",
     summary:
       "A live scan for observing how products are represented across AI shopping and answer surfaces at a point in time.",
     useCases: [

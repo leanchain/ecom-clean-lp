@@ -133,7 +133,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
     related: [
       {
         label: "Try the free AI discovery scan",
-        href: "/tools/ai-discovery-scan",
+        href: "/scan",
       },
     ],
   },

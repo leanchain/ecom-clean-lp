@@ -195,7 +195,7 @@ export default function BenchmarksPage() {
               </dl>
 
               <Link
-                href="/tools/ai-discovery-scan"
+                href="/scan"
                 className="mt-9 inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#b8441d]"
               >
                 Check my store

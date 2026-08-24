@@ -57,7 +57,7 @@ export default function BeseamFooter() {
                     <li key={label}>
                       <Link
                         href={href}
-                        className="text-[13px] text-white/62 transition-colors hover:text-white"
+                        className="inline-flex min-h-11 items-center text-[13px] text-white/62 transition-colors hover:text-white"
                       >
                         {label}
                       </Link>

@@ -6,29 +6,34 @@ import {
   useRef,
   useState,
   type FormEvent,
-  type KeyboardEvent,
 } from "react";
 
-import { ArrowRight, Check, ChevronDown, Loader2, Lock, Share2, X } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  ChevronDown,
+  Loader2,
+  Lock,
+  Printer,
+  RefreshCw,
+  Share2,
+  X,
+} from "lucide-react";
 
 import type {
   Answer,
   AnswerCheckResult,
   ShownProduct,
-  Step,
 } from "@/components/beseam/answer-check-types";
 import { ChannelIcon } from "@/components/beseam/channel-icon";
 import TrackedLink from "@/components/beseam/tracked-link";
-import { SAMPLE_LOOP } from "@/data/sample-loop";
-import { SAMPLE_SCAN } from "@/data/sample-scan";
 import useAnalytics from "@/hooks/useAnalytics";
+import { APP_REGISTER_URL, APP_REPORT_URL } from "@/lib/app-urls";
 
 export type { AnswerCheckResult };
 
 const POLL_MS = 6000;
 const MAX_POLLS = 60; // ~6 minutes, then stop asking
-const APP_REGISTER_URL = "https://app.beseam.com/register";
-const APP_REPORT_URL = "https://app.beseam.com/report";
 
 const LIVE_STATUSES = new Set(["running", "queued", "validating"]);
 const PENDING_PAGE_AUDIT_STATUSES = new Set(["queued", "running"]);
@@ -57,8 +62,18 @@ function faviconHost(raw: string | null | undefined): string | null {
   return host.includes(".") ? host : null;
 }
 
-function BrandFavicon({ domain, name }: { domain?: string | null; name: string }) {
+function BrandFavicon({
+  domain,
+  name,
+}: {
+  domain?: string | null;
+  name: string;
+}) {
   const [source, setSource] = useState<"site" | "google" | "fallback">("site");
+  // A favicon that is slow, missing, or blocked used to leave an empty bordered
+  // square as the first glyph on the result. The initial is drawn immediately
+  // and the image only replaces it once it has actually decoded.
+  const [loaded, setLoaded] = useState(false);
   const host = faviconHost(domain);
   const initial = name.trim().charAt(0).toUpperCase() || "?";
 
@@ -70,16 +85,23 @@ function BrandFavicon({ domain, name }: { domain?: string | null; name: string }
         ? `https://${host}/favicon.ico`
         : `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=64`;
     return (
-      <img
-        src={src}
-        alt=""
+      <span
         aria-hidden="true"
-        width={28}
-        height={28}
-        loading="lazy"
-        onError={() => setSource(source === "site" ? "google" : "fallback")}
-        className="h-7 w-7 shrink-0 border border-black/14 bg-white object-contain p-0.5"
-      />
+        className="relative inline-flex h-7 w-7 shrink-0 items-center justify-center border border-black/14 bg-white font-mono text-[11px] font-semibold text-black/58"
+      >
+        {loaded ? null : initial}
+        <img
+          src={src}
+          alt=""
+          aria-hidden="true"
+          width={28}
+          height={28}
+          loading="lazy"
+          onLoad={() => setLoaded(true)}
+          onError={() => setSource(source === "site" ? "google" : "fallback")}
+          className={`absolute inset-0 h-full w-full object-contain p-0.5 ${loaded ? "" : "opacity-0"}`}
+        />
+      </span>
     );
   }
 
@@ -93,177 +115,6 @@ function BrandFavicon({ domain, name }: { domain?: string | null; name: string }
   );
 }
 
-function StepEvidence({
-  step,
-  result,
-}: {
-  step: Step;
-  result: AnswerCheckResult;
-}) {
-  if (step.key === "storefront") {
-    const evidence = result.brand_evidence;
-    const products = evidence?.products.slice(0, 3) ?? [];
-    return (
-      <div className="grid gap-4 text-[12.5px] leading-relaxed text-black/68 sm:grid-cols-2">
-        <div>
-          <p className="font-semibold text-[#111318]">Detected store</p>
-          <p className="mt-1">
-            {result.brand ?? result.domain} · {result.platform ?? "platform unknown"}
-            {evidence?.market ? ` · ${evidence.market}` : ""}
-          </p>
-          <p className="mt-1 text-black/58">
-            {result.products_seen} sampled {result.products_seen === 1 ? "product" : "products"}
-          </p>
-        </div>
-        {products.length ? (
-          <div>
-            <p className="font-semibold text-[#111318]">Sampled products</p>
-            <ul className="mt-1 space-y-1">
-              {products.map((product) => (
-                <li key={product.title} className="truncate">
-                  {product.title}
-                  {product.price
-                    ? ` · ${product.price}${product.currency ? ` ${product.currency}` : ""}`
-                    : ""}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-      </div>
-    );
-  }
-
-  if (step.key === "catalog") {
-    const findings = result.findings.filter(
-      (finding) => finding.source !== "page_audit",
-    );
-    return findings.length ? (
-      <ul className="space-y-3">
-        {findings.slice(0, 3).map((finding, index) => (
-          <li key={`${finding.code}-${index}`}>
-            <p className="text-[12.5px] font-semibold text-[#111318]">
-              {finding.title}
-            </p>
-            <p className="mt-0.5 text-[12px] leading-relaxed text-black/62">
-              {finding.detail}
-            </p>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p className="text-[12.5px] text-black/62">
-        No catalog-level issues were found in the sampled storefront data.
-      </p>
-    );
-  }
-
-  if (step.key === "pages") {
-    const audits = result.page_audits ?? [];
-    const evaluated = audits.reduce(
-      (sum, audit) => sum + audit.checks_evaluated,
-      0,
-    );
-    const failed = audits.reduce((sum, audit) => sum + audit.checks_failed, 0);
-    return audits.length ? (
-      <div>
-        <p className="text-[12.5px] font-semibold text-[#111318]">
-          {failed} of {evaluated} measured page checks need attention
-        </p>
-        <ul className="mt-2 divide-y divide-black/10">
-          {audits.slice(0, 3).map((audit) => (
-            <li
-              key={audit.url}
-              className="flex items-start justify-between gap-4 py-2 first:pt-0 last:pb-0"
-            >
-              <span className="min-w-0 truncate text-[12px] text-black/66">
-                {audit.title ?? audit.url}
-              </span>
-              <span className="shrink-0 font-mono text-[12px] text-black/58">
-                {audit.checks_failed}/{audit.checks_evaluated} flagged
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ) : (
-      <p className="text-[12.5px] text-black/62">
-        No sampled product pages were available to audit.
-      </p>
-    );
-  }
-
-  return null;
-}
-
-function StepRow({ step, result }: { step: Step; result?: AnswerCheckResult }) {
-  const icon =
-    step.state === "done" ? (
-      <Check className="h-4 w-4 text-[#1f7a4d]" aria-hidden="true" />
-    ) : step.state === "failed" ? (
-      <X className="h-4 w-4 text-[#d95028]" aria-hidden="true" />
-    ) : step.state === "active" ? (
-      <Loader2
-        className="h-4 w-4 animate-spin text-black/62"
-        aria-hidden="true"
-      />
-    ) : (
-      <span
-        className="block h-1.5 w-1.5 translate-x-1 translate-y-1 rounded-full bg-black/25"
-        aria-hidden="true"
-      />
-    );
-  const expandable =
-    Boolean(result) &&
-    step.state === "done" &&
-    ["storefront", "catalog", "pages"].includes(step.key);
-
-  if (expandable && result) {
-    return (
-      <details className="group border-b border-black/12 last:border-b-0">
-        <summary className="flex cursor-pointer list-none items-start gap-3 px-5 py-3 [&::-webkit-details-marker]:hidden">
-          <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center">
-            {icon}
-          </span>
-          <span className="flex-1 text-left text-[14px] leading-snug text-black/72">
-            {step.label}
-            {step.detail ? (
-              <span className="mt-1 block text-[12px] text-black/62">
-                {step.detail}
-              </span>
-            ) : null}
-          </span>
-          <span className="mt-0.5 flex items-center gap-1.5 text-[12px] font-semibold text-black/52">
-            Details
-            <ChevronDown
-              className="h-3.5 w-3.5 transition-transform group-open:rotate-180"
-              aria-hidden="true"
-            />
-          </span>
-        </summary>
-        <div className="border-t border-black/8 bg-black/[0.02] px-5 py-4 pl-12">
-          <StepEvidence step={step} result={result} />
-        </div>
-      </details>
-    );
-  }
-
-  return (
-    <div className="flex items-start gap-3 border-b border-black/12 px-5 py-3 last:border-b-0">
-      <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center">
-        {icon}
-      </span>
-      <span className="flex-1 text-left text-[14px] leading-snug text-black/72">
-        {step.label}
-        {step.detail ? (
-          <span className="mt-1 block text-[12px] text-black/62">
-            {step.detail}
-          </span>
-        ) : null}
-      </span>
-    </div>
-  );
-}
 const FINDING_RANK: Record<string, number> = {
   blocker: 0,
   high: 1,
@@ -288,438 +139,6 @@ function findingArea(code: string) {
   return "Product evidence";
 }
 
-function DiagnosticWorkspace({
-  result,
-  aiLocked,
-}: {
-  result: AnswerCheckResult;
-  aiLocked: boolean;
-}) {
-  const audits = result.page_audits ?? [];
-  const catalogFindings = result.findings.filter(
-    (finding) => finding.source !== "page_audit",
-  );
-  const failedChecks = audits.reduce(
-    (sum, audit) => sum + audit.checks_failed,
-    0,
-  );
-  const evaluatedChecks = audits.reduce(
-    (sum, audit) => sum + audit.checks_evaluated,
-    0,
-  );
-  const urgent = result.findings.filter(
-    (finding) => finding.severity === "blocker" || finding.severity === "high",
-  );
-  const priority = sortedFindings(result)[0] ?? null;
-  const needsAttention =
-    urgent.length > 0 || failedChecks > 0 || catalogFindings.length > 0;
-
-  const domainCards = [
-    {
-      label: "Storefront",
-      status: catalogFindings.length ? "Needs attention" : "Read",
-      warn: catalogFindings.length > 0,
-      value: `${result.products_seen} products sampled`,
-      detail: `${catalogFindings.length} catalog ${catalogFindings.length === 1 ? "signal" : "signals"}${result.platform ? ` · ${result.platform}` : ""}`,
-    },
-    {
-      label: "Product pages",
-      status: failedChecks ? "Needs attention" : "Read",
-      warn: failedChecks > 0,
-      value: `${audits.length} sampled ${audits.length === 1 ? "PDP" : "PDPs"}`,
-      detail: evaluatedChecks
-        ? `${failedChecks} of ${evaluatedChecks} measured checks flagged`
-        : "No product-page checks were measured",
-    },
-    {
-      label: "Assistant visibility",
-      status: aiLocked ? "Verification required" : result.answers.length ? "Complete" : "Running",
-      warn: aiLocked,
-      value: "ChatGPT + Google AI Mode",
-      detail: aiLocked
-        ? "Email verification unlocks the live buyer-question check."
-        : result.answers.length
-          ? `${result.answers.length} assistant observations recorded`
-          : "Live buyer-question checks are in progress.",
-    },
-  ];
-
-  return (
-    <section className="border-t border-black/14 bg-[#fafafa]">
-      <div className="bg-white">
-        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-black/14 px-5 py-5 sm:px-6">
-          <div>
-            <span className="inline-flex items-center border-l-2 border-[#b8441d] pl-2 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/56">
-              Store diagnostic workspace
-            </span>
-            <h3 className="mt-4 text-[24px] font-semibold tracking-[-0.025em] text-[#172033]">
-              {needsAttention ? "Overall: needs attention" : "No major issues found in this sample"}
-            </h3>
-            <p className="mt-2 max-w-[68ch] text-[13.5px] leading-relaxed text-[#64748b]">
-              Public storefront and product-page evidence, kept separate from the verified live assistant run.
-            </p>
-          </div>
-          <span
-            className={`inline-flex items-center gap-2 border border-black/18 bg-white px-3 py-1.5 text-[12px] font-semibold ${
-              needsAttention ? "text-[#b8441d]" : "text-[#111318]"
-            }`}
-          >
-            <span
-              className={`h-2 w-2 rounded-full ${needsAttention ? "bg-amber-500" : "bg-emerald-500"}`}
-              aria-hidden="true"
-            />
-            {needsAttention ? "Degraded" : "Read complete"}
-          </span>
-        </div>
-
-        <div className="px-5 py-5 sm:px-6 sm:py-6">
-          <div className="grid border-y border-black/12 lg:grid-cols-3">
-            {domainCards.map((card) => (
-              <div
-                key={card.label}
-                className="border-t border-black/12 bg-white p-4 first:border-t-0 lg:border-l lg:border-t-0 lg:first:border-l-0"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#64748b]">
-                    {card.label}
-                  </span>
-                  <span
-                    className={`inline-flex items-center gap-1.5 border border-black/14 bg-white px-2.5 py-1 text-[11px] font-semibold ${
-                      card.warn ? "text-[#b8441d]" : "text-[#111318]"
-                    }`}
-                  >
-                    <span
-                      className={`h-1.5 w-1.5 rounded-full ${card.warn ? "bg-amber-500" : "bg-emerald-500"}`}
-                      aria-hidden="true"
-                    />
-                    {card.status}
-                  </span>
-                </div>
-                <p className="mt-4 text-[16px] font-semibold tracking-[-0.01em] text-[#172033]">
-                  {card.value}
-                </p>
-                <p className="mt-1.5 text-[12.5px] leading-relaxed text-[#64748b]">
-                  {card.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6">
-            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#64748b]">
-              Evidence sources
-            </p>
-            <div className="grid gap-2 sm:grid-cols-3">
-              {[
-                ["Public catalog", `${result.products_seen} products read`, true],
-                ["Product pages", `${audits.length} pages audited`, audits.length > 0],
-                ["Live assistants", aiLocked ? "Verification required" : result.answers.length ? "Verified run complete" : "Running", !aiLocked],
-              ].map(([label, state, fresh]) => (
-                <div key={String(label)} className="flex items-center gap-2 border border-black/14 bg-white px-3 py-2.5">
-                  <span
-                    className={`h-2 w-2 shrink-0 rounded-full ${fresh ? "bg-emerald-500" : "border-[1.5px] border-[#94a3b8] bg-transparent"}`}
-                    aria-hidden="true"
-                  />
-                  <div className="min-w-0">
-                    <p className="truncate text-[12.5px] font-medium text-[#172033]">{label}</p>
-                    <p className={`truncate text-[11px] font-semibold ${fresh ? "text-emerald-700" : "text-[#64748b]"}`}>{state}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {priority ? (
-            <div className="mt-6">
-              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#64748b]">
-                Prioritized issue
-              </p>
-              <div className="border-t border-black/14 bg-white pt-4 sm:pt-5">
-                <div className="flex flex-wrap items-center gap-2.5">
-                  {priority.severity ? (
-                    <span
-                      className={`${SEVERITY_BADGE} ${SEVERITY_STYLES[priority.severity] ?? SEVERITY_STYLES.low}`}
-                    >
-                      {priority.severity}
-                    </span>
-                  ) : null}
-                  <span className="text-[12px] font-semibold text-[#64748b]">
-                    {priority.source === "page_audit" ? findingArea(priority.code) : "Storefront evidence"}
-                  </span>
-                  <span className="text-[#94a3b8]" aria-hidden="true">·</span>
-                  <span className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#64748b]">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
-                    Public evidence
-                  </span>
-                </div>
-
-                <h4 className="mt-3 max-w-[52rem] text-[20px] font-semibold leading-snug tracking-[-0.015em] text-[#172033] sm:text-[22px]">
-                  {priority.title}
-                </h4>
-
-                <dl className="mt-4 divide-y divide-[#dbe2ec] border-y border-[#dbe2ec]">
-                  <div className="grid grid-cols-[7rem_1fr] gap-3 py-2.5 sm:grid-cols-[9rem_1fr]">
-                    <dt className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#64748b]">Evidence</dt>
-                    <dd className="text-[13px] leading-relaxed text-[#475569]">{priority.detail}</dd>
-                  </div>
-                  {priority.product ? (
-                    <div className="grid grid-cols-[7rem_1fr] gap-3 py-2.5 sm:grid-cols-[9rem_1fr]">
-                      <dt className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#64748b]">Affected</dt>
-                      <dd className="text-[13px] font-medium text-[#172033]">{priority.product}</dd>
-                    </div>
-                  ) : null}
-                  <div className="grid grid-cols-[7rem_1fr] gap-3 py-2.5 sm:grid-cols-[9rem_1fr]">
-                    <dt className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#64748b]">Source</dt>
-                    <dd className="text-[13px] text-[#475569]">
-                      {priority.source === "page_audit" ? "Deterministic product-page audit" : "Public storefront catalog"}
-                    </dd>
-                  </div>
-                </dl>
-
-                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-[12px] text-[#64748b]">
-                    {priority.fix_complexity ? <span>Fix complexity: <strong className="font-semibold text-[#172033]">{priority.fix_complexity}</strong></span> : null}
-                    <span>Impact not yet measured</span>
-                  </div>
-                  {priority.url ? (
-                    <a
-                      href={priority.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex min-h-9 items-center font-semibold text-[#172033] underline decoration-[#cbd5e1] underline-offset-4 hover:decoration-[#b8441d]"
-                    >
-                      Inspect page →
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </section>
-  );
-}
-function FindingsPanel({ result }: { result: AnswerCheckResult }) {
-  const findings = sortedFindings(result);
-  if (!findings.length) return null;
-  const urgentCount = findings.filter(
-    (finding) => finding.severity === "blocker" || finding.severity === "high",
-  ).length;
-
-  return (
-    <div className="bg-white">
-      <details className="group border-b border-black/14 bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 sm:px-6 [&::-webkit-details-marker]:hidden">
-          <div className="min-w-0">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/48">Findings</p>
-            <p className="mt-1 text-[14px] font-semibold text-[#111318]">
-              {findings.length} issues{urgentCount > 0 ? ` · ${urgentCount} high priority` : ""}
-            </p>
-          </div>
-          <span className="flex shrink-0 items-center gap-2 text-[12px] font-semibold text-[#111318]">
-            Inspect
-            <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
-          </span>
-        </summary>
-
-        <div className="border-t border-black/14 bg-[#fafafa]">
-          <ol className="divide-y divide-black/12">
-            {findings.map((finding, index) => (
-              <li
-                key={`${finding.code}-${finding.product ?? index}`}
-                className="bg-white px-5 py-4 sm:px-6 sm:py-5"
-              >
-                <div className="flex flex-wrap items-center gap-2.5">
-                  <span className="font-mono text-[10.5px] text-[#94a3b8]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  {finding.severity ? (
-                    <span
-                      className={`${SEVERITY_BADGE} ${SEVERITY_STYLES[finding.severity] ?? SEVERITY_STYLES.low}`}
-                    >
-                      {finding.severity}
-                    </span>
-                  ) : (
-                    <span className="border border-black/14 bg-white px-2 py-0.5 text-[10.5px] font-semibold uppercase tracking-[0.06em] text-black/56">
-                      catalog
-                    </span>
-                  )}
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#64748b]">
-                    {finding.source === "page_audit" ? findingArea(finding.code) : "Storefront evidence"}
-                  </span>
-                </div>
-
-                <h4 className="mt-3 text-[16px] font-semibold leading-snug text-[#172033]">
-                  {finding.title}
-                </h4>
-
-                <dl className="mt-3 divide-y divide-[#e5eaf0] border-y border-[#e5eaf0]">
-                  <div className="grid grid-cols-[6rem_1fr] gap-3 py-2.5 sm:grid-cols-[8rem_1fr]">
-                    <dt className="text-[10.5px] font-semibold uppercase tracking-[0.06em] text-[#94a3b8]">Evidence</dt>
-                    <dd className="text-[12.5px] leading-relaxed text-[#475569]">{finding.detail}</dd>
-                  </div>
-                  {finding.product ? (
-                    <div className="grid grid-cols-[6rem_1fr] gap-3 py-2.5 sm:grid-cols-[8rem_1fr]">
-                      <dt className="text-[10.5px] font-semibold uppercase tracking-[0.06em] text-[#94a3b8]">Affected</dt>
-                      <dd className="text-[12.5px] font-medium text-[#172033]">{finding.product}</dd>
-                    </div>
-                  ) : null}
-                </dl>
-
-                <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-[11.5px] text-[#64748b]">
-                  <span>{finding.fix_complexity ? `Fix complexity: ${finding.fix_complexity}` : "Impact not yet measured"}</span>
-                  {finding.url ? (
-                    <a
-                      href={finding.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-semibold text-[#172033] underline decoration-[#cbd5e1] underline-offset-4 hover:decoration-[#b8441d]"
-                    >
-                      Inspect page →
-                    </a>
-                  ) : null}
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </details>
-    </div>
-  );
-}
-function ProductPageWorkspace({ result }: { result: AnswerCheckResult }) {
-  const audits = result.page_audits ?? [];
-  if (!audits.length) return null;
-  const failed = audits.reduce((sum, audit) => sum + audit.checks_failed, 0);
-  const high = audits.reduce(
-    (sum, audit) =>
-      sum +
-      audit.findings.filter(
-        (finding) => finding.severity === "blocker" || finding.severity === "high",
-      ).length,
-    0,
-  );
-
-  return (
-    <details className="group border-b border-black/14 bg-white">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 sm:px-6 [&::-webkit-details-marker]:hidden">
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/48">
-              PDP analyzer
-            </p>
-            {high > 0 ? (
-              <span className="border border-black/14 bg-white px-2 py-0.5 text-[10.5px] font-semibold text-[#b8441d]">
-                {high} high priority
-              </span>
-            ) : null}
-          </div>
-          <p className="mt-1 text-[14px] font-semibold text-[#111318]">
-            {failed} checks flagged across {audits.length} sampled {audits.length === 1 ? "PDP" : "PDPs"}
-          </p>
-        </div>
-        <span className="flex shrink-0 items-center gap-2 text-[12px] font-semibold text-[#111318]">
-          Inspect
-          <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
-        </span>
-      </summary>
-
-      <div className="border-t border-black/14 bg-[#fafafa]">
-        {audits.map((audit, auditIndex) => {
-          const highFindings = audit.findings.filter(
-            (finding) => finding.severity === "blocker" || finding.severity === "high",
-          ).length;
-          const groups = Array.from(
-            audit.findings.reduce((map, finding) => {
-              const label = findingArea(finding.code);
-              const rows = map.get(label) ?? [];
-              rows.push(finding);
-              map.set(label, rows);
-              return map;
-            }, new Map<string, typeof audit.findings>()),
-          );
-
-          return (
-            <section key={audit.url} className={auditIndex > 0 ? "border-t border-black/18" : ""}>
-              <div className="grid gap-4 bg-white px-5 py-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_8rem_8rem_auto] lg:items-center">
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-black/48">
-                      Product page {String(auditIndex + 1).padStart(2, "0")}
-                    </span>
-                    {highFindings > 0 ? (
-                      <span className="text-[10.5px] font-semibold text-[#b8441d]">
-                        {highFindings} high priority
-                      </span>
-                    ) : null}
-                  </div>
-                  <p className="mt-1.5 truncate text-[14px] font-semibold text-[#111318]">
-                    {audit.title ?? audit.url}
-                  </p>
-                  <p className="mt-1 truncate font-mono text-[10.5px] text-black/42">{audit.url}</p>
-                </div>
-                <div>
-                  <p className="text-[18px] font-semibold text-[#b8441d]">{audit.checks_failed}</p>
-                  <p className="text-[10px] uppercase tracking-[0.06em] text-black/48">checks flagged</p>
-                </div>
-                <div>
-                  <p className="text-[13px] font-semibold text-[#111318]">{groups.length} issue areas</p>
-                  <p className="mt-0.5 text-[10.5px] text-black/42">{audit.checks_evaluated} measured</p>
-                </div>
-                <a
-                  href={audit.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-[12px] font-semibold text-[#111318] underline decoration-black/24 underline-offset-4 hover:decoration-[#b8441d]"
-                >
-                  Open page →
-                </a>
-              </div>
-
-              {groups.length > 0 ? (
-                <div className="border-t border-black/12 px-5 sm:px-6">
-                  {groups.map(([label, findings], groupIndex) => (
-                    <section
-                      key={label}
-                      className={`grid gap-3 py-4 md:grid-cols-[11rem_minmax(0,1fr)] ${groupIndex > 0 ? "border-t border-black/12" : ""}`}
-                    >
-                      <div>
-                        <p className="text-[10.5px] font-semibold uppercase tracking-[0.08em] text-black/48">{label}</p>
-                        <p className="mt-1 text-[12px] text-black/56">
-                          {findings.length} {findings.length === 1 ? "issue" : "issues"}
-                        </p>
-                      </div>
-                      <ul className="divide-y divide-black/10 border-t border-black/10 md:border-t-0">
-                        {findings.map((finding, index) => (
-                          <li key={`${finding.code}-${index}`} className="py-3 first:pt-0 md:first:pt-0">
-                            <div className="flex flex-wrap items-center gap-2">
-                              {finding.severity ? (
-                                <span className={`${SEVERITY_BADGE} ${SEVERITY_STYLES[finding.severity] ?? SEVERITY_STYLES.low}`}>
-                                  {finding.severity}
-                                </span>
-                              ) : null}
-                              <span className="text-[12.5px] font-semibold leading-snug text-[#111318]">{finding.title}</span>
-                            </div>
-                            <p className="mt-1.5 text-[11.5px] leading-relaxed text-black/58">{finding.detail}</p>
-                          </li>
-                        ))}
-                      </ul>
-                    </section>
-                  ))}
-                </div>
-              ) : (
-                <p className="border-t border-black/12 px-5 py-4 text-[12px] text-black/56 sm:px-6">
-                  No observed failures on this sampled page.
-                </p>
-              )}
-            </section>
-          );
-        })}
-      </div>
-    </details>
-  );
-}
 const RIVAL_LIMIT = 6;
 
 // "Amazon / EverJoy Daily" and "BLOCH Dance US (official)" are the same rival
@@ -760,6 +179,26 @@ function tallyRivals(answers: Answer[]) {
 // Three signals only: green won, red lost, ink in between. Blue is reserved
 // for things you can click. The reds are the light-ground signal (#b8441d);
 // #e8653a only ever sits on the dark grounds.
+// Platform names arrive lowercase from the API. They are proper nouns on the
+// card, where every other identifier is set the way its owner writes it.
+const PLATFORM_LABELS: Record<string, string> = {
+  shopify: "Shopify",
+  woocommerce: "WooCommerce",
+  bigcommerce: "BigCommerce",
+  magento: "Magento",
+  squarespace: "Squarespace",
+  wix: "Wix",
+  prestashop: "PrestaShop",
+  generic: "Storefront",
+};
+
+function platformLabel(platform: string) {
+  const key = platform.trim().toLowerCase();
+  return (
+    PLATFORM_LABELS[key] ?? platform.charAt(0).toUpperCase() + platform.slice(1)
+  );
+}
+
 function scoreBand(score: number) {
   if (score >= 70)
     return { label: "Strong", text: "text-[#1a6b43]", fill: "bg-[#1f7a4d]" };
@@ -825,38 +264,48 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
   return (
     <section className="bg-[#fffaf7]">
       <div className="bg-[#fffaf7]">
-        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[#dbe2ec] bg-white px-5 py-5 sm:px-6">
+        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[#e4ded6] bg-white px-5 py-5 sm:px-6">
           <div>
             <span className="inline-flex items-center border-l-2 border-[#b8441d] pl-2 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/56">
               Observe · live answer evidence
             </span>
-            <h3 className="mt-4 text-[24px] font-semibold tracking-[-0.025em] text-[#172033]">
+            <h4 className="mt-4 text-[24px] font-semibold tracking-[-0.025em] text-[#111318]">
               What shoppers are being told
-            </h3>
-            <p className="mt-2 max-w-[66ch] text-[13.5px] leading-relaxed text-[#64748b]">
-              Verified buyer-question observations, kept with the assistant, competing brands, and surfaced products.
+            </h4>
+            <p className="mt-2 max-w-[66ch] text-[13.5px] leading-relaxed text-[#5f5a55]">
+              Verified buyer-question observations, kept with the assistant,
+              competing brands, and surfaced products.
             </p>
           </div>
           <span className="inline-flex items-center gap-2 border border-black/18 bg-white px-3 py-1.5 text-[12px] font-semibold text-[#111318]">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
+            <span
+              className="h-2 w-2 rounded-full bg-[#1f7a4d]"
+              aria-hidden="true"
+            />
             Verified run complete
           </span>
         </div>
 
         <div className="grid gap-0 border-t border-black/12 bg-white lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
           <div className="flex flex-col border-b border-black/12 p-5 sm:px-6 lg:border-b-0 lg:border-r">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.07em] text-[#64748b]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.07em] text-[#5f5a55]">
               Brand appearance
             </p>
             <div className="mt-3 flex flex-wrap items-end gap-3">
-              <span className={`text-[46px] font-semibold leading-none tracking-[-0.04em] tabular-nums ${scoreBand(pct).text}`}>
+              <span
+                className={`text-[46px] font-semibold leading-none tracking-[-0.04em] tabular-nums ${scoreBand(pct).text}`}
+              >
                 {named}/{scored.length}
               </span>
-              <span className="mb-1 border border-black/14 bg-white px-2.5 py-1 font-mono text-[11px] text-black/56">
-                {pct}% of observed answers
+              {/* scoreBand already computes the word; showing only its colour
+                  threw away the one piece of interpretation the code had. */}
+              <span
+                className={`mb-1 border border-black/14 bg-white px-2.5 py-1 font-mono text-[11px] font-semibold ${scoreBand(pct).text}`}
+              >
+                {scoreBand(pct).label} · {pct}% of observed answers
               </span>
             </div>
-            <p className="mt-4 max-w-[38ch] text-[12.5px] leading-relaxed text-[#475569]">
+            <p className="mt-4 max-w-[38ch] text-[12.5px] leading-relaxed text-[#3b3833]">
               {named === scored.length
                 ? "Your brand appeared in every observed answer in this run."
                 : named === 0
@@ -865,15 +314,19 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
             </p>
 
             {topRival && named < scored.length ? (
-              <div className="mt-5 border-l-2 border-[#b8441d] bg-[#fafafa] p-4">
+              <div className="mt-5 border border-black/14 bg-[#fafafa] p-4">
                 <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-amber-500" aria-hidden="true" />
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-amber-700">
+                  <span
+                    className="h-2 w-2 rounded-full bg-[#c8891f]"
+                    aria-hidden="true"
+                  />
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#8a5a12]">
                     Needs attention
                   </p>
                 </div>
-                <p className="mt-2 text-[12.5px] leading-relaxed text-[#475569]">
-                  {topRival.label} was the most frequently named alternative in this sample ({topRival.count}×).
+                <p className="mt-2 text-[12.5px] leading-relaxed text-[#3b3833]">
+                  {topRival.label} was the most frequently named alternative in
+                  this sample ({topRival.count}×).
                 </p>
               </div>
             ) : null}
@@ -881,11 +334,12 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
 
           <div className="p-5 sm:px-6">
             <div className="flex items-center justify-between gap-3">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.07em] text-[#64748b]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.07em] text-[#5f5a55]">
                 By assistant
               </p>
-              <span className="font-mono text-[10.5px] text-[#94a3b8]">
-                {channels.length} {channels.length === 1 ? "assistant" : "assistants"}
+              <span className="font-mono text-[11px] text-[#6f6862]">
+                {channels.length}{" "}
+                {channels.length === 1 ? "assistant" : "assistants"}
               </span>
             </div>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -895,26 +349,29 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
                   className="border border-black/14 bg-white p-4"
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <span className="flex min-w-0 items-center gap-2.5 text-[13px] font-semibold text-[#172033]">
+                    <span className="flex min-w-0 items-center gap-2.5 text-[13px] font-semibold text-[#111318]">
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-black/14 bg-white">
                         <ChannelIcon
-                          channel={CHANNEL_BRAND_KEYS[engine.channel.toLowerCase()] ?? engine.channel}
+                          channel={
+                            CHANNEL_BRAND_KEYS[engine.channel.toLowerCase()] ??
+                            engine.channel
+                          }
                           className="h-4 w-4 opacity-80"
                         />
                       </span>
                       <span className="truncate">{engine.channel}</span>
                     </span>
-                    <span className="font-mono text-[12px] text-[#64748b]">
+                    <span className="font-mono text-[12px] text-[#5f5a55]">
                       {engine.wins}/{engine.total}
                     </span>
                   </div>
-                  <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-[#e5eaf0]">
+                  <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-[#efe9e1]">
                     <span
                       className={`block h-full rounded-full ${scoreBand(engine.pct).fill}`}
                       style={{ width: `${Math.max(engine.pct, 1.5)}%` }}
                     />
                   </div>
-                  <div className="mt-3 flex items-center justify-between gap-3 text-[11px] text-[#64748b]">
+                  <div className="mt-3 flex items-center justify-between gap-3 text-[11px] text-[#5f5a55]">
                     <span>{engine.wins} named you</span>
                     <span>{engine.total - engine.wins} missed you</span>
                   </div>
@@ -924,7 +381,7 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
           </div>
         </div>
 
-        <dl className="grid border-t border-[#dbe2ec] bg-white sm:grid-cols-3">
+        <dl className="grid border-t border-[#e4ded6] bg-white sm:grid-cols-3">
           {[
             ["Observed answers", String(scored.length)],
             ["Buyer questions", String(questionCount)],
@@ -932,12 +389,12 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
           ].map(([label, value], index) => (
             <div
               key={label}
-              className={`px-5 py-4 sm:px-6 ${index > 0 ? "border-t border-[#dbe2ec] sm:border-l sm:border-t-0" : ""}`}
+              className={`px-5 py-4 sm:px-6 ${index > 0 ? "border-t border-[#e4ded6] sm:border-l sm:border-t-0" : ""}`}
             >
-              <dt className="text-[10.5px] font-semibold uppercase tracking-[0.06em] text-[#94a3b8]">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#6f6862]">
                 {label}
               </dt>
-              <dd className="mt-1.5 text-[18px] font-semibold text-[#172033]">
+              <dd className="mt-1.5 text-[18px] font-semibold text-[#111318]">
                 {value}
               </dd>
             </div>
@@ -974,16 +431,18 @@ function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
         channel={CHANNEL_BRAND_KEYS[channel.toLowerCase()] ?? channel}
         className="h-3 w-3 opacity-70"
       />
+      {channel}
+      {/* The outcome follows the name it belongs to: a mark in front of the
+          label reads as a dismiss affordance, not a result. */}
       {unknown ? (
-        <span aria-hidden="true">-</span>
+        <span aria-hidden="true">–</span>
       ) : named ? (
         <Check className="h-2.5 w-2.5" aria-hidden="true" />
       ) : (
         <X className="h-2.5 w-2.5" aria-hidden="true" />
       )}
-      {channel}
       {answer.observation_method ? (
-        <span className="border-l border-current/20 pl-1.5 font-mono text-[10px] font-normal opacity-70">
+        <span className="border-l border-current/20 pl-1.5 font-mono text-[11px] font-normal opacity-70">
           {OBSERVATION_METHOD_LABEL[answer.observation_method]}
         </span>
       ) : null}
@@ -1057,7 +516,7 @@ function ProductTile({ product }: { product: ShownProduct }) {
         <p className="line-clamp-2 text-[11.5px] font-semibold leading-snug text-[#111318]">
           {product.title}
         </p>
-        <p className="mt-1 text-[10.5px] leading-snug text-black/48">
+        <p className="mt-1 text-[11px] leading-snug text-black/48">
           {product.merchant ?? "Merchant"}
           {product.price ? ` · ${product.price}` : ""}
         </p>
@@ -1066,7 +525,7 @@ function ProductTile({ product }: { product: ShownProduct }) {
             href={product.url}
             target="_blank"
             rel="noreferrer"
-            className="mt-2 inline-flex text-[10.5px] font-semibold text-[#111318] underline decoration-black/24 underline-offset-4 hover:decoration-[#b8441d]"
+            className="mt-2 inline-flex text-[11px] font-semibold text-[#111318] underline decoration-black/24 underline-offset-4 hover:decoration-[#b8441d]"
           >
             Open product →
           </a>
@@ -1078,31 +537,75 @@ function ProductTile({ product }: { product: ShownProduct }) {
 function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
   const findings = sortedFindings(result);
   const audits = result.page_audits ?? [];
-  const pageAuditStatus = result.page_audits_status ?? (audits.length ? "complete" : "not_started");
-  const pageAuditsInFlight = pageAuditStatus === "queued" || pageAuditStatus === "running";
-  const catalogFindings = findings.filter((finding) => finding.source !== "page_audit" && finding.source !== "catalog_sample");
-  const consistencyFindings = findings.filter((finding) => finding.source === "catalog_sample");
-  const evaluatedChecks = audits.reduce((sum, audit) => sum + audit.checks_evaluated, 0);
-  const failedChecks = audits.reduce((sum, audit) => sum + audit.checks_failed, 0);
+  const pageAuditStatus =
+    result.page_audits_status ?? (audits.length ? "complete" : "not_started");
+  const pageAuditsInFlight =
+    pageAuditStatus === "queued" || pageAuditStatus === "running";
+  const catalogFindings = findings.filter(
+    (finding) =>
+      finding.source !== "page_audit" && finding.source !== "catalog_sample",
+  );
+  const consistencyFindings = findings.filter(
+    (finding) => finding.source === "catalog_sample",
+  );
+  const evaluatedChecks = audits.reduce(
+    (sum, audit) => sum + audit.checks_evaluated,
+    0,
+  );
+  const failedChecks = audits.reduce(
+    (sum, audit) => sum + audit.checks_failed,
+    0,
+  );
 
   const market = result.brand_evidence?.market ?? null;
-  const inventory = result.site_inventory;
-  const catalog = result.catalog_inventory;
+  // Rows written before the inventory stage existed come back as `{}` rather
+  // than absent. An empty object is truthy, so every `!inventory` guard below
+  // would pass and then dereference `inventory.robots`, taking the whole card
+  // down with a client-side exception. Treat an incomplete payload as absent.
+  const rawInventory = result.site_inventory;
+  const inventory =
+    rawInventory?.robots &&
+    rawInventory.sitemap &&
+    rawInventory.search_crawlers &&
+    rawInventory.assistant_crawlers
+      ? rawInventory
+      : undefined;
+  const rawCatalog = result.catalog_inventory;
+  const catalog =
+    rawCatalog &&
+    rawCatalog.products_checked != null &&
+    rawCatalog.describability
+      ? rawCatalog
+      : undefined;
   const rawPageTypes = inventory?.page_types ?? {};
   const entityPageTypes = inventory?.entity_page_types ?? rawPageTypes;
   const siteHosts = Object.keys(inventory?.hosts ?? {});
-  const localeCount = inventory?.locales.length ?? 0;
+  const localeCount = inventory?.locales?.length ?? 0;
   const entitySuffix = inventory?.urls_capped ? "+" : "";
   const siteProductCount = entityPageTypes.product ?? 0;
-  const productCount = catalog && !catalog.products_capped
-    ? catalog.products_checked
-    : siteProductCount || result.products_seen;
-  const productCountSuffix = catalog && !catalog.products_capped ? "" : entitySuffix;
-  const exactCollectionCount = catalog?.collections_status === "measured" && !catalog.collections_capped
-    ? Number(catalog.collections_checked ?? 0)
-    : null;
-  const collectionCount = exactCollectionCount ?? entityPageTypes.collection ?? 0;
-  const collectionCountSuffix = exactCollectionCount == null ? entitySuffix : "";
+  const productCount =
+    catalog && !catalog.products_capped
+      ? catalog.products_checked
+      : siteProductCount || result.products_seen;
+  const productCountSuffix =
+    catalog && !catalog.products_capped ? "" : entitySuffix;
+  // A measured catalog count is the only one allowed to be called a collection.
+  // The URL inventory counts collection *URLs*, which includes locale copies, so
+  // it routinely exceeds the real number by an order of magnitude — printing it
+  // as "1,346 collections" next to "291 products" is a claim the merchant can
+  // disprove from memory, and it discredits every other number on the card.
+  const collectionsMeasured = catalog?.collections_status === "measured";
+  const collectionCount = collectionsMeasured
+    ? Number(catalog?.collections_checked ?? 0)
+    : (entityPageTypes.collection ?? 0);
+  const collectionCountSuffix = collectionsMeasured
+    ? catalog?.collections_capped
+      ? "+"
+      : ""
+    : entitySuffix;
+  const collectionNoun = collectionsMeasured
+    ? "collections"
+    : "collection URLs";
   const contentPageCount = entityPageTypes.page ?? 0;
   const articleCount = entityPageTypes.article ?? 0;
   const blogCount = entityPageTypes.blog ?? 0;
@@ -1128,13 +631,16 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
         : inventory.sitemap.status === "not_found"
           ? "Not found"
           : "Not measured";
-  const crawlerLabel = !inventory || inventory.search_crawlers.status !== "measured"
-    ? "Not measured"
-    : inventory.search_crawlers.blocked > 0
-      ? `${inventory.search_crawlers.blocked} blocked`
-      : "Open";
+  const crawlerLabel =
+    !inventory || inventory.search_crawlers.status !== "measured"
+      ? "Not measured"
+      : inventory.search_crawlers.blocked > 0
+        ? `${inventory.search_crawlers.blocked} blocked`
+        : "Open";
   const discoveryFiles = Object.entries(inventory?.discovery_files ?? {});
-  const discoveryFilesPresent = discoveryFiles.filter(([, value]) => value.present === true).length;
+  const discoveryFilesPresent = discoveryFiles.filter(
+    ([, value]) => value.present === true,
+  ).length;
   const internalReach = inventory?.internal_reach;
   const internalReachLabel = !internalReach
     ? "Not measured"
@@ -1144,15 +650,23 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
         ? "Not measured in quick scan"
         : internalReach.status;
 
-  const siteMapRows = ([
-    ["Product pages", `${productCount}${productCountSuffix}`],
-    ["Collections", `${collectionCount}${collectionCountSuffix}`],
-    ["Pages", `${contentPageCount}${entitySuffix}`],
-    ["Articles", `${articleCount}${entitySuffix}`],
-    ["Blogs", `${blogCount}${entitySuffix}`],
-    ["Policies", `${policyCount}${entitySuffix}`],
-    ["Locale URL copies", `${inventory?.localized_url_copies ?? 0}${inventory?.urls_capped ? "+" : ""}`],
-  ] as Array<[string, string]>).filter(([, value]) => Number.parseInt(value, 10) > 0);
+  const siteMapRows = (
+    [
+      ["Product pages", `${productCount}${productCountSuffix}`],
+      [
+        collectionsMeasured ? "Collections" : "Collection URLs",
+        `${collectionCount}${collectionCountSuffix}`,
+      ],
+      ["Pages", `${contentPageCount}${entitySuffix}`],
+      ["Articles", `${articleCount}${entitySuffix}`],
+      ["Blogs", `${blogCount}${entitySuffix}`],
+      ["Policies", `${policyCount}${entitySuffix}`],
+      [
+        "Locale URL copies",
+        `${inventory?.localized_url_copies ?? 0}${inventory?.urls_capped ? "+" : ""}`,
+      ],
+    ] as Array<[string, string]>
+  ).filter(([, value]) => Number.parseInt(value, 10) > 0);
 
   const staticAreas = [
     { label: "Search & page signals", domains: ["seo"] },
@@ -1178,16 +692,30 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
     return { ...area, ...counts };
   });
 
-  const Fold = ({ title, summary, children }: { title: string; summary: string; children: React.ReactNode }) => (
+  const Fold = ({
+    title,
+    summary,
+    children,
+  }: {
+    title: string;
+    summary: string;
+    children: React.ReactNode;
+  }) => (
     <details className="group border-b border-black/14 bg-white">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 sm:px-6 [&::-webkit-details-marker]:hidden">
         <div className="min-w-0">
-          <p className="text-[14px] font-semibold text-[#111318]">{title}</p>
-          <p className="mt-1 text-[12.5px] leading-relaxed text-black/56">{summary}</p>
+          <h3 className="text-[14px] font-semibold text-[#111318]">{title}</h3>
+          <p className="mt-1 text-[12.5px] leading-relaxed text-black/56">
+            {summary}
+          </p>
         </div>
-        <span className="flex shrink-0 items-center gap-2 text-[11.5px] font-semibold text-[#111318]">
-          Details
-          <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
+        <span className="flex min-h-11 shrink-0 items-center gap-2 text-[12px] font-semibold text-[#111318]">
+          <span className="group-open:hidden">Details</span>
+          <span className="hidden group-open:inline">Close</span>
+          <ChevronDown
+            className="h-4 w-4 transition-transform group-open:rotate-180"
+            aria-hidden="true"
+          />
         </span>
       </summary>
       <div className="border-t border-black/12 bg-[#fffaf7]">{children}</div>
@@ -1202,44 +730,70 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
     <section className="border-b border-black/14 bg-white">
       <div className="flex flex-wrap items-start justify-between gap-4 border-b border-black/14 bg-[#fffaf7] px-5 py-3.5 sm:px-6">
         <div>
-          <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.1em] text-[#b8441d]">
-            {pageAuditsInFlight ? "Observe · first results ready" : "Observe complete"}
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#b8441d]">
+            {pageAuditsInFlight
+              ? "Observe · first results ready"
+              : "Observe complete"}
           </p>
           <p className="mt-1 text-[12px] text-black/52">
-            {pageAuditsInFlight ? "Store and catalog are ready while representative product pages finish." : "You can see where the gaps are. Next, understand what is driving them."}
+            {pageAuditsInFlight
+              ? "Store and catalog are ready while representative product pages finish."
+              : "You can see where the gaps are. Next, understand what is driving them."}
           </p>
         </div>
-        <span className="border border-black/14 bg-white px-2.5 py-1 text-[10.5px] font-semibold text-[#111318]">
+        <span className="border border-black/14 bg-white px-2.5 py-1 text-[11px] font-semibold text-[#111318]">
           {pageAuditsInFlight ? "Inspecting pages" : "Observed"}
         </span>
       </div>
 
       <Fold
         title="Store"
-        summary={inventory
-          ? `${productCount}${productCountSuffix} products · ${collectionCount}${collectionCountSuffix} collections · ${localeCount ? `${localeCount} locale paths` : market ?? "primary storefront"} · sitemap ${sitemapLabel.toLowerCase()} · crawler access ${crawlerLabel.toLowerCase()}`
-          : `${result.brand ?? result.domain} · ${result.platform ?? "platform unknown"}`}
+        summary={
+          inventory
+            ? `${productCount}${productCountSuffix} products · ${collectionCount}${collectionCountSuffix} ${collectionNoun} · ${localeCount ? `${localeCount} locale paths` : (market ?? "primary storefront")} · sitemap ${sitemapLabel.toLowerCase()} · crawler access ${crawlerLabel.toLowerCase()}`
+            : `${result.brand ?? result.domain} · ${result.platform ?? "platform unknown"}`
+        }
       >
         <div className="grid gap-px bg-black/10 sm:grid-cols-4">
           <div className="bg-white px-5 py-4 sm:px-6">
-            <p className="text-[10px] text-black/42">Store</p>
-            <p className="mt-1 text-[12.5px] font-semibold text-[#111318]">{result.brand ?? result.domain}</p>
-            <p className="mt-0.5 text-[11px] text-black/48">{result.platform ?? "Storefront"}</p>
+            <p className="text-[11px] text-black/42">Store</p>
+            <p className="mt-1 text-[12.5px] font-semibold text-[#111318]">
+              {result.brand ?? result.domain}
+            </p>
+            <p className="mt-0.5 text-[11px] text-black/48">
+              {result.platform ?? "Storefront"}
+            </p>
           </div>
           <div className="bg-white px-5 py-4">
-            <p className="text-[10px] text-black/42">Public footprint</p>
-            <p className="mt-1 text-[12.5px] font-semibold text-[#111318]">{inventoryUrlLabel}</p>
-            <p className="mt-0.5 text-[11px] text-black/48">{inventory?.localized_url_copies ? `${inventory.localized_url_copies}+ localized URL copies` : "Public URLs discovered"}</p>
+            <p className="text-[11px] text-black/42">Public footprint</p>
+            <p className="mt-1 text-[12.5px] font-semibold text-[#111318]">
+              {inventoryUrlLabel}
+            </p>
+            <p className="mt-0.5 text-[11px] text-black/48">
+              {inventory?.localized_url_copies
+                ? `${inventory.localized_url_copies}+ localized URL copies`
+                : "Public URLs discovered"}
+            </p>
           </div>
           <div className="bg-white px-5 py-4">
-            <p className="text-[10px] text-black/42">Locale paths</p>
-            <p className="mt-1 text-[12.5px] font-semibold text-[#111318]">{localeCount || "Primary"}</p>
-            <p className="mt-0.5 text-[11px] text-black/48">{inventory?.locales.length ? inventory.locales.join(", ") : market ?? "Primary storefront"}</p>
+            <p className="text-[11px] text-black/42">Locale paths</p>
+            <p className="mt-1 text-[12.5px] font-semibold text-[#111318]">
+              {localeCount || "Primary"}
+            </p>
+            <p className="mt-0.5 text-[11px] text-black/48">
+              {inventory?.locales.length
+                ? inventory.locales.join(", ")
+                : (market ?? "Primary storefront")}
+            </p>
           </div>
           <div className="bg-white px-5 py-4 sm:px-6">
-            <p className="text-[10px] text-black/42">Domains</p>
-            <p className="mt-1 text-[12.5px] font-semibold text-[#111318]">{siteHosts.length || 1}</p>
-            <p className="mt-0.5 truncate text-[11px] text-black/48">{siteHosts.join(", ") || result.domain}</p>
+            <p className="text-[11px] text-black/42">Domains</p>
+            <p className="mt-1 text-[12.5px] font-semibold text-[#111318]">
+              {siteHosts.length || 1}
+            </p>
+            <p className="mt-0.5 truncate text-[11px] text-black/48">
+              {siteHosts.join(", ") || result.domain}
+            </p>
           </div>
         </div>
 
@@ -1247,43 +801,128 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
           <div className="border-t border-black/10 bg-[#fffaf7] px-5 py-5 sm:px-6">
             <div className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
               <div>
-                <p className="text-[11px] font-semibold text-[#111318]">What exists</p>
+                <p className="text-[11px] font-semibold text-[#111318]">
+                  What exists
+                </p>
                 <div className="mt-3 grid grid-cols-2 gap-px border border-black/10 bg-black/10 sm:grid-cols-3 lg:grid-cols-2">
                   {siteMapRows.map(([label, count]) => (
                     <div key={label} className="bg-white px-3 py-3">
-                      <p className="text-[10px] text-black/44">{label}</p>
-                      <p className="mt-1 text-[18px] font-semibold text-[#111318] tabular-nums">{count}</p>
+                      <p className="text-[11px] text-black/44">{label}</p>
+                      <p className="mt-1 text-[18px] font-semibold text-[#111318] tabular-nums">
+                        {count}
+                      </p>
                     </div>
                   ))}
                 </div>
-                {inventory.urls_capped ? <p className="mt-2 text-[10.5px] leading-relaxed text-black/42">Counts with + are lower bounds because the quick URL inventory reached its 5,000-URL cap.</p> : null}
+                {inventory.urls_capped ? (
+                  <p className="mt-2 text-[11px] leading-relaxed text-black/42">
+                    Counts with + are lower bounds because the quick URL
+                    inventory reached its 5,000-URL cap.
+                  </p>
+                ) : null}
               </div>
 
               <div>
-                <p className="text-[11px] font-semibold text-[#111318]">Can it be discovered?</p>
+                <p className="text-[11px] font-semibold text-[#111318]">
+                  Can it be discovered?
+                </p>
                 <dl className="mt-3 divide-y divide-black/10 border-y border-black/10 bg-white">
                   {[
-                    ["robots.txt", robotsLabel, inventory.robots.status === "unavailable"],
-                    ["Sitemap", `${sitemapLabel}${inventory.sitemap.urls_from_sitemap ? ` · ${inventory.sitemap.urls_from_sitemap}${inventory.urls_capped ? "+" : ""} URLs` : ""}`, inventory.sitemap.status === "not_found"],
-                    ["Search crawlers", inventory.search_crawlers.status === "measured" ? `${inventory.search_crawlers.allowed}/${inventory.search_crawlers.total} allowed` : "Not measured", inventory.search_crawlers.blocked > 0],
-                    ["Assistant crawlers", inventory.assistant_crawlers.status === "measured" ? `${inventory.assistant_crawlers.allowed}/${inventory.assistant_crawlers.total} allowed` : "Not measured", inventory.assistant_crawlers.blocked > 0],
-                    ["URLs blocked by robots", inventory.robots.blocked_urls == null ? "Not measured" : String(inventory.robots.blocked_urls), Number(inventory.robots.blocked_urls ?? 0) > 0],
+                    [
+                      "robots.txt",
+                      robotsLabel,
+                      inventory.robots.status === "unavailable",
+                    ],
+                    [
+                      "Sitemap",
+                      `${sitemapLabel}${inventory.sitemap.urls_from_sitemap ? ` · ${inventory.sitemap.urls_from_sitemap}${inventory.urls_capped ? "+" : ""} URLs` : ""}`,
+                      inventory.sitemap.status === "not_found",
+                    ],
+                    [
+                      "Search crawlers",
+                      inventory.search_crawlers.status === "measured"
+                        ? `${inventory.search_crawlers.allowed}/${inventory.search_crawlers.total} allowed`
+                        : "Not measured",
+                      inventory.search_crawlers.blocked > 0,
+                    ],
+                    [
+                      "Assistant crawlers",
+                      inventory.assistant_crawlers.status === "measured"
+                        ? `${inventory.assistant_crawlers.allowed}/${inventory.assistant_crawlers.total} allowed`
+                        : "Not measured",
+                      inventory.assistant_crawlers.blocked > 0,
+                    ],
+                    [
+                      "URLs blocked by robots",
+                      inventory.robots.blocked_urls == null
+                        ? "Not measured"
+                        : String(inventory.robots.blocked_urls),
+                      Number(inventory.robots.blocked_urls ?? 0) > 0,
+                    ],
                     ["Internal reach", internalReachLabel, false],
-                    ["Orphan products", internalReach?.orphan_products === "not_measured" ? "Not measured in quick scan" : internalReach?.orphan_products ?? "Not measured", false],
-                    ["Discovery files", discoveryFiles.length ? `${discoveryFilesPresent}/${discoveryFiles.length} found` : "Not measured", false],
-                    ["Sitemap freshness", inventory.sitemap.dated_urls ? `${inventory.sitemap.dated_urls}${inventory.urls_capped ? "+" : ""} dated URLs` : "No dates exposed", false],
-                    ["Images in sitemap", inventory.sitemap.image_entries ? `${inventory.sitemap.image_entries}${inventory.urls_capped ? "+" : ""} references` : "No image entries exposed", false],
+                    [
+                      "Orphan products",
+                      internalReach?.orphan_products === "not_measured"
+                        ? "Not measured in quick scan"
+                        : (internalReach?.orphan_products ?? "Not measured"),
+                      false,
+                    ],
+                    [
+                      "Discovery files",
+                      discoveryFiles.length
+                        ? `${discoveryFilesPresent}/${discoveryFiles.length} found`
+                        : "Not measured",
+                      false,
+                    ],
+                    [
+                      "Sitemap freshness",
+                      inventory.sitemap.dated_urls
+                        ? `${inventory.sitemap.dated_urls}${inventory.urls_capped ? "+" : ""} dated URLs`
+                        : "No dates exposed",
+                      false,
+                    ],
+                    [
+                      "Images in sitemap",
+                      inventory.sitemap.image_entries
+                        ? `${inventory.sitemap.image_entries}${inventory.urls_capped ? "+" : ""} references`
+                        : "No image entries exposed",
+                      false,
+                    ],
                   ].map(([label, value, warn]) => (
-                    <div key={String(label)} className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 px-3 py-2.5">
+                    <div
+                      key={String(label)}
+                      className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 px-3 py-2.5"
+                    >
                       <dt className="text-[11px] text-black/50">{label}</dt>
-                      <dd className={`text-right text-[11px] font-semibold ${warn ? "text-[#b8441d]" : "text-[#111318]"}`}>{String(value)}</dd>
+                      <dd
+                        className={`text-right text-[11px] font-semibold ${warn ? "text-[#b8441d]" : "text-[#111318]"}`}
+                      >
+                        {String(value)}
+                      </dd>
                     </div>
                   ))}
                 </dl>
-                {internalReach?.status === "sampled" ? <p className="mt-2 text-[10.5px] leading-relaxed text-black/42">Homepage paths are sampled here. True orphan coverage needs the full internal-link graph.</p> : null}
+                {internalReach?.status === "sampled" ? (
+                  <p className="mt-2 text-[11px] leading-relaxed text-black/42">
+                    Homepage paths are sampled here. True orphan coverage needs
+                    the full internal-link graph.
+                  </p>
+                ) : null}
                 {discoveryFiles.length ? (
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {discoveryFiles.map(([path, value]) => <span key={path} className={`border px-2 py-1 text-[10px] ${value.present ? "border-[#1f7a4d]/30 text-[#1f7a4d]" : "border-black/12 text-black/44"}`}>{path} · {value.present ? "found" : value.present === false ? "not found" : "not measured"}</span>)}
+                    {discoveryFiles.map(([path, value]) => (
+                      <span
+                        key={path}
+                        className={`border px-2 py-1 text-[11px] ${value.present ? "border-[#1f7a4d]/30 text-[#1f7a4d]" : "border-black/12 text-black/44"}`}
+                      >
+                        {path} ·{" "}
+                        {value.present
+                          ? "found"
+                          : value.present === false
+                            ? "not found"
+                            : "not measured"}
+                      </span>
+                    ))}
                   </div>
                 ) : null}
               </div>
@@ -1294,65 +933,194 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
 
       <Fold
         title="Catalog"
-        summary={catalog
-          ? `${catalogCheckedLabel} · ${catalog.products_with_gaps} need attention · ${catalog.unavailable_products} unavailable${consistencyFindings.length ? ` · ${consistencyFindings.length} sampled consistency gaps` : ""}`
-          : `${catalogFindings.length} catalog ${catalogFindings.length === 1 ? "gap" : "gaps"}`}
+        summary={
+          catalog
+            ? `${catalogCheckedLabel} · ${catalog.products_with_gaps} need attention · ${catalog.unavailable_products} unavailable${consistencyFindings.length ? ` · ${consistencyFindings.length} sampled consistency gaps` : ""}`
+            : `${catalogFindings.length} catalog ${catalogFindings.length === 1 ? "gap" : "gaps"}`
+        }
       >
         {catalog ? (
           <div className="bg-[#fffaf7] px-5 py-5 sm:px-6">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <p className="text-[13px] font-semibold text-[#111318]">Can products be understood and distinguished?</p>
-                <p className="mt-1 text-[11.5px] text-black/50">{catalogCheckedLabel}{catalog.products_capped ? " · counts below cover the products checked" : ""}</p>
+                <p className="text-[13px] font-semibold text-[#111318]">
+                  Can products be understood and distinguished?
+                </p>
+                <p className="mt-1 text-[11.5px] text-black/50">
+                  {catalogCheckedLabel}
+                  {catalog.products_capped
+                    ? " · counts below cover the products checked"
+                    : ""}
+                </p>
               </div>
-              <span className="text-[11px] text-black/44">{catalog.products_with_gaps} products with at least one gap</span>
+              <span className="text-[11px] text-black/44">
+                {catalog.products_with_gaps} products with at least one gap
+              </span>
             </div>
 
             <div className="mt-4 grid gap-px border border-black/10 bg-black/10 md:grid-cols-2 xl:grid-cols-3">
               <div className="bg-white p-4">
-                <p className="text-[11px] font-semibold text-[#111318]">Categories & collections</p>
-                <p className="mt-2 text-[18px] font-semibold text-[#111318]">{catalog.missing_product_types} <span className="text-[11px] font-normal text-black/46">without category</span></p>
-                <p className="mt-1 text-[10.5px] leading-relaxed text-black/48">{catalog.product_type_count ?? 0} product types · {collectionCount}{collectionCountSuffix} collections · {catalog.missing_tags} without tags</p>
-                <p className="mt-2 text-[10px] text-black/38">Collection membership: {catalog.collection_membership?.status === "not_measured" ? "not measured in quick scan" : catalog.collection_membership?.status ?? "not measured"}</p>
-                {catalog.top_product_types?.length ? <p className="mt-2 line-clamp-2 text-[10px] text-black/46">Common product types: {catalog.top_product_types.slice(0, 4).map((item) => item.name).join(" · ")}</p> : null}
-                {catalog.collection_titles?.length ? <p className="mt-1 line-clamp-2 text-[10px] text-black/46">Collections: {catalog.collection_titles.slice(0, 4).join(" · ")}</p> : null}
+                <p className="text-[11px] font-semibold text-[#111318]">
+                  Categories & collections
+                </p>
+                <p className="mt-2 text-[18px] font-semibold text-[#111318]">
+                  {catalog.missing_product_types}{" "}
+                  <span className="text-[11px] font-normal text-black/46">
+                    without category
+                  </span>
+                </p>
+                <p className="mt-1 text-[11px] leading-relaxed text-black/48">
+                  {catalog.product_type_count ?? 0} product types ·{" "}
+                  {collectionCount}
+                  {collectionCountSuffix} {collectionNoun} ·{" "}
+                  {catalog.missing_tags} without tags
+                </p>
+                <p className="mt-2 text-[11px] text-black/38">
+                  Collection membership:{" "}
+                  {catalog.collection_membership?.status === "not_measured"
+                    ? "not measured in quick scan"
+                    : (catalog.collection_membership?.status ?? "not measured")}
+                </p>
+                {catalog.top_product_types?.length ? (
+                  <p className="mt-2 line-clamp-2 text-[11px] text-black/46">
+                    Common product types:{" "}
+                    {catalog.top_product_types
+                      .slice(0, 4)
+                      .map((item) => item.name)
+                      .join(" · ")}
+                  </p>
+                ) : null}
+                {catalog.collection_titles?.length ? (
+                  <p className="mt-1 line-clamp-2 text-[11px] text-black/46">
+                    Collections:{" "}
+                    {catalog.collection_titles.slice(0, 4).join(" · ")}
+                  </p>
+                ) : null}
               </div>
               <div className="bg-white p-4">
-                <p className="text-[11px] font-semibold text-[#111318]">Product identity</p>
-                <p className="mt-2 text-[18px] font-semibold text-[#111318]">{catalog.missing_identifiers} <span className="text-[11px] font-normal text-black/46">without SKU/barcode</span></p>
-                <p className="mt-1 text-[10.5px] leading-relaxed text-black/48">{catalog.placeholder_vendors} brand/vendor gaps · {catalog.identifier_conflicts} identifier conflicts</p>
+                <p className="text-[11px] font-semibold text-[#111318]">
+                  Product identity
+                </p>
+                <p className="mt-2 text-[18px] font-semibold text-[#111318]">
+                  {catalog.missing_identifiers}{" "}
+                  <span className="text-[11px] font-normal text-black/46">
+                    without SKU/barcode
+                  </span>
+                </p>
+                <p className="mt-1 text-[11px] leading-relaxed text-black/48">
+                  {catalog.placeholder_vendors} brand/vendor gaps ·{" "}
+                  {catalog.identifier_conflicts} identifier conflicts
+                </p>
               </div>
               <div className="bg-white p-4">
-                <p className="text-[11px] font-semibold text-[#111318]">Variants & buyer options</p>
-                <p className="mt-2 text-[18px] font-semibold text-[#111318]">{catalog.multi_variant_products} <span className="text-[11px] font-normal text-black/46">products with variants</span></p>
-                <p className="mt-1 text-[10.5px] leading-relaxed text-black/48">{catalog.default_only_options} expose no buyer options · {catalog.variant_option_gaps ?? 0} true variant-option gaps · {catalog.variant_identifier_gaps} variant ID gaps</p>
-                {catalog.option_dimensions?.length ? <p className="mt-2 line-clamp-2 text-[10px] text-black/46">Options: {catalog.option_dimensions.slice(0, 5).map((item) => item.name).join(" · ")}</p> : null}
+                <p className="text-[11px] font-semibold text-[#111318]">
+                  Variants & buyer options
+                </p>
+                <p className="mt-2 text-[18px] font-semibold text-[#111318]">
+                  {catalog.multi_variant_products}{" "}
+                  <span className="text-[11px] font-normal text-black/46">
+                    products with variants
+                  </span>
+                </p>
+                <p className="mt-1 text-[11px] leading-relaxed text-black/48">
+                  {catalog.default_only_options} expose no buyer options ·{" "}
+                  {catalog.variant_option_gaps ?? 0} true variant-option gaps ·{" "}
+                  {catalog.variant_identifier_gaps} variant ID gaps
+                </p>
+                {catalog.option_dimensions?.length ? (
+                  <p className="mt-2 line-clamp-2 text-[11px] text-black/46">
+                    Options:{" "}
+                    {catalog.option_dimensions
+                      .slice(0, 5)
+                      .map((item) => item.name)
+                      .join(" · ")}
+                  </p>
+                ) : null}
               </div>
               <div className="bg-white p-4">
-                <p className="text-[11px] font-semibold text-[#111318]">Product information</p>
-                <p className="mt-2 text-[18px] font-semibold text-[#111318]">{catalog.describability.strong} <span className="text-[11px] font-normal text-black/46">well described</span></p>
-                <p className="mt-1 text-[10.5px] leading-relaxed text-black/48">{catalog.missing_descriptions} missing descriptions · {catalog.thin_descriptions} thin · {catalog.missing_images} without images · {catalog.duplicate_description_products} duplicate copy</p>
+                <p className="text-[11px] font-semibold text-[#111318]">
+                  Product information
+                </p>
+                <p className="mt-2 text-[18px] font-semibold text-[#111318]">
+                  {catalog.describability.strong}{" "}
+                  <span className="text-[11px] font-normal text-black/46">
+                    well described
+                  </span>
+                </p>
+                <p className="mt-1 text-[11px] leading-relaxed text-black/48">
+                  {catalog.missing_descriptions} missing descriptions ·{" "}
+                  {catalog.thin_descriptions} thin · {catalog.missing_images}{" "}
+                  without images · {catalog.duplicate_description_products}{" "}
+                  duplicate copy
+                </p>
               </div>
               <div className="bg-white p-4">
-                <p className="text-[11px] font-semibold text-[#111318]">Availability</p>
-                <p className={`mt-2 text-[18px] font-semibold ${catalog.unavailable_products ? "text-[#b8441d]" : "text-[#111318]"}`}>{catalog.unavailable_products} <span className="text-[11px] font-normal text-black/46">unavailable products</span></p>
-                <p className="mt-1 text-[10.5px] leading-relaxed text-black/48">{catalog.total_variants} variants across {catalog.products_checked} checked products</p>
+                <p className="text-[11px] font-semibold text-[#111318]">
+                  Availability
+                </p>
+                <p
+                  className={`mt-2 text-[18px] font-semibold ${catalog.unavailable_products ? "text-[#b8441d]" : "text-[#111318]"}`}
+                >
+                  {catalog.unavailable_products}{" "}
+                  <span className="text-[11px] font-normal text-black/46">
+                    unavailable products
+                  </span>
+                </p>
+                <p className="mt-1 text-[11px] leading-relaxed text-black/48">
+                  {catalog.total_variants} variants across{" "}
+                  {catalog.products_checked} checked products
+                </p>
               </div>
               <div className="bg-white p-4">
-                <p className="text-[11px] font-semibold text-[#111318]">Product consistency</p>
-                {pageAuditsInFlight ? <div className="mt-2 flex items-center gap-2 text-[11px] text-black/52"><Loader2 className="h-3.5 w-3.5 animate-spin text-[#b8441d]" />Comparing representative PDPs…</div> : <p className="mt-2 text-[18px] font-semibold text-[#111318]">{consistencyFindings.length} <span className="text-[11px] font-normal text-black/46">sampled gaps</span></p>}
-                <p className="mt-1 text-[10.5px] leading-relaxed text-black/48">Catalog ↔ page data for price, availability, product data and buyer attributes on {audits.length || result.products_seen} representative PDPs.</p>
+                <p className="text-[11px] font-semibold text-[#111318]">
+                  Product consistency
+                </p>
+                {pageAuditsInFlight ? (
+                  <div className="mt-2 flex items-center gap-2 text-[11px] text-black/52">
+                    <Loader2 className="h-3.5 w-3.5 animate-spin text-[#b8441d]" />
+                    Comparing representative PDPs…
+                  </div>
+                ) : (
+                  <p className="mt-2 text-[18px] font-semibold text-[#111318]">
+                    {consistencyFindings.length}{" "}
+                    <span className="text-[11px] font-normal text-black/46">
+                      sampled gaps
+                    </span>
+                  </p>
+                )}
+                <p className="mt-1 text-[11px] leading-relaxed text-black/48">
+                  Catalog ↔ page data for price, availability, product data and
+                  buyer attributes on {audits.length || result.products_seen}{" "}
+                  representative PDPs.
+                </p>
               </div>
             </div>
 
             {catalogFindings.length ? (
               <div className="mt-5 border-t border-black/10 pt-4">
-                <p className="text-[11px] font-semibold text-[#111318]">What stands out</p>
+                <p className="text-[11px] font-semibold text-[#111318]">
+                  What stands out
+                </p>
                 <ul className="mt-2 divide-y divide-black/10 border-y border-black/10 bg-white px-3">
                   {catalogFindings.map((finding, index) => (
-                    <li key={`${finding.code}-${index}`} className="flex items-start justify-between gap-4 py-3">
-                      <div><p className="text-[11.5px] font-semibold text-[#111318]">{finding.title}</p><p className="mt-1 text-[10.5px] leading-relaxed text-black/50">{finding.detail}</p></div>
-                      {finding.severity === "high" || finding.severity === "blocker" ? <span className="shrink-0 text-[9.5px] font-semibold uppercase text-[#b8441d]">High</span> : null}
+                    <li
+                      key={`${finding.code}-${index}`}
+                      className="flex items-start justify-between gap-4 py-3"
+                    >
+                      <div>
+                        <p className="text-[11.5px] font-semibold text-[#111318]">
+                          {finding.title}
+                        </p>
+                        <p className="mt-1 text-[11px] leading-relaxed text-black/50">
+                          {finding.detail}
+                        </p>
+                      </div>
+                      {finding.severity === "high" ||
+                      finding.severity === "blocker" ? (
+                        <span className="shrink-0 text-[11px] font-semibold uppercase text-[#b8441d]">
+                          High
+                        </span>
+                      ) : null}
                     </li>
                   ))}
                 </ul>
@@ -1360,33 +1128,65 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
             ) : null}
           </div>
         ) : (
-          <div className="bg-white px-5 py-4 text-[12.5px] text-black/54 sm:px-6">Catalog-wide detail is limited on this storefront; the representative product pages continue below.</div>
+          <div className="bg-white px-5 py-4 text-[12.5px] text-black/54 sm:px-6">
+            Catalog-wide detail is limited on this storefront; the
+            representative product pages continue below.
+          </div>
         )}
       </Fold>
 
       <Fold
         title="Product pages"
-        summary={pageAuditsInFlight
-          ? `${result.products_seen} representative PDPs · inspection in progress`
-          : pageAuditStatus === "failed"
-            ? `${result.products_seen} representative PDPs · page inspection could not complete`
-            : `${audits.length} representative PDPs · ${evaluatedChecks} measured checks · ${failedChecks} review · ${staticAreas.reduce((sum, area) => sum + area.unevaluated, 0)} not measured`}
+        summary={
+          pageAuditsInFlight
+            ? `${result.products_seen} representative PDPs · inspection in progress`
+            : pageAuditStatus === "failed"
+              ? `${result.products_seen} representative PDPs · page inspection could not complete`
+              : `${audits.length} representative PDPs · ${evaluatedChecks} measured checks · ${failedChecks} review · ${staticAreas.reduce((sum, area) => sum + area.unevaluated, 0)} not measured`
+        }
       >
         {pageAuditsInFlight ? (
-          <div className="flex items-start gap-3 bg-white px-5 py-5 sm:px-6"><Loader2 className="mt-0.5 h-4 w-4 animate-spin text-[#b8441d]" /><div><p className="text-[12.5px] font-semibold text-[#111318]">Inspecting {result.products_seen} representative product pages</p><p className="mt-1 text-[11.5px] text-black/50">Store and catalog evidence is already available above. Page-level results will appear here automatically.</p></div></div>
+          <div className="flex items-start gap-3 bg-white px-5 py-5 sm:px-6">
+            <Loader2 className="mt-0.5 h-4 w-4 animate-spin text-[#b8441d]" />
+            <div>
+              <p className="text-[12.5px] font-semibold text-[#111318]">
+                Inspecting {result.products_seen} representative product pages
+              </p>
+              <p className="mt-1 text-[11.5px] text-black/50">
+                Store and catalog evidence is already available above.
+                Page-level results will appear here automatically.
+              </p>
+            </div>
+          </div>
         ) : pageAuditStatus === "failed" ? (
-          <p className="bg-white px-5 py-4 text-[12px] text-black/54 sm:px-6">The Store and Catalog observations are still valid. The representative PDP inspection could not complete on this run.</p>
+          <p className="bg-white px-5 py-4 text-[12px] text-black/54 sm:px-6">
+            The Store and Catalog observations are still valid. The
+            representative PDP inspection could not complete on this run.
+          </p>
         ) : (
           <>
             <div className="border-b border-black/12 bg-[#fffaf7] px-5 py-4 sm:px-6">
-              <p className="text-[11px] font-semibold text-[#111318]">What the representative pages show</p>
+              <p className="text-[11px] font-semibold text-[#111318]">
+                What the representative pages show
+              </p>
               <div className="mt-3 grid gap-px border border-black/10 bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
                 {staticAreas.map((area) => (
                   <div key={area.label} className="bg-white px-3 py-3">
-                    <p className="text-[10.5px] font-semibold leading-snug text-[#111318]">{area.label}</p>
+                    <p className="text-[11px] font-semibold leading-snug text-[#111318]">
+                      {area.label}
+                    </p>
                     <div className="mt-2 flex items-baseline justify-between gap-2">
-                      <span className={`text-[16px] font-semibold ${area.failed ? "text-[#b8441d]" : "text-[#111318]"}`}>{area.failed} review</span>
-                      <span className="text-[9.5px] text-black/42">{area.evaluated} measured{area.unevaluated ? ` · ${area.unevaluated} not measured` : ""}</span>
+                      <span
+                        className={`text-[16px] font-semibold ${area.failed ? "text-[#b8441d]" : "text-[#111318]"}`}
+                      >
+                        {area.failed} review
+                      </span>
+                      <span className="text-[11px] text-black/42">
+                        {area.evaluated} measured
+                        {area.unevaluated
+                          ? ` · ${area.unevaluated} not measured`
+                          : ""}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -1394,11 +1194,52 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
             </div>
             <ul className="divide-y divide-black/10 bg-white">
               {audits.map((audit, index) => (
-                <li key={audit.url} className="grid gap-3 px-5 py-3.5 sm:grid-cols-[28px_minmax(0,1fr)_auto_auto] sm:items-center sm:px-6">
-                  <span className="font-mono text-[10.5px] text-black/38">{String(index + 1).padStart(2, "0")}</span>
-                  <div className="min-w-0"><p className="truncate text-[12.5px] font-semibold text-[#111318]">{audit.title ?? audit.url}</p><p className="mt-0.5 truncate text-[10.5px] text-black/44">{audit.url}</p></div>
-                  <div className="flex items-center gap-3 text-[10.5px] sm:justify-end">{audit.score != null ? <span className="font-semibold text-[#111318]">Health {Math.round(audit.score)}</span> : null}<span className={audit.checks_failed > 0 ? "font-semibold text-[#b8441d]" : "text-black/48"}>{audit.checks_failed}/{audit.checks_evaluated} review</span></div>
-                  {audit.report_id ? <a href={`${APP_REPORT_URL}/${audit.report_id}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 justify-self-start text-[11.5px] font-semibold text-[#111318] underline decoration-black/18 underline-offset-4 hover:text-[#b8441d] hover:decoration-[#b8441d] sm:justify-self-end">Inspect PDP <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></a> : <span className="justify-self-start text-[10.5px] text-black/34 sm:justify-self-end">Report unavailable</span>}
+                <li
+                  key={audit.url}
+                  className="grid gap-3 px-5 py-3.5 sm:grid-cols-[28px_minmax(0,1fr)_auto_auto] sm:items-center sm:px-6"
+                >
+                  <span className="font-mono text-[11px] text-black/38">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="truncate text-[12.5px] font-semibold text-[#111318]">
+                      {audit.title ?? audit.url}
+                    </p>
+                    <p className="mt-0.5 truncate text-[11px] text-black/44">
+                      {audit.url}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 text-[11px] sm:justify-end">
+                    {audit.score != null ? (
+                      <span className="font-semibold text-[#111318]">
+                        Health {Math.round(audit.score)}
+                      </span>
+                    ) : null}
+                    <span
+                      className={
+                        audit.checks_failed > 0
+                          ? "font-semibold text-[#b8441d]"
+                          : "text-black/48"
+                      }
+                    >
+                      {audit.checks_failed}/{audit.checks_evaluated} review
+                    </span>
+                  </div>
+                  {audit.report_id ? (
+                    <a
+                      href={`${APP_REPORT_URL}/${audit.report_id}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 justify-self-start text-[11.5px] font-semibold text-[#111318] underline decoration-black/18 underline-offset-4 hover:text-[#b8441d] hover:decoration-[#b8441d] sm:justify-self-end"
+                    >
+                      Inspect PDP{" "}
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </a>
+                  ) : (
+                    <span className="justify-self-start text-[11px] text-black/34 sm:justify-self-end">
+                      Report unavailable
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -1414,25 +1255,39 @@ function ScanDisclosure({
   title,
   summary,
   children,
+  defaultOpen = false,
 }: {
   number: string;
   title: string;
   summary: string;
   children: React.ReactNode;
+  defaultOpen?: boolean;
 }) {
   return (
-    <details className="group border-b border-black/14 bg-white">
+    <details
+      id={`scan-${number}`}
+      open={defaultOpen}
+      className="group border-b border-black/14 bg-white"
+    >
       <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 sm:px-6 [&::-webkit-details-marker]:hidden">
         <div className="flex min-w-0 items-start gap-4">
-          <span className="mt-0.5 font-mono text-[11px] font-semibold text-[#b8441d]">{number}</span>
+          <span className="mt-0.5 font-mono text-[11px] font-semibold text-[#b8441d]">
+            {number}
+          </span>
           <div className="min-w-0">
-            <p className="text-[14px] font-semibold text-[#111318]">{title}</p>
+            <h3 className="text-[14px] font-semibold text-[#111318]">
+              {title}
+            </h3>
             <p className="mt-1 text-[12.5px] text-black/56">{summary}</p>
           </div>
         </div>
-        <span className="flex shrink-0 items-center gap-2 text-[12px] font-semibold text-[#111318]">
-          Inspect
-          <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
+        <span className="flex min-h-11 shrink-0 items-center gap-2 text-[12px] font-semibold text-[#111318]">
+          <span className="group-open:hidden">Details</span>
+          <span className="hidden group-open:inline">Close</span>
+          <ChevronDown
+            className="h-4 w-4 transition-transform group-open:rotate-180"
+            aria-hidden="true"
+          />
         </span>
       </summary>
       <div className="border-t border-black/14 bg-[#fffaf7]">{children}</div>
@@ -1443,12 +1298,23 @@ function ScanDisclosure({
 function LockedAiStages() {
   const stages = [
     ["01", "What shoppers ask", "The buying questions your store needs to win"],
-    ["02", "What gets chosen", "Which brands and products appear when yours do not"],
-    ["03", "Why it happens", "Connect the live answers to the evidence you already observed"],
+    [
+      "02",
+      "What gets chosen",
+      "Which brands and products appear when yours do not",
+    ],
+    [
+      "03",
+      "Why it happens",
+      "Connect the live answers to the evidence you already observed",
+    ],
   ] as const;
 
   return (
-    <div className="bg-white" aria-label="Understand is locked until email verification">
+    <div
+      className="bg-white"
+      aria-label="Understand is locked until email verification"
+    >
       {stages.map(([number, title, summary]) => (
         <div
           key={number}
@@ -1456,13 +1322,22 @@ function LockedAiStages() {
           aria-disabled="true"
         >
           <div className="flex min-w-0 items-start gap-4 opacity-55">
-            <span className="mt-0.5 font-mono text-[11px] font-semibold text-black/48">{number}</span>
+            <span className="mt-0.5 font-mono text-[11px] font-semibold text-black/48">
+              {number}
+            </span>
             <div>
-              <p className="text-[14px] font-semibold text-[#111318]">{title}</p>
-              <p className="mt-1 max-w-[68ch] text-[12.5px] leading-relaxed text-black/56">{summary}</p>
+              <p className="text-[14px] font-semibold text-[#111318]">
+                {title}
+              </p>
+              <p className="mt-1 max-w-[68ch] text-[12.5px] leading-relaxed text-black/56">
+                {summary}
+              </p>
             </div>
           </div>
-          <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center text-black/38" aria-label="Locked">
+          <span
+            className="inline-flex h-7 w-7 shrink-0 items-center justify-center text-black/38"
+            aria-label="Locked"
+          >
             <Lock className="h-3.5 w-3.5" aria-hidden="true" />
           </span>
         </div>
@@ -1480,9 +1355,16 @@ function QuestionsDisclosure({ result }: { result: AnswerCheckResult }) {
     >
       <ol className="divide-y divide-black/12 bg-white">
         {result.questions.map((question, index) => (
-          <li key={question} className="grid gap-2 px-5 py-3.5 sm:grid-cols-[2rem_minmax(0,1fr)] sm:px-6">
-            <span className="font-mono text-[10.5px] text-black/38">{String(index + 1).padStart(2, "0")}</span>
-            <span className="text-[13px] leading-relaxed text-[#111318]">{question}</span>
+          <li
+            key={question}
+            className="grid gap-2 px-5 py-3.5 sm:grid-cols-[2rem_minmax(0,1fr)] sm:px-6"
+          >
+            <span className="font-mono text-[11px] text-black/38">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span className="text-[13px] leading-relaxed text-[#111318]">
+              {question}
+            </span>
           </li>
         ))}
       </ol>
@@ -1508,7 +1390,8 @@ function VisibilityDisclosure({ result }: { result: AnswerCheckResult }) {
       cells: channels.map(
         (channel) =>
           result.answers.find(
-            (answer) => answer.question === question && answer.channel_label === channel,
+            (answer) =>
+              answer.question === question && answer.channel_label === channel,
           ) ?? null,
       ),
     }))
@@ -1517,6 +1400,9 @@ function VisibilityDisclosure({ result }: { result: AnswerCheckResult }) {
   return (
     <ScanDisclosure
       number="02"
+      // The one section that argues the product's case opens on arrival; the
+      // rest stay folded. A closed accordion cannot persuade anybody.
+      defaultOpen
       title="What gets chosen"
       summary={
         scored.length > 0
@@ -1527,27 +1413,46 @@ function VisibilityDisclosure({ result }: { result: AnswerCheckResult }) {
       <AiVisibilityWorkspace result={result} />
 
       {rows.length > 0 || products.length > 0 ? (
-        <div className="grid border-t border-black/18 bg-white lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
+        <div
+          className={`grid border-t border-black/18 bg-white ${
+            // The right column holds the product shelf and nothing else. Most
+            // answers carry no products, so keeping the split unconditional
+            // left a third of the panel empty while the evidence was squeezed.
+            products.length > 0
+              ? "lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]"
+              : ""
+          }`}
+        >
           <div>
             {rivals.length > 0 ? (
               <div className="px-4 py-4 sm:px-5">
                 <p className="flex items-center gap-2 text-[12px] font-semibold text-black/62">
-                  <span className="h-[3px] w-4 bg-[#b8441d]" aria-hidden="true" />
+                  <span
+                    className="h-[3px] w-4 bg-[#b8441d]"
+                    aria-hidden="true"
+                  />
                   Competitors named when you were not
                 </p>
                 <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
                   {rivals.map((rival) => (
                     <li key={rival.label} className="flex items-center gap-3">
-                      <span className="w-[8.5rem] shrink-0 truncate text-[12.5px] text-black/70" title={rival.label}>
+                      <span
+                        className="w-[8.5rem] shrink-0 truncate text-[12.5px] text-black/70"
+                        title={rival.label}
+                      >
                         {rival.label}
                       </span>
                       <span className="h-1 flex-1 bg-black/8">
                         <span
                           className="block h-full bg-[#d95028]"
-                          style={{ width: `${(rival.count / rivals[0].count) * 100}%` }}
+                          style={{
+                            width: `${(rival.count / rivals[0].count) * 100}%`,
+                          }}
                         />
                       </span>
-                      <span className="w-8 shrink-0 text-right font-mono text-[12px] text-black/62">{rival.count}×</span>
+                      <span className="w-8 shrink-0 text-right font-mono text-[12px] text-black/62">
+                        {rival.count}×
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -1557,18 +1462,24 @@ function VisibilityDisclosure({ result }: { result: AnswerCheckResult }) {
             {rows.length > 0 ? (
               <div className="border-t border-black/12">
                 <p className="flex items-center gap-2 px-4 pt-4 text-[12px] font-semibold text-black/62 sm:px-5">
-                  <span className="h-[3px] w-4 bg-[#b8441d]" aria-hidden="true" />
+                  <span
+                    className="h-[3px] w-4 bg-[#b8441d]"
+                    aria-hidden="true"
+                  />
                   Question by question
                 </p>
                 <ul className="mt-3">
                   {rows.map((row) => {
                     const missedIn = row.cells.filter(
-                      (cell): cell is Answer => Boolean(cell) && cell?.mentioned === false,
+                      (cell): cell is Answer =>
+                        Boolean(cell) && cell?.mentioned === false,
                     );
                     const instead = Array.from(
                       new Set(
                         missedIn.flatMap((cell) =>
-                          (cell.competitors ?? []).map((raw) => rivalIdentity(raw).label),
+                          (cell.competitors ?? []).map(
+                            (raw) => rivalIdentity(raw).label,
+                          ),
                         ),
                       ),
                     )
@@ -1576,17 +1487,28 @@ function VisibilityDisclosure({ result }: { result: AnswerCheckResult }) {
                       .slice(0, 4);
 
                     return (
-                      <li key={row.question} className="border-t border-black/12 px-4 py-3 sm:px-5">
-                        <p className="text-[13px] font-medium leading-snug text-[#111318]">“{row.question}”</p>
+                      <li
+                        key={row.question}
+                        className="border-t border-black/12 px-4 py-3 sm:px-5"
+                      >
+                        <p className="text-[13px] font-medium leading-snug text-[#111318]">
+                          “{row.question}”
+                        </p>
                         <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5">
                           {row.cells.map((cell, index) =>
                             cell ? (
-                              <ChannelChip key={channels[index]} channel={channels[index]} answer={cell} />
+                              <ChannelChip
+                                key={channels[index]}
+                                channel={channels[index]}
+                                answer={cell}
+                              />
                             ) : null,
                           )}
                           {instead.length ? (
                             <span className="text-[12px] leading-relaxed text-black/62">
-                              <span className="font-semibold">Named instead </span>
+                              <span className="font-semibold">
+                                Named instead{" "}
+                              </span>
                               {instead.join(", ")}
                             </span>
                           ) : null}
@@ -1627,10 +1549,15 @@ function AiAuditDisclosure({ result }: { result: AnswerCheckResult }) {
       audit.report_id ? ([[audit.url, audit.report_id]] as const) : [],
     ),
   );
-  const urgent = findings.filter((finding) => finding.severity === "blocker" || finding.severity === "high");
+  const urgent = findings.filter(
+    (finding) => finding.severity === "blocker" || finding.severity === "high",
+  );
   const grouped = Array.from(
     findings.reduce((map, finding) => {
-      const area = finding.source === "page_audit" ? findingArea(finding.code) : "Product evidence";
+      const area =
+        finding.source === "page_audit"
+          ? findingArea(finding.code)
+          : "Product evidence";
       const rows = map.get(area) ?? [];
       rows.push(finding);
       map.set(area, rows);
@@ -1648,7 +1575,8 @@ function AiAuditDisclosure({ result }: { result: AnswerCheckResult }) {
         <div className="grid gap-px bg-black/14 sm:grid-cols-2 xl:grid-cols-3">
           {grouped.map(([area, areaFindings], areaIndex) => {
             const areaUrgent = areaFindings.filter(
-              (finding) => finding.severity === "blocker" || finding.severity === "high",
+              (finding) =>
+                finding.severity === "blocker" || finding.severity === "high",
             ).length;
             return (
               <section
@@ -1657,32 +1585,46 @@ function AiAuditDisclosure({ result }: { result: AnswerCheckResult }) {
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-black/46">{area}</p>
+                    <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-black/46">
+                      {area}
+                    </p>
                     <p className="mt-1 text-[13px] font-semibold text-[#111318]">
-                      {areaFindings.length} {areaFindings.length === 1 ? "issue" : "issues"}
+                      {areaFindings.length}{" "}
+                      {areaFindings.length === 1 ? "issue" : "issues"}
                     </p>
                   </div>
                   {areaUrgent > 0 ? (
-                    <span className="border border-black/14 bg-white px-2 py-0.5 text-[10.5px] font-semibold text-[#b8441d]">
+                    <span className="border border-black/14 bg-white px-2 py-0.5 text-[11px] font-semibold text-[#b8441d]">
                       {areaUrgent} high
                     </span>
                   ) : null}
                 </div>
                 <ul className="mt-4 divide-y divide-black/10 border-t border-black/10">
                   {areaFindings.map((finding, index) => (
-                    <li key={`${finding.code}-${finding.product ?? index}`} className="py-3 last:pb-0">
+                    <li
+                      key={`${finding.code}-${finding.product ?? index}`}
+                      className="py-3 last:pb-0"
+                    >
                       <div className="flex flex-wrap items-center gap-2">
                         {finding.severity ? (
-                          <span className={`${SEVERITY_BADGE} ${SEVERITY_STYLES[finding.severity] ?? SEVERITY_STYLES.low}`}>
+                          <span
+                            className={`${SEVERITY_BADGE} ${SEVERITY_STYLES[finding.severity] ?? SEVERITY_STYLES.low}`}
+                          >
                             {finding.severity}
                           </span>
                         ) : null}
-                        <span className="text-[12.5px] font-semibold leading-snug text-[#111318]">{finding.title}</span>
+                        <span className="text-[12.5px] font-semibold leading-snug text-[#111318]">
+                          {finding.title}
+                        </span>
                       </div>
-                      <p className="mt-1.5 text-[11.5px] leading-relaxed text-black/58">{finding.detail}</p>
+                      <p className="mt-1.5 text-[11.5px] leading-relaxed text-black/58">
+                        {finding.detail}
+                      </p>
                       {finding.product || finding.url ? (
-                        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10.5px] text-black/46">
-                          {finding.product ? <span className="truncate">{finding.product}</span> : null}
+                        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-black/46">
+                          {finding.product ? (
+                            <span className="truncate">{finding.product}</span>
+                          ) : null}
                           {finding.url && reportIdByUrl.get(finding.url) ? (
                             <a
                               href={`${APP_REPORT_URL}/${reportIdByUrl.get(finding.url)}`}
@@ -1712,24 +1654,35 @@ function AiAuditDisclosure({ result }: { result: AnswerCheckResult }) {
           })}
         </div>
       ) : (
-        <p className="bg-white px-5 py-4 text-[13px] text-black/58 sm:px-6">No audit issues were observed in this sample.</p>
+        <p className="bg-white px-5 py-4 text-[13px] text-black/58 sm:px-6">
+          No audit issues were observed in this sample.
+        </p>
       )}
 
       {audits.length > 0 ? (
         <div className="border-t border-black/18 bg-[#fafafa] px-5 py-4 sm:px-6">
-          <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-black/42">Pages audited</p>
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-black/42">
+            Pages audited
+          </p>
           <ul className="mt-2 divide-y divide-black/10 border-y border-black/10 bg-white">
             {audits.map((audit) => (
-              <li key={audit.url} className="grid gap-2 px-3 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-                <span className="min-w-0 truncate text-[12.5px] font-medium text-[#111318]">{audit.title ?? audit.url}</span>
+              <li
+                key={audit.url}
+                className="grid gap-2 px-3 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center"
+              >
+                <span className="min-w-0 truncate text-[12.5px] font-medium text-[#111318]">
+                  {audit.title ?? audit.url}
+                </span>
                 <span className="flex items-center gap-3">
-                  <span className="font-mono text-[10.5px] text-black/48">{audit.checks_failed}/{audit.checks_evaluated} flagged</span>
+                  <span className="font-mono text-[11px] text-black/48">
+                    {audit.checks_failed}/{audit.checks_evaluated} flagged
+                  </span>
                   {audit.report_id ? (
                     <a
                       href={`${APP_REPORT_URL}/${audit.report_id}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[10.5px] font-semibold text-[#111318] underline decoration-black/24 underline-offset-4 hover:decoration-[#b8441d]"
+                      className="text-[11px] font-semibold text-[#111318] underline decoration-black/24 underline-offset-4 hover:decoration-[#b8441d]"
                     >
                       Inspect →
                     </a>
@@ -1764,8 +1717,33 @@ export function ResultCard({
   const answers = result.answers;
   const inFlight = isScanInFlight(result);
   const scored = answers.filter((answer) => answer.mentioned !== null);
-  const showProgress = inFlight || answers.length === 0;
-  const [shareStatus, setShareStatus] = useState<"idle" | "shared" | "copied" | "failed">("idle");
+  const [shareStatus, setShareStatus] = useState<
+    "idle" | "shared" | "copied" | "failed"
+  >("idle");
+
+  // Printing a set of collapsed disclosures produces a page with no evidence on
+  // it. Open every fold, print, then put the reader's own folds back exactly as
+  // they left them.
+  const onPrint = () => {
+    const folds = Array.from(
+      document.querySelectorAll<HTMLDetailsElement>("details"),
+    );
+    const wasOpen = folds.map((fold) => fold.open);
+    folds.forEach((fold) => {
+      fold.open = true;
+    });
+    const restore = () => {
+      folds.forEach((fold, index) => {
+        fold.open = wasOpen[index];
+      });
+      window.removeEventListener("afterprint", restore);
+    };
+    window.addEventListener("afterprint", restore);
+    window.print();
+    // Safari never fires `afterprint` from a cancelled dialog; the timeout is
+    // the only guarantee the reader's folds come back.
+    window.setTimeout(restore, 1000);
+  };
 
   const onShare = async () => {
     const shareUrl = new URL("/scan", window.location.origin);
@@ -1779,7 +1757,11 @@ export function ResultCard({
         window.setTimeout(() => setShareStatus("idle"), 1800);
         return;
       } catch (shareError) {
-        if (shareError instanceof DOMException && shareError.name === "AbortError") return;
+        if (
+          shareError instanceof DOMException &&
+          shareError.name === "AbortError"
+        )
+          return;
       }
     }
 
@@ -1800,16 +1782,37 @@ export function ResultCard({
             {eyebrow}
           </span>
           <div className="mt-3 flex items-center gap-3">
-            <BrandFavicon domain={result.domain} name={identity ?? result.brand ?? result.domain} />
-            <p className="text-[22px] font-semibold leading-snug tracking-[-0.02em] text-[#172033]">
+            <BrandFavicon
+              domain={result.domain}
+              name={identity ?? result.brand ?? result.domain}
+            />
+            <h2 className="text-[22px] font-semibold leading-snug tracking-[-0.02em] text-[#111318]">
               {identity ?? result.brand ?? result.domain}
-            </p>
+            </h2>
           </div>
-          <p className="mt-1 font-mono text-[11.5px] text-[#64748b]">
-            {identityMeta ?? `${result.domain}${result.platform ? ` · ${result.platform}` : ""}`}
+          <p className="mt-1 font-mono text-[11.5px] text-[#5f5a55]">
+            {identityMeta ??
+              `${result.domain}${result.platform ? ` · ${platformLabel(result.platform)}` : ""}`}
           </p>
         </div>
-        {verificationGate ? (
+        {/* Run state and the two ways to keep the scan: share it, or hand a
+            printed copy to whoever signs off the fixes. Share used to render
+            only while the email gate was on screen, which made it unreachable
+            for any scan that never entered that state. */}
+        <div className="flex flex-wrap items-center gap-2">
+          <span
+            className={`inline-flex items-center gap-2 border border-black/18 bg-white px-3 py-1.5 text-[12px] font-semibold ${inFlight ? "text-[#111318]" : scored.length ? "text-[#111318]" : "text-black/56"}`}
+          >
+            <span
+              className={`h-2 w-2 rounded-full ${inFlight ? "bg-[#111318]" : scored.length ? "bg-[#1f7a4d]" : "bg-[#6f6862]"}`}
+              aria-hidden="true"
+            />
+            {inFlight
+              ? "Live answer check running"
+              : scored.length
+                ? "Live evidence complete"
+                : "Scan complete"}
+          </span>
           <button
             type="button"
             onClick={() => void onShare()}
@@ -1831,32 +1834,33 @@ export function ResultCard({
                     : "Share"}
             </span>
           </button>
-        ) : (
-          <span
-            className={`inline-flex items-center gap-2 border border-black/18 bg-white px-3 py-1.5 text-[12px] font-semibold ${inFlight ? "text-[#111318]" : scored.length ? "text-[#111318]" : "text-black/56"}`}
+          <button
+            type="button"
+            onClick={onPrint}
+            className="inline-flex min-h-11 items-center gap-2 border border-black/18 bg-white px-3 py-1.5 text-[12px] font-semibold text-[#111318] transition-colors hover:border-black/32 hover:bg-[#fffaf7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b8441d]/35"
           >
-            <span
-              className={`h-2 w-2 rounded-full ${inFlight ? "bg-blue-500" : scored.length ? "bg-emerald-500" : "bg-[#94a3b8]"}`}
-              aria-hidden="true"
-            />
-            {inFlight
-              ? "Live answer check running"
-              : scored.length
-                ? "Live evidence complete"
-                : "Scan complete"}
-          </span>
-        )}
+            <Printer className="h-3.5 w-3.5" aria-hidden="true" />
+            Print
+          </button>
+        </div>
       </div>
 
       {result.reject_reason ? (
-        <p className="px-5 py-4 text-[14px] leading-relaxed text-[#b8441d] sm:px-6">{result.reject_reason}</p>
+        <p className="px-5 py-4 text-[14px] leading-relaxed text-[#b8441d] sm:px-6">
+          {result.reject_reason}
+        </p>
       ) : (
         <InitialScanSummary result={result} />
       )}
 
-      {showProgress && verificationGate ? (
+      {/* Whenever the locked stages are shown, the way to unlock them is shown
+          with them. Tying this to `showProgress` meant a settled scan awaiting
+          verification rendered three padlocks and no form. */}
+      {verificationGate ? (
         <div className="border-b border-black/14 bg-[#fffaf7] px-4 py-5 sm:px-6 sm:py-6">
-          <div className="border-l-2 border-[#b8441d] bg-white p-5 sm:p-6">{verificationGate}</div>
+          <div className="border border-black/18 bg-white p-5 sm:p-6">
+            {verificationGate}
+          </div>
         </div>
       ) : null}
 
@@ -1872,13 +1876,22 @@ export function ResultCard({
         )
       ) : null}
 
-      {continueHref && scored.length > 0 && !inFlight && !result.reject_reason ? (
+      {/* The way into the product must not depend on a subsystem the visitor did
+          not ask about: page audits can sit queued indefinitely, and gating on
+          `inFlight` used to delete this block from every completed scan. Answers
+          on the card are the only precondition that matters. */}
+      {continueHref && scored.length > 0 && !result.reject_reason ? (
         <div className="grid gap-5 border-t border-black/18 bg-[#faf1eb] px-4 py-5 sm:px-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#b8441d]">Next · Decide</p>
-            <p className="mt-1 text-[15px] font-semibold text-[#111318]">Choose the few changes worth making.</p>
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#b8441d]">
+              Next · Decide
+            </p>
+            <p className="mt-1 text-[15px] font-semibold text-[#111318]">
+              Choose the few changes worth making.
+            </p>
             <p className="mt-1 max-w-[58ch] text-[13px] leading-relaxed text-black/64">
-              Rank what matters, choose the changes worth making, and keep the evidence attached to every decision.
+              Rank what matters, choose the changes worth making, and keep the
+              evidence attached to every decision.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
@@ -1907,7 +1920,11 @@ export function ResultCard({
         </div>
       ) : null}
 
-      {note ? <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">{note}</p> : null}
+      {note ? (
+        <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
+          {note}
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -1916,14 +1933,6 @@ export function ResultCard({
 // One store moving through the same operating loop used across the product:
 // Observe → Understand → Decide → Act → Learn. Evidence and proposals stay
 // distinct so a proposed change never reads as something that already shipped.
-
-const LOOP_STAGES = [
-  { key: "observe", label: "Observe", tag: "see the evidence" },
-  { key: "understand", label: "Understand", tag: "find the cause" },
-  { key: "decide", label: "Decide", tag: "choose the change" },
-  { key: "act", label: "Act", tag: "publish with control" },
-  { key: "learn", label: "Learn", tag: "measure again" },
-] as const;
 
 const SEVERITY_STYLES: Record<string, string> = {
   blocker: "bg-[#b3261e] text-white",
@@ -1935,516 +1944,82 @@ const SEVERITY_STYLES: Record<string, string> = {
 const SEVERITY_BADGE =
   "mt-0.5 shrink-0 px-1.5 py-0.5 text-[12px] font-semibold uppercase tracking-[0.06em]";
 
-function LoopPanelShell({
-  eyebrow,
-  tag,
-  children,
-}: {
-  eyebrow: string;
-  tag: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="border border-black/22 bg-white text-left">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/14 px-4 py-3 sm:px-5">
-        <p className="text-[12px] font-semibold text-black/62">{eyebrow}</p>
-        <span className="bg-[#111318] px-2 py-0.5 text-[12px] uppercase tracking-[0.06em] text-white">
-          {tag}
-        </span>
-      </div>
-      {children}
-    </div>
+/**
+ * The one sentence a merchant repeats to their team, plus the provenance chips
+ * that say what that sentence rests on. Salvaged from the retired public audit
+ * report: it was the only surface that stated the result in plain words instead
+ * of leaving it to be read off the sections below.
+ */
+function ScanTakeaway({ result }: { result: AnswerCheckResult }) {
+  const scored = result.answers.filter((answer) => answer.mentioned !== null);
+  const missed = scored.filter((answer) => answer.mentioned === false).length;
+  const brand = result.brand || result.domain;
+  const wins = Array.from(
+    new Set(
+      scored
+        .filter((answer) => answer.mentioned === true)
+        .map((answer) => answer.question)
+        .filter((question): question is string => Boolean(question)),
+    ),
   );
-}
+  const loneWin = wins.length === 1 ? wins[0] : null;
+  const assistants = Array.from(
+    new Set(
+      result.answers
+        .map((answer) => answer.channel_label)
+        .filter((label): label is string => Boolean(label)),
+    ),
+  );
+  const audits = result.page_audits ?? [];
+  const evaluated = audits.reduce(
+    (sum, audit) => sum + audit.checks_evaluated,
+    0,
+  );
+  const failed = audits.reduce((sum, audit) => sum + audit.checks_failed, 0);
 
-function LoopProductRow() {
-  const product = SAMPLE_LOOP.product;
+  const chips = [
+    "Public pages only",
+    `${result.products_seen} products sampled`,
+    result.questions.length
+      ? `${result.questions.length} buyer questions`
+      : null,
+    assistants.length ? assistants.join(" + ") : null,
+    // One number only: the deterministic page audit is evidence the answers
+    // rest on, not a second scoreboard competing with them.
+    evaluated ? `${failed} of ${evaluated} page checks failed` : null,
+  ].filter((chip): chip is string => Boolean(chip));
+
   return (
-    <div className="flex items-center gap-3">
-      <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden border border-black/12 bg-[#fafafa]">
-        {product.image_url ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={product.image_url}
-            alt=""
-            loading="lazy"
-            className="h-full w-full object-contain mix-blend-multiply"
-          />
-        ) : null}
-      </div>
-      <div>
-        <p className="text-[13px] font-semibold leading-snug text-[#111318]">
-          {product.title}
+    <div className="mb-4 border border-black/18 bg-white px-5 py-5">
+      <p className="flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-black/58">
+        <span className="h-[3px] w-4 bg-[#b8441d]" aria-hidden="true" />
+        Owner takeaway
+      </p>
+      <p className="mt-3 text-[18px] font-semibold leading-snug text-[#111318]">
+        {scored.length
+          ? missed === 0
+            ? `${brand} was named in all ${scored.length} assistant answers.`
+            : missed === scored.length
+              ? `${brand} was named in none of the ${scored.length} assistant answers.`
+              : `${brand} was absent from ${missed} of ${scored.length} assistant answers.`
+          : isScanInFlight(result)
+            ? "The catalog evidence is in. The assistant answers are running now."
+            : `This scan shows the public evidence behind how assistants describe ${brand}.`}
+      </p>
+      {loneWin ? (
+        <p className="mt-3 text-[13px] leading-relaxed text-black/62">
+          The only win came for “{loneWin}”.
         </p>
-        <p className="mt-0.5 text-[12px] text-black/62">
-          This store · <span className="font-mono">{product.price}</span>
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function UnderstandPanel() {
-  const d = SAMPLE_LOOP.diagnose;
-  return (
-    <LoopPanelShell
-      eyebrow="Understand · why this product is being missed"
-      tag="evidence"
-    >
-      <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
-        <div className="border-b border-black/14 px-4 py-4 sm:px-5 lg:border-b-0 lg:border-r">
-          <LoopProductRow />
-          <div className="mt-5 border-t border-black/14 pt-4">
-            <p className="text-[12px] font-semibold text-black/62">
-              Product evidence check
-            </p>
-            <p className="mt-2 font-serif text-[clamp(2.6rem,3vw,3.4rem)] leading-[0.9] tracking-[-0.02em] text-[#b8441d]">
-              {d.failedChecks}
-              <span className="ml-2 font-mono text-[13px] tracking-normal text-black/62">
-                of {d.totalChecks} checks need attention
-              </span>
-            </p>
-            <p className="mt-2 text-[12px] leading-relaxed text-black/62">
-              {d.source}. The evidence narrows the problem to the fields that matter first.
-            </p>
-          </div>
-        </div>
-        <ul className="px-4 py-2 sm:px-5">
-          {d.findings.map((finding) => (
-            <li
-              key={finding.field}
-              className="flex items-start gap-3 border-b border-black/10 py-3 last:border-b-0"
-            >
-              <span
-                className={`${SEVERITY_BADGE} ${SEVERITY_STYLES[finding.severity]}`}
-              >
-                {finding.severity}
-              </span>
-              <div>
-                <p className="font-mono text-[12px] font-semibold text-[#111318]">
-                  {finding.field}
-                </p>
-                <p className="mt-0.5 text-[12.5px] leading-relaxed text-black/70">
-                  {finding.issue}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
-        Observe showed the miss. Understand connects it to the strongest page evidence before any change is chosen.
-      </p>
-    </LoopPanelShell>
-  );
-}
-
-function DecidePanel() {
-  const f = SAMPLE_LOOP.fix;
-  return (
-    <LoopPanelShell eyebrow="Decide · choose the smallest useful change" tag="proposed">
-      <div className="px-4 py-4 sm:px-5">
-        <LoopProductRow />
-        <div className="mt-5 overflow-hidden border border-black/20">
-          <div className="flex flex-wrap items-center justify-between gap-2 bg-[#111318] px-3 py-2">
-            <span className="font-mono text-[12px] text-white/80">
-              proposed change · {f.field}
-            </span>
-            <span className="text-[12px] text-white/72">
-              Product page template
-            </span>
-          </div>
-          <div className="overflow-x-auto bg-[#fafafa] py-2">
-            {f.diff.map((line) => (
-              <div
-                key={line.text}
-                className={`flex items-start gap-2 px-3 py-0.5 font-mono text-[12px] leading-relaxed ${
-                  line.kind === "del"
-                    ? "bg-[#b3261e]/[0.07] text-[#8a1f18]"
-                    : line.kind === "add"
-                      ? "bg-[#1f7a4d]/[0.08] text-[#175c3b]"
-                      : "text-black/62"
-                }`}
-              >
-                <span className="w-3 shrink-0 select-none">
-                  {line.kind === "del" ? "−" : line.kind === "add" ? "+" : " "}
-                </span>
-                <span className="whitespace-pre">{line.text}</span>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-black/14 bg-white px-3 py-2.5">
-            <span className="text-[12px] font-semibold text-[#111318]">Selected first: {f.field}</span>
-            <span className="border border-black/20 px-2 py-1 text-[11px] font-semibold text-black/58">decision only · not published</span>
-          </div>
-        </div>
-        <div className="mt-4">
-          <p className="text-[12px] font-semibold text-black/62">
-            Also queued from this audit
-          </p>
-          <ul className="mt-2 divide-y divide-black/10 border border-black/14">
-            {f.alsoQueued.map((item) => (
-              <li
-                key={item.field}
-                className="flex items-start gap-3 px-3 py-2.5"
-              >
-                <span
-                  className={`${SEVERITY_BADGE} ${SEVERITY_STYLES[item.severity]}`}
-                >
-                  {item.severity}
-                </span>
-                <div className="min-w-0">
-                  <p className="font-mono text-[12px] font-semibold text-[#111318]">
-                    {item.field}
-                  </p>
-                  <p className="mt-0.5 text-[12.5px] leading-relaxed text-black/70">
-                    {item.change}
-                  </p>
-                </div>
-                <span className="ml-auto mt-0.5 shrink-0 border border-black/20 px-1.5 py-0.5 text-[12px] font-semibold uppercase tracking-[0.06em] text-black/62">
-                  proposed
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
-        Decide ranks the evidence into a small, reviewable change. Nothing has shipped yet.
-      </p>
-    </LoopPanelShell>
-  );
-}
-
-function ActPanel() {
-  const f = SAMPLE_LOOP.fix;
-  const chosen = f.diff.find((line) => line.kind === "add")?.text ?? f.field;
-  return (
-    <LoopPanelShell eyebrow="Act · put the decision into the store" tag="controlled">
-      <div className="px-4 py-4 sm:px-5">
-        <LoopProductRow />
-        <div className="mt-5 border border-black/18 bg-[#fffaf7] p-4 sm:p-5">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-black/42">Selected change</p>
-              <p className="mt-2 font-mono text-[12px] font-semibold text-[#111318]">{f.field}</p>
-            </div>
-            <span className="border border-[#1f7a4d]/30 bg-white px-2 py-1 text-[11px] font-semibold text-[#1f7a4d]">ready for approval</span>
-          </div>
-          <div className="mt-4 border-l-2 border-[#1f7a4d] bg-white px-3 py-3 font-mono text-[12px] leading-relaxed text-[#175c3b]">
-            + {chosen}
-          </div>
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span aria-hidden="true" className="inline-flex items-center bg-[#111318] px-3 py-2 text-[12px] font-semibold text-white">Approve &amp; publish</span>
-            <span aria-hidden="true" className="inline-flex items-center border border-black/30 bg-white px-3 py-2 text-[12px] font-semibold text-[#111318]">Keep as draft</span>
-            <span className="ml-auto text-[11.5px] text-black/52">nothing ships without approval</span>
-          </div>
-        </div>
-        <div className="mt-4 grid gap-px border border-black/10 bg-black/10 sm:grid-cols-3">
-          <div className="bg-white px-3 py-3"><p className="text-[10px] text-black/42">Scope</p><p className="mt-1 text-[12px] font-semibold text-[#111318]">1 field</p></div>
-          <div className="bg-white px-3 py-3"><p className="text-[10px] text-black/42">Control</p><p className="mt-1 text-[12px] font-semibold text-[#111318]">Approval required</p></div>
-          <div className="bg-white px-3 py-3"><p className="text-[10px] text-black/42">After publish</p><p className="mt-1 text-[12px] font-semibold text-[#111318]">Measure again</p></div>
-        </div>
-      </div>
-      <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
-        Act is execution with control: approve the selected change, publish it, and keep a clear path to revert.
-      </p>
-    </LoopPanelShell>
-  );
-}
-
-function LearnPanel() {
-  const v = SAMPLE_LOOP.verify;
-  return (
-    <LoopPanelShell
-      eyebrow="Learn · measure what changed after the action"
-      tag="after publish"
-    >
-      <div className="px-4 py-4 sm:px-5">
-        <LoopProductRow />
-        <div className="mt-4 border border-black/14 bg-white">
-          <div className="flex items-center gap-2 border-b border-black/10 px-4 py-2.5">
-            <ChannelIcon channel="ChatGPT" className="h-4 w-4" />
-            <span className="text-[12px] font-semibold text-[#111318]">
-              ChatGPT
-            </span>
-            <span className="ml-auto text-[12px] text-black/62">
-              Same question · after publish
-            </span>
-          </div>
-          <div className="space-y-4 px-4 py-4">
-            <div className="flex justify-end">
-              <p className="max-w-[85%] rounded-2xl rounded-br-md bg-[#f2f2f2] px-4 py-2.5 text-[13.5px] leading-relaxed text-[#111318]">
-                {v.question}
-              </p>
-            </div>
-            <div className="flex items-start gap-2.5">
-              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-black/12 bg-white">
-                <ChannelIcon channel="ChatGPT" className="h-4 w-4" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="text-[13.5px] leading-relaxed text-[#2a2c33]">
-                  {v.answerIntro}
-                </p>
-                <ul className="mt-2.5 space-y-1.5">
-                  {v.answerPoints.map((point) => (
-                    <li
-                      key={point.label}
-                      className="flex gap-2 text-[13.5px] leading-relaxed text-[#2a2c33]"
-                    >
-                      <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-black/40" />
-                      <span>
-                        <strong className="font-semibold">{point.label}</strong>{" "}
-                        : {point.text}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-3 text-[13.5px] leading-relaxed text-[#2a2c33]">
-                  {v.answerBridge}
-                </p>
-                <ol className="mt-3 space-y-2">
-                  {v.answerProducts.map((product, index) => (
-                    <li
-                      key={product.title}
-                      className={`flex items-center gap-3 border p-2.5 ${
-                        product.ours
-                          ? "border-[#1f7a4d]/40 bg-[#1f7a4d]/[0.05]"
-                          : "border-black/10 bg-white"
-                      }`}
-                    >
-                      <span className="w-4 shrink-0 font-mono text-[12px] text-black/62">
-                        {index + 1}.
-                      </span>
-                      {product.image_url ? (
-                        <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden border border-black/10 bg-[#fafafa]">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={product.image_url}
-                            alt=""
-                            loading="lazy"
-                            className="h-full w-full object-contain mix-blend-multiply"
-                          />
-                        </span>
-                      ) : null}
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-[13px] font-medium text-[#111318]">
-                          {product.title}
-                        </span>
-                        <span className="mt-0.5 block text-[12px] text-black/62">
-                          {product.merchant} ·{" "}
-                          <span className="font-mono">{product.price}</span>
-                        </span>
-                      </span>
-                      {product.ours ? (
-                        <span className="shrink-0 bg-[#1f7a4d] px-1.5 py-0.5 text-[12px] font-semibold uppercase tracking-[0.06em] text-white">
-                          yours
-                        </span>
-                      ) : null}
-                    </li>
-                  ))}
-                </ol>
-                <p className="mt-3 text-[13.5px] leading-relaxed text-[#2a2c33]">
-                  {v.answerOutro}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
-        {v.note}
-      </p>
-    </LoopPanelShell>
-  );
-}
-
-function loopTabId(index: number) {
-  return `loop-tab-${LOOP_STAGES[index].key}`;
-}
-
-function loopPanelId(index: number) {
-  return `loop-panel-${LOOP_STAGES[index].key}`;
-}
-
-function LoopStage({ index }: { index: number }) {
-  if (index === 0)
-    return (
-      <ResultCard
-        result={SAMPLE_SCAN}
-        eyebrow="Example scan, real result"
-        identity="A dancewear store"
-        identityMeta="Shopify · scanned with this form"
-        note="The unedited output of one real scan: the store's own buying questions, both assistants, and who got named instead. Enter your domain to get yours."
-      />
-    );
-  if (index === 1) return <UnderstandPanel />;
-  if (index === 2) return <DecidePanel />;
-  if (index === 3) return <ActPanel />;
-  return <LearnPanel />;
-}
-
-export function SampleLoopShowcase() {
-  const [stage, setStage] = useState(0);
-  // Pinning is a desktop-only affordance. Below md the section is ordinary
-  // document flow: no tall wrapper, no sticky card, no scroll-driven staging,
-  // and all five stages stack so every one is reachable by plain scrolling.
-  const [pinned, setPinned] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  useEffect(() => {
-    const query = window.matchMedia("(min-width: 768px)");
-    const sync = () => setPinned(query.matches);
-    sync();
-    query.addEventListener("change", sync);
-    return () => query.removeEventListener("change", sync);
-  }, []);
-
-  // Scroll-driven (desktop only): the card pins while the tall wrapper scrolls
-  // past, and scroll progress through the wrapper selects the scan stage before
-  // releasing the section.
-  useEffect(() => {
-    if (!pinned) {
-      setStage(0);
-      return;
-    }
-    const onScroll = () => {
-      const node = wrapperRef.current;
-      if (!node) return;
-      const scrollable = node.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      const progress = Math.min(
-        1,
-        Math.max(0, -node.getBoundingClientRect().top / scrollable),
-      );
-      setStage(
-        Math.min(
-          LOOP_STAGES.length - 1,
-          Math.floor(progress * LOOP_STAGES.length),
-        ),
-      );
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [pinned]);
-
-  // Selecting a stage has to move the scroll position into that stage's slice
-  // of the wrapper, otherwise the next scroll event maps the old position
-  // straight back over the choice. It is a no-op when the position is already
-  // inside the slice, never runs below md (nothing is pinned there), and jumps
-  // instantly when the visitor asked for reduced motion.
-  const select = (index: number) => {
-    setStage(index);
-    const node = wrapperRef.current;
-    if (!pinned || !node) return;
-    const scrollable = node.offsetHeight - window.innerHeight;
-    if (scrollable <= 0) return;
-    const slice = scrollable / LOOP_STAGES.length;
-    const start = node.getBoundingClientRect().top + window.scrollY;
-    const sliceStart = start + index * slice;
-    if (window.scrollY >= sliceStart && window.scrollY < sliceStart + slice)
-      return;
-    window.scrollTo({
-      top: sliceStart + slice / 2,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-    });
-  };
-
-  const onTabKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    const last = LOOP_STAGES.length - 1;
-    const next =
-      event.key === "ArrowRight"
-        ? stage === last
-          ? 0
-          : stage + 1
-        : event.key === "ArrowLeft"
-          ? stage === 0
-            ? last
-            : stage - 1
-          : event.key === "Home"
-            ? 0
-            : event.key === "End"
-              ? last
-              : -1;
-    if (next < 0) return;
-    event.preventDefault();
-    select(next);
-    tabRefs.current[next]?.focus({ preventScroll: true });
-  };
-
-  return (
-    <div ref={wrapperRef} className="h-auto md:h-[300vh]">
-      <div className="static md:sticky md:top-20">
-        <div
-          role="tablist"
-          aria-label="Loop stages"
-          tabIndex={-1}
-          onKeyDown={onTabKeyDown}
-          className="mb-4 hidden gap-px border border-black/18 bg-black/18 md:grid md:grid-cols-5"
-        >
-          {LOOP_STAGES.map((entry, index) => {
-            const active = index === stage;
-            return (
-              <button
-                key={entry.key}
-                ref={(node) => {
-                  tabRefs.current[index] = node;
-                }}
-                id={loopTabId(index)}
-                type="button"
-                role="tab"
-                aria-selected={active}
-                aria-controls={loopPanelId(index)}
-                tabIndex={active ? 0 : -1}
-                onClick={() => select(index)}
-                className={`px-3 py-2.5 text-left transition-colors ${
-                  active
-                    ? "bg-[#111318] text-white"
-                    : "bg-white hover:bg-black/5"
-                }`}
-              >
-                <span
-                  className={`text-[12px] ${active ? "text-white/72" : "text-black/62"}`}
-                >
-                  0{index + 1} · {entry.tag}
-                </span>
-                <span
-                  className={`block text-[13px] font-semibold ${active ? "text-white" : "text-[#111318]"}`}
-                >
-                  {entry.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="space-y-12 md:space-y-0">
-          {LOOP_STAGES.map((entry, index) => (
-            <section
-              key={entry.key}
-              id={loopPanelId(index)}
-              role="tabpanel"
-              aria-labelledby={loopTabId(index)}
-              className={index === stage ? "md:block" : "md:hidden"}
-            >
-              <h3 className="mb-3 text-[15px] font-semibold text-[#111318] md:hidden">
-                <span className="mr-2 font-mono text-[12px] font-semibold text-black/62">
-                  0{index + 1}
-                </span>
-                {entry.label}: {entry.tag}
-              </h3>
-              <LoopStage index={index} />
-            </section>
-          ))}
-        </div>
+      ) : null}
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        {chips.map((chip) => (
+          <span
+            key={chip}
+            className="inline-flex min-h-8 items-center border border-black/20 bg-white px-3 text-[12px] font-semibold text-black/68"
+          >
+            {chip}
+          </span>
+        ))}
       </div>
     </div>
   );
@@ -2466,6 +2041,7 @@ export default function AnswerCheck({
   const [submitting, setSubmitting] = useState(false);
   const [verificationSubmitting, setVerificationSubmitting] = useState(false);
   const pollCount = useRef(0);
+  const [pollExhausted, setPollExhausted] = useState(false);
 
   const load = useCallback(async (target: string) => {
     const response = await fetch(
@@ -2481,11 +2057,17 @@ export default function AnswerCheck({
     const params = new URLSearchParams(window.location.search);
     const scanError = params.get("scan_error");
     if (scanError === "missing_token") {
-      setError("That verification link is missing its token. Start or continue your scan below.");
+      setError(
+        "That verification link is missing its token. Start or continue your scan below.",
+      );
     } else if (scanError === "link_used") {
-      setError("That verification link is invalid or has already been used. Start the scan again if you need a new link.");
+      setError(
+        "That verification link is invalid or has already been used. Start the scan again if you need a new link.",
+      );
     } else if (scanError === "unavailable") {
-      setError("We could not verify that link right now. Try the link from your email again.");
+      setError(
+        "We could not verify that link right now. Try the link from your email again.",
+      );
     }
 
     const fromEmail = params.get("domain");
@@ -2496,9 +2078,14 @@ export default function AnswerCheck({
     });
   }, [load]);
   // Poll while either the free PDP sample or the verified live probe is running.
+  // The budget is finite, so the exhausted case has to say so: silently ceasing
+  // to poll leaves a progress row spinning forever with nothing to act on.
   useEffect(() => {
     if (!result || !isScanInFlight(result)) return;
-    if (pollCount.current >= MAX_POLLS) return;
+    if (pollCount.current >= MAX_POLLS) {
+      setPollExhausted(true);
+      return;
+    }
 
     const timer = setTimeout(() => {
       pollCount.current += 1;
@@ -2549,6 +2136,7 @@ export default function AnswerCheck({
       }
 
       pollCount.current = 0;
+      setPollExhausted(false);
       setResult(payload as AnswerCheckResult);
     } catch {
       setError("The scan service is unavailable right now.");
@@ -2583,7 +2171,9 @@ export default function AnswerCheck({
       const payload = await response.json();
       if (!response.ok) {
         setVerificationError(
-          payload?.detail || payload?.error || "We could not send the verification email.",
+          payload?.detail ||
+            payload?.error ||
+            "We could not send the verification email.",
         );
         return;
       }
@@ -2596,7 +2186,9 @@ export default function AnswerCheck({
         label: placement,
       });
     } catch {
-      setVerificationError("We could not send the verification email right now.");
+      setVerificationError(
+        "We could not send the verification email right now.",
+      );
     } finally {
       setVerificationSubmitting(false);
     }
@@ -2608,6 +2200,7 @@ export default function AnswerCheck({
   return (
     <div>
       <form
+        id="answer-check-form"
         onSubmit={onSubmit}
         noValidate
         className="mx-auto w-full max-w-3xl border border-black/18 bg-white p-3 sm:p-4"
@@ -2658,6 +2251,18 @@ export default function AnswerCheck({
         >
           {error}
         </p>
+        {/* A failed scan is usually the API being briefly unavailable, so give
+            the visitor the retry instead of making them retype the domain. */}
+        {error && domain.trim() ? (
+          <button
+            type="submit"
+            disabled={submitting}
+            className="mt-3 inline-flex min-h-10 items-center gap-2 border border-black/36 bg-white px-4 text-[13px] font-semibold text-[#111318] transition-colors hover:border-[#b8441d] hover:text-[#b8441d] disabled:cursor-wait disabled:opacity-70"
+          >
+            <RefreshCw className="h-3.5 w-3.5" aria-hidden="true" />
+            {submitting ? "Retrying…" : "Try again"}
+          </button>
+        ) : null}
       </form>
 
       {result ? (
@@ -2667,8 +2272,33 @@ export default function AnswerCheck({
             Observe · your store
             <span className="h-px w-8 bg-black/18" aria-hidden="true" />
           </div>
+          <ScanTakeaway result={result} />
+          {/* The poll budget ran out with work still outstanding. Name what did
+              finish, so the evidence already on the card is not thrown into
+              doubt by one stalled stage. */}
+          {pollExhausted ? (
+            <div
+              role="status"
+              className="mb-4 flex flex-wrap items-center justify-between gap-3 border border-black/18 bg-[#fffaf7] px-5 py-4"
+            >
+              <p className="max-w-[62ch] text-[13px] leading-relaxed text-[#111318]">
+                Product-page inspection didn’t finish. Everything else on this
+                card is complete and safe to act on.
+              </p>
+              <button
+                type="submit"
+                form="answer-check-form"
+                disabled={submitting}
+                className="inline-flex min-h-11 shrink-0 items-center gap-2 border border-black/36 bg-white px-4 text-[13px] font-semibold text-[#111318] transition-colors hover:border-[#b8441d] hover:text-[#b8441d] disabled:cursor-wait disabled:opacity-70"
+              >
+                <RefreshCw className="h-3.5 w-3.5" aria-hidden="true" />
+                {submitting ? "Running…" : "Run it again"}
+              </button>
+            </div>
+          ) : null}
           <ResultCard
             result={result}
+            note="A point-in-time observation from public catalog data and public assistant surfaces. Answers can change; Beseam proves impact by rerunning these same questions after each approved fix."
             continueHref={`${APP_REGISTER_URL}?scan_domain=${encodeURIComponent(result.domain)}`}
             verificationGate={
               result.status === "awaiting_verification" ? (
@@ -2676,35 +2306,74 @@ export default function AnswerCheck({
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="inline-flex items-center gap-2 border border-black/14 bg-white px-2.5 py-1 text-[11px] font-semibold text-[#111318]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
+                        <span
+                          className="h-1.5 w-1.5 rounded-full bg-[#1f7a4d]"
+                          aria-hidden="true"
+                        />
                         Verification email sent
                       </span>
                     </div>
-                    <p className="mt-3 text-[18px] font-semibold tracking-[-0.01em] text-[#172033]">
+                    <p className="mt-3 text-[18px] font-semibold tracking-[-0.01em] text-[#111318]">
                       One click to continue to Understand
                     </p>
-                    <p className="mt-1.5 max-w-[66ch] text-[13px] leading-relaxed text-[#64748b]">
-                      Check {email.trim()} and continue. We’ll connect what shoppers are being shown with the evidence you already observed, so you can see what is driving the gaps.
+                    <p className="mt-1.5 max-w-[66ch] text-[13px] leading-relaxed text-[#5f5a55]">
+                      Check {email.trim()} and continue. We’ll connect what
+                      shoppers are being shown with the evidence you already
+                      observed, so you can see what is driving the gaps.
                     </p>
+                    {/* A sent state with no exit strands anyone who mistyped
+                        their address or never received the mail. */}
+                    <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px]">
+                      <button
+                        type="button"
+                        onClick={() => setVerificationSent(false)}
+                        className="inline-flex min-h-11 items-center font-semibold text-[#111318] underline decoration-black/30 underline-offset-4 transition-colors hover:text-[#b8441d] hover:decoration-[#b8441d]"
+                      >
+                        Send it again
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEmail("");
+                          setVerificationSent(false);
+                        }}
+                        className="inline-flex min-h-11 items-center text-[#5f5a55] underline decoration-black/20 underline-offset-4 transition-colors hover:text-[#b8441d] hover:decoration-[#b8441d]"
+                      >
+                        Use a different address
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <form onSubmit={onVerificationSubmit} noValidate>
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="inline-flex items-center gap-2 border border-black/14 bg-white px-2.5 py-1 text-[11px] font-semibold text-[#b8441d]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-amber-500" aria-hidden="true" />
+                        <span
+                          className="h-1.5 w-1.5 rounded-full bg-[#c8891f]"
+                          aria-hidden="true"
+                        />
                         Next · Understand
                       </span>
                     </div>
-                    <p className="mt-3 text-[20px] font-semibold tracking-[-0.015em] text-[#172033]">
+                    <p className="mt-3 text-[20px] font-semibold tracking-[-0.015em] text-[#111318]">
                       Turn what you observed into a clear next move.
                     </p>
-                    <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-[#64748b]">
-                      See why products are being missed, what shoppers are shown instead, and which gaps are worth acting on first.
+                    <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-[#5f5a55]">
+                      See why products are being missed, what shoppers are shown
+                      instead, and which gaps are worth acting on first.
                     </p>
-                    <div className="mt-3 flex flex-wrap gap-2 text-[11px] font-medium text-[#64748b]">
-                      <span className="border border-black/14 bg-white px-2.5 py-1">3 shopper questions</span>
-                      <span className="border border-black/14 bg-white px-2.5 py-1">ChatGPT</span>
-                      <span className="border border-black/14 bg-white px-2.5 py-1">Google AI Mode</span>
+                    <div className="mt-3 flex flex-wrap gap-2 text-[11px] font-medium text-[#5f5a55]">
+                      <span className="border border-black/14 bg-white px-2.5 py-1">
+                        {result.questions.length} shopper{" "}
+                        {result.questions.length === 1
+                          ? "question"
+                          : "questions"}
+                      </span>
+                      <span className="border border-black/14 bg-white px-2.5 py-1">
+                        ChatGPT
+                      </span>
+                      <span className="border border-black/14 bg-white px-2.5 py-1">
+                        Google AI Mode
+                      </span>
                     </div>
                     <div className="mt-4 grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
                       <div>
@@ -2729,11 +2398,29 @@ export default function AnswerCheck({
                         disabled={verificationSubmitting}
                         className="inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[14px] font-semibold text-white transition-colors hover:bg-[#b8441d] disabled:opacity-70"
                       >
-                        {verificationSubmitting ? "Sending…" : "Continue to Understand"}
+                        {verificationSubmitting
+                          ? "Sending…"
+                          : "Continue to Understand"}
                       </button>
                     </div>
+                    {/* The one high-stakes ask on the page. Say what the address
+                        is for before it is typed, not after. */}
+                    <p className="mt-2.5 max-w-[68ch] text-[12px] leading-relaxed text-[#5f5a55]">
+                      One verification link, so the paid check runs for a real
+                      store owner. No marketing list, no card. See our{" "}
+                      <a
+                        href="/privacy-policy"
+                        className="underline decoration-black/25 underline-offset-2 hover:text-[#b8441d] hover:decoration-[#b8441d]"
+                      >
+                        privacy policy
+                      </a>
+                      .
+                    </p>
                     {verificationError ? (
-                      <p role="alert" className="mt-3 text-[13px] leading-relaxed text-[#b3261e]">
+                      <p
+                        role="alert"
+                        className="mt-3 text-[13px] leading-relaxed text-[#b3261e]"
+                      >
                         {verificationError}
                       </p>
                     ) : null}

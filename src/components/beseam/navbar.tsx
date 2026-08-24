@@ -8,10 +8,8 @@ import { ArrowRight, Menu, X } from "lucide-react";
 
 import Logo from "@/components/beseam/logo";
 import TrackedLink from "@/components/beseam/tracked-link";
+import { APP_LOGIN_URL, APP_REGISTER_URL } from "@/lib/app-urls";
 import { cn } from "@/lib/utils";
-
-const APP_LOGIN_URL = "https://app.beseam.com/login";
-const APP_REGISTER_URL = "https://app.beseam.com/register";
 const NAV_LINKS = [
   { label: "What Beseam sees", href: "/#scope" },
   { label: "How it works", href: "/#proof" },

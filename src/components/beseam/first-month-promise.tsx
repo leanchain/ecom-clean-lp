@@ -1,7 +1,7 @@
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import { Reveal } from "@/components/beseam/reveal";
 import TrackedLink from "@/components/beseam/tracked-link";
-
-const APP_REGISTER_URL = "https://app.beseam.com/register";
+import { APP_REGISTER_URL } from "@/lib/app-urls";
 
 export default function FirstMonthPromise({
   showManifestoLink = true,
@@ -29,16 +29,24 @@ export default function FirstMonthPromise({
               question, move through the full loop, and carry what you learn
               into the next decision.
             </p>
-            <TrackedLink
-              href={APP_REGISTER_URL}
-              eventName="free_pilot_clicked"
-              eventCategory="conversion"
-              placement="first_month_promise"
-              preserveUtm
-              className="mt-7 inline-flex min-h-11 items-center justify-center bg-[#111318] px-5 text-[14px] font-semibold text-white transition-colors hover:bg-[#b8441d]"
-            >
-              Start free for 30 days
-            </TrackedLink>
+            <div className="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <TrackedLink
+                href={APP_REGISTER_URL}
+                eventName="free_pilot_clicked"
+                eventCategory="conversion"
+                placement="first_month_promise"
+                preserveUtm
+                className="inline-flex min-h-11 items-center justify-center bg-[#111318] px-5 text-[14px] font-semibold text-white transition-colors hover:bg-[#b8441d]"
+              >
+                Start free for 30 days
+              </TrackedLink>
+              <BookReviewCta
+                variant="primary"
+                location="first_month_promise"
+                label="Talk to us"
+                className="min-h-11 gap-2 border border-black/40 bg-transparent px-5 py-0 text-[14px] font-semibold text-[#151515] hover:border-[#b8441d] hover:bg-transparent hover:text-[#b8441d]"
+              />
+            </div>
           </div>
         </Reveal>
       </div>

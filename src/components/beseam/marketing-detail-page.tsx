@@ -3,9 +3,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import TrackedLink from "@/components/beseam/tracked-link";
+import { APP_REGISTER_URL } from "@/lib/app-urls";
 import type { MarketingPageData } from "@/lib/marketing-pages";
-
-const APP_REGISTER_URL = "https://app.beseam.com/register";
 
 const PIPELINE = [
   ["01", "Observe", "See what is happening from the evidence in scope."],

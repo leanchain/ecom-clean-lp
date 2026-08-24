@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 
 import TrackedLink from "@/components/beseam/tracked-link";
-
-const APP_REGISTER_URL = "https://app.beseam.com/register";
+import { APP_REGISTER_URL } from "@/lib/app-urls";
 
 /** Roughly one screen of scroll: the bar appears once the hero copy is behind you. */
 const SHOW_AFTER_SCROLL_Y = 600;
@@ -51,7 +50,7 @@ export default function MobileStickyCta() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-4 bottom-4 z-40 md:hidden">
+    <div data-print-hide className="fixed inset-x-4 bottom-4 z-40 md:hidden">
       <TrackedLink
         href={APP_REGISTER_URL}
         eventName="marketing_primary_cta_clicked"

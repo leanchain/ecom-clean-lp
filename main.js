@@ -395,6 +395,10 @@ async function submitReview(lead, env) {
 // needs a cross-origin call and the API host stays out of the page source.
 const DEFAULT_API_BASE = "https://api.beseam.com/api";
 
+// Where the product app lives. `npm run dev` overrides it with a --var so a
+// local verification click lands on the local app instead of production.
+const DEFAULT_APP_BASE = "https://app.beseam.com";
+
 async function proxyAnswerCheck(request, url, env) {
   const apiBase = (env.API_BASE_URL || DEFAULT_API_BASE).replace(/\/$/, "");
 
@@ -569,7 +573,8 @@ async function verifyAnswerCheck(url, env) {
       return Response.redirect(scan.toString(), 302);
     }
     if (/^\d+$/.test(reportId)) {
-      return Response.redirect(`https://app.beseam.com/report/${reportId}`, 302);
+      const appBase = (env.APP_BASE_URL || DEFAULT_APP_BASE).replace(/\/+$/, "");
+      return Response.redirect(`${appBase}/report/${reportId}`, 302);
     }
     scan.searchParams.set("domain", payload.domain);
   } catch {

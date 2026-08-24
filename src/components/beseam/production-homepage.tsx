@@ -10,8 +10,7 @@ import { Reveal } from "@/components/beseam/reveal";
 import TrackedLink from "@/components/beseam/tracked-link";
 import WhyBeseam from "@/components/beseam/why-beseam";
 import { BENCHMARK_RUN } from "@/data/category-benchmarks";
-
-const APP_REGISTER_URL = "https://app.beseam.com/register";
+import { APP_REGISTER_URL } from "@/lib/app-urls";
 
 const COMMERCE_SCOPE = [
   {
