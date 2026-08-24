@@ -57,12 +57,12 @@ export default function ProductionHomepage() {
           opening screen so a rendered result can grow the section without
           stretching the artwork down the page. */}
       <section id="home-hero" className="relative isolate overflow-hidden">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[86svh]">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[80svh]">
           <HeroSurfaceShift />
         </div>
         <div
           id="ai-check"
-          className="pointer-events-none relative z-10 mx-auto flex min-h-[86svh] max-w-[92rem] scroll-mt-24 items-center justify-center px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-24"
+          className="pointer-events-none relative z-10 mx-auto flex min-h-[80svh] max-w-[92rem] scroll-mt-24 items-center justify-center px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-24"
         >
           <Reveal className="w-full">
             <div className="mx-auto w-full max-w-[76rem] text-center">

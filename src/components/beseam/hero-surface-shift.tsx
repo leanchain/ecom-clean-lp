@@ -2350,7 +2350,18 @@ export default function HeroSurfaceShift() {
               autoJourneyVisible && autoJourney.nodes.includes(hub.id as HubId);
             const autoSupport =
               autoJourneyVisible && autoSupportHubIds.includes(hub.id as HubId);
-            const autoMuted = autoJourneyVisible && !autoRoute && !autoSupport;
+            // Muted is the resting state, not an auto-journey special case. A
+            // hub earns full brightness only while it is the focused cluster,
+            // the open card, or a node of the journey that is actually running.
+            // Otherwise the graph popped bright in every gap -- before the first
+            // journey, between journeys, and during the pause after the pointer
+            // moves but before the cluster retracts.
+            const live =
+              selected ||
+              renderedForegroundHubId === hub.id ||
+              autoRoute ||
+              autoSupport;
+            const muted = !live;
             const shadowed = foregroundHub?.id === hub.id;
             const labelBelow = hub.y > graphHeight * 0.58;
 
@@ -2361,7 +2372,7 @@ export default function HeroSurfaceShift() {
                 data-x={hub.x}
                 data-y={hub.y}
                 transform={`translate(${hub.x} ${hub.y})`}
-                className={`hero-kg-hub ${selected ? "hero-kg-selected" : ""} ${autoSoft ? "hero-kg-auto-soft" : ""} ${autoRoute ? "hero-kg-auto-route" : ""} ${autoSupport ? "hero-kg-auto-support" : ""} ${autoMuted ? "hero-kg-auto-muted" : ""} ${shadowed ? "hero-kg-base-shadowed" : ""}`}
+                className={`hero-kg-hub ${selected ? "hero-kg-selected" : ""} ${autoSoft ? "hero-kg-auto-soft" : ""} ${autoRoute ? "hero-kg-auto-route" : ""} ${autoSupport ? "hero-kg-auto-support" : ""} ${muted ? "hero-kg-auto-muted" : ""} ${shadowed ? "hero-kg-base-shadowed" : ""}`}
               >
                 <circle
                   className="hero-kg-hub-ring"
@@ -2423,7 +2434,7 @@ export default function HeroSurfaceShift() {
               "--kg-expand": foregroundProgressRef.current,
             } as React.CSSProperties
           }
-          className="hero-kg-foreground pointer-events-none absolute inset-0 z-20 h-full w-full"
+          className={`hero-kg-foreground pointer-events-none absolute inset-0 z-20 h-full w-full ${autoJourneyVisible ? "hero-kg-foreground-auto" : ""}`}
         >
           <g className="hero-kg-foreground-neighbor-edges" fill="none">
             {LINKS.filter(
@@ -2869,6 +2880,12 @@ export default function HeroSurfaceShift() {
           filter: none;
           transition: opacity ${TRACK};
           will-change: opacity;
+        }
+        /* The auto journey expands clusters unattended, behind the headline, so
+           it sits a step quieter than a cluster a hover explicitly asked for.
+           Hover keeps the full .9. */
+        .hero-kg-foreground.hero-kg-foreground-auto {
+          opacity: clamp(0, calc(var(--kg-expand) * 1.35), .62);
         }
         .hero-kg-foreground-neighbor-edge {
           stroke: ${INK};
