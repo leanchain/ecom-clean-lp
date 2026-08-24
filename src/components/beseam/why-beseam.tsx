@@ -61,6 +61,27 @@ const CANDIDATES = [
   },
 ] as const;
 
+const MOBILE_FINDINGS = [
+  {
+    domain: "Onsite search",
+    finding: "Search works.",
+    detail: "The refined query still returns the waterproof jackets.",
+    issue: false,
+  },
+  {
+    domain: "Product pages",
+    finding: "Commuting language is missing.",
+    detail: "Not in the titles, descriptions, or tags.",
+    issue: true,
+  },
+  {
+    domain: "Availability",
+    finding: "Stock is available.",
+    detail: "Almost all returned jackets are in stock in the shopper’s market.",
+    issue: false,
+  },
+] as const;
+
 const OUTCOME = [
   {
     label: "The change",
@@ -185,6 +206,127 @@ function Tails() {
   );
 }
 
+function MobileTrace() {
+  return (
+    <div className="lg:hidden">
+      {/* Mobile shows the result of each diagnostic check directly. Unlike the
+          desktop hypothesis graph, the reader never has to negate a failed
+          hypothesis in their head to understand what Beseam found. */}
+      <div className="border-b border-white/14 pb-6">
+        <div className="flex items-baseline gap-3">
+          <span className="font-mono text-[10px] font-semibold tabular-nums text-[#e8653a]">
+            01
+          </span>
+          <StepLabel>Shopper signal</StepLabel>
+        </div>
+        <p className="mt-3 text-[16px] leading-[1.5] text-white/92">
+          Shopper searched {QUERIES[0].value}, added {QUERIES[1].value}, saw the
+          same jackets, then left without opening one.
+        </p>
+      </div>
+
+      <div className="border-b border-white/14 py-6">
+        <div className="flex items-baseline gap-3">
+          <span className="font-mono text-[10px] font-semibold tabular-nums text-[#e8653a]">
+            02
+          </span>
+          <StepLabel>What Beseam found</StepLabel>
+        </div>
+        <p className="mt-2 text-[13px] leading-[1.55] text-white/52">
+          Beseam checks possible explanations and follows where the evidence points.
+        </p>
+
+        <div className="mt-4 border-y border-white/12">
+          {MOBILE_FINDINGS.map((item, index) => (
+            <article
+              key={item.domain}
+              className={`py-4 ${index > 0 ? "border-t border-white/10" : ""} ${
+                item.issue
+                  ? "-mx-3 border-l-2 border-l-[#e8653a] bg-[#e8653a]/[0.07] px-3"
+                  : ""
+              }`}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <p className={`font-mono text-[10px] font-semibold uppercase tracking-[0.1em] ${item.issue ? "text-white/68" : "text-white/42"}`}>
+                  {item.domain}
+                </p>
+                <span
+                  className={`shrink-0 px-2 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] ${
+                    item.issue
+                      ? "bg-[#e8653a] text-[#16110e]"
+                      : "bg-white/[0.06] text-white/46"
+                  }`}
+                >
+                  {item.issue ? "Possible issue" : "Less likely"}
+                </span>
+              </div>
+
+              <p
+                className={`mt-2 leading-[1.45] ${
+                  item.issue
+                    ? "text-[16px] font-medium text-white"
+                    : "text-[15px] text-white/72"
+                }`}
+              >
+                {item.finding}
+              </p>
+              <p
+                className={`mt-1.5 text-[12px] leading-[1.55] ${
+                  item.issue ? "text-white/68" : "text-white/42"
+                }`}
+              >
+                {item.detail}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        <p className="mt-4 border-l-2 border-[#e8653a] pl-3 text-[13px] leading-[1.55] text-white/72">
+          In this trace, the evidence points more strongly to the product pages than to search or stock.
+        </p>
+      </div>
+
+      <div className="border-b border-white/14 py-6">
+        <div className="flex items-baseline gap-3">
+          <span className="font-mono text-[10px] font-semibold tabular-nums text-[#e8653a]">
+            03
+          </span>
+          <StepLabel>Change</StepLabel>
+        </div>
+        <p className="mt-3 text-[15px] leading-[1.55] text-white/90">
+          {OUTCOME[0].value}
+        </p>
+      </div>
+
+      <div className="py-6">
+        <div className="flex items-baseline gap-3">
+          <span className="font-mono text-[10px] font-semibold tabular-nums text-[#e8653a]">
+            04
+          </span>
+          <StepLabel>Verify</StepLabel>
+        </div>
+        <p className="mt-3 text-[15px] leading-[1.55] text-white/90">
+          {OUTCOME[1].value}
+        </p>
+      </div>
+
+      <div className="border-t border-white/14 pt-6">
+        <p className="text-[12px] leading-[1.65] text-white/54">
+          Beseam keeps the shopper signal, the explanations it checked, the action,
+          and what happened afterward connected.
+        </p>
+        <Link
+          href="/manifesto"
+          className="mt-4 inline-flex min-h-10 items-center gap-2 text-[13px] font-semibold text-[#e8653a] underline decoration-white/20 underline-offset-6 hover:decoration-[#e8653a]"
+        >
+          Why I built Beseam
+          <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 export default function WhyBeseam() {
   return (
     <section
@@ -202,16 +344,22 @@ export default function WhyBeseam() {
                 See what&rsquo;s behind the problem.
               </h2>
             </div>
-            <p className="max-w-[50ch] text-[16px] leading-[1.75] text-white/72">
-              Three things could explain it. Beseam checks all three, and shows
-              you the two that turned out not to be the cause.
-            </p>
+            <div className="max-w-[50ch] text-[16px] leading-[1.75] text-white/72">
+              <p className="lg:hidden">
+                Several things could explain it. Beseam checks possible explanations
+                and shows where the evidence points.
+              </p>
+              <p className="hidden lg:block">
+                Three things could explain it. Beseam checks all three, and shows
+                you the two that turned out not to be the cause.
+              </p>
+            </div>
           </div>
         </Reveal>
 
         <Reveal delay={0.06}>
-          <div className="mt-12 border border-white/16 bg-white/[0.02]">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/12 px-5 py-3 sm:px-6">
+          <div className="mt-12 lg:border lg:border-white/16 lg:bg-white/[0.02]">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-y border-white/12 py-3 lg:border-t-0 lg:border-b lg:px-6">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#e8653a]">
                 Example trace
               </p>
@@ -220,144 +368,117 @@ export default function WhyBeseam() {
               </p>
             </div>
 
-            {/* Mobile keeps one spine down the left so the same graph reads as
-                branches rather than as a stack of unrelated blocks. */}
-            <div className="relative px-5 pb-10 pt-9 sm:px-7 lg:px-10">
-              <span
-                aria-hidden="true"
-                className="absolute bottom-[13.5rem] left-[1.55rem] top-[3.6rem] w-px bg-white/16 sm:left-[2.05rem] lg:hidden"
-              />
+            <div className="relative pb-8 pt-6 sm:pb-10 sm:pt-9 lg:px-10">
+              <MobileTrace />
 
-              <div className="grid gap-6 pl-7 lg:grid-cols-2 lg:gap-6 lg:pl-0">
-                {QUERIES.map((query) => (
-                  <div key={query.value} className="relative lg:text-center">
-                    <span className="absolute -left-7 top-1 lg:hidden">
-                      <NodeDot />
-                    </span>
-                    <span className="mb-3 hidden justify-center lg:flex">
-                      <NodeDot />
-                    </span>
-                    <StepLabel>{query.label}</StepLabel>
-                    <p className="mt-2 text-[17px] leading-[1.4] text-white/88">
-                      {query.value}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <div className="hidden lg:block">
+                <div className="grid grid-cols-2 gap-6">
+                  {QUERIES.map((query) => (
+                    <div key={query.value} className="relative text-center">
+                      <span className="mb-3 flex justify-center">
+                        <NodeDot />
+                      </span>
+                      <StepLabel>{query.label}</StepLabel>
+                      <p className="mt-2 text-[17px] leading-[1.4] text-white/88">
+                        {query.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
 
-              <Converge />
+                <Converge />
 
-              <div className="relative mt-6 pl-7 lg:mt-0 lg:pl-0 lg:text-center">
-                <span className="absolute -left-7 top-1 lg:hidden">
-                  <NodeDot />
-                </span>
-                <span className="mb-3 hidden justify-center lg:flex">
-                  <NodeDot />
-                </span>
-                <StepLabel>What happened next</StepLabel>
-                <p className="mt-2 text-[clamp(1.1rem,1.7vw,1.4rem)] leading-[1.4] text-white/92">
-                  {SIGNAL}
-                </p>
-              </div>
+                <div className="relative text-center">
+                  <span className="mb-3 flex justify-center">
+                    <NodeDot />
+                  </span>
+                  <StepLabel>What happened next</StepLabel>
+                  <p className="mt-2 text-[clamp(1.1rem,1.7vw,1.4rem)] leading-[1.4] text-white/92">
+                    {SIGNAL}
+                  </p>
+                </div>
 
-              <Fork />
+                <Fork />
 
-              <p className="mt-7 pl-7 lg:hidden">
-                <StepLabel>What could explain it</StepLabel>
-              </p>
-
-              <div className="mt-5 grid gap-8 pl-7 lg:mt-0 lg:grid-cols-3 lg:items-stretch lg:gap-14 lg:pl-0">
-                {CANDIDATES.map((item) => (
-                  <div key={item.domain} className="flex flex-col">
-                    <span className="mb-4 hidden justify-center lg:flex">
-                      <NodeDot tone={item.cause ? "cause" : "dead"} />
-                    </span>
-                    <article
-                      className={
-                        item.cause
-                          ? "relative flex flex-1 flex-col gap-3.5 border border-[#e8653a]/70 bg-[#e8653a]/[0.08] px-5 py-5"
-                          : "relative flex flex-1 flex-col gap-3 border border-dashed border-white/25 px-5 py-5"
-                      }
-                    >
-                      <span
-                        className="absolute top-1.5 lg:hidden"
-                        style={{ left: "-2.25rem" }}
-                      >
+                <div className="grid grid-cols-3 items-stretch gap-14">
+                  {CANDIDATES.map((item) => (
+                    <div key={item.domain} className="flex flex-col">
+                      <span className="mb-4 flex justify-center">
                         <NodeDot tone={item.cause ? "cause" : "dead"} />
                       </span>
-                      <p
-                        className={`font-mono text-[11px] font-semibold uppercase tracking-[0.1em] ${
-                          item.cause ? "text-white/64" : "text-white/44"
-                        }`}
-                      >
-                        {item.domain}
-                      </p>
-                      <p
+                      <article
                         className={
                           item.cause
-                            ? "text-[17px] font-medium leading-[1.4] text-white"
-                            : "text-[15px] leading-[1.5] text-white/54 line-through decoration-white/28"
+                            ? "relative flex flex-1 flex-col gap-3.5 border border-[#e8653a]/70 bg-[#e8653a]/[0.08] px-5 py-5"
+                            : "relative flex flex-1 flex-col gap-3 border border-dashed border-white/25 px-5 py-5"
                         }
                       >
-                        {item.claim}
-                      </p>
-                      <p
-                        className={`self-start px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] ${
-                          item.cause
-                            ? "bg-[#e8653a] text-[#16110e]"
-                            : "bg-white/[0.07] text-white/60"
-                        }`}
-                      >
-                        {item.cause ? "Observed" : "Ruled out"}
-                      </p>
-                      {/* A strikethrough with no reason under it is
-                          decoration. The reason is what makes it credible. */}
-                      <p
-                        className={`mt-auto pt-1 text-[13px] leading-[1.6] ${
-                          item.cause ? "text-white/78" : "text-white/50"
-                        }`}
-                      >
-                        {item.why}
-                      </p>
-                    </article>
-                  </div>
-                ))}
-              </div>
+                        <p
+                          className={`font-mono text-[11px] font-semibold uppercase tracking-[0.1em] ${
+                            item.cause ? "text-white/64" : "text-white/44"
+                          }`}
+                        >
+                          {item.domain}
+                        </p>
+                        <p
+                          className={
+                            item.cause
+                              ? "text-[17px] font-medium leading-[1.4] text-white"
+                              : "text-[15px] leading-[1.5] text-white/54 line-through decoration-white/28"
+                          }
+                        >
+                          {item.claim}
+                        </p>
+                        <p
+                          className={`self-start px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] ${
+                            item.cause
+                              ? "bg-[#e8653a] text-[#16110e]"
+                              : "bg-white/[0.07] text-white/60"
+                          }`}
+                        >
+                          {item.cause ? "Observed" : "Ruled out"}
+                        </p>
+                        <p
+                          className={`mt-auto pt-1 text-[13px] leading-[1.6] ${
+                            item.cause ? "text-white/78" : "text-white/50"
+                          }`}
+                        >
+                          {item.why}
+                        </p>
+                      </article>
+                    </div>
+                  ))}
+                </div>
 
-              <Tails />
+                <Tails />
 
-              <div
-                aria-hidden="true"
-                className="mx-auto h-7 w-px lg:hidden"
-                style={{ background: ACCENT }}
-              />
+                <div className="grid border border-[#e8653a]/45 bg-[#e8653a]/[0.05] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+                  {OUTCOME.map((item) => (
+                    <div
+                      key={item.label}
+                      className="border-l border-white/14 px-6 py-5 first:border-l-0"
+                    >
+                      <StepLabel>{item.label}</StepLabel>
+                      <p className="mt-2.5 text-[16px] leading-[1.5] text-white/92">
+                        {item.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
 
-              <div className="grid border border-[#e8653a]/45 bg-[#e8653a]/[0.05] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-                {OUTCOME.map((item) => (
-                  <div
-                    key={item.label}
-                    className="border-t border-white/14 px-5 py-5 first:border-t-0 sm:px-6 lg:border-l lg:border-t-0 lg:first:border-l-0"
+                <div className="mt-9 flex items-center justify-between gap-8 border-t border-white/14 pt-7">
+                  <p className="max-w-[62ch] text-[13px] leading-[1.7] text-white/62">
+                    Two of the three were wrong. Beseam keeps the signal, what was
+                    checked, what was changed, and the measured result connected.
+                  </p>
+                  <Link
+                    href="/manifesto"
+                    className="inline-flex min-h-10 shrink-0 items-center gap-2 text-[13px] font-semibold text-[#e8653a] underline decoration-white/20 underline-offset-6 hover:decoration-[#e8653a]"
                   >
-                    <StepLabel>{item.label}</StepLabel>
-                    <p className="mt-2.5 text-[16px] leading-[1.5] text-white/92">
-                      {item.value}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-9 flex flex-col gap-5 border-t border-white/14 pt-7 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
-                <p className="max-w-[62ch] text-[13px] leading-[1.7] text-white/62">
-                  Two of the three were wrong. Beseam keeps the signal, what was
-                  checked, what was changed, and the measured result connected.
-                </p>
-                <Link
-                  href="/manifesto"
-                  className="inline-flex min-h-10 shrink-0 items-center gap-2 text-[13px] font-semibold text-[#e8653a] underline decoration-white/20 underline-offset-6 hover:decoration-[#e8653a]"
-                >
-                  Why I built Beseam
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                </Link>
+                    Why I built Beseam
+                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
