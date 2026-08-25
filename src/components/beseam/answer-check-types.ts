@@ -70,12 +70,25 @@ export type Answer = {
     | "probe"
     | "live_serp"
     | "consumer_sample"
+    | "grounded"
     | "derived"
     | "fallback"
     | null;
   mentioned: boolean | null;
   competitors: string[];
   products?: ShownProduct[];
+  /**
+   * The assistant's own human-readable line for this question, as extracted by
+   * the monitoring parser (`ParsedObservation.qualitative_framing`). Not the
+   * raw provider payload — that is a JSON blob and is never persisted.
+   */
+  framing?: string | null;
+  /**
+   * The queries the surface actually ran. A grounded model rewrites the
+   * question before searching, so these are what Google received — not what
+   * the shopper typed.
+   */
+  search_queries?: string[];
   error: string | null;
 };
 

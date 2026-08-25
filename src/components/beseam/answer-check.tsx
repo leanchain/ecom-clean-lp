@@ -9,6 +9,8 @@ import {
   type ReactNode,
 } from "react";
 
+import { useRouter } from "next/navigation";
+
 import {
   ArrowRight,
   Check,
@@ -418,13 +420,17 @@ function FoundStrip({ result }: { result: AnswerCheckResult }) {
       : String(result.products_seen);
   const findingCount = result.findings.length;
 
+  const pagesFailed = pageStatus === "failed";
+
   const facts: Array<[string, string, boolean]> = [
     [productCount, "products found", false],
-    [
-      pagesInFlight ? String(result.products_seen) : String(audits.length),
-      pagesInFlight ? "product pages being read" : "product pages checked",
-      pagesInFlight,
-    ],
+    pagesFailed
+      ? ["—", "product pages — we could not read them", false]
+      : [
+          pagesInFlight ? String(result.products_seen) : String(audits.length),
+          pagesInFlight ? "product pages being read" : "product pages checked",
+          pagesInFlight,
+        ],
     [
       String(findingCount),
       findingCount === 1 ? "thing worth looking at" : "things worth looking at",
@@ -433,135 +439,214 @@ function FoundStrip({ result }: { result: AnswerCheckResult }) {
   ];
 
   return (
-    <dl className="grid border-b border-black/14 bg-[#fffaf7] sm:grid-cols-3">
-      {facts.map(([value, label, pending], index) => (
-        <div
-          key={label}
-          className={`flex items-baseline gap-2.5 px-5 py-4 sm:px-6 ${
-            index > 0
-              ? "border-t border-black/12 sm:border-l sm:border-t-0"
-              : ""
-          }`}
-        >
-          <dd className="text-[26px] font-semibold leading-none tracking-[-0.03em] tabular-nums text-ink-deep">
-            {value}
-          </dd>
-          <dt className="flex items-center gap-1.5 text-[12.5px] leading-snug text-black/58">
-            {label}
-            {pending ? (
-              <Loader2
-                className="h-3 w-3 animate-spin text-signal-ink"
-                aria-hidden="true"
-              />
-            ) : null}
-          </dt>
-        </div>
-      ))}
-    </dl>
+    <>
+      <dl className="grid border-b border-black/14 bg-white sm:grid-cols-3">
+        {facts.map(([value, label, pending], index) => (
+          <div
+            key={label}
+            className={`flex items-baseline gap-2.5 px-5 py-4 sm:px-6 ${
+              index > 0
+                ? "border-t border-black/12 sm:border-l sm:border-t-0"
+                : ""
+            }`}
+          >
+            {/* Colour goes on the number the merchant is here for. The other
+                two are context; painting all three would mean none of them. */}
+            <dd
+              className={`text-[26px] font-semibold leading-none tracking-[-0.03em] tabular-nums ${
+                index === 2 && findingCount > 0
+                  ? "text-signal-ink"
+                  : "text-ink-deep"
+              }`}
+            >
+              {value}
+            </dd>
+            <dt className="flex items-center gap-1.5 text-[12.5px] leading-snug text-black/58">
+              {label}
+              {pending ? (
+                <Loader2
+                  className="h-3 w-3 animate-spin text-signal-ink"
+                  aria-hidden="true"
+                />
+              ) : null}
+            </dt>
+          </div>
+        ))}
+      </dl>
+      {/* A zero with no explanation reads as “your pages are broken”. Say whose
+          side the failure was on, and that the rest still stands. */}
+      {pagesFailed ? (
+        <p className="border-b border-black/14 bg-[#fffaf7] px-5 py-3 text-[13px] leading-relaxed text-black/64 sm:px-6">
+          We could not finish reading your individual product pages on this run.
+          Everything below comes from your public catalog and still holds —
+          running the scan again usually picks the pages up.
+        </p>
+      ) : null}
+    </>
   );
 }
 
 // ── The heart of the result ─────────────────────────────────────────────────
 
+/**
+ * Findings that say the same thing to the merchant, collapsed into one row.
+ *
+ * Several technical checks legitimately map to one consequence — two
+ * `security.*` checks both mean “the store may be missing protections shoppers
+ * expect”, and the same template usually fails on every sampled page. Printing
+ * that sentence twice reads as a bug to the person we are trying to convince,
+ * so the group is merged here and every underlying check stays listed under
+ * “What we saw”. Nothing is dropped; the technical rows keep their own detail,
+ * evidence and code.
+ */
+type FindingGroupRow = { lead: Finding; members: Finding[] };
+
+function groupFindings(findings: Finding[]): FindingGroupRow[] {
+  const groups = new Map<string, FindingGroupRow>();
+  for (const finding of findings) {
+    // Already sorted by severity, so the first arrival is the most severe and
+    // is the one whose priority label the row carries.
+    const key = findingHeadline(finding).trim().toLowerCase();
+    const existing = groups.get(key);
+    if (existing) existing.members.push(finding);
+    else groups.set(key, { lead: finding, members: [finding] });
+  }
+  return Array.from(groups.values());
+}
+
 function FindingRow({
-  finding,
+  group,
   index,
-  reportId,
+  reportIdByUrl,
 }: {
-  finding: Finding;
+  group: FindingGroupRow;
   index: number;
-  reportId?: number | null;
+  reportIdByUrl: Map<string, number>;
 }) {
+  const finding = group.lead;
   const priority = priorityOf(finding);
   const why = findingWhy(finding);
   const nextStep = findingNextStep(finding);
 
   return (
-    <li className="border-b border-black/12 px-5 py-5 last:border-b-0 sm:px-6">
-      <div className="flex items-baseline gap-2 text-[11px] font-semibold uppercase tracking-[0.08em]">
-        <span className="font-mono tabular-nums text-black/34">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <span className={priority.urgent ? "text-signal-ink" : "text-black/50"}>
-          {priority.label}
-        </span>
-        {/* The grouping is orientation, not information the merchant acts on.
-            On a phone it wrapped the priority onto two lines, so it waits for
-            the room to sit on one. */}
-        <span className="hidden text-black/26 sm:inline" aria-hidden="true">
-          /
-        </span>
-        <span className="hidden font-normal normal-case tracking-normal text-black/50 sm:inline">
-          {findingGroup(finding)}
-        </span>
-      </div>
+    // Rank marker carries the priority as colour. A filled square for the ones
+    // worth doing first, a hairline outline for the rest: the list reads its own
+    // order at a glance without striping every second row.
+    <li className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3.5 gap-y-0 border-b border-black/12 px-5 py-5 last:border-b-0 sm:gap-x-4 sm:px-6">
+      <span
+        aria-hidden="true"
+        className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center font-mono text-[11px] font-semibold tabular-nums ${
+          priority.urgent
+            ? "bg-signal-ink text-white"
+            : "border border-black/16 text-black/45"
+        }`}
+      >
+        {index + 1}
+      </span>
 
-      <p className="mt-2 max-w-[54ch] text-balance text-[17px] font-semibold leading-[1.35] tracking-[-0.015em] text-ink-deep sm:text-[18px]">
-        {findingHeadline(finding)}
-      </p>
-
-      {why ? (
-        <p className="mt-2.5 max-w-[68ch] text-[14px] leading-[1.65] text-black/64">
-          {why}
-        </p>
-      ) : null}
-
-      {nextStep ? (
-        <p className="mt-3 max-w-[68ch] text-[14px] leading-[1.6] text-ink-deep">
-          <span className="font-semibold">Do this next — </span>
-          {nextStep}
-        </p>
-      ) : null}
-
-      <details className="group mt-3">
-        <summary className="inline-flex min-h-9 cursor-pointer list-none items-center gap-1.5 text-[12.5px] font-semibold text-black/56 transition-colors hover:text-signal-ink [&::-webkit-details-marker]:hidden">
-          <ChevronDown
-            className="h-3.5 w-3.5 transition-transform group-open:rotate-180"
-            aria-hidden="true"
-          />
-          <span className="group-open:hidden">What we saw</span>
-          <span className="hidden group-open:inline">Hide what we saw</span>
-        </summary>
-        <div className="mt-2.5 border-l border-black/14 pl-4 text-[12.5px] leading-relaxed text-black/62">
-          <p className="font-semibold text-ink-deep">{finding.title}</p>
-          {finding.detail ? <p className="mt-1">{finding.detail}</p> : null}
-          {finding.evidence?.length ? (
-            <ul className="mt-2 space-y-1">
-              {finding.evidence.slice(0, 3).map((line, position) => (
-                <li
-                  key={`${line}-${position}`}
-                  className="break-words font-mono text-[11.5px] text-black/54"
-                >
-                  {line}
-                </li>
-              ))}
-            </ul>
-          ) : null}
-          <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11.5px] text-black/44">
-            {finding.product ? <span>{finding.product}</span> : null}
-            <span className="font-mono">{finding.code}</span>
-            {finding.url && reportId ? (
-              <a
-                href={`${APP_REPORT_URL}/${reportId}`}
-                target="_blank"
-                rel="noreferrer"
-                className="font-semibold text-ink-deep underline decoration-black/24 underline-offset-4 hover:decoration-signal-ink"
-              >
-                Full page report →
-              </a>
-            ) : finding.url ? (
-              <a
-                href={finding.url}
-                target="_blank"
-                rel="noreferrer"
-                className="font-semibold text-black/56 underline decoration-black/20 underline-offset-4 hover:text-ink-deep hover:decoration-signal-ink"
-              >
-                Open the page →
-              </a>
-            ) : null}
-          </p>
+      <div className="min-w-0">
+        <div className="flex items-baseline gap-2 text-[11px] font-semibold uppercase tracking-[0.08em]">
+          <span
+            className={priority.urgent ? "text-signal-ink" : "text-black/50"}
+          >
+            {priority.label}
+          </span>
+          {/* The grouping is orientation, not information the merchant acts on.
+              On a phone it wrapped the priority onto two lines, so it waits for
+              the room to sit on one. */}
+          <span className="hidden text-black/26 sm:inline" aria-hidden="true">
+            /
+          </span>
+          <span className="hidden font-normal normal-case tracking-normal text-black/50 sm:inline">
+            {findingGroup(finding)}
+          </span>
         </div>
-      </details>
+
+        <p className="mt-1.5 max-w-[54ch] text-balance text-[17px] font-semibold leading-[1.35] tracking-[-0.015em] text-ink-deep sm:text-[18px]">
+          {findingHeadline(finding)}
+        </p>
+
+        {why ? (
+          <p className="mt-2.5 max-w-[68ch] text-[14px] leading-[1.65] text-black/64">
+            {why}
+          </p>
+        ) : null}
+
+        {nextStep ? (
+          <p className="mt-3 max-w-[68ch] border-l border-signal-ink/35 pl-3.5 text-[14px] leading-[1.6] text-ink-deep">
+            <span className="font-semibold">Do this next — </span>
+            {nextStep}
+          </p>
+        ) : null}
+
+        <details className="group mt-3">
+          <summary className="inline-flex min-h-9 cursor-pointer list-none items-center gap-1.5 text-[12.5px] font-semibold text-black/56 transition-colors hover:text-signal-ink [&::-webkit-details-marker]:hidden">
+            <ChevronDown
+              className="h-3.5 w-3.5 transition-transform group-open:rotate-180"
+              aria-hidden="true"
+            />
+            <span className="group-open:hidden">
+              What we saw
+              {group.members.length > 1
+                ? ` (${group.members.length} checks)`
+                : ""}
+            </span>
+            <span className="hidden group-open:inline">Hide what we saw</span>
+          </summary>
+          <div className="mt-2.5 space-y-3 border-l border-black/14 pl-4 text-[12.5px] leading-relaxed text-black/62">
+            {group.members.map((member, position) => {
+              const reportId = member.url
+                ? reportIdByUrl.get(member.url)
+                : undefined;
+              return (
+                <div key={`${member.code}-${member.product ?? position}`}>
+                  <p className="font-semibold text-ink-deep">{member.title}</p>
+                  {member.detail ? (
+                    <p className="mt-1">{member.detail}</p>
+                  ) : null}
+                  {member.evidence?.length ? (
+                    <ul className="mt-2 space-y-1">
+                      {member.evidence
+                        .slice(0, 3)
+                        .map((line, evidenceIndex) => (
+                          <li
+                            key={`${line}-${evidenceIndex}`}
+                            className="break-words font-mono text-[11.5px] text-black/54"
+                          >
+                            {line}
+                          </li>
+                        ))}
+                    </ul>
+                  ) : null}
+                  <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11.5px] text-black/44">
+                    {member.product ? <span>{member.product}</span> : null}
+                    <span className="font-mono">{member.code}</span>
+                    {member.url && reportId ? (
+                      <a
+                        href={`${APP_REPORT_URL}/${reportId}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-ink-deep underline decoration-black/24 underline-offset-4 hover:decoration-signal-ink"
+                      >
+                        Full page report →
+                      </a>
+                    ) : member.url ? (
+                      <a
+                        href={member.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-black/56 underline decoration-black/20 underline-offset-4 hover:text-ink-deep hover:decoration-signal-ink"
+                      >
+                        Open the page →
+                      </a>
+                    ) : null}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </details>
+      </div>
     </li>
   );
 }
@@ -570,18 +655,23 @@ const FIRST_SHOWN = 4;
 
 function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
   const [expanded, setExpanded] = useState(false);
-  const findings = sortedFindings(result);
+  const findings = groupFindings(sortedFindings(result));
   const audits = result.page_audits ?? [];
   const pageStatus =
     result.page_audits_status ?? (audits.length ? "complete" : "not_started");
   const pagesInFlight = pageStatus === "queued" || pageStatus === "running";
-  const reportIdByUrl = new Map(
+  const reportIdByUrl = new Map<string, number>(
     audits.flatMap((audit) =>
       audit.report_id ? ([[audit.url, audit.report_id]] as const) : [],
     ),
   );
   const shown = expanded ? findings : findings.slice(0, FIRST_SHOWN);
   const hidden = findings.length - shown.length;
+
+  // With nothing found and nothing still running, this section would only
+  // restate the headline directly above it in slightly different words. The
+  // headline and the scope note already carry that message.
+  if (!findings.length && !pagesInFlight) return null;
 
   return (
     <section className="border-b border-black/14 bg-white">
@@ -592,7 +682,7 @@ function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
         <p className="mt-1.5 max-w-[70ch] text-[13.5px] leading-relaxed text-black/60">
           {findings.length
             ? "Read as possibilities, not verdicts. A short public scan can show what the evidence points toward; it cannot prove what it costs you."
-            : "Nothing obvious stood out on the pages we could read."}
+            : "Still reading."}
           {pagesInFlight
             ? " More may appear as your product pages finish."
             : ""}
@@ -602,14 +692,12 @@ function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
       {findings.length ? (
         <>
           <ol>
-            {shown.map((finding, index) => (
+            {shown.map((group, index) => (
               <FindingRow
-                key={`${finding.code}-${finding.product ?? index}`}
-                finding={finding}
+                key={`${group.lead.code}-${group.lead.product ?? index}`}
+                group={group}
                 index={index}
-                reportId={
-                  finding.url ? reportIdByUrl.get(finding.url) : undefined
-                }
+                reportIdByUrl={reportIdByUrl}
               />
             ))}
           </ol>
@@ -626,7 +714,9 @@ function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
             </div>
           ) : null}
         </>
-      ) : pagesInFlight ? (
+      ) : (
+        // Only reachable while pages are still being read — the empty, settled
+        // case returns null above.
         <div className="flex items-center gap-3 px-5 py-5 sm:px-6">
           <Loader2
             className="h-4 w-4 animate-spin text-signal-ink"
@@ -636,44 +726,16 @@ function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
             Still reading your product pages.
           </p>
         </div>
-      ) : (
-        <p className="px-5 py-5 text-[13.5px] leading-relaxed text-black/62 sm:px-6">
-          That is a good sign, but it is not a clean bill of health: this scan
-          read {countLabel(result.products_seen, "product page")} and public
-          catalog data only.
-        </p>
       )}
     </section>
   );
 }
 
-// ── Honest scope ────────────────────────────────────────────────────────────
-
-function FreeScopeNote({ result }: { result: AnswerCheckResult }) {
-  const audits = result.page_audits ?? [];
-  return (
-    <section className="border-b border-black/14 bg-[#fffaf7] px-5 py-5 sm:px-6">
-      <h3 className="text-[13px] font-semibold text-ink-deep">
-        What this free scan did not cover
-      </h3>
-      <ul className="mt-2.5 grid gap-2 text-[13px] leading-relaxed text-black/62 sm:grid-cols-3 sm:gap-x-8">
-        <li>
-          It read public pages only — no login, no admin, no order or analytics
-          data.
-        </li>
-        <li>
-          It read{" "}
-          {countLabel(audits.length || result.products_seen, "product page")} as
-          a sample, not your whole store.
-        </li>
-        <li>
-          It points at what is worth investigating. It has not proved what any
-          of it costs you.
-        </li>
-      </ul>
-    </section>
-  );
-}
+// The standalone “What this free scan did not cover” panel and the closing
+// point-in-time footnote were removed at the owner's request. The scan's limits
+// are still stated where they are actually read: the pre-scan promise (public
+// pages only, no login, no store access) and the standing line above the list
+// — “Read as possibilities, not verdicts … it cannot prove what it costs you.”
 
 // ── Two distinct ways forward ───────────────────────────────────────────────
 
@@ -688,15 +750,19 @@ function ContinuePaths({
   const topHeadline = top ? findingHeadline(top) : null;
 
   return (
+    // Two offers, two grounds. Self-serve stays on the product's own ink; the
+    // engagement sits on the pigment, which is the only ground the bright
+    // signal is cleared to sit on — so the emphasised path is emphasised by
+    // the palette rather than by a bigger button.
     <section
       data-print-hide
-      className="grid border-t border-black/18 bg-ink-deep text-white lg:grid-cols-2"
+      className="grid border-t border-black/18 text-white lg:grid-cols-2"
     >
-      <div className="border-b border-white/16 px-5 py-6 sm:px-6 lg:border-b-0 lg:border-r">
+      <div className="bg-ink-deep px-5 py-7 sm:px-6 sm:py-8">
         <h3 className="text-[19px] font-semibold tracking-[-0.02em]">
           Take it from here yourself
         </h3>
-        <p className="mt-2 max-w-[46ch] text-[14px] leading-[1.6] text-white/68">
+        <p className="mt-2.5 max-w-[44ch] text-[14px] leading-[1.62] text-white/64">
           Create an account and work through what this scan found: rank it,
           decide what deserves action, and make the changes with your own
           people.
@@ -707,7 +773,7 @@ function ContinuePaths({
           eventCategory="conversion"
           placement="answer_check_result"
           preserveUtm
-          className="group mt-5 inline-flex min-h-12 items-center justify-center gap-2 bg-white px-6 text-[14px] font-semibold text-ink-deep transition-colors hover:bg-signal hover:text-white"
+          className="group mt-6 inline-flex min-h-12 items-center justify-center gap-2 border border-white/30 px-6 text-[14px] font-semibold text-white transition-colors hover:bg-white hover:text-ink-deep"
         >
           Start free
           <ArrowRight
@@ -717,18 +783,18 @@ function ContinuePaths({
         </TrackedLink>
       </div>
 
-      <div className="px-5 py-6 sm:px-6">
+      <div className="bg-pigment px-5 py-7 sm:px-6 sm:py-8">
         <h3 className="text-[19px] font-semibold tracking-[-0.02em]">
           {topHeadline
             ? "Want us to work through this with you?"
             : "Bring us one real problem"}
         </h3>
         {topHeadline ? (
-          <p className="mt-2 max-w-[46ch] text-[14px] leading-[1.55] text-white/80">
+          <p className="mt-2.5 max-w-[44ch] text-[14px] leading-[1.5] text-signal">
             Starting with “{topHeadline}”
           </p>
         ) : null}
-        <p className="mt-2 max-w-[46ch] text-[14px] leading-[1.6] text-white/68">
+        <p className="mt-2.5 max-w-[44ch] text-[14px] leading-[1.62] text-white/70">
           In your first 30 days we take one commercial problem end to end:
           connect the evidence, decide with you what deserves action, help make
           the change, and measure what happened after.
@@ -737,7 +803,7 @@ function ContinuePaths({
           variant="primary"
           location="scan_result_managed"
           label="Plan my first improvement"
-          className="mt-5 min-h-12 gap-2 border border-white/28 bg-transparent px-6 py-0 text-[14px] font-semibold text-white hover:bg-white hover:text-ink-deep"
+          className="mt-6 min-h-12 gap-2 bg-white px-6 py-0 text-[14px] font-semibold text-ink-deep hover:bg-signal hover:text-ink-deep"
         />
       </div>
     </section>
@@ -1004,16 +1070,12 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
     </section>
   );
 }
-const OBSERVATION_METHOD_LABEL: Record<
-  NonNullable<Answer["observation_method"]>,
-  string
-> = {
-  probe: "Probe",
-  live_serp: "Live SERP",
-  consumer_sample: "Consumer sample",
-  derived: "Derived",
-  fallback: "Fallback",
-};
+// `observation_method` is deliberately not rendered. "Probe", "Live SERP",
+// "Google-grounded" are our collection vocabulary, and a merchant reading an
+// acquisition page has no way to price the difference between them. The one
+// piece of provenance that does mean something concrete — the Google searches a
+// grounded engine actually ran — is shown as itself instead.
+
 function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
   const named = answer.mentioned === true;
   const unknown = answer.mentioned === null || Boolean(answer.error);
@@ -1041,11 +1103,6 @@ function ChannelChip({ channel, answer }: { channel: string; answer: Answer }) {
       ) : (
         <X className="h-2.5 w-2.5" aria-hidden="true" />
       )}
-      {answer.observation_method ? (
-        <span className="border-l border-current/20 pl-1.5 font-mono text-[11px] font-normal opacity-70">
-          {OBSERVATION_METHOD_LABEL[answer.observation_method]}
-        </span>
-      ) : null}
       <span className="sr-only">
         {unknown ? "no answer" : named ? "named you" : "did not name you"}
       </span>
@@ -1301,8 +1358,12 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
     summary: string;
     children: React.ReactNode;
   }) => (
-    <details className="group border-b border-black/14 bg-white">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 sm:px-6 [&::-webkit-details-marker]:hidden">
+    // Level 2 in the card's depth scale: anything openable sits on the warm
+    // ground so it reads as a lid, and its contents open onto white. Before
+    // this, every section and every row was the same white and the card was one
+    // undifferentiated sheet.
+    <details className="group/fold border-b border-black/14 bg-[#fffaf7]">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 transition-colors hover:bg-[#fdf1e9] sm:px-6 [&::-webkit-details-marker]:hidden">
         <div className="min-w-0">
           <h3 className="text-[14px] font-semibold text-ink-deep">{title}</h3>
           <p className="mt-1 text-[12.5px] leading-relaxed text-black/56">
@@ -1310,15 +1371,15 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
           </p>
         </div>
         <span className="flex min-h-11 shrink-0 items-center gap-2 text-[12px] font-semibold text-ink-deep">
-          <span className="group-open:hidden">Details</span>
-          <span className="hidden group-open:inline">Close</span>
+          <span className="group-open/fold:hidden">Details</span>
+          <span className="hidden group-open/fold:inline">Close</span>
           <ChevronDown
-            className="h-4 w-4 transition-transform group-open:rotate-180"
+            className="h-4 w-4 transition-transform group-open/fold:rotate-180"
             aria-hidden="true"
           />
         </span>
       </summary>
-      <div className="border-t border-black/12 bg-[#fffaf7]">{children}</div>
+      <div className="border-t border-black/12 bg-white">{children}</div>
     </details>
   );
 
@@ -1326,33 +1387,12 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
     ? `${catalog.products_checked}${catalog.products_capped ? "+" : ""} products checked`
     : `${result.products_seen} products sampled`;
 
-  // The run status lives once, in the card header. This section is the evidence
-  // ledger underneath the plain-language result — it used to open with its own
-  // "Observe complete" banner, which was the third place on one page claiming to
-  // announce the same thing.
+  // Store, Catalog and Product pages each already collapse on their own. An
+  // outer disclosure around them was a fold inside a fold — two clicks and a
+  // paragraph of preamble between the merchant and a number they can read. The
+  // three rows now sit directly on the card and speak for themselves.
   return (
-    <details className="group border-b border-black/14 bg-white">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 sm:px-6 [&::-webkit-details-marker]:hidden">
-        <div className="min-w-0">
-          <h3 className="text-[15px] font-semibold text-ink-deep">
-            Full evidence
-          </h3>
-          <p className="mt-1 max-w-[70ch] text-[12.5px] leading-relaxed text-black/56">
-            Everything the scan measured on your store, catalog and product
-            pages. Nothing above is hidden here — this is where the numbers
-            behind it live.
-          </p>
-        </div>
-        <span className="flex min-h-11 shrink-0 items-center gap-2 text-[12px] font-semibold text-ink-deep">
-          <span className="group-open:hidden">Open</span>
-          <span className="hidden group-open:inline">Close</span>
-          <ChevronDown
-            className="h-4 w-4 transition-transform group-open:rotate-180"
-            aria-hidden="true"
-          />
-        </span>
-      </summary>
-
+    <section className="border-b border-black/14 bg-white">
       <Fold
         title="Store"
         summary={
@@ -1853,18 +1893,18 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
           </>
         )}
       </Fold>
-    </details>
+    </section>
   );
 }
 
+// Section numbers went with the sections. There is one disclosure left, so a
+// “02” in front of it numbered a sequence that no longer exists.
 function ScanDisclosure({
-  number,
   title,
   summary,
   children,
   defaultOpen = false,
 }: {
-  number: string;
   title: string;
   summary: string;
   children: React.ReactNode;
@@ -1872,30 +1912,24 @@ function ScanDisclosure({
 }) {
   return (
     <details
-      id={`scan-${number}`}
       open={defaultOpen}
-      className="group border-b border-black/14 bg-white"
+      className="group/section border-b border-black/14 bg-[#fffaf7]"
     >
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 sm:px-6 [&::-webkit-details-marker]:hidden">
-        <div className="flex min-w-0 items-start gap-4">
-          <span className="mt-0.5 font-mono text-[11px] font-semibold text-signal-ink">
-            {number}
-          </span>
-          <div className="min-w-0">
-            <h3 className="text-[14px] font-semibold text-ink-deep">{title}</h3>
-            <p className="mt-1 text-[12.5px] text-black/56">{summary}</p>
-          </div>
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 transition-colors hover:bg-[#fdf1e9] sm:px-6 [&::-webkit-details-marker]:hidden">
+        <div className="min-w-0">
+          <h3 className="text-[15px] font-semibold text-ink-deep">{title}</h3>
+          <p className="mt-1 text-[12.5px] text-black/56">{summary}</p>
         </div>
         <span className="flex min-h-11 shrink-0 items-center gap-2 text-[12px] font-semibold text-ink-deep">
-          <span className="group-open:hidden">Details</span>
-          <span className="hidden group-open:inline">Close</span>
+          <span className="group-open/section:hidden">Details</span>
+          <span className="hidden group-open/section:inline">Close</span>
           <ChevronDown
-            className="h-4 w-4 transition-transform group-open:rotate-180"
+            className="h-4 w-4 transition-transform group-open/section:rotate-180"
             aria-hidden="true"
           />
         </span>
       </summary>
-      <div className="border-t border-black/14 bg-[#fffaf7]">{children}</div>
+      <div className="border-t border-black/14 bg-white">{children}</div>
     </details>
   );
 }
@@ -1913,14 +1947,19 @@ function DeeperAnalysisPanel({
   result: AnswerCheckResult;
   gate: React.ReactNode;
 }) {
+  // Two distinct things open up, and both are gated by the same one click:
+  // the answer probe (`execute_probe`) and the per-page AI interpretation
+  // (`/pdp/public/pdp-audit/{id}/complete-ai`, which is handed the failed
+  // checks above plus the real page copy and returns concrete suggestions).
+  // Only advertising the first one undersold what confirming actually buys.
   const adds = [
     [
-      "The questions your shoppers actually ask",
-      `Written from the ${countLabel(result.products_seen, "product")} we just read on your storefront.`,
+      "AI reads your pages and says what to change",
+      "Open any product page report and AI goes through the page next to the findings above, then writes back concrete improvements and the page copy it based them on.",
     ],
     [
-      "What assistants answer today",
-      "We put those questions to ChatGPT and Google AI Mode and record what comes back.",
+      "What shoppers are told today",
+      `Questions written from the ${countLabel(result.products_seen, "product")} we just read, put to ChatGPT and Google AI Mode, with the answers recorded.`,
     ],
     [
       "Who gets named when you do not",
@@ -1931,38 +1970,31 @@ function DeeperAnalysisPanel({
   return (
     <section className="border-b border-black/14 bg-white">
       <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-        <div className="border-b border-black/12 px-5 py-5 sm:px-6 lg:border-b-0 lg:border-r">
+        <div className="border-b border-black/12 bg-white px-5 py-6 sm:px-6 lg:border-b-0 lg:border-r">
+          {/* Merchant-facing only. What this costs Beseam to run is our
+              problem, not something to put in front of someone deciding
+              whether to trust us. */}
           <h3 className="text-[19px] font-semibold tracking-[-0.02em] text-ink-deep">
-            Continue into the deeper check
+            Let AI go through your store with you
           </h3>
           <p className="mt-1.5 max-w-[52ch] text-[13.5px] leading-relaxed text-black/62">
-            Everything above is yours already. The next part asks live AI
-            assistants about your products, which costs us real money per run —
-            so we confirm a working email first to be sure a real store owner
-            asked for it.
+            Everything above is yours already. Next, AI reads your product pages
+            alongside these findings and writes back what to change — and your
+            shoppers’ own questions go to ChatGPT and Google AI Mode so you can
+            see what they are told today. Confirm your email to open both.
           </p>
           <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[12.5px] font-medium text-[#3b3833]">
-            <span className="inline-flex items-center gap-1.5">
-              <Check
-                aria-hidden="true"
-                className="h-3.5 w-3.5 text-[#1f7a4d]"
-              />
-              Still free
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Check
-                aria-hidden="true"
-                className="h-3.5 w-3.5 text-[#1f7a4d]"
-              />
-              Still no account
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Check
-                aria-hidden="true"
-                className="h-3.5 w-3.5 text-[#1f7a4d]"
-              />
-              One email, no list
-            </span>
+            {["Free", "No account", "One email, no marketing list"].map(
+              (item) => (
+                <span key={item} className="inline-flex items-center gap-1.5">
+                  <Check
+                    aria-hidden="true"
+                    className="h-3.5 w-3.5 text-[#1f7a4d]"
+                  />
+                  {item}
+                </span>
+              ),
+            )}
           </p>
           <dl className="mt-5 border-t border-black/12">
             {adds.map(([term, detail]) => (
@@ -1981,205 +2013,313 @@ function DeeperAnalysisPanel({
             ))}
           </dl>
         </div>
-        <div className="bg-[#fffaf7] px-5 py-5 sm:px-6">{gate}</div>
+        {/* The one ask on the card gets its own ground and a little more air
+            than the explanation beside it. */}
+        <div className="bg-[#fffaf7] px-5 py-6 sm:px-6">{gate}</div>
       </div>
     </section>
   );
 }
 
-function QuestionsDisclosure({ result }: { result: AnswerCheckResult }) {
+/**
+ * One question, expandable into what each assistant did with it.
+ *
+ * `probe.py` keeps the reduction, not the prose: `_summarize()` records whether
+ * you were named, who was named instead, and the product cards the surface put
+ * up — `fetched.raw_response` is parsed and dropped. So this shows exactly what
+ * was observed and never implies we kept an answer we did not.
+ */
+/**
+ * Beseam's own read of one question, derived only from what was recorded.
+ * `probe.py` keeps no answer prose, so this states the counts and the names —
+ * never a paraphrase of something we did not keep.
+ */
+function questionVerdict(answers: Answer[]) {
+  const scored = answers.filter((answer) => answer.mentioned !== null);
+  if (!scored.length) return "No assistant returned a usable answer here.";
+
+  const named = scored.filter((answer) => answer.mentioned === true).length;
+  const rivals = Array.from(
+    new Set(
+      scored
+        .filter((answer) => answer.mentioned === false)
+        .flatMap((answer) =>
+          (answer.competitors ?? []).map((raw) => rivalIdentity(raw).label),
+        ),
+    ),
+  ).filter(Boolean);
+
+  const assistants = countLabel(scored.length, "assistant");
+  const tail = rivals.length
+    ? ` ${rivals.slice(0, 3).join(", ")} ${rivals.length === 1 ? "was" : "were"} put forward instead.`
+    : "";
+
+  if (named === scored.length) {
+    return `You were named by ${named === 1 ? "the assistant" : `all ${assistants}`} asked this question.`;
+  }
+  if (named === 0) {
+    return `None of the ${assistants} asked this question named you.${tail}`;
+  }
+  return `${named} of ${assistants} named you.${tail}`;
+}
+
+function QuestionRow({
+  question,
+  answers,
+}: {
+  question: string;
+  answers: Answer[];
+}) {
+  const products = shownProducts(answers);
+
   return (
-    <ScanDisclosure
-      number="01"
-      title="What shoppers ask"
-      summary={`${result.questions.length} buying ${result.questions.length === 1 ? "question" : "questions"} this store needs to win`}
-    >
-      <ol className="divide-y divide-black/12 bg-white">
-        {result.questions.map((question, index) => (
-          <li
-            key={question}
-            className="grid gap-2 px-5 py-3.5 sm:grid-cols-[2rem_minmax(0,1fr)] sm:px-6"
-          >
-            <span className="font-mono text-[11px] text-black/38">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <span className="text-[13px] leading-relaxed text-ink-deep">
-              {question}
-            </span>
-          </li>
-        ))}
-      </ol>
-    </ScanDisclosure>
+    <li className="border-t border-black/12">
+      {/* Named group: this sits inside ScanDisclosure's own open <details
+          class="group">, so a bare `group-open:` would read that ancestor's
+          state and render every chevron pre-rotated. */}
+      <details className="group/question">
+        <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-4 py-3.5 transition-colors hover:bg-[#fffaf7] sm:px-5 [&::-webkit-details-marker]:hidden">
+          <div className="min-w-0">
+            <p className="text-[13.5px] font-medium leading-snug text-ink-deep">
+              “{question}”
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5">
+              {answers.map((answer, index) => (
+                <ChannelChip
+                  key={`${answer.channel_label}-${index}`}
+                  channel={answer.channel_label ?? "Assistant"}
+                  answer={answer}
+                />
+              ))}
+            </div>
+          </div>
+          <ChevronDown
+            className="mt-1 h-4 w-4 shrink-0 text-black/40 transition-transform group-open/question:rotate-180"
+            aria-hidden="true"
+          />
+        </summary>
+
+        <div className="grid items-start border-t border-black/10 bg-white lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+          {/* Left: the exchange, read-only. Square bubbles and hairline rules
+              rather than the rounded chat idiom — this is the same visual world
+              as the rest of the card, and it is a record, not a live thread.
+              There is deliberately no input: we cannot continue this
+              conversation on the merchant's behalf, so offering a box would be
+              a lie about what the page can do. */}
+          <div className="border-b border-black/10 px-4 py-4 sm:px-5 lg:border-b-0 lg:border-r">
+            <div className="flex justify-end">
+              <p className="max-w-[85%] bg-ink-deep px-3.5 py-2.5 text-[13px] leading-[1.55] text-white">
+                {question}
+              </p>
+            </div>
+            <p className="mt-1.5 text-right text-[11px] text-black/40">
+              {answers.length === 1
+                ? "asked to 1 assistant"
+                : `asked to each of ${countLabel(answers.length, "assistant")} separately`}
+            </p>
+
+            <ul className="mt-4 space-y-5">
+              {answers.map((answer, index) => {
+                const instead = Array.from(
+                  new Set(
+                    (answer.competitors ?? []).map(
+                      (raw) => rivalIdentity(raw).label,
+                    ),
+                  ),
+                ).filter(Boolean);
+                const said = answer.framing?.trim();
+                const channel = answer.channel_label ?? "Assistant";
+
+                return (
+                  <li key={`${channel}-${index}`}>
+                    <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-semibold text-ink-deep">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center border border-black/14 bg-white">
+                        <ChannelIcon
+                          channel={
+                            CHANNEL_BRAND_KEYS[channel.toLowerCase()] ?? channel
+                          }
+                          className="h-3 w-3 opacity-80"
+                        />
+                      </span>
+                      {channel}
+                    </p>
+
+                    {/* The engine rewrites the question before it searches, so
+                        the answer is a reply to these words, not the shopper's.
+                        Named for what it is — a Google search — rather than for
+                        how we collected it. */}
+                    {answer.search_queries?.length ? (
+                      <p className="mt-1.5 text-[11.5px] leading-relaxed text-black/50">
+                        <span className="font-semibold">Google search — </span>
+                        {answer.search_queries
+                          .slice(0, 3)
+                          .map((q) => `“${q}”`)
+                          .join(", ")}
+                      </p>
+                    ) : null}
+
+                    {said ? (
+                      <div className="mt-1.5 border border-black/14 bg-[#fbfaf9]">
+                        <p className="px-3.5 py-2.5 text-[13px] leading-[1.6] text-ink-deep">
+                          {said}
+                        </p>
+                        {/* Never let this read as the whole reply. The parser
+                            keeps a summary line; the full provider payload is
+                            not retained. */}
+                        <p className="border-t border-black/10 px-3.5 py-1.5 text-[11px] text-black/40">
+                          Excerpt of what came back · not the full reply
+                        </p>
+                      </div>
+                    ) : answer.error ? (
+                      <p className="mt-1.5 border border-dashed border-black/16 px-3.5 py-2.5 text-[12.5px] leading-relaxed text-black/48">
+                        {channel} could not be reached — {answer.error}
+                      </p>
+                    ) : (answer.products?.length ?? 0) > 0 ||
+                      instead.length > 0 ||
+                      answer.mentioned !== null ? null : (
+                      // Only when there is genuinely nothing to report. If the
+                      // engine returned a verdict, competitors or products, the
+                      // summary line directly below already says what happened
+                      // — an apology stacked on top of it reads as a broken scan
+                      // rather than as a thin answer.
+                      <p className="mt-1.5 border border-dashed border-black/16 px-3.5 py-2.5 text-[12.5px] leading-relaxed text-black/48">
+                        {channel} returned no written answer for this question.
+                      </p>
+                    )}
+
+                    <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px]">
+                      <span
+                        className={`font-semibold ${answer.mentioned === true ? "text-[#1a6b43]" : answer.mentioned === false ? "text-signal-ink" : "text-black/56"}`}
+                      >
+                        {answer.mentioned === true
+                          ? "Named you"
+                          : answer.mentioned === false
+                            ? "Did not name you"
+                            : "No verdict"}
+                      </span>
+                      {instead.length ? (
+                        <span className="text-black/62">
+                          · named instead: {instead.join(", ")}
+                        </span>
+                      ) : null}
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Right: everything the surfaces put in front of the shopper for
+              this question, then what it adds up to. */}
+          <div className="px-4 py-3.5 sm:px-5">
+            <p className="text-[12px] font-semibold text-black/62">
+              {products.length
+                ? "Products put in front of the shopper"
+                : "No products were surfaced"}
+            </p>
+            {/* Bounded: a question that surfaced eight products would otherwise
+                tower over the transcript beside it and leave the left column a
+                column of white. The shelf scrolls instead. */}
+            {products.length ? (
+              <ul className="mt-2.5 grid max-h-[24rem] grid-cols-2 gap-2 overflow-y-auto pr-1 sm:grid-cols-3 lg:grid-cols-2">
+                {products.map((product) => (
+                  <ProductTile
+                    key={`${product.title}-${product.merchant ?? ""}`}
+                    product={product}
+                  />
+                ))}
+              </ul>
+            ) : null}
+
+            <div className="mt-4 border-t border-black/10 pt-3">
+              <p className="text-[12px] font-semibold text-black/62">
+                What this adds up to
+              </p>
+              <p className="mt-1.5 max-w-[46ch] text-[13px] leading-relaxed text-ink-deep">
+                {questionVerdict(answers)}
+              </p>
+            </div>
+          </div>
+        </div>
+      </details>
+    </li>
   );
 }
 
 function VisibilityDisclosure({ result }: { result: AnswerCheckResult }) {
   const scored = result.answers.filter((answer) => answer.mentioned !== null);
   const named = scored.filter((answer) => answer.mentioned === true).length;
-  const channels = Array.from(
-    new Set(
-      result.answers
-        .map((answer) => answer.channel_label)
-        .filter((label): label is string => Boolean(label)),
-    ),
-  );
   const rivals = tallyRivals(result.answers).slice(0, RIVAL_LIMIT);
-  const products = shownProducts(result.answers);
+  // Questions in the order they were generated, each carrying every answer it
+  // produced. The bare list of questions used to be its own section above this
+  // one, restating what these rows already say.
   const rows = result.questions
     .map((question) => ({
       question,
-      cells: channels.map(
-        (channel) =>
-          result.answers.find(
-            (answer) =>
-              answer.question === question && answer.channel_label === channel,
-          ) ?? null,
-      ),
+      answers: result.answers.filter((answer) => answer.question === question),
     }))
-    .filter((row) => row.cells.some(Boolean));
+    .filter((row) => row.answers.length > 0);
 
   return (
     <ScanDisclosure
-      number="02"
-      // The one section that argues the product's case opens on arrival; the
-      // rest stay folded. A closed accordion cannot persuade anybody.
+      // The one section that argues the product's case opens on arrival.
       defaultOpen
-      title="What gets chosen"
+      title="What shoppers ask, and what they are told"
       summary={
         scored.length > 0
-          ? `${named}/${scored.length} observed answers chose your brand`
+          ? `${rows.length} buying ${rows.length === 1 ? "question" : "questions"} · ${named}/${scored.length} observed answers chose your brand`
           : "Checking what shoppers are being shown"
       }
     >
       <AiVisibilityWorkspace result={result} />
 
-      {rows.length > 0 || products.length > 0 ? (
-        <div
-          className={`grid border-t border-black/18 bg-white ${
-            // The right column holds the product shelf and nothing else. Most
-            // answers carry no products, so keeping the split unconditional
-            // left a third of the panel empty while the evidence was squeezed.
-            products.length > 0
-              ? "lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]"
-              : ""
-          }`}
-        >
-          <div>
-            {rivals.length > 0 ? (
-              <div className="px-4 py-4 sm:px-5">
-                <p className="flex items-center gap-2 text-[12px] font-semibold text-black/62">
-                  <span
-                    className="h-[3px] w-4 bg-signal-ink"
-                    aria-hidden="true"
-                  />
-                  Competitors named when you were not
-                </p>
-                <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
-                  {rivals.map((rival) => (
-                    <li key={rival.label} className="flex items-center gap-3">
-                      <span
-                        className="w-[8.5rem] shrink-0 truncate text-[12.5px] text-black/70"
-                        title={rival.label}
-                      >
-                        {rival.label}
-                      </span>
-                      <span className="h-1 flex-1 bg-black/8">
-                        <span
-                          className="block h-full bg-[#d95028]"
-                          style={{
-                            width: `${(rival.count / rivals[0].count) * 100}%`,
-                          }}
-                        />
-                      </span>
-                      <span className="w-8 shrink-0 text-right font-mono text-[12px] text-black/62">
-                        {rival.count}×
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-
-            {rows.length > 0 ? (
-              <div className="border-t border-black/12">
-                <p className="flex items-center gap-2 px-4 pt-4 text-[12px] font-semibold text-black/62 sm:px-5">
-                  <span
-                    className="h-[3px] w-4 bg-signal-ink"
-                    aria-hidden="true"
-                  />
-                  Question by question
-                </p>
-                <ul className="mt-3">
-                  {rows.map((row) => {
-                    const missedIn = row.cells.filter(
-                      (cell): cell is Answer =>
-                        Boolean(cell) && cell?.mentioned === false,
-                    );
-                    const instead = Array.from(
-                      new Set(
-                        missedIn.flatMap((cell) =>
-                          (cell.competitors ?? []).map(
-                            (raw) => rivalIdentity(raw).label,
-                          ),
-                        ),
-                      ),
-                    )
-                      .filter(Boolean)
-                      .slice(0, 4);
-
-                    return (
-                      <li
-                        key={row.question}
-                        className="border-t border-black/12 px-4 py-3 sm:px-5"
-                      >
-                        <p className="text-[13px] font-medium leading-snug text-ink-deep">
-                          “{row.question}”
-                        </p>
-                        <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5">
-                          {row.cells.map((cell, index) =>
-                            cell ? (
-                              <ChannelChip
-                                key={channels[index]}
-                                channel={channels[index]}
-                                answer={cell}
-                              />
-                            ) : null,
-                          )}
-                          {instead.length ? (
-                            <span className="text-[12px] leading-relaxed text-black/62">
-                              <span className="font-semibold">
-                                Named instead{" "}
-                              </span>
-                              {instead.join(", ")}
-                            </span>
-                          ) : null}
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ) : null}
-          </div>
-
-          {products.length > 0 ? (
-            <aside className="flex flex-col border-t border-black/18 px-4 py-4 sm:px-5 lg:min-h-0 lg:border-l lg:border-t-0">
-              <p className="flex items-center gap-2 text-[12px] font-semibold text-black/62">
-                <span
-                  className="h-[3px] w-4 bg-signal-ink"
-                  aria-hidden="true"
-                />
-                Products the assistants put in front of the shopper
+      {rows.length > 0 ? (
+        <div className="border-t border-black/18 bg-white">
+          {rivals.length > 0 ? (
+            <div className="px-4 py-4 sm:px-5">
+              <p className="text-[12px] font-semibold text-black/62">
+                Competitors named when you were not
               </p>
-              <div className="relative mt-3 flex-1 lg:min-h-0">
-                <ul className="grid max-h-[22rem] grid-cols-2 gap-2 overflow-y-auto pr-1 sm:max-h-[26rem] lg:absolute lg:inset-0 lg:max-h-none">
-                  {products.map((product) => (
-                    <ProductTile key={product.title} product={product} />
-                  ))}
-                </ul>
-              </div>
-            </aside>
+              <ul className="mt-3 grid gap-2 sm:grid-cols-2 sm:gap-x-10">
+                {rivals.map((rival) => (
+                  <li key={rival.label} className="flex items-center gap-3">
+                    <span
+                      className="w-[8.5rem] shrink-0 truncate text-[12.5px] text-black/70"
+                      title={rival.label}
+                    >
+                      {rival.label}
+                    </span>
+                    <span className="h-1 flex-1 bg-black/8">
+                      <span
+                        className="block h-full bg-[#d95028]"
+                        style={{
+                          width: `${(rival.count / rivals[0].count) * 100}%`,
+                        }}
+                      />
+                    </span>
+                    <span className="w-8 shrink-0 text-right font-mono text-[12px] text-black/62">
+                      {rival.count}×
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ) : null}
+
+          <div className="border-t border-black/12">
+            <p className="px-4 pb-1 pt-4 text-[12px] font-semibold text-black/62 sm:px-5">
+              Open a question to see what each assistant answered
+            </p>
+            <ul>
+              {rows.map((row) => (
+                <QuestionRow
+                  key={row.question}
+                  question={row.question}
+                  answers={row.answers}
+                />
+              ))}
+            </ul>
+          </div>
         </div>
       ) : null}
     </ScanDisclosure>
@@ -2230,12 +2370,14 @@ function ScanHeadline({ result }: { result: AnswerCheckResult }) {
   }
 
   return (
-    <section className="border-b border-black/14 bg-white px-5 py-6 sm:px-6">
-      <p className="max-w-[34ch] text-balance font-display text-[clamp(1.5rem,3.1vw,2.15rem)] font-normal leading-[1.12] tracking-[-0.022em] text-ink-deep">
+    // The one statement of the whole page sits on the warm ground, so the
+    // result opens as a sentence rather than as the top of a table.
+    <section className="border-b border-black/14 bg-[#fffaf7] px-5 py-7 sm:px-6 sm:py-8">
+      <p className="max-w-[30ch] text-balance font-display text-[clamp(1.65rem,3.4vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.024em] text-ink-deep">
         {headline}
       </p>
       {support ? (
-        <p className="mt-2.5 max-w-[64ch] text-[14px] leading-[1.6] text-black/60">
+        <p className="mt-3 max-w-[62ch] text-[14px] leading-[1.62] text-black/58">
           {support}
         </p>
       ) : null}
@@ -2315,14 +2457,12 @@ export function ResultCard({
   result,
   identity,
   identityMeta,
-  note,
   continueHref,
   verificationGate,
 }: {
   result: AnswerCheckResult;
   identity?: string;
   identityMeta?: string;
-  note?: string;
   continueHref?: string;
   verificationGate?: React.ReactNode;
 }) {
@@ -2417,7 +2557,9 @@ export function ResultCard({
             announced "Observe complete" — was the page telling the visitor the
             same thing three times in three different vocabularies. */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-2 border border-black/18 bg-white px-3 py-1.5 text-[12px] font-semibold text-ink-deep">
+          {/* One height across the row. Print alone carried `min-h-11` for its
+              touch target, which left it 44px next to two 30px siblings. */}
+          <span className="inline-flex min-h-11 items-center gap-2 border border-black/18 bg-white px-3 text-[12px] font-semibold text-ink-deep">
             <span
               className={`h-2 w-2 rounded-full ${
                 result.reject_reason
@@ -2439,7 +2581,7 @@ export function ResultCard({
             type="button"
             hidden={Boolean(result.reject_reason)}
             onClick={() => void onShare()}
-            className="inline-flex items-center gap-2 border border-black/18 bg-white px-3 py-1.5 text-[12px] font-semibold text-ink-deep transition-colors hover:border-black/32 hover:bg-[#fffaf7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-ink/35"
+            className="inline-flex min-h-11 items-center gap-2 border border-black/18 bg-white px-3 text-[12px] font-semibold text-ink-deep transition-colors hover:border-black/32 hover:bg-[#fffaf7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-ink/35"
             aria-label="Share this scan"
           >
             {shareStatus === "copied" || shareStatus === "shared" ? (
@@ -2461,7 +2603,7 @@ export function ResultCard({
             type="button"
             hidden={Boolean(result.reject_reason)}
             onClick={onPrint}
-            className="inline-flex min-h-11 items-center gap-2 border border-black/18 bg-white px-3 py-1.5 text-[12px] font-semibold text-ink-deep transition-colors hover:border-black/32 hover:bg-[#fffaf7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-ink/35"
+            className="inline-flex min-h-11 items-center gap-2 border border-black/18 bg-white px-3 text-[12px] font-semibold text-ink-deep transition-colors hover:border-black/32 hover:bg-[#fffaf7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-ink/35"
           >
             <Printer className="h-3.5 w-3.5" aria-hidden="true" />
             Print
@@ -2480,16 +2622,20 @@ export function ResultCard({
           <FoundStrip result={result} />
           <WorthLookingAt result={result} />
 
+          {/* The holistic read sits directly under the list it explains. Each
+              finding carries its own “What we saw”; this is the whole-store
+              picture those individual verdicts were drawn from, and it is what
+              a merchant opens when they want to know why the list says what it
+              says rather than what one check found. */}
+          <InitialScanSummary result={result} />
+
           {verificationGate ? (
             <DeeperAnalysisPanel result={result} gate={verificationGate} />
           ) : scored.length > 0 || result.questions.length > 0 ? (
             <>
-              <QuestionsDisclosure result={result} />
               <VisibilityDisclosure result={result} />
             </>
           ) : null}
-
-          <FreeScopeNote result={result} />
 
           {/* Both ways forward are offered as soon as the scan has found
               anything real. They used to require a verified answer probe, which
@@ -2498,16 +2644,8 @@ export function ResultCard({
           {continueHref ? (
             <ContinuePaths result={result} continueHref={continueHref} />
           ) : null}
-
-          <InitialScanSummary result={result} />
         </>
       )}
-
-      {note ? (
-        <p className="border-t border-black/14 px-5 py-3 text-[12px] leading-relaxed text-black/62">
-          {note}
-        </p>
-      ) : null}
     </div>
   );
 }
@@ -2516,8 +2654,17 @@ export default function AnswerCheck({
   placement = "homepage_hero",
   formNote,
   showPromise = false,
+  handOffTo,
 }: {
   placement?: string;
+  /**
+   * Route to send the visitor to on submit instead of rendering the result in
+   * place. Set on surfaces that are not built to hold a result — the homepage
+   * hero is a centred, viewport-height composition, and a finished scan card is
+   * an order of magnitude taller than it. The destination reads `?domain=` on
+   * arrival and starts the scan itself.
+   */
+  handOffTo?: string;
   /**
    * Reassurance shown directly under the field. It has to render between the
    * form and the result, or a scanned store pushes it a full card away from the
@@ -2533,6 +2680,7 @@ export default function AnswerCheck({
   showPromise?: boolean;
 }) {
   const { trackEvent } = useAnalytics();
+  const router = useRouter();
   const [domain, setDomain] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
@@ -2553,9 +2701,54 @@ export default function AnswerCheck({
     return (await response.json()) as AnswerCheckResult;
   }, []);
 
-  // A verification click lands back here with ?domain=: show that scan. Failed
-  // verification links also land here with a specific, human-readable error.
+  // The one place a scan is actually started. Both the form and an arriving
+  // ?domain= go through it, so a link to a domain nobody has scanned yet
+  // behaves exactly like typing that domain into the field.
+  const runScan = useCallback(
+    async (target: string) => {
+      setSubmitting(true);
+      try {
+        const response = await fetch("/api/answer-check", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            domain: target,
+            email: null,
+            source: placement,
+            website,
+          }),
+        });
+        const payload = await response.json();
+
+        if (!response.ok) {
+          setError(
+            payload?.detail ||
+              payload?.error ||
+              "We could not scan that domain.",
+          );
+          return;
+        }
+
+        pollCount.current = 0;
+        setPollExhausted(false);
+        setResult(payload as AnswerCheckResult);
+      } catch {
+        setError("The scan service is unavailable right now.");
+      } finally {
+        setSubmitting(false);
+      }
+    },
+    [placement, website],
+  );
+
+  // Arrivals with ?domain=: a verification click, a shared link, or the hand-off
+  // from the homepage hero. Failed verification links land here too, with a
+  // specific human-readable error.
+  const arrivalHandled = useRef(false);
   useEffect(() => {
+    if (arrivalHandled.current) return;
+    arrivalHandled.current = true;
+
     const params = new URLSearchParams(window.location.search);
     const scanError = params.get("scan_error");
     if (scanError === "missing_token") {
@@ -2572,13 +2765,17 @@ export default function AnswerCheck({
       );
     }
 
-    const fromEmail = params.get("domain");
-    if (!fromEmail) return;
-    setDomain(fromEmail);
-    void load(fromEmail).then((payload) => {
+    const fromUrl = params.get("domain");
+    if (!fromUrl) return;
+    setDomain(fromUrl);
+    void load(fromUrl).then((payload) => {
+      // A cached scan renders immediately. Nothing cached means nobody has
+      // scanned this domain yet — which used to leave the page blank on every
+      // shared link and on the hand-off from the homepage. Start it instead.
       if (payload) setResult(payload);
+      else void runScan(fromUrl);
     });
-  }, [load]);
+  }, [load, runScan]);
   // Poll while either the free PDP sample or the verified live probe is running.
   // The budget is finite, so the exhausted case has to say so: silently ceasing
   // to poll leaves a progress row spinning forever with nothing to act on.
@@ -2610,41 +2807,27 @@ export default function AnswerCheck({
       return;
     }
 
-    setSubmitting(true);
     trackEvent({
       action: "answer_check_started",
       category: "conversion",
       label: placement,
     });
 
-    try {
-      const response = await fetch("/api/answer-check", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          domain: target,
-          email: null,
-          source: placement,
-          website,
-        }),
-      });
-      const payload = await response.json();
-
-      if (!response.ok) {
-        setError(
-          payload?.detail || payload?.error || "We could not scan that domain.",
-        );
-        return;
+    // Hand off to the page built for a result instead of growing a 2,000px card
+    // inside a viewport-height hero. The scan then owns a real URL: shareable,
+    // reloadable, and back returns to where the visitor came from.
+    if (handOffTo) {
+      setSubmitting(true);
+      const next = new URLSearchParams();
+      next.set("domain", target);
+      for (const [key, value] of new URLSearchParams(window.location.search)) {
+        if (key.startsWith("utm_")) next.set(key, value);
       }
-
-      pollCount.current = 0;
-      setPollExhausted(false);
-      setResult(payload as AnswerCheckResult);
-    } catch {
-      setError("The scan service is unavailable right now.");
-    } finally {
-      setSubmitting(false);
+      router.push(`${handOffTo}?${next.toString()}`);
+      return;
     }
+
+    await runScan(target);
   };
 
   const onVerificationSubmit = async (event: FormEvent) => {
@@ -2819,16 +3002,6 @@ export default function AnswerCheck({
           ) : null}
           <ResultCard
             result={result}
-            // The footnote has to describe the run that actually happened. A
-            // free scan never asked an assistant anything, so claiming "public
-            // assistant surfaces" on it was a claim the card could not support.
-            note={
-              result.reject_reason
-                ? undefined
-                : result.answers.some((answer) => answer.mentioned !== null)
-                  ? "A point-in-time reading of your public storefront and of what assistants answered when we asked. Answers change; Beseam re-asks the same questions after each approved fix so you can see what moved."
-                  : "A point-in-time reading of your public storefront: public catalog data and a sample of product pages. It shows what is worth investigating, not a full diagnosis of your store."
-            }
             continueHref={`${APP_REGISTER_URL}?scan_domain=${encodeURIComponent(result.domain)}`}
             verificationGate={
               result.status === "awaiting_verification" ? (
@@ -2877,8 +3050,8 @@ export default function AnswerCheck({
                       Confirm your email to continue
                     </label>
                     <p className="mt-1.5 max-w-[52ch] text-[13px] leading-relaxed text-[#5f5a55]">
-                      We send one link. Click it and the deeper check starts —
-                      no account, no card, no marketing list.
+                      We send one link. Click it and both open up — no account,
+                      no card, no marketing list.
                     </p>
                     <div className="mt-3.5 grid gap-3">
                       <input
