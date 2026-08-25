@@ -2,12 +2,11 @@ import { ArrowRight } from "lucide-react";
 
 import LiveAnswerCheck from "@/components/beseam/answer-check";
 import CategoryBenchmarksSection from "@/components/beseam/category-benchmarks-section";
+import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
 import { Reveal } from "@/components/beseam/reveal";
-import TrackedLink from "@/components/beseam/tracked-link";
 import WhyBeseam from "@/components/beseam/why-beseam";
-import { APP_REGISTER_URL } from "@/lib/app-urls";
 
 const COMMERCE_PATH = [
   { title: "Discovery", detail: "AI · Search · Feeds" },
@@ -33,19 +32,19 @@ const OPERATING_LOOP = [
     title: "Decide",
     lead: "Choose what should happen next.",
     detail:
-      "Compare evidence, affected scope, urgency, and commercial value to choose what deserves action.",
+      "Beseam compares the evidence, affected scope, urgency, and commercial value so you can decide what deserves action.",
   },
   {
     title: "Act",
     lead: "Put the decision into action.",
     detail:
-      "Change supported product data, content, merchandising, creative, campaigns, or store experience under merchant approval.",
+      "With your approval, Beseam helps make supported changes to product data, content, merchandising, creative, campaigns, or store experience.",
   },
   {
     title: "Learn",
     lead: "Measure and improve.",
     detail:
-      "Measure the relevant discovery, behavior, conversion, order, and revenue signals after the action and feed the result into the next decision.",
+      "Beseam measures what changed afterward and carries that evidence into the next decision.",
   },
 ] as const;
 
@@ -57,7 +56,7 @@ export default function ProductionHomepage() {
           opening screen so a rendered result can grow the section without
           stretching the artwork down the page. */}
       <section id="home-hero" className="relative isolate overflow-hidden">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[80svh]">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[80svh]">
           <HeroSurfaceShift />
         </div>
         <div
@@ -66,37 +65,36 @@ export default function ProductionHomepage() {
         >
           <Reveal className="w-full">
             <div className="mx-auto w-full max-w-[76rem] text-center">
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+              <p className="pointer-events-auto font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
                 Commerce discovery + conversion
               </p>
-              <h1 className="mx-auto mt-6 max-w-[18ch] text-balance font-display text-[clamp(3rem,5.6vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-[#111318]">
-                Make your products easier to find, choose, and buy.
+              <h1 className="pointer-events-auto mx-auto mt-6 max-w-[18ch] text-balance font-display text-[clamp(3rem,5.6vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-[#111318]">
+                Turn product <span className="text-[#b8441d]">discovery</span> into buying{" "}
+                <span style={{ color: "var(--secondary)" }}>decisions</span>.
               </h1>
-              <p className="mx-auto mt-6 max-w-[54ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
-                Enter your store to see what surfaces, what gets in the way, and
-                where Beseam would look next.
+              <p className="pointer-events-auto mx-auto mt-6 max-w-[54ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
+                Enter your store to see what shoppers find, what gets in the way,
+                and get your first action items.
               </p>
 
               <div className="pointer-events-auto mx-auto mt-9 w-full">
                 <LiveAnswerCheck
                   placement="homepage_hero"
                   formNote={
-                    <p className="mx-auto mt-6 flex flex-col items-center justify-center gap-x-3 gap-y-2 text-[13px] text-black/56 sm:flex-row">
-                      <span>
+                    <div className="mx-auto mt-2 flex flex-col items-center text-center">
+                      <p className="text-[12px] leading-relaxed text-black/44">
                         Free and anonymous. Public storefront pages only.
-                      </span>
-                      <TrackedLink
-                        href={APP_REGISTER_URL}
-                        eventName="marketing_primary_cta_clicked"
-                        eventCategory="conversion"
-                        placement="homepage_hero"
-                        preserveUtm
-                        className="group inline-flex min-h-9 items-center gap-1.5 font-semibold text-[#111318] underline decoration-black/30 underline-offset-6 hover:decoration-[#b8441d]"
-                      >
-                        Or start for free
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                      </TrackedLink>
-                    </p>
+                      </p>
+                      <div className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[14px] text-black/62">
+                        <span>Want us to run the loop with you?</span>
+                        <BookReviewCta
+                          variant="primary"
+                          location="homepage_hero_managed"
+                          label="Plan my first improvement"
+                          className="min-h-9 gap-1.5 bg-transparent px-0 py-0 text-[14px] font-semibold text-[#111318] underline decoration-black/30 underline-offset-6 hover:bg-transparent hover:text-[#b8441d] hover:decoration-[#b8441d]"
+                        />
+                      </div>
+                    </div>
                   }
                 />
               </div>

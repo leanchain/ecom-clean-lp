@@ -12,9 +12,9 @@ import { APP_LOGIN_URL, APP_REGISTER_URL } from "@/lib/app-urls";
 import { cn } from "@/lib/utils";
 const NAV_LINKS = [
   { label: "Live check", href: "/#ai-check" },
+  { label: "Platform", href: "/platform" },
+  { label: "How we work", href: "/how-we-work" },
   { label: "Benchmark", href: "/#benchmarks" },
-  { label: "How it works", href: "/#proof" },
-  { label: "30 days free", href: "/#promise" },
 ] as const;
 
 export default function BeseamNavbar() {
@@ -92,7 +92,7 @@ export default function BeseamNavbar() {
               eventCategory="conversion"
               placement="navbar"
               preserveUtm
-              className="group inline-flex min-h-10 items-center justify-center gap-2 whitespace-nowrap bg-[#111318] px-4 text-[13px] font-semibold text-white transition-colors hover:bg-[#b8441d] focus-visible:ring-2 focus-visible:ring-[#b8441d] focus-visible:ring-offset-3"
+              className="group inline-flex min-h-10 items-center justify-center gap-2 whitespace-nowrap bg-[#b8441d] px-4 text-[13px] font-semibold text-white focus-visible:ring-2 focus-visible:ring-[#b8441d] focus-visible:ring-offset-3"
             >
               Start for free
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />

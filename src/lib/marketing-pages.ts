@@ -239,6 +239,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       },
     ],
     related: [
+      { label: "How we work with brands", href: "/how-we-work" },
       { label: "AI shopping discovery", href: "/ai-visibility-monitoring" },
       { label: "See the operating loop", href: "/#proof" },
     ],

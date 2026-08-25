@@ -501,6 +501,16 @@
   .button {
     @apply tracking-tight;
   }
+
+  button:not(:disabled),
+  [role="button"],
+  .button {
+    @apply cursor-pointer;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed;
+  }
 }
 
 /* Components layer */

@@ -49,7 +49,7 @@ export default function CookieConsent() {
         <button
           type="button"
           onClick={accept}
-          className="min-h-8 bg-[#111318] px-3 text-[11.5px] font-semibold text-white transition-colors hover:bg-[#b8441d]"
+          className="min-h-8 bg-[#b8441d] px-3 text-[11.5px] font-semibold text-white"
         >
           Accept analytics
         </button>

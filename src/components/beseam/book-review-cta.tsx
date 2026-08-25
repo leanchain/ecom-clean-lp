@@ -76,7 +76,7 @@ export function BookReviewCta({
       data-cal-config={JSON.stringify(calConfig)}
       onClick={handleBookClick}
       className={cn(
-        "group inline-flex min-h-12 items-center justify-center gap-3 bg-[#111318] px-7 py-3 text-[15px] font-semibold leading-tight text-white transition-colors hover:bg-[#b8441d] focus-visible:ring-2 focus-visible:ring-[#b8441d] focus-visible:ring-offset-3",
+        "group inline-flex min-h-12 items-center justify-center gap-3 bg-[#b8441d] px-7 py-3 text-[15px] font-semibold leading-tight text-white focus-visible:ring-2 focus-visible:ring-[#b8441d] focus-visible:ring-offset-3",
         className,
       )}
     >

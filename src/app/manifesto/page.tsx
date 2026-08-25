@@ -9,23 +9,23 @@ import { Reveal } from "@/components/beseam/reveal";
 
 const MANIFESTO_URL = "https://beseam.com/manifesto";
 const MANIFESTO_IMAGE = "https://beseam.com/images/social/manifesto.png";
-const MANIFESTO_MODIFIED = "2026-08-22";
+const MANIFESTO_MODIFIED = "2026-08-25";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Beseam Manifesto | The useful unit is a decision you can trace",
+    absolute: "Beseam Manifesto | Every commerce team should be able to operate like the best",
   },
   description:
-    "Why Beseam keeps observation, understanding, decisions, actions, and learning connected to the evidence behind them.",
+    "Beseam exists to give every commerce team access to the intelligence, technology, and operating capability to compete at its best — without requiring the biggest team or budget.",
   alternates: { canonical: "/manifesto" },
   authors: [{ name: "Pankaj Kumar", url: "/about" }],
   creator: "Pankaj Kumar",
   publisher: "Beseam",
   category: "Ecommerce",
   openGraph: {
-    title: "Beseam Manifesto | The useful unit is a decision you can trace",
+    title: "Beseam Manifesto | Every commerce team should be able to operate like the best",
     description:
-      "The principles behind Beseam: observe the evidence, separate fact from inference, decide with context, act with control, and learn from what changes.",
+      "World-class commerce capability should not depend on team size or budget. Beseam combines technology, connected evidence, and hands-on work to help commerce teams operate better.",
     url: "/manifesto",
     siteName: "Beseam",
     type: "article",
@@ -44,16 +44,16 @@ export const metadata: Metadata = {
         url: MANIFESTO_IMAGE,
         width: 1200,
         height: 630,
-        alt: "The Beseam Manifesto: the useful unit is a decision you can trace",
+        alt: "The Beseam Manifesto",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam Manifesto | The useful unit is a decision you can trace",
+    title: "Beseam Manifesto | Every commerce team should be able to operate like the best",
     description:
-      "Observe what is happening, understand what may explain it, decide, act with control, and learn from what changes.",
+      "World-class commerce capability should not depend on team size or budget.",
     images: [MANIFESTO_IMAGE],
   },
 };
@@ -150,9 +150,9 @@ export default function ManifestoPage() {
       {
         "@type": "Article",
         "@id": `${MANIFESTO_URL}#article`,
-        headline: "The useful unit is a decision you can trace.",
+        headline: "Every commerce team should be able to operate like the best.",
         description:
-          "Why Beseam keeps what teams observe, understand, decide, act on, and learn connected to the evidence behind it.",
+          "Beseam exists to give every commerce team access to the intelligence, technology, and operating capability to compete at its best, while keeping decisions connected to the evidence behind them.",
         image: {
           "@type": "ImageObject",
           url: MANIFESTO_IMAGE,
@@ -185,7 +185,7 @@ export default function ManifestoPage() {
         "@type": "WebPage",
         "@id": MANIFESTO_URL,
         url: MANIFESTO_URL,
-        name: "Beseam Manifesto | The useful unit is a decision you can trace",
+        name: "Beseam Manifesto | Every commerce team should be able to operate like the best",
         about: { "@id": "https://beseam.com/#organization" },
         primaryImageOfPage: { "@id": `${MANIFESTO_URL}#primaryimage` },
         dateModified: MANIFESTO_MODIFIED,
@@ -245,23 +245,24 @@ export default function ManifestoPage() {
                 The Beseam manifesto
               </p>
               <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,6.1vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
-                The useful unit is a decision you can trace.
+                Every commerce team should be able to operate like the best.
               </h1>
             </div>
             <div className="max-w-2xl self-end">
               <p className="text-[20px] leading-[1.65] text-black/68">
-                Beseam connects discovery, store, behavior, and revenue evidence
-                so one commercial question can move through Observe, Understand,
-                Decide, Act, and Learn without losing the context behind it.
+                The ability to understand customers, connect evidence, make better
+                decisions, act quickly, and learn from what happens should not
+                depend on having hundreds of people, a huge technology budget, or
+                a maze of specialist tools.
               </p>
               <p className="mt-5 text-[17px] leading-[1.7] text-black/62">
-                Observe what is happening. Understand what may explain it.
-                Decide what is worth doing. Act with control. Learn from the
-                signals that move afterward.
+                Beseam exists to make that capability available to every commerce
+                team — from ambitious brands running lean to the world&rsquo;s largest
+                retailers.
               </p>
               <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
                 By Pankaj Kumar · Founder, Beseam · Updated{" "}
-                <time dateTime={MANIFESTO_MODIFIED}>22 August 2026</time>
+                <time dateTime={MANIFESTO_MODIFIED}>25 August 2026</time>
               </p>
             </div>
           </Reveal>
@@ -273,8 +274,62 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Commerce teams do not need more disconnected reporting.
+                Technology should multiply the team you have.
               </h2>
+            </div>
+            <div>
+              <p className="max-w-2xl text-[18px] leading-[1.72] text-black/68">
+                You should not need the organization of a global retailer to
+                operate like one. And if you are a global retailer, you should not
+                need more organizational complexity to move faster.
+              </p>
+              <div className="mt-10 border-t border-black/22">
+                {[
+                  [
+                    "For teams running lean",
+                    "A smaller team should have access to the intelligence, automation, and operating discipline that once required specialist teams and large technology budgets.",
+                  ],
+                  [
+                    "For large organizations",
+                    "More people and systems should not mean more handoffs before a useful decision can be made. Beseam should help existing teams move with less coordination overhead.",
+                  ],
+                  [
+                    "The same standard for both",
+                    "Connect the evidence, decide with context, act with control, and learn from what changed. The operating model should scale with the business rather than define the size of business it can serve.",
+                  ],
+                ].map(([title, body], index) => (
+                  <article
+                    key={title}
+                    className="grid gap-3 border-b border-black/18 py-6 sm:grid-cols-[3rem_13rem_1fr] sm:gap-6"
+                  >
+                    <span className="font-mono text-[12px] text-black/62">
+                      0{index + 1}
+                    </span>
+                    <h3 className="text-[16px] font-semibold text-black/82">
+                      {title}
+                    </h3>
+                    <p className="text-[14px] leading-relaxed text-black/62">
+                      {body}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="border-b border-black/18">
+        <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+          <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
+            <div>
+              <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
+                The useful unit is a decision you can trace.
+              </h2>
+              <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-black/62">
+                Giving teams more capability only matters if the system helps them
+                reach better decisions without hiding how those decisions were made.
+              </p>
             </div>
             <div>
               <p className="max-w-2xl text-[17px] leading-[1.7] text-black/66">

@@ -1918,7 +1918,7 @@ export function ResultCard({
               eventCategory="conversion"
               placement="answer_check_result"
               preserveUtm
-              className="group inline-flex min-h-11 items-center justify-center gap-2 bg-[#111318] px-5 text-[13px] font-semibold text-white transition-colors hover:bg-[#b8441d]"
+              className="group inline-flex min-h-11 items-center justify-center gap-2 bg-[#b8441d] px-5 text-[13px] font-semibold text-white"
             >
               Start for free
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -2249,9 +2249,9 @@ export default function AnswerCheck({
           <button
             type="submit"
             disabled={submitting}
-            className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[15px] font-semibold text-white transition-colors hover:bg-[#b8441d] disabled:opacity-70"
+            className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#b8441d] px-6 text-[15px] font-semibold text-white disabled:opacity-70"
           >
-            {submitting ? "Reading your store…" : "Check my store"}
+            {submitting ? "Reading your store…" : "Scan my store"}
             <ArrowRight
               aria-hidden="true"
               className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
@@ -2422,7 +2422,7 @@ export default function AnswerCheck({
                       <button
                         type="submit"
                         disabled={verificationSubmitting}
-                        className="inline-flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-6 text-[14px] font-semibold text-white transition-colors hover:bg-[#b8441d] disabled:opacity-70"
+                        className="inline-flex min-h-12 items-center justify-center gap-2 bg-[#b8441d] px-6 text-[14px] font-semibold text-white disabled:opacity-70"
                       >
                         {verificationSubmitting
                           ? "Sending…"

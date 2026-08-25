@@ -14,6 +14,7 @@ const FOOTER_GROUPS = [
   {
     label: "Company",
     links: [
+      ["How we work", "/how-we-work"],
       ["About", "/about"],
       ["Manifesto", "/manifesto"],
       ["Contact us", "/contact"],

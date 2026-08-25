@@ -32,7 +32,7 @@ type CardState =
   | { kind: "capability"; hubId: string; index: number }
   | null;
 
-const ACCENT = "#b8441d";
+const ACCENT = "#7c3aed";
 const INK = "#111318";
 const PAPER = "#fafafa";
 const FOREGROUND_SPREAD = 1.3;
@@ -2057,7 +2057,18 @@ export default function HeroSurfaceShift() {
 
     if (desiredForegroundHubId) {
       const rendered = renderedForegroundHubRef.current;
+      // The auto journey's own "traveling" effect already drives
+      // foregroundProgressRef continuously (per rAF, from real hub-to-hub
+      // proximity) as autoApproachHubId flips from the departed hub to the
+      // approaching one. Running the retract-then-re-ease branch below at the
+      // same time fights that loop for control of --kg-expand: this effect
+      // would snap progress to 0 and ease it back up on a delay, while the
+      // travel loop keeps writing its own proximity-based value in between --
+      // the result is edges whose draw length pulses out of sync with (and momentarily belongs to) the wrong hub. Only pointer/hover-driven swaps need the retract treatment.
+      const isAutoDriven =
+        autoJourneyVisible && !activeHub && !pointerApproachHubId;
       const swapping =
+        !isAutoDriven &&
         rendered !== null &&
         rendered !== desiredForegroundHubId &&
         foregroundProgressRef.current > 0.05 &&
@@ -2104,8 +2115,11 @@ export default function HeroSurfaceShift() {
       }
     };
   }, [
+    activeHub,
+    autoJourneyVisible,
     desiredForegroundHubId,
     easePointerForegroundProgress,
+    pointerApproachHubId,
     setForegroundProgress,
   ]);
 
@@ -2202,7 +2216,7 @@ export default function HeroSurfaceShift() {
     <div
       ref={rootRef}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 isolate z-0 overflow-hidden"
     >
       <svg
         ref={svgRef}
@@ -2659,7 +2673,7 @@ export default function HeroSurfaceShift() {
         }
         .hero-kg-main-edges path.hero-kg-connected {
           stroke: ${ACCENT};
-          stroke-opacity: 0.26;
+          stroke-opacity: 0.45;
           stroke-width: 0.82;
         }
         .hero-kg-context .hero-kg-main-edges path:not(.hero-kg-near):not(.hero-kg-connected) {
@@ -2675,9 +2689,9 @@ export default function HeroSurfaceShift() {
         }
         .hero-kg-journeys path.hero-kg-journey-active {
           stroke-width: 1.35;
-          stroke-opacity: 0.26;
+          stroke-opacity: 0.52;
           stroke-dasharray: none;
-          filter: drop-shadow(0 0 3px rgba(184,68,29,.12));
+          filter: drop-shadow(0 0 3px rgba(124,58,237,.16));
         }
         .hero-kg-auto-signal {
           width: 18px;
@@ -2894,7 +2908,12 @@ export default function HeroSurfaceShift() {
           stroke-dasharray: 1;
           stroke-dashoffset: calc(1 - var(--kg-expand));
           stroke-linecap: round;
-          vector-effect: non-scaling-stroke;
+          /* No vector-effect: non-scaling-stroke here -- combined with the
+             pathLength=1 draw-on dasharray it makes the dash length track a
+             different coordinate space than the stroke geometry, so the line
+             visibly falls short of its endpoint in proportion to how much the
+             viewBox is scaled up (invisible on small screens, obvious at 4K /
+             100% zoom). */
           transition: stroke-dashoffset ${TRACK};
         }
         .hero-kg-foreground-neighbor-edge-weak {
@@ -2912,7 +2931,7 @@ export default function HeroSurfaceShift() {
           stroke-opacity: 0.3;
           stroke-dasharray: 1;
           stroke-dashoffset: calc(1 - var(--kg-expand));
-          vector-effect: non-scaling-stroke;
+          /* No non-scaling-stroke: see .hero-kg-foreground-neighbor-edge. */
           transition: stroke-dashoffset ${TRACK};
         }
         .hero-kg-foreground-capability .hero-kg-cap-dot {
@@ -2956,7 +2975,7 @@ export default function HeroSurfaceShift() {
           stroke-opacity: 0.3;
           stroke-dasharray: 1;
           stroke-dashoffset: calc(1 - var(--kg-expand));
-          vector-effect: non-scaling-stroke;
+          /* No non-scaling-stroke: see .hero-kg-foreground-neighbor-edge. */
           transition: stroke-dashoffset ${TRACK};
         }
         .hero-kg-foreground .hero-kg-sat-dot {

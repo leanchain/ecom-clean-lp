@@ -313,7 +313,8 @@ function MobileTrace() {
       <div className="border-t border-white/14 pt-6">
         <p className="text-[12px] leading-[1.65] text-white/54">
           Beseam keeps the shopper signal, the explanations it checked, the action,
-          and what happened afterward connected.
+          and what happened afterward connected. We work through the evidence with
+          your team, help make the supported change, and measure what happens next.
         </p>
         <Link
           href="/manifesto"
@@ -467,9 +468,10 @@ export default function WhyBeseam() {
                 </div>
 
                 <div className="mt-9 flex items-center justify-between gap-8 border-t border-white/14 pt-7">
-                  <p className="max-w-[62ch] text-[13px] leading-[1.7] text-white/62">
-                    Two of the three were wrong. Beseam keeps the signal, what was
-                    checked, what was changed, and the measured result connected.
+                  <p className="max-w-[70ch] text-[13px] leading-[1.7] text-white/62">
+                    Beseam does not stop at the recommendation. We work through the
+                    evidence with your team, help make the supported change, and
+                    measure what happens afterward.
                   </p>
                   <Link
                     href="/manifesto"

@@ -155,7 +155,7 @@ function ContactForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-5 inline-flex min-h-11 items-center justify-center bg-[#111318] px-6 text-[14px] font-semibold text-white transition-colors hover:bg-[#b8441d] disabled:cursor-wait disabled:opacity-70"
+        className="mt-5 inline-flex min-h-11 items-center justify-center bg-[#b8441d] px-6 text-[14px] font-semibold text-white disabled:cursor-wait disabled:opacity-70"
       >
         {submitting ? "Sending…" : "Send message"}
       </button>
