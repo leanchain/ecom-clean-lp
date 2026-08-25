@@ -124,7 +124,7 @@ export default async function ComparisonPage({
   };
 
   return (
-    <article className="bg-[#fafafa] text-[#111318]">
+    <article className="bg-ground text-ink-deep">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -142,7 +142,7 @@ export default async function ComparisonPage({
         <div className="mx-auto max-w-[92rem] px-5 pb-18 pt-10 sm:px-8 sm:pb-24 sm:pt-14 lg:px-10 lg:pb-28">
           <Link
             href="/compare"
-            className="inline-flex items-center gap-2 text-[12px] font-semibold text-black/62 transition-colors hover:text-[#b8441d]"
+            className="inline-flex items-center gap-2 text-[12px] font-semibold text-black/62 transition-colors hover:text-signal-ink"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             All comparisons
@@ -150,7 +150,7 @@ export default async function ComparisonPage({
 
           <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(22rem,0.58fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                 Beseam vs {comparison.name}
               </p>
               <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,5.7vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em]">
@@ -170,7 +170,7 @@ export default async function ComparisonPage({
         </div>
       </header>
 
-      <section className="border-b border-black/18 bg-[#f6f6f6]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div className="grid border-y border-black/24 lg:grid-cols-3">
             {[
@@ -201,7 +201,7 @@ export default async function ComparisonPage({
         <div className="mx-auto max-w-[92rem] px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
           <div className="grid gap-8 border-y border-black/24 py-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
             <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
                 Stack boundary
               </p>
               <h2 className="mt-4 font-serif text-[34px] leading-[1.02] tracking-[-0.02em]">
@@ -216,11 +216,11 @@ export default async function ComparisonPage({
       </section>
 
       {practical ? (
-        <section className="border-b border-black/18 bg-[#f6f6f6]">
+        <section className="border-b border-black/18 bg-ground-2">
           <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
             <div className="grid gap-12 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
               <div>
-                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
                   Buying reality
                 </p>
                 <h2 className="mt-5 max-w-[15ch] font-serif text-[38px] leading-[1.04] tracking-[-0.02em]">
@@ -255,7 +255,7 @@ export default async function ComparisonPage({
                         </p>
                       </div>
                       <div>
-                        <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-[#b8441d] md:hidden">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-signal-ink md:hidden">
                           Beseam
                         </span>
                         <p className="mt-1 text-[13px] leading-relaxed text-black/68 md:mt-0">
@@ -269,7 +269,7 @@ export default async function ComparisonPage({
                   href={practical.source.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 text-[12px] font-semibold text-black/62 transition-colors hover:text-[#b8441d]"
+                  className="mt-6 inline-flex items-center gap-2 text-[12px] font-semibold text-black/62 transition-colors hover:text-signal-ink"
                 >
                   {practical.source.label}
                   <ExternalLink className="h-3.5 w-3.5" />
@@ -320,7 +320,7 @@ export default async function ComparisonPage({
                       className="grid grid-cols-[1rem_1fr] gap-3 text-[14px] leading-relaxed text-black/62"
                     >
                       <span
-                        className="mt-[0.65rem] h-px bg-[#b8441d]"
+                        className="mt-[0.65rem] h-px bg-signal-ink"
                         aria-hidden="true"
                       />
                       <span>{item}</span>
@@ -333,7 +333,7 @@ export default async function ComparisonPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#111318] text-white">
+      <section className="border-b border-black/18 bg-ink-deep text-white">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div>
             <div className="max-w-2xl">
@@ -365,7 +365,7 @@ export default async function ComparisonPage({
                     </p>
                   </div>
                   <div>
-                    <span className="font-mono text-[12px] uppercase tracking-[0.1em] text-[#e8653a] md:hidden">
+                    <span className="font-mono text-[12px] uppercase tracking-[0.1em] text-signal md:hidden">
                       Beseam
                     </span>
                     <p className="mt-1 text-[13px] leading-relaxed text-white/72 md:mt-0">
@@ -411,7 +411,7 @@ export default async function ComparisonPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f6f6f6]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div>
             <div className="max-w-[68ch]">
@@ -419,7 +419,7 @@ export default async function ComparisonPage({
                 {comparison.evidence.caption}
               </p>
             </div>
-            <figure className="mt-10 border border-black/22 bg-[#111318] p-2">
+            <figure className="mt-10 border border-black/22 bg-ink-deep p-2">
               <Image
                 src={comparison.evidence.src}
                 alt={comparison.evidence.alt}
@@ -432,7 +432,7 @@ export default async function ComparisonPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f6f6f6]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
             <div>
@@ -448,7 +448,7 @@ export default async function ComparisonPage({
                 >
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-[16px] font-semibold">
                     {faq.question}
-                    <span className="font-mono text-[15px] text-[#b8441d] group-open:rotate-45">
+                    <span className="font-mono text-[15px] text-signal-ink group-open:rotate-45">
                       +
                     </span>
                   </summary>
@@ -481,7 +481,7 @@ export default async function ComparisonPage({
                     href={source.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="group inline-flex items-start gap-3 text-[14px] font-semibold text-black/66 transition-colors hover:text-[#b8441d]"
+                    className="group inline-flex items-start gap-3 text-[14px] font-semibold text-black/66 transition-colors hover:text-signal-ink"
                   >
                     {source.label}
                     <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" />
@@ -493,7 +493,7 @@ export default async function ComparisonPage({
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#111318] text-white">
+      <section className="border-b border-black/18 bg-ink-deep text-white">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div className="grid gap-10 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
             <div>
@@ -514,7 +514,7 @@ export default async function ComparisonPage({
                   <span className="text-[13px] leading-relaxed text-white/72">
                     {item.headline}
                   </span>
-                  <ArrowRight className="h-4 w-4 text-[#e8653a] transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="h-4 w-4 text-signal transition-transform group-hover:translate-x-0.5" />
                 </Link>
               ))}
               <Link

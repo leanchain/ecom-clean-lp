@@ -33,7 +33,7 @@ export default function CookieConsent() {
         after you accept.{" "}
         <Link
           href="/privacy-policy"
-          className="font-semibold text-[#111318] underline decoration-black/30 underline-offset-3 hover:decoration-[#b8441d]"
+          className="font-semibold text-ink-deep underline decoration-black/30 underline-offset-3 hover:decoration-signal-ink"
         >
           Privacy policy
         </Link>
@@ -42,14 +42,14 @@ export default function CookieConsent() {
         <button
           type="button"
           onClick={decline}
-          className="min-h-8 border border-black/30 px-3 text-[11.5px] font-semibold text-[#111318] transition-colors hover:border-[#b8441d] hover:text-[#b8441d]"
+          className="min-h-8 border border-black/30 px-3 text-[11.5px] font-semibold text-ink-deep transition-colors hover:border-signal-ink hover:text-signal-ink"
         >
           Reject analytics
         </button>
         <button
           type="button"
           onClick={accept}
-          className="min-h-8 bg-[#b8441d] px-3 text-[11.5px] font-semibold text-white"
+          className="min-h-8 bg-signal-ink px-3 text-[11.5px] font-semibold text-white"
         >
           Accept analytics
         </button>

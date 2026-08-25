@@ -15,15 +15,15 @@ const USER_AGENT = "BeseamBot/1.0 (+https://beseam.com/bot)";
 
 export default function BotPage() {
   return (
-    <div className="bg-[#fafafa] text-[#151515]">
+    <div className="bg-ground text-[#151515]">
       <section className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                 Official crawler information
               </p>
-              <h1 className="mt-7 max-w-[14ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
+              <h1 className="mt-7 max-w-[14ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-ink-deep">
                 BeseamBot
               </h1>
             </div>
@@ -38,7 +38,7 @@ export default function BotPage() {
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/48">
                   User-Agent
                 </p>
-                <code className="mt-2 block overflow-x-auto font-mono text-[13px] leading-6 text-[#111318]">
+                <code className="mt-2 block overflow-x-auto font-mono text-[13px] leading-6 text-ink-deep">
                   {USER_AGENT}
                 </code>
               </div>
@@ -50,7 +50,7 @@ export default function BotPage() {
       <section className="border-b border-black/18 bg-white">
         <div className="mx-auto grid max-w-[92rem] gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-3 lg:gap-12 lg:px-10 lg:py-24">
           <div>
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
               What it accesses
             </p>
             <p className="mt-5 text-[16px] leading-[1.72] text-black/66">
@@ -61,7 +61,7 @@ export default function BotPage() {
             </p>
           </div>
           <div>
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
               Why it visits
             </p>
             <p className="mt-5 text-[16px] leading-[1.72] text-black/66">
@@ -72,7 +72,7 @@ export default function BotPage() {
             </p>
           </div>
           <div>
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
               Operator
             </p>
             <p className="mt-5 text-[16px] leading-[1.72] text-black/66">
@@ -84,14 +84,14 @@ export default function BotPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f6f6f6]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
             <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
                 Polite crawling
               </p>
-              <h2 className="mt-6 max-w-[15ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+              <h2 className="mt-6 max-w-[15ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
                 Built to respect the storefront.
               </h2>
             </div>
@@ -115,7 +115,7 @@ export default function BotPage() {
                 ],
               ].map(([title, body]) => (
                 <div key={title} className="border-t border-black/22 pt-5">
-                  <h3 className="text-[16px] font-semibold text-[#111318]">
+                  <h3 className="text-[16px] font-semibold text-ink-deep">
                     {title}
                   </h3>
                   <p className="mt-3 text-[15px] leading-[1.68] text-black/62">
@@ -128,13 +128,13 @@ export default function BotPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#fafafa]">
+      <section className="border-b border-black/18 bg-ground">
         <div className="mx-auto grid max-w-[92rem] gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20 lg:px-10 lg:py-24">
           <div>
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
               Control access
             </p>
-            <h2 className="mt-6 font-display text-[clamp(2.1rem,3vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em] text-[#111318]">
+            <h2 className="mt-6 font-display text-[clamp(2.1rem,3vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink-deep">
               Use standard robots.txt rules.
             </h2>
             <p className="mt-5 max-w-[54ch] text-[16px] leading-[1.72] text-black/66">
@@ -143,7 +143,7 @@ export default function BotPage() {
             </p>
           </div>
           <div className="space-y-5">
-            <div className="border border-black/18 bg-[#111318] p-5 text-white">
+            <div className="border border-black/18 bg-ink-deep p-5 text-white">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-white/48">
                 Block BeseamBot
               </p>
@@ -153,7 +153,7 @@ export default function BotPage() {
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/48">
                 Ask for a slower crawl
               </p>
-              <pre className="mt-4 overflow-x-auto font-mono text-[13px] leading-6 text-[#111318]">{`User-agent: BeseamBot\nCrawl-delay: 5`}</pre>
+              <pre className="mt-4 overflow-x-auto font-mono text-[13px] leading-6 text-ink-deep">{`User-agent: BeseamBot\nCrawl-delay: 5`}</pre>
             </div>
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function BotPage() {
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <div className="grid gap-8 border-t border-black/22 pt-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div>
-              <h2 className="font-display text-[clamp(2rem,3vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em] text-[#111318]">
+              <h2 className="font-display text-[clamp(2rem,3vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink-deep">
                 Questions about BeseamBot traffic?
               </h2>
               <p className="mt-4 max-w-[62ch] text-[16px] leading-[1.7] text-black/62">
@@ -173,7 +173,7 @@ export default function BotPage() {
             </div>
             <Link
               href="/contact"
-              className="inline-flex min-h-11 items-center justify-center border border-[#b8441d] px-5 py-3 text-[14px] font-semibold text-[#b8441d] transition-colors hover:bg-[#b8441d] hover:text-white"
+              className="inline-flex min-h-11 items-center justify-center border border-signal-ink px-5 py-3 text-[14px] font-semibold text-signal-ink transition-colors hover:bg-signal-ink hover:text-white"
             >
               Contact Beseam
             </Link>

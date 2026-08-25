@@ -31,7 +31,7 @@ const FOOTER_GROUPS = [
 
 export default function BeseamFooter() {
   return (
-    <footer className="bg-[#111318] text-white">
+    <footer className="bg-ink-deep text-white">
       <div className="mx-auto max-w-[92rem] px-5 pb-8 pt-14 sm:px-8 sm:pt-16 lg:px-10">
         <div className="grid gap-12 border-b border-white/18 pb-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.25fr)] lg:gap-20">
           <div>

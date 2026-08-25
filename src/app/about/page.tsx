@@ -85,7 +85,7 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="bg-[#fafafa] text-[#151515]">
+    <div className="bg-ground text-[#151515]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -94,10 +94,10 @@ export default function AboutPage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                 About Beseam
               </p>
-              <h1 className="mt-7 max-w-[17ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
+              <h1 className="mt-7 max-w-[17ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-ink-deep">
                 Commerce teams have data. Knowing what to change next is harder.
               </h1>
             </div>
@@ -110,13 +110,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f6f6f6]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto grid max-w-[92rem] gap-12 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1.2fr)_minmax(20rem,0.8fr)] lg:items-start lg:gap-20 lg:px-10 lg:py-28">
           <Reveal>
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
               The founder
             </p>
-            <h2 className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+            <h2 className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
               Built with the reliability mindset behind large-scale systems.
             </h2>
             <div className="mt-8 max-w-[68ch] space-y-6 text-[17px] leading-[1.72] text-black/66">
@@ -141,7 +141,7 @@ export default function AboutPage() {
             </div>
             <Link
               href="/manifesto"
-              className="mt-9 inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#b8441d] underline decoration-black/20 underline-offset-7 hover:decoration-[#b8441d]"
+              className="mt-9 inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-signal-ink underline decoration-black/20 underline-offset-7 hover:decoration-signal-ink"
             >
               Read why I am building Beseam
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -151,14 +151,14 @@ export default function AboutPage() {
                 href="https://linkedin.com/in/pankaj4u4m"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-black/66 hover:text-[#b8441d]"
+                className="inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-black/66 hover:text-signal-ink"
               >
                 <Linkedin className="h-4 w-4" aria-hidden="true" />
                 LinkedIn
               </Link>
               <a
                 href="mailto:pankaj@beseam.com"
-                className="inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-black/66 hover:text-[#b8441d]"
+                className="inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-black/66 hover:text-signal-ink"
               >
                 <Mail className="h-4 w-4" aria-hidden="true" />
                 pankaj@beseam.com
@@ -179,7 +179,7 @@ export default function AboutPage() {
                 />
               </div>
               <figcaption className="border-t border-black/18 px-5 py-4">
-                <p className="text-[15px] font-semibold text-[#111318]">
+                <p className="text-[15px] font-semibold text-ink-deep">
                   Pankaj Kumar
                 </p>
                 <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.09em] text-black/62">
@@ -191,10 +191,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#fafafa]">
+      <section className="border-b border-black/18 bg-ground">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-10 border-b border-black/22 pb-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
-            <h2 className="max-w-[16ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+            <h2 className="max-w-[16ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
               Grounded in real commerce.
             </h2>
             <p className="max-w-[64ch] self-end text-[17px] leading-[1.65] text-black/66">
@@ -219,10 +219,10 @@ export default function AboutPage() {
                   className="h-20 w-20 border border-black/18 object-cover"
                 />
                 <div>
-                  <h3 className="text-[17px] font-semibold text-[#111318]">
+                  <h3 className="text-[17px] font-semibold text-ink-deep">
                     {advisor.name}
                   </h3>
-                  <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.08em] text-[#b8441d]">
+                  <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.08em] text-signal-ink">
                     {advisor.role}
                   </p>
                   <p className="mt-4 text-[14px] leading-relaxed text-black/64">
@@ -232,7 +232,7 @@ export default function AboutPage() {
                     href={advisor.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-[13px] font-semibold text-[#b8441d] underline decoration-black/20 underline-offset-5"
+                    className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-[13px] font-semibold text-signal-ink underline decoration-black/20 underline-offset-5"
                   >
                     <Linkedin className="h-3.5 w-3.5" aria-hidden="true" />
                     LinkedIn
@@ -247,7 +247,7 @@ export default function AboutPage() {
 
       <TeamsSection />
 
-      <section className="bg-[#111318] text-white">
+      <section className="bg-ink-deep text-white">
         <div className="mx-auto grid max-w-[92rem] gap-10 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1.15fr)_auto] lg:items-end lg:gap-20 lg:px-10 lg:py-28">
           <Reveal>
             <h2 className="max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
@@ -262,7 +262,7 @@ export default function AboutPage() {
               Questions first?{" "}
               <a
                 href="mailto:pankaj@beseam.com"
-                className="font-semibold text-[#e8653a] underline underline-offset-4"
+                className="font-semibold text-signal underline underline-offset-4"
               >
                 pankaj@beseam.com
               </a>
@@ -272,7 +272,7 @@ export default function AboutPage() {
             <BookReviewCta
               variant="primary"
               location="about_footer"
-              className="bg-white text-[#111318] hover:bg-[#e8653a] hover:text-white"
+              className="bg-white text-ink-deep hover:bg-signal hover:text-white"
             />
           </Reveal>
         </div>

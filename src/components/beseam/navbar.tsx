@@ -11,7 +11,7 @@ import TrackedLink from "@/components/beseam/tracked-link";
 import { APP_LOGIN_URL, APP_REGISTER_URL } from "@/lib/app-urls";
 import { cn } from "@/lib/utils";
 const NAV_LINKS = [
-  { label: "Live check", href: "/#ai-check" },
+  { label: "Why Beseam", href: "/#why" },
   { label: "Platform", href: "/platform" },
   { label: "How we work", href: "/how-we-work" },
   { label: "Benchmark", href: "/#benchmarks" },
@@ -33,13 +33,13 @@ export default function BeseamNavbar() {
       className={cn(
         "sticky z-50 mx-auto border transition-all duration-200",
         scrolled
-          ? "top-3 w-[calc(100%-1.5rem)] max-w-[95rem] rounded-none border-black/14 bg-[#fafafa]/72 shadow-lg backdrop-blur-2xl"
-          : "top-0 w-full border-x-transparent border-t-transparent border-b-black/10 bg-[#fafafa]/92 backdrop-blur-md",
+          ? "top-3 w-[calc(100%-1.5rem)] max-w-[95rem] rounded-none border-black/14 bg-ground/72 shadow-lg backdrop-blur-2xl"
+          : "top-0 w-full border-x-transparent border-t-transparent border-b-black/10 bg-ground/92 backdrop-blur-md",
       )}
     >
       <a
         href="#main-content"
-        className="absolute left-4 top-2 -translate-y-20 bg-[#111318] px-4 py-2 text-sm font-semibold text-white focus:translate-y-0"
+        className="absolute left-4 top-2 -translate-y-20 bg-ink-deep px-4 py-2 text-sm font-semibold text-white focus:translate-y-0"
       >
         Skip to content
       </a>
@@ -57,7 +57,7 @@ export default function BeseamNavbar() {
           )}
         >
           <Link href="/" className="flex items-center" aria-label="Beseam home">
-            <Logo className="text-[#111318]" markClassName="drop-shadow-none" />
+            <Logo className="text-ink-deep" markClassName="drop-shadow-none" />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center lg:flex">
@@ -65,7 +65,7 @@ export default function BeseamNavbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="min-h-11 whitespace-nowrap px-3 py-3 text-[14px] font-medium text-black/62 transition-colors hover:text-[#111318] focus-visible:ring-2 focus-visible:ring-[#b8441d] xl:px-4"
+                className="min-h-11 whitespace-nowrap px-3 py-3 text-[14px] font-medium text-black/62 transition-colors hover:text-ink-deep focus-visible:ring-2 focus-visible:ring-signal-ink xl:px-4"
               >
                 {link.label}
               </Link>
@@ -82,7 +82,7 @@ export default function BeseamNavbar() {
               href={APP_LOGIN_URL}
               eventName="login_clicked"
               placement="navbar"
-              className="text-[14px] font-semibold text-black/62 transition-colors hover:text-[#b8441d]"
+              className="text-[14px] font-semibold text-black/62 transition-colors hover:text-signal-ink"
             >
               Log in
             </TrackedLink>
@@ -92,7 +92,7 @@ export default function BeseamNavbar() {
               eventCategory="conversion"
               placement="navbar"
               preserveUtm
-              className="group inline-flex min-h-10 items-center justify-center gap-2 whitespace-nowrap bg-[#b8441d] px-4 text-[13px] font-semibold text-white focus-visible:ring-2 focus-visible:ring-[#b8441d] focus-visible:ring-offset-3"
+              className="group inline-flex min-h-10 items-center justify-center gap-2 whitespace-nowrap bg-signal-ink px-4 text-[13px] font-semibold text-white focus-visible:ring-2 focus-visible:ring-signal-ink focus-visible:ring-offset-3"
             >
               Start for free
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -101,7 +101,7 @@ export default function BeseamNavbar() {
 
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center border border-black/40 text-[#111318] lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center border border-black/40 text-ink-deep lg:hidden"
             onClick={() => setMobileOpen((open) => !open)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
@@ -121,7 +121,7 @@ export default function BeseamNavbar() {
           id="mobile-navigation"
           className={cn(
             "border-t border-black/18 lg:hidden",
-            scrolled ? "bg-[#fafafa]/88 backdrop-blur-2xl" : "bg-[#fafafa]",
+            scrolled ? "bg-ground/88 backdrop-blur-2xl" : "bg-ground",
           )}
         >
           <div className="mx-auto max-w-[92rem] px-5 pb-7 sm:px-8">
@@ -142,7 +142,7 @@ export default function BeseamNavbar() {
                 href={APP_LOGIN_URL}
                 eventName="login_clicked"
                 placement="mobile_nav"
-                className="flex min-h-12 items-center justify-center border border-black/40 text-[14px] font-semibold text-[#111318]"
+                className="flex min-h-12 items-center justify-center border border-black/40 text-[14px] font-semibold text-ink-deep"
               >
                 Log in
               </TrackedLink>
@@ -153,7 +153,7 @@ export default function BeseamNavbar() {
                 placement="mobile_nav"
                 preserveUtm
                 onClick={() => setMobileOpen(false)}
-                className="flex min-h-12 items-center justify-center gap-2 bg-[#111318] px-5 text-[14px] font-semibold text-white"
+                className="flex min-h-12 items-center justify-center gap-2 bg-ink-deep px-5 text-[14px] font-semibold text-white"
               >
                 Start for free
                 <ArrowRight className="h-4 w-4" />

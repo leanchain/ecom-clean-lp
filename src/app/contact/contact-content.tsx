@@ -13,7 +13,7 @@ import {
 } from "@/lib/marketing-analytics";
 
 const inputClass =
-  "mt-1.5 min-h-11 w-full border border-black/30 bg-white px-3.5 py-2.5 text-[15px] text-[#111318] outline-none placeholder:text-black/52 focus:border-[#b8441d]";
+  "mt-1.5 min-h-11 w-full border border-black/30 bg-white px-3.5 py-2.5 text-[15px] text-ink-deep outline-none placeholder:text-black/52 focus:border-signal-ink";
 
 function ContactForm() {
   const { trackEvent } = useAnalytics();
@@ -78,12 +78,12 @@ function ContactForm() {
     return (
       <div
         role="status"
-        className="border border-black/18 bg-[#f6f6f6] p-8 text-center"
+        className="border border-black/18 bg-ground-2 p-8 text-center"
       >
-        <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.1em] text-[#b8441d]">
+        <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.1em] text-signal-ink">
           Message received
         </p>
-        <h2 className="mt-3 font-display text-[32px] font-normal tracking-[-0.02em] text-[#111318]">
+        <h2 className="mt-3 font-display text-[32px] font-normal tracking-[-0.02em] text-ink-deep">
           We&rsquo;ll reply within one business day.
         </h2>
       </div>
@@ -155,7 +155,7 @@ function ContactForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-5 inline-flex min-h-11 items-center justify-center bg-[#b8441d] px-6 text-[14px] font-semibold text-white disabled:cursor-wait disabled:opacity-70"
+        className="mt-5 inline-flex min-h-11 items-center justify-center bg-signal-ink px-6 text-[14px] font-semibold text-white disabled:cursor-wait disabled:opacity-70"
       >
         {submitting ? "Sending…" : "Send message"}
       </button>
@@ -165,15 +165,15 @@ function ContactForm() {
 
 export default function ContactContent() {
   return (
-    <div className="bg-[#fafafa] text-[#151515]">
+    <div className="bg-ground text-[#151515]">
       <section className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                 Contact
               </p>
-              <h1 className="mt-7 max-w-[16ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
+              <h1 className="mt-7 max-w-[16ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-ink-deep">
                 Questions before you commit?
               </h1>
             </div>
@@ -185,12 +185,12 @@ export default function ContactContent() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f6f6f6]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           <Reveal className="flex flex-col gap-6 border border-black/18 bg-white p-7 sm:flex-row sm:items-center sm:justify-between md:p-9">
             <a
               href="mailto:pankaj@beseam.com"
-              className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#111318] hover:text-[#b8441d]"
+              className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-ink-deep hover:text-signal-ink"
             >
               <Mail className="h-4 w-4" aria-hidden="true" />
               pankaj@beseam.com
@@ -206,7 +206,7 @@ export default function ContactContent() {
             <p className="font-mono text-[12px] uppercase tracking-[0.09em] text-black/62">
               Or send a message
             </p>
-            <h2 className="mt-4 font-display text-[clamp(1.8rem,2.6vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.02em] text-[#111318]">
+            <h2 className="mt-4 font-display text-[clamp(1.8rem,2.6vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.02em] text-ink-deep">
               We read every message.
             </h2>
             <div className="mt-8">

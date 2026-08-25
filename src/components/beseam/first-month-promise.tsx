@@ -1,7 +1,42 @@
+import Link from "next/link";
+
+import { ArrowRight } from "lucide-react";
+
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import { Reveal } from "@/components/beseam/reveal";
 import TrackedLink from "@/components/beseam/tracked-link";
 import { APP_REGISTER_URL } from "@/lib/app-urls";
+
+/**
+ * Three ways in, in the order a visitor meets them. They are separated here
+ * because “free” was doing three different jobs on the old page: the anonymous
+ * public scan, the self-serve product, and the first thirty days of working
+ * together are not the same offer and should not read as one.
+ *
+ * The third column is the emphasised one. It is a commercial engagement with a
+ * measured result at the end, not a trial that lapses.
+ */
+
+const ENTRY_POINTS = [
+  {
+    when: "Right now",
+    title: "The free scan",
+    body: "Enter your domain. Beseam reads your public storefront and shows where shoppers are losing you. No account, no access to your store, nothing to install.",
+    lead: false,
+  },
+  {
+    when: "Whenever you like",
+    title: "Beseam, run by your team",
+    body: "Create an account and work the loop yourself: go through what Beseam found, decide what deserves action, and make the change with your own people.",
+    lead: false,
+  },
+  {
+    when: "Your first 30 days",
+    title: "One improvement, with us",
+    body: "Bring one meaningful commercial problem. We connect the evidence, investigate what may explain it, decide with you what deserves action, help make a supported change, and measure what happens next.",
+    lead: true,
+  },
+] as const;
 
 export default function FirstMonthPromise({
   showManifestoLink = true,
@@ -11,44 +46,85 @@ export default function FirstMonthPromise({
   void showManifestoLink;
 
   return (
-    <section id="promise" className="scroll-mt-24 bg-[#faf1eb]">
-      <div className="mx-auto max-w-[92rem] px-5 pb-20 pt-12 sm:px-8 sm:pb-24 sm:pt-16 lg:px-10 lg:pb-28 lg:pt-16">
-        <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-20">
-          <div>
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
-              Your first 30 days
-            </p>
-            <h2 className="mt-4 max-w-[20ch] font-display text-[clamp(2rem,3.1vw,2.6rem)] font-normal leading-[1.06] tracking-[-0.02em] text-[#111318]">
-              Your first improvement, with us.
-            </h2>
-          </div>
-
-          <div className="self-end">
-            <p className="max-w-[58ch] text-[17px] leading-[1.7] text-black/66">
-              For the first 30 days, we work as an extension of your commerce
-              team. Give Beseam one meaningful commercial problem and we&rsquo;ll
-              connect the relevant evidence, investigate what may explain it,
-              decide with you what deserves action, help make a supported change,
-              and measure what happens next.
-            </p>
-            <div className="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-              <BookReviewCta
-                variant="primary"
-                location="first_month_promise"
-                label="Work with Beseam"
-                className="min-h-11 gap-2 px-5 py-0 text-[14px] font-semibold"
-              />
-              <TrackedLink
-                href={APP_REGISTER_URL}
-                eventName="free_pilot_clicked"
-                eventCategory="conversion"
-                placement="first_month_promise"
-                preserveUtm
-                className="inline-flex min-h-11 items-center justify-center border border-black/40 bg-transparent px-5 text-[14px] font-semibold text-[#151515] transition-colors hover:border-[#b8441d] hover:text-[#b8441d]"
-              >
-                Start free yourself
-              </TrackedLink>
+    <section
+      id="promise"
+      className="scroll-mt-24 border-t border-black/14 bg-[#faf1eb]"
+    >
+      <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+        <Reveal>
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end lg:gap-20">
+            <div>
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
+                Your first 30 days
+              </p>
+              <h2 className="mt-6 max-w-[18ch] text-balance font-display text-[clamp(2.3rem,3.8vw,3.9rem)] font-normal leading-[1.03] tracking-[-0.02em] text-ink-deep">
+                Your first improvement, with us.
+              </h2>
             </div>
+
+            <p className="max-w-[54ch] text-[17px] leading-[1.7] text-black/66">
+              Three ways in, and you can stop at any of them. What most teams
+              actually want is the third: one real commercial problem, worked
+              end to end, with something measured at the end of it.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.06}>
+          <div className="mt-12 grid border-t-2 border-ink-deep lg:mt-16 lg:grid-cols-3">
+            {ENTRY_POINTS.map((entry) => (
+              <article
+                key={entry.title}
+                className={`flex flex-col border-b border-black/16 py-7 last:border-b-0 lg:border-b-0 lg:border-l lg:border-black/16 lg:px-8 lg:py-9 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0 ${
+                  entry.lead ? "lg:bg-white/55" : ""
+                }`}
+              >
+                <p
+                  className={`font-mono text-[11px] font-semibold uppercase tracking-[0.12em] ${
+                    entry.lead ? "text-signal-ink" : "text-black/58"
+                  }`}
+                >
+                  {entry.when}
+                </p>
+                <h3 className="mt-4 max-w-[20ch] text-balance font-display text-[clamp(1.5rem,2.1vw,1.95rem)] font-normal leading-[1.12] tracking-[-0.02em] text-ink-deep">
+                  {entry.title}
+                </h3>
+                <p className="mt-4 max-w-[46ch] text-[15px] leading-[1.7] text-black/66">
+                  {entry.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.08}>
+          <div className="mt-10 flex flex-col items-start gap-4 border-t border-black/16 pt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
+            <BookReviewCta
+              variant="primary"
+              location="first_month_promise"
+              label="Work with Beseam"
+              className="min-h-12 gap-2 px-6 py-0 text-[15px] font-semibold"
+            />
+            <TrackedLink
+              href={APP_REGISTER_URL}
+              eventName="free_pilot_clicked"
+              eventCategory="conversion"
+              placement="first_month_promise"
+              preserveUtm
+              className="inline-flex min-h-12 items-center justify-center border border-black/40 bg-transparent px-6 text-[15px] font-semibold text-[#151515] transition-colors hover:border-signal-ink hover:text-signal-ink"
+            >
+              Start free yourself
+            </TrackedLink>
+            <Link
+              href="/#ai-check"
+              className="group inline-flex min-h-12 items-center gap-2 text-[15px] font-semibold text-ink-deep underline decoration-black/30 underline-offset-6 hover:decoration-signal-ink"
+            >
+              Or scan your store first
+              <ArrowRight
+                aria-hidden="true"
+                className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+              />
+            </Link>
           </div>
         </Reveal>
       </div>

@@ -143,7 +143,7 @@ export default function BenchmarksPage() {
   };
 
   return (
-    <div className="bg-[#fafafa] text-[#151515]">
+    <div className="bg-ground text-[#151515]">
       {hasBenchmarks ? (
         <script
           type="application/ld+json"
@@ -154,7 +154,7 @@ export default function BenchmarksPage() {
       <section>
         <div className="mx-auto max-w-[92rem] px-5 pb-16 pt-20 sm:px-8 sm:pt-28 lg:px-10">
           <Reveal>
-            <h1 className="max-w-[20ch] text-balance font-display text-[clamp(2.6rem,5vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-[#111318]">
+            <h1 className="max-w-[20ch] text-balance font-display text-[clamp(2.6rem,5vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-ink-deep">
               AI shopping answers often disagree on which brands belong.
             </h1>
             <p className="mt-8 max-w-[68ch] text-[17px] leading-[1.7] text-black/68">
@@ -182,9 +182,9 @@ export default function BenchmarksPage() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <figure className="mt-14 border-t-2 border-[#111318] pt-6">
+            <figure className="mt-14 border-t-2 border-ink-deep pt-6">
               <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-                <h2 className="max-w-[26ch] text-balance font-display text-[clamp(1.7rem,2.6vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.015em] text-[#111318]">
+                <h2 className="max-w-[26ch] text-balance font-display text-[clamp(1.7rem,2.6vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.015em] text-ink-deep">
                   {soloShare}% of brand namings came from a single engine.
                 </h2>
                 <span className="font-mono text-[12px] uppercase tracking-[0.1em] text-black/55">
@@ -219,7 +219,7 @@ export default function BenchmarksPage() {
                       {step.label}
                     </dt>
                     <dd className="mt-2 flex items-baseline gap-2.5">
-                      <span className="font-display text-[clamp(1.7rem,2.6vw,2.3rem)] leading-none tabular-nums text-[#111318]">
+                      <span className="font-display text-[clamp(1.7rem,2.6vw,2.3rem)] leading-none tabular-nums text-ink-deep">
                         {step.count}
                       </span>
                       <span className="font-mono text-[12px] tabular-nums text-black/55">
@@ -238,7 +238,7 @@ export default function BenchmarksPage() {
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <Reveal>
             <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
-              <h2 className="max-w-[18ch] text-balance font-display text-[clamp(2rem,3.1vw,3rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+              <h2 className="max-w-[18ch] text-balance font-display text-[clamp(2rem,3.1vw,3rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
                 The engines do not answer alike.
               </h2>
               <p className="max-w-[62ch] text-[16px] leading-[1.7] text-black/64">
@@ -255,7 +255,7 @@ export default function BenchmarksPage() {
                 questions
               </caption>
               <thead>
-                <tr className="border-b-2 border-[#111318] font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-black/54">
+                <tr className="border-b-2 border-ink-deep font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-black/54">
                   <th scope="col" className="py-3 pr-4 font-semibold">
                     Engine
                   </th>
@@ -296,7 +296,7 @@ export default function BenchmarksPage() {
                   >
                     <th
                       scope="row"
-                      className="py-4 pr-4 text-[15px] font-semibold text-[#111318]"
+                      className="py-4 pr-4 text-[15px] font-semibold text-ink-deep"
                     >
                       {engine.engine}
                     </th>
@@ -317,12 +317,12 @@ export default function BenchmarksPage() {
                             }}
                           />
                         </span>
-                        <span className="w-8 shrink-0 font-mono text-[13px] tabular-nums text-[#111318]">
+                        <span className="w-8 shrink-0 font-mono text-[13px] tabular-nums text-ink-deep">
                           {engine.namings}
                         </span>
                       </span>
                     </td>
-                    <td className="py-4 pr-4 text-right font-mono text-[13px] tabular-nums text-[#111318]">
+                    <td className="py-4 pr-4 text-right font-mono text-[13px] tabular-nums text-ink-deep">
                       {engine.perAnswer.toFixed(1)}
                     </td>
                     <td className="hidden py-4 pr-4 text-right font-mono text-[13px] tabular-nums text-black/70 sm:table-cell">
@@ -351,11 +351,11 @@ export default function BenchmarksPage() {
         </div>
       </section>
 
-      <section className="bg-[#f6f6f6]">
+      <section className="bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <Reveal>
-            <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b-2 border-[#111318] pb-4">
-              <h2 className="max-w-[24ch] text-balance font-display text-[clamp(1.7rem,2.6vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.015em] text-[#111318]">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-b-2 border-ink-deep pb-4">
+              <h2 className="max-w-[24ch] text-balance font-display text-[clamp(1.7rem,2.6vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.015em] text-ink-deep">
                 Every question, and which engine named what.
               </h2>
               <p className="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-black/58">
@@ -410,7 +410,7 @@ export default function BenchmarksPage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <Reveal>
-              <h2 className="max-w-[16ch] text-balance font-display text-[clamp(2rem,3.1vw,3rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+              <h2 className="max-w-[16ch] text-balance font-display text-[clamp(2rem,3.1vw,3rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
                 How every figure on this page is produced.
               </h2>
               <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-black/64">
@@ -440,7 +440,7 @@ export default function BenchmarksPage() {
 
               <Link
                 href="/scan"
-                className="mt-9 inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-[#b8441d]"
+                className="mt-9 inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-[#151515] underline decoration-black/30 underline-offset-8 transition-colors hover:decoration-signal-ink"
               >
                 Check my store
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />

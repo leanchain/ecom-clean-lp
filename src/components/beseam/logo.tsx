@@ -22,7 +22,7 @@ export default function Logo({
         viewBox="503 225 2655 3298"
         aria-hidden="true"
         className={cn(
-          "h-[0.80em] w-[0.70em] shrink-0 text-[#e8653a] drop-shadow-[0_1px_2px_rgba(17,19,24,0.35)]",
+          "h-[0.80em] w-[0.70em] shrink-0 text-signal drop-shadow-[0_1px_2px_rgba(17,19,24,0.35)]",
           markClassName,
         )}
       >

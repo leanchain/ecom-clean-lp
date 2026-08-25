@@ -45,15 +45,15 @@ const RESPONSIBILITIES = [
 export default function HowWeWorkPage() {
   return (
     <>
-      <section className="border-b border-black/14 bg-[#fafafa]">
+      <section className="border-b border-black/14 bg-ground">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.75fr)] lg:items-end lg:gap-20">
               <div>
-                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                   How we work with brands
                 </p>
-                <h1 className="mt-6 max-w-[14ch] text-balance font-display text-[clamp(3rem,5.8vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-[#111318]">
+                <h1 className="mt-6 max-w-[14ch] text-balance font-display text-[clamp(3rem,5.8vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-ink-deep">
                   An extension of your commerce team.
                 </h1>
               </div>
@@ -72,7 +72,7 @@ export default function HowWeWorkPage() {
                   />
                   <Link
                     href="/platform"
-                    className="group inline-flex min-h-12 items-center gap-2 px-1 text-[15px] font-semibold text-[#111318] underline decoration-black/25 underline-offset-6 hover:decoration-[#b8441d]"
+                    className="group inline-flex min-h-12 items-center gap-2 px-1 text-[15px] font-semibold text-ink-deep underline decoration-black/25 underline-offset-6 hover:decoration-signal-ink"
                   >
                     See the platform
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -84,12 +84,12 @@ export default function HowWeWorkPage() {
         </div>
       </section>
 
-      <section className="border-b border-white/12 bg-[#111318] text-white">
+      <section className="border-b border-white/12 bg-ink-deep text-white">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[minmax(14rem,0.55fr)_minmax(0,1.45fr)] lg:gap-20">
               <div>
-                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#e8653a]">
+                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal">
                   Not another dashboard to manage
                 </p>
                 <h2 className="mt-5 max-w-[13ch] font-display text-[clamp(2.2rem,3.8vw,3.8rem)] font-normal leading-[1.04] tracking-[-0.02em]">
@@ -110,7 +110,7 @@ export default function HowWeWorkPage() {
                       key={number}
                       className={`border-b border-white/14 py-6 md:border-b-0 md:px-5 ${index > 0 ? "md:border-l" : "md:pl-0"}`}
                     >
-                      <span className="font-mono text-[11px] font-semibold text-[#e8653a]">
+                      <span className="font-mono text-[11px] font-semibold text-signal">
                         {number}
                       </span>
                       <h3 className="mt-3 text-[17px] font-semibold text-white">
@@ -133,14 +133,14 @@ export default function HowWeWorkPage() {
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[minmax(14rem,0.5fr)_minmax(0,1.5fr)] lg:gap-20">
               <div>
-                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+                <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                   Working relationship
                 </p>
-                <h2 className="mt-5 max-w-[14ch] font-display text-[clamp(2.2rem,3.6vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-[#111318]">
+                <h2 className="mt-5 max-w-[14ch] font-display text-[clamp(2.2rem,3.6vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
                   Your judgment stays in the loop.
                 </h2>
               </div>
-              <div className="border-t-2 border-[#111318]">
+              <div className="border-t-2 border-ink-deep">
                 <div className="hidden grid-cols-2 gap-8 border-b border-black/14 py-4 text-[12px] font-semibold uppercase tracking-[0.1em] text-black/42 sm:grid">
                   <span>Your team</span>
                   <span>Beseam</span>
@@ -154,7 +154,7 @@ export default function HowWeWorkPage() {
                       <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/38 sm:hidden">
                         Your team
                       </span>
-                      <p className="mt-1 text-[15px] font-semibold text-[#111318] sm:mt-0">
+                      <p className="mt-1 text-[15px] font-semibold text-ink-deep sm:mt-0">
                         {row.yours}
                       </p>
                     </div>
@@ -174,15 +174,15 @@ export default function HowWeWorkPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/14 bg-[#fafafa]">
+      <section className="border-b border-black/14 bg-ground">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-              <article className="border-t-2 border-[#111318] pt-6">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+              <article className="border-t-2 border-ink-deep pt-6">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
                   Use Beseam directly
                 </p>
-                <h2 className="mt-4 text-[25px] font-semibold tracking-[-0.02em] text-[#111318]">
+                <h2 className="mt-4 text-[25px] font-semibold tracking-[-0.02em] text-ink-deep">
                   Your team operates the platform.
                 </h2>
                 <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-black/62">
@@ -191,18 +191,18 @@ export default function HowWeWorkPage() {
                 </p>
                 <Link
                   href="/platform"
-                  className="mt-6 inline-flex min-h-10 items-center gap-2 text-[14px] font-semibold text-[#111318] underline decoration-black/25 underline-offset-6 hover:decoration-[#b8441d]"
+                  className="mt-6 inline-flex min-h-10 items-center gap-2 text-[14px] font-semibold text-ink-deep underline decoration-black/25 underline-offset-6 hover:decoration-signal-ink"
                 >
                   Explore the platform
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </article>
 
-              <article className="border-t-2 border-[#b8441d] pt-6">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+              <article className="border-t-2 border-signal-ink pt-6">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
                   Work the loop with us
                 </p>
-                <h2 className="mt-4 text-[25px] font-semibold tracking-[-0.02em] text-[#111318]">
+                <h2 className="mt-4 text-[25px] font-semibold tracking-[-0.02em] text-ink-deep">
                   We operate alongside your team.
                 </h2>
                 <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-black/62">

@@ -101,7 +101,7 @@ export default function FieldbookSearch({
 
       {open && (
         <div
-          className="fixed inset-0 z-[100] flex items-start justify-center bg-[#111318]/58 px-4 pt-[8vh] backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-start justify-center bg-ink-deep/58 px-4 pt-[8vh] backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           aria-label="Search the Commerce Fieldbook"

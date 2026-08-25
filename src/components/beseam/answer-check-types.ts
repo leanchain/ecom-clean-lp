@@ -9,7 +9,9 @@ export type Step = {
 
 export type Finding = {
   code: string;
+  /** Technical check name. Secondary on the result: shown under "what we saw". */
   title: string;
+  /** Technical detail or analyzer recommendation. Also secondary. */
   detail: string;
   product: string | null;
   severity?: "blocker" | "high" | "medium" | "low" | "info";
@@ -18,6 +20,16 @@ export type Finding = {
   evidence?: string[];
   fix_complexity?: string;
   source?: "catalog" | "catalog_sample" | "page_audit";
+  /**
+   * Merchant-facing copy attached by the backend (`finding_copy.py`). These are
+   * the primary strings on the result: what a shopper or search engine may be
+   * experiencing, why it matters commercially, and the one next action.
+   * Optional because a cached payload from an older deploy may not carry them.
+   */
+  headline?: string;
+  why?: string;
+  next_step?: string;
+  area?: string;
 };
 
 export type PageAudit = {
@@ -31,7 +43,10 @@ export type PageAudit = {
   coverage: number;
   degraded: boolean;
   domain_scores: Record<string, number>;
-  domain_counts?: Record<string, { evaluated: number; failed: number; unevaluated: number }>;
+  domain_counts?: Record<
+    string,
+    { evaluated: number; failed: number; unevaluated: number }
+  >;
   checks_evaluated: number;
   checks_failed: number;
   checks_unevaluated: number;
@@ -123,7 +138,11 @@ export type SiteInventory = {
   };
   discovery_files?: Record<
     string,
-    { present: boolean | null; status_code: number | null; content_type: string | null }
+    {
+      present: boolean | null;
+      status_code: number | null;
+      content_type: string | null;
+    }
   >;
   internal_reach?: {
     status: string;
@@ -181,7 +200,13 @@ export type AnswerCheckResult = {
   products_seen: number;
   brand_evidence?: BrandEvidence;
   page_audits?: PageAudit[];
-  page_audits_status?: "not_started" | "queued" | "running" | "complete" | "failed" | string;
+  page_audits_status?:
+    | "not_started"
+    | "queued"
+    | "running"
+    | "complete"
+    | "failed"
+    | string;
   site_inventory?: SiteInventory;
   catalog_inventory?: CatalogInventory;
 };

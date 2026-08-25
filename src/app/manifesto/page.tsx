@@ -231,7 +231,7 @@ export default function ManifestoPage() {
   };
 
   return (
-    <article className="bg-[#fafafa] text-[#151515]">
+    <article className="bg-ground text-[#151515]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -241,10 +241,10 @@ export default function ManifestoPage() {
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                 The Beseam manifesto
               </p>
-              <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,6.1vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
+              <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,6.1vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-ink-deep">
                 Every commerce team should be able to operate like the best.
               </h1>
             </div>
@@ -269,7 +269,7 @@ export default function ManifestoPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f6f6f6]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
@@ -360,7 +360,7 @@ export default function ManifestoPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#111318] text-white">
+      <section className="border-b border-black/18 bg-ink-deep text-white">
         <div className="mx-auto grid max-w-[92rem] gap-14 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[20rem_minmax(0,1fr)] lg:items-start lg:gap-20 lg:px-10 lg:py-28">
           <Reveal>
             <figure>
@@ -422,7 +422,7 @@ export default function ManifestoPage() {
             </div>
             <Link
               href="/about"
-              className="mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-[#e8653a] underline decoration-white/20 underline-offset-7 hover:decoration-[#e8653a]"
+              className="mt-8 inline-flex items-center gap-2 text-[14px] font-semibold text-signal underline decoration-white/20 underline-offset-7 hover:decoration-signal"
             >
               More about the founder and advisors
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -461,7 +461,7 @@ export default function ManifestoPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f6f6f6]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
@@ -529,7 +529,7 @@ export default function ManifestoPage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#111318] text-white">
+      <section className="border-b border-black/18 bg-ink-deep text-white">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>

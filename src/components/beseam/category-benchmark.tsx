@@ -99,16 +99,16 @@ export default function CategoryBenchmarkFigure({
           </span>
         </div>
 
-        <p className="mt-5 max-w-[42ch] text-[17px] font-semibold leading-[1.4] text-[#111318]">
+        <p className="mt-5 max-w-[42ch] text-[17px] font-semibold leading-[1.4] text-ink-deep">
           &ldquo;{question}&rdquo;
         </p>
 
         <p className="mt-4 text-[13px] leading-relaxed text-black/62">
-          <span className="font-semibold tabular-nums text-[#111318]">
+          <span className="font-semibold tabular-nums text-ink-deep">
             {brands.length}
           </span>{" "}
           brands named in total.{" "}
-          <span className="font-semibold tabular-nums text-[#111318]">
+          <span className="font-semibold tabular-nums text-ink-deep">
             {soloCount}
           </span>{" "}
           of them by only one engine.
@@ -130,7 +130,7 @@ export default function CategoryBenchmarkFigure({
               >
                 {engineLabel(engine)}
               </span>
-              <span className="font-mono text-[12px] tabular-nums text-[#111318]">
+              <span className="font-mono text-[12px] tabular-nums text-ink-deep">
                 {named}
               </span>
             </span>
@@ -150,7 +150,7 @@ export default function CategoryBenchmarkFigure({
                     fact the row exists to carry. */}
                 <span
                   className={`pr-2 text-[14px] leading-snug ${
-                    consensus ? "font-semibold text-[#111318]" : "text-black/82"
+                    consensus ? "font-semibold text-ink-deep" : "text-black/82"
                   }`}
                 >
                   {row.brand}

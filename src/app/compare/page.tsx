@@ -92,7 +92,7 @@ export default function ComparePage() {
   };
 
   return (
-    <div className="bg-[#fafafa] text-[#111318]">
+    <div className="bg-ground text-ink-deep">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
@@ -102,7 +102,7 @@ export default function ComparePage() {
         <div className="mx-auto max-w-[92rem] px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-20 lg:px-10 lg:pb-28 lg:pt-24">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.88fr)_minmax(22rem,0.62fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                 Compare Beseam
               </p>
               <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,6vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em]">
@@ -124,10 +124,10 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#f6f6f6]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div className="grid gap-8 border-t border-black/24 pt-5 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-10">
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
               Start here
             </p>
             <div className="max-w-2xl">
@@ -150,7 +150,7 @@ export default function ComparePage() {
                 className="group flex flex-col justify-between gap-8 border-b border-r border-black/18 bg-white p-6 transition-colors hover:bg-[#fffdfb] sm:p-7"
               >
                 <div>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.09em] text-[#b8441d]">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.09em] text-signal-ink">
                     {comparison.category}
                   </span>
                   <h3 className="mt-5 text-[20px] font-semibold text-black/84">
@@ -160,7 +160,7 @@ export default function ComparePage() {
                     {comparison.headline}
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-2 text-[12px] font-semibold text-[#b8441d]">
+                <span className="inline-flex items-center gap-2 text-[12px] font-semibold text-signal-ink">
                   Compare
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -199,7 +199,7 @@ export default function ComparePage() {
                 return (
                   <div key={layer.title}>
                     <div className="grid gap-5 border-t border-black/24 pt-5 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-10">
-                      <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[#b8441d]">
+                      <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
                         {layer.eyebrow}
                       </p>
                       <div className="max-w-2xl">
@@ -227,7 +227,7 @@ export default function ComparePage() {
                                 <span className="font-mono text-[12px] text-black/62">
                                   {String(index + 1).padStart(2, "0")}
                                 </span>
-                                <span className="font-mono text-[12px] uppercase tracking-[0.09em] text-[#b8441d]">
+                                <span className="font-mono text-[12px] uppercase tracking-[0.09em] text-signal-ink">
                                   {comparison.category}
                                 </span>
                               </div>
@@ -238,7 +238,7 @@ export default function ComparePage() {
                                 {comparison.headline}
                               </p>
                             </div>
-                            <span className="inline-flex items-center gap-2 text-[12px] font-semibold text-[#b8441d]">
+                            <span className="inline-flex items-center gap-2 text-[12px] font-semibold text-signal-ink">
                               Compare
                               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                             </span>
@@ -255,7 +255,7 @@ export default function ComparePage() {
         </div>
       </section>
 
-      <section className="border-b border-black/18 bg-[#111318] text-white">
+      <section className="border-b border-black/18 bg-ink-deep text-white">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-20">
             <div>
@@ -291,7 +291,7 @@ export default function ComparePage() {
                   key={title}
                   className="border-b border-white/16 py-7 md:border-r md:px-6 lg:border-b-0 lg:last:border-r-0 lg:last:pr-0"
                 >
-                  <span className="font-mono text-[11px] text-[#e8653a]">
+                  <span className="font-mono text-[11px] text-signal">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-4 text-[17px] font-semibold text-white/92">
@@ -306,7 +306,7 @@ export default function ComparePage() {
           </div>
         </div>
       </section>
-      <section className="border-b border-black/18 bg-[#f6f6f6]">
+      <section className="border-b border-black/18 bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
           <div className="grid border-y border-black/24 lg:grid-cols-[minmax(0,1fr)_19rem]">
             <div className="py-10 pr-0 lg:py-14 lg:pr-16">

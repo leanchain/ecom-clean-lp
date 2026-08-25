@@ -50,7 +50,7 @@ export function FieldbookToolbar({
 
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-[90] bg-[#111318]/48 lg:hidden"
+          className="fixed inset-0 z-[90] bg-ink-deep/48 lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Fieldbook navigation"

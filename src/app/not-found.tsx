@@ -30,15 +30,15 @@ const DESTINATIONS = [
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[calc(100vh-4.5rem)] flex-col bg-[#fafafa] text-[#151515]">
+    <div className="flex min-h-[calc(100vh-4.5rem)] flex-col bg-ground text-[#151515]">
       <section className="border-b border-black/18">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end lg:gap-20">
             <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-[#b8441d]">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                 Error 404
               </p>
-              <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.6rem,5.4vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-[#111318]">
+              <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.6rem,5.4vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-ink-deep">
                 This page is not here.
               </h1>
             </div>
@@ -55,7 +55,7 @@ export default function NotFound() {
                 />
                 <Link
                   href="/"
-                  className="inline-flex min-h-11 items-center justify-center gap-2 text-[14px] font-semibold text-[#151515] underline decoration-black/25 underline-offset-7 hover:decoration-[#b8441d] sm:justify-start"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 text-[14px] font-semibold text-[#151515] underline decoration-black/25 underline-offset-7 hover:decoration-signal-ink sm:justify-start"
                 >
                   Back to the homepage{" "}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -66,9 +66,9 @@ export default function NotFound() {
         </div>
       </section>
 
-      <section className="flex-1 bg-[#f6f6f6]">
+      <section className="flex-1 bg-ground-2">
         <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
-          <h2 className="max-w-[18ch] font-serif text-[28px] font-normal leading-[1.06] tracking-[-0.02em] text-[#111318]">
+          <h2 className="max-w-[18ch] font-serif text-[28px] font-normal leading-[1.06] tracking-[-0.02em] text-ink-deep">
             Try one of these
           </h2>
           <div className="mt-8 border-t border-black/22">
@@ -89,7 +89,7 @@ export default function NotFound() {
                 </span>
                 <ArrowRight
                   aria-hidden="true"
-                  className="h-4 w-4 text-[#b8441d] transition-transform group-hover:translate-x-0.5"
+                  className="h-4 w-4 text-signal-ink transition-transform group-hover:translate-x-0.5"
                 />
               </Link>
             ))}
