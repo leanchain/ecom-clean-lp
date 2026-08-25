@@ -15,25 +15,59 @@ import { APP_REGISTER_URL } from "@/lib/app-urls";
  *
  * The third column is the emphasised one. It is a commercial engagement with a
  * measured result at the end, not a trial that lapses.
+ *
+ * Each column carries the same three rows — who does the work, what you get,
+ * who it suits — because “what do I actually receive” is the question this
+ * section exists to answer, and prose was letting all three columns dodge it.
  */
 
 const ENTRY_POINTS = [
   {
     when: "Right now",
     title: "The free scan",
-    body: "Enter your domain. Beseam reads your public storefront and shows where shoppers are losing you. No account, no access to your store, nothing to install.",
+    body: "Enter your domain. Beseam reads your public storefront and shows where shoppers are losing you.",
+    rows: [
+      ["Who does the work", "Nobody. Beseam reads what is already public."],
+      [
+        "What you get",
+        "Where shoppers can’t find you, what your product pages leave out, and what to change first.",
+      ],
+      [
+        "What it costs",
+        "Nothing — no account, no access to your store, nothing to install.",
+      ],
+    ],
     lead: false,
   },
   {
     when: "Whenever you like",
     title: "Beseam, run by your team",
     body: "Create an account and work the loop yourself: go through what Beseam found, decide what deserves action, and make the change with your own people.",
+    rows: [
+      ["Who does the work", "Your team, at your pace."],
+      [
+        "What you get",
+        "Findings in order of what they are worth, with the reason attached to each one.",
+      ],
+      ["Suits you if", "You already have people who can make store changes."],
+    ],
     lead: false,
   },
   {
     when: "Your first 30 days",
     title: "One improvement, with us",
-    body: "Bring one meaningful commercial problem. We connect the evidence, investigate what may explain it, decide with you what deserves action, help make a supported change, and measure what happens next.",
+    body: "Bring one meaningful commercial problem. We stay in it with you from the first signal through the change to the measured result.",
+    rows: [
+      ["Who does the work", "Beseam, with your team, under your approval."],
+      [
+        "What you get",
+        "The investigation, the recommendation, help making the change, and the proof afterwards.",
+      ],
+      [
+        "Suits you if",
+        "You have the problem and nobody free to chase it down.",
+      ],
+    ],
     lead: true,
   },
 ] as const;
@@ -92,6 +126,22 @@ export default function FirstMonthPromise({
                 <p className="mt-4 max-w-[46ch] text-[15px] leading-[1.7] text-black/66">
                   {entry.body}
                 </p>
+
+                <dl className="mt-6 border-t border-black/16">
+                  {entry.rows.map(([term, detail]) => (
+                    <div
+                      key={term}
+                      className="border-b border-black/12 py-3 last:border-b-0"
+                    >
+                      <dt className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/58">
+                        {term}
+                      </dt>
+                      <dd className="mt-1.5 max-w-[44ch] text-[14px] leading-[1.6] text-black/72">
+                        {detail}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
               </article>
             ))}
           </div>

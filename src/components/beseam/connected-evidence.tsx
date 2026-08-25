@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { ArrowRight, X } from "lucide-react";
 
+import { ImpactScreen } from "@/components/beseam/app-screens";
 import { Reveal } from "@/components/beseam/reveal";
 
 /**
@@ -33,6 +34,18 @@ import { Reveal } from "@/components/beseam/reveal";
  * and manufactured evidence is the one thing this product must never show.
  * Replace with a real scan when one is cleared for publication.
  */
+/**
+ * The four domains the loop runs across. Lives here rather than in its own
+ * band on the homepage: “connected” is a claim, and this is the shortest
+ * statement of what it is connecting.
+ */
+const DOMAINS = [
+  { title: "Discovery", detail: "Where shoppers start looking" },
+  { title: "Store", detail: "What your store shows them" },
+  { title: "Behaviour", detail: "What they do next" },
+  { title: "Revenue", detail: "What it was worth" },
+] as const;
+
 const QUERIES = [
   { label: "Searched", value: "“waterproof jacket”" },
   { label: "Then added", value: "... “commuting”" },
@@ -336,7 +349,7 @@ function MobileTrace() {
 export default function ConnectedEvidence() {
   return (
     <section
-      id="evidence"
+      id="proof"
       className="scroll-mt-24 border-y border-black/18 bg-ink-deep text-white"
     >
       <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
@@ -365,8 +378,40 @@ export default function ConnectedEvidence() {
           </div>
         </Reveal>
 
+        <Reveal delay={0.04}>
+          <div className="mt-10 border-y border-white/14 py-5">
+            <div className="grid gap-5 sm:grid-cols-4 sm:gap-0">
+              {DOMAINS.map((domain, index) => (
+                <div
+                  key={domain.title}
+                  className="relative pr-8 sm:px-6 sm:first:pl-0 sm:last:pr-0"
+                >
+                  <div className="flex items-center gap-3">
+                    <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-white">
+                      {domain.title}
+                    </p>
+                    {index < DOMAINS.length - 1 ? (
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-3.5 w-3.5 shrink-0 text-white/30 sm:absolute sm:-right-2 sm:top-0.5"
+                      />
+                    ) : null}
+                  </div>
+                  <p className="mt-2 text-[12px] leading-relaxed text-white/58">
+                    {domain.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-5 max-w-[70ch] text-[13px] leading-[1.65] text-white/58">
+              One shopper, followed across all four — so what you find in one
+              place still means something in the next.
+            </p>
+          </div>
+        </Reveal>
+
         <Reveal delay={0.06}>
-          <div className="mt-12 lg:border lg:border-white/16 lg:bg-white/[0.02]">
+          <div className="mt-10 lg:border lg:border-white/16 lg:bg-white/[0.02]">
             <div className="flex flex-wrap items-center justify-between gap-3 border-y border-white/12 py-3 lg:border-t-0 lg:border-b lg:px-6">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-signal">
                 Example trace
@@ -490,6 +535,25 @@ export default function ConnectedEvidence() {
                 </div>
               </div>
             </div>
+          </div>
+        </Reveal>
+
+        {/* The trace above says what Beseam concluded. This says where the
+            merchant reads it back afterwards — the same claim, in the product
+            rather than in a diagram. */}
+        <Reveal delay={0.08}>
+          <div className="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-14">
+            <div>
+              <h3 className="max-w-[18ch] text-balance font-display text-[clamp(1.6rem,2.3vw,2.2rem)] font-normal leading-[1.1] tracking-[-0.02em]">
+                Then the same questions, asked again.
+              </h3>
+              <p className="mt-4 max-w-[48ch] text-[15px] leading-[1.7] text-white/66">
+                A change is a guess until something measures it. What was
+                changed, what moved afterwards, and what did not — kept next to
+                the decision that produced it.
+              </p>
+            </div>
+            <ImpactScreen />
           </div>
         </Reveal>
       </div>
