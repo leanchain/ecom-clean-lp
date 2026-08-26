@@ -2552,6 +2552,18 @@ export default function HeroSurfaceShift() {
                     transform={`translate(${x} ${y})`}
                     className={`hero-kg-capability hero-kg-parent-active hero-kg-foreground-capability ${foregroundIsEvidence ? "hero-kg-evidence-type" : ""} ${isActive ? "hero-kg-active" : ""}`}
                   >
+                    {placement && Math.abs(placement.centerY - y) > 2 ? (
+                      // The lane-crowding pass can shove a label well away from
+                      // its own dot -- without this it can end up sitting
+                      // closer to a neighbor's dot than its own.
+                      <line
+                        className="hero-kg-cap-leader"
+                        x1="0"
+                        y1="0"
+                        x2={labelOnLeft ? -7.5 : 7.5}
+                        y2={placement.centerY - y}
+                      />
+                    ) : null}
                     <circle
                       className="hero-kg-cap-dot"
                       r={(1.75 + (node.index % 3) * 0.22) * nodeScale}
@@ -2584,6 +2596,15 @@ export default function HeroSurfaceShift() {
                 transform={`translate(${foregroundHub.x} ${foregroundHub.y})`}
                 className={`hero-kg-hub hero-kg-selected hero-kg-foreground-hub ${foregroundIsEvidence ? "hero-kg-evidence-type" : ""}`}
               >
+                {placement && Math.abs(placement.centerY - foregroundHub.y) > 2 ? (
+                  <line
+                    className="hero-kg-cap-leader"
+                    x1="0"
+                    y1="0"
+                    x2={labelOnLeft ? -9 : 9}
+                    y2={placement.centerY - foregroundHub.y}
+                  />
+                ) : null}
                 <circle
                   className="hero-kg-hub-ring"
                   r={(foregroundHub.id === "truth" ? 4.8 : 4.2) * nodeScale}
@@ -2638,6 +2659,17 @@ export default function HeroSurfaceShift() {
                     className={`hero-kg-sat-item ${foregroundIsEvidence ? "hero-kg-evidence-type" : ""} ${active ? "hero-kg-active" : ""}`}
                     transform={`translate(${x} ${y})`}
                   >
+                    {Math.abs(blockCenterY - y) > 2 ? (
+                      // Same crowding fix as capability labels: tie a
+                      // relocated label back to the dot it actually describes.
+                      <line
+                        className="hero-kg-sat-leader"
+                        x1="0"
+                        y1="0"
+                        x2={labelOnLeft ? -6.5 * nodeScale : 6.5 * nodeScale}
+                        y2={blockCenterY - y}
+                      />
+                    ) : null}
                     <circle className="hero-kg-sat-dot" r={2.9 * nodeScale} />
                     <text
                       className="hero-kg-sat-label"
@@ -2999,6 +3031,12 @@ export default function HeroSurfaceShift() {
           opacity: 0.26;
           transition: opacity ${STATE};
         }
+        .hero-kg-cap-leader {
+          stroke: ${INK};
+          stroke-width: 0.4;
+          stroke-opacity: 0.2;
+          vector-effect: non-scaling-stroke;
+        }
         .hero-kg-foreground-capability.hero-kg-active .hero-kg-cap-dot {
           opacity: 0.8;
           transform: scale(1.75);
@@ -3052,6 +3090,12 @@ export default function HeroSurfaceShift() {
         .hero-kg-foreground .hero-kg-sat-label {
           opacity: 0.3;
           transition: opacity ${STATE};
+        }
+        .hero-kg-sat-leader {
+          stroke: ${INK};
+          stroke-width: 0.4;
+          stroke-opacity: 0.2;
+          vector-effect: non-scaling-stroke;
         }
         .hero-kg-foreground .hero-kg-sat-value {
           opacity: 0.38;
