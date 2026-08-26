@@ -287,12 +287,15 @@ type GraphLayout = {
   positions: Record<HubId, Point>;
 };
 type ForegroundLabelSide = "left" | "right";
+// offsetY is a leash-limited nudge away from the label's own dot -- not an
+// absolute stacked position. Zero unless another label actually overlaps it.
 type ForegroundLabelPlacement = {
   side: ForegroundLabelSide;
-  centerY: number;
+  offsetY: number;
 };
-type ForegroundLabelItem = ForegroundLabelPlacement & {
+type ForegroundLabelItem = {
   key: string;
+  side: ForegroundLabelSide;
   desiredY: number;
   height: number;
 };
@@ -1014,45 +1017,48 @@ function squaredDistance(a: Point, b: Point) {
   return (a.x - b.x) ** 2 + (a.y - b.y) ** 2;
 }
 
-function distributeForegroundLabels(
-  items: readonly ForegroundLabelItem[],
-  minY: number,
-  maxY: number,
-  gap: number,
-) {
-  const placed = [...items]
-    .sort((a, b) => a.desiredY - b.desiredY)
-    .map((item) => ({ ...item, centerY: item.desiredY }));
-  if (!placed.length) return new Map<string, ForegroundLabelPlacement>();
-
-  let cursor = minY;
-  for (const item of placed) {
-    const half = item.height / 2;
-    item.centerY = Math.max(item.desiredY, cursor + half);
-    cursor = item.centerY + half + gap;
-  }
-
-  let nextTop = maxY;
-  for (let index = placed.length - 1; index >= 0; index -= 1) {
-    const item = placed[index];
-    const half = item.height / 2;
-    item.centerY = Math.min(item.centerY, nextTop - half);
-    nextTop = item.centerY - half - gap;
-  }
-
-  cursor = minY;
-  for (const item of placed) {
-    const half = item.height / 2;
-    item.centerY = Math.max(item.centerY, cursor + half);
-    cursor = item.centerY + half + gap;
+// Leashed rectangle separation: each label starts pinned to its own dot
+// (offset 0). Overlapping pairs push apart by half their overlap each pass;
+// a spring pulls every label back toward its own dot every pass. Labels with
+// nothing overlapping them settle back to ~0 -- only genuinely crowded ones
+// end up displaced, and only by as much as their neighbors force.
+function relaxForegroundLabels(items: readonly ForegroundLabelItem[], gap: number) {
+  if (!items.length) return new Map<string, ForegroundLabelPlacement>();
+  const offsets = items.map(() => 0);
+  const ITERATIONS = 24;
+  const SPRING = 0.15;
+  // No hard min/max clamp: unlike the old whole-canvas stack, displacement
+  // here is already leash-bounded by the spring (push settles once it
+  // balances the 15%-per-iteration pull-back), so a hub near the canvas
+  // edge can't get clamped into colliding with itself the way a global
+  // bound would.
+  for (let iter = 0; iter < ITERATIONS; iter += 1) {
+    for (let i = 0; i < items.length; i += 1) {
+      for (let j = i + 1; j < items.length; j += 1) {
+        const yi = items[i].desiredY + offsets[i];
+        const yj = items[j].desiredY + offsets[j];
+        const minGap = (items[i].height + items[j].height) / 2 + gap;
+        const dy = yj - yi;
+        const overlap = minGap - Math.abs(dy);
+        if (overlap > 0) {
+          const dir = dy >= 0 ? 1 : -1;
+          const shift = (overlap / 2) * dir;
+          offsets[i] -= shift;
+          offsets[j] += shift;
+        }
+      }
+    }
+    for (let i = 0; i < items.length; i += 1) {
+      offsets[i] *= 1 - SPRING;
+    }
   }
 
   return new Map(
-    placed.map((item) => [
+    items.map((item, index) => [
       item.key,
       {
         side: item.side,
-        centerY: item.centerY,
+        offsetY: offsets[index],
       } satisfies ForegroundLabelPlacement,
     ]),
   );
@@ -2178,7 +2184,6 @@ export default function HeroSurfaceShift() {
         lanes[side].push({
           key: `cap:${node.hubId}:${node.index}`,
           side,
-          centerY: y,
           desiredY: y,
           height: foregroundType.capability * 1.25,
         });
@@ -2199,7 +2204,6 @@ export default function HeroSurfaceShift() {
       lanes[side].push({
         key: `sat:${foregroundHub.id}:${index}`,
         side,
-        centerY: point.y,
         desiredY: point.y,
         height: foregroundType.satellite + foregroundType.value + 5,
       });
@@ -2209,17 +2213,14 @@ export default function HeroSurfaceShift() {
     lanes[hubSide].push({
       key: `hub:${foregroundHub.id}`,
       side: hubSide,
-      centerY: foregroundHub.y,
       desiredY: foregroundHub.y,
       height: foregroundType.hub * 1.3,
     });
 
-    const minY = 20;
-    const maxY = graphHeight - 20;
     const gap = Math.max(5, foregroundType.capability * 0.35);
     return new Map([
-      ...distributeForegroundLabels(lanes.left, minY, maxY, gap),
-      ...distributeForegroundLabels(lanes.right, minY, maxY, gap),
+      ...relaxForegroundLabels(lanes.left, gap),
+      ...relaxForegroundLabels(lanes.right, gap),
     ]);
   }, [
     capabilityNodes,
@@ -2543,10 +2544,9 @@ export default function HeroSurfaceShift() {
                   `cap:${node.hubId}:${node.index}`,
                 );
                 const labelOnLeft = placement?.side === "left";
-                // Pinned to this capability's own dot -- never the lane-
-                // crowding position, so the label is always next to the node
-                // it describes, never a neighbor's.
-                const labelY = -4.4;
+                // Pinned to this capability's own dot; only nudged if it
+                // actually overlaps a neighbor (see relaxForegroundLabels).
+                const labelY = -4.4 + (placement?.offsetY ?? 0);
                 return (
                   <g
                     key={`foreground-cap-${node.hubId}-${node.index}`}
@@ -2577,7 +2577,9 @@ export default function HeroSurfaceShift() {
             const labelOnLeft = placement?.side === "left";
             // Pinned to the hub's own position -- see the capability label
             // comment above.
-            const labelY = foregroundHub.y > graphHeight * 0.58 ? 12 : -6.5;
+            const labelY =
+              (foregroundHub.y > graphHeight * 0.58 ? 12 : -6.5) +
+              (placement?.offsetY ?? 0);
             return (
               <g
                 transform={`translate(${foregroundHub.x} ${foregroundHub.y})`}
@@ -2622,7 +2624,8 @@ export default function HeroSurfaceShift() {
               const labelOnLeft = placement?.side === "left";
               // Pinned to this satellite's own dot -- see the capability
               // label comment above.
-              const labelY = -(foregroundType.value + 3) / 2;
+              const labelY =
+                -(foregroundType.value + 3) / 2 + (placement?.offsetY ?? 0);
               const valueY = labelY + foregroundType.value + 3;
               return (
                 <g key={`foreground-sat-${foregroundHub.id}-${label}`}>
