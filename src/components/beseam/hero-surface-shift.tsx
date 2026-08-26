@@ -349,7 +349,7 @@ const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
       behavior: { x: 520, y: 835 },
       checkout: { x: 380, y: 1035 },
       revenue: { x: 632, y: 1040 },
-      marketplaces: { x: 680, y: 940 },
+      marketplaces: { x: 220, y: 500 },
     },
   },
   tablet: {
@@ -372,7 +372,7 @@ const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
       behavior: { x: 900, y: 685 },
       checkout: { x: 1070, y: 590 },
       revenue: { x: 1080, y: 275 },
-      marketplaces: { x: 1130, y: 80 },
+      marketplaces: { x: 430, y: 480 },
     },
   },
   desktop: {
@@ -395,7 +395,7 @@ const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
       behavior: { x: 1280, y: 675 },
       checkout: { x: 1580, y: 580 },
       revenue: { x: 1640, y: 126 },
-      marketplaces: { x: 1720, y: 260 },
+      marketplaces: { x: 130, y: 400 },
     },
   },
   wide: {
@@ -418,7 +418,7 @@ const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
       behavior: { x: 1590, y: 700 },
       checkout: { x: 1940, y: 610 },
       revenue: { x: 2070, y: 128 },
-      marketplaces: { x: 1980, y: 250 },
+      marketplaces: { x: 110, y: 420 },
     },
   },
   ultrawide: {
@@ -441,7 +441,7 @@ const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
       behavior: { x: 2020, y: 742 },
       checkout: { x: 2460, y: 650 },
       revenue: { x: 2660, y: 132 },
-      marketplaces: { x: 2530, y: 260 },
+      marketplaces: { x: 100, y: 430 },
     },
   },
 };
