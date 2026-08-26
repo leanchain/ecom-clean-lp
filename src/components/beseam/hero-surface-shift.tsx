@@ -32,11 +32,14 @@ type CardState =
   | { kind: "capability"; hubId: string; index: number }
   | null;
 
-const ACCENT = "#7c3aed";
-// Secondary accent, matches the app's --secondary token. Reserved for the
-// journey's *supporting* hubs/edges while a story plays -- evidence backing
-// the claim, not the claim itself.
-const SECONDARY = "#2e5da6";
+// Matches the app's --secondary token. The focus/expanded-hub color -- the
+// one thing actually active right now: the selected hub, its journey line,
+// connected edges, active capability/satellite dots.
+const ACCENT = "#2e5da6";
+// Matches the app's --signal-ink token (brand orange, light-ground variant).
+// Reserved for the journey's *supporting* hubs/edges while a story plays --
+// evidence backing the claim, not the claim itself.
+const SECONDARY = "#b8441d";
 const INK = "#111318";
 const PAPER = "#fafafa";
 const FOREGROUND_SPREAD = 1.3;
@@ -2145,6 +2148,13 @@ export default function HeroSurfaceShift() {
   const foregroundHub = renderedForegroundHubId
     ? hubById[renderedForegroundHubId]
     : null;
+  // A node keeps its own color through focus/expand -- it doesn't repaint to
+  // a universal "active" hue. See isEvidenceHub: journey stops stay
+  // secondary blue, evidence-only hubs stay signal-ink orange, whichever one
+  // is actually in focus right now.
+  const foregroundIsEvidence = foregroundHub
+    ? isEvidenceHub(foregroundHub.id)
+    : false;
   const foregroundType = FOREGROUND_TYPE[layoutName];
   const foregroundLabelPlacements = useMemo(() => {
     const empty = new Map<string, ForegroundLabelPlacement>();
@@ -2515,7 +2525,7 @@ export default function HeroSurfaceShift() {
                     x2={x}
                     y2={y}
                     pathLength={1}
-                    className="hero-kg-parent-active hero-kg-foreground-cap-edge"
+                    className={`hero-kg-parent-active hero-kg-foreground-cap-edge ${foregroundIsEvidence ? "hero-kg-evidence-type" : ""}`}
                   />
                 );
               })}
@@ -2540,7 +2550,7 @@ export default function HeroSurfaceShift() {
                   <g
                     key={`foreground-cap-${node.hubId}-${node.index}`}
                     transform={`translate(${x} ${y})`}
-                    className={`hero-kg-capability hero-kg-parent-active hero-kg-foreground-capability ${isActive ? "hero-kg-active" : ""}`}
+                    className={`hero-kg-capability hero-kg-parent-active hero-kg-foreground-capability ${foregroundIsEvidence ? "hero-kg-evidence-type" : ""} ${isActive ? "hero-kg-active" : ""}`}
                   >
                     <circle
                       className="hero-kg-cap-dot"
@@ -2572,7 +2582,7 @@ export default function HeroSurfaceShift() {
             return (
               <g
                 transform={`translate(${foregroundHub.x} ${foregroundHub.y})`}
-                className="hero-kg-hub hero-kg-selected hero-kg-foreground-hub"
+                className={`hero-kg-hub hero-kg-selected hero-kg-foreground-hub ${foregroundIsEvidence ? "hero-kg-evidence-type" : ""}`}
               >
                 <circle
                   className="hero-kg-hub-ring"
@@ -2622,10 +2632,10 @@ export default function HeroSurfaceShift() {
                     x2={x}
                     y2={y}
                     pathLength={1}
-                    className="hero-kg-sat-edge"
+                    className={`hero-kg-sat-edge ${foregroundIsEvidence ? "hero-kg-evidence-type" : ""}`}
                   />
                   <g
-                    className={`hero-kg-sat-item ${active ? "hero-kg-active" : ""}`}
+                    className={`hero-kg-sat-item ${foregroundIsEvidence ? "hero-kg-evidence-type" : ""} ${active ? "hero-kg-active" : ""}`}
                     transform={`translate(${x} ${y})`}
                   >
                     <circle className="hero-kg-sat-dot" r={2.9 * nodeScale} />
@@ -2705,7 +2715,7 @@ export default function HeroSurfaceShift() {
           stroke-width: 1.35;
           stroke-opacity: 0.52;
           stroke-dasharray: none;
-          filter: drop-shadow(0 0 3px rgba(124,58,237,.16));
+          filter: drop-shadow(0 0 3px rgba(46,93,166,.16));
         }
         .hero-kg-auto-signal {
           width: 18px;
@@ -2863,6 +2873,13 @@ export default function HeroSurfaceShift() {
           fill: ${ACCENT};
           opacity: 0.8;
         }
+        /* A node keeps its own color through focus -- see foregroundIsEvidence. */
+        .hero-kg-hub.hero-kg-selected.hero-kg-evidence-type .hero-kg-hub-ring {
+          stroke: ${SECONDARY};
+        }
+        .hero-kg-hub.hero-kg-selected.hero-kg-evidence-type .hero-kg-hub-core {
+          fill: ${SECONDARY};
+        }
         .hero-kg-hub.hero-kg-selected .hero-kg-hub-label {
           opacity: 0.32;
         }
@@ -2870,6 +2887,9 @@ export default function HeroSurfaceShift() {
           fill: ${ACCENT};
           transform-box: fill-box;
           transform-origin: center;
+        }
+        .hero-kg-sat-item.hero-kg-evidence-type .hero-kg-sat-dot {
+          fill: ${SECONDARY};
         }
         .hero-kg-sat-label {
           fill: ${INK};
@@ -2882,6 +2902,9 @@ export default function HeroSurfaceShift() {
           font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
           font-size: 7.4px;
           font-weight: 750;
+        }
+        .hero-kg-sat-item.hero-kg-evidence-type .hero-kg-sat-value {
+          fill: ${SECONDARY};
         }
         .hero-kg-lens {
           fill: none;
@@ -2962,6 +2985,9 @@ export default function HeroSurfaceShift() {
           /* No non-scaling-stroke: see .hero-kg-foreground-neighbor-edge. */
           transition: stroke-dashoffset ${TRACK};
         }
+        .hero-kg-foreground .hero-kg-capability-edges line.hero-kg-foreground-cap-edge.hero-kg-evidence-type {
+          stroke: ${SECONDARY};
+        }
         .hero-kg-foreground-capability .hero-kg-cap-dot {
           fill: ${ACCENT};
           opacity: 0.55;
@@ -2976,6 +3002,9 @@ export default function HeroSurfaceShift() {
         .hero-kg-foreground-capability.hero-kg-active .hero-kg-cap-dot {
           opacity: 0.8;
           transform: scale(1.75);
+        }
+        .hero-kg-foreground-capability.hero-kg-evidence-type .hero-kg-cap-dot {
+          fill: ${SECONDARY};
         }
         .hero-kg-foreground-capability.hero-kg-active .hero-kg-cap-label {
           opacity: 0.4;
@@ -2992,6 +3021,12 @@ export default function HeroSurfaceShift() {
           transform: scale(calc(.96 + var(--kg-expand) * .42));
           transition: transform ${TRACK};
         }
+        .hero-kg-foreground-hub.hero-kg-evidence-type .hero-kg-hub-ring {
+          stroke: ${SECONDARY};
+        }
+        .hero-kg-foreground-hub.hero-kg-evidence-type .hero-kg-hub-core {
+          fill: ${SECONDARY};
+        }
         .hero-kg-foreground-hub .hero-kg-hub-label {
           opacity: 0.32;
           font-size: 8.4px;
@@ -3005,6 +3040,9 @@ export default function HeroSurfaceShift() {
           stroke-dashoffset: calc(1 - var(--kg-expand));
           /* No non-scaling-stroke: see .hero-kg-foreground-neighbor-edge. */
           transition: stroke-dashoffset ${TRACK};
+        }
+        .hero-kg-foreground .hero-kg-expanded-foreground .hero-kg-sat-edge.hero-kg-evidence-type {
+          stroke: ${SECONDARY};
         }
         .hero-kg-foreground .hero-kg-sat-dot {
           opacity: 0.55;
