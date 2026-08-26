@@ -274,6 +274,23 @@ const HUBS: readonly Hub[] = [
       ["Observed impact", "+8.4%", 68],
     ],
   },
+  {
+    id: "marketplaces",
+    label: "Marketplaces",
+    x: 1720,
+    y: 260,
+    satellites: [
+      ["Amazon", "74"],
+      ["eBay", "58"],
+      ["Otto", "62"],
+      ["Galaxus", "69"],
+    ],
+    metrics: [
+      ["Amazon visibility", "74 / 100", 74],
+      ["eBay visibility", "58 / 100", 58],
+      ["Buy Box coverage", "72%", 72],
+    ],
+  },
 ] as const;
 
 type HubId = (typeof HUBS)[number]["id"];
@@ -332,6 +349,7 @@ const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
       behavior: { x: 520, y: 835 },
       checkout: { x: 380, y: 1035 },
       revenue: { x: 632, y: 1040 },
+      marketplaces: { x: 680, y: 940 },
     },
   },
   tablet: {
@@ -354,6 +372,7 @@ const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
       behavior: { x: 900, y: 685 },
       checkout: { x: 1070, y: 590 },
       revenue: { x: 1080, y: 275 },
+      marketplaces: { x: 1130, y: 80 },
     },
   },
   desktop: {
@@ -376,6 +395,7 @@ const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
       behavior: { x: 1280, y: 675 },
       checkout: { x: 1580, y: 580 },
       revenue: { x: 1640, y: 126 },
+      marketplaces: { x: 1720, y: 260 },
     },
   },
   wide: {
@@ -398,6 +418,7 @@ const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
       behavior: { x: 1590, y: 700 },
       checkout: { x: 1940, y: 610 },
       revenue: { x: 2070, y: 128 },
+      marketplaces: { x: 1980, y: 250 },
     },
   },
   ultrawide: {
@@ -420,6 +441,7 @@ const GRAPH_LAYOUTS: Record<GraphLayoutName, GraphLayout> = {
       behavior: { x: 2020, y: 742 },
       checkout: { x: 2460, y: 650 },
       revenue: { x: 2660, y: 132 },
+      marketplaces: { x: 2530, y: 260 },
     },
   },
 };
@@ -824,6 +846,33 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
       "Reconcile tracked and commerce-source revenue evidence.",
     ],
   ],
+  marketplaces: [
+    [
+      "Buy Box coverage",
+      "72%",
+      "Share of tracked listings currently winning the buy box against competing sellers.",
+    ],
+    [
+      "Listing completeness",
+      "88%",
+      "Required marketplace fields and imagery present across tracked SKUs.",
+    ],
+    [
+      "Price parity",
+      "91%",
+      "Tracked listings priced in line with the merchant's own storefront.",
+    ],
+    [
+      "Category ranking",
+      "Top 20",
+      "Median tracked position within its marketplace category page.",
+    ],
+    [
+      "Review coverage",
+      "64%",
+      "Tracked SKUs carrying enough reviews to support a buying decision.",
+    ],
+  ],
 };
 
 const LINKS = [
@@ -853,6 +902,9 @@ const LINKS = [
   ["brand", "campaigns"],
   ["creative", "pdp"],
   ["revenue", "recs"],
+  ["catalog", "marketplaces"],
+  ["brand", "marketplaces"],
+  ["marketplaces", "revenue"],
 ] as const;
 
 const WEAK_LINKS = [
@@ -862,6 +914,7 @@ const WEAK_LINKS = [
   ["creative", "behavior"],
   ["truth", "revenue"],
   ["pdp", "revenue"],
+  ["campaigns", "marketplaces"],
 ] as const;
 
 type JourneyDefinition = {
@@ -908,6 +961,16 @@ const JOURNEYS: readonly JourneyDefinition[] = [
     supportByNode: {
       campaigns: ["brand", "creative", "behavior"],
       pdp: ["creative", "behavior"],
+      checkout: ["behavior"],
+      revenue: ["behavior"],
+    },
+  },
+  {
+    id: "marketplace-discovery",
+    nodes: ["marketplaces", "pdp", "checkout", "revenue"],
+    supportByNode: {
+      marketplaces: ["catalog", "brand", "behavior"],
+      pdp: ["catalog", "behavior"],
       checkout: ["behavior"],
       revenue: ["behavior"],
     },
@@ -1022,7 +1085,10 @@ function squaredDistance(a: Point, b: Point) {
 // a spring pulls every label back toward its own dot every pass. Labels with
 // nothing overlapping them settle back to ~0 -- only genuinely crowded ones
 // end up displaced, and only by as much as their neighbors force.
-function relaxForegroundLabels(items: readonly ForegroundLabelItem[], gap: number) {
+function relaxForegroundLabels(
+  items: readonly ForegroundLabelItem[],
+  gap: number,
+) {
   if (!items.length) return new Map<string, ForegroundLabelPlacement>();
   const offsets = items.map(() => 0);
   const ITERATIONS = 24;
