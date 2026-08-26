@@ -1,18 +1,11 @@
 import { Reveal } from "@/components/beseam/reveal";
 
 /**
- * Markets are a product capability, not a dropdown, so the section has to show
- * the thing that actually differs: the sentence a shopper types.
- *
- * The question leads in each column, in the local language, because that is the
- * part a merchant can verify against their own experience in two seconds. The
- * three rows underneath say what changes with it.
- *
- * These are illustrations of the kind of difference Beseam observes, and the
- * closing line says so. No claim is made about what is true for any particular
- * catalogue — that is what a scan is for.
+ * Markets are a product capability, not a dropdown, so the section shows the
+ * thing that can actually differ: what a shopper asks, the comparison set, and
+ * the assumptions around the purchase. These are illustrations, not claims
+ * about every shopper or catalogue in a country.
  */
-
 const MARKETS = [
   {
     place: "Switzerland",
@@ -23,15 +16,15 @@ const MARKETS = [
     rows: [
       [
         "The words",
-        "Velo, not Fahrrad. A product page written for Germany reads foreign here.",
+        "A Swiss-German shopper may say Velo where a Germany-focused page says Fahrrad.",
       ],
       [
         "The comparison",
-        "Local outdoor retailers, not the brands that dominate the answer in the UK.",
+        "The relevant comparison set may be local outdoor retailers rather than the brands that surface in another market.",
       ],
       [
         "The assumption",
-        "Prices in CHF, and a clear answer about what happens at the border on a return.",
+        "Shoppers may expect CHF pricing and clear cross-border return information.",
       ],
     ],
   },
@@ -44,12 +37,12 @@ const MARKETS = [
     rows: [
       [
         "The words",
-        "Commuting is “cycling to work”, and the scheme language turns up in the query itself.",
+        "A UK shopper may phrase the use case as “cycling to work” rather than using the same wording as another market.",
       ],
-      ["The comparison", "Marketplace listings as often as brand stores."],
+      ["The comparison", "Marketplace listings may compete alongside brand stores."],
       [
         "The assumption",
-        "Next-day delivery and free returns, taken for granted rather than asked about.",
+        "Delivery speed and return terms may be taken for granted or asked about differently.",
       ],
     ],
   },
@@ -57,18 +50,20 @@ const MARKETS = [
     place: "Italy",
     flag: "🇮🇹",
     language: "Italiano",
-    question:
-      "«Qual è la migliore giacca antipioggia per andare in bici in città?»",
+    question: "«Qual è la migliore giacca antipioggia per andare in bici in città?»",
     translation: "Which is the best rain jacket for cycling in the city?",
     rows: [
-      ["The words", "Antipioggia, and in città — the use is urban, not sport."],
+      [
+        "The words",
+        "A shopper may use antipioggia and describe an urban use case as in città.",
+      ],
       [
         "The comparison",
-        "Brands whose product pages are actually written in Italian.",
+        "Italian-language product pages may become more relevant in the comparison set.",
       ],
       [
         "The assumption",
-        "EU sizing, and sizing guidance that does not assume a UK chart.",
+        "Sizing guidance and delivery expectations can differ from an English-language market.",
       ],
     ],
   },
@@ -92,10 +87,10 @@ export default function MarketsSection() {
               </h2>
             </div>
             <p className="max-w-[52ch] text-[17px] leading-[1.72] text-white/70">
-              The same product sells differently in every market. Different
-              words, different rivals, different things taken for granted about
-              delivery and returns. Beseam asks the questions shoppers actually
-              ask there, in their language, and looks at what comes back.
+              Language, competitors, delivery expectations, and the way a use
+              case is described can change by market. Beseam keeps that context
+              attached to the questions it tests instead of treating every
+              country as the same storefront translated.
             </p>
           </div>
         </Reveal>
@@ -108,51 +103,31 @@ export default function MarketsSection() {
                 className="border-b border-white/14 py-8 lg:border-b-0 lg:border-l lg:border-white/14 lg:px-8 lg:py-9 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0"
               >
                 <p className="flex flex-wrap items-baseline gap-x-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-signal">
-                  <span
-                    aria-hidden="true"
-                    className="text-[15px] leading-none"
-                  >
+                  <span aria-hidden="true" className="text-[15px] leading-none">
                     {market.flag}
                   </span>
                   {market.place}
-                  <span
-                    aria-hidden="true"
-                    className="h-1 w-1 rounded-full bg-white/30"
-                  />
+                  <span aria-hidden="true" className="h-1 w-1 rounded-full bg-white/30" />
                   <span className="text-white/56">{market.language}</span>
                 </p>
 
                 <p
-                  lang={
-                    market.language === "Deutsch"
-                      ? "de"
-                      : market.language === "Italiano"
-                        ? "it"
-                        : "en"
-                  }
+                  lang={market.language === "Deutsch" ? "de" : market.language === "Italiano" ? "it" : "en"}
                   className="mt-5 font-display text-[clamp(1.2rem,1.65vw,1.55rem)] leading-[1.32] text-white/92 lg:min-h-[3.9em]"
                 >
                   {market.question}
                 </p>
                 {market.translation ? (
-                  <p className="mt-2 text-[12px] leading-[1.5] text-white/56">
-                    {market.translation}
-                  </p>
+                  <p className="mt-2 text-[12px] leading-[1.5] text-white/56">{market.translation}</p>
                 ) : (
-                  <p
-                    aria-hidden="true"
-                    className="mt-2 hidden text-[12px] leading-[1.5] text-transparent lg:block"
-                  >
+                  <p aria-hidden="true" className="mt-2 hidden text-[12px] leading-[1.5] text-transparent lg:block">
                     &nbsp;
                   </p>
                 )}
 
                 <dl className="mt-7 border-t border-white/14">
                   {market.rows.map(([term, detail]) => (
-                    <div
-                      key={term}
-                      className="border-b border-white/12 py-3.5 last:border-b-0"
-                    >
+                    <div key={term} className="border-b border-white/12 py-3.5 last:border-b-0">
                       <dt className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-white/58">
                         {term}
                       </dt>
@@ -169,9 +144,9 @@ export default function MarketsSection() {
 
         <Reveal delay={0.08}>
           <p className="mt-10 max-w-[74ch] border-l-2 border-signal pl-4 text-[14px] leading-[1.7] text-white/60">
-            Examples of the kind of difference a market makes. What actually
-            differs for your catalogue is what Beseam observes — market by
-            market, in the language your shoppers use.
+            These are examples of the kinds of differences Beseam can test. What
+            actually differs for your catalogue comes from the evidence observed
+            in each market.
           </p>
         </Reveal>
       </div>

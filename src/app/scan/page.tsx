@@ -32,7 +32,8 @@ export default function ScanPage() {
           <LiveAnswerCheck placement="ai_discovery_scan" showPromise />
         </div>
 
-        {/* The highest-intent page on the site had no way to talk to us. */}
+        {/* The highest-intent page on the site has the same managed path as the
+            homepage and scan result, so there is one sales CTA vocabulary. */}
         <div
           data-print-hide
           className="mx-auto mt-20 max-w-[76rem] bg-ink-deep px-6 py-12 text-white sm:px-10 sm:py-14"
@@ -50,7 +51,7 @@ export default function ScanPage() {
             </div>
             <BookReviewCta
               location="scan_page"
-              label="Book a 20-minute store review"
+              label="Plan my first improvement"
               className="bg-white text-ink-deep hover:bg-signal hover:text-white"
             />
           </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import {
   ArrowRight,
+  BarChart3,
   BookOpen,
   Boxes,
   ClipboardCheck,
@@ -46,6 +47,13 @@ const SECTIONS = [
     description:
       "Find the symptom closest to yours, then collect the details needed to narrow the cause.",
     icon: ClipboardCheck,
+  },
+  {
+    title: "Benchmarks",
+    href: "/benchmarks",
+    description:
+      "Compare category patterns after you understand the problem you are trying to solve.",
+    icon: BarChart3,
   },
   {
     title: "Agent skills",

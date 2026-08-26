@@ -7,6 +7,7 @@ import ConnectedEvidence from "@/components/beseam/connected-evidence";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
 import MarketsSection from "@/components/beseam/markets-section";
+import OperatingLoop from "@/components/beseam/operating-loop";
 import { Reveal } from "@/components/beseam/reveal";
 import ShopperLoss from "@/components/beseam/shopper-loss";
 import WhyBeseam from "@/components/beseam/why-beseam";
@@ -14,22 +15,14 @@ import WhyBeseam from "@/components/beseam/why-beseam";
 /**
  * Section order is the argument, and it is deliberate:
  *
- *   problem → why us → proof we do not guess → markets → how you compare →
- *   what you actually get
+ * problem → why us → proof we do not guess → operating model → markets →
+ * how you compare → what you actually get
  *
- * Benchmarks used to sit second. They answer “how do I compare”, which is a
- * question a visitor only has once they know what the product is, so they now
- * sit late.
- *
- * Four sections used to make the same argument. “Observe / Understand / Decide
- * / Act / Learn” asked a non-technical buyer to learn five words for something
- * ConnectedEvidence already shows happening, and WorkingModes said what the
- * last section’s columns say with deliverables attached. Both are gone: the
- * page argues each point once, in the place where it can be shown rather than
- * asserted.
+ * Benchmarks answer “how do I compare”, so they sit after a visitor already
+ * understands what Beseam does. The canonical Observe → Understand → Decide →
+ * Act → Learn loop stays on the homepage, but only after a concrete trace has
+ * made those words easy to understand.
  */
-
-/** Three concrete returns, so “free scan” is not an unpriced promise. */
 const SCAN_RETURNS = [
   "Where shoppers can’t find you",
   "What your product pages leave out",
@@ -39,10 +32,6 @@ const SCAN_RETURNS = [
 export default function ProductionHomepage() {
   return (
     <div className="bg-ground text-[#151515]">
-      {/* The scan is the page's only real conversion, so it lives in the first
-          viewport rather than behind a jump link. The graph is pinned to the
-          opening screen so a rendered result can grow the section without
-          stretching the artwork down the page. */}
       <section id="home-hero" className="relative isolate overflow-hidden">
         <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[80svh]">
           <HeroSurfaceShift />
@@ -58,8 +47,7 @@ export default function ProductionHomepage() {
               </p>
               <h1 className="pointer-events-auto mx-auto mt-6 max-w-[18ch] text-balance font-display text-[clamp(3rem,5.6vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-ink-deep">
                 Turn product <span className="text-signal-ink">discovery</span>{" "}
-                into buying{" "}
-                <span style={{ color: "var(--secondary)" }}>decisions</span>.
+                into buying <span style={{ color: "var(--secondary)" }}>decisions</span>.
               </h1>
               <p className="pointer-events-auto mx-auto mt-6 max-w-[58ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
                 Beseam finds where shoppers get lost, shows what is worth
@@ -68,16 +56,15 @@ export default function ProductionHomepage() {
               </p>
 
               <div className="pointer-events-auto mx-auto mt-9 w-full">
-                {/* The hero starts the scan and hands off to /scan, which is
-                    built to hold a result. Rendering it here grew a ~2,000px
-                    card inside a centred 80svh composition and left the scan
-                    with no URL to share, reload, or come back to. */}
                 <LiveAnswerCheck
                   placement="homepage_hero"
                   handOffTo="/scan"
                   formNote={
                     <div className="mx-auto mt-2 flex flex-col items-center text-center">
-                      <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+                      <p className="text-[12.5px] leading-snug text-black/54">
+                        Free and anonymous. Public storefront pages only.
+                      </p>
+                      <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
                         {SCAN_RETURNS.map((item) => (
                           <li
                             key={item}
@@ -111,15 +98,11 @@ export default function ProductionHomepage() {
       </section>
 
       <ShopperLoss />
-
       <WhyBeseam />
-
       <ConnectedEvidence />
-
+      <OperatingLoop />
       <MarketsSection />
-
       <CategoryBenchmarksSection />
-
       <FirstMonthPromise />
     </div>
   );

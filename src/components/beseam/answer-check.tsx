@@ -2922,14 +2922,13 @@ export default function AnswerCheck({
             disabled={submitting}
             className="group inline-flex min-h-12 items-center justify-center gap-2 bg-signal-ink px-6 text-[15px] font-semibold text-white disabled:opacity-70"
           >
-            {submitting ? "Reading your store…" : "Scan my store free"}
+            {submitting ? "Reading your store…" : "Scan my store"}
             <ArrowRight
               aria-hidden="true"
               className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
             />
           </button>
         </div>
-
         <label className="sr-only" aria-hidden="true">
           Website
           <input
@@ -2986,8 +2985,9 @@ export default function AnswerCheck({
               className="mb-4 flex flex-wrap items-center justify-between gap-3 border border-black/18 bg-[#fffaf7] px-5 py-4"
             >
               <p className="max-w-[62ch] text-[13px] leading-relaxed text-ink-deep">
-                We did not finish reading your product pages this time.
-                Everything else on this card is complete and safe to act on.
+                We did not finish reading your product pages this time. The
+                completed observations below are still useful; read the findings
+                as possibilities, not verdicts.
               </p>
               <button
                 type="submit"

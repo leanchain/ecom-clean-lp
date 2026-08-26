@@ -93,7 +93,7 @@ function ScreenChrome({
 export function ActionsScreen() {
   return (
     <div className="border border-black/16 bg-white">
-      <ScreenChrome title="Actions" meta="In the product" />
+      <ScreenChrome title="Actions" meta="Illustrative product view" />
 
       <div className="relative">
         <div className="grid grid-cols-[minmax(0,1fr)_4.5rem_4.5rem] gap-3 border-b border-black/12 px-4 py-2 sm:px-5">

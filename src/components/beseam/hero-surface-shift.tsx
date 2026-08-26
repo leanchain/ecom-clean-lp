@@ -33,6 +33,10 @@ type CardState =
   | null;
 
 const ACCENT = "#7c3aed";
+// Secondary accent, matches the app's --secondary token. Reserved for the
+// journey's *supporting* hubs/edges while a story plays -- evidence backing
+// the claim, not the claim itself.
+const SECONDARY = "#2e5da6";
 const INK = "#111318";
 const PAPER = "#fafafa";
 const FOREGROUND_SPREAD = 1.3;
@@ -905,6 +909,15 @@ const JOURNEYS: readonly JourneyDefinition[] = [
 ];
 
 const INITIAL_AUTO_HUB_ID: HubId | null = JOURNEYS[0]?.nodes[0] ?? null;
+// A hub is either a stop the journeys actually travel to, or evidence that
+// only ever backs one up (see supportByNode above) -- never both. Derived,
+// not hand-tagged, so it can't drift from the journeys as they change.
+const JOURNEY_HUB_IDS = new Set<HubId>(
+  JOURNEYS.flatMap((journey) => journey.nodes),
+);
+function isEvidenceHub(id: HubId) {
+  return !JOURNEY_HUB_IDS.has(id);
+}
 function curve(a: Hub, b: Hub, bend = 0) {
   const mx = (a.x + b.x) / 2;
   const my = (a.y + b.y) / 2;
@@ -2364,6 +2377,7 @@ export default function HeroSurfaceShift() {
               autoJourneyVisible && autoJourney.nodes.includes(hub.id as HubId);
             const autoSupport =
               autoJourneyVisible && autoSupportHubIds.includes(hub.id as HubId);
+            const evidenceType = isEvidenceHub(hub.id as HubId);
             // Muted is the resting state, not an auto-journey special case. A
             // hub earns full brightness only while it is the focused cluster,
             // the open card, or a node of the journey that is actually running.
@@ -2386,7 +2400,7 @@ export default function HeroSurfaceShift() {
                 data-x={hub.x}
                 data-y={hub.y}
                 transform={`translate(${hub.x} ${hub.y})`}
-                className={`hero-kg-hub ${selected ? "hero-kg-selected" : ""} ${autoSoft ? "hero-kg-auto-soft" : ""} ${autoRoute ? "hero-kg-auto-route" : ""} ${autoSupport ? "hero-kg-auto-support" : ""} ${muted ? "hero-kg-auto-muted" : ""} ${shadowed ? "hero-kg-base-shadowed" : ""}`}
+                className={`hero-kg-hub ${evidenceType ? "hero-kg-evidence-type" : ""} ${selected ? "hero-kg-selected" : ""} ${autoSoft ? "hero-kg-auto-soft" : ""} ${autoRoute ? "hero-kg-auto-route" : ""} ${autoSupport ? "hero-kg-auto-support" : ""} ${muted ? "hero-kg-auto-muted" : ""} ${shadowed ? "hero-kg-base-shadowed" : ""}`}
               >
                 <circle
                   className="hero-kg-hub-ring"
@@ -2710,7 +2724,7 @@ export default function HeroSurfaceShift() {
           color: ${ACCENT};
         }
         .hero-kg-support-edges path {
-          stroke: ${ACCENT};
+          stroke: ${SECONDARY};
           stroke-width: 0.82;
           stroke-opacity: calc(.04 + var(--kg-support, 0) * .22);
           stroke-dasharray: 2 8;
@@ -2793,6 +2807,17 @@ export default function HeroSurfaceShift() {
           opacity: calc(.3 + var(--kg-spot, 0) * .16);
           transition: opacity ${TRACK};
         }
+        /* Evidence hubs (never a journey stop themselves, only ever cited as
+           support -- see JOURNEY_HUB_IDS) carry the secondary hue at rest, at
+           the exact same opacity math as a plain hub. Pure hue swap, so the
+           kg-spot brightening and muted/selected states behave identically;
+           only the color says "this is evidence," never the intensity. */
+        .hero-kg-hub.hero-kg-evidence-type .hero-kg-hub-ring {
+          stroke: ${SECONDARY};
+        }
+        .hero-kg-hub.hero-kg-evidence-type .hero-kg-hub-core {
+          fill: ${SECONDARY};
+        }
         .hero-kg-hub.hero-kg-auto-muted {
           opacity: 0.48;
         }
@@ -2812,13 +2837,16 @@ export default function HeroSurfaceShift() {
           opacity: calc(.5 + var(--kg-support, 0) * .4);
         }
         .hero-kg-hub.hero-kg-auto-support .hero-kg-hub-ring {
-          stroke: ${ACCENT};
-          stroke-opacity: calc(.3 + var(--kg-support, 0) * .3);
+          stroke: ${SECONDARY};
+          /* Capped below the focused hub's autoplay floor (.62 layer x .72
+             ring = ~.45 effective) so the node actually in focus never reads
+             weaker than what's merely supporting it. */
+          stroke-opacity: calc(.3 + var(--kg-support, 0) * .1);
           transform: scale(calc(.94 + var(--kg-support, 0) * .1));
         }
         .hero-kg-hub.hero-kg-auto-support .hero-kg-hub-core {
-          fill: ${ACCENT};
-          opacity: calc(.34 + var(--kg-support, 0) * .3);
+          fill: ${SECONDARY};
+          opacity: calc(.34 + var(--kg-support, 0) * .14);
           transform: scale(calc(.94 + var(--kg-support, 0) * .18));
         }
         .hero-kg-hub.hero-kg-auto-support .hero-kg-hub-label {

@@ -8,13 +8,13 @@ import { ArrowRight, Menu, X } from "lucide-react";
 
 import Logo from "@/components/beseam/logo";
 import TrackedLink from "@/components/beseam/tracked-link";
-import { APP_LOGIN_URL, APP_REGISTER_URL } from "@/lib/app-urls";
+import { APP_LOGIN_URL } from "@/lib/app-urls";
 import { cn } from "@/lib/utils";
 const NAV_LINKS = [
   { label: "Why Beseam", href: "/#why" },
   { label: "Platform", href: "/platform" },
   { label: "How we work", href: "/how-we-work" },
-  { label: "Benchmark", href: "/#benchmarks" },
+  { label: "Resources", href: "/resources" },
 ] as const;
 
 export default function BeseamNavbar() {
@@ -87,14 +87,14 @@ export default function BeseamNavbar() {
               Log in
             </TrackedLink>
             <TrackedLink
-              href={APP_REGISTER_URL}
+              href="/scan"
               eventName="marketing_primary_cta_clicked"
               eventCategory="conversion"
               placement="navbar"
               preserveUtm
               className="group inline-flex min-h-10 items-center justify-center gap-2 whitespace-nowrap bg-signal-ink px-4 text-[13px] font-semibold text-white focus-visible:ring-2 focus-visible:ring-signal-ink focus-visible:ring-offset-3"
             >
-              Start for free
+              Scan my store
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </TrackedLink>
           </div>
@@ -147,7 +147,7 @@ export default function BeseamNavbar() {
                 Log in
               </TrackedLink>
               <TrackedLink
-                href={APP_REGISTER_URL}
+                href="/scan"
                 eventName="marketing_primary_cta_clicked"
                 eventCategory="conversion"
                 placement="mobile_nav"
@@ -155,7 +155,7 @@ export default function BeseamNavbar() {
                 onClick={() => setMobileOpen(false)}
                 className="flex min-h-12 items-center justify-center gap-2 bg-ink-deep px-5 text-[14px] font-semibold text-white"
               >
-                Start for free
+                Scan my store
                 <ArrowRight className="h-4 w-4" />
               </TrackedLink>
             </div>

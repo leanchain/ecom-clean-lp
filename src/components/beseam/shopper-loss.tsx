@@ -413,9 +413,9 @@ export default function ShopperLoss() {
               </h2>
             </div>
             <p className="max-w-[50ch] text-[17px] leading-[1.7] text-black/64">
-              Most lost revenue is not a mystery. It goes in one of three
-              places, and each one has a different fix. Beseam tells you which
-              one is costing you the most right now.
+              Many lost sales show up in one of these three moments. Beseam helps
+              you see where shoppers are dropping out and what deserves attention
+              first, without pretending one signal proves the cause.
             </p>
           </div>
         </Reveal>
