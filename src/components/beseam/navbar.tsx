@@ -43,10 +43,10 @@ export default function BeseamNavbar() {
   return (
     <header
       className={cn(
-        "sticky z-50 mx-auto border transition-all duration-200",
+        "sticky top-0 z-50 mx-auto w-full border border-x-transparent border-t-transparent transition-all duration-200",
         scrolled
-          ? "top-3 w-[calc(100%-1.5rem)] max-w-[95rem] rounded-none border-black/14 bg-ground/72 shadow-lg backdrop-blur-2xl"
-          : "top-0 w-full border-x-transparent border-t-transparent border-b-black/10 bg-ground/92 backdrop-blur-md",
+          ? "border-b-black/14 bg-ground/72 shadow-lg backdrop-blur-2xl"
+          : "border-b-black/10 bg-ground/92 backdrop-blur-md",
       )}
     >
       <a
@@ -56,12 +56,7 @@ export default function BeseamNavbar() {
         Skip to content
       </a>
 
-      <div
-        className={cn(
-          "mx-auto max-w-[92rem] transition-all duration-200",
-          scrolled ? "px-3 sm:px-4 lg:px-5" : "px-4 sm:px-6 lg:px-8",
-        )}
-      >
+      <div className="mx-auto max-w-[92rem] px-4 transition-all duration-200 sm:px-6 lg:px-8">
         <div
           className={cn(
             "flex items-center justify-between transition-all duration-200",
