@@ -4,12 +4,15 @@ export interface LogoProps {
   className?: string;
   markClassName?: string;
   wordmarkClassName?: string;
+  /** Collapse the wordmark so only the B mark stays (e.g. scrolled navbar). */
+  hideWordmark?: boolean;
 }
 
 export default function Logo({
   className,
   markClassName,
   wordmarkClassName,
+  hideWordmark = false,
 }: LogoProps) {
   return (
     <span
@@ -37,7 +40,11 @@ export default function Logo({
       </svg>
       <span
         aria-hidden="true"
-        className={cn("font-semibold tracking-[-0.065em]", wordmarkClassName)}
+        className={cn(
+          "inline-block overflow-hidden font-semibold tracking-[-0.065em] transition-all duration-200",
+          hideWordmark ? "max-w-0 opacity-0" : "max-w-[5em] opacity-100",
+          wordmarkClassName,
+        )}
       >
         eseam
       </span>

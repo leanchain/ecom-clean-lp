@@ -69,7 +69,11 @@ export default function BeseamNavbar() {
           )}
         >
           <Link href="/" className="flex items-center" aria-label="Beseam home">
-            <Logo className="text-ink-deep" markClassName="drop-shadow-none" />
+            <Logo
+              className="text-ink-deep"
+              markClassName="drop-shadow-none"
+              hideWordmark={scrolled}
+            />
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center lg:flex">
