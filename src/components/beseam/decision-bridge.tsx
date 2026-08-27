@@ -44,22 +44,27 @@ function DiscoveryVignette() {
     >
       {(
         [
-          ["openai", true],
-          ["gemini", true],
-          ["perplexity", false],
+          ["openai", "ChatGPT", true],
+          ["gemini", "Gemini", true],
+          ["perplexity", "Perplexity", false],
         ] as const
-      ).map(([brand, named]) => (
-        <div key={brand} className="flex items-center gap-2.5">
+      ).map(([brand, name, named]) => (
+        <div key={brand} className="flex items-center gap-2">
           <ChannelIcon
             brand={brand}
             className={`h-3.5 w-3.5 ${named ? "text-ink-deep/70" : "text-black/30"}`}
           />
-          <span className="h-px flex-1 bg-black/14" />
-          {named ? (
-            <Check className="h-3 w-3 shrink-0 text-[#1a6b43]" />
-          ) : (
-            <X className="h-3 w-3 shrink-0 text-signal-ink" />
-          )}
+          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/56">
+            {name}
+          </span>
+          <span className="h-px min-w-4 flex-1 bg-black/10" />
+          <span
+            className={`shrink-0 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] ${
+              named ? "text-[#1a6b43]" : "text-signal-ink"
+            }`}
+          >
+            {named ? "Named" : "Not named"}
+          </span>
         </div>
       ))}
     </div>
@@ -74,19 +79,35 @@ function StoreVignette() {
       className="flex h-[5.75rem] items-center gap-3.5 border border-black/14 bg-white px-3.5"
     >
       <ProductArt kind="shell" className="h-14 w-14 shrink-0" />
-      <div className="flex min-w-0 flex-1 flex-col gap-2.5">
-        <div className="flex items-center gap-2">
-          <Check className="h-3 w-3 shrink-0 text-[#1a6b43]" />
-          <span className="h-px w-full bg-black/14" />
-        </div>
-        <div className="flex items-center gap-2">
-          <Check className="h-3 w-3 shrink-0 text-[#1a6b43]" />
-          <span className="h-px w-3/4 bg-black/14" />
-        </div>
-        <div className="flex items-center gap-2">
-          <X className="h-3 w-3 shrink-0 text-signal-ink" />
-          <span className="w-full border-t border-dashed border-black/28" />
-        </div>
+      <div className="flex min-w-0 flex-1 flex-col gap-2">
+        {(
+          [
+            ["Waterproof", "20,000 mm", true],
+            ["Returns", "30 days", true],
+            ["Fits over layers?", "No answer", false],
+          ] as const
+        ).map(([question, answer, ok]) => (
+          <div
+            key={question}
+            className="flex items-center justify-between gap-2"
+          >
+            <span className="truncate font-mono text-[9px] uppercase tracking-[0.06em] text-black/48">
+              {question}
+            </span>
+            <span
+              className={`flex shrink-0 items-center gap-1 font-mono text-[9px] font-semibold ${
+                ok ? "text-black/64" : "text-signal-ink"
+              }`}
+            >
+              {ok ? (
+                <Check className="h-2.5 w-2.5" />
+              ) : (
+                <X className="h-2.5 w-2.5" />
+              )}
+              {answer}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -113,27 +134,29 @@ function BuyingVignette() {
           <span
             className={
               ok
-                ? "h-px flex-1 bg-black/14"
-                : "flex-1 border-t border-dashed border-black/28"
+                ? "h-px min-w-4 flex-1 bg-black/10"
+                : "min-w-4 flex-1 border-t border-dashed border-black/28"
             }
           />
-          {ok ? (
-            <Check className="h-3 w-3 shrink-0 text-[#1a6b43]" />
-          ) : (
-            <X className="h-3 w-3 shrink-0 text-signal-ink" />
-          )}
+          <span
+            className={`shrink-0 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] ${
+              ok ? "text-[#1a6b43]" : "text-signal-ink"
+            }`}
+          >
+            {ok ? "OK" : "Fails"}
+          </span>
         </div>
       ))}
     </div>
   );
 }
 
-/** Before/after pairs with no axis and no figures. */
+/** Before/after pairs with a legend but no axis and no figures. */
 function RevenueVignette() {
   return (
     <div
       aria-hidden="true"
-      className="flex h-[5.75rem] items-stretch gap-3 border border-black/14 bg-white px-4 py-3"
+      className="flex h-[5.75rem] flex-col border border-black/14 bg-white px-4 py-2.5"
     >
       <div className="flex flex-1 items-end justify-around gap-3 border-b border-black/20">
         {(
@@ -143,13 +166,29 @@ function RevenueVignette() {
             ["46%", "58%"],
           ] as const
         ).map(([before, after], index) => (
-          <span key={index} className="flex items-end gap-1">
-            <span className="w-3 bg-black/16" style={{ height: `calc(${before} * 0.62)` }} />
-            <span className="w-3 bg-signal-ink" style={{ height: `calc(${after} * 0.62)` }} />
+          <span key={index} className="flex h-full items-end gap-1">
+            <span className="w-3 bg-black/16" style={{ height: before }} />
+            <span className="w-3 bg-signal-ink" style={{ height: after }} />
           </span>
         ))}
       </div>
-      <TrendingUp className="h-4 w-4 shrink-0 self-start text-signal-ink" />
+      <div className="mt-2 flex items-center justify-between">
+        <span className="flex items-center gap-3">
+          <span className="flex items-center gap-1.5">
+            <span className="h-2 w-2 bg-black/16" />
+            <span className="font-mono text-[8.5px] font-semibold uppercase tracking-[0.06em] text-black/46">
+              Before
+            </span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="h-2 w-2 bg-signal-ink" />
+            <span className="font-mono text-[8.5px] font-semibold uppercase tracking-[0.06em] text-black/46">
+              After
+            </span>
+          </span>
+        </span>
+        <TrendingUp className="h-3.5 w-3.5 shrink-0 text-signal-ink" />
+      </div>
     </div>
   );
 }
