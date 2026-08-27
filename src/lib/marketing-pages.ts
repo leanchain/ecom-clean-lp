@@ -179,7 +179,8 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
     ],
     sections: [
       {
-        title: "Understand what may be blocking the choice, not just the symptom.",
+        title:
+          "Understand what may be blocking the choice, not just the symptom.",
         icon: RefreshCw,
         body: "A visibility miss, search exit, product-page hesitation, checkout drop, or revenue change is a symptom. Beseam connects the surrounding product, store, shopper, competitor, and revenue evidence so the team can understand what may explain it without pretending a hypothesis is a fact.",
         points: [
