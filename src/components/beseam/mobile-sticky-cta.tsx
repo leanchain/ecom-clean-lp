@@ -57,7 +57,7 @@ export default function MobileStickyCta() {
         eventCategory="conversion"
         placement="mobile_sticky"
         preserveUtm
-        className="flex min-h-12 items-center justify-center gap-3 border border-white/18 bg-ink-deep px-5 text-sm font-semibold text-white"
+        className="flex min-h-12 items-center justify-center gap-3 border border-white/18 bg-signal-ink px-5 text-sm font-semibold text-white"
       >
         Start for free
         <ArrowRight className="h-4 w-4" />

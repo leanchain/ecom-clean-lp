@@ -350,7 +350,7 @@ export default function MarketingDetailPage({
               eventCategory="conversion"
               placement={page.slug + "_footer"}
               preserveUtm
-              className="group inline-flex min-h-12 items-center justify-center gap-2 bg-ink-deep px-6 text-[15px] font-semibold text-white transition-colors hover:bg-technical-panel"
+              className="group inline-flex min-h-12 items-center justify-center gap-2 bg-signal-ink px-6 text-[15px] font-semibold text-white transition-colors hover:bg-pigment"
             >
               Start for free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

@@ -154,7 +154,7 @@ export default function BeseamNavbar() {
                 placement="mobile_nav"
                 preserveUtm
                 onClick={() => setMobileOpen(false)}
-                className="flex min-h-12 items-center justify-center gap-2 bg-ink-deep px-5 text-[14px] font-semibold text-white"
+                className="flex min-h-12 items-center justify-center gap-2 bg-signal-ink px-5 text-[14px] font-semibold text-white"
               >
                 Scan my store
                 <ArrowRight className="h-4 w-4" />

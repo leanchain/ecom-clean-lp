@@ -155,7 +155,7 @@ export default function ResourcesPage() {
               </h1>
               <Link
                 href="/resources/start-here"
-                className="mt-8 inline-flex min-h-12 items-center gap-3 bg-ink-deep px-5 text-[13px] font-semibold text-white"
+                className="mt-8 inline-flex min-h-12 items-center gap-3 bg-signal-ink px-5 text-[13px] font-semibold text-white"
               >
                 Open the Fieldbook <ArrowRight className="h-4 w-4" />
               </Link>

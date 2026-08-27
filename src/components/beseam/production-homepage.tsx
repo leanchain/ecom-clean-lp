@@ -47,7 +47,7 @@ export default function ProductionHomepage() {
               </p>
               <h1 className="pointer-events-auto mx-auto mt-6 max-w-[18ch] text-balance font-display text-[clamp(3rem,5.6vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-ink-deep">
                 Get more shoppers to{" "}
-                <span style={{ color: "var(--secondary)" }}>choose you</span>.
+                <span className="text-signal-ink">choose you</span>.
               </h1>
               <p className="pointer-events-auto mx-auto mt-6 max-w-[62ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
                 Shopping is moving from finding products to choosing products.
