@@ -14,6 +14,7 @@ import FaqSection from "@/components/beseam/faq-section";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
 import Logo from "@/components/beseam/logo";
+import LogoConcepts from "@/components/beseam/logo-concepts";
 import MarketsSection from "@/components/beseam/markets-section";
 import MeasureImpact from "@/components/beseam/measure-impact";
 import OperatingLoop from "@/components/beseam/operating-loop";
@@ -49,6 +50,7 @@ const INVENTORY: readonly InventoryItem[] = [
   { name: "footer", status: "Foundation", note: "Global site footer" },
   { name: "hero-surface-shift", status: "Homepage", note: "Hero knowledge graph" },
   { name: "logo", status: "Foundation", note: "Beseam brand mark" },
+  { name: "logo-concepts", status: "Unused", note: "Logo mark explorations: seam, chosen node, resolved fork" },
   { name: "marketing-detail-page", status: "Used elsewhere", note: "Shared marketing-page template" },
   { name: "markets-section", status: "Unused", note: "Previous market-differences section" },
   { name: "measure-impact", status: "Homepage", note: "Standalone Impact-ledger section" },
@@ -200,6 +202,11 @@ export default function PlaybookPage() {
       <section id="component-logo" className="scroll-mt-20 border-b border-black/14 bg-ground">
         <PreviewHeader name="logo" status="Foundation" note="Beseam brand mark" />
         <div className="mx-auto flex max-w-[64rem] flex-wrap items-center gap-10 px-5 py-12 sm:px-8 lg:px-10"><Logo /><div className="bg-ink-deep p-5"><Logo className="text-white" /></div></div>
+      </section>
+
+      <section id="component-logo-concepts" className="scroll-mt-20 border-b border-black/14 bg-white">
+        <PreviewHeader name="logo-concepts" status="Unused" note="Logo mark explorations: seam, chosen node, resolved fork" />
+        <LogoConcepts />
       </section>
 
       <section id="component-book-review-cta" className="scroll-mt-20 border-b border-black/14 bg-white">
