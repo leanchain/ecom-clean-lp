@@ -42,8 +42,8 @@ export default function BeseamFooter() {
               Make products easier to find, choose, and buy.
             </p>
             <p className="mt-6 max-w-[54ch] text-[14px] leading-relaxed text-white/62">
-              Observe what is happening, understand what may explain it, act
-              with control, and learn from what changes.
+              See where shoppers choose something else, understand what may
+              explain it, act with your approval, and measure what changes.
             </p>
           </div>
 
