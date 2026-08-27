@@ -1205,7 +1205,12 @@ export default function HeroSurfaceShift() {
   const [autoContextHubId, setAutoContextHubId] = useState<HubId | null>(
     INITIAL_AUTO_HUB_ID,
   );
+  // Autoplay is an introduction, not a loop: it runs each journey once and
+  // then rests, and the first hover/tap ends it for good. The hero shares the
+  // viewport with the headline and the scan form, so motion that never stops
+  // competes with the two things that convert.
   const [autoInteractionPaused, setAutoInteractionPaused] = useState(false);
+  const [autoJourneyDone, setAutoJourneyDone] = useState(false);
   const [pointerApproachHubId, setPointerApproachHubId] = useState<
     string | null
   >(null);
@@ -1234,7 +1239,7 @@ export default function HeroSurfaceShift() {
   const graphLayout = GRAPH_LAYOUTS[layoutName];
   const autoJourney = JOURNEYS[autoJourneyIndex];
   const autoJourneyVisible =
-    !activeHubId && !cardState && !autoInteractionPaused;
+    !activeHubId && !cardState && !autoInteractionPaused && !autoJourneyDone;
   const focusRadius =
     layoutName === "ultrawide"
       ? 430
@@ -1394,18 +1399,14 @@ export default function HeroSurfaceShift() {
     svgRef.current?.style.setProperty("--kg-support", clamped.toFixed(3));
   }, []);
 
-  const holdAutoJourney = useCallback((delay = 3200) => {
+  const holdAutoJourney = useCallback(() => {
     if (autoResumeTimerRef.current) {
       clearTimeout(autoResumeTimerRef.current);
-    }
-    setAutoInteractionPaused(true);
-    autoResumeTimerRef.current = setTimeout(() => {
       autoResumeTimerRef.current = null;
-      pointerApproachHubRef.current = null;
-      pointerProximityRef.current = 0;
-      setPointerApproachHubId(null);
-      setAutoInteractionPaused(false);
-    }, delay);
+    }
+    // Deliberately one-way: once a visitor takes the graph over, it stays
+    // where they left it instead of restarting under their cursor.
+    setAutoInteractionPaused(true);
   }, []);
 
   useEffect(
@@ -1448,7 +1449,12 @@ export default function HeroSurfaceShift() {
 
     if (autoPhase === "ending") {
       const endingTimer = window.setTimeout(() => {
-        setAutoJourneyIndex((index) => (index + 1) % JOURNEYS.length);
+        const nextIndex = autoJourneyIndex + 1;
+        if (nextIndex >= JOURNEYS.length) {
+          setAutoJourneyDone(true);
+        } else {
+          setAutoJourneyIndex(nextIndex);
+        }
         autoVisualRef.current = { full: null, soft: null };
         autoContextHubRef.current = null;
         setAutoFocusHubId(null);
@@ -1478,6 +1484,7 @@ export default function HeroSurfaceShift() {
     return () => window.clearTimeout(departureTimer);
   }, [
     autoJourney,
+    autoJourneyIndex,
     autoJourneyVisible,
     autoPhase,
     setForegroundProgress,
