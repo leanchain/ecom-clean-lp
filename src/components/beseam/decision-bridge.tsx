@@ -1,4 +1,4 @@
-import { ArrowRight, Check, TrendingUp, X } from "lucide-react";
+import { ArrowRight, Check, X } from "lucide-react";
 
 import { ChannelIcon } from "@/components/beseam/channel-icon";
 import ProductArt from "@/components/beseam/product-art";
@@ -40,30 +40,33 @@ function DiscoveryVignette() {
   return (
     <div
       aria-hidden="true"
-      className="flex h-[5.75rem] flex-col justify-center gap-2.5 border border-black/14 bg-white px-3.5"
+      className="relative flex h-[5.75rem] flex-col justify-center gap-2 border border-black/14 bg-white px-3.5"
     >
+      <span className="absolute right-2 top-1 font-mono text-[8px] uppercase tracking-[0.08em] text-black/38">
+        Example
+      </span>
       {(
         [
-          ["openai", "ChatGPT", true],
-          ["gemini", "Gemini", true],
-          ["perplexity", "Perplexity", false],
+          ["openai", "ChatGPT", 68],
+          ["gemini", "Gemini", 61],
+          ["perplexity", "Perplexity", 0],
         ] as const
-      ).map(([brand, name, named]) => (
+      ).map(([brand, name, share]) => (
         <div key={brand} className="flex items-center gap-2">
           <ChannelIcon
             brand={brand}
-            className={`h-3.5 w-3.5 ${named ? "text-ink-deep/70" : "text-black/30"}`}
+            className={`h-3.5 w-3.5 ${share > 0 ? "text-ink-deep/70" : "text-black/30"}`}
           />
           <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/56">
             {name}
           </span>
           <span className="h-px min-w-4 flex-1 bg-black/10" />
           <span
-            className={`shrink-0 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] ${
-              named ? "text-[#1a6b43]" : "text-signal-ink"
+            className={`shrink-0 font-mono text-[9px] font-semibold tabular-nums ${
+              share > 0 ? "text-[#1a6b43]" : "text-signal-ink"
             }`}
           >
-            {named ? "Named" : "Not named"}
+            {share > 0 ? `Named · ${share}%` : "Not named · 0%"}
           </span>
         </div>
       ))}
@@ -151,44 +154,39 @@ function BuyingVignette() {
   );
 }
 
-/** Before/after pairs with a legend but no axis and no figures. */
+/**
+ * Point improvements rather than bars: the figures mirror the ImpactScreen
+ * example ledger further down the page and carry the same “Example” stamp.
+ */
 function RevenueVignette() {
   return (
     <div
       aria-hidden="true"
-      className="flex h-[5.75rem] flex-col border border-black/14 bg-white px-4 py-2.5"
+      className="relative flex h-[5.75rem] flex-col justify-center gap-2 border border-black/14 bg-white px-3.5"
     >
-      <div className="flex flex-1 items-end justify-around gap-3 border-b border-black/20">
-        {(
-          [
-            ["38%", "62%"],
-            ["30%", "74%"],
-            ["46%", "58%"],
-          ] as const
-        ).map(([before, after], index) => (
-          <span key={index} className="flex h-full items-end gap-1">
-            <span className="w-3 bg-black/16" style={{ height: before }} />
-            <span className="w-3 bg-signal-ink" style={{ height: after }} />
+      <span className="absolute right-2 top-1 font-mono text-[8px] uppercase tracking-[0.08em] text-black/38">
+        Example
+      </span>
+      {(
+        [
+          ["Named by AI", "9 → 23%", "+14 pts"],
+          ["Search → page", "46 → 57%", "+11 pts"],
+          ["Add to cart", "2.4 → 2.9%", "+0.5 pts"],
+        ] as const
+      ).map(([label, range, delta]) => (
+        <div key={label} className="flex items-center gap-2">
+          <span className="truncate font-mono text-[9px] uppercase tracking-[0.06em] text-black/48">
+            {label}
           </span>
-        ))}
-      </div>
-      <div className="mt-2 flex items-center justify-between">
-        <span className="flex items-center gap-3">
-          <span className="flex items-center gap-1.5">
-            <span className="h-2 w-2 bg-black/16" />
-            <span className="font-mono text-[8.5px] font-semibold uppercase tracking-[0.06em] text-black/46">
-              Before
-            </span>
+          <span className="h-px min-w-3 flex-1 bg-black/10" />
+          <span className="shrink-0 font-mono text-[9px] tabular-nums text-black/56">
+            {range}
           </span>
-          <span className="flex items-center gap-1.5">
-            <span className="h-2 w-2 bg-signal-ink" />
-            <span className="font-mono text-[8.5px] font-semibold uppercase tracking-[0.06em] text-black/46">
-              After
-            </span>
+          <span className="w-12 shrink-0 text-right font-mono text-[9px] font-semibold tabular-nums text-signal-ink">
+            {delta}
           </span>
-        </span>
-        <TrendingUp className="h-3.5 w-3.5 shrink-0 text-signal-ink" />
-      </div>
+        </div>
+      ))}
     </div>
   );
 }

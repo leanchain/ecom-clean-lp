@@ -30,7 +30,7 @@ const QUEUE_ROWS = [
   {
     title: "Add the commuting use case to the Urban Shell product page.",
     why: "The shopper asked for a commuting jacket, and the product page never answers whether this one fits that use case.",
-    priority: "High",
+    priority: "P0",
     effort: "Quick",
     step: "Review",
     lead: true,
@@ -38,7 +38,7 @@ const QUEUE_ROWS = [
   {
     title: "Explain how Urban Shell fits over everyday layers.",
     why: "The shopper opened the size guide, and fit over layers is still unanswered at the decision point.",
-    priority: "High",
+    priority: "P1",
     effort: "Quick",
     step: "Review",
     lead: false,
@@ -46,7 +46,7 @@ const QUEUE_ROWS = [
   {
     title: "Recheck commuter queries after the product-page change.",
     why: "The same buying question should be observed again before claiming that the change helped discovery.",
-    priority: "Medium",
+    priority: "P2",
     effort: "Quick",
     step: "Queue",
     lead: false,
@@ -56,6 +56,12 @@ const QUEUE_ROWS = [
 const EFFORT_TONE: Record<string, string> = {
   Quick: "border-[#1f7a4d]/35 bg-[#1f7a4d]/[0.08] text-[#1a6b43]",
   Hard: "border-black/20 bg-black/[0.04] text-black/62",
+};
+
+const PRIORITY_TONE: Record<string, string> = {
+  P0: "border-signal-ink/30 bg-signal-ink/[0.07] text-signal-ink",
+  P1: "border-black/20 bg-black/[0.05] text-[#3f3f3f]",
+  P2: "border-black/14 bg-black/[0.02] text-black/52",
 };
 
 function ScreenChrome({
@@ -119,11 +125,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
             <p className="text-[12.5px] font-medium leading-[1.3] text-[#151515]">
               {row.title}
             </p>
-            <span className={`inline-flex w-fit shrink-0 rounded-md border px-1.5 py-0.5 text-[9.5px] font-semibold ${
-              row.priority === "High"
-                ? "border-signal-ink/30 bg-signal-ink/[0.07] text-signal-ink"
-                : "border-black/16 bg-black/[0.03] text-[#4a4a4a]"
-            }`}>
+            <span className={`inline-flex w-fit shrink-0 rounded-md border px-1.5 py-0.5 text-[9.5px] font-semibold ${PRIORITY_TONE[row.priority]}`}>
               {row.priority}
             </span>
             <span className="inline-flex w-fit shrink-0 rounded-md border border-[#1f7a4d]/35 bg-[#1f7a4d]/[0.08] px-1.5 py-0.5 text-[9.5px] font-semibold text-[#1a6b43]">
@@ -149,9 +151,12 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
       <ScreenChrome title="Actions" meta="Illustrative product view" />
 
       <div className="relative">
-        <div className="grid grid-cols-[minmax(0,1fr)_4.5rem_4.5rem] gap-3 border-b border-black/12 px-4 py-2 sm:px-5">
+        <div className="grid grid-cols-[minmax(0,1fr)_3.5rem_4.5rem_4.5rem] gap-3 border-b border-black/12 px-4 py-2 sm:px-5">
           <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
             Decision and exact fix
+          </p>
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
+            Priority
           </p>
           <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
             Effort
@@ -164,7 +169,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
         {QUEUE_ROWS.map((row) => (
           <div
             key={row.title}
-            className={`grid grid-cols-[minmax(0,1fr)_4.5rem_4.5rem] items-start gap-3 border-b border-black/10 px-4 py-3.5 last:border-b-0 sm:px-5 ${
+            className={`grid grid-cols-[minmax(0,1fr)_3.5rem_4.5rem_4.5rem] items-start gap-3 border-b border-black/10 px-4 py-3.5 last:border-b-0 sm:px-5 ${
               row.lead ? "bg-signal-ink/[0.06]" : ""
             }`}
           >
@@ -182,6 +187,12 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
                 {row.why}
               </p>
             </div>
+
+            <span
+              className={`inline-flex shrink-0 items-center rounded-md border px-1.5 py-0.5 text-[11px] font-semibold ${PRIORITY_TONE[row.priority]}`}
+            >
+              {row.priority}
+            </span>
 
             <span
               className={`inline-flex shrink-0 items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium ${
