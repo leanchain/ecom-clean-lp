@@ -50,7 +50,7 @@ export default function CredibilityRail() {
             ))}
           </ul>
         </div>
-        <div className="py-6 lg:pl-12">
+        <div className="py-6 lg:pl-16">
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-black/50">
               Research

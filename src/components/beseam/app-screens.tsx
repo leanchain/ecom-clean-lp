@@ -134,7 +134,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
             <span
               className={`inline-flex w-fit shrink-0 items-center rounded-md px-2 py-1 text-[10px] font-semibold ${
                 row.lead
-                  ? "bg-signal-ink text-white"
+                  ? "bg-[var(--secondary)] text-[var(--secondary-foreground)]"
                   : "border border-black/18 bg-white text-[#3f3f3f]"
               }`}
             >
@@ -209,7 +209,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
             <span
               className={`inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-1 text-[11px] font-semibold ${
                 row.lead
-                  ? "bg-signal-ink text-white"
+                  ? "bg-[var(--secondary)] text-[var(--secondary-foreground)]"
                   : "border border-black/20 text-black/70"
               }`}
             >

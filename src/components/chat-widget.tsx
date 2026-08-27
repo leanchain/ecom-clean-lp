@@ -35,7 +35,7 @@ const ChatWidget = () => {
             cross_origin_cookies: true,
             show_availability_tooltip: false
           };
-          window.$crisp.push(["config", "color:theme", ["deep_orange"]]);
+          window.$crisp.push(["config", "color:theme", ["#b8441d"]]);
           window.$crisp.push(["config", "show:availability_tooltip", [false]]);
           window.$crisp.push(["config", "show:operator_count", [false]]);
 
