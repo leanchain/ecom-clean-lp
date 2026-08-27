@@ -48,9 +48,9 @@ export default function ProductionHomepage() {
               </h1>
               <p className="pointer-events-auto mx-auto mt-6 max-w-[62ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
                 Shopping is moving from finding products to choosing products.
-                See where shoppers overlook you, choose something else, or stop
-                before buying — then understand what to improve and measure what
-                happens next.
+                Beseam follows the buying decision — what shoppers wanted, which
+                choices they saw, what they chose or where they stopped, what
+                may explain it, and what happened after a change.
               </p>
 
               <div className="pointer-events-auto mx-auto mt-9 w-full">

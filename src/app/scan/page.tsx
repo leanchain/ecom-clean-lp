@@ -7,7 +7,7 @@ import { buildPublicMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPublicMetadata({
   title: "Free Store Scan | Beseam",
   description:
-    "Enter your domain and Beseam reads your public storefront: where shoppers may be getting lost, what is worth investigating, and your first suggested actions. No login, no store access.",
+    "Enter your domain and Beseam reads your public storefront: what makes products harder to find or choose, what is worth investigating, and what to look at first. No login, no store access.",
   path: "/scan",
 });
 
@@ -17,7 +17,7 @@ export default function ScanPage() {
       <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
         <div className="mx-auto max-w-[72rem] text-center">
           <h1 className="mx-auto max-w-[22ch] text-balance font-display text-[clamp(2.8rem,5vw,4.8rem)] font-normal leading-[1] tracking-[-0.025em]">
-            See where shoppers are getting lost.
+            See what makes your products harder to find or choose.
           </h1>
           <p className="mx-auto mt-7 max-w-[52ch] text-[17px] leading-[1.7] text-black/64">
             Enter your domain. We read your public storefront and hand back what
@@ -44,9 +44,10 @@ export default function ScanPage() {
                 Not sure a scan is the right place to start?
               </h2>
               <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/66">
-                Bring the commercial problem instead — orders flat, a category
-                that never converts, products nobody finds. Twenty minutes, your
-                store on screen, and an honest answer about whether we can help.
+                Bring the decision you are losing instead — products nobody
+                finds, pages that do not answer the deciding question, or
+                shoppers who stop before purchase. Twenty minutes, your store on
+                screen, and an honest answer about whether we can help.
               </p>
             </div>
             <BookReviewCta

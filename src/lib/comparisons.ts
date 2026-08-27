@@ -70,18 +70,18 @@ function buildAiVisibilityComparison(seed: AiVisibilitySeed): Comparison {
     slug: seed.slug,
     name: seed.name,
     category: "AI discovery & visibility",
-    metaTitle: `Beseam vs ${seed.name}: AI visibility vs commerce action`,
-    metaDescription: `Compare Beseam and ${seed.name} across AI visibility, citations, competitor discovery, action, and re-checking what changed.`,
+    metaTitle: `Beseam vs ${seed.name}: AI visibility or buying-decision follow-through?`,
+    metaDescription: `Compare Beseam and ${seed.name} across AI visibility, buying questions, competitor recommendations, store evidence, supported change, and re-checking what changed.`,
     headline: seed.headline,
-    intro: `${seed.platformSummary} Beseam also observes AI discovery, but keeps the answer evidence connected to the affected product or page, a controlled change, and the same buying question asked again afterward.`,
+    intro: `${seed.platformSummary} Beseam also observes AI discovery, but follows the buying question into the affected product or page, the evidence you control, a supported change, and the same question asked again afterward.`,
     competitorSummary: `Choose ${seed.name} when ${seed.bestFor}`,
     beseamSummary:
-      "Choose Beseam when AI discovery is not only a reporting problem: you need to trace why a product lost, change what you control, and re-check the same buying question alongside the rest of the commerce evidence.",
-    useTogetherSummary: `Keep ${seed.name} for its specialist AI-visibility workflow. Use Beseam when a qualified discovery gap needs to move from answer evidence into a store-level change and a before/after re-check.`,
+      "Choose Beseam when the question is not only how often you appear, but why a shopper may choose another product: trace the missed buying question into the evidence you control, make a supported change, and ask again.",
+    useTogetherSummary: `Keep ${seed.name} for its specialist AI-visibility workflow. Use Beseam when a missed buying question needs to move from the observed answer into product or store evidence, a supported change, and a before/after re-check.`,
     chooseCompetitorWhen: seed.strengths,
     chooseBeseamWhen: [
       "A missing recommendation or citation needs to be traced to the affected product, page, source, or catalog fact before anyone changes content.",
-      "The team wants AI-discovery evidence considered alongside storefront, shopper behavior, campaigns, reliability, orders, and revenue.",
+      "The team wants to connect who was recommended with the product, store, shopper, and purchase evidence that may help explain the choice.",
       "The original buying question, proposed change, approval, execution state, and re-check need to remain one evidence trace.",
     ],
     notAReplacementFor: `Beseam is not a one-for-one replacement for ${seed.name}'s dedicated AI-visibility reporting, competitor benchmarking, or the specialist monitoring workflow teams already use there.`,
@@ -105,17 +105,17 @@ function buildAiVisibilityComparison(seed: AiVisibilitySeed): Comparison {
           "Turn a supported finding into an owned change with approval boundaries instead of ending at a recommendation or dashboard.",
       },
       {
-        criterion: "Commerce context",
+        criterion: "What happens after the answer",
         competitor:
           "Specialist evidence about AI answers, mentions, citations, competitors, prompts, and sources.",
         beseam:
-          "AI discovery sits beside catalog, storefront, behavior, campaign, reliability, order, and revenue evidence.",
+          "The observed answer can be connected to product facts, storefront evidence, shopper behavior, checkout, orders, and the same question asked again.",
       },
       {
         criterion: "Best relationship",
         competitor: "Specialist AI-discovery monitoring and analysis.",
         beseam:
-          "Carries a qualified discovery problem from answer evidence into a controlled commerce action and re-check.",
+          "Carries a missed buying question from answer evidence into a supported store change and re-check.",
       },
     ],
     workflow: [
@@ -159,7 +159,7 @@ function buildAiVisibilityComparison(seed: AiVisibilitySeed): Comparison {
       },
       {
         question: `Can ${seed.name} and Beseam be used together?`,
-        answer: `Yes. ${seed.name} can remain a specialist monitoring source while Beseam carries a qualified discovery problem into wider commerce evidence, action ownership, and verification. Exact integration availability depends on the contracted setup.`,
+        answer: `Yes. ${seed.name} can remain a specialist monitoring source while Beseam carries a qualified buying question into product and store evidence, ownership, a supported change, and verification. Exact integration availability depends on the contracted setup.`,
       },
       {
         question: "What is the main difference?",
@@ -177,7 +177,7 @@ const AI_VISIBILITY_COMPARISONS: Comparison[] = [
     slug: "profound",
     name: "Profound",
     headline:
-      "Profound measures AI visibility across platforms. Beseam carries the gap into the store and asks again.",
+      "Profound measures AI visibility across platforms. Beseam follows the buying questions where your products were overlooked into the store evidence you can change.",
     platformSummary:
       "Profound is an AI-visibility platform for measuring brand presence, share of voice, and citations across multiple answer engines, with platform comparisons that can switch between visibility, share of voice, and citation share.",
     bestFor:
@@ -208,7 +208,7 @@ const AI_VISIBILITY_COMPARISONS: Comparison[] = [
     slug: "peec-ai",
     name: "Peec AI",
     headline:
-      "Peec AI tracks how brands appear in AI search. Beseam connects a lost answer to the change behind the next one.",
+      "Peec AI tracks how brands appear in AI search. Beseam follows a missed recommendation into the product evidence behind the next choice.",
     platformSummary:
       "Peec AI is an AI-search analytics platform that tracks visibility, share of voice, sentiment, position, competitors, cited domains, and individual chats, with AI engines used as a top-level filter.",
     bestFor:
@@ -239,7 +239,7 @@ const AI_VISIBILITY_COMPARISONS: Comparison[] = [
     slug: "otterly-ai",
     name: "Otterly.AI",
     headline:
-      "Otterly.AI turns visibility findings into to-dos. Beseam keeps the answer, store change, and re-check in one trace.",
+      "Otterly.AI turns visibility findings into to-dos. Beseam keeps the buying question, store change, and re-check in one trace.",
     platformSummary:
       "Otterly.AI monitors brand visibility and sentiment across AI search, including a Brand Visibility Index and recommendation workflow that can move findings into a tracked to-do list.",
     bestFor:
@@ -270,7 +270,7 @@ const AI_VISIBILITY_COMPARISONS: Comparison[] = [
     slug: "rankscale",
     name: "Rankscale",
     headline:
-      "Rankscale separates visibility from detection. Beseam carries the diagnosed gap through a controlled store change and re-check.",
+      "Rankscale separates visibility from detection. Beseam follows the missed buying question through a supported store change and re-check.",
     platformSummary:
       "Rankscale is an AI-search visibility platform that separates visibility, mentions, citations, sentiment, position, and detection rate, with audit recommendations tied to underperforming prompt sets.",
     bestFor:
@@ -301,7 +301,7 @@ const AI_VISIBILITY_COMPARISONS: Comparison[] = [
     slug: "athena-hq",
     name: "Athena",
     headline:
-      "Athena pairs AI share of voice with an Action Center. Beseam ties the recommendation to the product, change, and answer afterward.",
+      "Athena pairs AI share of voice with an Action Center. Beseam ties the missed buying question to the product evidence, change, and answer afterward.",
     platformSummary:
       "Athena is an AI-search visibility platform centered on share of voice, competitor discovery, source analysis, and an Action Center for prioritized recommendations and content work.",
     bestFor:
@@ -332,7 +332,7 @@ const AI_VISIBILITY_COMPARISONS: Comparison[] = [
     slug: "amionai",
     name: "AmIOnAI",
     headline:
-      "AmIOnAI makes AI visibility an action plan. Beseam keeps each change attached to the commerce evidence and re-check.",
+      "AmIOnAI makes AI visibility an action plan. Beseam keeps each buying question attached to the store evidence, change, and re-check.",
     platformSummary:
       "AmIOnAI is an AI-visibility product built around a visibility score, source analysis, and a week-by-week action plan for improving presence in ChatGPT and Google AI surfaces.",
     bestFor:
@@ -363,7 +363,7 @@ const AI_VISIBILITY_COMPARISONS: Comparison[] = [
     slug: "ahrefs-brand-radar",
     name: "Ahrefs Brand Radar",
     headline:
-      "Ahrefs Brand Radar measures AI share of voice at search scale. Beseam connects a discovery gap to the store action behind the next answer.",
+      "Ahrefs Brand Radar measures AI share of voice at search scale. Beseam follows a missed buying question into the store evidence you can change.",
     platformSummary:
       "Ahrefs Brand Radar extends competitive search intelligence into AI visibility, including AI share of voice, mentions, citations, and platform-level comparisons informed by Ahrefs' search-demand data.",
     bestFor:
@@ -394,7 +394,7 @@ const AI_VISIBILITY_COMPARISONS: Comparison[] = [
     slug: "semrush-ai-toolkit",
     name: "Semrush AI Toolkit",
     headline:
-      "Semrush surfaces AI topic and source opportunities. Beseam carries the opportunity into a controlled commerce change and re-check.",
+      "Semrush surfaces AI topic and source opportunities. Beseam follows the missed buying question into a supported store change and asks again.",
     platformSummary:
       "Semrush AI Toolkit measures AI visibility against industry competitors and turns gaps into topic and source opportunities, including prompts and domains where competitors appear and the tracked brand does not.",
     bestFor:
@@ -429,13 +429,13 @@ export const COMPARISONS: Comparison[] = [
     slug: "google-analytics",
     name: "Google Analytics",
     category: "Web analytics",
-    metaTitle: "Beseam vs Google Analytics: From reporting to commerce action",
+    metaTitle: "Beseam vs Google Analytics: Reporting vs buying-journey evidence",
     metaDescription:
       "Compare Beseam and Google Analytics. See where GA4 is stronger, where Beseam differs, and why commerce teams often use both.",
     headline:
       "Google Analytics reports the journey. Beseam keeps the evidence connected to what happens next.",
     intro:
-      "GA4 is a broad measurement system for acquisition, events, engagement, and conversions. Beseam connects that measurement with catalog, discovery, shopper behavior, campaigns, reliability, orders, and revenue so the team can understand the commercial problem, decide what deserves action, and measure what changed afterward.",
+      "GA4 is a broad measurement system for acquisition, events, engagement, and conversions. Beseam connects that measurement with catalog, discovery, shopper behavior, campaigns, reliability, orders, and revenue so the team can understand the shopper's buying decision, decide what deserves action, and measure what changed afterward.",
     competitorSummary:
       "Choose Google Analytics for broad traffic, acquisition, event, and conversion reporting with a widely supported ecosystem.",
     beseamSummary:
@@ -449,7 +449,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "The same revenue problem appears across storefront, catalog, campaigns, behavior, and order data.",
-      "Teams need one evidence-backed commerce decision rather than another dashboard.",
+      "Teams need the evidence around the shopper's buying decision rather than another dashboard.",
       "You need the finding, owner, approval, change, and verification to stay connected.",
     ],
     notAReplacementFor:
@@ -485,7 +485,7 @@ export const COMPARISONS: Comparison[] = [
         criterion: "Best relationship",
         competitor: "System of record for analytics and acquisition reporting.",
         beseam:
-          "Keeps GA4 evidence attached to the commerce decision, approved action, and measured result without replacing GA4.",
+          "Keeps GA4 evidence attached to the shopper's buying decision, approved action, and measured result without replacing GA4.",
       },
     ],
     workflow: [
@@ -557,13 +557,13 @@ export const COMPARISONS: Comparison[] = [
     name: "Microsoft Clarity",
     category: "Behavior analytics",
     metaTitle:
-      "Beseam vs Microsoft Clarity: Behavior evidence vs commerce action",
+      "Beseam vs Microsoft Clarity: Behavior evidence and buying decisions",
     metaDescription:
       "Compare Beseam and Microsoft Clarity. See where free heatmaps and session recordings help, and when commerce teams need connected evidence, a controlled action, and after-action learning.",
     headline:
       "Microsoft Clarity shows the session for free. Beseam connects the friction to what should happen next.",
     intro:
-      "Microsoft Clarity is a free behavior analytics tool that captures heatmaps, session recordings, and friction signals like rage clicks, dead clicks, and quick backs, with AI-generated session summaries and native links to Google Analytics and Microsoft Advertising. Beseam treats behavior as one input inside a broader commerce decision that also covers catalog, AI discovery, campaigns, incidents, and booked revenue.",
+      "Microsoft Clarity is a free behavior analytics tool that captures heatmaps, session recordings, and friction signals like rage clicks, dead clicks, and quick backs, with AI-generated session summaries and native links to Google Analytics and Microsoft Advertising. Beseam treats behavior as one signal in why shoppers choose, hesitate, or stop, alongside product, discovery, reliability, and revenue evidence.",
     competitorSummary:
       "Choose Microsoft Clarity when you need free, unlimited heatmaps, session recordings, and friction detection with no seat or session caps.",
     beseamSummary:
@@ -577,7 +577,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "Friction signals need to be considered alongside catalog, AI discovery, campaign, and revenue evidence, not reviewed in isolation.",
-      "The team wants one evidence-backed commerce decision instead of a queue of recordings to watch.",
+      "The team wants the evidence around the shopper's buying decision instead of a queue of recordings to watch.",
       "The proposed change, owner, approval, and verified outcome must stay attached to the original signal.",
     ],
     notAReplacementFor:
@@ -614,7 +614,7 @@ export const COMPARISONS: Comparison[] = [
         criterion: "Best relationship",
         competitor: "Free behavior capture source.",
         beseam:
-          "Connects Clarity's friction signals to the wider commercial question, controlled action, and measured result.",
+          "Connects Clarity's friction signals to the shopper's buying decision, supported action, and measured result.",
       },
     ],
     workflow: [
@@ -649,7 +649,7 @@ export const COMPARISONS: Comparison[] = [
       src: "/images/product-live/product-workflow.gif",
       alt: "Real Beseam product workflow for a dancewear store product",
       caption:
-        "Real Beseam product workflow. A Clarity-style friction signal for a dancewear store becomes a governed commerce action instead of a recording left unwatched.",
+        "Real Beseam product workflow. A Clarity-style friction signal for a dancewear store becomes a supported change instead of a recording left unwatched.",
     },
     faqs: [
       {
@@ -685,11 +685,11 @@ export const COMPARISONS: Comparison[] = [
     slug: "hotjar",
     name: "Hotjar",
     category: "Behavior analytics",
-    metaTitle: "Beseam vs Hotjar: From behavior evidence to commerce action",
+    metaTitle: "Beseam vs Hotjar: From behavior evidence to buying decisions",
     metaDescription:
       "Compare Beseam and Hotjar. See when heatmaps and recordings are the better tool, and when commerce teams need connected evidence, a controlled action, and learning afterward.",
     headline:
-      "Hotjar shows the session. Beseam connects the behavior to the commerce decision.",
+      "Hotjar shows the session. Beseam connects the behavior to what made choosing harder.",
     intro:
       "Hotjar is built for visual behavior evidence through heatmaps, recordings, and feedback. Beseam treats that behavior as one part of a broader commercial question that can also include product data, pages, AI discovery, campaigns, reliability, conversion, orders, and revenue.",
     competitorSummary:
@@ -789,7 +789,7 @@ export const COMPARISONS: Comparison[] = [
       {
         question: "Can Hotjar and Beseam be used together?",
         answer:
-          "Yes. Hotjar can provide qualitative behavior evidence while Beseam connects the issue to wider commerce context, helps the team decide what deserves action, and measures the relevant signals afterward.",
+          "Yes. Hotjar can provide qualitative behavior evidence while Beseam connects the issue to the other product, store, and buying evidence, helps the team decide what deserves action, and measures the relevant signals afterward.",
       },
       {
         question: "What does Beseam add beyond a heatmap?",
@@ -814,13 +814,13 @@ export const COMPARISONS: Comparison[] = [
     name: "Noibu",
     category: "Ecommerce error monitoring",
     metaTitle:
-      "Beseam vs Noibu: Checkout monitoring or cross-commerce decisions?",
+      "Beseam vs Noibu: Checkout monitoring or the wider buying journey?",
     metaDescription:
-      "Compare Beseam and Noibu across technical error monitoring, wider commerce evidence, controlled action, and learning after a change.",
+      "Compare Beseam and Noibu across technical error monitoring, product and store evidence, controlled action, and learning after a change.",
     headline:
-      "Noibu finds the broken checkout. Beseam puts that break in the wider commerce decision.",
+      "Noibu finds the broken checkout. Beseam connects that break to the rest of the buying journey.",
     intro:
-      "Noibu monitors storefronts for technical errors, broken pages, and release regressions that block purchases, then estimates the revenue at risk. Beseam connects that reliability evidence with catalog, discovery, campaigns, shopper behavior, conversion, orders, and revenue so the team can decide how the break compares with the other commercial problems demanding action.",
+      "Noibu monitors storefronts for technical errors, broken pages, and release regressions that block purchases, then estimates the revenue at risk. Beseam connects that reliability evidence with catalog, discovery, campaigns, shopper behavior, conversion, orders, and revenue so the team can see how that break fits into the buying decision and decide what deserves action first.",
     competitorSummary:
       "Choose Noibu when the priority is catching technical errors, broken checkout flows, and release regressions before they cost revenue.",
     beseamSummary:
@@ -834,7 +834,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "The reliability signal needs to be considered alongside catalog, AI discovery, campaign, and behavior evidence, not handled in isolation.",
-      "The team wants one evidence-backed commerce decision instead of a separate alert queue per system.",
+      "The team wants the evidence around the shopper's buying decision instead of a separate alert queue per system.",
       "The proposed change, owner, approval, and verified outcome must stay attached to the original signal.",
     ],
     notAReplacementFor:
@@ -873,7 +873,7 @@ export const COMPARISONS: Comparison[] = [
         competitor:
           "Dedicated technical reliability and checkout monitoring source.",
         beseam:
-          "Keeps a Noibu-style reliability finding connected to the wider commercial decision, controlled action, and measured result.",
+          "Keeps a Noibu-style reliability finding connected to the shopper's buying decision, supported action, and measured result.",
       },
     ],
     workflow: [
@@ -915,7 +915,7 @@ export const COMPARISONS: Comparison[] = [
       {
         question: "Does Beseam replace Noibu?",
         answer:
-          "No. Noibu's technical error detection, checkout monitoring, and revenue-at-risk estimates stay valuable on their own. Beseam connects those findings to the wider commerce evidence, the decision about what to do, and what changed afterward.",
+          "No. Noibu's technical error detection, checkout monitoring, and revenue-at-risk estimates stay valuable on their own. Beseam connects those findings to the other product, store, and buying evidence, the decision about what to do, and what changed afterward.",
       },
       {
         question: "Can Noibu and Beseam be used together?",
@@ -957,7 +957,7 @@ export const COMPARISONS: Comparison[] = [
     beseamSummary:
       "Choose Beseam when the decision must cross experience, catalog, discovery, advertising, operations, and revenue, and end in an owned, verified action.",
     useTogetherSummary:
-      "Use Contentsquare for deep experience analysis and Beseam for the wider commerce decision. A qualified finding can move into Beseam's issue, ownership, and verification model without pretending the products are interchangeable.",
+      "Use Contentsquare for deep experience analysis and Beseam to connect those findings to the rest of the buying journey. A qualified finding can move into Beseam's issue, ownership, and verification model without pretending the products are interchangeable.",
     chooseCompetitorWhen: [
       "Digital experience analytics is the main program and requires deep journey, zoning, replay, and friction analysis.",
       "A specialized experience team needs broad qualitative and quantitative exploration.",
@@ -965,7 +965,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "The problem crosses experience, catalog, AI discovery, campaigns, reliability, and orders.",
-      "The team needs one evidence-backed commerce decision rather than a larger analysis workspace.",
+      "The team needs the evidence around the shopper's buying decision rather than a larger analysis workspace.",
       "The issue must move into ownership, approval, execution, and outcome verification.",
     ],
     notAReplacementFor:
@@ -1002,7 +1002,7 @@ export const COMPARISONS: Comparison[] = [
         criterion: "Best relationship",
         competitor: "Specialist experience analytics platform.",
         beseam:
-          "Connects experience findings with the other evidence needed for a commerce decision, action, and measured result.",
+          "Connects experience findings with the other evidence around the shopper's buying decision, a supported action, and the measured result.",
       },
     ],
     workflow: [
@@ -1077,7 +1077,7 @@ export const COMPARISONS: Comparison[] = [
     metaDescription:
       "Compare Beseam and Amplitude across product analytics, ecommerce evidence, experimentation, decisions, action, and learning.",
     headline:
-      "Amplitude answers product questions. Beseam keeps ecommerce decisions connected to action and learning.",
+      "Amplitude answers product questions. Beseam connects product behavior to the shopper's buying decision.",
     intro:
       "Amplitude is designed for product analytics: funnels, retention, cohorts, journeys, replay, experimentation, and product growth workflows. Beseam connects commerce evidence around products, pages, queries, campaigns, journeys, reliability, conversion, orders, and revenue so a team can move from observation to a controlled action and learn from the result.",
     competitorSummary:
@@ -1124,7 +1124,7 @@ export const COMPARISONS: Comparison[] = [
         competitor:
           "Charts, cohorts, dashboards, replay, and experiment results.",
         beseam:
-          "A specific commerce decision with evidence, affected object, owner, approval, action, and measured result.",
+          "The shopper's buying decision with the relevant evidence, affected object, owner, approval, action, and measured result.",
       },
       {
         criterion: "Best relationship",
@@ -1160,7 +1160,7 @@ export const COMPARISONS: Comparison[] = [
         competitor:
           "Experiment and analytics results inform the product roadmap.",
         beseam:
-          "The measured result becomes evidence for the next commerce decision.",
+          "The measured result becomes evidence for the next decision.",
       },
     ],
     evidence: {
@@ -1226,7 +1226,7 @@ export const COMPARISONS: Comparison[] = [
     chooseBeseamWhen: [
       "The experimentation backlog is driven by opinion rather than cross-system commercial evidence.",
       "The right intervention may be a catalog, campaign, content, reliability, or product change, not necessarily an A/B test.",
-      "You want the result to improve the next commerce decision.",
+      "You want the result to improve the next decision.",
     ],
     notAReplacementFor:
       "Beseam does not replace VWO's full experimentation engine, feature flag SDKs, progressive rollouts, statistical testing methods, or personalization delivery.",
@@ -1306,7 +1306,7 @@ export const COMPARISONS: Comparison[] = [
       {
         question: "Does Beseam replace VWO?",
         answer:
-          "No. VWO is stronger when the primary requirement is experimentation, feature flags, progressive rollout, or personalization delivery. Beseam connects the wider commerce evidence and helps the team decide whether an experiment is the right intervention.",
+          "No. VWO is stronger when the primary requirement is experimentation, feature flags, progressive rollout, or personalization delivery. Beseam connects the other product, store, and buying evidence and helps the team decide whether an experiment is the right intervention.",
       },
       {
         question: "Can Beseam send work to VWO?",
@@ -1340,7 +1340,7 @@ export const COMPARISONS: Comparison[] = [
     metaDescription:
       "Compare Beseam and Triple Whale across attribution, commerce analytics, revenue diagnosis, action, and verification.",
     headline:
-      "Triple Whale measures commerce. Beseam turns the evidence into action.",
+      "Triple Whale measures commerce. Beseam connects that measurement to what shoppers find, choose, and buy.",
     intro:
       "Triple Whale brings ecommerce analytics, attribution, marketing performance, website conversion, retention, and portfolio reporting together. Beseam uses measurement as evidence alongside catalog, storefront, AI discovery, behavior, reliability, campaigns, actions, orders, and revenue so the team can decide what deserves action and learn from what changed afterward.",
     competitorSummary:
@@ -1348,7 +1348,7 @@ export const COMPARISONS: Comparison[] = [
     beseamSummary:
       "Choose Beseam when the hard part is connecting measurement to the affected product, page, campaign, or journey, deciding what deserves action, making a supported change, and measuring what changed afterward.",
     useTogetherSummary:
-      "Use Triple Whale for commerce measurement and attribution and Beseam to connect that evidence to the wider commercial question, controlled action, and learning afterward. Where the contracted setup connects the data, the evidence can remain attached to the relevant product, page, campaign, or revenue period.",
+      "Use Triple Whale for commerce measurement and attribution and Beseam to connect that evidence to the shopper's buying decision, supported action, and learning afterward. Where the contracted setup connects the data, the evidence can remain attached to the relevant product, page, campaign, or revenue period.",
     chooseCompetitorWhen: [
       "Paid media attribution and ecommerce reporting are the main priorities.",
       "The team needs unified dashboards for acquisition, conversion, retention, or multiple stores.",
@@ -1436,7 +1436,7 @@ export const COMPARISONS: Comparison[] = [
       {
         question: "Does Beseam replace Triple Whale?",
         answer:
-          "Not when the main requirement is deep ecommerce attribution, marketing reporting, retention analytics, or portfolio reporting. Beseam connects that measurement with the wider commerce evidence, decision, controlled action, and learning afterward.",
+          "Not when the main requirement is deep ecommerce attribution, marketing reporting, retention analytics, or portfolio reporting. Beseam connects that measurement with the other product, store, and buying evidence, the decision, controlled action, and learning afterward.",
       },
       {
         question: "Can Beseam use attribution data?",
@@ -1473,15 +1473,15 @@ export const COMPARISONS: Comparison[] = [
     metaDescription:
       "Compare Beseam and Mixpanel across product analytics, ecommerce evidence, decisions, action, and learning.",
     headline:
-      "Mixpanel answers product questions fast. Beseam keeps the ecommerce decision connected to what happens next.",
+      "Mixpanel answers product questions fast. Beseam connects product behavior to the shopper's buying decision.",
     intro:
       "Mixpanel is built for self-serve product analytics: funnels, retention, cohorts, and flows that show how users move through a product. Beseam connects storefront, catalog, AI discovery, campaigns, behavior, reliability, and booked revenue so the team can observe the wider pattern, understand what may explain it, and decide what deserves action.",
     competitorSummary:
       "Choose Mixpanel when product and growth teams need fast, self-serve funnel, retention, and cohort analysis on events.",
     beseamSummary:
-      "Choose Beseam when the same drop shows up across storefront, catalog, campaigns, behavior, and orders, and the team needs the evidence connected to one commerce decision instead of another chart.",
+      "Choose Beseam when the same drop shows up across storefront, catalog, campaigns, behavior, and orders, and the team needs the evidence connected to the shopper's buying decision instead of another chart.",
     useTogetherSummary:
-      "Keep Mixpanel as the event-analysis tool product teams already query. Run Beseam alongside it to connect event evidence with the wider commerce problem, the decision about what to change, and the measured result.",
+      "Keep Mixpanel as the event-analysis tool product teams already query. Run Beseam alongside it to connect event evidence with the shopper's buying decision, the merchant's decision about what to change, and the measured result.",
     chooseCompetitorWhen: [
       "Product and growth teams need self-serve funnel, retention, and cohort queries without waiting on an analyst.",
       "The question is behavioral and event-based: activation, retention, or feature adoption.",
@@ -1489,7 +1489,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "The same revenue problem spans storefront, catalog, campaigns, behavior, and order data, not just product events.",
-      "Teams need one evidence-backed commerce decision rather than another funnel to interpret.",
+      "Teams need the evidence around the shopper's buying decision rather than another funnel to interpret.",
       "The finding, owner, approval, change, and verification need to stay connected.",
     ],
     notAReplacementFor:
@@ -1561,7 +1561,7 @@ export const COMPARISONS: Comparison[] = [
       src: "/images/product-live/revenue-analytics.webp",
       alt: "Beseam revenue analytics workspace showing commerce metrics for a dancewear store",
       caption:
-        "Real Beseam revenue analytics. Mixpanel-style event evidence stays attached to the wider commerce decision, action, and measured result.",
+        "Real Beseam revenue analytics. Mixpanel-style event evidence stays attached to the shopper's buying decision, action, and measured result.",
     },
     faqs: [
       {
@@ -1601,7 +1601,7 @@ export const COMPARISONS: Comparison[] = [
     metaDescription:
       "Compare Beseam and PostHog across product analytics, replay, experimentation, commerce breadth, and action.",
     headline:
-      "PostHog runs the product stack. Beseam keeps the commerce decision connected across systems.",
+      "PostHog runs the product stack. Beseam connects those product signals to the shopper's buying decision.",
     intro:
       "PostHog is an open-source, all-in-one product platform combining product analytics, session replay, feature flags, and experimentation in one codebase-friendly tool. Beseam connects storefront, catalog, AI discovery, campaigns, shopper behavior, reliability, conversion, orders, and revenue so the team can decide which commerce problem deserves engineering attention and what happened after the intervention.",
     competitorSummary:
@@ -1609,7 +1609,7 @@ export const COMPARISONS: Comparison[] = [
     beseamSummary:
       "Choose Beseam when the problem is not missing tooling, but deciding which cross-system commerce issue deserves an engineer's next sprint.",
     useTogetherSummary:
-      "Keep PostHog as the product platform engineering already ships against. Run Beseam alongside it to connect the wider commerce evidence and decide whether a PostHog flag, replay review, or experiment is the right intervention.",
+      "Keep PostHog as the product platform engineering already ships against. Run Beseam alongside it to connect the other product, store, and buying evidence and decide whether a PostHog flag, replay review, or experiment is the right intervention.",
     chooseCompetitorWhen: [
       "Engineering teams want analytics, replay, flags, and experimentation in one open-source, self-hostable platform.",
       "The team is comfortable instrumenting events and managing its own data pipeline.",
@@ -1617,7 +1617,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "The same revenue problem spans storefront, catalog, campaigns, behavior, and order data, not just product events.",
-      "Teams need one evidence-backed commerce decision rather than another dashboard to configure.",
+      "Teams need the evidence around the shopper's buying decision rather than another dashboard to configure.",
       "The finding, owner, approval, change, and verification need to stay connected.",
     ],
     notAReplacementFor:
@@ -1647,7 +1647,7 @@ export const COMPARISONS: Comparison[] = [
       {
         criterion: "Action and verification",
         competitor:
-          "Flags and experiments ship through PostHog; broader commerce action happens elsewhere.",
+          "Flags and experiments ship through PostHog; other product and store changes happen elsewhere.",
         beseam:
           "The proposed change, approval, execution state, and equivalent-period verification remain attached to the finding.",
       },
@@ -1704,12 +1704,12 @@ export const COMPARISONS: Comparison[] = [
       {
         question: "Can PostHog and Beseam be used together?",
         answer:
-          "Yes. PostHog can remain the platform engineering ships against, while Beseam connects the wider commerce evidence and helps the team decide whether a flag, replay review, or experiment is the right intervention.",
+          "Yes. PostHog can remain the platform engineering ships against, while Beseam connects the other product, store, and buying evidence and helps the team decide whether a flag, replay review, or experiment is the right intervention.",
       },
       {
         question: "Why not just use PostHog's own prioritization?",
         answer:
-          "PostHog surfaces product signals well but does not connect them with catalog, AI discovery, campaign, or reliability evidence outside the product stack. Beseam keeps that wider evidence attached to the commerce decision.",
+          "PostHog surfaces product signals well but does not connect them with catalog, AI discovery, campaign, or reliability evidence outside the product stack. Beseam keeps that wider evidence attached to the shopper's buying decision.",
       },
     ],
     sources: [
@@ -1728,7 +1728,7 @@ export const COMPARISONS: Comparison[] = [
     slug: "fullstory",
     name: "FullStory",
     category: "Experience analytics",
-    metaTitle: "Beseam vs FullStory: Session replay or commerce decisions?",
+    metaTitle: "Beseam vs FullStory: Session replay or buying-decision evidence?",
     metaDescription:
       "Compare Beseam and FullStory across session replay, experience analytics, commercial decisions, controlled action, and learning afterward.",
     headline:
@@ -1740,7 +1740,7 @@ export const COMPARISONS: Comparison[] = [
     beseamSummary:
       "Choose Beseam when the decision must cross experience, catalog, discovery, advertising, operations, and revenue, and end in an owned, verified action.",
     useTogetherSummary:
-      "Use FullStory for deep experience capture and search, and Beseam for the wider commerce decision. A qualified finding can move into Beseam's issue, ownership, and verification model without treating the products as interchangeable.",
+      "Use FullStory for deep experience capture and search, and Beseam to connect those findings to the rest of the shopper's buying decision. A qualified finding can move into Beseam's issue, ownership, and verification model without treating the products as interchangeable.",
     chooseCompetitorWhen: [
       "Session replay, frustration signals, and searchable experience data are the core requirement.",
       "A dedicated experience or support team needs to find and watch specific sessions quickly.",
@@ -1748,7 +1748,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "The problem crosses experience, catalog, AI discovery, campaigns, reliability, and orders.",
-      "The team needs one evidence-backed commerce decision rather than a larger session index to search.",
+      "The team needs the evidence around the shopper's buying decision rather than a larger session index to search.",
       "The issue must move into ownership, approval, execution, and outcome verification.",
     ],
     notAReplacementFor:
@@ -1786,7 +1786,7 @@ export const COMPARISONS: Comparison[] = [
         competitor:
           "Specialist session replay and experience capture platform.",
         beseam:
-          "Connects experience findings with the other evidence needed for a commerce decision, action, and measured result.",
+          "Connects experience findings with the other evidence around the shopper's buying decision, a supported action, and the measured result.",
       },
     ],
     workflow: [
@@ -1858,13 +1858,13 @@ export const COMPARISONS: Comparison[] = [
     name: "LogRocket",
     category: "Session replay & product analytics",
     metaTitle:
-      "Beseam vs LogRocket: Technical replay or connected commerce action?",
+      "Beseam vs LogRocket: Technical replay or buying-decision evidence?",
     metaDescription:
-      "Compare Beseam and LogRocket across session replay, frontend monitoring, wider commerce evidence, action, and learning.",
+      "Compare Beseam and LogRocket across session replay, frontend monitoring, product and store evidence, action, and learning.",
     headline:
-      "LogRocket replays the session and the stack trace. Beseam connects the break to the wider commerce decision.",
+      "LogRocket replays the session and the stack trace. Beseam connects the break to the shopper's buying decision.",
     intro:
-      "LogRocket pairs session replay with frontend performance monitoring, error tracking, and product analytics so engineering teams can reproduce and fix what broke. Beseam treats that evidence as one input inside a broader commerce decision that also covers catalog, AI discovery, campaigns, incidents, and booked revenue.",
+      "LogRocket pairs session replay with frontend performance monitoring, error tracking, and product analytics so engineering teams can reproduce and fix what broke. Beseam treats that evidence as one signal around the shopper's buying decision alongside catalog, AI discovery, campaigns, incidents, and booked revenue.",
     competitorSummary:
       "Choose LogRocket when engineering needs to reproduce bugs, watch sessions, and connect frontend errors to performance and product data.",
     beseamSummary:
@@ -1878,7 +1878,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "The technical issue needs to be considered alongside catalog, AI discovery, campaign, and revenue evidence.",
-      "The team wants one evidence-backed commerce decision instead of a queue of error reports to triage.",
+      "The team wants the evidence around the shopper's buying decision instead of a queue of error reports to triage.",
       "The proposed change, owner, approval, and verified outcome must stay attached to the original signal.",
     ],
     notAReplacementFor:
@@ -1915,7 +1915,7 @@ export const COMPARISONS: Comparison[] = [
         criterion: "Best relationship",
         competitor: "Engineering-owned technical evidence source.",
         beseam:
-          "Connects LogRocket findings to the wider commercial question, controlled action, and measured result.",
+          "Connects LogRocket findings to the shopper's buying decision, supported action, and measured result.",
       },
     ],
     workflow: [
@@ -1950,18 +1950,18 @@ export const COMPARISONS: Comparison[] = [
       src: "/images/product-live/product-workflow.gif",
       alt: "Real Beseam product workflow for a dancewear store product",
       caption:
-        "Real Beseam product workflow. A LogRocket-style technical finding becomes a governed commerce action instead of an error report left in the queue.",
+        "Real Beseam product workflow. A LogRocket-style technical finding becomes a supported change instead of an error report left in the queue.",
     },
     faqs: [
       {
         question: "Does Beseam replace LogRocket?",
         answer:
-          "No. LogRocket's session replay, error reproduction, and performance monitoring stay valuable for engineering. Beseam connects those findings to wider commerce evidence, the decision about what to change, and what moved afterward.",
+          "No. LogRocket's session replay, error reproduction, and performance monitoring stay valuable for engineering. Beseam connects those findings to the other product, store, and buying evidence, the decision about what to change, and what moved afterward.",
       },
       {
         question: "Can LogRocket and Beseam be used together?",
         answer:
-          "Yes. LogRocket can supply the technical evidence while Beseam connects the issue to wider commerce context, helps the team decide what deserves action, and measures the relevant signals afterward.",
+          "Yes. LogRocket can supply the technical evidence while Beseam connects the issue to the other product, store, and buying evidence, helps the team decide what deserves action, and measures the relevant signals afterward.",
       },
       {
         question: "What does Beseam add beyond an error report?",
@@ -1985,13 +1985,13 @@ export const COMPARISONS: Comparison[] = [
     slug: "crazy-egg",
     name: "Crazy Egg",
     category: "Behavior analytics",
-    metaTitle: "Beseam vs Crazy Egg: Heatmaps or connected commerce action?",
+    metaTitle: "Beseam vs Crazy Egg: Heatmaps or buying-decision evidence?",
     metaDescription:
       "Compare Beseam and Crazy Egg. See where heatmaps and simple page tests help, and when commerce teams need wider evidence, a controlled action, and learning afterward.",
     headline:
-      "Crazy Egg maps the click. Beseam connects the pattern to the wider commerce decision.",
+      "Crazy Egg maps the click. Beseam connects the pattern to what may have shaped the shopper's buying decision.",
     intro:
-      "Crazy Egg is a heatmap and A/B testing tool that shows where visitors click, scroll, and drop off on a page. Beseam treats that evidence as one input inside a broader commerce decision that also covers catalog, AI discovery, campaigns, incidents, and booked revenue.",
+      "Crazy Egg is a heatmap and A/B testing tool that shows where visitors click, scroll, and drop off on a page. Beseam treats that evidence as one signal around the shopper's buying decision alongside catalog, AI discovery, campaigns, incidents, and booked revenue.",
     competitorSummary:
       "Choose Crazy Egg when your team needs fast, visual heatmaps, scrollmaps, and simple A/B tests on individual pages.",
     beseamSummary:
@@ -2042,7 +2042,7 @@ export const COMPARISONS: Comparison[] = [
         criterion: "Best relationship",
         competitor: "Visual, page-level behavior source.",
         beseam:
-          "Connects heatmap evidence to the wider commercial question, controlled action, and measured result.",
+          "Connects heatmap evidence to the shopper's buying decision, supported action, and measured result.",
       },
     ],
     workflow: [
@@ -2079,18 +2079,18 @@ export const COMPARISONS: Comparison[] = [
       src: "/images/product-live/revenue-analytics.webp",
       alt: "Beseam revenue analytics workspace showing commerce metrics for a dancewear store",
       caption:
-        "Real Beseam revenue analytics. A heatmap signal for a dancewear store stays attached to the commerce decision, owner, action, and measured result instead of becoming a detached insight.",
+        "Real Beseam revenue analytics. A heatmap signal for a dancewear store stays attached to the shopper's buying decision, owner, action, and measured result instead of becoming a detached insight.",
     },
     faqs: [
       {
         question: "Does Beseam replace Crazy Egg?",
         answer:
-          "No. Crazy Egg's heatmaps, scrollmaps, and simple page tests can stay in place. Beseam connects what they surface to wider commerce evidence, the decision about what to change, and the result afterward.",
+          "No. Crazy Egg's heatmaps, scrollmaps, and simple page tests can stay in place. Beseam connects what they surface to the other product, store, and buying evidence, the decision about what to change, and the result afterward.",
       },
       {
         question: "Can Crazy Egg and Beseam be used together?",
         answer:
-          "Yes. Crazy Egg can supply visual page evidence while Beseam connects the issue to wider commerce context, helps the team decide what deserves action, and measures the relevant signals afterward.",
+          "Yes. Crazy Egg can supply visual page evidence while Beseam connects the issue to the other product, store, and buying evidence, helps the team decide what deserves action, and measures the relevant signals afterward.",
       },
       {
         question: "What does Beseam add beyond a heatmap?",
@@ -2115,13 +2115,13 @@ export const COMPARISONS: Comparison[] = [
     name: "Mouseflow",
     category: "Behavior analytics",
     metaTitle:
-      "Beseam vs Mouseflow: Friction scoring or connected commerce action?",
+      "Beseam vs Mouseflow: Friction scoring or buying-decision evidence?",
     metaDescription:
       "Compare Beseam and Mouseflow. See where friction scoring and session replay help, and when commerce teams need wider evidence, a controlled action, and learning afterward.",
     headline:
-      "Mouseflow scores the friction. Beseam connects the signal to the wider commerce decision.",
+      "Mouseflow scores the friction. Beseam connects the signal to what may have shaped the shopper's buying decision.",
     intro:
-      "Mouseflow captures session recordings, heatmaps, funnels, and a friction score that flags where visitors struggle. Beseam treats that evidence as one input inside a broader commerce decision that also covers catalog, AI discovery, campaigns, incidents, and booked revenue.",
+      "Mouseflow captures session recordings, heatmaps, funnels, and a friction score that flags where visitors struggle. Beseam treats that evidence as one signal around the shopper's buying decision alongside catalog, AI discovery, campaigns, incidents, and booked revenue.",
     competitorSummary:
       "Choose Mouseflow when you need session recordings, heatmaps, funnels, and an automated friction score across a full site.",
     beseamSummary:
@@ -2135,7 +2135,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "Friction signals need to be considered alongside catalog, AI discovery, campaign, and revenue evidence, not reviewed page by page.",
-      "The team wants one evidence-backed commerce decision instead of a friction-score leaderboard.",
+      "The team wants the evidence around the shopper's buying decision instead of a friction-score leaderboard.",
       "The proposed change, owner, approval, and verified outcome must stay attached to the original signal.",
     ],
     notAReplacementFor:
@@ -2173,7 +2173,7 @@ export const COMPARISONS: Comparison[] = [
         criterion: "Best relationship",
         competitor: "Site-wide friction detection source.",
         beseam:
-          "Connects friction signals to the wider commercial question, controlled action, and measured result.",
+          "Connects friction signals to the shopper's buying decision, supported action, and measured result.",
       },
     ],
     workflow: [
@@ -2207,18 +2207,18 @@ export const COMPARISONS: Comparison[] = [
       src: "/images/product-live/optimization.webp",
       alt: "Real Beseam optimization workspace for a dancewear store",
       caption:
-        "Real Beseam optimization workspace. A friction-score signal for a dancewear store stays attached to the commerce decision, owner, action, and measured result instead of becoming a leaderboard entry.",
+        "Real Beseam optimization workspace. A friction-score signal for a dancewear store stays attached to the shopper's buying decision, owner, action, and measured result instead of becoming a leaderboard entry.",
     },
     faqs: [
       {
         question: "Does Beseam replace Mouseflow?",
         answer:
-          "No. Mouseflow's recordings, heatmaps, and friction scoring can stay in place. Beseam connects what it surfaces to wider commerce evidence, the decision about what to change, and the result afterward.",
+          "No. Mouseflow's recordings, heatmaps, and friction scoring can stay in place. Beseam connects what it surfaces to the other product, store, and buying evidence, the decision about what to change, and the result afterward.",
       },
       {
         question: "Can Mouseflow and Beseam be used together?",
         answer:
-          "Yes. Mouseflow can supply friction and behavior evidence while Beseam connects the issue to wider commerce context, helps the team decide what deserves action, and measures the relevant signals afterward.",
+          "Yes. Mouseflow can supply friction and behavior evidence while Beseam connects the issue to the other product, store, and buying evidence, helps the team decide what deserves action, and measures the relevant signals afterward.",
       },
       {
         question: "What does Beseam add beyond a friction score?",
@@ -2243,13 +2243,13 @@ export const COMPARISONS: Comparison[] = [
     name: "Adobe Analytics",
     category: "Web analytics",
     metaTitle:
-      "Beseam vs Adobe Analytics: Enterprise reporting or connected commerce action?",
+      "Beseam vs Adobe Analytics: Enterprise reporting or buying-decision evidence?",
     metaDescription:
-      "Compare Beseam and Adobe Analytics across enterprise reporting, attribution, wider commerce evidence, controlled action, and learning afterward.",
+      "Compare Beseam and Adobe Analytics across enterprise reporting, attribution, product and store evidence, supported action, and learning afterward.",
     headline:
-      "Adobe Analytics reports at enterprise scale. Beseam decides what should change.",
+      "Adobe Analytics reports at enterprise scale. Beseam connects that evidence to the shopper's buying decision and what may be worth changing.",
     intro:
-      "Adobe Analytics is an enterprise web and app analytics platform inside Adobe Experience Cloud, built for large organizations that need deep segmentation, attribution, and cross-channel reporting. Beseam connects that measurement with catalog, discovery, shopper behavior, campaigns, reliability, orders, and revenue so the team can understand the commercial problem, decide what deserves action, and measure what changed afterward.",
+      "Adobe Analytics is an enterprise web and app analytics platform inside Adobe Experience Cloud, built for large organizations that need deep segmentation, attribution, and cross-channel reporting. Beseam connects that measurement with catalog, discovery, shopper behavior, campaigns, reliability, orders, and revenue so the team can understand the shopper's buying decision, decide what deserves action, and measure what changed afterward.",
     competitorSummary:
       "Choose Adobe Analytics for enterprise-grade segmentation, attribution, and cross-channel reporting integrated with the wider Experience Cloud.",
     beseamSummary:
@@ -2263,7 +2263,7 @@ export const COMPARISONS: Comparison[] = [
     ],
     chooseBeseamWhen: [
       "The same revenue problem appears across storefront, catalog, campaigns, behavior, and order data.",
-      "Teams need one evidence-backed commerce decision rather than another segment to build.",
+      "Teams need the evidence around the shopper's buying decision rather than another segment to build.",
       "You need the finding, owner, approval, change, and verification to stay connected.",
     ],
     notAReplacementFor:
@@ -2514,7 +2514,7 @@ export const PRACTICAL_COMPARISONS: Record<string, PracticalComparison> = {
       {
         criterion: "Replace or keep?",
         competitor: "Usually keep GA4 as an analytics source of record.",
-        beseam: "Beseam is designed to sit alongside GA4 and keep its measurements attached to the commerce decision and follow-up action.",
+        beseam: "Beseam is designed to sit alongside GA4 and keep its measurements attached to the shopper's buying decision and follow-up action.",
       },
       {
         criterion: "Pricing model",
@@ -2616,7 +2616,7 @@ export const PRACTICAL_COMPARISONS: Record<string, PracticalComparison> = {
       {
         criterion: "Replace or keep?",
         competitor: "Keep Noibu when deep ecommerce error detection and technical diagnosis are core requirements.",
-        beseam: "Use Beseam when reliability evidence needs to sit beside discovery, behavior, campaigns, orders, and the wider commerce decision.",
+        beseam: "Use Beseam when reliability evidence needs to sit beside discovery, behavior, campaigns, orders, and the rest of the shopper's buying decision.",
       },
       {
         criterion: "Pricing model",

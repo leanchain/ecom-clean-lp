@@ -12,7 +12,7 @@ import { SITE_URL, buildPublicMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPublicMetadata({
   title: "About Beseam",
   description:
-    "Why Beseam was founded to keep what ecommerce teams observe, understand, decide, act on, and learn connected to the evidence behind it.",
+    "Why Beseam was founded to help ecommerce teams understand the buying decisions behind finding, choosing, and buying — with the evidence kept attached from signal to result.",
   path: "/about",
 });
 
@@ -43,7 +43,7 @@ export default function AboutPage() {
         url: `${SITE_URL}/about`,
         name: "About Beseam",
         description:
-          "Why Beseam was founded and the people building a system that keeps evidence connected from observation through learning.",
+          "Why Beseam was founded to help ecommerce teams understand what makes shoppers find, choose, and buy products, with evidence kept connected through the decision.",
         about: { "@id": `${SITE_URL}/#organization` },
         mainEntity: { "@id": `${SITE_URL}/about#pankaj-kumar` },
         inLanguage: "en",
@@ -98,13 +98,14 @@ export default function AboutPage() {
                 About Beseam
               </p>
               <h1 className="mt-7 max-w-[17ch] font-display text-[clamp(2.8rem,6.2vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-ink-deep">
-                Commerce teams have data. Knowing what to change next is harder.
+                Being found is not the same as being chosen.
               </h1>
             </div>
             <p className="max-w-[64ch] text-[19px] leading-[1.72] text-black/66">
-              Beseam was built to keep scattered commerce evidence connected
-              through one operating loop: Observe, Understand, Decide, Act, and
-              Learn.
+              Beseam was built around the buying decision: what shoppers wanted,
+              what they saw, what made the choice harder, what the team changed,
+              and what happened afterward. Observe, Understand, Decide, Act, and
+              Learn is how we keep that work connected.
             </p>
           </Reveal>
         </div>
@@ -127,16 +128,16 @@ export default function AboutPage() {
               </p>
               <p>
                 For the past year, he has worked closely with ecommerce founders
-                and operators on real stores, including product data, discovery,
-                storefront behavior, conversion, and the systems teams use to
-                act.
+                and operators on real stores, following the same buying journey
+                from how products are found, through what helps shoppers choose,
+                to where purchases stop.
               </p>
               <p>
-                The same problem kept repeating: teams had plenty of signals but
-                a weak connection between what happened, what was worth
-                changing, who should act, and what changed afterwards. Beseam
-                was founded to keep that evidence, decision, action, and
-                measurement together.
+                The same problem kept repeating: teams could measure traffic,
+                pages, behavior, and conversion, but not easily connect them to
+                the buying decision between being considered and being chosen.
+                Beseam was founded to keep that evidence, the team's decision,
+                the change, and what happened afterward together.
               </p>
             </div>
             <Link
@@ -251,12 +252,13 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-[92rem] gap-10 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1.15fr)_auto] lg:items-end lg:gap-20 lg:px-10 lg:py-28">
           <Reveal>
             <h2 className="max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-              Bring one store and one commercial question that matters.
+              Bring one store and one buying decision worth understanding.
             </h2>
             <p className="mt-7 max-w-[64ch] text-[17px] leading-[1.65] text-white/72">
-              A 20-minute review starts with the products and commercial
-              question that matter most, then looks at the evidence Beseam can
-              actually observe and what would be worth doing next.
+              A 20-minute review starts with one place shoppers overlook you,
+              choose something else, or stop before purchase, then looks at the
+              evidence Beseam can actually observe and what may be worth doing
+              next.
             </p>
             <p className="mt-5 text-[14px] text-white/62">
               Questions first?{" "}

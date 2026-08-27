@@ -38,7 +38,7 @@ export async function generateMetadata({
     type: "article",
     modifiedTime: comparison.lastReviewed,
     section: "Platform comparisons",
-    tags: [comparison.name, comparison.category, "ecommerce decisions"],
+    tags: [comparison.name, comparison.category, "buying decisions"],
   });
 }
 
@@ -81,7 +81,7 @@ export default async function ComparisonPage({
     about: [
       { "@type": "Thing", name: comparison.name },
       { "@type": "Thing", name: comparison.category },
-      { "@type": "Thing", name: "Ecommerce decision making" },
+      { "@type": "Thing", name: "Buying decisions" },
     ],
   };
 

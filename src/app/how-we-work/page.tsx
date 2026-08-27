@@ -11,12 +11,12 @@ import { buildPublicMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPublicMetadata({
   title: "How We Work With Ecommerce Brands | Beseam",
   description:
-    "Beseam can work as an extension of your commerce team: connect the evidence, investigate possible explanations, decide what deserves action, help make supported changes, and measure what happens next.",
+    "Beseam can work as an extension of your commerce team on the places shoppers overlook you, choose something else, or stop before buying — from evidence through a supported change and measurement afterward.",
   path: "/how-we-work",
 });
 
 const LOOP = [
-  ["01", "Observe", "Start with one real commercial problem and connect the evidence around it."],
+  ["01", "Observe", "Start with one buying decision worth understanding and connect the evidence around it."],
   ["02", "Understand", "Investigate possible explanations without turning correlation into certainty."],
   ["03", "Decide", "Work with your team to choose what deserves action and why."],
   ["04", "Act", "Prepare and help make supported changes under your approval rules."],
@@ -26,7 +26,7 @@ const LOOP = [
 const RESPONSIBILITIES = [
   {
     yours: "Business context and priorities",
-    ours: "Connect the relevant discovery, store, behavior, and commercial evidence.",
+    ours: "Connect the evidence around where shoppers find, choose, and buy."
   },
   {
     yours: "Brand judgment and constraints",
@@ -60,9 +60,9 @@ export default function HowWeWorkPage() {
               <div>
                 <p className="max-w-[52ch] text-[18px] leading-[1.7] text-black/66">
                   Beseam combines software with hands-on commerce work. Bring us
-                  one meaningful commercial problem and we work alongside your
-                  team from the first signal through the change and the measured
-                  result.
+                  one place shoppers overlook you, choose something else, or stop
+                  before purchase, and we work alongside your team from the first
+                  signal through the change and the measured result.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <BookReviewCta

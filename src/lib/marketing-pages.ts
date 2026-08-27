@@ -139,48 +139,48 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
   },
   platform: {
     slug: "platform",
-    eyebrow: "Observe → Understand → Decide → Act → Learn",
+    eyebrow: "Find → Choose → Buy",
     headline:
-      "Keep the evidence connected from the first signal to the measured result.",
-    metaTitle: "How Beseam Works | Observe, Understand, Decide, Act, Learn",
+      "Follow the buying decision from the first question to the purchase.",
+    metaTitle: "Beseam Platform | Find, Choose, Buy",
     description:
-      "Beseam connects discovery, store, shopper behavior, conversion, orders, and revenue so teams can understand a commercial problem, decide what deserves action, make supported changes, and measure what changed afterward.",
+      "Beseam connects where shoppers find products, what helps them choose, where purchases break, and what happens after a change — using Observe, Understand, Decide, Act, Learn.",
     intro:
-      "A product can lose demand before the visit, on the store, or during checkout while the evidence sits in different systems. Beseam keeps those signals attached to the product, page, journey, decision, and action so the team can see what is worth changing and what moved afterward.",
+      "A shopper can overlook you before the visit, choose something else on the store, or stop after deciding. The evidence usually sits in different systems. Beseam keeps those signals attached to the product, page, journey, team decision, and action so you can see what may be worth changing and what moved afterward.",
     proofLine:
-      "The operating model is Observe, Understand, Decide, Act, Learn, with the source evidence and affected commercial scope carried through every step.",
-    observationsHeading: "What Beseam observes",
+      "The shopper path is Find, Choose, Buy. Beseam works across it with Observe, Understand, Decide, Act, Learn — keeping the evidence attached at every step.",
+    observationsHeading: "Follow the shopper's decision",
     observationsIntro:
-      "Beseam connects four parts of the same shopper and commercial path instead of treating each as a separate dashboard.",
+      "Beseam connects the moments where a product gets considered, chosen, purchased, and measured instead of treating each as a separate dashboard.",
     observations: [
       {
-        title: "Discovery",
+        title: "Finding",
         icon: Radar,
         detail:
-          "External search, AI shopping answers, feeds and other signals that show where products are found, absent or losing ground before the visit.",
+          "AI answers, external search, onsite search, marketplaces, and other places that decide which products enter the shopper's consideration set.",
       },
       {
-        title: "Store",
+        title: "Choosing",
         icon: Store,
         detail:
-          "Onsite search, merchandising, product pages, recommendations and product data that shape what shoppers can find and choose.",
+          "Product pages, comparisons, recommendations, fit, reviews, price, and product facts that help a shopper decide which product is right.",
       },
       {
-        title: "Behavior",
+        title: "Buying",
         icon: Brain,
         detail:
-          "Journeys, friction and checkout evidence that show where shoppers hesitate, fail or move forward.",
+          "Cart, delivery, checkout, payment, and shopper behavior that show where a decided shopper still moves forward or stops.",
       },
       {
-        title: "Revenue",
+        title: "Learning",
         icon: TrendingUp,
         detail:
-          "Conversion, orders, attribution and impact evidence used to measure what changed after an action.",
+          "Conversion, orders, revenue, and the original signals checked again after a change so the next decision starts with evidence.",
       },
     ],
     sections: [
       {
-        title: "Understand the commercial problem, not just the symptom.",
+        title: "Understand what may be blocking the choice, not just the symptom.",
         icon: RefreshCw,
         body: "A visibility miss, search exit, product-page hesitation, checkout drop, or revenue change is a symptom. Beseam connects the surrounding product, store, shopper, competitor, and revenue evidence so the team can understand what may explain it without pretending a hypothesis is a fact.",
         points: [
@@ -220,12 +220,12 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       {
         question: "What do I need to connect first?",
         answer:
-          "Start with the store and the evidence needed for the first commercial question you want to answer. Additional sources are useful when they improve that decision, not simply because they exist.",
+          "Start with the store and one buying decision you want to understand: where shoppers overlook you, choose something else, or stop before purchase. Add sources only when they improve that understanding.",
       },
       {
-        question: "How does Beseam move from observation to a decision?",
+        question: "How does Beseam work out what may be worth changing?",
         answer:
-          "Beseam keeps the relevant evidence together, separates observed facts from possible explanations, and helps the team decide what deserves action without overstating certainty.",
+          "Beseam keeps the shopper signal and relevant evidence together, separates observed facts from possible explanations, and helps the team decide what deserves action without overstating certainty.",
       },
       {
         question: "Can Beseam make changes automatically?",
@@ -233,9 +233,9 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
           "Only supported changes under the approval rules agreed for the store. The previous state is retained so the action can be reviewed and reversed when the workflow supports it.",
       },
       {
-        question: "How does Beseam learn after an action?",
+        question: "How do I know whether a change helped?",
         answer:
-          "Beseam observes the relevant signals after an action and keeps them connected to the decision that produced it. What changed becomes evidence for the next cycle without turning correlation into certainty.",
+          "Beseam checks the relevant shopper, store, conversion, order, or revenue signals after an action and keeps them connected to the decision that produced it. What changed becomes evidence for the next cycle without turning correlation into certainty.",
       },
     ],
     related: [

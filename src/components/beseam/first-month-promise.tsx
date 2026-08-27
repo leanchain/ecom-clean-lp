@@ -51,7 +51,7 @@ const ENTRY_POINTS = [
   {
     when: "Your first 30 days",
     title: "One improvement, with us",
-    body: "Bring one meaningful commercial problem. We stay in it with you from the first signal through the supported change and the measurement afterwards.",
+    body: "Bring one place shoppers overlook you, choose something else, or stop before purchase. We stay in it with you from the first signal through the supported change and the measurement afterwards.",
     rows: [
       ["Who does the work", "Beseam, alongside your team and under your approval."],
       [
@@ -93,8 +93,8 @@ export default function FirstMonthPromise({
 
             <p className="max-w-[54ch] text-[17px] leading-[1.7] text-black/66">
               Three ways in, depending on how closely you want us involved. The
-              third takes one real commercial problem end to end, then measures
-              what happens after the supported change.
+              third follows one place the buying decision breaks from evidence
+              through a supported change, then measures what happens afterward.
             </p>
           </div>
         </Reveal>

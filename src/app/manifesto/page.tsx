@@ -9,23 +9,23 @@ import { Reveal } from "@/components/beseam/reveal";
 
 const MANIFESTO_URL = "https://beseam.com/manifesto";
 const MANIFESTO_IMAGE = "https://beseam.com/images/social/manifesto.png";
-const MANIFESTO_MODIFIED = "2026-08-25";
+const MANIFESTO_MODIFIED = "2026-08-27";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Beseam Manifesto | Every commerce team should be able to operate like the best",
+    absolute: "Beseam Manifesto | Shopping is moving from finding to choosing",
   },
   description:
-    "Beseam exists to give every commerce team access to the intelligence, technology, and operating capability to compete at its best — without requiring the biggest team or budget.",
+    "Shopping is moving from finding products to choosing products. Beseam is built to help commerce teams understand and improve the buying decisions between discovery and purchase.",
   alternates: { canonical: "/manifesto" },
   authors: [{ name: "Pankaj Kumar", url: "/about" }],
   creator: "Pankaj Kumar",
   publisher: "Beseam",
   category: "Ecommerce",
   openGraph: {
-    title: "Beseam Manifesto | Every commerce team should be able to operate like the best",
+    title: "Beseam Manifesto | Shopping is moving from finding to choosing",
     description:
-      "World-class commerce capability should not depend on team size or budget. Beseam combines technology, connected evidence, and hands-on work to help commerce teams operate better.",
+      "Being visible is no longer enough. Beseam is built around understanding the buying decision between being considered and being chosen.",
     url: "/manifesto",
     siteName: "Beseam",
     type: "article",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     tags: [
       "decision making",
       "ecommerce",
-      "product discovery",
+      "buying decisions",
       "conversion",
       "revenue measurement",
     ],
@@ -51,17 +51,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam Manifesto | Every commerce team should be able to operate like the best",
+    title: "Beseam Manifesto | Shopping is moving from finding to choosing",
     description:
-      "World-class commerce capability should not depend on team size or budget.",
+      "Being visible is no longer enough. The important question is whether shoppers choose you.",
     images: [MANIFESTO_IMAGE],
   },
 };
 
 const PROBLEM = [
   [
-    "Signals live in different systems",
-    "Discovery, store behavior, product data, conversion, and revenue are usually measured separately even when they describe the same commercial problem.",
+    "Finding, choosing, and buying live in different systems",
+    "AI and search, onsite discovery, product pages, behavior, checkout, and revenue are usually measured separately even when they describe the same buying decision.",
   ],
   [
     "A symptom is not a cause",
@@ -150,9 +150,9 @@ export default function ManifestoPage() {
       {
         "@type": "Article",
         "@id": `${MANIFESTO_URL}#article`,
-        headline: "Every commerce team should be able to operate like the best.",
+        headline: "Shopping is moving from finding products to choosing products.",
         description:
-          "Beseam exists to give every commerce team access to the intelligence, technology, and operating capability to compete at its best, while keeping decisions connected to the evidence behind them.",
+          "Beseam is built to help commerce teams understand the buying decision between being considered and being chosen, while keeping each conclusion connected to its evidence.",
         image: {
           "@type": "ImageObject",
           url: MANIFESTO_IMAGE,
@@ -168,16 +168,16 @@ export default function ManifestoPage() {
         keywords: [
           "decision making",
           "ecommerce",
-          "product discovery",
+          "buying decisions",
           "onsite commerce",
           "shopper behavior",
           "conversion",
           "revenue measurement",
         ],
         about: [
-          { "@type": "Thing", name: "Ecommerce decision making" },
+          { "@type": "Thing", name: "Buying decisions" },
           { "@type": "Thing", name: "Ecommerce" },
-          { "@type": "Thing", name: "Product discovery" },
+          { "@type": "Thing", name: "Buying decisions" },
           { "@type": "Thing", name: "Conversion optimization" },
         ],
       },
@@ -185,7 +185,7 @@ export default function ManifestoPage() {
         "@type": "WebPage",
         "@id": MANIFESTO_URL,
         url: MANIFESTO_URL,
-        name: "Beseam Manifesto | Every commerce team should be able to operate like the best",
+        name: "Beseam Manifesto | Shopping is moving from finding to choosing",
         about: { "@id": "https://beseam.com/#organization" },
         primaryImageOfPage: { "@id": `${MANIFESTO_URL}#primaryimage` },
         dateModified: MANIFESTO_MODIFIED,
@@ -245,24 +245,24 @@ export default function ManifestoPage() {
                 The Beseam manifesto
               </p>
               <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,6.1vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em] text-ink-deep">
-                Every commerce team should be able to operate like the best.
+                Shopping is moving from finding products to choosing products.
               </h1>
             </div>
             <div className="max-w-2xl self-end">
               <p className="text-[20px] leading-[1.65] text-black/68">
-                The ability to understand customers, connect evidence, make better
-                decisions, act quickly, and learn from what happens should not
-                depend on having hundreds of people, a huge technology budget, or
-                a maze of specialist tools.
+                For years, ecommerce was built around helping shoppers find
+                products. AI assistants, search, recommendations, product pages,
+                reviews, fit, price, and delivery increasingly do something more
+                important: help shoppers decide what to buy.
               </p>
               <p className="mt-5 text-[17px] leading-[1.7] text-black/62">
-                Beseam exists to make that capability available to every commerce
-                team — from ambitious brands running lean to the world&rsquo;s largest
-                retailers.
+                Being visible is no longer enough. The important question is
+                whether the shopper has enough reason and confidence to choose
+                you — and what your team can change when they do not.
               </p>
               <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
                 By Pankaj Kumar · Founder, Beseam · Updated{" "}
-                <time dateTime={MANIFESTO_MODIFIED}>25 August 2026</time>
+                <time dateTime={MANIFESTO_MODIFIED}>27 August 2026</time>
               </p>
             </div>
           </Reveal>
@@ -324,18 +324,22 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                The useful unit is a decision you can trace.
+                The useful unit is the buying decision.
               </h2>
               <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-black/62">
-                Giving teams more capability only matters if the system helps them
-                reach better decisions without hiding how those decisions were made.
+                More capability only matters if it helps a team understand why a
+                shopper considered one product, chose another, or stopped before
+                purchase without hiding how that conclusion was reached.
               </p>
             </div>
             <div>
               <p className="max-w-2xl text-[17px] leading-[1.7] text-black/66">
-                They need to know what is happening, what may explain it, what
-                is worth changing, who should act, and what changed after the
-                action. The evidence should stay attached all the way through.
+                For every important buying decision, the questions are simple:
+                what did the shopper want, which choices did they see, what
+                questions remained, what did they choose or where did they stop,
+                what may explain it, what could the merchant change, and what
+                happened afterward. The evidence should stay attached all the
+                way through.
               </p>
               <div className="mt-10 border-t border-black/22">
                 {PROBLEM.map(([title, body], index) => (
@@ -393,19 +397,20 @@ export default function ManifestoPage() {
 
           <Reveal delay={0.06}>
             <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.6vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-              The useful gap is between a signal and a decision you can defend.
+              The important gap is between being considered and being chosen.
             </h2>
             <div className="mt-8 max-w-[68ch] space-y-6 text-[17px] leading-[1.75] text-white/72">
               <p>
                 For the past year, I have worked closely with ecommerce founders
-                and operators on real stores across product data, discovery,
-                storefront behavior, conversion, and the systems teams use to
-                act.
+                and operators on real stores across the path from finding, to
+                choosing, to buying — and the systems teams use to understand each
+                part.
               </p>
               <p>
                 The repeated problem was not a lack of dashboards. It was the
-                weak connection between a signal, the evidence around it, the
-                decision a team made, and what happened after the action.
+                weak connection between a shopper signal, the evidence affecting
+                the choice, the decision a team made, and what happened after the
+                action.
               </p>
               <p>
                 Before Beseam, I worked on measurement, reliability, and

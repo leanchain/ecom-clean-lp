@@ -8,9 +8,9 @@ import { COMPARISONS } from "@/lib/comparisons";
 import { buildPublicMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPublicMetadata({
-  title: "Compare Beseam with AI Discovery, Analytics, and Commerce Tools",
+  title: "Compare Beseam with AI Discovery, Analytics, and Ecommerce Tools",
   description:
-    "Evidence-led comparisons across AI discovery and visibility, analytics, behavior, experimentation, commerce measurement, and reliability, showing where specialist tools are stronger and where Beseam differs.",
+    "Evidence-led comparisons showing which part of the buying decision each tool sees, where specialist tools are stronger, and how Beseam keeps that decision connected from shopper signal to supported change and re-check.",
   path: "/compare",
   image: "/images/social/compare.png",
 });
@@ -106,7 +106,7 @@ export default function ComparePage() {
                 Compare Beseam
               </p>
               <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,6vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em]">
-                Know what each tool is built to do.
+                Different tools see different parts of the buying decision.
               </h1>
             </div>
             <div className="border-t border-black/24 pt-6 lg:pb-2">
@@ -135,9 +135,9 @@ export default function ComparePage() {
                 Most likely comparisons.
               </h2>
               <p className="mt-4 text-[14px] leading-relaxed text-black/62">
-                Six tools that most clearly frame where Beseam belongs in an
-                ecommerce stack: AI discovery, attribution, analytics, behavior,
-                and storefront reliability.
+                Six tools that most clearly show where Beseam fits: which products
+                get considered, what shoppers do next, what breaks before purchase,
+                and what the team can change.
               </p>
             </div>
           </div>
@@ -319,8 +319,8 @@ export default function ComparePage() {
               <div className="flex h-full flex-col justify-center">
                 <p className="text-[14px] leading-relaxed text-black/62">
                   A 20-minute review covers one store, the systems already in
-                  place, and the first commercial question worth taking from
-                  evidence to action.
+                  place, and one buying decision worth following from evidence to
+                  a supported change.
                 </p>
                 <BookReviewCta
                   location="comparison_hub"

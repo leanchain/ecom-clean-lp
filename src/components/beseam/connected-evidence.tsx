@@ -357,7 +357,7 @@ export default function ConnectedEvidence() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal">
-                Connected evidence
+                The buying decision
               </p>
               <h2 className="mt-7 max-w-[16ch] text-balance font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
                 Beseam doesn&rsquo;t stop at the symptom.
@@ -366,15 +366,15 @@ export default function ConnectedEvidence() {
             <div className="max-w-[50ch] text-[16px] leading-[1.75] text-white/72">
               <p className="lg:hidden">
                 Seeing that a shopper left tells you what happened, not what
-                stopped them choosing. Several things could explain it. Beseam
-                checks the possible explanations and shows where the evidence
-                points.
+                may have shaped the buying decision. Several things could
+                explain it. Beseam checks the possible explanations and shows
+                where the evidence points.
               </p>
               <p className="hidden lg:block">
-                Seeing that a shopper left tells you what happened, not what
-                stopped them choosing. Three things could explain it here. Beseam
-                checks all three, and shows you the two that turned out not to be
-                the cause.
+                Seeing that a shopper left tells you what happened, not what may
+                have shaped the buying decision. Three things could explain it
+                here. Beseam checks all three, and shows you the two the evidence
+                rules out.
               </p>
             </div>
           </div>

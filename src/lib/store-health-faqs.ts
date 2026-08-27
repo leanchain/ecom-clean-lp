@@ -5,9 +5,9 @@ export const STORE_HEALTH_FAQS = [
       "Start with your domain. Store or analytics access is only needed when Beseam needs additional evidence or permission to support a change.",
   },
   {
-    question: "How does Beseam move from observation to a decision?",
+    question: "How does Beseam work out what may be worth changing?",
     answer:
-      "Beseam keeps the relevant evidence around an outcome together, separates observed facts from possible explanations, and helps the team decide what deserves action. The reason for the decision stays attached to the evidence.",
+      "Beseam keeps the shopper signal and relevant evidence together, separates observed facts from possible explanations, and helps the team decide what deserves action. The reason for the decision stays attached to the evidence.",
   },
   {
     question: "What can Beseam actually change?",
@@ -20,8 +20,8 @@ export const STORE_HEALTH_FAQS = [
       "Yes. Customer-facing changes follow the approval rules agreed for your store. Beseam keeps the evidence, proposed action, and previous value connected so supported changes can be reviewed and reverted when needed.",
   },
   {
-    question: "How does Beseam learn after an action?",
+    question: "How do I know whether a change helped?",
     answer:
-      "Beseam observes the relevant discovery, store, behavior, conversion, or revenue signals after an action and keeps them connected to the decision that produced it. What changed becomes evidence for the next cycle without turning correlation into certainty.",
+      "Beseam checks the relevant shopper, store, conversion, order, or revenue signals after an action and keeps them connected to the decision that produced it. What changed becomes evidence for the next cycle without turning correlation into certainty.",
   },
 ] as const;

@@ -230,15 +230,15 @@ function countLabel(count: number, noun: string) {
 
 const FREE_SCAN_RETURNS = [
   [
-    "The products and pages we can see",
+    "What we can find",
     "How many products you have public, and a sample of product pages read end to end.",
   ],
   [
-    "What is worth looking at",
-    "Each one in plain words: what a shopper or search engine may be experiencing, and why it matters.",
+    "What makes choosing harder",
+    "In plain words: where products may be overlooked or where the page leaves a buying question unanswered.",
   ],
   [
-    "Your first suggested actions",
+    "What to look at first",
     "One next step per finding, with the technical evidence kept underneath it.",
   ],
 ] as const;
@@ -253,9 +253,9 @@ export function FreeScanPromise({ compact = false }: { compact?: boolean }) {
         <p className="text-[13px] text-black/56">Usually about a minute.</p>
       </div>
       <p className="mt-2 max-w-[62ch] text-[14.5px] leading-[1.65] text-black/68">
-        We read your public storefront and show you where shoppers may be
-        getting lost, what is worth investigating, and your first suggested
-        actions.
+        We read your public storefront and show you where products may be
+        overlooked, what makes them harder to choose, and what is worth looking
+        at first.
       </p>
 
       <ul className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -795,9 +795,9 @@ function ContinuePaths({
           </p>
         ) : null}
         <p className="mt-2.5 max-w-[44ch] text-[14px] leading-[1.62] text-white/70">
-          In your first 30 days we take one commercial problem end to end:
-          connect the evidence, decide with you what deserves action, help make
-          the change, and measure what happened after.
+          In your first 30 days we follow one place the buying decision breaks
+          end to end: connect the evidence, decide with you what deserves action,
+          help make the change, and measure what happened after.
         </p>
         <BookReviewCta
           variant="primary"

@@ -32,9 +32,9 @@ export default function TeamsSection() {
             Built for the people who own ecommerce growth.
           </h2>
           <p className="max-w-[64ch] self-end text-[17px] leading-[1.65] text-black/66">
-            Discovery, merchandising, store behavior, conversion, and
-            implementation cross team boundaries. Beseam keeps the evidence,
-            decision, action, and measurement connected in one operating record.
+            Finding, choosing, and buying cross team boundaries. Beseam keeps
+            the shopper signal, supporting evidence, team decision, change, and
+            measurement connected in one operating record.
           </p>
         </Reveal>
 
