@@ -12,7 +12,7 @@ import { SITE_URL, buildPublicMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPublicMetadata({
   title: "About Beseam",
   description:
-    "Why Beseam was founded to help ecommerce teams understand the buying decisions behind finding, choosing, and buying — with the evidence kept attached from signal to result.",
+    "Why Beseam was founded to help ecommerce teams understand the buying decisions behind finding, choosing, and buying, with the evidence kept attached from signal to result.",
   path: "/about",
 });
 

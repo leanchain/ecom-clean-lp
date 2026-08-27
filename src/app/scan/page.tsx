@@ -21,7 +21,7 @@ export default function ScanPage() {
           </h1>
           <p className="mx-auto mt-7 max-w-[52ch] text-[17px] leading-[1.7] text-black/64">
             Enter your domain. We read your public storefront and hand back what
-            is worth looking at — in plain words, with the evidence attached.
+            is worth looking at, in plain words, with the evidence attached.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export default function ScanPage() {
                 Not sure a scan is the right place to start?
               </h2>
               <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/66">
-                Bring the decision you are losing instead — products nobody
+                Bring the decision you are losing instead: products nobody
                 finds, pages that do not answer the deciding question, or
                 shoppers who stop before purchase. Twenty minutes, your store on
                 screen, and an honest answer about whether we can help.

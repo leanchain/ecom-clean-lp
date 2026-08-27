@@ -258,7 +258,7 @@ export default function ManifestoPage() {
               <p className="mt-5 text-[17px] leading-[1.7] text-black/62">
                 Being visible is no longer enough. The important question is
                 whether the shopper has enough reason and confidence to choose
-                you — and what your team can change when they do not.
+                you, and what your team can change when they do not.
               </p>
               <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
                 By Pankaj Kumar · Founder, Beseam · Updated{" "}
@@ -403,8 +403,8 @@ export default function ManifestoPage() {
               <p>
                 For the past year, I have worked closely with ecommerce founders
                 and operators on real stores across the path from finding, to
-                choosing, to buying — and the systems teams use to understand each
-                part.
+                choosing, to buying, and the systems teams use to understand
+                each part.
               </p>
               <p>
                 The repeated problem was not a lack of dashboards. It was the

@@ -51,7 +51,7 @@ const QUERIES = [
   { label: "Then added", value: "... “commuting”" },
 ] as const;
 
-const SIGNAL = "Got the same jackets back — then left without opening one.";
+const SIGNAL = "Got the same jackets back, then left without opening one.";
 
 const CANDIDATES = [
   {
@@ -104,7 +104,7 @@ const OUTCOME = [
   {
     label: "What proves it",
     value:
-      "Search exits, product visits, and conversion — and the same query, rerun.",
+      "Search exits, product visits, and conversion. And the same query, rerun.",
   },
 ] as const;
 
@@ -406,7 +406,7 @@ export default function ConnectedEvidence() {
               ))}
             </div>
             <p className="mt-5 max-w-[70ch] text-[13px] leading-[1.65] text-white/58">
-              One shopper, followed across all four — so what you find in one
+              One shopper, followed across all four. So what you find in one
               place still means something in the next.
             </p>
           </div>
@@ -551,7 +551,7 @@ export default function ConnectedEvidence() {
               </h3>
               <p className="mt-4 max-w-[48ch] text-[15px] leading-[1.7] text-white/66">
                 A change is a guess until something measures it. What was
-                changed, what moved afterwards, and what did not — kept next to
+                changed, what moved afterwards, and what did not. Kept next to
                 the decision that produced it.
               </p>
             </div>

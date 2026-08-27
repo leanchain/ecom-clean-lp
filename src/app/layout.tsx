@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s | Beseam",
   },
   description:
-    "Beseam helps ecommerce teams see where shoppers overlook their products, choose something else, or stop before buying — then understand what to improve and measure what happens next.",
+    "Beseam helps ecommerce teams see where shoppers overlook their products, choose something else, or stop before buying, then understand what to improve and measure what happens next.",
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
   publisher: "Beseam",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Beseam - Get more shoppers to choose you",
     description:
-      "See where shoppers overlook your products, choose something else, or stop before buying — then understand what to improve and measure what happens next.",
+      "See where shoppers overlook your products, choose something else, or stop before buying, then understand what to improve and measure what happens next.",
     url: "/",
     siteName: "Beseam",
     type: "website",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Beseam - Get more shoppers to choose you",
     description:
-      "See where shoppers overlook your products, choose something else, or stop before buying — then understand what to improve and measure what happens next.",
+      "See where shoppers overlook your products, choose something else, or stop before buying, then understand what to improve and measure what happens next.",
     images: [HOME_SOCIAL_IMAGE],
   },
 };

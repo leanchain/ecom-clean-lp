@@ -69,7 +69,7 @@ export default function CategoryBenchmarksSection() {
                 <strong className="font-semibold text-ink-deep">
                   {SOLO_SHARE}% of brand namings appeared on only one assistant
                 </strong>
-                {" — "}
+                {", "}
                 so where a shopper asks decides which brands they ever see.
               </p>
               <p className="mt-4 max-w-[52ch] text-[14px] leading-[1.7] text-black/52">

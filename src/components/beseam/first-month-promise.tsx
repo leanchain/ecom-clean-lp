@@ -29,7 +29,7 @@ const ENTRY_POINTS = [
       ],
       [
         "What it costs",
-        "Nothing — no account, no access to your store, nothing to install.",
+        "Nothing: no account, no access to your store, nothing to install.",
       ],
     ],
     lead: false,

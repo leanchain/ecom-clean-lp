@@ -10,7 +10,7 @@ import { STORE_HEALTH_FAQS } from "@/lib/store-health-faqs";
 export const metadata: Metadata = buildPublicMetadata({
   title: "Beseam | Get more shoppers to choose you",
   description:
-    "Beseam helps ecommerce teams see where shoppers overlook their products, choose something else, or stop before buying — then understand what to improve and measure what happens next.",
+    "Beseam helps ecommerce teams see where shoppers overlook their products, choose something else, or stop before buying, then understand what to improve and measure what happens next.",
   path: "/",
   image: HOME_SOCIAL_IMAGE,
   imageAlt:

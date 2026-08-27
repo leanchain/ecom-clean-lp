@@ -338,7 +338,7 @@ const SITUATIONS: readonly Situation[] = [
     rows: [
       [
         "Beseam finds",
-        "The buying questions your products belong in — and the ones that name somebody else instead.",
+        "The buying questions your products belong in, and the ones that name somebody else instead.",
       ],
       [
         "You change",
@@ -375,8 +375,8 @@ const SITUATIONS: readonly Situation[] = [
   {
     stage: "Buying it",
     category: "Supplements",
-    heading: "They choose you — then the purchase breaks.",
-    lead: "Cart, delivery, payment. A cost turns up late, a field breaks, an option is missing — and a shopper who had already decided walks away.",
+    heading: "They choose you. Then the purchase breaks.",
+    lead: "Cart, delivery, payment. A cost turns up late, a field breaks, an option is missing, and a shopper who had already decided walks away.",
     rows: [
       [
         "Beseam finds",

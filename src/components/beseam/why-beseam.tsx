@@ -30,7 +30,7 @@ function TeamSpecimen() {
       </p>
       <p className="mt-5 max-w-[46ch] text-[15px] leading-[1.7] text-black/68">
         Same product, same evidence. The difference is that we stay in the work
-        with you — through the investigation, the decision, the change, and the
+        with you, through the investigation, the decision, the change, and the
         measurement afterwards.
       </p>
       <Link
@@ -50,7 +50,7 @@ function TeamSpecimen() {
 const CLAIMS = [
   {
     heading: "A list of findings is not a plan.",
-    body: "Beseam weighs what it found against how many shoppers it touches, what it is likely worth, and how hard it is to change — then tells you what to start with and why. You are never handed a screen of numbers and asked to work it out.",
+    body: "Beseam weighs what it found against how many shoppers it touches, what it is likely worth, and how hard it is to change, then tells you what to start with and why. You are never handed a screen of numbers and asked to work it out.",
     Specimen: ActionsScreen,
   },
   {

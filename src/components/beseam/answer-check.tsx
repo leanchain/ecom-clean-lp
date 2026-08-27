@@ -376,7 +376,7 @@ function ScanProgress({
         {domain ? `Reading ${domain}` : "Reading your storefront"}
       </h3>
       <p className="mt-1 text-[13px] leading-relaxed text-black/56">
-        Results appear below as soon as each part is done — you do not have to
+        Results appear below as soon as each part is done. You do not have to
         wait for all of it.
       </p>
       <ol className="mt-4 space-y-3">
@@ -425,7 +425,7 @@ function FoundStrip({ result }: { result: AnswerCheckResult }) {
   const facts: Array<[string, string, boolean]> = [
     [productCount, "products found", false],
     pagesFailed
-      ? ["—", "product pages — we could not read them", false]
+      ? ["—", "product pages: we could not read them", false]
       : [
           pagesInFlight ? String(result.products_seen) : String(audits.length),
           pagesInFlight ? "product pages being read" : "product pages checked",
@@ -478,8 +478,8 @@ function FoundStrip({ result }: { result: AnswerCheckResult }) {
       {pagesFailed ? (
         <p className="border-b border-black/14 bg-[#fffaf7] px-5 py-3 text-[13px] leading-relaxed text-black/64 sm:px-6">
           We could not finish reading your individual product pages on this run.
-          Everything below comes from your public catalog and still holds —
-          running the scan again usually picks the pages up.
+          Everything below comes from your public catalog and still holds.
+          Running the scan again usually picks the pages up.
         </p>
       ) : null}
     </>
@@ -574,7 +574,7 @@ function FindingRow({
 
         {nextStep ? (
           <p className="mt-3 max-w-[68ch] border-l border-signal-ink/35 pl-3.5 text-[14px] leading-[1.6] text-ink-deep">
-            <span className="font-semibold">Do this next — </span>
+            <span className="font-semibold">Do this next: </span>
             {nextStep}
           </p>
         ) : null}
@@ -1979,7 +1979,7 @@ function DeeperAnalysisPanel({
           </h3>
           <p className="mt-1.5 max-w-[52ch] text-[13.5px] leading-relaxed text-black/62">
             Everything above is yours already. Next, AI reads your product pages
-            alongside these findings and writes back what to change — and your
+            alongside these findings and writes back what to change, and your
             shoppers’ own questions go to ChatGPT and Google AI Mode so you can
             see what they are told today. Confirm your email to open both.
           </p>
@@ -2150,7 +2150,7 @@ function QuestionRow({
                         how we collected it. */}
                     {answer.search_queries?.length ? (
                       <p className="mt-1.5 text-[11.5px] leading-relaxed text-black/50">
-                        <span className="font-semibold">Google search — </span>
+                        <span className="font-semibold">Google search: </span>
                         {answer.search_queries
                           .slice(0, 3)
                           .map((q) => `“${q}”`)
@@ -2172,7 +2172,7 @@ function QuestionRow({
                       </div>
                     ) : answer.error ? (
                       <p className="mt-1.5 border border-dashed border-black/16 px-3.5 py-2.5 text-[12.5px] leading-relaxed text-black/48">
-                        {channel} could not be reached — {answer.error}
+                        {channel} could not be reached: {answer.error}
                       </p>
                     ) : (answer.products?.length ?? 0) > 0 ||
                       instead.length > 0 ||
@@ -2404,12 +2404,12 @@ function RejectedNotice({ result }: { result: AnswerCheckResult }) {
   const suggestions = blocked
     ? [
         "Check the domain is the storefront shoppers use, not a staging or admin address.",
-        "Ask whoever maintains the store whether bot protection is blocking outside readers — the same rule usually blocks search engines too.",
+        "Ask whoever maintains the store whether bot protection is blocking outside readers. The same rule usually blocks search engines too.",
       ]
     : noProducts
       ? [
           "Try the domain shoppers actually browse products on, including any market prefix.",
-          "If your products are only visible after login, a public scan cannot reach them — but we can look at them with you.",
+          "If your products are only visible after login, a public scan cannot reach them, but we can look at them with you.",
         ]
       : [
           "Check the spelling, and try it without www or a trailing path.",
@@ -3016,7 +3016,7 @@ export default function AnswerCheck({
                     </p>
                     <p className="mt-1.5 max-w-[52ch] text-[13.5px] leading-relaxed text-[#5f5a55]">
                       Open the link we sent to {email.trim()}. Nothing on this
-                      page goes away in the meantime — you can keep reading, or
+                      page goes away in the meantime. You can keep reading, or
                       come back to it later.
                     </p>
                     {/* A sent state with no exit strands anyone who mistyped
@@ -3050,7 +3050,7 @@ export default function AnswerCheck({
                       Confirm your email to continue
                     </label>
                     <p className="mt-1.5 max-w-[52ch] text-[13px] leading-relaxed text-[#5f5a55]">
-                      We send one link. Click it and both open up — no account,
+                      We send one link. Click it and both open up: no account,
                       no card, no marketing list.
                     </p>
                     <div className="mt-3.5 grid gap-3">
