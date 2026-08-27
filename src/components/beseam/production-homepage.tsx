@@ -1,32 +1,32 @@
-import { Check } from "lucide-react";
+import Link from "next/link";
+
+import { ArrowRight, Check } from "lucide-react";
 
 import LiveAnswerCheck from "@/components/beseam/answer-check";
-import { BookReviewCta } from "@/components/beseam/book-review-cta";
-import BuyingDecisionStory from "@/components/beseam/buying-decision-story";
-import CategoryBenchmarksSection from "@/components/beseam/category-benchmarks-section";
+import ConnectedEvidence from "@/components/beseam/connected-evidence";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
-import MarketsSection from "@/components/beseam/markets-section";
 import OperatingLoop from "@/components/beseam/operating-loop";
 import { Reveal } from "@/components/beseam/reveal";
-import ShopperLoss from "@/components/beseam/shopper-loss";
-import WhyBeseam from "@/components/beseam/why-beseam";
+import { BENCHMARK_RUN } from "@/data/category-benchmarks";
 
 /**
  * Section order is the argument, and it is deliberate:
  *
- * problem → one buying decision end to end → why us → markets → benchmark →
- * operating model → what you actually get
+ * AI shopping wedge → one buying decision end to end → ways to start
  *
- * The product story comes before the method. A visitor first sees Beseam follow
- * one shopper from question to result. Observe → Understand → Decide → Act →
- * Learn appears later as the name for work they already understand.
+ * The homepage sells one sharp entry point. The broader buying-decision system
+ * lives on /platform.
  */
 const SCAN_RETURNS = [
-  "Where you get overlooked",
-  "What makes products harder to choose",
+  "Where AI overlooks you",
+  "Which competitors get named instead",
   "What to improve first",
 ] as const;
+
+const BENCHMARK_SOLO_SHARE = Math.round(
+  (BENCHMARK_RUN.singleEngineOnly / BENCHMARK_RUN.namings) * 100,
+);
 
 export default function ProductionHomepage() {
   return (
@@ -46,10 +46,7 @@ export default function ProductionHomepage() {
                 <span className="text-signal-ink">choose you</span>.
               </h1>
               <p className="pointer-events-auto mx-auto mt-6 max-w-[62ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
-                Shopping is moving from finding products to choosing products.
-                Beseam follows the buying decision: what shoppers wanted, which
-                choices they saw, what they chose or where they stopped, what
-                may explain it, and what happened after a change.
+                Shopping is moving from finding products to choosing products. AI is increasingly deciding which products make the shortlist. Beseam shows where yours gets missed, what may explain it, and what to change.
               </p>
 
               <div className="pointer-events-auto mx-auto mt-9 w-full">
@@ -59,11 +56,7 @@ export default function ProductionHomepage() {
                   formNote={
                     <div className="mx-auto mt-2 flex flex-col items-center text-center">
                       <p className="text-[12.5px] leading-snug text-black/54">
-                        Free and anonymous. Public storefront pages only.
-                      </p>
-                      <p className="mt-1 text-[12.5px] leading-snug text-black/48">
-                        Start without installing anything. Connect Shopify when
-                        you want deeper evidence and supported changes.
+                        Free. No login required.
                       </p>
                       <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
                         {SCAN_RETURNS.map((item) => (
@@ -80,15 +73,6 @@ export default function ProductionHomepage() {
                         ))}
                       </ul>
 
-                      <div className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-black/12 pt-5 text-[14px] text-black/62">
-                        <span>Want us to run the loop with you?</span>
-                        <BookReviewCta
-                          variant="primary"
-                          location="homepage_hero_managed"
-                          label="Plan my first improvement"
-                          className="min-h-9 gap-1.5 bg-transparent px-0 py-0 text-[14px] font-semibold text-ink-deep underline decoration-black/30 underline-offset-6 hover:bg-transparent hover:text-signal-ink hover:decoration-signal-ink"
-                        />
-                      </div>
                     </div>
                   }
                 />
@@ -98,12 +82,26 @@ export default function ProductionHomepage() {
         </div>
       </section>
 
-      <ShopperLoss />
-      <BuyingDecisionStory />
-      <WhyBeseam />
-      <MarketsSection />
-      <CategoryBenchmarksSection />
+      <section className="border-y border-black/14 bg-white">
+        <div className="mx-auto flex max-w-[92rem] flex-col gap-4 px-5 py-5 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[11px] font-semibold uppercase tracking-[0.09em] text-black/58">
+            <span>{BENCHMARK_RUN.questions} shopper questions</span>
+            <span>{BENCHMARK_RUN.engines.length} AI engines</span>
+            <span>{BENCHMARK_RUN.answersCompleted} completed answers</span>
+            <span className="text-signal-ink">{BENCHMARK_SOLO_SHARE}% of brand appearances were unique to one engine</span>
+          </div>
+          <Link
+            href="/benchmarks"
+            className="group inline-flex shrink-0 items-center gap-2 text-[13px] font-semibold text-ink-deep underline decoration-black/25 underline-offset-5 hover:decoration-signal-ink"
+          >
+            See the report
+            <ArrowRight aria-hidden="true" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+      </section>
+
       <OperatingLoop />
+      <ConnectedEvidence />
       <FirstMonthPromise />
     </div>
   );

@@ -86,11 +86,8 @@ export default function MarketsSection() {
                 What helps a shopper choose changes by market.
               </h2>
             </div>
-            <p className="max-w-[52ch] text-[17px] leading-[1.72] text-white/70">
-              Language, competitors, delivery expectations, and the way a use
-              case is described can all change what gets considered. Beseam
-              keeps that context attached to the questions it tests instead of
-              treating every country as the same storefront translated.
+            <p className="max-w-[46ch] text-[17px] leading-[1.72] text-white/70">
+              Language, competitors, delivery expectations, and buying questions change by market.
             </p>
           </div>
         </Reveal>
@@ -143,10 +140,8 @@ export default function MarketsSection() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <p className="mt-10 max-w-[74ch] border-l-2 border-signal pl-4 text-[14px] leading-[1.7] text-white/60">
-            These are examples of the kinds of differences Beseam can test. What
-            actually differs for your catalogue comes from the evidence observed
-            in each market.
+          <p className="mt-10 text-[12px] text-white/48">
+            Illustrative examples. Your market differences come from observed evidence.
           </p>
         </Reveal>
       </div>

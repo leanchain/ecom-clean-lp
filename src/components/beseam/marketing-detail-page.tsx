@@ -8,9 +8,8 @@ import type { MarketingPageData } from "@/lib/marketing-pages";
 const PIPELINE = [
   ["01", "Observe", "See what is happening from the evidence in scope."],
   ["02", "Understand", "Connect the signals that may explain the pattern."],
-  ["03", "Decide", "Choose the most worthwhile next move."],
-  ["04", "Act", "Make an approved change with the previous state retained."],
-  ["05", "Learn", "Compare the relevant signals before and after."],
+  ["03", "Act", "Choose and make an approved change with the previous state retained."],
+  ["04", "Learn", "Compare the relevant signals before and after."],
 ] as const;
 
 const PLATFORM_SURFACES = [
@@ -245,7 +244,7 @@ export default function MarketingDetailPage({
                 <div>
                   <div className="mb-5">
                     <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-signal-ink">
-                      Decide and act
+                      Act
                     </p>
                     <h3 className="mt-3 text-[20px] font-semibold text-ink">
                       Turn evidence into a specific next move.
@@ -277,10 +276,10 @@ export default function MarketingDetailPage({
                   How Beseam works
                 </p>
                 <h2 className="mt-4 max-w-[20ch] font-display text-[clamp(2.1rem,3.6vw,3.5rem)] font-normal leading-[1.06] tracking-[-0.02em] text-white">
-                  Observe. Understand. Decide. Act. Learn.
+                  Observe. Understand. Act. Learn.
                 </h2>
               </div>
-              <ol className="mt-10 grid border-y border-technical-rule md:grid-cols-5">
+              <ol className="mt-10 grid border-y border-technical-rule md:grid-cols-4">
                 {PIPELINE.map(([number, title, body], index) => (
                   <li
                     key={number}

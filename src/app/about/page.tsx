@@ -104,8 +104,8 @@ export default function AboutPage() {
             <p className="max-w-[64ch] text-[19px] leading-[1.72] text-black/66">
               Beseam was built around the buying decision: what shoppers wanted,
               what they saw, what made the choice harder, what the team changed,
-              and what happened afterward. Observe, Understand, Decide, Act, and
-              Learn is how we keep that work connected.
+              and what happened afterward. Observe, Understand, Act, and Learn
+              is how we keep that work connected.
             </p>
           </Reveal>
         </div>

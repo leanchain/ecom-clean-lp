@@ -55,7 +55,7 @@ export function BookReviewCta({
   if (variant === "secondary") {
     return (
       <TrackedLink
-        href="/#proof"
+        href="/#decision-story"
         eventName="marketing_secondary_cta_clicked"
         placement={location}
         className={cn(

@@ -49,10 +49,10 @@ const SECTIONS = [
     icon: ClipboardCheck,
   },
   {
-    title: "Benchmark",
+    title: "AI Shopping Report",
     href: "/benchmarks",
     description:
-      "See the public AI shopping benchmark, including exact questions, engine-level results, dates, and method.",
+      "See the public AI shopping report, including exact questions, engine-level results, dates, and method.",
     icon: BarChart3,
   },
   {

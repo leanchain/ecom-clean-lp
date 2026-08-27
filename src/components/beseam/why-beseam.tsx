@@ -5,9 +5,9 @@ import { ArrowRight, Check } from "lucide-react";
 import { Reveal } from "@/components/beseam/reveal";
 
 const PRIORITY_SIGNALS = [
-  "How many shoppers the problem touches",
-  "How strong the supporting evidence is",
-  "How practical the change is to make",
+  "Shopper reach",
+  "Evidence strength",
+  "Effort to change",
 ] as const;
 
 export default function WhyBeseam() {
@@ -18,19 +18,13 @@ export default function WhyBeseam() {
     >
       <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
         <Reveal>
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-16">
-            <div>
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                Why Beseam
-              </p>
-              <h2 className="mt-5 max-w-[20ch] text-balance font-display text-[clamp(2rem,3.2vw,3.2rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
-                You don&rsquo;t need another dashboard. You need to know what to do next.
-              </h2>
-            </div>
-            <p className="max-w-[52ch] text-[16px] leading-[1.7] text-black/64">
-              The buying-decision trace gives you the evidence. Beseam keeps the
-              next move and the working relationship just as clear.
+          <div>
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
+              Why Beseam
             </p>
+            <h2 className="mt-5 max-w-[20ch] text-balance font-display text-[clamp(2rem,3.2vw,3.2rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
+              You don&rsquo;t need another dashboard. You need to know what to do next.
+            </h2>
           </div>
         </Reveal>
 
@@ -43,10 +37,8 @@ export default function WhyBeseam() {
               <h3 className="mt-4 max-w-[18ch] font-display text-[clamp(1.6rem,2.4vw,2.2rem)] font-normal leading-[1.1] tracking-[-0.02em] text-ink-deep">
                 A list of findings is not a plan.
               </h3>
-              <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-black/64">
-                Beseam keeps the recommendation attached to why it matters, so
-                the team can choose what deserves action instead of sorting a
-                wall of alerts by hand.
+              <p className="mt-4 max-w-[46ch] text-[15px] leading-[1.7] text-black/64">
+                Beseam ranks what deserves action and keeps the reason attached.
               </p>
               <ul className="mt-6 border-t border-black/14">
                 {PRIORITY_SIGNALS.map((signal) => (
@@ -70,10 +62,8 @@ export default function WhyBeseam() {
               <h3 className="mt-4 max-w-[18ch] font-display text-[clamp(1.6rem,2.4vw,2.2rem)] font-normal leading-[1.1] tracking-[-0.02em] text-ink-deep">
                 You do not have to run it alone.
               </h3>
-              <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-black/64">
-                Use Beseam with your own team, or have us stay in the work with
-                you through the investigation, decision, supported change, and
-                measurement afterward.
+              <p className="mt-4 max-w-[44ch] text-[15px] leading-[1.7] text-black/64">
+                Use Beseam yourself, or have us run the loop with you.
               </p>
               <Link
                 href="/how-we-work"

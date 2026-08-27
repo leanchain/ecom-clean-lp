@@ -43,8 +43,7 @@ export default function Home() {
         featureList: [
           "See where shoppers overlook products or choose something else",
           "Understand likely explanations with source evidence attached",
-          "Decide what deserves action",
-          "Act under merchant approval rules",
+          "Act on what matters under merchant approval rules",
           "Measure what happens after the action",
         ],
         publisher: { "@id": "https://beseam.com/#organization" },

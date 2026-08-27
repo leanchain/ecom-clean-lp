@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { ArrowRight, X } from "lucide-react";
 
-import { ImpactScreen } from "@/components/beseam/app-screens";
+import { ActionsScreen, ImpactScreen } from "@/components/beseam/app-screens";
 import { Reveal } from "@/components/beseam/reveal";
 
 /**
@@ -48,7 +48,7 @@ const DOMAINS = [
 
 const QUERIES = [
   { label: "Searched", value: "“waterproof jacket”" },
-  { label: "Then added", value: "... “commuting”" },
+  { label: "Then added", value: "... “for commuting”" },
 ] as const;
 
 const SIGNAL = "Got the same jackets back, then left without opening one.";
@@ -95,18 +95,8 @@ const MOBILE_FINDINGS = [
   },
 ] as const;
 
-const OUTCOME = [
-  {
-    label: "The change",
-    value:
-      "Say who the fit is for on those jackets, and surface the strongest matches for the refined query.",
-  },
-  {
-    label: "What proves it",
-    value:
-      "Search exits, product visits, and conversion. And the same query, rerun.",
-  },
-] as const;
+const PROOF =
+  "Search exits, product visits, conversion, and the same query rerun.";
 
 /**
  * Edges land on the centre of each node. Two columns with a 1.5rem gap put the
@@ -310,9 +300,7 @@ function MobileTrace() {
           </span>
           <StepLabel>Change</StepLabel>
         </div>
-        <p className="mt-3 text-[15px] leading-[1.55] text-white/90">
-          {OUTCOME[0].value}
-        </p>
+<div className="mt-3"><ActionsScreen compact /></div>
       </div>
 
       <div className="py-6">
@@ -322,9 +310,7 @@ function MobileTrace() {
           </span>
           <StepLabel>Verify</StepLabel>
         </div>
-        <p className="mt-3 text-[15px] leading-[1.55] text-white/90">
-          {OUTCOME[1].value}
-        </p>
+        <p className="mt-3 text-[15px] leading-[1.55] text-white/90">{PROOF}</p>
       </div>
 
       <div className="border-t border-white/14 pt-6">
@@ -365,16 +351,16 @@ export default function ConnectedEvidence() {
             </div>
             <div className="max-w-[50ch] text-[16px] leading-[1.75] text-white/72">
               <p className="lg:hidden">
-                Seeing that a shopper left tells you what happened, not what
-                may have shaped the buying decision. Several things could
-                explain it. Beseam checks the possible explanations and shows
-                where the evidence points.
+                Seeing that a shopper left tells you what happened, not what may
+                have shaped the buying decision. Several things could explain
+                it. Beseam checks the possible explanations and shows where the
+                evidence points.
               </p>
               <p className="hidden lg:block">
                 Seeing that a shopper left tells you what happened, not what may
                 have shaped the buying decision. Three things could explain it
-                here. Beseam checks all three, and shows you the two the evidence
-                rules out.
+                here. Beseam checks all three, and shows you the two the
+                evidence rules out.
               </p>
             </div>
           </div>
@@ -507,18 +493,16 @@ export default function ConnectedEvidence() {
 
                 <Tails />
 
-                <div className="grid border border-signal/45 bg-signal/[0.05] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-                  {OUTCOME.map((item) => (
-                    <div
-                      key={item.label}
-                      className="border-l border-white/14 px-6 py-5 first:border-l-0"
-                    >
-                      <StepLabel>{item.label}</StepLabel>
-                      <p className="mt-2.5 text-[16px] leading-[1.5] text-white/92">
-                        {item.value}
-                      </p>
-                    </div>
-                  ))}
+                <div className="grid border border-signal/45 bg-signal/[0.05] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+                  <div className="p-3 sm:p-4">
+                    <ActionsScreen compact />
+                  </div>
+                  <div className="border-l border-white/14 px-6 py-5">
+                    <StepLabel>What proves it</StepLabel>
+                    <p className="mt-2.5 text-[16px] leading-[1.5] text-white/92">
+                      {PROOF}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="mt-9 flex items-center justify-between gap-8 border-t border-white/14 pt-7">

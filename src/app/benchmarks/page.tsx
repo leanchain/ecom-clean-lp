@@ -18,9 +18,9 @@ import { SITE_URL, buildPublicMetadata } from "@/lib/seo";
 
 const hasBenchmarks = CATEGORY_BENCHMARKS.length > 0;
 export const metadata: Metadata = buildPublicMetadata({
-  title: "AI Shopping Benchmark | Beseam",
+  title: "AI Shopping Report | Beseam",
   description:
-    "The Beseam AI shopping benchmark asks the same public shopper questions across AI assistants and publishes which engine named which brand, with dates, denominators, and methodology.",
+    "The Beseam AI Shopping Report asks the same public shopper questions across AI assistants and publishes which engine named which brand, with dates, denominators, and methodology.",
   path: "/benchmarks",
   noIndex: !hasBenchmarks,
 });
@@ -116,7 +116,7 @@ export default function BenchmarksPage() {
     "@context": "https://schema.org",
     "@type": "Dataset",
     "@id": `${SITE_URL}/benchmarks#dataset`,
-    name: "Beseam product discovery benchmark",
+    name: "Beseam AI Shopping Report data",
     description:
       "Observed brand namings from public shopper questions asked across configured AI shopping and answer surfaces, with the exact questions, dates, engines, and denominators published.",
     url: `${SITE_URL}/benchmarks`,
@@ -127,7 +127,7 @@ export default function BenchmarksPage() {
     isAccessibleForFree: true,
     inLanguage: "en",
     keywords: [
-      "product discovery benchmark",
+      "AI shopping report",
       "AI shopping",
       "ecommerce",
       ...categories,
@@ -154,13 +154,13 @@ export default function BenchmarksPage() {
         <div className="mx-auto max-w-[92rem] px-5 pb-16 pt-20 sm:px-8 sm:pt-28 lg:px-10">
           <Reveal>
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-              Beseam AI shopping benchmark
+              Beseam AI Shopping Report
             </p>
             <h1 className="mt-6 max-w-[20ch] text-balance font-display text-[clamp(2.6rem,5vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-ink-deep">
               AI shopping answers often disagree on which brands belong.
             </h1>
             <p className="mt-8 max-w-[68ch] text-[17px] leading-[1.7] text-black/68">
-              This benchmark looks at one part of the buying decision: which
+              This report looks at one part of the buying decision: which
               brands enter the consideration set in AI shopping answers. We
               asked {BENCHMARK_RUN.questions} real shopper questions across{" "}
               {categories.join(", ").toLowerCase()} on{" "}

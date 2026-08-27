@@ -24,7 +24,7 @@ const FOOTER_GROUPS = [
     label: "Fieldbook",
     links: [
       ["Fieldbook", "/resources"],
-      ["Benchmark", "/benchmarks"],
+      ["AI Shopping Report", "/benchmarks"],
     ],
   },
 ] as const;
@@ -42,8 +42,8 @@ export default function BeseamFooter() {
               Make products easier to find, choose, and buy.
             </p>
             <p className="mt-6 max-w-[54ch] text-[14px] leading-relaxed text-white/62">
-              Observe what is happening, understand what may explain it, decide,
-              act with control, and learn from what changes.
+              Observe what is happening, understand what may explain it, act
+              with control, and learn from what changes.
             </p>
           </div>
 

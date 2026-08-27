@@ -30,6 +30,7 @@ const QUEUE_ROWS = [
   {
     title: "Add the commuting use case to the Urban Shell product page.",
     why: "The shopper asked for a commuting jacket, and the product page never answers whether this one fits that use case.",
+    priority: "High",
     effort: "Quick",
     step: "Review",
     lead: true,
@@ -37,6 +38,7 @@ const QUEUE_ROWS = [
   {
     title: "Explain how Urban Shell fits over everyday layers.",
     why: "The shopper opened the size guide, and fit over layers is still unanswered at the decision point.",
+    priority: "High",
     effort: "Quick",
     step: "Review",
     lead: false,
@@ -44,6 +46,7 @@ const QUEUE_ROWS = [
   {
     title: "Recheck commuter queries after the product-page change.",
     why: "The same buying question should be observed again before claiming that the change helped discovery.",
+    priority: "Medium",
     effort: "Quick",
     step: "Queue",
     lead: false,
@@ -90,7 +93,57 @@ function ScreenChrome({
 }
 
 /** /actions, cropped to the columns a merchant acts on. */
-export function ActionsScreen() {
+export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
+  if (compact) {
+    return (
+      <div className="border border-black/16 bg-white">
+        <div className="flex items-center justify-between gap-4 border-b border-black/12 bg-ground px-3 py-2.5">
+          <p className="text-[13px] font-semibold text-ink-deep">Actions</p>
+          <p className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/46">
+            3 tasks
+          </p>
+        </div>
+        <div className="grid grid-cols-[minmax(0,1fr)_4.25rem_4rem_4.5rem] gap-2 border-b border-black/12 px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/46">
+          <span>Task</span>
+          <span>Priority</span>
+          <span>Effort</span>
+          <span>Next</span>
+        </div>
+        {QUEUE_ROWS.map((row) => (
+          <div
+            key={row.title}
+            className={`grid grid-cols-[minmax(0,1fr)_4.25rem_4rem_4.5rem] items-center gap-2 border-b border-black/10 px-3 py-2 last:border-b-0 ${
+              row.lead ? "bg-signal-ink/[0.06]" : "bg-white"
+            }`}
+          >
+            <p className="text-[12.5px] font-medium leading-[1.3] text-[#151515]">
+              {row.title}
+            </p>
+            <span className={`inline-flex w-fit shrink-0 rounded-md border px-1.5 py-0.5 text-[9.5px] font-semibold ${
+              row.priority === "High"
+                ? "border-signal-ink/30 bg-signal-ink/[0.07] text-signal-ink"
+                : "border-black/16 bg-black/[0.03] text-[#4a4a4a]"
+            }`}>
+              {row.priority}
+            </span>
+            <span className="inline-flex w-fit shrink-0 rounded-md border border-[#1f7a4d]/35 bg-[#1f7a4d]/[0.08] px-1.5 py-0.5 text-[9.5px] font-semibold text-[#1a6b43]">
+              {row.effort}
+            </span>
+            <span
+              className={`inline-flex w-fit shrink-0 items-center rounded-md px-2 py-1 text-[10px] font-semibold ${
+                row.lead
+                  ? "bg-signal-ink text-white"
+                  : "border border-black/18 bg-white text-[#3f3f3f]"
+              }`}
+            >
+              {row.step}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="border border-black/16 bg-white">
       <ScreenChrome title="Actions" meta="Illustrative product view" />

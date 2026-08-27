@@ -57,34 +57,19 @@ export default function CategoryBenchmarksSection() {
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                AI shopping benchmark
+                AI Shopping Report
               </p>
               <h2 className="mt-6 max-w-[18ch] text-balance font-display text-[clamp(2.2rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
                 Who gets considered depends on where shoppers ask.
               </h2>
-              <p className="mt-6 max-w-[52ch] text-[16px] leading-[1.7] text-black/64">
-                We ask the same buying questions every quarter and publish what
-                comes back. The answers show how the consideration set changes
-                from one assistant to another. In the last run,{" "}
-                <strong className="font-semibold text-ink-deep">
-                  {SOLO_SHARE}% of brand namings appeared on only one assistant
-                </strong>
-                {", "}
-                so where a shopper asks decides which brands they ever see.
-              </p>
-              <p className="mt-4 max-w-[52ch] text-[14px] leading-[1.7] text-black/52">
-                {BENCHMARK_RUN.questions} shopper questions across{" "}
-                {BENCHMARK_RUN.engines.join(", ")}.{" "}
-                {BENCHMARK_RUN.answersCompleted} answers completed,{" "}
-                {BENCHMARK_RUN.namings} brand namings, of which only{" "}
-                {BENCHMARK_RUN.everyEngine} appeared on every engine that
-                answered.
+              <p className="mt-6 max-w-[48ch] text-[16px] leading-[1.7] text-black/64">
+                We ask the same buying questions across AI assistants and publish what comes back. In the latest run, <strong className="font-semibold text-ink-deep">{SOLO_SHARE}% of brand appearances occurred on only one assistant.</strong>
               </p>
               <Link
                 href="/benchmarks"
                 className="mt-7 inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-ink-deep underline decoration-black/25 underline-offset-6 hover:decoration-signal-ink"
               >
-                See the benchmark and method
+                See the report and method
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>

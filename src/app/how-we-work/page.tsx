@@ -16,11 +16,10 @@ export const metadata: Metadata = buildPublicMetadata({
 });
 
 const LOOP = [
-  ["01", "Observe", "Start with one buying decision worth understanding and connect the evidence around it."],
+  ["01", "Observe", "Start with one buying decision and connect the evidence around it."],
   ["02", "Understand", "Investigate possible explanations without turning correlation into certainty."],
-  ["03", "Decide", "Work with your team to choose what deserves action and why."],
-  ["04", "Act", "Prepare and help make supported changes under your approval rules."],
-  ["05", "Learn", "Measure the relevant signals afterward and carry the result into the next decision."],
+  ["03", "Act", "Choose what deserves action, then prepare and help make the supported change under your approval rules."],
+  ["04", "Learn", "Measure the relevant signals afterward and carry the result forward."],
 ] as const;
 
 const RESPONSIBILITIES = [
@@ -100,11 +99,10 @@ export default function HowWeWorkPage() {
                 <p className="max-w-[64ch] text-[17px] leading-[1.75] text-white/68">
                   Your team can use Beseam directly, but you do not have to turn
                   every new signal into another investigation to manage. We can
-                  work through the evidence with you, bring the next decision,
-                  help move an approved change forward, and stay involved through
-                  measurement.
+                  work through the evidence with you, help move an approved change
+                  forward, and stay involved through measurement.
                 </p>
-                <ol className="mt-10 grid border-t border-white/16 md:grid-cols-5">
+                <ol className="mt-10 grid border-t border-white/16 md:grid-cols-4">
                   {LOOP.map(([number, title, body], index) => (
                     <li
                       key={number}

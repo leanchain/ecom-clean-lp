@@ -8,8 +8,8 @@ import { Reveal } from "@/components/beseam/reveal";
 const DESTINATIONS = [
   [
     "See how Beseam works",
-    "How one commercial question moves through Observe, Understand, Decide, Act, and Learn.",
-    "/#proof",
+    "How one buying decision moves through Observe, Understand, Act, and Learn.",
+    "/#decision-story",
   ],
   [
     "Run the free AI discovery scan",

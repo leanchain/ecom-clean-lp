@@ -1,6 +1,5 @@
 import {
   Brain,
-  ListTodo,
   Radar,
   RefreshCw,
   Sparkles,
@@ -144,11 +143,11 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       "Follow the buying decision from the first question to the purchase.",
     metaTitle: "Beseam Platform | Find, Choose, Buy",
     description:
-      "Beseam connects where shoppers find products, what helps them choose, where purchases break, and what happens after a change using Observe, Understand, Decide, Act, Learn.",
+      "Beseam connects where shoppers find products, what helps them choose, where purchases break, and what happens after a change using Observe, Understand, Act, Learn.",
     intro:
-      "A shopper can overlook you before the visit, choose something else on the store, or stop after deciding. The evidence usually sits in different systems. Beseam keeps those signals attached to the product, page, journey, team decision, and action so you can see what may be worth changing and what moved afterward.",
+      "AI shopping is one place a buying decision begins. Beseam follows it further across onsite search, recommendations, product pages, sizing and fit, shopper behavior, checkout, conversion, actions, and impact so the evidence stays attached from the first question to what happened after a change.",
     proofLine:
-      "The shopper path is Find, Choose, Buy. Beseam works across it with Observe, Understand, Decide, Act, Learn, keeping the evidence attached at every step.",
+      "The shopper path is Find, Choose, Buy. Beseam works across it with Observe, Understand, Act, Learn, keeping the evidence attached at every step.",
     observationsHeading: "Follow the shopper's decision",
     observationsIntro:
       "Beseam connects the moments where a product gets considered, chosen, purchased, and measured instead of treating each as a separate dashboard.",
@@ -190,23 +189,13 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
         ],
       },
       {
-        title: "Decide what deserves action.",
-        icon: ListTodo,
-        body: "Beseam helps a team compare evidence, affected scope, urgency, and commercial consequence so the next action is tied to a specific product, page, journey, or opportunity rather than a generic score or backlog of findings.",
-        points: [
-          "Separate urgent breakage from worthwhile opportunities.",
-          "Keep the decision specific to the affected product, page, or journey.",
-          "Keep the reason for the decision attached to the evidence.",
-        ],
-      },
-      {
-        title: "Act with control. Learn from what changes.",
+        title: "Act on what matters. Learn from what changes.",
         icon: Sparkles,
-        body: "Supported product data, content, merchandising, creative, campaign, or store changes can move through an approval path with the previous state retained. After the action, Beseam checks the relevant discovery, behavior, conversion, order, or revenue signals and carries the result into the next decision.",
+        body: "Beseam helps the team choose the next move, then supported product data, content, merchandising, creative, campaign, or store changes can move through an approval path with the previous state retained. After the action, Beseam checks the relevant discovery, behavior, conversion, order, or revenue signals.",
         points: [
+          "Tie the action to the affected product, page, journey, or opportunity.",
           "Keep control with explicit approval for supported store changes.",
-          "Observe the signals relevant to the action afterward.",
-          "Carry what was learned into the next decision.",
+          "Carry what was learned into the next action.",
         ],
       },
     ],
@@ -241,7 +230,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
     related: [
       { label: "How we work with brands", href: "/how-we-work" },
       { label: "AI shopping discovery", href: "/ai-visibility-monitoring" },
-      { label: "See a connected trace", href: "/#proof" },
+      { label: "See a buying decision", href: "/#decision-story" },
     ],
   },
 };
