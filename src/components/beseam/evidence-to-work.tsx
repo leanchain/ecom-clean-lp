@@ -30,7 +30,7 @@ export default function EvidenceToWork() {
         </Reveal>
 
         <Reveal delay={0.05}>
-          <div className="mx-auto mt-12 max-w-[56rem] lg:mt-16">
+          <div className="mx-auto mt-12 max-w-[68rem] lg:mt-16">
             <ActionsScreen />
           </div>
         </Reveal>

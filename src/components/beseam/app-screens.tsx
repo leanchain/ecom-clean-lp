@@ -151,7 +151,10 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
       <ScreenChrome title="Actions" meta="Illustrative product view" />
 
       <div className="relative">
-        <div className="grid grid-cols-[minmax(0,1fr)_3.5rem_4.5rem_4.5rem] gap-3 border-b border-black/12 px-4 py-2 sm:px-5">
+        <div
+          className="grid gap-4 border-b border-black/12 px-4 py-2 sm:px-5"
+          style={{ gridTemplateColumns: "minmax(0,1fr) 4rem 4.5rem 5.5rem" }}
+        >
           <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
             Decision and exact fix
           </p>
@@ -169,9 +172,10 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
         {QUEUE_ROWS.map((row) => (
           <div
             key={row.title}
-            className={`grid grid-cols-[minmax(0,1fr)_3.5rem_4.5rem_4.5rem] items-start gap-3 border-b border-black/10 px-4 py-3.5 last:border-b-0 sm:px-5 ${
+            className={`grid items-center gap-4 border-b border-black/10 px-4 py-3.5 last:border-b-0 sm:px-5 ${
               row.lead ? "bg-signal-ink/[0.06]" : ""
             }`}
+            style={{ gridTemplateColumns: "minmax(0,1fr) 4rem 4.5rem 5.5rem" }}
           >
             <div>
               <p
