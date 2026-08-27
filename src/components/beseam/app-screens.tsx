@@ -189,7 +189,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
             </div>
 
             <span
-              className={`inline-flex shrink-0 items-center rounded-md border px-1.5 py-0.5 text-[11px] font-semibold ${PRIORITY_TONE[row.priority]}`}
+              className={`inline-flex shrink-0 items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium ${PRIORITY_TONE[row.priority]}`}
             >
               {row.priority}
             </span>
