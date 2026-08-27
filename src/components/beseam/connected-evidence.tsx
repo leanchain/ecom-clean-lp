@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { ArrowRight, X } from "lucide-react";
 
-import { ActionsScreen, ImpactScreen } from "@/components/beseam/app-screens";
 import { Reveal } from "@/components/beseam/reveal";
 
 /**
@@ -34,18 +33,6 @@ import { Reveal } from "@/components/beseam/reveal";
  * and manufactured evidence is the one thing this product must never show.
  * Replace with a real scan when one is cleared for publication.
  */
-/**
- * The four domains the loop runs across. Lives here rather than in its own
- * band on the homepage: “connected” is a claim, and this is the shortest
- * statement of what it is connecting.
- */
-const DOMAINS = [
-  { title: "Discovery", detail: "Where shoppers start looking" },
-  { title: "Store", detail: "What your store shows them" },
-  { title: "Behaviour", detail: "What they do next" },
-  { title: "Revenue", detail: "What it was worth" },
-] as const;
-
 const QUERIES = [
   { label: "Searched", value: "“waterproof jacket”" },
   { label: "Then added", value: "... “for commuting”" },
@@ -94,9 +81,6 @@ const MOBILE_FINDINGS = [
     issue: false,
   },
 ] as const;
-
-const PROOF =
-  "Search exits, product visits, conversion, and the same query rerun.";
 
 /**
  * Edges land on the centre of each node. Two columns with a 1.5rem gap put the
@@ -293,24 +277,17 @@ function MobileTrace() {
         </p>
       </div>
 
-      <div className="border-b border-white/14 py-6">
+      <div className="py-6">
         <div className="flex items-baseline gap-3">
           <span className="font-mono text-[10px] font-semibold tabular-nums text-signal">
             03
           </span>
-          <StepLabel>Change</StepLabel>
+          <StepLabel>What happens next</StepLabel>
         </div>
-<div className="mt-3"><ActionsScreen compact /></div>
-      </div>
-
-      <div className="py-6">
-        <div className="flex items-baseline gap-3">
-          <span className="font-mono text-[10px] font-semibold tabular-nums text-signal">
-            04
-          </span>
-          <StepLabel>Verify</StepLabel>
-        </div>
-        <p className="mt-3 text-[15px] leading-[1.55] text-white/90">{PROOF}</p>
+        <p className="mt-3 text-[15px] leading-[1.55] text-white/90">
+          The surviving evidence becomes work — prioritized tasks and
+          remeasurement, below.
+        </p>
       </div>
 
       <div className="border-t border-white/14 pt-6">
@@ -343,7 +320,7 @@ export default function ConnectedEvidence() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal">
-                The buying decision
+                One buying decision, end to end
               </p>
               <h2 className="mt-7 max-w-[16ch] text-balance font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
                 Beseam doesn&rsquo;t stop at the symptom.
@@ -363,38 +340,6 @@ export default function ConnectedEvidence() {
                 evidence rules out.
               </p>
             </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.04}>
-          <div className="mt-10 border-y border-white/14 py-5">
-            <div className="grid gap-5 sm:grid-cols-4 sm:gap-0">
-              {DOMAINS.map((domain, index) => (
-                <div
-                  key={domain.title}
-                  className="relative pr-8 sm:px-6 sm:first:pl-0 sm:last:pr-0"
-                >
-                  <div className="flex items-center gap-3">
-                    <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-white">
-                      {domain.title}
-                    </p>
-                    {index < DOMAINS.length - 1 ? (
-                      <ArrowRight
-                        aria-hidden="true"
-                        className="h-3.5 w-3.5 shrink-0 text-white/30 sm:absolute sm:-right-2 sm:top-0.5"
-                      />
-                    ) : null}
-                  </div>
-                  <p className="mt-2 text-[12px] leading-relaxed text-white/58">
-                    {domain.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-5 max-w-[70ch] text-[13px] leading-[1.65] text-white/58">
-              One shopper, followed across all four. So what you find in one
-              place still means something in the next.
-            </p>
           </div>
         </Reveal>
 
@@ -493,16 +438,12 @@ export default function ConnectedEvidence() {
 
                 <Tails />
 
-                <div className="grid border border-signal/45 bg-signal/[0.05] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-                  <div className="p-3 sm:p-4">
-                    <ActionsScreen compact />
-                  </div>
-                  <div className="border-l border-white/14 px-6 py-5">
-                    <StepLabel>What proves it</StepLabel>
-                    <p className="mt-2.5 text-[16px] leading-[1.5] text-white/92">
-                      {PROOF}
-                    </p>
-                  </div>
+                <div className="border border-signal/45 bg-signal/[0.05] px-6 py-5 text-center">
+                  <StepLabel>What happens next</StepLabel>
+                  <p className="mt-2.5 text-[16px] leading-[1.5] text-white/92">
+                    The surviving evidence becomes work — the queue below turns
+                    it into prioritized, approvable tasks.
+                  </p>
                 </div>
 
                 <div className="mt-9 flex items-center justify-between gap-8 border-t border-white/14 pt-7">
@@ -521,25 +462,6 @@ export default function ConnectedEvidence() {
                 </div>
               </div>
             </div>
-          </div>
-        </Reveal>
-
-        {/* The trace above says what Beseam concluded. This says where the
-            merchant reads it back afterwards — the same claim, in the product
-            rather than in a diagram. */}
-        <Reveal delay={0.08}>
-          <div className="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-14">
-            <div>
-              <h3 className="max-w-[18ch] text-balance font-display text-[clamp(1.6rem,2.3vw,2.2rem)] font-normal leading-[1.1] tracking-[-0.02em]">
-                Then the same questions, asked again.
-              </h3>
-              <p className="mt-4 max-w-[48ch] text-[15px] leading-[1.7] text-white/66">
-                A change is a guess until something measures it. What was
-                changed, what moved afterwards, and what did not. Kept next to
-                the decision that produced it.
-              </p>
-            </div>
-            <ImpactScreen />
           </div>
         </Reveal>
       </div>
