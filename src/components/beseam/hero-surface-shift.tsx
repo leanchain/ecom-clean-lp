@@ -72,7 +72,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "search",
-    label: "Search",
+    label: "Search results",
     x: 365,
     y: 108,
     satellites: [
@@ -89,7 +89,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "catalog",
-    label: "Catalog",
+    label: "Product options",
     x: 590,
     y: 245,
     satellites: [
@@ -106,7 +106,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "brand",
-    label: "Brand",
+    label: "Brand trust",
     x: 770,
     y: 112,
     satellites: [
@@ -123,7 +123,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "truth",
-    label: "Product truth",
+    label: "Product facts",
     x: 840,
     y: 315,
     satellites: [
@@ -140,7 +140,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "creative",
-    label: "Creative",
+    label: "Images & content",
     x: 1040,
     y: 118,
     satellites: [
@@ -157,7 +157,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "campaigns",
-    label: "Campaigns",
+    label: "Paid discovery",
     x: 1245,
     y: 155,
     satellites: [
@@ -174,7 +174,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "onsite",
-    label: "Onsite search",
+    label: "Store search",
     x: 1085,
     y: 330,
     satellites: [
@@ -225,7 +225,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "behavior",
-    label: "Behavior",
+    label: "Shopper signals",
     x: 1225,
     y: 500,
     satellites: [
@@ -259,7 +259,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "revenue",
-    label: "Revenue",
+    label: "Purchase",
     x: 1630,
     y: 210,
     satellites: [

@@ -83,14 +83,14 @@ export default function MarketsSection() {
                 Markets
               </p>
               <h2 className="mt-7 max-w-[20ch] text-balance font-display text-[clamp(2.3rem,3.8vw,3.9rem)] font-normal leading-[1.03] tracking-[-0.02em]">
-                Shoppers do not ask the same questions everywhere.
+                What helps a shopper choose changes by market.
               </h2>
             </div>
             <p className="max-w-[52ch] text-[17px] leading-[1.72] text-white/70">
               Language, competitors, delivery expectations, and the way a use
-              case is described can change by market. Beseam keeps that context
-              attached to the questions it tests instead of treating every
-              country as the same storefront translated.
+              case is described can all change what gets considered. Beseam
+              keeps that context attached to the questions it tests instead of
+              treating every country as the same storefront translated.
             </p>
           </div>
         </Reveal>

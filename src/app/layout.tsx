@@ -29,11 +29,11 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: {
-    default: "Beseam | Make products easier to find, choose, and buy",
+    default: "Beseam | Get more shoppers to choose you",
     template: "%s | Beseam",
   },
   description:
-    "Beseam shows where products lose shoppers across discovery and the store, helps teams understand what may explain it, make supported changes, and measure what changed in behavior, conversion, orders, and revenue.",
+    "Beseam helps ecommerce teams see where shoppers overlook their products, choose something else, or stop before buying — then understand what to improve and measure what happens next.",
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
   publisher: "Beseam",
@@ -59,9 +59,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Beseam - Make products easier to find, choose, and buy",
+    title: "Beseam - Get more shoppers to choose you",
     description:
-      "See where products lose shoppers, understand what may explain it, make supported changes, and measure what happened next.",
+      "See where shoppers overlook your products, choose something else, or stop before buying — then understand what to improve and measure what happens next.",
     url: "/",
     siteName: "Beseam",
     type: "website",
@@ -70,16 +70,16 @@ export const metadata: Metadata = {
         url: HOME_SOCIAL_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Beseam connecting discovery, store, behavior, and revenue evidence",
+        alt: "Beseam showing where shoppers find, choose, and buy products",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam - Make products easier to find, choose, and buy",
+    title: "Beseam - Get more shoppers to choose you",
     description:
-      "See where products lose shoppers, understand what may explain it, make supported changes, and measure what happened next.",
+      "See where shoppers overlook your products, choose something else, or stop before buying — then understand what to improve and measure what happens next.",
     images: [HOME_SOCIAL_IMAGE],
   },
 };
@@ -96,7 +96,7 @@ export default function RootLayout({
         name: "Beseam",
         url: `${SITE_URL}/`,
         description:
-          "Beseam connects discovery, store, shopper behavior, conversion, orders, and revenue so teams can understand commercial problems, decide what deserves action, make supported changes, and measure what changed afterward.",
+          "Beseam helps ecommerce teams get more shoppers to choose their products by showing where products get overlooked, why that may be happening, what to improve, and what happened after a change.",
         sameAs: ["https://www.linkedin.com/company/beseam/"],
         logo: {
           "@type": "ImageObject",

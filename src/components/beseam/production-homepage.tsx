@@ -24,9 +24,9 @@ import WhyBeseam from "@/components/beseam/why-beseam";
  * made those words easy to understand.
  */
 const SCAN_RETURNS = [
-  "Where shoppers can’t find you",
-  "What your product pages leave out",
-  "What to change first",
+  "Where you get overlooked",
+  "What makes products harder to choose",
+  "What to improve first",
 ] as const;
 
 export default function ProductionHomepage() {
@@ -49,17 +49,17 @@ export default function ProductionHomepage() {
                 For ecommerce teams
               </p>
               <h1 className="pointer-events-auto mx-auto mt-6 max-w-[18ch] text-balance font-display text-[clamp(3rem,5.6vw,5rem)] font-black leading-[0.98] tracking-[-0.04em] text-ink-deep">
-                Turn product <span className="text-signal-ink">discovery</span>{" "}
-                into buying{" "}
+                Get more shoppers to{" "}
                 <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
-                  decisions
+                  choose you
                 </span>
                 .
               </h1>
-              <p className="pointer-events-auto mx-auto mt-6 max-w-[58ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
-                Beseam finds where shoppers get lost, shows what is worth
-                improving, helps you make the change, and measures what happened
-                after.
+              <p className="pointer-events-auto mx-auto mt-6 max-w-[62ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
+                Shopping is moving from finding products to choosing products.
+                See where shoppers overlook you, choose something else, or stop
+                before buying — then understand what to improve and measure what
+                happens next.
               </p>
 
               <div className="pointer-events-auto mx-auto mt-9 w-full">

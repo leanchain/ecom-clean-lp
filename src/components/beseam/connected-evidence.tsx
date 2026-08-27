@@ -365,14 +365,16 @@ export default function ConnectedEvidence() {
             </div>
             <div className="max-w-[50ch] text-[16px] leading-[1.75] text-white/72">
               <p className="lg:hidden">
-                Knowing a shopper left is not the same as knowing why. Several
-                things could explain it. Beseam checks the possible explanations
-                and shows where the evidence points.
+                Seeing that a shopper left tells you what happened, not what
+                stopped them choosing. Several things could explain it. Beseam
+                checks the possible explanations and shows where the evidence
+                points.
               </p>
               <p className="hidden lg:block">
-                Knowing a shopper left is not the same as knowing why. Three
-                things could explain it here. Beseam checks all three, and shows
-                you the two that turned out not to be the cause.
+                Seeing that a shopper left tells you what happened, not what
+                stopped them choosing. Three things could explain it here. Beseam
+                checks all three, and shows you the two that turned out not to be
+                the cause.
               </p>
             </div>
           </div>

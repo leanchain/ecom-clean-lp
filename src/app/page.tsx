@@ -8,13 +8,13 @@ import { HOME_SOCIAL_IMAGE, buildPublicMetadata } from "@/lib/seo";
 import { STORE_HEALTH_FAQS } from "@/lib/store-health-faqs";
 
 export const metadata: Metadata = buildPublicMetadata({
-  title: "Beseam | Make products easier to find, choose, and buy",
+  title: "Beseam | Get more shoppers to choose you",
   description:
-    "Beseam shows where products lose shoppers across discovery and the store, helps teams understand what may explain it, make supported changes, and measure what changed in behavior, conversion, orders, and revenue.",
+    "Beseam helps ecommerce teams see where shoppers overlook their products, choose something else, or stop before buying — then understand what to improve and measure what happens next.",
   path: "/",
   image: HOME_SOCIAL_IMAGE,
   imageAlt:
-    "Beseam connecting discovery, store, behavior, and revenue evidence",
+    "Beseam showing where shoppers find, choose, and buy products",
 });
 
 export default function Home() {
@@ -25,9 +25,9 @@ export default function Home() {
         "@type": "WebPage",
         "@id": "https://beseam.com/#webpage",
         url: "https://beseam.com/",
-        name: "Beseam | Make products easier to find, choose, and buy",
+        name: "Beseam | Get more shoppers to choose you",
         description:
-          "Beseam shows where products lose shoppers across discovery and the store, helps teams understand what may explain it, make supported changes, and measure what happened next.",
+          "Beseam helps ecommerce teams see where shoppers overlook their products, choose something else, or stop before buying, then understand what to improve and measure what happens next.",
         about: { "@id": "https://beseam.com/#organization" },
         inLanguage: "en",
       },
@@ -39,13 +39,13 @@ export default function Home() {
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         description:
-          "Beseam connects discovery, store, shopper behavior, conversion, orders, and revenue so teams can understand a commercial problem, decide what deserves action, make supported changes, and measure what changed afterward.",
+          "Beseam helps ecommerce teams make products easier to find, choose, and buy by connecting shopper questions, store evidence, behavior, supported changes, and what happened afterward.",
         featureList: [
-          "Observe connected discovery, store, behavior, and revenue signals",
+          "See where shoppers overlook products or choose something else",
           "Understand likely explanations with source evidence attached",
           "Decide what deserves action",
           "Act under merchant approval rules",
-          "Learn from relevant signals after the action",
+          "Measure what happens after the action",
         ],
         publisher: { "@id": "https://beseam.com/#organization" },
       },

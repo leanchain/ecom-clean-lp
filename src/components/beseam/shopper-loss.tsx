@@ -333,7 +333,7 @@ const SITUATIONS: readonly Situation[] = [
   {
     stage: "Finding it",
     category: "Electronics",
-    heading: "They never see your product.",
+    heading: "You can’t be chosen if you’re never considered.",
     lead: "A shopper asks an assistant, or types into a search box, and gets three other brands. Nothing else about your store gets a chance.",
     rows: [
       [
@@ -375,7 +375,7 @@ const SITUATIONS: readonly Situation[] = [
   {
     stage: "Buying it",
     category: "Supplements",
-    heading: "They get to the last step and stop.",
+    heading: "They choose you — then the purchase breaks.",
     lead: "Cart, delivery, payment. A cost turns up late, a field breaks, an option is missing — and a shopper who had already decided walks away.",
     rows: [
       [
@@ -406,7 +406,7 @@ export default function ShopperLoss() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:gap-16">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                Where stores lose shoppers
+                Where choices are lost
               </p>
               <h2 className="mt-7 max-w-[22ch] text-balance font-display text-[clamp(2.3rem,3.8vw,3.9rem)] font-normal leading-[1.03] tracking-[-0.02em] text-ink-deep">
                 Three places a sale quietly disappears.

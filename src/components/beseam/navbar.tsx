@@ -15,7 +15,7 @@ const NAV_LINKS = [
   { label: "Why Beseam", href: "/#why" },
   { label: "Platform", href: "/platform" },
   { label: "How we work", href: "/how-we-work" },
-  { label: "Resources", href: "/resources" },
+  { label: "Benchmarks", href: "/benchmarks" },
 ] as const;
 
 /** Pill CTA styled after app-fit.beseam.com/fit's "Add to Shopify" button. */

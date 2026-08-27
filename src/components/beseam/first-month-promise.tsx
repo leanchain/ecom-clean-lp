@@ -20,12 +20,12 @@ const ENTRY_POINTS = [
   {
     when: "Right now",
     title: "The free scan",
-    body: "Enter your domain. Beseam reads your public storefront and shows where shoppers may be getting lost.",
+    body: "Enter your domain. Beseam reads your public storefront and shows where shoppers may be overlooking your products or struggling to choose.",
     rows: [
       ["Who does the work", "Nobody. Beseam reads what is already public."],
       [
         "What you get",
-        "Where shoppers can’t find you, what your product pages leave out, and what to look at first.",
+        "Where you get overlooked, what makes products harder to choose, and what to improve first.",
       ],
       [
         "What it costs",

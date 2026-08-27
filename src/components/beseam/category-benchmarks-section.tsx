@@ -57,14 +57,15 @@ export default function CategoryBenchmarksSection() {
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                Discovery benchmark
+                AI shopping benchmark
               </p>
               <h2 className="mt-6 max-w-[18ch] text-balance font-display text-[clamp(2.2rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
-                How do you compare?
+                Who gets considered depends on where shoppers ask.
               </h2>
               <p className="mt-6 max-w-[52ch] text-[16px] leading-[1.7] text-black/64">
                 We ask the same buying questions every quarter and publish what
-                comes back. In the last run,{" "}
+                comes back. The answers show how the consideration set changes
+                from one assistant to another. In the last run,{" "}
                 <strong className="font-semibold text-ink-deep">
                   {SOLO_SHARE}% of brand namings appeared on only one assistant
                 </strong>
