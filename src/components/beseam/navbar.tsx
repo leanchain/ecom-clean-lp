@@ -43,10 +43,10 @@ export default function BeseamNavbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 mx-auto w-full border border-x-transparent border-t-transparent transition-all duration-200",
+        "sticky z-50 mx-auto border transition-all duration-200",
         scrolled
-          ? "border-b-black/14 bg-ground/72 shadow-lg backdrop-blur-2xl"
-          : "border-b-black/10 bg-ground/92 backdrop-blur-md",
+          ? "top-3 w-[calc(100%-1.5rem)] max-w-[95rem] rounded-none border-black/14 bg-ground/72 shadow-lg backdrop-blur-2xl"
+          : "top-0 w-full border-x-transparent border-t-transparent border-b-black/10 bg-ground/92 backdrop-blur-md",
       )}
     >
       <a
