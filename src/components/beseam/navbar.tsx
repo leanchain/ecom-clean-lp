@@ -13,10 +13,10 @@ import { APP_LOGIN_URL } from "@/lib/app-urls";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { label: "Why Beseam", href: "/#why" },
   { label: "Platform", href: "/platform" },
   { label: "How we work", href: "/how-we-work" },
   { label: "Benchmarks", href: "/benchmarks" },
+  { label: "Resources", href: "/resources" },
 ] as const;
 
 export default function BeseamNavbar() {
