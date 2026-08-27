@@ -29,6 +29,7 @@ export type FieldbookFrontmatter = {
   difficulty?: "beginner" | "intermediate" | "advanced";
   version?: string;
   worksWith?: string[];
+  audienceNote?: string;
   relatedSkills?: string[];
   relatedProblems?: string[];
   relatedResources?: string[];

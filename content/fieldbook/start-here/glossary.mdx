@@ -1,0 +1,48 @@
+---
+title: Glossary
+navTitle: Glossary
+summary: Plain-language definitions for the technical terms that repeat across Problem, Skill, and Playbook pages.
+category: Start here
+kind: guide
+status: stable
+order: 5
+reviewedAt: 2026-08-26
+---
+
+Fieldbook pages stay precise for whoever executes the fix, which means some technical vocabulary repeats page after page. This glossary defines those terms in plain language so you can read a Problem or Skill page without stopping to look each one up.
+
+## Product data and catalog
+
+**PDP (product detail page)** — the page a shopper lands on for one product, such as `/products/blue-jacket`.
+
+**Feed** — the file your store sends to a channel (Google Shopping, a marketplace, an ad platform) listing your products, prices, and availability. If your website shows one price and the feed shows another, shoppers and channels are seeing different things.
+
+**GTIN, MPN, SKU** — three different ID numbers for the same product. GTIN is the barcode-style number retailers share (like a UPC). MPN is the manufacturer's part number. SKU is your own internal code. Channels use these to confirm two listings are the same product.
+
+**Structured data / schema markup / JSON-LD** — information on your product page that shoppers never see, written so search engines and AI tools can read the price, availability, and details automatically. Think of it as a label written for machines, sitting next to the label written for people.
+
+**Canonical URL** — the one web address a search engine should treat as the "official" version of a page, for cases where the same product could technically be reached at more than one URL.
+
+**Robots rules / indexability** — the settings that tell search engines whether they're even allowed to read and list a page. Set these wrong and a page can be invisible to search and AI tools even though it looks completely normal to a shopper.
+
+## Search and AI discovery
+
+**SEO** — search engine optimization: making pages easier for Google and similar engines to find, understand, and rank.
+
+**GEO** — generative engine optimization: the same idea, but for AI answer tools such as ChatGPT or Google AI Mode, which assemble an answer instead of returning a list of links.
+
+**Citation** — when an AI answer names your product or links to your page as the source of a fact.
+
+**Retest** — running the same check again after a fix, to see whether anything actually changed. A retest is what turns "we think we fixed it" into "we confirmed it moved."
+
+## Analytics and revenue
+
+**Attribution window** — the time range an ad platform allows between a shopper seeing an ad and buying, for that purchase to still count as coming from the ad. Different platforms use different windows, which is a common reason totals never quite match.
+
+**Consent state** — whether a shopper has agreed to be tracked (cookies, analytics, ads). Analytics tools only see events from shoppers who consented, so consent rates affect how complete the numbers look.
+
+**Booked, observed, attributed, modeled** — four different kinds of numbers that get mistaken for each other. *Booked* is what your order system recorded. *Observed* is what analytics actually saw happen. *Attributed* is what an ad platform decided to credit itself for, using its own rules. *Modeled* is a forecast or estimate standing in for something that wasn't directly measured. See [the evidence model](/resources/start-here/evidence-model) for how the Fieldbook keeps these apart everywhere it writes about money.
+
+## Evidence and confidence
+
+Every Fieldbook page labels a claim as **observed**, a **hypothesis**, **modeled**, or **verified** — never one blended score. The full definitions live in [the Fieldbook evidence model](/resources/start-here/evidence-model); it's worth reading once, since every Problem and Skill page uses these words the same way.

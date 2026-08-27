@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { CalendarDays, Gauge, GitBranch } from "lucide-react";
+import { CalendarDays, Gauge, GitBranch, Users } from "lucide-react";
 
 import type { FieldbookDocument } from "@/lib/fieldbook-content";
 
@@ -25,6 +25,17 @@ export default function FieldbookDocumentHeader({
       <p className="mt-7 max-w-3xl text-[18px] leading-[1.7] text-black/62">
         {frontmatter.summary}
       </p>
+      {frontmatter.audienceNote && (
+        <div className="mt-6 flex max-w-3xl items-start gap-3 border-l-2 border-[var(--beseam-accent)] bg-[var(--beseam-panel)] px-4 py-3">
+          <Users className="mt-0.5 h-4 w-4 shrink-0 text-[var(--beseam-accent)]" />
+          <p className="text-[13px] leading-relaxed text-black/68">
+            <span className="font-semibold text-[var(--beseam-ink)]">
+              Who does this:{" "}
+            </span>
+            {frontmatter.audienceNote}
+          </p>
+        </div>
+      )}
       <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 border-t border-black/14 pt-5 font-mono text-[9px] uppercase tracking-[0.08em] text-black/42">
         {frontmatter.version && (
           <span className="inline-flex items-center gap-2">

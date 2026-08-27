@@ -4,18 +4,48 @@ import { useEffect, useState } from "react";
 
 import Link from "next/link";
 
-import { ArrowRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import Logo from "@/components/beseam/logo";
 import TrackedLink from "@/components/beseam/tracked-link";
-import { APP_LOGIN_URL } from "@/lib/app-urls";
+import { SHOPIFY_APP_URL } from "@/lib/app-urls";
 import { cn } from "@/lib/utils";
+
 const NAV_LINKS = [
   { label: "Why Beseam", href: "/#why" },
   { label: "Platform", href: "/platform" },
   { label: "How we work", href: "/how-we-work" },
   { label: "Resources", href: "/resources" },
 ] as const;
+
+/** Pill CTA styled after app-fit.beseam.com/fit's "Add to Shopify" button. */
+function AddToShopifyCta({
+  placement,
+  className,
+}: {
+  placement: string;
+  className?: string;
+}) {
+  return (
+    <TrackedLink
+      href={SHOPIFY_APP_URL}
+      eventName="shopify_admin_clicked"
+      eventCategory="conversion"
+      placement={placement}
+      className={cn(
+        "inline-flex items-center justify-center gap-2 rounded-full bg-primary font-bold text-primary-foreground shadow-sm transition-all hover:scale-[1.02] hover:bg-primary-hover active:scale-[0.98]",
+        className,
+      )}
+    >
+      <img
+        src="/shopify.svg"
+        alt=""
+        className="h-4 w-auto brightness-0 invert"
+      />
+      Add to Shopify
+    </TrackedLink>
+  );
+}
 
 export default function BeseamNavbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -72,31 +102,11 @@ export default function BeseamNavbar() {
             ))}
           </nav>
 
-          <div
-            className={cn(
-              "hidden items-center lg:flex",
-              scrolled ? "gap-3" : "gap-5",
-            )}
-          >
-            <TrackedLink
-              href={APP_LOGIN_URL}
-              eventName="login_clicked"
+          <div className="hidden lg:flex">
+            <AddToShopifyCta
               placement="navbar"
-              className="text-[14px] font-semibold text-black/62 transition-colors hover:text-signal-ink"
-            >
-              Log in
-            </TrackedLink>
-            <TrackedLink
-              href="/scan"
-              eventName="marketing_primary_cta_clicked"
-              eventCategory="conversion"
-              placement="navbar"
-              preserveUtm
-              className="group inline-flex min-h-10 items-center justify-center gap-2 whitespace-nowrap bg-signal-ink px-4 text-[13px] font-semibold text-white focus-visible:ring-2 focus-visible:ring-signal-ink focus-visible:ring-offset-3"
-            >
-              Scan my store
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-            </TrackedLink>
+              className="min-h-10 px-5 text-[13px]"
+            />
           </div>
 
           <button
@@ -137,27 +147,11 @@ export default function BeseamNavbar() {
                 </Link>
               ))}
             </nav>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <TrackedLink
-                href={APP_LOGIN_URL}
-                eventName="login_clicked"
+            <div className="mt-5">
+              <AddToShopifyCta
                 placement="mobile_nav"
-                className="flex min-h-12 items-center justify-center border border-black/40 text-[14px] font-semibold text-ink-deep"
-              >
-                Log in
-              </TrackedLink>
-              <TrackedLink
-                href="/scan"
-                eventName="marketing_primary_cta_clicked"
-                eventCategory="conversion"
-                placement="mobile_nav"
-                preserveUtm
-                onClick={() => setMobileOpen(false)}
-                className="flex min-h-12 items-center justify-center gap-2 bg-ink-deep px-5 text-[14px] font-semibold text-white"
-              >
-                Scan my store
-                <ArrowRight className="h-4 w-4" />
-              </TrackedLink>
+                className="min-h-12 w-full px-5 text-[14px]"
+              />
             </div>
           </div>
         </div>

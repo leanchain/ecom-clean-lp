@@ -33,6 +33,9 @@ export default function ProductionHomepage() {
   return (
     <div className="bg-ground text-[#151515]">
       <section id="home-hero" className="relative isolate overflow-hidden">
+        {/* app-fit.beseam.com/fit-style soft glow, layered behind the existing evidence graph */}
+        <div className="pointer-events-none absolute -left-24 top-[-8%] z-0 h-[42%] w-[42%] rounded-full bg-primary/10 blur-[120px]" />
+        <div className="pointer-events-none absolute -right-24 bottom-[-8%] z-0 h-[42%] w-[42%] rounded-full bg-secondary/10 blur-[120px]" />
         <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[80svh]">
           <HeroSurfaceShift />
         </div>
@@ -45,9 +48,13 @@ export default function ProductionHomepage() {
               <p className="pointer-events-auto font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                 For ecommerce teams
               </p>
-              <h1 className="pointer-events-auto mx-auto mt-6 max-w-[18ch] text-balance font-display text-[clamp(3rem,5.6vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-ink-deep">
+              <h1 className="pointer-events-auto mx-auto mt-6 max-w-[18ch] text-balance font-display text-[clamp(3rem,5.6vw,5rem)] font-black leading-[0.98] tracking-[-0.04em] text-ink-deep">
                 Turn product <span className="text-signal-ink">discovery</span>{" "}
-                into buying <span style={{ color: "var(--secondary)" }}>decisions</span>.
+                into buying{" "}
+                <span className="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  decisions
+                </span>
+                .
               </h1>
               <p className="pointer-events-auto mx-auto mt-6 max-w-[58ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
                 Beseam finds where shoppers get lost, shows what is worth
