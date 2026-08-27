@@ -11,11 +11,12 @@ import Logo from "@/components/beseam/logo";
 import TrackedLink from "@/components/beseam/tracked-link";
 import { APP_LOGIN_URL } from "@/lib/app-urls";
 import { cn } from "@/lib/utils";
+// Fieldbook stays reachable from the footer; primary nav keeps only what a
+// buyer needs to understand and start: product, method, research.
 const NAV_LINKS = [
   { label: "Platform", href: "/platform" },
   { label: "How we work", href: "/how-we-work" },
   { label: "AI Shopping Report", href: "/benchmarks" },
-  { label: "Fieldbook", href: "/resources" },
 ] as const;
 
 export default function BeseamNavbar() {
