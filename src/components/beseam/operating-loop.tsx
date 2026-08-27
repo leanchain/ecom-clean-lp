@@ -32,7 +32,8 @@ export default function OperatingLoop() {
               </h2>
             </div>
             <p className="max-w-[54ch] text-[16px] leading-[1.7] text-black/64">
-              You do not need five separate tools or workflows. These five words describe the work Beseam keeps connected underneath the recommendation you see.
+              The buying decision above is the product in motion. These five
+              words name the work Beseam keeps connected underneath it.
             </p>
           </div>
         </Reveal>

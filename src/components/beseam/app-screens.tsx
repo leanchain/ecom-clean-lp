@@ -28,24 +28,24 @@ import { ArrowRight, Check, TrendingUp } from "lucide-react";
 
 const QUEUE_ROWS = [
   {
-    title: "Say how the sizing runs on the hoodies that don’t say.",
-    why: "It is the question most shoppers on that collection are asking, and your team can do it today.",
+    title: "Add the commuting use case to the Urban Shell product page.",
+    why: "The shopper asked for a commuting jacket, and the product page never answers whether this one fits that use case.",
     effort: "Quick",
-    step: "Apply",
+    step: "Review",
     lead: true,
   },
   {
-    title: "Put battery life on every earbud page.",
-    why: "It is what assistants quote when they name somebody else.",
+    title: "Explain how Urban Shell fits over everyday layers.",
+    why: "The shopper opened the size guide, and fit over layers is still unanswered at the decision point.",
     effort: "Quick",
-    step: "Apply",
+    step: "Review",
     lead: false,
   },
   {
-    title: "Show delivery cost before the address step.",
-    why: "Probably the bigger win, but it needs a developer.",
-    effort: "Hard",
-    step: "Assign",
+    title: "Recheck commuter queries after the product-page change.",
+    why: "The same buying question should be observed again before claiming that the change helped discovery.",
+    effort: "Quick",
+    step: "Queue",
     lead: false,
   },
 ] as const;
@@ -177,19 +177,19 @@ export function ActionsScreen() {
  */
 const LEDGER_ROWS = [
   {
-    metric: "Assistant answers naming you",
+    metric: "Commuter answers naming Urban Shell",
     before: "9%",
     after: "23%",
     delta: "+2.6×",
   },
   {
-    metric: "Search → product page",
+    metric: "Store search → Urban Shell page",
     before: "46%",
     after: "57%",
     delta: "+24%",
   },
   {
-    metric: "Product page → add to cart",
+    metric: "Urban Shell page → add to cart",
     before: "2.4%",
     after: "2.9%",
     delta: "+21%",

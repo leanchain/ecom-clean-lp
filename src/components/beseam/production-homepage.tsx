@@ -2,8 +2,8 @@ import { Check } from "lucide-react";
 
 import LiveAnswerCheck from "@/components/beseam/answer-check";
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
+import BuyingDecisionStory from "@/components/beseam/buying-decision-story";
 import CategoryBenchmarksSection from "@/components/beseam/category-benchmarks-section";
-import ConnectedEvidence from "@/components/beseam/connected-evidence";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
 import MarketsSection from "@/components/beseam/markets-section";
@@ -15,13 +15,12 @@ import WhyBeseam from "@/components/beseam/why-beseam";
 /**
  * Section order is the argument, and it is deliberate:
  *
- * problem → why us → proof we do not guess → operating model → markets →
- * how you compare → what you actually get
+ * problem → one buying decision end to end → why us → markets → benchmark →
+ * operating model → what you actually get
  *
- * Benchmarks answer “how do I compare”, so they sit after a visitor already
- * understands what Beseam does. The canonical Observe → Understand → Decide →
- * Act → Learn loop stays on the homepage, but only after a concrete trace has
- * made those words easy to understand.
+ * The product story comes before the method. A visitor first sees Beseam follow
+ * one shopper from question to result. Observe → Understand → Decide → Act →
+ * Learn appears later as the name for work they already understand.
  */
 const SCAN_RETURNS = [
   "Where you get overlooked",
@@ -62,6 +61,10 @@ export default function ProductionHomepage() {
                       <p className="text-[12.5px] leading-snug text-black/54">
                         Free and anonymous. Public storefront pages only.
                       </p>
+                      <p className="mt-1 text-[12.5px] leading-snug text-black/48">
+                        Start without installing anything. Connect Shopify when
+                        you want deeper evidence and supported changes.
+                      </p>
                       <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
                         {SCAN_RETURNS.map((item) => (
                           <li
@@ -96,11 +99,11 @@ export default function ProductionHomepage() {
       </section>
 
       <ShopperLoss />
+      <BuyingDecisionStory />
       <WhyBeseam />
-      <ConnectedEvidence />
-      <OperatingLoop />
       <MarketsSection />
       <CategoryBenchmarksSection />
+      <OperatingLoop />
       <FirstMonthPromise />
     </div>
   );

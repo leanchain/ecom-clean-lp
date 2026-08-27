@@ -1,63 +1,13 @@
 import Link from "next/link";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
-import { ActionsScreen } from "@/components/beseam/app-screens";
 import { Reveal } from "@/components/beseam/reveal";
 
-/**
- * The "why not another analytics tool" answer, and the only section on the
- * page whose job is comparison rather than description.
- *
- * Two claims, each with a small specimen instead of an icon: a ranked list of
- * what to do instead of a wall of findings, and the working relationship.
- * Deliberately not a feature grid — the claims are arguments, and arguments
- * need room to be shown, not summarised.
- *
- * The “connected across all four domains” claim used to live here as a third
- * argument with a schematic of its own. It now belongs to ConnectedEvidence,
- * which proves the same thing with a real trace instead of asserting it.
- *
- * The first claim is now carried by the actions screen itself rather than by a
- * drawing of one: the argument is “you get a decision, not a wall of numbers”,
- * and the product is the strongest available evidence for it.
- */
-function TeamSpecimen() {
-  return (
-    <div className="border border-signal-ink/40 bg-signal-ink/[0.06] px-6 py-8 sm:px-8 sm:py-10">
-      <p className="max-w-[18ch] font-display text-[clamp(1.6rem,2.6vw,2.3rem)] leading-[1.12] tracking-[-0.02em] text-ink-deep">
-        An extension of your commerce team.
-      </p>
-      <p className="mt-5 max-w-[46ch] text-[15px] leading-[1.7] text-black/68">
-        Same product, same evidence. The difference is that we stay in the work
-        with you, through the investigation, the decision, the change, and the
-        measurement afterwards.
-      </p>
-      <Link
-        href="/how-we-work"
-        className="group mt-6 inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-ink-deep underline decoration-black/30 underline-offset-6 hover:decoration-signal-ink"
-      >
-        See how we work with brands
-        <ArrowRight
-          aria-hidden="true"
-          className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-        />
-      </Link>
-    </div>
-  );
-}
-
-const CLAIMS = [
-  {
-    heading: "A list of findings is not a plan.",
-    body: "Beseam weighs what it found against how many shoppers it touches, what it is likely worth, and how hard it is to change, then tells you what to start with and why. You are never handed a screen of numbers and asked to work it out.",
-    Specimen: ActionsScreen,
-  },
-  {
-    heading: "You do not have to run it alone.",
-    body: "Plenty of teams have the evidence and no one free to act on it. Beseam can work the loop with you instead of leaving another workflow on your desk.",
-    Specimen: TeamSpecimen,
-  },
+const PRIORITY_SIGNALS = [
+  "How many shoppers the problem touches",
+  "How strong the supporting evidence is",
+  "How practical the change is to make",
 ] as const;
 
 export default function WhyBeseam() {
@@ -66,49 +16,77 @@ export default function WhyBeseam() {
       id="why"
       className="scroll-mt-24 border-t border-black/14 bg-[#f5e9e2]"
     >
-      <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+      <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
         <Reveal>
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-end lg:gap-16">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-16">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
                 Why Beseam
               </p>
-              <h2 className="mt-7 max-w-[20ch] text-balance font-display text-[clamp(2.3rem,3.8vw,3.9rem)] font-normal leading-[1.03] tracking-[-0.02em] text-ink-deep">
-                You don&rsquo;t need another dashboard. You need to know what to
-                do next.
+              <h2 className="mt-5 max-w-[20ch] text-balance font-display text-[clamp(2rem,3.2vw,3.2rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
+                You don&rsquo;t need another dashboard. You need to know what to do next.
               </h2>
             </div>
-            <p className="max-w-[48ch] text-[17px] leading-[1.7] text-black/64">
-              Two things separate Beseam from the tools already open in your
-              other tabs.
+            <p className="max-w-[52ch] text-[16px] leading-[1.7] text-black/64">
+              The buying-decision trace gives you the evidence. Beseam keeps the
+              next move and the working relationship just as clear.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-14 sm:mt-16 lg:mt-20">
-          {CLAIMS.map(({ Specimen, ...claim }, index) => (
-            <Reveal key={claim.heading} delay={0.04}>
-              <article
-                className={`grid gap-9 border-black/16 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center lg:gap-14 xl:gap-20 ${
-                  index > 0
-                    ? "mt-14 border-t pt-14 sm:mt-16 sm:pt-16 lg:mt-20 lg:pt-20"
-                    : ""
-                }`}
+        <div className="mt-10 grid gap-px border border-black/14 bg-black/14 lg:grid-cols-2">
+          <Reveal delay={0.04}>
+            <article className="h-full bg-white p-7 sm:p-8">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.11em] text-signal-ink">
+                Prioritize
+              </p>
+              <h3 className="mt-4 max-w-[18ch] font-display text-[clamp(1.6rem,2.4vw,2.2rem)] font-normal leading-[1.1] tracking-[-0.02em] text-ink-deep">
+                A list of findings is not a plan.
+              </h3>
+              <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-black/64">
+                Beseam keeps the recommendation attached to why it matters, so
+                the team can choose what deserves action instead of sorting a
+                wall of alerts by hand.
+              </p>
+              <ul className="mt-6 border-t border-black/14">
+                {PRIORITY_SIGNALS.map((signal) => (
+                  <li
+                    key={signal}
+                    className="flex items-center gap-3 border-b border-black/12 py-3 text-[13px] text-black/66 last:border-b-0"
+                  >
+                    <Check className="h-3.5 w-3.5 shrink-0 text-signal-ink" aria-hidden="true" />
+                    {signal}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </Reveal>
+
+          <Reveal delay={0.06}>
+            <article className="h-full bg-[#fff8f4] p-7 sm:p-8">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.11em] text-signal-ink">
+                Work together
+              </p>
+              <h3 className="mt-4 max-w-[18ch] font-display text-[clamp(1.6rem,2.4vw,2.2rem)] font-normal leading-[1.1] tracking-[-0.02em] text-ink-deep">
+                You do not have to run it alone.
+              </h3>
+              <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-black/64">
+                Use Beseam with your own team, or have us stay in the work with
+                you through the investigation, decision, supported change, and
+                measurement afterward.
+              </p>
+              <Link
+                href="/how-we-work"
+                className="group mt-6 inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-ink-deep underline decoration-black/30 underline-offset-6 hover:decoration-signal-ink"
               >
-                <div>
-                  <h3 className="max-w-[19ch] text-balance font-display text-[clamp(1.7rem,2.5vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.02em] text-ink-deep">
-                    {claim.heading}
-                  </h3>
-                  <p className="mt-5 max-w-[52ch] text-[16px] leading-[1.72] text-black/66">
-                    {claim.body}
-                  </p>
-                </div>
-                <div>
-                  <Specimen />
-                </div>
-              </article>
-            </Reveal>
-          ))}
+                See how we work with brands
+                <ArrowRight
+                  aria-hidden="true"
+                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                />
+              </Link>
+            </article>
+          </Reveal>
         </div>
       </div>
     </section>
