@@ -144,11 +144,11 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       "Follow the buying decision from the first question to the purchase.",
     metaTitle: "Beseam Platform | Find, Choose, Buy",
     description:
-      "Beseam connects where shoppers find products, what helps them choose, where purchases break, and what happens after a change — using Observe, Understand, Decide, Act, Learn.",
+      "Beseam connects where shoppers find products, what helps them choose, where purchases break, and what happens after a change using Observe, Understand, Decide, Act, Learn.",
     intro:
       "A shopper can overlook you before the visit, choose something else on the store, or stop after deciding. The evidence usually sits in different systems. Beseam keeps those signals attached to the product, page, journey, team decision, and action so you can see what may be worth changing and what moved afterward.",
     proofLine:
-      "The shopper path is Find, Choose, Buy. Beseam works across it with Observe, Understand, Decide, Act, Learn — keeping the evidence attached at every step.",
+      "The shopper path is Find, Choose, Buy. Beseam works across it with Observe, Understand, Decide, Act, Learn, keeping the evidence attached at every step.",
     observationsHeading: "Follow the shopper's decision",
     observationsIntro:
       "Beseam connects the moments where a product gets considered, chosen, purchased, and measured instead of treating each as a separate dashboard.",

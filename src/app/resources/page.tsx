@@ -49,10 +49,10 @@ const SECTIONS = [
     icon: ClipboardCheck,
   },
   {
-    title: "Benchmarks",
+    title: "Benchmark",
     href: "/benchmarks",
     description:
-      "Compare category patterns after you understand the problem you are trying to solve.",
+      "See the public AI shopping benchmark, including exact questions, engine-level results, dates, and method.",
     icon: BarChart3,
   },
   {
@@ -162,10 +162,10 @@ export default function ResourcesPage() {
             </div>
             <div className="max-w-2xl">
               <p className="text-[19px] leading-[1.72] text-black/66">
-                Pick the symptom that matches your store. From there, the
-                Fieldbook links to a checklist, a team playbook, and the
-                official sources behind the recommendation. External work stays
-                credited to its maintainers.
+                The Fieldbook is Beseam&apos;s practical library for diagnosing
+                commerce problems. Start with a symptom, then use the evidence
+                rules, checklists, agent skills, playbooks, standards, and
+                primary sources needed to investigate it without guessing.
               </p>
               <div className="mt-8">
                 <FieldbookSearch entries={searchEntries} />
@@ -173,7 +173,7 @@ export default function ResourcesPage() {
               <p className="mt-5 font-mono text-[12px] uppercase tracking-[0.09em] text-black/62">
                 {problems.length} problem guides · {skills.length} agent skills
                 · {playbooks.length} playbooks · {ECOSYSTEM_RESOURCES.length}{" "}
-                reviewed resources
+                reviewed references
               </p>
             </div>
           </div>

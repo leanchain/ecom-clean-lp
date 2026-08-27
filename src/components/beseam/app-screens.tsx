@@ -3,7 +3,7 @@ import { ArrowRight, Check, TrendingUp } from "lucide-react";
 /**
  * The product, rebuilt in HTML rather than screenshotted.
  *
- * Everything else drawn on this page is the shopper's world — an assistant
+ * Everything else drawn on this page is the shopper's world: an assistant
  * answer, a collection page, a cart. None of it shows what a merchant would
  * actually log into, which is the one thing a visitor cannot picture. These
  * two screens are Beseam's own: the actions queue and the impact ledger.
@@ -89,7 +89,7 @@ function ScreenChrome({
   );
 }
 
-/** /actions — cropped to the columns a merchant acts on. */
+/** /actions, cropped to the columns a merchant acts on. */
 export function ActionsScreen() {
   return (
     <div className="border border-black/16 bg-white">
@@ -153,15 +153,15 @@ export function ActionsScreen() {
       </div>
 
       <p className="border-t border-black/12 bg-ground px-4 py-2.5 text-[11px] leading-[1.5] text-black/54 sm:px-5">
-        Nine more columns — owner, confidence, source, where it was measured —
-        are a click away. None of them are needed to start.
+        Nine more columns cover owner, confidence, source, and where it was
+        measured. They are a click away, and none are needed to start.
       </p>
     </div>
   );
 }
 
 /**
- * Figures are illustrative and the frame says so — same standard as the
+ * Figures are illustrative and the frame says so. This follows the same standard as the
  * specimens in ShopperLoss, which carry invented brand names under an
  * “Example” stamp. A percentage with no stamp would read as a case study.
  *
@@ -172,7 +172,7 @@ export function ActionsScreen() {
  * instead.
  *
  * The assistant row leads. Being named in an AI answer is the thing this
- * product exists for, and an earlier draft parked it on “No change” — which
+ * product exists for, and an earlier draft parked it on “No change”, which
  * argued against the entire page from inside the product screenshot.
  */
 const LEDGER_ROWS = [
@@ -196,7 +196,7 @@ const LEDGER_ROWS = [
   },
 ] as const;
 
-/** /impact — the outcome ledger, with example figures. */
+/** /impact, the outcome ledger with example figures. */
 export function ImpactScreen() {
   return (
     <div className="border border-white/16 bg-white/[0.02]">
@@ -237,8 +237,8 @@ export function ImpactScreen() {
       ))}
 
       <p className="border-t border-white/12 px-4 py-2.5 text-[11px] leading-[1.5] text-white/50 sm:px-5">
-        Example figures, not a customer’s — the layout is the product, and the
-        first numbers published here will be a real store’s.
+        Example figures, not a customer&apos;s. The layout is the product, and the
+        first numbers published here will be a real store&apos;s.
       </p>
     </div>
   );

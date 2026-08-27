@@ -17,11 +17,10 @@ import {
 import { SITE_URL, buildPublicMetadata } from "@/lib/seo";
 
 const hasBenchmarks = CATEGORY_BENCHMARKS.length > 0;
-
 export const metadata: Metadata = buildPublicMetadata({
-  title: "Product Discovery Benchmarks | Beseam",
+  title: "AI Shopping Benchmark | Beseam",
   description:
-    "Public shopper questions across AI assistants show how variable one part of product discovery can be. See which engine named which brand, with dates, denominators, and methodology.",
+    "The Beseam AI shopping benchmark asks the same public shopper questions across AI assistants and publishes which engine named which brand, with dates, denominators, and methodology.",
   path: "/benchmarks",
   noIndex: !hasBenchmarks,
 });
@@ -154,13 +153,16 @@ export default function BenchmarksPage() {
       <section>
         <div className="mx-auto max-w-[92rem] px-5 pb-16 pt-20 sm:px-8 sm:pt-28 lg:px-10">
           <Reveal>
-            <h1 className="max-w-[20ch] text-balance font-display text-[clamp(2.6rem,5vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-ink-deep">
+            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
+              Beseam AI shopping benchmark
+            </p>
+            <h1 className="mt-6 max-w-[20ch] text-balance font-display text-[clamp(2.6rem,5vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-ink-deep">
               AI shopping answers often disagree on which brands belong.
             </h1>
             <p className="mt-8 max-w-[68ch] text-[17px] leading-[1.7] text-black/68">
-              This benchmark looks at one part of product discovery: the brands
-              named in AI shopping answers. We asked {BENCHMARK_RUN.questions}{" "}
-              real shopper questions across{" "}
+              This benchmark looks at one part of the buying decision: which
+              brands enter the consideration set in AI shopping answers. We
+              asked {BENCHMARK_RUN.questions} real shopper questions across{" "}
               {categories.join(", ").toLowerCase()} on{" "}
               {BENCHMARK_RUN.engines.join(", ")}, kept every completed answer,
               and recorded which engine named which brand.

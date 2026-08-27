@@ -21,10 +21,10 @@ const FOOTER_GROUPS = [
     ],
   },
   {
-    label: "Resources",
+    label: "Fieldbook",
     links: [
-      ["Resources", "/resources"],
-      ["Benchmarks", "/benchmarks"],
+      ["Fieldbook", "/resources"],
+      ["Benchmark", "/benchmarks"],
     ],
   },
 ] as const;

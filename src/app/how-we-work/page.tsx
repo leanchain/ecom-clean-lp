@@ -11,7 +11,7 @@ import { buildPublicMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPublicMetadata({
   title: "How We Work With Ecommerce Brands | Beseam",
   description:
-    "Beseam can work as an extension of your commerce team on the places shoppers overlook you, choose something else, or stop before buying — from evidence through a supported change and measurement afterward.",
+    "Use Beseam with your own team or have us run the loop alongside you, from evidence through a supported change and measurement afterward.",
   path: "/how-we-work",
 });
 
@@ -59,10 +59,10 @@ export default function HowWeWorkPage() {
               </div>
               <div>
                 <p className="max-w-[52ch] text-[18px] leading-[1.7] text-black/66">
-                  Beseam combines software with hands-on commerce work. Bring us
-                  one place shoppers overlook you, choose something else, or stop
-                  before purchase, and we work alongside your team from the first
-                  signal through the change and the measured result.
+                  Use Beseam yourself, or have us run the loop alongside your
+                  team. In both cases, start with one place shoppers overlook
+                  you, choose something else, or stop before purchase, then
+                  follow the evidence through the change and measured result.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <BookReviewCta

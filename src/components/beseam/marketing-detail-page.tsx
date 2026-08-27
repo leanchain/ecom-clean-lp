@@ -1,19 +1,61 @@
 import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
-
+import { ActionsScreen, ImpactScreen } from "@/components/beseam/app-screens";
 import TrackedLink from "@/components/beseam/tracked-link";
 import { APP_REGISTER_URL } from "@/lib/app-urls";
 import type { MarketingPageData } from "@/lib/marketing-pages";
-
 const PIPELINE = [
   ["01", "Observe", "See what is happening from the evidence in scope."],
   ["02", "Understand", "Connect the signals that may explain the pattern."],
   ["03", "Decide", "Choose the most worthwhile next move."],
   ["04", "Act", "Make an approved change with the previous state retained."],
   ["05", "Learn", "Compare the relevant signals before and after."],
-];
+] as const;
 
+const PLATFORM_SURFACES = [
+  {
+    stage: "Finding",
+    question: "Can the product enter the consideration set?",
+    items: [
+      "AI shopping discovery",
+      "External search",
+      "Store search",
+      "Marketplaces",
+    ],
+  },
+  {
+    stage: "Choosing",
+    question: "Does the shopper have enough reason and evidence to choose it?",
+    items: [
+      "Shopper questions",
+      "Products and product pages",
+      "Comparison and recommendations",
+      "Sizing and fit",
+      "Reviews, price, and product facts",
+    ],
+  },
+  {
+    stage: "Buying",
+    question: "What stops a shopper who is ready to buy?",
+    items: [
+      "Behavior and friction",
+      "Cart and checkout",
+      "Delivery and payment",
+      "Store reliability",
+    ],
+  },
+  {
+    stage: "Act and learn",
+    question: "What should change, and did it help?",
+    items: [
+      "Prioritized actions",
+      "Approvals and supported changes",
+      "Impact and remeasurement",
+      "Conversion, orders, and revenue evidence",
+    ],
+  },
+] as const;
 export default function MarketingDetailPage({
   page,
 }: {
@@ -156,44 +198,115 @@ export default function MarketingDetailPage({
           </div>
         </div>
       </section>
-
       {page.slug === "platform" ? (
-        <section className="border-b border-technical-rule bg-ink-deep text-white">
-          <div className="section-pad-tight mx-auto max-w-6xl px-6">
-            <div className="max-w-4xl">
-              <p className="text-[14px] font-semibold text-signal">
-                How Beseam works
-              </p>
-              <h2 className="mt-4 max-w-[20ch] font-display text-[clamp(2.1rem,3.6vw,3.5rem)] font-normal leading-[1.06] tracking-[-0.02em] text-white">
-                Observe. Understand. Decide. Act. Learn.
-              </h2>
-            </div>
-            <ol className="mt-10 grid border-y border-technical-rule md:grid-cols-5">
-              {PIPELINE.map(([number, title, body], index) => (
-                <li
-                  key={number}
-                  className={
-                    "relative border-b border-technical-rule py-7 md:border-b-0 md:px-6 " +
-                    (index === 0 ? "md:pl-0" : "md:border-l")
-                  }
-                >
-                  <span className="text-[12px] font-semibold tabular-nums text-signal">
-                    {number}
-                  </span>
-                  <h3 className="mt-4 text-[18px] font-semibold text-white">
-                    {title}
-                  </h3>
-                  <p className="mt-3 text-[13px] leading-relaxed text-white/72">
-                    {body}
+        <>
+          <section className="border-b border-rule bg-ground">
+            <div className="section-pad-tight mx-auto max-w-6xl px-6">
+              <div className="grid gap-10 lg:grid-cols-[minmax(14rem,0.45fr)_minmax(0,1fr)] lg:gap-16">
+                <div>
+                  <p className="text-[14px] font-semibold text-signal-ink">
+                    What is in the platform
                   </p>
-                  {index < PIPELINE.length - 1 ? (
-                    <ArrowRight className="absolute -right-2.5 top-7 z-10 hidden h-5 w-5 bg-ink-deep text-signal md:block" />
-                  ) : null}
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+                  <h2 className="editorial-subheading mt-4 text-ink">
+                    One buying decision, several connected surfaces.
+                  </h2>
+                  <p className="mt-4 max-w-[44ch] text-[15px] leading-relaxed text-foreground">
+                    Beseam is not one dashboard for every commerce metric. It
+                    connects the product surfaces that help explain whether a
+                    shopper found you, chose you, completed the purchase, and
+                    responded differently after a change.
+                  </p>
+                </div>
+                <div className="grid gap-px border border-rule bg-rule sm:grid-cols-2">
+                  {PLATFORM_SURFACES.map((surface, index) => (
+                    <article key={surface.stage} className="bg-panel-white p-6">
+                      <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-signal-ink">
+                        0{index + 1} · {surface.stage}
+                      </p>
+                      <h3 className="mt-4 max-w-[24ch] text-[17px] font-semibold leading-snug text-ink">
+                        {surface.question}
+                      </h3>
+                      <ul className="mt-5 border-t border-rule">
+                        {surface.items.map((item) => (
+                          <li
+                            key={item}
+                            className="border-b border-rule py-3 text-[13px] leading-relaxed text-foreground last:border-b-0"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-16 grid gap-10 lg:grid-cols-2 lg:gap-12">
+                <div>
+                  <div className="mb-5">
+                    <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-signal-ink">
+                      Decide and act
+                    </p>
+                    <h3 className="mt-3 text-[20px] font-semibold text-ink">
+                      Turn evidence into a specific next move.
+                    </h3>
+                  </div>
+                  <ActionsScreen />
+                </div>
+                <div>
+                  <div className="mb-5">
+                    <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-signal-ink">
+                      Learn
+                    </p>
+                    <h3 className="mt-3 text-[20px] font-semibold text-ink">
+                      Keep the result attached to the change.
+                    </h3>
+                  </div>
+                  <div className="bg-ink-deep p-1">
+                    <ImpactScreen />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="border-b border-technical-rule bg-ink-deep text-white">
+            <div className="section-pad-tight mx-auto max-w-6xl px-6">
+              <div className="max-w-4xl">
+                <p className="text-[14px] font-semibold text-signal">
+                  How Beseam works
+                </p>
+                <h2 className="mt-4 max-w-[20ch] font-display text-[clamp(2.1rem,3.6vw,3.5rem)] font-normal leading-[1.06] tracking-[-0.02em] text-white">
+                  Observe. Understand. Decide. Act. Learn.
+                </h2>
+              </div>
+              <ol className="mt-10 grid border-y border-technical-rule md:grid-cols-5">
+                {PIPELINE.map(([number, title, body], index) => (
+                  <li
+                    key={number}
+                    className={
+                      "relative border-b border-technical-rule py-7 md:border-b-0 md:px-6 " +
+                      (index === 0 ? "md:pl-0" : "md:border-l")
+                    }
+                  >
+                    <span className="text-[12px] font-semibold tabular-nums text-signal">
+                      {number}
+                    </span>
+                    <h3 className="mt-4 text-[18px] font-semibold text-white">
+                      {title}
+                    </h3>
+                    <p className="mt-3 text-[13px] leading-relaxed text-white/72">
+                      {body}
+                    </p>
+                    {index < PIPELINE.length - 1 ? (
+                      <ArrowRight className="absolute -right-2.5 top-7 z-10 hidden h-5 w-5 bg-ink-deep text-signal md:block" />
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        </>
       ) : null}
 
       <section className="bg-ground">
