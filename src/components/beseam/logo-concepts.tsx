@@ -1,95 +1,80 @@
 /**
- * Logo mark explorations — three directions drawn from the brand story, shown
- * against the current mark on /playbook. Each must survive 16px single-color,
- * sharp corners, ink + terracotta duotone max. Not used in production.
+ * Logo mark explorations — typographic direction: custom-cut B letterforms,
+ * no diagrams. Slab geometry from the site's table/hairline language. Each
+ * must survive 16px single-color, sharp corners, ink + terracotta duotone
+ * max. Not used in production.
  */
 
 const SIGNAL = "#e8653a";
 
-/** 1 · The seam: two panels joined by a stitched seam, forming a B. */
-export function SeamB({ className }: { className?: string }) {
+/** 1 · Cut B: one decisive slice through a slab B, halves offset. */
+export function CutB({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" aria-hidden="true" className={className}>
-      <path d="M5 2h9v28H5z" fill="currentColor" />
-      <path d="M18 2h7l3 3v6l-2 2 2 2v10l-3 3h-7V2z" fill="currentColor" />
-      <path
-        d="M16 1v30"
-        stroke={SIGNAL}
-        strokeWidth="1.6"
-        strokeDasharray="3 2.4"
-        fill="none"
-      />
+      <g transform="translate(-0.5 0)">
+        <path
+          d="M5 2h22v11.46L5 16.85zM11 6h10v4.5H11z"
+          fill="currentColor"
+          fillRule="evenodd"
+        />
+      </g>
+      <g transform="translate(0.5 0)">
+        <path
+          d="M5 18.25 29 14.55V30H5zM11 18.5h12v7H11z"
+          fill="currentColor"
+          fillRule="evenodd"
+        />
+      </g>
     </svg>
   );
 }
 
-/** 2 · The chosen node: three candidates, one gets the ring. */
-export function ChosenNode({ className }: { className?: string }) {
+/** 2 · Decision counter: slab B, top counter open, bottom counter filled. */
+export function DecisionCounterB({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" aria-hidden="true" className={className}>
       <path
-        d="M8 24 16 8l6 11"
-        stroke="currentColor"
-        strokeOpacity="0.3"
-        strokeWidth="1.4"
-        fill="none"
+        d="M5 2h22v12h2v16H5zM11 6h10v4.5H11zM11 18.5h12v7H11z"
+        fill="currentColor"
+        fillRule="evenodd"
       />
-      <circle cx="8" cy="24" r="3" fill="currentColor" />
-      <circle cx="16" cy="8" r="3" fill="currentColor" />
-      <circle cx="23" cy="21" r="3.2" fill={SIGNAL} />
-      <circle
-        cx="23"
-        cy="21"
-        r="7.2"
-        stroke={SIGNAL}
-        strokeWidth="2"
-        fill="none"
-      />
+      <path d="M11 18.5h12v7H11z" fill={SIGNAL} />
     </svg>
   );
 }
 
-/** 3 · The resolved fork: branches ruled out, one path continues. */
-export function ResolvedFork({ className }: { className?: string }) {
+/** 3 · Open B: bowls released from the stem, joined only by alignment. */
+export function OpenB({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" aria-hidden="true" className={className}>
+      <path d="M5 2h5v28H5z" fill="currentColor" />
       <path
-        d="M3 16h10"
-        stroke="currentColor"
-        strokeWidth="2.6"
-        fill="none"
+        d="M12.5 2h8.5l5 4v4l-5 4h-8.5v-3.5h7.5l2-1.6V7.1l-2-1.6h-7.5z"
+        fill="currentColor"
       />
       <path
-        d="M13 16 21 7M13 16l8 9"
-        stroke="currentColor"
-        strokeOpacity="0.35"
-        strokeWidth="2"
-        strokeDasharray="3 2.6"
-        fill="none"
+        d="M12.5 16h10l5 4.5v5l-5 4.5h-10v-3.5h9l2.2-1.8v-2.4l-2.2-1.8h-9z"
+        fill="currentColor"
       />
-      <path d="M20 4.5h4v4h-4z" fill="currentColor" fillOpacity="0.35" />
-      <path d="M20 23.5h4v4h-4z" fill="currentColor" fillOpacity="0.35" />
-      <path d="M13 16h12" stroke={SIGNAL} strokeWidth="2.6" fill="none" />
-      <path d="M25 12.8h6.4v6.4H25z" fill={SIGNAL} />
     </svg>
   );
 }
 
 const CONCEPTS = [
   {
-    name: "The seam",
-    idea: "Be + seam, literally: two panels stitched into a B. The dash echoes the ruled-out lines in the evidence traces.",
-    Mark: SeamB,
+    name: "Cut B",
+    idea: "A slab B with one decisive slice — the seam — and the halves set slightly apart. The cut is the brand move.",
+    Mark: CutB,
   },
   {
-    name: "The chosen node",
-    idea: "Three candidates from the evidence graph; one gets the ring. The mark is the promise: get chosen.",
-    Mark: ChosenNode,
+    name: "Decision counter",
+    idea: "Pure letterform with one move: the top counter stays open, the bottom counter is filled terracotta. Discovery open, decision made.",
+    Mark: DecisionCounterB,
   },
   {
-    name: "The resolved fork",
-    idea: "The trace condensed: branches checked and ruled out, one path holds and continues to the decision.",
-    Mark: ResolvedFork,
+    name: "Open B",
+    idea: "The bowls release from the stem — three strokes held together only by alignment. Quietest of the three; pure craft.",
+    Mark: OpenB,
   },
 ] as const;
 
