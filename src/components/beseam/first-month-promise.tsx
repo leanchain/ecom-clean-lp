@@ -22,7 +22,7 @@ export default function FirstMonthPromise({
               Start
             </p>
             <h2 className="mt-6 max-w-[18ch] text-balance font-display text-[clamp(2.3rem,3.8vw,3.9rem)] font-normal leading-[1.03] tracking-[-0.02em] text-ink-deep">
-              Use Beseam yourself, or run it with us.
+              Start with one buying decision.
             </h2>
           </div>
         </Reveal>
@@ -34,7 +34,7 @@ export default function FirstMonthPromise({
                 Your team
               </p>
               <h3 className="mt-4 font-display text-[clamp(1.65rem,2.3vw,2.2rem)] font-normal leading-[1.1] tracking-[-0.02em] text-ink-deep">
-                Run Beseam directly.
+                Run Beseam yourself.
               </h3>
               <p className="mt-4 max-w-[46ch] text-[15px] leading-[1.7] text-black/66">
                 Track the AI shopping questions that matter, act on what Beseam finds, and measure what changes.
@@ -56,10 +56,10 @@ export default function FirstMonthPromise({
                 With Beseam
               </p>
               <h3 className="mt-4 font-display text-[clamp(1.65rem,2.3vw,2.2rem)] font-normal leading-[1.1] tracking-[-0.02em] text-ink-deep">
-                Your first improvement, with us.
+                Have Beseam run the first loop with you.
               </h3>
               <p className="mt-4 max-w-[46ch] text-[15px] leading-[1.7] text-black/66">
-                Bring the AI shopping questions where your products get missed. We investigate the gap, help make the approved change, and measure what happens.
+                We find the gap, investigate it, turn the strongest evidence into a supported change, and measure what happens afterward.
               </p>
               <BookReviewCta
                 variant="primary"
