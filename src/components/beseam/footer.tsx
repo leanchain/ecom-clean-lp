@@ -39,7 +39,8 @@ export default function BeseamFooter() {
               <Logo className="text-white" />
             </Link>
             <p className="mt-7 max-w-[20ch] font-display text-[34px] leading-[1.08] tracking-[-0.02em] text-white/92">
-              Turn product discovery into buying decisions.
+              Turn product discovery into{" "}
+              <span className="text-signal">buying decisions</span>.
             </p>
             <p className="mt-6 max-w-[54ch] text-[14px] leading-relaxed text-white/62">
               See where shoppers choose something else, understand what may
