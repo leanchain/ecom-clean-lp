@@ -55,6 +55,7 @@ const INVENTORY: readonly InventoryItem[] = [
   { name: "mobile-sticky-cta", status: "Homepage", note: "Mobile-only conversion control" },
   { name: "navbar", status: "Foundation", note: "Global site navigation" },
   { name: "operating-loop", status: "Homepage", note: "Current bridge into the decision trace" },
+  { name: "pipeline-graphic", status: "Used elsewhere", note: "Drawn Observe/Understand/Act/Learn pipeline on /platform" },
   { name: "product-art", status: "Foundation", note: "Illustrative product specimen art" },
   { name: "production-homepage", status: "Homepage", note: "Homepage composition" },
   { name: "resource-index", status: "Used elsewhere", note: "Resource library browser" },

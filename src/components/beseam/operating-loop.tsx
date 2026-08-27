@@ -10,7 +10,8 @@ const STEPS = [
 /**
  * The canonical Beseam operating model, deliberately introduced only after the
  * visitor has already seen the merchant problem and a connected-evidence trace.
- * It is identity and method, not the elevator pitch.
+ * It is identity and method, not the elevator pitch. Kept text-only on the
+ * homepage — the drawn version of this loop lives on /platform.
  */
 export default function OperatingLoop() {
   return (

@@ -2,16 +2,10 @@ import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
 import { ActionsScreen, ImpactScreen } from "@/components/beseam/app-screens";
+import PipelineGraphic from "@/components/beseam/pipeline-graphic";
 import TrackedLink from "@/components/beseam/tracked-link";
 import { APP_REGISTER_URL } from "@/lib/app-urls";
 import type { MarketingPageData } from "@/lib/marketing-pages";
-const PIPELINE = [
-  ["01", "Observe", "See what is happening from the evidence in scope."],
-  ["02", "Understand", "Connect the signals that may explain the pattern."],
-  ["03", "Act", "Choose and make an approved change with the previous state retained."],
-  ["04", "Learn", "Compare the relevant signals before and after."],
-] as const;
-
 const PLATFORM_SURFACES = [
   {
     stage: "Finding",
@@ -279,30 +273,7 @@ export default function MarketingDetailPage({
                   Observe. Understand. Act. Learn.
                 </h2>
               </div>
-              <ol className="mt-10 grid border-y border-technical-rule md:grid-cols-4">
-                {PIPELINE.map(([number, title, body], index) => (
-                  <li
-                    key={number}
-                    className={
-                      "relative border-b border-technical-rule py-7 md:border-b-0 md:px-6 " +
-                      (index === 0 ? "md:pl-0" : "md:border-l")
-                    }
-                  >
-                    <span className="text-[12px] font-semibold tabular-nums text-signal">
-                      {number}
-                    </span>
-                    <h3 className="mt-4 text-[18px] font-semibold text-white">
-                      {title}
-                    </h3>
-                    <p className="mt-3 text-[13px] leading-relaxed text-white/72">
-                      {body}
-                    </p>
-                    {index < PIPELINE.length - 1 ? (
-                      <ArrowRight className="absolute -right-2.5 top-7 z-10 hidden h-5 w-5 bg-ink-deep text-signal md:block" />
-                    ) : null}
-                  </li>
-                ))}
-              </ol>
+              <PipelineGraphic />
             </div>
           </section>
         </>
