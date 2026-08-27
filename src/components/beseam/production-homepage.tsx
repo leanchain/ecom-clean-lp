@@ -42,10 +42,7 @@ export default function ProductionHomepage() {
         >
           <Reveal className="w-full">
             <div className="mx-auto w-full max-w-[76rem] text-center">
-              <p className="pointer-events-auto font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                For ecommerce teams
-              </p>
-              <h1 className="pointer-events-auto mx-auto mt-6 max-w-[18ch] text-balance font-display text-[clamp(3rem,5.6vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-ink-deep">
+              <h1 className="pointer-events-auto mx-auto max-w-[18ch] text-balance font-display text-[clamp(3rem,5.6vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-ink-deep">
                 Get more shoppers to{" "}
                 <span className="text-signal-ink">choose you</span>.
               </h1>
