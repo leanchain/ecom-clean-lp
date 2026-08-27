@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { ArrowRight, Menu, X } from "lucide-react";
 
@@ -20,10 +21,20 @@ const NAV_LINKS = [
 
 export default function BeseamNavbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  // The homepage hero carries its own scan form, so the navbar CTA would ask
+  // for the same action twice above the fold. Everywhere else it is the only
+  // primary action in view and stays put.
+  const showCta = pathname !== "/" || pastHero;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 32);
+      setPastHero(window.scrollY > window.innerHeight * 0.6);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
@@ -87,17 +98,19 @@ export default function BeseamNavbar() {
             >
               Log in
             </TrackedLink>
-            <TrackedLink
-              href="/scan"
-              eventName="marketing_primary_cta_clicked"
-              eventCategory="conversion"
-              placement="navbar"
-              preserveUtm
-              className="group inline-flex min-h-10 items-center justify-center gap-2 whitespace-nowrap bg-signal-ink px-4 text-[13px] font-semibold text-white focus-visible:ring-2 focus-visible:ring-signal-ink focus-visible:ring-offset-3"
-            >
-              Scan my store
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-            </TrackedLink>
+            {showCta && (
+              <TrackedLink
+                href="/scan"
+                eventName="marketing_primary_cta_clicked"
+                eventCategory="conversion"
+                placement="navbar"
+                preserveUtm
+                className="group inline-flex min-h-10 items-center justify-center gap-2 whitespace-nowrap bg-signal-ink px-4 text-[13px] font-semibold text-white focus-visible:ring-2 focus-visible:ring-signal-ink focus-visible:ring-offset-3"
+              >
+                Scan my store
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </TrackedLink>
+            )}
           </div>
 
           <button
