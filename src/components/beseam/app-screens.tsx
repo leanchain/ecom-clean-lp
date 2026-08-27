@@ -16,7 +16,7 @@ import { ArrowRight, Check, TrendingUp } from "lucide-react";
  *
  * Fidelity has one deliberate limit. The real actions queue is twelve columns
  * wide, and reproducing all twelve here would argue the opposite of what this
- * section claims. It is cropped to the three a merchant acts on, and the crop
+ * section claims. It is cropped to the four a merchant acts on, and the crop
  * is stated rather than hidden.
  *
  * The impact figures are illustrative and stamped as such in the frame. Money
@@ -221,7 +221,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
       </div>
 
       <p className="border-t border-black/12 bg-ground px-4 py-2.5 text-[11px] leading-[1.5] text-black/54 sm:px-5">
-        Nine more columns cover owner, confidence, source, and where it was
+        Eight more columns cover owner, confidence, source, and where it was
         measured. They are a click away, and none are needed to start.
       </p>
     </div>
