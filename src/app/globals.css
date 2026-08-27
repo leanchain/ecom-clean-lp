@@ -208,23 +208,15 @@
     )
   );
   /*
-   * Beseam Fit alignment (2026-08-26): display headings share the same
-   * Figtree sans used on app-fit.beseam.com/fit instead of the former Lora
-   * serif. `--font-serif` stays available as an explicit serif opt-in.
+   * Lora is the established display face. `font-serif` remains an alias for
+   * existing markup, while newer marketing pages can use `font-display`.
    */
-  --font-display: var(
-    --font-figtree,
-    var(
-      --font-sf-pro-display,
-      "Inter",
-      "SF Pro Display",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      system-ui,
-      sans-serif
-    )
-  );
+  /*
+   * The literal chain is repeated instead of aliasing `var(--font-display)`:
+   * `--font-lora` is defined on <body> by next/font, so every consumer must
+   * resolve the font variable itself.
+   */
+  --font-display: var(--font-lora, "Lora"), Georgia, serif;
   --font-serif: var(--font-lora, "Lora"), Georgia, serif;
   --font-mono: "Fira Code", "Courier New", monospace;
 
@@ -343,9 +335,9 @@
 
 /* Typography utilities */
 .font-heading {
-  font-family: var(--font-display);
-  font-weight: 900;
-  letter-spacing: -0.035em;
+  font-family: var(--font-lora, "Lora"), Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
@@ -357,8 +349,8 @@
 
 @theme inline {
   --font-sans: var(--font-figtree);
-  --font-display: var(--font-figtree);
-  --font-heading: var(--font-figtree);
+  --font-display: var(--font-lora, "Lora"), Georgia, serif;
+  --font-heading: var(--font-lora, "Lora"), Georgia, serif;
   --font-accent: var(--font-figtree);
   --font-serif: var(--font-lora, "Lora"), Georgia, serif;
   --font-mono: "Fira Code", "Courier New", monospace;
