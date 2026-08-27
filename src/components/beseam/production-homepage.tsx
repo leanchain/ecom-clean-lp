@@ -41,11 +41,11 @@ export default function ProductionHomepage() {
           <Reveal className="w-full">
             <div className="mx-auto w-full max-w-[76rem] text-center">
               <h1 className="pointer-events-auto mx-auto max-w-[18ch] text-balance font-display text-[clamp(3rem,5.6vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-ink-deep">
-                Turn product discovery into{" "}
-                <span className="text-signal-ink">buying decisions</span>.
+                Get more shoppers to{" "}
+                <span className="text-signal-ink">choose you</span>.
               </h1>
               <p className="pointer-events-auto mx-auto mt-6 max-w-[58ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
-                See where your products get overlooked, understand what may
+                See where shoppers choose something else, understand what may
                 explain it, turn the evidence into action, and measure what
                 changes.
               </p>
