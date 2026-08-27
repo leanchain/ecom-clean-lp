@@ -42,7 +42,7 @@ const INVENTORY: readonly InventoryItem[] = [
   { name: "channel-icon", status: "Foundation", note: "AI / commerce channel marks" },
   { name: "connected-evidence", status: "Homepage", note: "Trimmed decision trace — ends at the finding" },
   { name: "credibility-rail", status: "Homepage", note: "Two-register proof band under the hero" },
-  { name: "decision-bridge", status: "Homepage", note: "One-system bridge: Discovery / Store / Behavior / Revenue" },
+  { name: "decision-bridge", status: "Homepage", note: "One-system bridge: Finding / Choosing / Buying / Worth" },
   { name: "evidence-to-work", status: "Homepage", note: "Standalone Actions-queue section" },
   { name: "faq-section", status: "Homepage", note: "Homepage FAQ" },
   { name: "first-month-promise", status: "Homepage", note: "Current final start section" },
@@ -152,7 +152,7 @@ export default function PlaybookPage() {
 
       <div className="border-b border-black/14 bg-[#faf1eb] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-signal-ink">Current homepage sections</div>
       <MajorPreview name="credibility-rail" status="Homepage" note="Two-register proof band under the hero"><CredibilityRail /></MajorPreview>
-      <MajorPreview name="decision-bridge" status="Homepage" note="One-system bridge: Discovery / Store / Behavior / Revenue"><DecisionBridge /></MajorPreview>
+      <MajorPreview name="decision-bridge" status="Homepage" note="One-system bridge: Finding / Choosing / Buying / Worth"><DecisionBridge /></MajorPreview>
       <MajorPreview name="operating-loop" status="Homepage" note="Bridge from consideration to the connected decision trace"><OperatingLoop /></MajorPreview>
       <MajorPreview name="connected-evidence" status="Homepage" note="Trimmed decision trace — ends at the finding"><ConnectedEvidence /></MajorPreview>
       <MajorPreview name="evidence-to-work" status="Homepage" note="Standalone Actions-queue section"><EvidenceToWork /></MajorPreview>

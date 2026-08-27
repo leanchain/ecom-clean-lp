@@ -89,7 +89,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "catalog",
-    label: "Product options",
+    label: "Products considered",
     x: 590,
     y: 245,
     satellites: [
@@ -140,7 +140,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "creative",
-    label: "Images & content",
+    label: "What they see",
     x: 1040,
     y: 118,
     satellites: [
@@ -157,7 +157,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "campaigns",
-    label: "Paid discovery",
+    label: "Ads they see",
     x: 1245,
     y: 155,
     satellites: [
@@ -191,7 +191,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "recs",
-    label: "Recommendations",
+    label: "What gets suggested",
     x: 1325,
     y: 315,
     satellites: [
@@ -225,7 +225,7 @@ const HUBS: readonly Hub[] = [
   },
   {
     id: "behavior",
-    label: "Shopper signals",
+    label: "What they do next",
     x: 1225,
     y: 500,
     satellites: [

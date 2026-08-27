@@ -7,31 +7,31 @@ import { Reveal } from "@/components/beseam/reveal";
 /**
  * The bridge the page was missing: after the hero scan, this is the shortest
  * complete statement of what Beseam is, before any methodology or evidence
- * arrives. Four signal domains read left to right as one connected system;
- * the numbered operating loop that follows explains what Beseam does with
- * them, so this row uses arrows, not numbers.
+ * arrives. The columns speak the shopper's world — finding, choosing, buying,
+ * and what it was worth — while the numbered operating loop that follows is
+ * Beseam's method for improving it, so this row uses arrows, not numbers.
  *
- * Each domain carries a drawn vignette rather than a paragraph: the same
+ * Each stage carries a drawn vignette rather than a paragraph: the same
  * rebuilt-in-HTML grammar as the app screens, aria-hidden, with no counts —
  * hairlines stand in for copy and the bars carry no axis or figure, so
  * nothing here can be misread as a measurement.
  */
 const DOMAINS = [
   {
-    title: "Discovery",
-    detail: "Where your products enter consideration — and where they get left off the shortlist.",
+    title: "Finding it",
+    detail: "You can’t be chosen if you’re never considered.",
   },
   {
-    title: "Store",
-    detail: "What your pages actually answer when a shopper is deciding.",
+    title: "Choosing it",
+    detail: "They see it and pick something else — often over an unanswered question.",
   },
   {
-    title: "Behavior",
-    detail: "Where interest turns into hesitation or action.",
+    title: "Buying it",
+    detail: "They choose you — then the purchase breaks.",
   },
   {
-    title: "Revenue",
-    detail: "What the decision — and the fix — was worth.",
+    title: "What it was worth",
+    detail: "Orders, conversion, and what the fix changed.",
   },
 ] as const;
 
@@ -92,31 +92,38 @@ function StoreVignette() {
   );
 }
 
-/** A search refined, then abandoned. */
-function BehaviorVignette() {
+/** The last steps of the purchase, with one of them broken. */
+function BuyingVignette() {
   return (
     <div
       aria-hidden="true"
       className="flex h-[5.75rem] flex-col justify-center gap-2.5 border border-black/14 bg-white px-3.5"
     >
-      <div className="flex min-w-0 items-center gap-1.5">
-        <span className="truncate border border-black/16 bg-ground px-1.5 py-0.5 font-mono text-[9px] text-black/62">
-          waterproof jacket
-        </span>
-        <ArrowRight className="h-3 w-3 shrink-0 text-black/35" />
-        <span className="truncate border border-signal-ink/40 bg-signal-ink/[0.06] px-1.5 py-0.5 font-mono text-[9px] text-signal-ink">
-          + for commuting
-        </span>
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="font-mono text-[9px] uppercase tracking-[0.08em] text-black/40">
-          then
-        </span>
-        <span className="h-px flex-1 bg-black/12" />
-        <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-signal-ink">
-          left without opening one
-        </span>
-      </div>
+      {(
+        [
+          ["Cart", true],
+          ["Delivery", true],
+          ["Payment", false],
+        ] as const
+      ).map(([step, ok]) => (
+        <div key={step} className="flex items-center gap-2.5">
+          <span className="w-14 shrink-0 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/46">
+            {step}
+          </span>
+          <span
+            className={
+              ok
+                ? "h-px flex-1 bg-black/14"
+                : "flex-1 border-t border-dashed border-black/28"
+            }
+          />
+          {ok ? (
+            <Check className="h-3 w-3 shrink-0 text-[#1a6b43]" />
+          ) : (
+            <X className="h-3 w-3 shrink-0 text-signal-ink" />
+          )}
+        </div>
+      ))}
     </div>
   );
 }
@@ -150,7 +157,7 @@ function RevenueVignette() {
 const VIGNETTES = [
   DiscoveryVignette,
   StoreVignette,
-  BehaviorVignette,
+  BuyingVignette,
   RevenueVignette,
 ] as const;
 
@@ -162,14 +169,14 @@ export default function DecisionBridge() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-16">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                What Beseam is
+                Shopping is moving from finding products to choosing products
               </p>
               <h2 className="mt-7 max-w-[18ch] text-balance font-display text-[clamp(2.3rem,3.8vw,3.9rem)] font-normal leading-[1.03] tracking-[-0.02em] text-ink-deep">
                 One system for the buying decision.
               </h2>
             </div>
             <p className="max-w-[52ch] text-[16px] leading-[1.75] text-black/64">
-              Beseam connects these signals so you can see what happened,
+              Beseam connects the whole journey so you can see what happened,
               understand what may explain it, act on the strongest evidence,
               and learn from what changes.
             </p>
