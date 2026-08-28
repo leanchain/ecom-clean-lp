@@ -51,8 +51,8 @@ export default function BeseamFooter() {
               />
             </Link>
             <p className="mt-7 max-w-[20ch] font-display text-[34px] leading-[1.08] tracking-[-0.02em] text-white/92">
-              Find the loss. Fix what matters.{" "}
-              <span className="text-signal">Prove what changed</span>.
+              Make products easier to{" "}
+              <span className="text-signal">find, choose, and buy</span>.
             </p>
             <p className="mt-6 max-w-[54ch] text-[14px] leading-relaxed text-white/62">
               Beseam runs one continuous growth loop across discovery, product
