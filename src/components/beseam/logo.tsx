@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 import { cn } from "@/lib/utils";
 
 export type LogoVariant =
@@ -7,6 +9,7 @@ export interface LogoProps {
   className?: string;
   markClassName?: string;
   wordmarkClassName?: string;
+  style?: CSSProperties;
   variant?: LogoVariant;
   /** Collapse the wordmark so only the B mark stays (e.g. scrolled navbar). */
   hideWordmark?: boolean;
@@ -23,13 +26,14 @@ export default function Logo({
   className,
   markClassName,
   wordmarkClassName,
+  style,
   variant = "default",
   hideWordmark = false,
 }: LogoProps) {
   return (
     <span
       className={cn("inline-flex items-center text-[27px] leading-none", className)}
-      style={{ columnGap: "0.09em" }}
+      style={{ columnGap: "0.09em", ...style }}
     >
       {/* Static generated SVG: render it directly instead of as a CSS background. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
