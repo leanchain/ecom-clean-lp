@@ -33,8 +33,8 @@ export default function ScanPage() {
           <LiveAnswerCheck placement="ai_discovery_scan" showPromise />
         </div>
 
-        {/* The highest-intent page on the site has the same managed path as the
-            homepage and scan result, so there is one sales CTA vocabulary. */}
+        {/* The highest-intent page on the site uses the same product-review path
+            as the homepage and scan result, so there is one CTA vocabulary. */}
         <div
           data-print-hide
           className="mx-auto mt-20 max-w-[76rem] bg-ink-deep px-6 py-12 text-white sm:px-10 sm:py-14"
@@ -42,18 +42,17 @@ export default function ScanPage() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div>
               <h2 className="max-w-[25ch] font-display text-[clamp(1.9rem,3.2vw,3rem)] font-normal leading-[1.04] tracking-[-0.025em]">
-                Not sure a scan is the right place to start?
+                Want to see Beseam follow one finding end to end?
               </h2>
               <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/66">
-                Bring the decision you are losing instead: products nobody
-                finds, pages that do not answer the deciding question, or
-                shoppers who stop before purchase. Twenty minutes, your store on
-                screen, and an honest answer about whether we can help.
+                Bring your store. In twenty minutes, we will use one real
+                finding to show how Beseam connects the evidence, proposes a
+                supported fix, and rechecks what changes.
               </p>
             </div>
             <BookReviewCta
               location="scan_page"
-              label="Plan my first improvement"
+              label="See Beseam on my store"
               className="bg-white text-ink-deep hover:bg-signal hover:text-white"
             />
           </div>

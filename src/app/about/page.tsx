@@ -252,13 +252,12 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-[92rem] gap-10 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1.15fr)_auto] lg:items-end lg:gap-20 lg:px-10 lg:py-28">
           <Reveal>
             <h2 className="max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-              Bring one store and one buying decision worth understanding.
+              See how Beseam follows one buying decision end to end.
             </h2>
             <p className="mt-7 max-w-[64ch] text-[17px] leading-[1.65] text-white/72">
-              A 20-minute review starts with one place shoppers overlook you,
-              choose something else, or stop before purchase, then looks at the
-              evidence Beseam can actually observe and what may be worth doing
-              next.
+              In a 20-minute store review, we use one real finding to show how
+              Beseam connects the evidence, proposes a supported change, and
+              rechecks what changes.
             </p>
             <p className="mt-5 text-[14px] text-white/62">
               Questions first?{" "}

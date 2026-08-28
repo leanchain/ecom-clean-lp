@@ -36,7 +36,7 @@ type InventoryItem = { name: string; status: Status; note: string };
 const INVENTORY: readonly InventoryItem[] = [
   { name: "answer-check", status: "Homepage", note: "Hero scan form and scan result UI" },
   { name: "app-screens", status: "Homepage", note: "Actions and Impact product views" },
-  { name: "book-review-cta", status: "Foundation", note: "Managed-service CTA" },
+  { name: "book-review-cta", status: "Foundation", note: "Store-review CTA" },
   { name: "buying-decision-story", status: "Unused", note: "Previous stacked Observe / Understand / Act / Learn story" },
   { name: "category-benchmark", status: "Used elsewhere", note: "Individual report figure on /benchmarks" },
   { name: "category-benchmarks-section", status: "Homepage", note: "AI Shopping Report ledger on the homepage" },
@@ -161,7 +161,7 @@ export default function PlaybookPage() {
       <MajorPreview name="evidence-to-work" status="Homepage" note="Standalone Actions-queue section"><EvidenceToWork /></MajorPreview>
       <MajorPreview name="measure-impact" status="Homepage" note="Standalone Impact-ledger section"><MeasureImpact /></MajorPreview>
       <MajorPreview name="category-benchmarks-section" status="Homepage" note="AI Shopping Report ledger on the homepage"><CategoryBenchmarksSection /></MajorPreview>
-      <MajorPreview name="first-month-promise" status="Homepage" note="Current self-serve / managed start section"><FirstMonthPromise /></MajorPreview>
+      <MajorPreview name="first-month-promise" status="Homepage" note="Current scan / continuous-loop start section"><FirstMonthPromise /></MajorPreview>
       <MajorPreview name="faq-section" status="Homepage" note="Current homepage FAQ"><FaqSection /></MajorPreview>
 
       <div className="border-b border-black/14 bg-[#faf1eb] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-signal-ink">Used elsewhere</div>
@@ -210,8 +210,8 @@ export default function PlaybookPage() {
       </section>
 
       <section id="component-book-review-cta" className="scroll-mt-20 border-b border-black/14 bg-white">
-        <PreviewHeader name="book-review-cta" status="Foundation" note="Managed-service CTA variants" />
-        <div className="mx-auto flex max-w-[64rem] flex-wrap items-center gap-4 px-5 py-12 sm:px-8 lg:px-10"><BookReviewCta location="playbook" label="Work with Beseam" /><BookReviewCta location="playbook" variant="secondary" label="Talk to us" /></div>
+        <PreviewHeader name="book-review-cta" status="Foundation" note="Store-review CTA variants" />
+        <div className="mx-auto flex max-w-[64rem] flex-wrap items-center gap-4 px-5 py-12 sm:px-8 lg:px-10"><BookReviewCta location="playbook" label="See Beseam on my store" /><BookReviewCta location="playbook" variant="secondary" label="See how Beseam works" /></div>
       </section>
 
       <section className="bg-ink-deep text-white"><div className="mx-auto max-w-[92rem] px-5 py-14 sm:px-8 lg:px-10"><p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-signal">Not rendered standalone</p><p className="mt-4 max-w-[70ch] text-[15px] leading-[1.7] text-white/66">Navbar and footer already wrap this page globally. ProductionHomepage and MarketingDetailPage are compositions rather than leaf components. ResourceIndex needs resource data. Reveal and TrackedLink are behavioral wrappers. MobileStickyCta is viewport-state dependent. They remain listed above so the inventory still covers the full Beseam component directory.</p></div></section>

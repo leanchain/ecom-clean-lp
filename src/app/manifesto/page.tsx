@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     absolute: "Beseam Manifesto | Shopping is moving from finding to choosing",
   },
   description:
-    "Shopping is moving from finding products to choosing products. Beseam is built to help commerce teams understand and improve the buying decisions between discovery and purchase.",
+    "Shopping is moving from finding products to choosing products. Beseam continuously watches the buying journey, finds what is worth improving next, proposes supported changes, and measures what changes.",
   alternates: { canonical: "/manifesto" },
   authors: [{ name: "Pankaj Kumar", url: "/about" }],
   creator: "Pankaj Kumar",
@@ -69,7 +69,7 @@ const PROBLEM = [
   ],
   [
     "A finding is not a decision",
-    "A long list of issues is not useful by itself. Teams need to know which problem or opportunity is worth acting on first and why.",
+    "A long list of issues is not useful by itself. Beseam should keep surfacing which problem or opportunity is worth acting on first and why.",
   ],
   [
     "A change is not proof",
@@ -87,8 +87,8 @@ const PRINCIPLES = [
     body: "A missing attribute, failed event, or changed conversion rate can be a fact. The explanation around it should remain a hypothesis until the evidence supports more.",
   },
   {
-    title: "Decide what deserves attention",
-    body: "Beseam should help a team decide what deserves attention now, not reward the product for producing the longest list of findings.",
+    title: "Keep finding what deserves attention",
+    body: "Beseam should rank what deserves attention now and keep the loop moving, not reward the product for producing the longest list of findings.",
   },
   {
     title: "Keep people in control",
@@ -152,7 +152,7 @@ export default function ManifestoPage() {
         "@id": `${MANIFESTO_URL}#article`,
         headline: "Shopping is moving from finding products to choosing products.",
         description:
-          "Beseam is built to help commerce teams understand the buying decision between being considered and being chosen, while keeping each conclusion connected to its evidence.",
+          "Beseam continuously watches the buying decision between being considered and being chosen, follows the strongest opportunities into supported changes, and keeps each conclusion connected to its evidence.",
         image: {
           "@type": "ImageObject",
           url: MANIFESTO_IMAGE,
@@ -258,7 +258,7 @@ export default function ManifestoPage() {
               <p className="mt-5 text-[17px] leading-[1.7] text-black/62">
                 Being visible is no longer enough. The important question is
                 whether the shopper has enough reason and confidence to choose
-                you, and what your team can change when they do not.
+                you, and what Beseam can improve when they do not.
               </p>
               <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.1em] text-black/62">
                 By Pankaj Kumar · Founder, Beseam · Updated{" "}
@@ -274,7 +274,7 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Technology should multiply the team you have.
+                Growth should keep moving without more coordination.
               </h2>
             </div>
             <div>
@@ -287,11 +287,11 @@ export default function ManifestoPage() {
                 {[
                   [
                     "For teams running lean",
-                    "A smaller team should have access to the intelligence, automation, and operating discipline that once required specialist teams and large technology budgets.",
+                    "A smaller team should get the intelligence, automation, and operating discipline that once required specialist teams and large technology budgets without having to operate every tool themselves.",
                   ],
                   [
                     "For large organizations",
-                    "More people and systems should not mean more handoffs before a useful decision can be made. Beseam should help existing teams move with less coordination overhead.",
+                    "More people and systems should not mean more handoffs before a useful change can move. Beseam should keep the loop running with less coordination overhead.",
                   ],
                   [
                     "The same standard for both",
@@ -327,9 +327,9 @@ export default function ManifestoPage() {
                 The useful unit is the buying decision.
               </h2>
               <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-black/62">
-                More capability only matters if it helps a team understand why a
-                shopper considered one product, chose another, or stopped before
-                purchase without hiding how that conclusion was reached.
+                More capability only matters if Beseam can use it to understand
+                why a shopper considered one product, chose another, or stopped
+                before purchase without hiding how that conclusion was reached.
               </p>
             </div>
             <div>
@@ -337,8 +337,8 @@ export default function ManifestoPage() {
                 For every important buying decision, the questions are simple:
                 what did the shopper want, which choices did they see, what
                 questions remained, what did they choose or where did they stop,
-                what may explain it, what could the merchant change, and what
-                happened afterward. The evidence should stay attached all the
+                what may explain it, what could Beseam change under the
+                merchant&rsquo;s rules, and what happened afterward. The evidence should stay attached all the
                 way through.
               </p>
               <div className="mt-10 border-t border-black/22">
@@ -420,9 +420,9 @@ export default function ManifestoPage() {
                 failure somewhere else.
               </p>
               <p>
-                That is why I am building Beseam: to keep what teams observe,
-                what they understand, what they decide, what they act on, and
-                what they learn connected to the evidence behind each step.
+                That is why I am building Beseam: to keep observing,
+                understanding, acting, and learning in one continuous loop, with
+                the evidence behind each step still attached.
               </p>
             </div>
             <Link

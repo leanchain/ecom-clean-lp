@@ -285,8 +285,8 @@ function MobileTrace() {
           <StepLabel>What happens next</StepLabel>
         </div>
         <p className="mt-3 text-[15px] leading-[1.55] text-white/90">
-          The surviving evidence becomes work — prioritized tasks and
-          remeasurement, below.
+          The strongest opportunity becomes a proposed fix, then is measured
+          again after the change.
         </p>
       </div>
 
@@ -330,7 +330,7 @@ export default function ConnectedEvidence() {
               <p>
                 Follow a commuting-jacket question from the shopper signal to
                 the explanations Beseam checks. The strongest evidence then
-                becomes reviewed work below, and the same path is measured again
+                becomes a supported fix, and the same path is measured again
                 after the change ships.
               </p>
             </div>
@@ -435,8 +435,8 @@ export default function ConnectedEvidence() {
                 <div className="border border-signal/45 bg-signal/[0.05] px-6 py-5 text-center">
                   <StepLabel>What happens next</StepLabel>
                   <p className="mt-2.5 text-[16px] leading-[1.5] text-white/92">
-                    The surviving evidence becomes work — the queue below turns
-                    it into prioritized, approvable tasks.
+                    The strongest evidence becomes a proposed fix. Beseam keeps
+                    it moving through approval when needed and remeasurement.
                   </p>
                 </div>
 

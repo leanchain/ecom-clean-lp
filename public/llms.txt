@@ -1,6 +1,6 @@
 # Beseam
 
-> Beseam shows where products lose shoppers across discovery and the store, connects the evidence that may explain it, helps teams decide and make supported changes, and measures what changed in behavior, conversion, orders, and revenue.
+> Beseam continuously watches how shoppers find, choose, and buy, connects the evidence around the strongest opportunities, proposes supported changes under merchant approval rules, and measures what changed in behavior, conversion, orders, and revenue.
 
 Beseam is not a replacement for Shopify, analytics, ad platforms, or other systems of record. It works across them and keeps source evidence attached through Observe → Understand → Act → Learn.
 

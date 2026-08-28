@@ -311,20 +311,19 @@ export default function ComparePage() {
           <div className="grid border-y border-black/24 lg:grid-cols-[minmax(0,1fr)_19rem]">
             <div className="py-10 pr-0 lg:py-14 lg:pr-16">
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.1rem,4.2vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                We will tell you what Beseam should add, and what it should
-                leave alone.
+                See how Beseam fits around the tools you already use.
               </h2>
             </div>
             <div className="border-t border-black/24 py-8 lg:border-l lg:border-t-0 lg:py-0 lg:pl-8">
               <div className="flex h-full flex-col justify-center">
                 <p className="text-[14px] leading-relaxed text-black/62">
-                  A 20-minute review covers one store, the systems already in
-                  place, and one buying decision worth following from evidence to
-                  a supported change.
+                  In a 20-minute store review, we use one real finding to show
+                  how Beseam connects the systems already in place, proposes a
+                  supported change, and rechecks what changes.
                 </p>
                 <BookReviewCta
                   location="comparison_hub"
-                  label="Book a 20-minute commerce review"
+                  label="See Beseam with my stack"
                   className="mt-7 w-full"
                 />
               </div>

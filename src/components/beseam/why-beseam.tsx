@@ -57,19 +57,21 @@ export default function WhyBeseam() {
           <Reveal delay={0.06}>
             <article className="h-full bg-[#fff8f4] p-7 sm:p-8">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.11em] text-signal-ink">
-                Work together
+                Continuous loop
               </p>
               <h3 className="mt-4 max-w-[18ch] font-display text-[clamp(1.6rem,2.4vw,2.2rem)] font-normal leading-[1.1] tracking-[-0.02em] text-ink-deep">
-                You do not have to run it alone.
+                Beseam keeps going after the finding.
               </h3>
               <p className="mt-4 max-w-[44ch] text-[15px] leading-[1.7] text-black/64">
-                Use Beseam yourself, or have us run the loop with you.
+                It keeps finding opportunities, proposing supported changes,
+                and measuring what changed. You step in only when judgment is
+                needed.
               </p>
               <Link
                 href="/how-we-work"
                 className="group mt-6 inline-flex min-h-11 items-center gap-2 text-[14px] font-semibold text-ink-deep underline decoration-black/30 underline-offset-6 hover:decoration-signal-ink"
               >
-                See how we work with brands
+                See how Beseam works
                 <ArrowRight
                   aria-hidden="true"
                   className="h-4 w-4 transition-transform group-hover:translate-x-0.5"

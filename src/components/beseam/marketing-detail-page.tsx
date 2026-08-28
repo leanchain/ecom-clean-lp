@@ -420,11 +420,11 @@ export default function MarketingDetailPage({
       <section className="bg-pigment text-white">
         <div className="section-pad mx-auto max-w-6xl px-6">
           <h2 className="max-w-[20ch] font-display text-[clamp(2.1rem,3.6vw,3.5rem)] font-normal leading-[1.06] tracking-[-0.02em]">
-            Start with one worthwhile improvement.
+            Keep the loop moving after the first finding.
           </h2>
           <p className="mt-5 max-w-[68ch] text-[18px] leading-relaxed">
-            Connect the evidence you already have, choose what is worth
-            changing, and measure the relevant signals after you act.
+            Connect your store and Beseam follows the strongest opportunity into
+            a supported change, then rechecks the relevant signals after it ships.
           </p>
           <div className="mt-8">
             <TrackedLink

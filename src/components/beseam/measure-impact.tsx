@@ -14,16 +14,16 @@ export default function MeasureImpact() {
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-14">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal">
-                Proof
+                The outcome
               </p>
-              <h2 className="mt-7 max-w-[16ch] text-balance font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-                Every fix has to earn its place.
+              <h2 className="mt-7 max-w-[18ch] text-balance font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
+                The work only matters if the outcome moves.
               </h2>
               <p className="mt-6 max-w-[46ch] text-[16px] leading-[1.75] text-white/70">
                 Beseam rechecks the original shopper signal and measures
-                downstream behavior, conversion, orders, and revenue.
-                Correlation stays labeled; the before-and-after stays attached
-                to the fix.
+                downstream behavior, conversion, orders, and revenue. What
+                changed stays attached to the work, while correlation and
+                causation stay clearly separated.
               </p>
             </div>
             <ImpactScreen />

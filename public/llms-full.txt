@@ -1,15 +1,14 @@
 # Beseam: expanded public summary
 
-Beseam shows where products lose shoppers across discovery and the store, connects the evidence that may explain the problem, helps teams decide and make supported changes, and measures what changed afterward. Its operating model is Observe, Understand, Decide, Act, Learn.
+Beseam continuously watches how shoppers find, choose, and buy, connects the evidence around the strongest opportunities, proposes supported changes under merchant approval rules, and measures what changed afterward. Its operating model is Observe, Understand, Act, Learn.
 ## Core operating model
 
 Beseam uses one loop across the commerce path:
 
 1. Observe: see what is happening from connected evidence.
-2. Understand: identify what may explain it while keeping uncertainty explicit.
-3. Decide: choose the problem or opportunity worth acting on next.
-4. Act: make a supported change under the merchant's approval rules.
-5. Learn: compare relevant signals before and after the action and carry the result into the next decision.
+2. Understand: identify the strongest opportunity and what may explain it while keeping uncertainty explicit.
+3. Act: propose and make a supported change under the merchant's approval rules.
+4. Learn: compare relevant signals before and after the action and carry the result into the next cycle.
 
 This loop applies whether a signal began in external discovery, onsite search, a product page, shopper behavior, checkout, or revenue measurement.
 

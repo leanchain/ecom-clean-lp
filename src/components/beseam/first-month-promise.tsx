@@ -21,7 +21,7 @@ export default function FirstMonthPromise({
               Put Beseam to work
             </p>
             <h2 className="mt-6 max-w-[18ch] text-balance font-display text-[clamp(2.3rem,3.8vw,3.9rem)] font-normal leading-[1.03] tracking-[-0.02em] text-ink-deep">
-              Start with the strongest opportunity Beseam finds.
+              From one opportunity to the next.
             </h2>
           </div>
         </Reveal>
@@ -57,16 +57,17 @@ export default function FirstMonthPromise({
                 Beseam Growth
               </p>
               <h3 className="mt-4 font-display text-[clamp(1.65rem,2.3vw,2.2rem)] font-normal leading-[1.1] tracking-[-0.02em] text-ink-deep">
-                Have Beseam run the loop.
+                Beseam keeps the loop moving.
               </h3>
               <p className="mt-4 max-w-[46ch] text-[15px] leading-[1.7] text-black/66">
-                Beseam finds the next supported opportunity, prepares and executes
-                fixes under your rules, and measures what happened afterward.
+                Beseam continuously finds worthwhile opportunities, proposes
+                supported fixes, asks for approval only when needed, and
+                measures what changed.
               </p>
               <BookReviewCta
                 variant="primary"
                 location="first_month_promise"
-                label="Work with Beseam"
+                label="Put Beseam to work"
                 className="mt-7 min-h-12 gap-2 px-6 py-0 text-[15px] font-semibold"
               />
             </article>

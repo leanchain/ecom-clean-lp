@@ -203,7 +203,7 @@ const STAGES = [
   {
     number: "03",
     title: "Act",
-    body: "The recommendations become a prioritized, approvable task list.",
+    body: "The supported fix moves forward under the merchant's approval rules.",
     Vignette: ActVignette,
   },
   {

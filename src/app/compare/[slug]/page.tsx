@@ -541,12 +541,13 @@ export default async function ComparisonPage({
             <div className="border-t border-black/24 py-8 lg:border-l lg:border-t-0 lg:py-0 lg:pl-8">
               <div className="flex h-full flex-col justify-center">
                 <p className="text-[14px] leading-relaxed text-black/62">
-                  Review one store, the tools already in place, and the first
-                  commercial question worth taking from evidence to action.
+                  In a 20-minute store review, we use one real finding to show
+                  how Beseam connects the tools already in place and keeps the
+                  loop moving from evidence to measured change.
                 </p>
                 <BookReviewCta
                   location={`comparison_${comparison.slug}`}
-                  label="Book a 20-minute commerce review"
+                  label="See Beseam with my stack"
                   className="mt-7 w-full"
                 />
               </div>

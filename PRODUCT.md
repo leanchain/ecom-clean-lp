@@ -17,7 +17,7 @@ The shared job: find out why products are not being found, chosen, or bought, an
 
 ## Product Purpose
 
-Beseam shows where products lose shoppers across discovery and the store, connects the evidence that may explain it, helps teams decide and make supported changes, and measures what changed in behavior, conversion, orders, and revenue.
+Beseam continuously watches how shoppers find, choose, and buy, connects the evidence around the strongest opportunities, proposes supported changes under merchant approval rules, and measures what changed in behavior, conversion, orders, and revenue.
 
 It is not a replacement for Shopify, analytics, ad platforms, or other systems of record. It works across them and keeps source evidence attached through the operating loop: **Observe → Understand → Act → Learn**.
 
@@ -34,7 +34,7 @@ What a neighboring product could not truthfully copy: the loop is closed and the
 - **Four connected domains.** Discovery (AI shopping answers, search, feeds, pre-visit product-discovery signals); Store (onsite search, merchandising, product pages, recommendations, catalog evidence); Behavior (shopper journeys, friction, checkout); Revenue (conversion, orders, attribution, impact evidence).
 - **Commercial boundary (confirmed).** The store and catalog observation is free and anonymous. Continuing to the AI-answer check requires a verified work email. Fixing, publishing, and monitoring are paid. The marketing site also carries a "30 days free" promise into the app.
 - **Surfaces.** Marketing site at `beseam.com` (this project); product app at `app.beseam.com`; API at `api.beseam.com`; a public crawler documented at `/bot`.
-- **Assisted path.** A 20-minute store review is bookable through Cal.com ("Sessions Beseam", Zoom) and runs alongside the self-serve path rather than replacing it.
+- **Product review path.** A 20-minute store review is bookable through Cal.com ("Sessions Beseam", Zoom) to show how Beseam follows a real store finding through the product loop; it is not a managed-service engagement.
 - **The Fieldbook.** `/resources` publishes problems, skills, playbooks, and ecosystem projects as an editorial layer — a merchant can arrive through a problem they can name rather than through the product.
 - **Machine readers are a real audience.** `llms.txt`, `llms-full.txt`, `agents.md`, `robots.txt`, and the sitemap are maintained deliberately; assistants reading the site are treated as visitors, which is consistent with what the product measures.
 
@@ -45,7 +45,7 @@ What a neighboring product could not truthfully copy: the loop is closed and the
 - Not every capability or data source is enabled for every store.
 - Beseam does not claim an exact cause when the evidence supports only correlation or a hypothesis.
 - No recommendation, traffic, conversion, or revenue outcome is guaranteed.
-- Vocabulary that is load-bearing and should not be casually reworded: **Observe, Understand, Decide, Act, Learn**; **observed** vs **hypothesis**; **evidence**; **reversible** changes; **the same questions, rerun**.
+- Vocabulary that is load-bearing and should not be casually reworded: **Observe, Understand, Act, Learn**; **observed** vs **hypothesis**; **evidence**; **reversible** changes; **the same questions, rerun**.
 
 ## Brand Commitments
 

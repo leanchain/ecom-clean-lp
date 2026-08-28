@@ -2,10 +2,10 @@ import { ActionsScreen } from "@/components/beseam/app-screens";
 import { Reveal } from "@/components/beseam/reveal";
 
 const WORKFLOW = [
-  ["Ranked", "What deserves attention first"],
-  ["Prepared", "Supported change ready"],
-  ["Approved", "Judgment stays with you"],
-  ["Verified", "Checked after it ships"],
+  ["Find", "Surface the strongest opportunity"],
+  ["Propose", "Prepare the supported fix"],
+  ["Approve", "Step in only when judgment is needed"],
+  ["Measure", "Check what changed and keep going"],
 ] as const;
 
 /**
@@ -24,17 +24,15 @@ export default function EvidenceToWork() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-16">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                Your growth plan
+                Continuous improvement
               </p>
-              <h2 className="mt-7 max-w-[24ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
-                <span className="lg:block lg:whitespace-nowrap">Beseam turns</span>{" "}
-                <span className="lg:block lg:whitespace-nowrap">opportunities into work.</span>
+              <h2 className="mt-7 max-w-[16ch] text-balance font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
+                Beseam finds what to improve next.
               </h2>
             </div>
             <p className="max-w-[50ch] text-[16px] leading-[1.75] text-black/64">
-              Beseam continuously ranks what the evidence says deserves
-              attention, prepares supported fixes, executes within your approval
-              rules, and keeps judgment-heavy changes ready for review.
+              It proposes the supported fix, asks for approval only when needed,
+              measures what changed, then keeps going.
             </p>
           </div>
         </Reveal>

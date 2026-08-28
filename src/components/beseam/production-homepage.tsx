@@ -4,6 +4,7 @@ import LiveAnswerCheck from "@/components/beseam/answer-check";
 import CategoryBenchmarksSection from "@/components/beseam/category-benchmarks-section";
 import ConnectedEvidence from "@/components/beseam/connected-evidence";
 import CredibilityRail from "@/components/beseam/credibility-rail";
+import DecisionBridge from "@/components/beseam/decision-bridge";
 import EvidenceToWork from "@/components/beseam/evidence-to-work";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
@@ -14,12 +15,11 @@ import { Reveal } from "@/components/beseam/reveal";
 /**
  * Section order is the argument, and it is deliberate:
  *
- * claim → credibility → prioritized growth plan → proof → simple operating
- * promise → evidence depth → research → ways to start
+ * claim → credibility → connected coverage → prioritized growth loop → proof →
+ * simple operating promise → evidence depth → research → ways to start
  *
- * The merchant sees what Beseam takes responsibility for before seeing the
- * machinery that supports it. The connected-system architecture belongs on
- * /platform.
+ * The merchant first understands the outcome, then the breadth Beseam watches,
+ * before seeing how that evidence becomes continuous action and measurement.
  */
 const SCAN_RETURNS = [
   "Where shoppers may lose you",
@@ -45,11 +45,8 @@ export default function ProductionHomepage() {
                 <span className="text-signal-ink">choose you</span>.
               </h1>
               <p className="pointer-events-auto mx-auto mt-6 max-w-[64ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
-                Beseam continuously finds the strongest opportunities to improve
-                growth, prepares and executes supported fixes under your rules,
-                and measures what changed.
+                Beseam continuously watches how shoppers find, choose, and buy — finding what to improve next, proposing a supported fix, and learning from what changes.
               </p>
-
               <div className="pointer-events-auto mx-auto mt-9 w-full">
                 <LiveAnswerCheck
                   placement="homepage_hero"
@@ -83,6 +80,11 @@ export default function ProductionHomepage() {
       </section>
 
       <CredibilityRail />
+      <DecisionBridge
+        eyebrow="Across the buying journey"
+        heading="Beseam watches how shoppers find, choose, and buy."
+        body="AI visibility and discovery, product and store experience, shopper behavior, personalization, and revenue all feed the same loop. Beseam uses them to find what is worth improving next — not to give you more dashboards to manage."
+      />
       <EvidenceToWork />
       <MeasureImpact />
       <OperatingLoop />

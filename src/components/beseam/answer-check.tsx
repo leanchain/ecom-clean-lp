@@ -764,7 +764,7 @@ function ContinuePaths({
           {opportunityCount} {opportunityCount === 1 ? "opportunity" : "opportunities"} found
         </p>
         <h3 className="mt-2 text-[19px] font-semibold tracking-[-0.02em]">
-          Turn this scan into your Growth plan
+          Keep Beseam watching after the scan
         </h3>
         <p className="mt-2.5 max-w-[46ch] text-[14px] leading-[1.62] text-white/64">
           Connect your store and Beseam ranks these against your real catalog,
@@ -789,7 +789,7 @@ function ContinuePaths({
           preserveUtm
           className="group mt-6 inline-flex min-h-12 items-center justify-center gap-2 border border-white/30 px-6 text-[14px] font-semibold text-white transition-colors hover:bg-white hover:text-ink-deep"
         >
-          Build my Growth plan
+          Connect my store
           <ArrowRight
             aria-hidden="true"
             className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
@@ -800,8 +800,8 @@ function ContinuePaths({
       <div className="bg-pigment px-5 py-7 sm:px-6 sm:py-8">
         <h3 className="text-[19px] font-semibold tracking-[-0.02em]">
           {topHeadline
-            ? "Want Beseam to run the first one with you?"
-            : "Bring us one real problem"}
+            ? "Want to see Beseam follow this end to end?"
+            : "See how Beseam works on a real store"}
         </h3>
         {topHeadline ? (
           <p className="mt-2.5 max-w-[44ch] text-[14px] leading-[1.5] text-signal">
@@ -809,14 +809,14 @@ function ContinuePaths({
           </p>
         ) : null}
         <p className="mt-2.5 max-w-[44ch] text-[14px] leading-[1.62] text-white/70">
-          In your first 30 days we follow one place the buying decision breaks
-          end to end: connect the evidence, prepare the change, get your approval
-          when judgment is needed, execute it, and measure what happened after.
+          In a 20-minute store review, we use one real finding to show how
+          Beseam follows it end to end: connect the evidence, propose the change,
+          ask for approval when judgment is needed, and remeasure what changed.
         </p>
         <BookReviewCta
           variant="primary"
           location="scan_result_managed"
-          label="Plan my first improvement"
+          label="See Beseam on my store"
           className="mt-6 min-h-12 gap-2 bg-white px-6 py-0 text-[14px] font-semibold text-ink-deep hover:bg-signal hover:text-ink-deep"
         />
       </div>
@@ -2459,7 +2459,7 @@ function RejectedNotice({ result }: { result: AnswerCheckResult }) {
         <BookReviewCta
           variant="primary"
           location="scan_rejected"
-          label="Have us look at it with you"
+          label="See Beseam on my store"
           className="min-h-12 gap-2 px-6 py-0 text-[14px] font-semibold"
         />
       </div>

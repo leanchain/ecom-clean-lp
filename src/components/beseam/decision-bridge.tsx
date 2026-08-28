@@ -20,7 +20,7 @@ export default function DecisionBridge({
   eyebrow = "Shopping is moving from finding products to choosing products",
   heading = "One system for the buying decision.",
   body =
-    "Discovery, product evidence, shopper behavior, and revenue should not live in separate dashboards. Beseam connects them around the same decision so the team can see what happened, understand what may explain it, act on what the evidence supports, and learn from what changes.",
+    "Discovery, product evidence, shopper behavior, and revenue should not live in separate dashboards. Beseam connects them around the same decision, follows the strongest opportunity into a supported change, and rechecks what changed. Your team steps in where judgment is needed.",
   exploreHref = "/platform",
   exploreLabel = "Explore the platform",
 }: DecisionBridgeProps) {

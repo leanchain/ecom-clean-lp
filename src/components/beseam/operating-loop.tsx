@@ -29,8 +29,8 @@ export default function OperatingLoop() {
               </h2>
             </div>
             <p className="max-w-[50ch] text-[16px] leading-[1.75] text-black/64">
-              You see the opportunity, approve only what needs judgment, and get
-              the evidence of what happened next.
+              Beseam keeps finding opportunities, proposing supported fixes,
+              and learning from what changes — continuously.
             </p>
           </div>
         </Reveal>

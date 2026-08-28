@@ -108,7 +108,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
           </p>
         </div>
         <div className="grid grid-cols-[minmax(0,1fr)_4.25rem_4rem_4.5rem] gap-2 border-b border-black/12 px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/46">
-          <span>Task</span>
+          <span>Proposed fix</span>
           <span>Priority</span>
           <span>Effort</span>
           <span>Next</span>

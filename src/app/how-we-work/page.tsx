@@ -9,35 +9,39 @@ import { Reveal } from "@/components/beseam/reveal";
 import { buildPublicMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPublicMetadata({
-  title: "How We Work With Ecommerce Brands | Beseam",
+  title: "How Beseam Works for Commerce Teams",
   description:
-    "Use Beseam with your own team or have us run the loop alongside you, from evidence through a supported change and measurement afterward.",
+    "Beseam continuously finds commerce growth opportunities, proposes supported fixes, asks for approval only when needed, and measures what changes.",
   path: "/how-we-work",
 });
 
 const LOOP = [
-  ["01", "Observe", "Start with one buying decision and connect the evidence around it."],
-  ["02", "Understand", "Investigate possible explanations without turning correlation into certainty."],
-  ["03", "Act", "Choose what deserves action, then prepare and help make the supported change under your approval rules."],
-  ["04", "Learn", "Measure the relevant signals afterward and carry the result forward."],
+  ["01", "Observe", "Find where shoppers are missed, hesitate, or drop out."],
+  ["02", "Understand", "Connect the evidence that may explain what happened."],
+  [
+    "03",
+    "Act",
+    "Prepare and move the supported change forward under your approvals.",
+  ],
+  [
+    "04",
+    "Learn",
+    "Recheck the same signals and measure what changed afterward.",
+  ],
 ] as const;
 
 const RESPONSIBILITIES = [
   {
-    yours: "Business context and priorities",
-    ours: "Connect the evidence around where shoppers find, choose, and buy."
+    yours: "Commercial context and priorities",
+    ours: "Continuously find the strongest opportunities across discovery, store, behavior, and revenue.",
   },
   {
-    yours: "Brand judgment and constraints",
-    ours: "Investigate what may explain the problem and separate evidence from hypotheses.",
+    yours: "Brand and operational judgment Beseam cannot infer",
+    ours: "Use that context to propose supported changes instead of generic recommendations.",
   },
   {
-    yours: "Approval for meaningful changes",
-    ours: "Recommend, prepare, and help execute supported changes where permitted.",
-  },
-  {
-    yours: "The final commercial decision",
-    ours: "Measure what happened afterward and keep the learning attached to the decision.",
+    yours: "Approval when a change needs judgment",
+    ours: "Execute where permitted, recheck what changed, and keep the loop moving.",
   },
 ] as const;
 
@@ -50,24 +54,23 @@ export default function HowWeWorkPage() {
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.75fr)] lg:items-end lg:gap-20">
               <div>
                 <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                  How we work with brands
+                  How Beseam works for commerce teams
                 </p>
-                <h1 className="mt-6 max-w-[14ch] text-balance font-display text-[clamp(3rem,5.8vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-ink-deep">
-                  An extension of your commerce team.
+                <h1 className="mt-6 max-w-[15ch] text-balance font-display text-[clamp(3rem,5.8vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-ink-deep">
+                  A continuous growth loop, not another dashboard.
                 </h1>
               </div>
               <div>
                 <p className="max-w-[52ch] text-[18px] leading-[1.7] text-black/66">
-                  Use Beseam yourself, or have us run the loop alongside your
-                  team. In both cases, start with one place shoppers overlook
-                  you, choose something else, or stop before purchase, then
-                  follow the evidence through the change and measured result.
+                  Beseam continuously finds growth opportunities, proposes
+                  supported fixes, and measures what changed. Your team steps
+                  in only when commercial judgment or approval is needed.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <BookReviewCta
                     variant="primary"
                     location="how_we_work_hero"
-                    label="Plan my first improvement"
+                    label="See Beseam work"
                   />
                   <Link
                     href="/platform"
@@ -86,21 +89,25 @@ export default function HowWeWorkPage() {
       <section className="border-b border-white/12 bg-ink-deep text-white">
         <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
           <Reveal>
-            <div className="grid gap-10 lg:grid-cols-[minmax(14rem,0.55fr)_minmax(0,1.45fr)] lg:gap-20">
+            <div className="grid gap-10 lg:grid-cols-[minmax(28rem,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
               <div>
                 <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal">
-                  Not another dashboard to manage
+                  The loop behind the outcome
                 </p>
-                <h2 className="mt-5 max-w-[13ch] font-display text-[clamp(2.2rem,3.8vw,3.8rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                  We can run the loop with you.
+                <h2 className="mt-5 max-w-[18ch] font-display text-[clamp(2.2rem,3.8vw,3.8rem)] font-normal leading-[1.04] tracking-[-0.02em]">
+                  <span className="lg:block lg:whitespace-nowrap">
+                    One outcome.
+                  </span>{" "}
+                  <span className="lg:block lg:whitespace-nowrap">
+                    One continuous loop.
+                  </span>
                 </h2>
               </div>
               <div>
                 <p className="max-w-[64ch] text-[17px] leading-[1.75] text-white/68">
-                  Your team can use Beseam directly, but you do not have to turn
-                  every new signal into another investigation to manage. We can
-                  work through the evidence with you, help move an approved change
-                  forward, and stay involved through measurement.
+                  Beseam stays in motion: observe what is happening, understand
+                  the strongest opportunity, propose and make the supported
+                  change, then learn from what moved next.
                 </p>
                 <ol className="mt-10 grid border-t border-white/16 md:grid-cols-4">
                   {LOOP.map(([number, title, body], index) => (
@@ -132,11 +139,16 @@ export default function HowWeWorkPage() {
             <div className="grid gap-10 lg:grid-cols-[minmax(14rem,0.5fr)_minmax(0,1.5fr)] lg:gap-20">
               <div>
                 <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                  Working relationship
+                  The operating relationship
                 </p>
                 <h2 className="mt-5 max-w-[14ch] font-display text-[clamp(2.2rem,3.6vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
-                  Your judgment stays in the loop.
+                  Beseam keeps moving. You step in when needed.
                 </h2>
+                <p className="mt-5 max-w-[36ch] text-[15px] leading-[1.7] text-black/60">
+                  Commerce and growth teams provide the context, constraints,
+                  and judgment Beseam cannot infer. The loop keeps running
+                  without becoming another workstream to manage.
+                </p>
               </div>
               <div className="border-t-2 border-ink-deep">
                 <div className="hidden grid-cols-2 gap-8 border-b border-black/14 py-4 text-[12px] font-semibold uppercase tracking-[0.1em] text-black/42 sm:grid">
@@ -178,44 +190,46 @@ export default function HowWeWorkPage() {
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
               <article className="border-t-2 border-ink-deep pt-6">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
-                  Use Beseam directly
+                  The operating record
                 </p>
                 <h2 className="mt-4 text-[25px] font-semibold tracking-[-0.02em] text-ink-deep">
-                  Your team operates the platform.
+                  You can see what Beseam is doing.
                 </h2>
                 <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-black/62">
-                  Investigate evidence, make decisions, approve supported actions,
-                  and measure the result inside Beseam.
+                  The Growth plan keeps the evidence, proposed change,
+                  commercial impact tier, approval state, and next move visible.
+                  It is the operating record of what Beseam is doing, not a task
+                  list for your team to manage.
                 </p>
                 <Link
                   href="/platform"
                   className="mt-6 inline-flex min-h-10 items-center gap-2 text-[14px] font-semibold text-ink-deep underline decoration-black/25 underline-offset-6 hover:decoration-signal-ink"
                 >
-                  Explore the platform
+                  See how the work is tracked
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </article>
 
               <article className="border-t-2 border-signal-ink pt-6">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
-                  Work the loop with us
+                  The measured outcome
                 </p>
                 <h2 className="mt-4 text-[25px] font-semibold tracking-[-0.02em] text-ink-deep">
-                  We operate alongside your team.
+                  You can see whether the outcome moved.
                 </h2>
                 <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-black/62">
-                  The same product powers the work. The difference is that Beseam
-                  stays involved in the investigation, decision, supported change,
-                  and measurement instead of leaving the workflow with you.
+                  Beseam rechecks the relevant shopper and store signals after
+                  the work ships. Observed, verified, attributed, and modeled
+                  outcomes stay separate so measurement does not become an
+                  inflated claim.
                 </p>
-                <div className="mt-6">
-                  <BookReviewCta
-                    variant="primary"
-                    location="how_we_work_modes"
-                    label="Plan my first improvement"
-                    className="min-h-10 px-5 py-0 text-[14px]"
-                  />
-                </div>
+                <Link
+                  href="/platform"
+                  className="mt-6 inline-flex min-h-10 items-center gap-2 text-[14px] font-semibold text-ink-deep underline decoration-black/25 underline-offset-6 hover:decoration-signal-ink"
+                >
+                  See how outcomes are measured
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </article>
             </div>
           </Reveal>

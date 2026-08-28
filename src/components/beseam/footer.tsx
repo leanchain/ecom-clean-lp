@@ -60,18 +60,21 @@ export default function BeseamFooter() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 sm:gap-x-10">
+          <div
+            className="grid w-full grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3 sm:gap-x-8"
+            style={{ maxWidth: "40rem", marginLeft: "auto" }}
+          >
             {FOOTER_GROUPS.map((group) => (
               <nav key={group.label} aria-label={group.label}>
                 <p className="text-[13px] font-semibold text-white">
                   {group.label}
                 </p>
-                <ul className="mt-5 space-y-3.5">
+                <ul className="mt-4 space-y-1.5">
                   {group.links.map(([label, href]) => (
                     <li key={label}>
                       <Link
                         href={href}
-                        className="inline-flex min-h-11 items-center text-[13px] text-white/62 transition-colors hover:text-white"
+                        className="inline-flex min-h-11 items-center text-[13px] text-white/62 transition-colors hover:text-white lg:min-h-9"
                       >
                         {label}
                       </Link>

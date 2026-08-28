@@ -49,9 +49,9 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       "See when AI shopping answers leave your products out, then inspect what may be worth changing.",
     metaTitle: "AI Shopping Discovery Monitoring for Ecommerce | Beseam",
     description:
-      "Observe real buying questions across AI assistants, keep the products and competitors named with the answer, and connect the result to evidence your team can investigate.",
+      "Observe real buying questions across AI assistants, connect each answer to product and store evidence, propose supported changes, and recheck what changes.",
     intro:
-      "AI shopping discovery is one part of what Beseam sees before a shopper reaches the store. For each buying question, Beseam keeps the observed answer, products named, competitor context and relevant product evidence together so the team can decide whether a supported change is worth testing.",
+      "AI shopping discovery is one signal in Beseam's continuous commerce loop. For each buying question, Beseam keeps the observed answer, products named, competitor context, and relevant product evidence together, then surfaces the strongest opportunity and proposes a supported change. Your team steps in when judgment or approval is needed.",
     proofLine:
       "The result is an observed answer with traceable context, not a company-wide visibility score or a claim about hidden ranking logic.",
     observations: [
@@ -73,7 +73,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       {
         title: "Product evidence you control",
         detail:
-          "Connect the miss to supported product-page, catalog, structured-data or feed differences your team can inspect and change.",
+          "Connect the miss to supported product-page, catalog, structured-data, or feed differences Beseam can inspect and, where permitted, change.",
       },
     ],
     sections: [
@@ -143,9 +143,9 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       "Everything that helps a shopper choose you, connected.",
     metaTitle: "Beseam Platform | Connected Ecommerce Growth",
     description:
-      "Beseam connects discovery, product evidence, shopper behavior, and revenue around the same buying decision, then turns the strongest evidence into work and measures what changed.",
+      "Beseam connects discovery, product evidence, shopper behavior, and revenue around the same buying decision, continuously proposing supported changes and measuring what changed.",
     intro:
-      "Beseam connects what shoppers see before the visit, what they find on the store, what they do next, and what happened after a change. The strongest evidence becomes a Growth plan instead of another dashboard.",
+      "Beseam connects what shoppers see before the visit, what they find on the store, what they do next, and what happened after a change. It keeps that evidence moving through one continuous loop instead of leaving another dashboard to manage.",
     proofLine:
       "Discovery, products, behavior, actions, and results stay attached to the same buying decision.",
     observationsHeading: "Follow the shopper's decision",
@@ -182,7 +182,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
         title:
           "Understand what may be blocking the choice, not just the symptom.",
         icon: RefreshCw,
-        body: "A visibility miss, search exit, product-page hesitation, checkout drop, or revenue change is a symptom. Beseam connects the surrounding product, store, shopper, competitor, and revenue evidence so the team can understand what may explain it without pretending a hypothesis is a fact.",
+        body: "A visibility miss, search exit, product-page hesitation, checkout drop, or revenue change is a symptom. Beseam connects the surrounding product, store, shopper, competitor, and revenue evidence so likely explanations stay grounded without pretending a hypothesis is a fact.",
         points: [
           "Keep the original observation, source, affected scope, and time attached.",
           "Connect evidence from before the visit with what happened on the store and afterward.",
@@ -192,7 +192,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       {
         title: "Act on what matters. Learn from what changes.",
         icon: Sparkles,
-        body: "Beseam helps the team choose the next move, then supported product data, content, merchandising, creative, campaign, or store changes can move through an approval path with the previous state retained. After the action, Beseam checks the relevant discovery, behavior, conversion, order, or revenue signals.",
+        body: "Beseam surfaces the next opportunity, proposes the supported product data, content, merchandising, creative, campaign, or store change, and moves it through approval when needed with the previous state retained. After the action, Beseam checks the relevant discovery, behavior, conversion, order, or revenue signals.",
         points: [
           "Tie the action to the affected product, page, journey, or opportunity.",
           "Keep control with explicit approval for supported store changes.",
@@ -210,12 +210,12 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       {
         question: "What do I need to connect first?",
         answer:
-          "Start with the store and one buying decision you want to understand: where shoppers overlook you, choose something else, or stop before purchase. Add sources only when they improve that understanding.",
+          "Connect the store first. Beseam keeps watching where shoppers overlook you, choose something else, or stop before purchase, and adds connected sources when they improve the evidence.",
       },
       {
         question: "How does Beseam work out what may be worth changing?",
         answer:
-          "Beseam keeps the shopper signal and relevant evidence together, separates observed facts from possible explanations, and helps the team decide what deserves action without overstating certainty.",
+          "Beseam keeps the shopper signal and relevant evidence together, separates observed facts from possible explanations, and ranks what deserves action without overstating certainty.",
       },
       {
         question: "How are changes approved and published?",
@@ -229,7 +229,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       },
     ],
     related: [
-      { label: "How we work with brands", href: "/how-we-work" },
+      { label: "How Beseam works", href: "/how-we-work" },
       { label: "AI shopping discovery", href: "/ai-visibility-monitoring" },
       { label: "See Beseam work", href: "/#proof" },
     ],
