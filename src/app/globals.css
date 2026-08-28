@@ -718,6 +718,20 @@ html.theme-transition::view-transition-new(root) {
   animation: marketing-reveal 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Connected system map: a selected signal traces its wire to the decision. */
+@keyframes signal-wire-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.signal-wire-draw {
+  animation: signal-wire-draw 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 .marketing-wash {
   background: color-mix(in srgb, var(--brand) 18%, transparent);
   filter: blur(110px);
@@ -824,7 +838,6 @@ html.theme-transition::view-transition-new(root) {
   font-weight: 650;
 }
 
- 
 /* Browser surfaces
  *
  * Selection and the caret ship with browser defaults that belong to no design
@@ -840,7 +853,6 @@ html.theme-transition::view-transition-new(root) {
   accent-color: var(--beseam-accent);
   caret-color: var(--beseam-ink);
 }
-
 
 /* Print
  *

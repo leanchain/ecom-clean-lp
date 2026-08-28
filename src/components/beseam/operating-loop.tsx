@@ -31,7 +31,8 @@ export default function OperatingLoop() {
               </h2>
             </div>
             <p className="max-w-[50ch] text-[16px] leading-[1.75] text-black/64">
-              Beseam connects the result to the evidence, the change, and what happens next.
+              Beseam connects the result to the evidence, the change, and what
+              happens next.
             </p>
           </div>
         </Reveal>
@@ -47,9 +48,13 @@ export default function OperatingLoop() {
                   <span className="font-mono text-[10px] font-semibold tabular-nums text-signal-ink">
                     {number}
                   </span>
-                  <h3 className="text-[15px] font-semibold text-ink-deep">{title}</h3>
+                  <h3 className="text-[15px] font-semibold text-ink-deep">
+                    {title}
+                  </h3>
                 </div>
-                <p className="mt-1.5 text-[13px] leading-[1.5] text-black/58">{body}</p>
+                <p className="mt-1.5 text-[13px] leading-[1.5] text-black/58">
+                  {body}
+                </p>
               </li>
             ))}
           </ol>
