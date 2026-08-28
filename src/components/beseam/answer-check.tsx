@@ -234,12 +234,12 @@ const FREE_SCAN_RETURNS = [
     "How many products you have public, and a sample of product pages read end to end.",
   ],
   [
-    "What makes choosing harder",
-    "In plain words: where products may be overlooked or where the page leaves a buying question unanswered.",
+    "Where shoppers may lose you",
+    "In plain words: where products may be overlooked, harder to choose, or harder to buy from the public storefront evidence we can see.",
   ],
   [
-    "What to look at first",
-    "One next step per finding, with the technical evidence kept underneath it.",
+    "What to improve first",
+    "One next move per finding, with the technical evidence kept underneath it and no claim that a public scan proves revenue impact.",
   ],
 ] as const;
 
@@ -253,9 +253,9 @@ export function FreeScanPromise({ compact = false }: { compact?: boolean }) {
         <p className="text-[13px] text-black/56">Usually about a minute.</p>
       </div>
       <p className="mt-2 max-w-[62ch] text-[14.5px] leading-[1.65] text-black/68">
-        We read your public storefront and show you where products may be
-        overlooked, what makes them harder to choose, and what is worth looking
-        at first.
+        We read your public storefront and show you where shoppers may lose you,
+        what makes products harder to choose or buy, and what is worth improving
+        first.
       </p>
 
       <ul className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -574,7 +574,7 @@ function FindingRow({
 
         {nextStep ? (
           <p className="mt-3 max-w-[68ch] border-l border-signal-ink/35 pl-3.5 text-[14px] leading-[1.6] text-ink-deep">
-            <span className="font-semibold">Do this next: </span>
+            <span className="font-semibold">Improve next: </span>
             {nextStep}
           </p>
         ) : null}
@@ -677,7 +677,7 @@ function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
     <section className="border-b border-black/14 bg-white">
       <div className="border-b border-black/12 px-5 py-5 sm:px-6">
         <h3 className="text-[19px] font-semibold tracking-[-0.02em] text-ink-deep">
-          What is worth looking at
+          Growth opportunities from this scan
         </h3>
         <p className="mt-1.5 max-w-[70ch] text-[13.5px] leading-relaxed text-black/60">
           {findings.length
@@ -748,6 +748,7 @@ function ContinuePaths({
 }) {
   const top = sortedFindings(result)[0] ?? null;
   const topHeadline = top ? findingHeadline(top) : null;
+  const opportunityCount = groupFindings(sortedFindings(result)).length;
 
   return (
     // Two offers, two grounds. Self-serve stays on the product's own ink; the
@@ -759,14 +760,27 @@ function ContinuePaths({
       className="grid border-t border-black/18 text-white lg:grid-cols-2"
     >
       <div className="bg-ink-deep px-5 py-7 sm:px-6 sm:py-8">
-        <h3 className="text-[19px] font-semibold tracking-[-0.02em]">
-          Take it from here yourself
-        </h3>
-        <p className="mt-2.5 max-w-[44ch] text-[14px] leading-[1.62] text-white/64">
-          Create an account and work through what this scan found: rank it,
-          decide what deserves action, and make the changes with your own
-          people.
+        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-white/50">
+          {opportunityCount} {opportunityCount === 1 ? "opportunity" : "opportunities"} found
         </p>
+        <h3 className="mt-2 text-[19px] font-semibold tracking-[-0.02em]">
+          Turn this scan into your Growth plan
+        </h3>
+        <p className="mt-2.5 max-w-[46ch] text-[14px] leading-[1.62] text-white/64">
+          Connect your store and Beseam ranks these against your real catalog,
+          prepares the changes it can execute safely, and keeps approval where
+          your judgment is needed.
+        </p>
+        <div className="mt-5 grid gap-2 text-[12.5px] sm:grid-cols-2">
+          <div className="border border-white/16 px-3 py-2.5">
+            <span className="block text-white/46">Prepared by Beseam</span>
+            <span className="mt-0.5 block font-semibold text-white">Checked after connection</span>
+          </div>
+          <div className="border border-white/16 px-3 py-2.5">
+            <span className="block text-white/46">Needs your approval</span>
+            <span className="mt-0.5 block font-semibold text-white">Checked after connection</span>
+          </div>
+        </div>
         <TrackedLink
           href={continueHref}
           eventName="scan_continue_clicked"
@@ -775,7 +789,7 @@ function ContinuePaths({
           preserveUtm
           className="group mt-6 inline-flex min-h-12 items-center justify-center gap-2 border border-white/30 px-6 text-[14px] font-semibold text-white transition-colors hover:bg-white hover:text-ink-deep"
         >
-          Start free
+          Build my Growth plan
           <ArrowRight
             aria-hidden="true"
             className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
@@ -786,7 +800,7 @@ function ContinuePaths({
       <div className="bg-pigment px-5 py-7 sm:px-6 sm:py-8">
         <h3 className="text-[19px] font-semibold tracking-[-0.02em]">
           {topHeadline
-            ? "Want us to work through this with you?"
+            ? "Want Beseam to run the first one with you?"
             : "Bring us one real problem"}
         </h3>
         {topHeadline ? (
@@ -796,8 +810,8 @@ function ContinuePaths({
         ) : null}
         <p className="mt-2.5 max-w-[44ch] text-[14px] leading-[1.62] text-white/70">
           In your first 30 days we follow one place the buying decision breaks
-          end to end: connect the evidence, decide with you what deserves action,
-          help make the change, and measure what happened after.
+          end to end: connect the evidence, prepare the change, get your approval
+          when judgment is needed, execute it, and measure what happened after.
         </p>
         <BookReviewCta
           variant="primary"
@@ -853,7 +867,7 @@ function tallyRivals(answers: Answer[]) {
 // Platform names arrive lowercase from the API. They are proper nouns on the
 // card, where every other identifier is set the way its owner writes it.
 const PLATFORM_LABELS: Record<string, string> = {
-  shopify: "Shopify",
+  shopify: "Commerce storefront",
   woocommerce: "WooCommerce",
   bigcommerce: "BigCommerce",
   magento: "Magento",

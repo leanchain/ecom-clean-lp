@@ -183,7 +183,7 @@ const USE_CASES: readonly {
 
 const WORK = [
   ["Evidence", "connected, with the source kept"],
-  ["Action", "approved, served or shipped, reversible"],
+  ["Action", "approved, served or shipped, tracked"],
   ["Impact", "the same questions, rerun"],
 ] as const;
 
@@ -239,7 +239,13 @@ function MonoNote({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function ConnectedSystemMap() {
+export default function ConnectedSystemMap({
+  exploreHref = "/platform",
+  exploreLabel = "Explore the platform",
+}: {
+  exploreHref?: string | null;
+  exploreLabel?: string;
+}) {
   const [activeId, setActiveId] = useState<SignalId>("discovery");
   const activeIndex = Math.max(
     0,
@@ -476,12 +482,12 @@ export default function ConnectedSystemMap() {
                 </p>
               </div>
               <p className="mt-2.5 text-[12.5px] leading-[1.6] text-black/62">
-                Connected evidence. Reviewed, reversible actions.
+                Connected evidence. Reviewed, governed actions.
               </p>
             </div>
 
             <p className="font-mono text-[10.5px] leading-[1.5] text-black/55">
-              output: what a shopper sees next, and proof it moved.
+              output: what a shopper sees next, and evidence of what changed.
             </p>
           </div>
         </div>
@@ -494,16 +500,20 @@ export default function ConnectedSystemMap() {
               <span className="hidden xl:inline">
                 <MonoNote>The list keeps growing</MonoNote>
               </span>
-              <Link
-                href="/platform"
-                className="group inline-flex items-center gap-1.5 whitespace-nowrap text-[12px] font-semibold text-signal-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-ink focus-visible:ring-offset-2"
-              >
-                Explore the platform
-                <ArrowRight
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
-                />
-              </Link>
+              {exploreHref ? (
+                <Link
+                  href={exploreHref}
+                  className="group inline-flex items-center gap-1.5 whitespace-nowrap text-[12px] font-semibold text-signal-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-ink focus-visible:ring-offset-2"
+                >
+                  {exploreLabel}
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                  />
+                </Link>
+              ) : (
+                <MonoNote>Connected coverage</MonoNote>
+              )}
             </div>
           </ColumnHead>
 

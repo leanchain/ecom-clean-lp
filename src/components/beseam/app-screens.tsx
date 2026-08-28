@@ -6,48 +6,46 @@ import { ArrowRight, Check, TrendingUp } from "lucide-react";
  * Everything else drawn on this page is the shopper's world: an assistant
  * answer, a collection page, a cart. None of it shows what a merchant would
  * actually log into, which is the one thing a visitor cannot picture. These
- * two screens are Beseam's own: the actions queue and the impact ledger.
+ * two screens are Beseam's own: the Growth plan and the Results ledger.
  *
  * Rebuilt, not captured, because a screenshot goes stale silently and blurs on
  * a retina display. Structure, column order, and row anatomy follow the real
- * screens; the accent is the landing signal rather than the app's own primary,
- * because a second brand colour in this page would read as a third-party
- * screenshot rather than as our product.
+ * screens; the accent is the landing signal rather than the app's own primary.
  *
- * Fidelity has one deliberate limit. The real actions queue is twelve columns
- * wide, and reproducing all twelve here would argue the opposite of what this
- * section claims. It is cropped to the four a merchant acts on, and the crop
- * is stated rather than hidden.
+ * The real queue is wider. This marketing view keeps only the columns needed to
+ * understand the decision: opportunity, priority, effort, estimated impact,
+ * and next step.
  *
- * The impact figures are illustrative and stamped as such in the frame. Money
- * is deliberately absent: a percentage under an “Example figures” stamp reads
- * as an illustration, whereas a revenue number reads as a case study however
- * it is labelled, and a fabricated result is the one thing this product must
- * never show.
+ * All figures in these reconstructed product views are illustrative. Growth plan
+ * impact uses relative $ / $$ / $$$ tiers rather than invented revenue amounts.
+ * Results keeps its own example stamp for the same reason.
  */
 
 const QUEUE_ROWS = [
   {
     title: "Add the commuting use case to the Urban Shell product page.",
     why: "The shopper asked for a commuting jacket, and the product page never answers whether this one fits that use case.",
-    priority: "P0",
+    priority: "High",
     effort: "Quick",
+    impact: "$$$$$",
     step: "Review",
     lead: true,
   },
   {
     title: "Explain how Urban Shell fits over everyday layers.",
     why: "The shopper opened the size guide, and fit over layers is still unanswered at the decision point.",
-    priority: "P1",
+    priority: "Medium",
     effort: "Quick",
+    impact: "$$$",
     step: "Review",
     lead: false,
   },
   {
     title: "Recheck commuter queries after the product-page change.",
     why: "The same buying question should be observed again before claiming that the change helped discovery.",
-    priority: "P2",
+    priority: "Low",
     effort: "Quick",
+    impact: "$",
     step: "Queue",
     lead: false,
   },
@@ -59,9 +57,9 @@ const EFFORT_TONE: Record<string, string> = {
 };
 
 const PRIORITY_TONE: Record<string, string> = {
-  P0: "border-signal-ink/30 bg-signal-ink/[0.07] text-signal-ink",
-  P1: "border-black/20 bg-black/[0.05] text-[#3f3f3f]",
-  P2: "border-black/14 bg-black/[0.02] text-black/52",
+  High: "border-signal-ink/30 bg-signal-ink/[0.07] text-signal-ink",
+  Medium: "border-black/20 bg-black/[0.05] text-[#3f3f3f]",
+  Low: "border-black/14 bg-black/[0.02] text-black/52",
 };
 
 function ScreenChrome({
@@ -104,9 +102,9 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
     return (
       <div className="border border-black/16 bg-white">
         <div className="flex items-center justify-between gap-4 border-b border-black/12 bg-ground px-3 py-2.5">
-          <p className="text-[13px] font-semibold text-ink-deep">Actions</p>
+          <p className="text-[13px] font-semibold text-ink-deep">Growth plan</p>
           <p className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/46">
-            3 tasks
+            3 opportunities
           </p>
         </div>
         <div className="grid grid-cols-[minmax(0,1fr)_4.25rem_4rem_4.5rem] gap-2 border-b border-black/12 px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/46">
@@ -125,7 +123,9 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
             <p className="text-[12.5px] font-medium leading-[1.3] text-[#151515]">
               {row.title}
             </p>
-            <span className={`inline-flex w-fit shrink-0 rounded-md border px-1.5 py-0.5 text-[9.5px] font-semibold ${PRIORITY_TONE[row.priority]}`}>
+            <span
+              className={`inline-flex w-fit shrink-0 rounded-md border px-1.5 py-0.5 text-[9.5px] font-semibold ${PRIORITY_TONE[row.priority]}`}
+            >
               {row.priority}
             </span>
             <span className="inline-flex w-fit shrink-0 rounded-md border border-[#1f7a4d]/35 bg-[#1f7a4d]/[0.08] px-1.5 py-0.5 text-[9.5px] font-semibold text-[#1a6b43]">
@@ -148,81 +148,96 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
 
   return (
     <div className="border border-black/16 bg-white">
-      <ScreenChrome title="Actions" meta="Illustrative product view" />
+      <ScreenChrome title="Growth plan" meta="Illustrative · 3 opportunities" />
 
-      <div className="relative">
-        <div
-          className="grid gap-4 border-b border-black/12 px-4 py-2 sm:px-5"
-          style={{ gridTemplateColumns: "minmax(0,1fr) 4rem 4.5rem 5.5rem" }}
-        >
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
-            Decision and exact fix
-          </p>
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
-            Priority
-          </p>
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
-            Effort
-          </p>
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
-            Next step
-          </p>
-        </div>
-
-        {QUEUE_ROWS.map((row) => (
+      <div className="relative overflow-x-auto">
+        <div className="min-w-[58rem]">
           <div
-            key={row.title}
-            className={`grid items-center gap-4 border-b border-black/10 px-4 py-3.5 last:border-b-0 sm:px-5 ${
-              row.lead ? "bg-signal-ink/[0.06]" : ""
-            }`}
-            style={{ gridTemplateColumns: "minmax(0,1fr) 4rem 4.5rem 5.5rem" }}
+            className="grid gap-4 border-b border-black/12 px-4 py-2 sm:px-5"
+            style={{
+              gridTemplateColumns:
+                "minmax(0,1fr) 4rem 4.5rem 6rem 5.5rem",
+            }}
           >
-            <div>
-              <p
-                className={`leading-[1.4] ${
-                  row.lead
-                    ? "text-[15px] font-semibold text-ink-deep"
-                    : "text-[14px] text-black/78"
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
+              Opportunity and prepared fix
+            </p>
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
+              Priority
+            </p>
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
+              Effort
+            </p>
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
+              Impact
+            </p>
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
+              Next step
+            </p>
+          </div>
+
+          {QUEUE_ROWS.map((row) => (
+            <div
+              key={row.title}
+              className={`grid items-center gap-4 border-b border-black/10 px-4 py-3.5 last:border-b-0 sm:px-5 ${
+                row.lead ? "bg-signal-ink/[0.06]" : ""
+              }`}
+              style={{
+                gridTemplateColumns:
+                  "minmax(0,1fr) 4rem 4.5rem 6rem 5.5rem",
+              }}
+            >
+              <div>
+                <p
+                  className={`leading-[1.4] ${
+                    row.lead
+                      ? "text-[15px] font-semibold text-ink-deep"
+                      : "text-[14px] text-black/78"
+                  }`}
+                >
+                  {row.title}
+                </p>
+                <p className="mt-1 max-w-[46ch] text-[12px] leading-[1.55] text-black/54">
+                  {row.why}
+                </p>
+              </div>
+
+              <span
+                className={`inline-flex shrink-0 items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium ${PRIORITY_TONE[row.priority]}`}
+              >
+                {row.priority}
+              </span>
+
+              <span
+                className={`inline-flex shrink-0 items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium ${
+                  EFFORT_TONE[row.effort] ?? EFFORT_TONE.Hard
                 }`}
               >
-                {row.title}
-              </p>
-              <p className="mt-1 max-w-[46ch] text-[12px] leading-[1.55] text-black/54">
-                {row.why}
-              </p>
+                {row.effort}
+              </span>
+
+              <span className="font-mono text-[11px] font-semibold tabular-nums text-ink-deep">
+                {row.impact}
+              </span>
+
+              <span
+                className={`inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-1 text-[11px] font-semibold ${
+                  row.lead
+                    ? "bg-[var(--secondary)] text-[var(--secondary-foreground)]"
+                    : "border border-black/20 text-black/70"
+                }`}
+              >
+                {row.step}
+                <ArrowRight aria-hidden="true" className="h-3 w-3" />
+              </span>
             </div>
-
-            <span
-              className={`inline-flex shrink-0 items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium ${PRIORITY_TONE[row.priority]}`}
-            >
-              {row.priority}
-            </span>
-
-            <span
-              className={`inline-flex shrink-0 items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium ${
-                EFFORT_TONE[row.effort] ?? EFFORT_TONE.Hard
-              }`}
-            >
-              {row.effort}
-            </span>
-
-            <span
-              className={`inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-1 text-[11px] font-semibold ${
-                row.lead
-                  ? "bg-[var(--secondary)] text-[var(--secondary-foreground)]"
-                  : "border border-black/20 text-black/70"
-              }`}
-            >
-              {row.step}
-              <ArrowRight aria-hidden="true" className="h-3 w-3" />
-            </span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <p className="border-t border-black/12 bg-ground px-4 py-2.5 text-[11px] leading-[1.5] text-black/54 sm:px-5">
-        Eight more columns cover owner, confidence, source, and where it was
-        measured. They are a click away, and none are needed to start.
+        Every opportunity keeps its evidence, owner, approval state, commercial
+        impact tier, and proof plan attached.
       </p>
     </div>
   );
@@ -268,7 +283,7 @@ const LEDGER_ROWS = [
 export function ImpactScreen() {
   return (
     <div className="border border-white/16 bg-white/[0.02]">
-      <ScreenChrome title="Impact" meta="Example figures" tone="dark" />
+      <ScreenChrome title="Results" meta="Example figures" tone="dark" />
 
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-white/12 px-4 py-3 sm:px-5">
         <span className="inline-flex items-center gap-2 text-[12px] text-white/70">

@@ -138,16 +138,16 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
   },
   platform: {
     slug: "platform",
-    eyebrow: "Find → Choose → Buy",
+    eyebrow: "Platform",
     headline:
-      "Follow the buying decision from the first question to the purchase.",
-    metaTitle: "Beseam Platform | Find, Choose, Buy",
+      "Everything that helps a shopper choose you, connected.",
+    metaTitle: "Beseam Platform | Connected Ecommerce Growth",
     description:
-      "Beseam connects where shoppers find products, what helps them choose, where purchases break, and what happens after a change using Observe, Understand, Act, Learn.",
+      "Beseam connects discovery, product evidence, shopper behavior, and revenue around the same buying decision, then turns the strongest evidence into work and measures what changed.",
     intro:
-      "AI shopping is one place a buying decision begins. Beseam follows it further across onsite search, recommendations, product pages, sizing and fit, shopper behavior, checkout, conversion, actions, and impact so the evidence stays attached from the first question to what happened after a change.",
+      "Beseam connects what shoppers see before the visit, what they find on the store, what they do next, and what happened after a change. The strongest evidence becomes a Growth plan instead of another dashboard.",
     proofLine:
-      "The shopper path is Find, Choose, Buy. Beseam works across it with Observe, Understand, Act, Learn, keeping the evidence attached at every step.",
+      "Discovery, products, behavior, actions, and results stay attached to the same buying decision.",
     observationsHeading: "Follow the shopper's decision",
     observationsIntro:
       "Beseam connects the moments where a product gets considered, chosen, purchased, and measured instead of treating each as a separate dashboard.",
@@ -204,7 +204,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       "Not every capability or source is enabled for every store.",
       "Beseam does not claim an exact cause when the evidence only supports a hypothesis or correlation.",
       "No single composite score replaces the underlying evidence and freshness state.",
-      "Automated action stays limited to changes that are explicitly supported and approved.",
+      "Publishing stays limited to supported changes under the store's approval rules.",
     ],
     faqs: [
       {
@@ -218,9 +218,9 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
           "Beseam keeps the shopper signal and relevant evidence together, separates observed facts from possible explanations, and helps the team decide what deserves action without overstating certainty.",
       },
       {
-        question: "Can Beseam make changes automatically?",
+        question: "How are changes approved and published?",
         answer:
-          "Only supported changes under the approval rules agreed for the store. The previous state is retained so the action can be reviewed and reversed when the workflow supports it.",
+          "Today, supported customer-facing changes move through the approval rules configured for the store. Beseam keeps the action and audit trail attached, and retains the previous state where the workflow supports rollback.",
       },
       {
         question: "How do I know whether a change helped?",
@@ -231,7 +231,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
     related: [
       { label: "How we work with brands", href: "/how-we-work" },
       { label: "AI shopping discovery", href: "/ai-visibility-monitoring" },
-      { label: "See a buying decision", href: "/#decision-story" },
+      { label: "See Beseam work", href: "/#proof" },
     ],
   },
 };

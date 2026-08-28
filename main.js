@@ -298,7 +298,7 @@ async function submitReview(lead, env) {
     return json(
       {
         error: requiresStore
-          ? "Name, work email and Shopify store URL are required."
+          ? "Name, work email and store URL are required."
           : "Name, work email and a message are required.",
       },
       400,
@@ -325,7 +325,7 @@ async function submitReview(lead, env) {
     "",
     "Name: " + name,
     "Work email: " + email,
-    store ? "Shopify store: " + store : null,
+    store ? "Store: " + store : null,
     "Message: " + (message || "Not provided"),
     "",
     "Attribution:",
@@ -344,7 +344,7 @@ async function submitReview(lead, env) {
     escapeHtml(email) +
     "</p>" +
     (store
-      ? "<p><strong>Shopify store:</strong> " + escapeHtml(store) + "</p>"
+      ? "<p><strong>Store:</strong> " + escapeHtml(store) + "</p>"
       : "") +
     "<p><strong>Message:</strong><br>" +
     escapeHtml(message || "Not provided").replaceAll("\n", "<br>") +

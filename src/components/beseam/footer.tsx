@@ -31,8 +31,16 @@ const FOOTER_GROUPS = [
 
 export default function BeseamFooter() {
   return (
-    <footer className="bg-ink-deep text-white">
-      <div className="mx-auto max-w-[92rem] px-5 pb-8 pt-14 sm:px-8 sm:pt-16 lg:px-10">
+    <footer className="relative overflow-hidden bg-ink-deep text-white">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-[12rem] -top-[14rem] h-[42rem] w-[42rem] opacity-90 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255,91,61,0.22) 0%, rgba(255,91,61,0.10) 34%, rgba(255,91,61,0.025) 56%, transparent 72%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-[92rem] px-5 pb-8 pt-14 sm:px-8 sm:pt-16 lg:px-10">
         <div className="grid gap-12 border-b border-white/18 pb-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.25fr)] lg:gap-20">
           <div>
             <Link href="/" aria-label="Beseam home" className="inline-flex max-w-full">
@@ -43,12 +51,12 @@ export default function BeseamFooter() {
               />
             </Link>
             <p className="mt-7 max-w-[20ch] font-display text-[34px] leading-[1.08] tracking-[-0.02em] text-white/92">
-              Turn product discovery into{" "}
-              <span className="text-signal">buying decisions</span>.
+              Find the loss. Fix what matters.{" "}
+              <span className="text-signal">Prove what changed</span>.
             </p>
             <p className="mt-6 max-w-[54ch] text-[14px] leading-relaxed text-white/62">
-              See where shoppers choose something else, understand what may
-              explain it, act with your approval, and measure what changes.
+              Beseam runs one continuous growth loop across discovery, product
+              choice, conversion, action, and results.
             </p>
           </div>
 

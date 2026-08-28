@@ -2,11 +2,11 @@
 
 > Beseam shows where products lose shoppers across discovery and the store, connects the evidence that may explain it, helps teams decide and make supported changes, and measures what changed in behavior, conversion, orders, and revenue.
 
-Beseam is not a replacement for Shopify, analytics, ad platforms, or other systems of record. It works across them and keeps source evidence attached through Observe → Understand → Decide → Act → Learn.
+Beseam is not a replacement for Shopify, analytics, ad platforms, or other systems of record. It works across them and keeps source evidence attached through Observe → Understand → Act → Learn.
 
 ## Core pages
 
-- [Platform](https://beseam.com/platform): What Beseam connects and the Observe → Understand → Decide → Act → Learn operating loop.
+- [Platform](https://beseam.com/platform): What Beseam connects and the Observe → Understand → Act → Learn operating loop.
 - [Manifesto](https://beseam.com/manifesto): Product principles, boundaries, and why Beseam is being built.
 - [About](https://beseam.com/about): Founder, advisors, and company background.
 - [Resources](https://beseam.com/resources): Beseam Fieldbook problems, skills, playbooks, and projects.

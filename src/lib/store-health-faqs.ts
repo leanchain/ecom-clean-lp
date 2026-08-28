@@ -2,26 +2,26 @@ export const STORE_HEALTH_FAQS = [
   {
     question: "What do I need to connect to get started?",
     answer:
-      "Start with your domain. Store or analytics access is only needed when Beseam needs additional evidence or permission to support a change.",
+      "Start with your domain. Add commerce, analytics, search, behavior, or customer data only when it improves the evidence or gives Beseam permission to support a change.",
   },
   {
-    question: "How does Beseam work out what may be worth changing?",
+    question: "How does Beseam decide what to fix first?",
     answer:
-      "Beseam keeps the shopper signal and relevant evidence together, separates observed facts from possible explanations, and helps the team decide what deserves action. The reason for the decision stays attached to the evidence.",
+      "Beseam keeps shopper signals and relevant evidence together, separates observed facts from possible explanations, and prioritizes the opportunities most likely to matter commercially. The reason for every decision stays attached.",
   },
   {
     question: "What can Beseam actually change?",
     answer:
-      "With your approval and the right store access, Beseam can help change supported product data, content, merchandising, and other editable store experiences. What can be published depends on the connected platform and the approval rules you choose.",
+      "With the right access, Beseam can support changes to product data, content, merchandising, onsite search, recommendations, and other editable store experiences. Execution depends on the connected system and the approval rules you choose.",
   },
   {
-    question: "Do I approve changes before they go live?",
+    question: "What needs approval before it goes live?",
     answer:
-      "Yes. Customer-facing changes follow the approval rules agreed for your store. Beseam keeps the evidence, proposed action, and previous value connected so supported changes can be reviewed and reverted when needed.",
+      "You choose the rules. Today, Beseam prepares supported customer-facing changes and executes them after the required approval for your store. Judgment-heavy or unsupported changes stop for review. Where rollback is supported, the previous state and audit trail are retained.",
   },
   {
-    question: "How do I know whether a change helped?",
+    question: "How does Beseam measure whether a change helped?",
     answer:
-      "Beseam checks the relevant shopper, store, conversion, order, or revenue signals after an action and keeps them connected to the decision that produced it. What changed becomes evidence for the next cycle without turning correlation into certainty.",
+      "Beseam rechecks the original shopper signal and measures the relevant behavior, conversion, order, or revenue signals afterward. The before-and-after stays attached to the action, while correlation and causation remain clearly separated.",
   },
 ] as const;

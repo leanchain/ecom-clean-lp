@@ -29,11 +29,11 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: {
-    default: "Beseam | Get more shoppers to choose you",
+    default: "Beseam | Find, fix, and measure ecommerce growth",
     template: "%s | Beseam",
   },
   description:
-    "Beseam helps ecommerce teams see where shoppers overlook their products, choose something else, or stop before buying, then understand what to improve and measure what happens next.",
+    "Beseam continuously finds the strongest opportunities to improve growth, prepares and executes supported fixes under your rules, and measures what changed.",
   authors: [{ name: "Beseam" }],
   creator: "Beseam",
   publisher: "Beseam",
@@ -59,9 +59,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/favicon/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Beseam - Get more shoppers to choose you",
+    title: "Beseam - Find, fix, and measure ecommerce growth",
     description:
-      "See where shoppers overlook your products, choose something else, or stop before buying, then understand what to improve and measure what happens next.",
+      "Beseam continuously finds the strongest opportunities to improve growth, prepares and executes supported fixes under your rules, and measures what changed.",
     url: "/",
     siteName: "Beseam",
     type: "website",
@@ -77,9 +77,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beseam - Get more shoppers to choose you",
+    title: "Beseam - Find, fix, and measure ecommerce growth",
     description:
-      "See where shoppers overlook your products, choose something else, or stop before buying, then understand what to improve and measure what happens next.",
+      "Beseam continuously finds the strongest opportunities to improve growth, prepares and executes supported fixes under your rules, and measures what changed.",
     images: [HOME_SOCIAL_IMAGE],
   },
 };
@@ -96,7 +96,7 @@ export default function RootLayout({
         name: "Beseam",
         url: `${SITE_URL}/`,
         description:
-          "Beseam helps ecommerce teams get more shoppers to choose their products by showing where products get overlooked, why that may be happening, what to improve, and what happened after a change.",
+          "Beseam is a growth operator for ecommerce brands: it finds the strongest opportunities to improve growth, prepares and executes supported fixes under merchant rules, and measures what changed.",
         sameAs: ["https://www.linkedin.com/company/beseam/"],
         logo: {
           "@type": "ImageObject",

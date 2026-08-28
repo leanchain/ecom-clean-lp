@@ -19,7 +19,7 @@ The shared job: find out why products are not being found, chosen, or bought, an
 
 Beseam shows where products lose shoppers across discovery and the store, connects the evidence that may explain it, helps teams decide and make supported changes, and measures what changed in behavior, conversion, orders, and revenue.
 
-It is not a replacement for Shopify, analytics, ad platforms, or other systems of record. It works across them and keeps source evidence attached through the operating loop: **Observe → Understand → Decide → Act → Learn**.
+It is not a replacement for Shopify, analytics, ad platforms, or other systems of record. It works across them and keeps source evidence attached through the operating loop: **Observe → Understand → Act → Learn**.
 
 Success is a merchant making a change they can defend, and being able to see afterwards whether it moved anything.
 
@@ -27,7 +27,7 @@ Success is a merchant making a change they can defend, and being able to see aft
 
 Evidence stays attached to the claim. Beseam observes what AI shopping assistants and the storefront actually show, separates observed facts from hypotheses and likely causes, keeps material customer-facing changes under explicit merchant control, and re-measures the same questions after the change.
 
-What a neighboring product could not truthfully copy: the loop is closed and the evidence is preserved end to end — the same buying questions that exposed a gap are the ones rerun to prove the fix. No single opaque score stands in for the evidence.
+What a neighboring product could not truthfully copy: the loop is closed and the evidence is preserved end to end — the same buying questions that exposed a gap are the ones rerun to measure what changed after the fix. No single opaque score stands in for the evidence.
 
 ## Operating Context
 

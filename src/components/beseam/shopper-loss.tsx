@@ -341,8 +341,8 @@ const SITUATIONS: readonly Situation[] = [
         "The buying questions your products belong in, and the ones that name somebody else instead.",
       ],
       [
-        "You change",
-        "The words, detail, and structure on your product pages that decide whether you turn up for those questions.",
+        "Beseam prepares",
+        "The product-page words, detail, and structure that can help you turn up for those questions, ready for review or execution.",
       ],
       [
         "You are aiming for",
@@ -362,8 +362,8 @@ const SITUATIONS: readonly Situation[] = [
         "The questions your product pages leave unanswered, product by product.",
       ],
       [
-        "You change",
-        "Titles, descriptions, sizing and fit, images, and what the page says first.",
+        "Beseam prepares",
+        "The title, description, sizing and fit, images, and page changes most likely to make the choice easier.",
       ],
       [
         "You are aiming for",
@@ -383,8 +383,8 @@ const SITUATIONS: readonly Situation[] = [
         "Where sessions stop, and what the sessions that stopped had in common.",
       ],
       [
-        "You change",
-        "The step that is losing them, with your team or ours doing the work.",
+        "Beseam prepares",
+        "The fix for the step that is losing them, with approval kept for changes that need your judgment.",
       ],
       [
         "You are aiming for",

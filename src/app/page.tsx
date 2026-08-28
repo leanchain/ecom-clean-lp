@@ -8,13 +8,12 @@ import { HOME_SOCIAL_IMAGE, buildPublicMetadata } from "@/lib/seo";
 import { STORE_HEALTH_FAQS } from "@/lib/store-health-faqs";
 
 export const metadata: Metadata = buildPublicMetadata({
-  title: "Beseam | Get more shoppers to choose you",
+  title: "Beseam | Find, fix, and measure ecommerce growth",
   description:
-    "Beseam helps ecommerce teams see where shoppers overlook their products, choose something else, or stop before buying, then understand what to improve and measure what happens next.",
+    "Beseam continuously finds the strongest opportunities to improve growth, prepares and executes supported fixes under your rules, and measures what changed.",
   path: "/",
   image: HOME_SOCIAL_IMAGE,
-  imageAlt:
-    "Beseam showing where shoppers find, choose, and buy products",
+  imageAlt: "Beseam finding, fixing, and measuring ecommerce growth opportunities",
 });
 
 export default function Home() {
@@ -25,9 +24,9 @@ export default function Home() {
         "@type": "WebPage",
         "@id": "https://beseam.com/#webpage",
         url: "https://beseam.com/",
-        name: "Beseam | Get more shoppers to choose you",
+        name: "Beseam | Find, fix, and measure ecommerce growth",
         description:
-          "Beseam helps ecommerce teams see where shoppers overlook their products, choose something else, or stop before buying, then understand what to improve and measure what happens next.",
+          "Beseam continuously finds the strongest opportunities to improve growth, prepares and executes supported fixes under your rules, and measures what changed.",
         about: { "@id": "https://beseam.com/#organization" },
         inLanguage: "en",
       },
@@ -39,12 +38,12 @@ export default function Home() {
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         description:
-          "Beseam helps ecommerce teams make products easier to find, choose, and buy by connecting shopper questions, store evidence, behavior, supported changes, and what happened afterward.",
+          "Beseam continuously finds strong ecommerce growth opportunities, prepares and executes supported fixes under merchant rules, and measures what changes afterward.",
         featureList: [
-          "See where shoppers overlook products or choose something else",
-          "Understand likely explanations with source evidence attached",
-          "Act on what matters under merchant approval rules",
-          "Measure what happens after the action",
+          "Find where shoppers may be missed across discovery and the store",
+          "Prioritize growth opportunities by evidence and projected impact",
+          "Make supported changes under merchant approval rules",
+          "Measure what changed with before-and-after evidence",
         ],
         publisher: { "@id": "https://beseam.com/#organization" },
       },

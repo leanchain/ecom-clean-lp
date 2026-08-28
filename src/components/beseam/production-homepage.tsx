@@ -4,7 +4,6 @@ import LiveAnswerCheck from "@/components/beseam/answer-check";
 import CategoryBenchmarksSection from "@/components/beseam/category-benchmarks-section";
 import ConnectedEvidence from "@/components/beseam/connected-evidence";
 import CredibilityRail from "@/components/beseam/credibility-rail";
-import DecisionBridge from "@/components/beseam/decision-bridge";
 import EvidenceToWork from "@/components/beseam/evidence-to-work";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
@@ -15,16 +14,17 @@ import { Reveal } from "@/components/beseam/reveal";
 /**
  * Section order is the argument, and it is deliberate:
  *
- * claim → proof → what Beseam is → how it works → one decision end to end
- * → the work → the measurement → the research → ways to start
+ * claim → credibility → prioritized growth plan → proof → simple operating
+ * promise → evidence depth → research → ways to start
  *
- * The visitor understands what Beseam is before seeing how sophisticated it
- * is. Depth lives in the trace and on /platform.
+ * The merchant sees what Beseam takes responsibility for before seeing the
+ * machinery that supports it. The connected-system architecture belongs on
+ * /platform.
  */
 const SCAN_RETURNS = [
-  "Where AI overlooks you",
-  "Which competitors get named instead",
+  "Where shoppers may lose you",
   "What to improve first",
+  "Evidence behind every finding",
 ] as const;
 
 export default function ProductionHomepage() {
@@ -44,10 +44,10 @@ export default function ProductionHomepage() {
                 Get more shoppers to{" "}
                 <span className="text-signal-ink">choose you</span>.
               </h1>
-              <p className="pointer-events-auto mx-auto mt-6 max-w-[58ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
-                See where shoppers choose something else, understand what may
-                explain it, turn the evidence into action, and measure what
-                changes.
+              <p className="pointer-events-auto mx-auto mt-6 max-w-[64ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
+                Beseam continuously finds the strongest opportunities to improve
+                growth, prepares and executes supported fixes under your rules,
+                and measures what changed.
               </p>
 
               <div className="pointer-events-auto mx-auto mt-9 w-full">
@@ -83,11 +83,10 @@ export default function ProductionHomepage() {
       </section>
 
       <CredibilityRail />
-      <DecisionBridge />
-      <OperatingLoop />
-      <ConnectedEvidence />
       <EvidenceToWork />
       <MeasureImpact />
+      <OperatingLoop />
+      <ConnectedEvidence />
       <CategoryBenchmarksSection />
       <FirstMonthPromise />
     </div>

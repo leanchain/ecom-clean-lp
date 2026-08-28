@@ -1,17 +1,15 @@
 import { Reveal } from "@/components/beseam/reveal";
 
 const STEPS = [
-  ["01", "Observe", "See where you were missed."],
-  ["02", "Understand", "Check what may explain it."],
-  ["03", "Act", "Turn the strongest finding into work."],
-  ["04", "Learn", "Ask again and measure what moved."],
+  ["01", "Observe", "See where shoppers are missed or may drop out."],
+  ["02", "Understand", "Connect the evidence that may explain why."],
+  ["03", "Act", "Prepare and make the supported change under your rules."],
+  ["04", "Learn", "Recheck the same signal and measure what changed."],
 ] as const;
 
 /**
- * The canonical Beseam operating model, deliberately introduced only after the
- * visitor has already seen the merchant problem and a connected-evidence trace.
- * It is identity and method, not the elevator pitch. Kept text-only on the
- * homepage — the drawn version of this loop lives on /platform.
+ * One operating vocabulary across the product and marketing site:
+ * Observe → Understand → Act → Learn.
  */
 export default function OperatingLoop() {
   return (
@@ -24,15 +22,15 @@ export default function OperatingLoop() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                From being considered to being chosen
+                One continuous growth loop
               </p>
               <h2 className="mt-7 max-w-[16ch] text-balance font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
-                Getting considered is only the start.
+                Beseam runs the loop.
               </h2>
             </div>
             <p className="max-w-[50ch] text-[16px] leading-[1.75] text-black/64">
-              Beseam connects the result to the evidence, the change, and what
-              happens next.
+              You see the opportunity, approve only what needs judgment, and get
+              the evidence of what happened next.
             </p>
           </div>
         </Reveal>

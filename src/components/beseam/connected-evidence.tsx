@@ -293,9 +293,9 @@ function MobileTrace() {
       <div className="border-t border-white/14 pt-6">
         <p className="text-[12px] leading-[1.65] text-white/54">
           Beseam keeps the shopper signal, the explanations it checked, the
-          action, and what happened afterward connected. We work through the
-          evidence with your team, help make the supported change, and measure
-          what happens next.
+          action, and what happened afterward connected. It prepares the supported
+          change, keeps your approval where judgment is needed, and measures what
+          happens next.
         </p>
         <Link
           href="/manifesto"
@@ -442,9 +442,9 @@ export default function ConnectedEvidence() {
 
                 <div className="mt-9 flex items-center justify-between gap-8 border-t border-white/14 pt-7">
                   <p className="max-w-[70ch] text-[13px] leading-[1.7] text-white/62">
-                    Beseam does not stop at the recommendation. We work through
-                    the evidence with your team, help make the supported change,
-                    and measure what happens afterward.
+                    Beseam does not stop at the recommendation. It prepares the
+                    supported change, keeps your approval where judgment is needed,
+                    and measures what happens afterward.
                   </p>
                   <Link
                     href="/manifesto"
