@@ -1,48 +1,56 @@
 import { cn } from "@/lib/utils";
 
+export type LogoVariant =
+  "default" | "secondary" | "inverted" | "secondary-inverted";
+
 export interface LogoProps {
   className?: string;
   markClassName?: string;
   wordmarkClassName?: string;
+  variant?: LogoVariant;
   /** Collapse the wordmark so only the B mark stays (e.g. scrolled navbar). */
   hideWordmark?: boolean;
 }
+
+const MARK_URLS: Record<LogoVariant, string> = {
+  default: "/brand/beseam-mark-default.svg",
+  secondary: "/brand/beseam-mark-secondary.svg",
+  inverted: "/brand/beseam-mark-inverted.svg",
+  "secondary-inverted": "/brand/beseam-mark-secondary-inverted.svg",
+};
 
 export default function Logo({
   className,
   markClassName,
   wordmarkClassName,
+  variant = "default",
   hideWordmark = false,
 }: LogoProps) {
   return (
     <span
-      className={cn(
-        "inline-flex items-center text-[27px] leading-none",
-        className,
-      )}
+      className={cn("inline-flex items-center text-[27px] leading-none", className)}
+      style={{ columnGap: "0.09em" }}
     >
-      <svg
-        viewBox="503 225 2655 3298"
+      {/* Static generated SVG: render it directly instead of as a CSS background. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         aria-hidden="true"
-        className={cn(
-          "h-[0.80em] w-[0.70em] shrink-0 text-signal-ink drop-shadow-[0_1px_2px_rgba(17,19,24,0.35)]",
-          markClassName,
-        )}
-      >
-        <g
-          transform="translate(0.000000,3750.000000) scale(0.100000,-0.100000)"
-          fill="currentColor"
-          stroke="none"
-        >
-          <path d="M6530 22543 c0 -6610 4 -11203 9 -11198 5 6 225 498 489 1095 l481 1086 734 1218 734 1218 948 1135 c723 865 972 1156 1045 1222 52 47 427 380 833 740 l737 653 0 4439 0 4439 438 0 c240 1 2158 14 4262 29 l3825 29 453 -78 453 -79 312 -165 c172 -91 398 -211 504 -268 l191 -103 325 -372 c263 -301 329 -382 345 -425 11 -29 95 -246 187 -483 l166 -430 31 -625 c17 -344 32 -626 32 -627 1 -1 409 54 906 123 l905 125 62 -30 62 -31 -18 -42 c-10 -24 -881 -1998 -1935 -4387 -1055 -2389 -1914 -4347 -1909 -4351 4 -5 208 -70 452 -145 l444 -138 344 -187 344 -188 295 -263 296 -264 219 -313 220 -313 170 -432 171 -432 64 -395 64 -395 0 -455 0 -455 -109 -480 -108 -480 -161 -320 -160 -320 -355 -385 -355 -386 -373 -218 -374 -218 -510 -140 -510 -140 -4097 -32 c-2254 -18 -4100 -35 -4103 -38 -3 -3 -96 -268 -206 -589 l-200 -584 -159 -680 -158 -680 -92 -700 -93 -700 -17 -565 c-9 -311 -16 -565 -16 -566 1 -1 2116 -8 4701 -16 l4700 -16 530 49 530 48 650 125 650 124 545 172 545 171 555 246 555 247 538 347 537 347 641 625 640 624 424 706 423 705 281 859 280 858 96 762 95 762 0 525 0 525 -95 776 -95 776 -126 472 -126 471 -282 611 -282 610 -344 499 -344 500 -405 419 -405 420 -500 375 -501 376 -509 278 c-280 153 -511 280 -514 283 -2 2 2 30 10 62 l14 58 578 391 578 391 581 661 582 660 278 512 279 511 234 751 235 750 79 587 80 586 0 546 0 546 -95 681 -95 681 -235 751 -235 751 -451 747 -451 747 -526 528 -527 529 -570 381 -570 381 -750 313 -750 313 -835 186 -835 186 -485 49 -485 49 -7777 0 -7778 0 0 -11207z" />
-          <path d="M19185 22860 c-2469 -334 -4499 -609 -4509 -611 -15 -3 126 -175 667 -814 377 -445 682 -814 678 -818 -5 -5 -391 -259 -859 -565 l-851 -557 -938 -766 -938 -767 -597 -613 -596 -614 -433 -525 -432 -525 -687 -1030 -687 -1030 -497 -1025 -498 -1025 -378 -1086 -378 -1086 -281 -1375 -282 -1374 -79 -840 -80 -839 0 -602 0 -603 2600 0 2600 0 0 23 c0 12 27 481 60 1042 l61 1020 190 950 189 950 264 805 263 805 535 1070 536 1070 321 490 322 490 569 680 569 680 622 590 621 589 851 619 c468 341 856 621 862 623 5 2 50 -18 100 -44 l90 -47 466 -948 c257 -521 468 -949 470 -951 2 -2 911 2043 2020 4545 l2017 4550 -16 49 c-9 28 -21 49 -26 49 -6 -1 -2031 -275 -4501 -609z" />
-        </g>
-      </svg>
+        src={MARK_URLS[variant]}
+        alt=""
+        width={484}
+        height={696}
+        className={cn("block w-auto shrink-0", markClassName)}
+        style={{
+          height: "0.78em",
+          width: "auto",
+          transform: "translateY(0.005em)",
+        }}
+      />
       <span
         aria-hidden="true"
         className={cn(
-          "inline-block overflow-hidden font-semibold tracking-[-0.065em] transition-all duration-200",
-          hideWordmark ? "max-w-0 opacity-0" : "max-w-[5em] opacity-100",
+          "inline-block overflow-hidden font-medium tracking-[-0.018em] transition-all duration-200",
+          hideWordmark ? "max-w-0 opacity-0" : "max-w-[5.4em] opacity-100",
           wordmarkClassName,
         )}
       >

@@ -36,7 +36,7 @@ export default function BeseamFooter() {
         <div className="grid gap-12 border-b border-white/18 pb-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.25fr)] lg:gap-20">
           <div>
             <Link href="/" aria-label="Beseam home" className="inline-flex">
-              <Logo className="text-white" />
+              <Logo variant="secondary-inverted" className="text-white" />
             </Link>
             <p className="mt-7 max-w-[20ch] font-display text-[34px] leading-[1.08] tracking-[-0.02em] text-white/92">
               Turn product discovery into{" "}
