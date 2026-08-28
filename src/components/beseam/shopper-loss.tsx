@@ -342,7 +342,7 @@ const SITUATIONS: readonly Situation[] = [
       ],
       [
         "Beseam prepares",
-        "The product-page words, detail, and structure that can help you turn up for those questions, ready for review or execution.",
+        "The product-page words, detail, and structure that can help you turn up for those questions, ready for your approval.",
       ],
       [
         "You are aiming for",
@@ -384,7 +384,7 @@ const SITUATIONS: readonly Situation[] = [
       ],
       [
         "Beseam prepares",
-        "The fix for the step that is losing them, with approval kept for changes that need your judgment.",
+        "The fix for the step that is losing them, ready for your approval before it changes the store.",
       ],
       [
         "You are aiming for",

@@ -203,7 +203,7 @@ const STAGES = [
   {
     number: "03",
     title: "Act",
-    body: "The supported fix moves forward under the merchant's approval rules.",
+    body: "The supported fix is approved by the brand owner before it changes the store.",
     Vignette: ActVignette,
   },
   {

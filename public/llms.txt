@@ -1,6 +1,6 @@
 # Beseam
 
-> Beseam continuously watches how shoppers find, choose, and buy, connects the evidence around the strongest opportunities, proposes supported changes under merchant approval rules, and measures what changed in behavior, conversion, orders, and revenue.
+> Beseam continuously watches how shoppers find, choose, and buy, connects the evidence around the strongest opportunities, proposes supported changes for brand-owner approval, applies approved changes, and measures what changed in behavior, conversion, orders, and revenue.
 
 Beseam is not a replacement for Shopify, analytics, ad platforms, or other systems of record. It works across them and keeps source evidence attached through Observe → Understand → Act → Learn.
 
@@ -25,7 +25,7 @@ Beseam is not a replacement for Shopify, analytics, ad platforms, or other syste
 - Preserve source evidence and freshness instead of hiding it behind one opaque score.
 - Separate observed facts from hypotheses and likely causes.
 - Decide which commercial question deserves attention instead of producing the longest list of findings.
-- Keep material customer-facing changes under explicit merchant control.
+- Require explicit brand-owner approval before any customer-facing change is applied.
 - Measure the relevant signals again after an action.
 
 ## Important boundaries

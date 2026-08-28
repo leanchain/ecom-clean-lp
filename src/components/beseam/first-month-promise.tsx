@@ -61,8 +61,8 @@ export default function FirstMonthPromise({
               </h3>
               <p className="mt-4 max-w-[46ch] text-[15px] leading-[1.7] text-black/66">
                 Beseam continuously finds worthwhile opportunities, proposes
-                supported fixes, asks for approval only when needed, and
-                measures what changed.
+                supported fixes for your approval, makes the approved change,
+                and measures what changed.
               </p>
               <BookReviewCta
                 variant="primary"

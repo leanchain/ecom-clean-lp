@@ -4,7 +4,7 @@ import { Reveal } from "@/components/beseam/reveal";
 const WORKFLOW = [
   ["Find", "Surface the strongest opportunity"],
   ["Propose", "Prepare the supported fix"],
-  ["Approve", "Step in only when judgment is needed"],
+  ["Approve", "You approve the change"],
   ["Measure", "Check what changed and keep going"],
 ] as const;
 
@@ -31,8 +31,8 @@ export default function EvidenceToWork() {
               </h2>
             </div>
             <p className="max-w-[50ch] text-[16px] leading-[1.75] text-black/64">
-              It proposes the supported fix, asks for approval only when needed,
-              measures what changed, then keeps going.
+              It proposes the supported fix for your approval, makes the approved
+              change, measures what changed, then keeps going.
             </p>
           </div>
         </Reveal>

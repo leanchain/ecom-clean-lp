@@ -294,7 +294,7 @@ function MobileTrace() {
         <p className="text-[12px] leading-[1.65] text-white/54">
           Beseam keeps the shopper signal, the explanations it checked, the
           action, and what happened afterward connected. It prepares the supported
-          change, keeps your approval where judgment is needed, and measures what
+          change for your approval, applies it after approval, and measures what
           happens next.
         </p>
         <Link
@@ -431,19 +431,18 @@ export default function ConnectedEvidence() {
                 </div>
 
                 <Tails />
-
                 <div className="border border-signal/45 bg-signal/[0.05] px-6 py-5 text-center">
                   <StepLabel>What happens next</StepLabel>
                   <p className="mt-2.5 text-[16px] leading-[1.5] text-white/92">
-                    The strongest evidence becomes a proposed fix. Beseam keeps
-                    it moving through approval when needed and remeasurement.
+                    The strongest evidence becomes a proposed fix. You approve
+                    the change; Beseam applies it and remeasures what changed.
                   </p>
                 </div>
 
                 <div className="mt-9 flex items-center justify-between gap-8 border-t border-white/14 pt-7">
                   <p className="max-w-[70ch] text-[13px] leading-[1.7] text-white/62">
                     Beseam does not stop at the recommendation. It prepares the
-                    supported change, keeps your approval where judgment is needed,
+                    supported change for your approval, applies the approved change,
                     and measures what happens afterward.
                   </p>
                   <Link

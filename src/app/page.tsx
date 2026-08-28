@@ -38,11 +38,11 @@ export default function Home() {
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         description:
-          "Beseam continuously finds strong ecommerce growth opportunities, prepares and executes supported fixes under merchant rules, and measures what changes afterward.",
+          "Beseam continuously finds strong ecommerce growth opportunities, prepares supported fixes for brand-owner approval, applies approved changes, and measures what changes afterward.",
         featureList: [
           "Find where shoppers may be missed across discovery and the store",
           "Prioritize growth opportunities by evidence and projected impact",
-          "Make supported changes under merchant approval rules",
+          "Ask the brand owner to approve before customer-facing changes are applied",
           "Measure what changed with before-and-after evidence",
         ],
         publisher: { "@id": "https://beseam.com/#organization" },

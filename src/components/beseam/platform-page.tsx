@@ -139,9 +139,9 @@ export default function PlatformPageContent({
               </div>
               <p className="max-w-[52ch] text-[16px] leading-[1.75] text-black/64">
                 Beseam does not ask the merchant to operate every diagnostic
-                surface. It continuously ranks opportunities, prepares supported
-                changes, and moves them through approval where needed. Results
-                keeps what happened attached to the same change.
+                surface. It continuously ranks opportunities and prepares supported
+                changes for your approval before anything customer-facing changes.
+                Results keeps what happened attached to the same change.
               </p>
             </div>
           </Reveal>

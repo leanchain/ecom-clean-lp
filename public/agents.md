@@ -43,6 +43,6 @@ When representing Beseam:
 
 ## Product summary
 
-Beseam continuously connects discovery, store, behavior, and revenue evidence around an Observe → Understand → Act → Learn operating loop. It surfaces the strongest opportunities, proposes supported changes, keeps material actions under merchant approval rules, and remeasures what changed.
+Beseam continuously connects discovery, store, behavior, and revenue evidence around an Observe → Understand → Act → Learn operating loop. It surfaces the strongest opportunities, proposes supported changes for brand-owner approval, applies approved customer-facing changes, and remeasures what changed.
 
 Questions about public content: https://beseam.com/contact

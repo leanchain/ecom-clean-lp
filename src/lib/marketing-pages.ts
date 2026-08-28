@@ -51,7 +51,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
     description:
       "Observe real buying questions across AI assistants, connect each answer to product and store evidence, propose supported changes, and recheck what changes.",
     intro:
-      "AI shopping discovery is one signal in Beseam's continuous commerce loop. For each buying question, Beseam keeps the observed answer, products named, competitor context, and relevant product evidence together, then surfaces the strongest opportunity and proposes a supported change. Your team steps in when judgment or approval is needed.",
+      "AI shopping discovery is one signal in Beseam's continuous commerce loop. For each buying question, Beseam keeps the observed answer, products named, competitor context, and relevant product evidence together, then surfaces the strongest opportunity and proposes a supported change for brand-owner approval.",
     proofLine:
       "The result is an observed answer with traceable context, not a company-wide visibility score or a claim about hidden ranking logic.",
     observations: [
@@ -73,7 +73,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       {
         title: "Product evidence you control",
         detail:
-          "Connect the miss to supported product-page, catalog, structured-data, or feed differences Beseam can inspect and, where permitted, change.",
+          "Connect the miss to supported product-page, catalog, structured-data, or feed differences Beseam can inspect and prepare for approval.",
       },
     ],
     sections: [
@@ -192,10 +192,10 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       {
         title: "Act on what matters. Learn from what changes.",
         icon: Sparkles,
-        body: "Beseam surfaces the next opportunity, proposes the supported product data, content, merchandising, creative, campaign, or store change, and moves it through approval when needed with the previous state retained. After the action, Beseam checks the relevant discovery, behavior, conversion, order, or revenue signals.",
+        body: "Beseam surfaces the next opportunity and proposes the supported product data, content, merchandising, creative, campaign, or store change. The brand owner approves before a customer-facing change is applied, with the previous state retained. After the action, Beseam checks the relevant discovery, behavior, conversion, order, or revenue signals.",
         points: [
           "Tie the action to the affected product, page, journey, or opportunity.",
-          "Keep control with explicit approval for supported store changes.",
+          "Approve every supported customer-facing store change before it is applied.",
           "Carry what was learned into the next action.",
         ],
       },
@@ -204,7 +204,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       "Not every capability or source is enabled for every store.",
       "Beseam does not claim an exact cause when the evidence only supports a hypothesis or correlation.",
       "No single composite score replaces the underlying evidence and freshness state.",
-      "Publishing stays limited to supported changes under the store's approval rules.",
+      "Customer-facing publishing requires explicit brand-owner approval before the change is applied.",
     ],
     faqs: [
       {
@@ -220,7 +220,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       {
         question: "How are changes approved and published?",
         answer:
-          "Today, supported customer-facing changes move through the approval rules configured for the store. Beseam keeps the action and audit trail attached, and retains the previous state where the workflow supports rollback.",
+          "The brand owner approves every supported customer-facing change before Beseam applies it. Beseam keeps the action and audit trail attached, and retains the previous state where the workflow supports rollback.",
       },
       {
         question: "How do I know whether a change helped?",

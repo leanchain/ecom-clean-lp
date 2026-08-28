@@ -11,7 +11,7 @@ import { buildPublicMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPublicMetadata({
   title: "How Beseam Works for Commerce Teams",
   description:
-    "Beseam continuously finds commerce growth opportunities, proposes supported fixes, asks for approval only when needed, and measures what changes.",
+    "Beseam continuously finds commerce growth opportunities, proposes supported fixes for brand-owner approval, makes approved changes, and measures what changes.",
   path: "/how-we-work",
 });
 
@@ -21,7 +21,7 @@ const LOOP = [
   [
     "03",
     "Act",
-    "Prepare and move the supported change forward under your approvals.",
+    "Prepare the supported change, get your approval, then apply it.",
   ],
   [
     "04",
@@ -40,8 +40,8 @@ const RESPONSIBILITIES = [
     ours: "Use that context to propose supported changes instead of generic recommendations.",
   },
   {
-    yours: "Approval when a change needs judgment",
-    ours: "Execute where permitted, recheck what changed, and keep the loop moving.",
+    yours: "Approve every customer-facing change",
+    ours: "Apply the approved change, recheck what changed, and keep the loop moving.",
   },
 ] as const;
 
@@ -62,9 +62,9 @@ export default function HowWeWorkPage() {
               </div>
               <div>
                 <p className="max-w-[52ch] text-[18px] leading-[1.7] text-black/66">
-                  Beseam continuously finds growth opportunities, proposes
-                  supported fixes, and measures what changed. Your team steps
-                  in only when commercial judgment or approval is needed.
+                  Beseam continuously finds growth opportunities and proposes
+                  supported fixes. You approve before anything customer-facing
+                  changes; Beseam applies it and measures what changed.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <BookReviewCta
@@ -106,8 +106,8 @@ export default function HowWeWorkPage() {
               <div>
                 <p className="max-w-[64ch] text-[17px] leading-[1.75] text-white/68">
                   Beseam stays in motion: observe what is happening, understand
-                  the strongest opportunity, propose and make the supported
-                  change, then learn from what moved next.
+                  the strongest opportunity, propose the supported change, get
+                  your approval, make it, then learn from what moved next.
                 </p>
                 <ol className="mt-10 grid border-t border-white/16 md:grid-cols-4">
                   {LOOP.map(([number, title, body], index) => (
@@ -142,7 +142,7 @@ export default function HowWeWorkPage() {
                   The operating relationship
                 </p>
                 <h2 className="mt-5 max-w-[14ch] font-display text-[clamp(2.2rem,3.6vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
-                  Beseam keeps moving. You step in when needed.
+                  Beseam keeps moving. Nothing changes without your approval.
                 </h2>
                 <p className="mt-5 max-w-[36ch] text-[15px] leading-[1.7] text-black/60">
                   Commerce and growth teams provide the context, constraints,

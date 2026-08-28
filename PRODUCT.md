@@ -17,7 +17,7 @@ The shared job: find out why products are not being found, chosen, or bought, an
 
 ## Product Purpose
 
-Beseam continuously watches how shoppers find, choose, and buy, connects the evidence around the strongest opportunities, proposes supported changes under merchant approval rules, and measures what changed in behavior, conversion, orders, and revenue.
+Beseam continuously watches how shoppers find, choose, and buy, connects the evidence around the strongest opportunities, proposes supported changes for brand-owner approval, applies approved changes, and measures what changed in behavior, conversion, orders, and revenue.
 
 It is not a replacement for Shopify, analytics, ad platforms, or other systems of record. It works across them and keeps source evidence attached through the operating loop: **Observe → Understand → Act → Learn**.
 
@@ -25,7 +25,7 @@ Success is a merchant making a change they can defend, and being able to see aft
 
 ## Positioning
 
-Evidence stays attached to the claim. Beseam observes what AI shopping assistants and the storefront actually show, separates observed facts from hypotheses and likely causes, keeps material customer-facing changes under explicit merchant control, and re-measures the same questions after the change.
+Evidence stays attached to the claim. Beseam observes what AI shopping assistants and the storefront actually show, separates observed facts from hypotheses and likely causes, requires explicit brand-owner approval before any customer-facing change, and re-measures the same questions after the change.
 
 What a neighboring product could not truthfully copy: the loop is closed and the evidence is preserved end to end — the same buying questions that exposed a gap are the ones rerun to measure what changed after the fix. No single opaque score stands in for the evidence.
 
@@ -75,5 +75,5 @@ Must not be fabricated: customer names, quotes, store counts, pricing, case-stud
 1. **Preserve the source evidence.** Never collapse it into one opaque score, and keep freshness visible.
 2. **Separate observed from inferred.** A fact and a likely cause never wear the same styling, the same verb, or the same confidence.
 3. **Answer the commercial question, not all of them.** Decide what deserves attention rather than producing the longest list of findings.
-4. **The merchant approves anything shoppers will see.** Material customer-facing changes stay under explicit control and stay reversible.
+4. **The brand owner approves anything shoppers will see.** Every customer-facing change requires explicit approval before Beseam applies it, and supported changes stay reversible.
 5. **Close the loop or it did not happen.** Re-measure the same signals after an action; the proof is the rerun, not the promise.

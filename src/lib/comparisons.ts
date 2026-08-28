@@ -102,7 +102,7 @@ function buildAiVisibilityComparison(seed: AiVisibilitySeed): Comparison {
         criterion: "Action model",
         competitor: seed.actionModel,
         beseam:
-          "Turn a supported finding into an owned change with approval boundaries instead of ending at a recommendation or dashboard.",
+          "Turn a supported finding into an owned change that waits for brand-owner approval instead of ending at a recommendation or dashboard.",
       },
       {
         criterion: "What happens after the answer",
@@ -136,7 +136,7 @@ function buildAiVisibilityComparison(seed: AiVisibilitySeed): Comparison {
         step: "Change what you control",
         competitor: seed.actionModel,
         beseam:
-          "Keep the proposed change, commerce object, owner, and approval boundary attached to the original answer evidence.",
+          "Keep the proposed change, commerce object, owner, and brand-owner approval attached to the original answer evidence.",
       },
       {
         step: "Ask again",
@@ -507,7 +507,7 @@ export const COMPARISONS: Comparison[] = [
         competitor:
           "The team moves into a CMS, commerce platform, ad platform, or ticketing tool.",
         beseam:
-          "The affected commerce object, proposed change, owner, and approval boundary remain explicit.",
+          "The affected commerce object and proposed change remain explicit, with brand-owner approval before any customer-facing change is applied.",
       },
       {
         step: "Check again",
@@ -636,7 +636,7 @@ export const COMPARISONS: Comparison[] = [
         step: "Change the experience",
         competitor: "The finding is handed to design, product, or engineering.",
         beseam:
-          "The commerce object and recommended change remain explicit, with approval where customer-facing content is involved.",
+          "The commerce object and recommended change remain explicit, and the brand owner approves before any customer-facing change is applied.",
       },
       {
         step: "Learn from the result",
@@ -765,7 +765,7 @@ export const COMPARISONS: Comparison[] = [
         step: "Change the experience",
         competitor: "The finding is handed to design, product, or engineering.",
         beseam:
-          "The commerce object and recommended change remain explicit, with approval where customer-facing content is involved.",
+          "The commerce object and recommended change remain explicit, and the brand owner approves before any customer-facing change is applied.",
       },
       {
         step: "Learn from the result",
@@ -896,7 +896,7 @@ export const COMPARISONS: Comparison[] = [
         competitor:
           "Engineering ships a fix through the normal release process.",
         beseam:
-          "The affected commerce object, proposed change, owner, and approval boundary remain explicit.",
+          "The affected commerce object and proposed change remain explicit, with brand-owner approval before any customer-facing change is applied.",
       },
       {
         step: "Check again",
@@ -1547,7 +1547,7 @@ export const COMPARISONS: Comparison[] = [
         competitor:
           "The team moves into a CMS, commerce platform, ad platform, or ticketing tool.",
         beseam:
-          "The affected commerce object, proposed change, owner, and approval boundary remain explicit.",
+          "The affected commerce object and proposed change remain explicit, with brand-owner approval before any customer-facing change is applied.",
       },
       {
         step: "Check again",
@@ -1679,7 +1679,7 @@ export const COMPARISONS: Comparison[] = [
         competitor:
           "The team ships a flag, rollout, or experiment directly in PostHog.",
         beseam:
-          "The affected commerce object, proposed change, owner, and approval boundary remain explicit.",
+          "The affected commerce object and proposed change remain explicit, with brand-owner approval before any customer-facing change is applied.",
       },
       {
         step: "Check again",
@@ -1937,7 +1937,7 @@ export const COMPARISONS: Comparison[] = [
         step: "Change the experience",
         competitor: "A fix ships through the normal engineering release cycle.",
         beseam:
-          "The commerce object and recommended change remain explicit, with approval where customer-facing content is involved.",
+          "The commerce object and recommended change remain explicit, and the brand owner approves before any customer-facing change is applied.",
       },
       {
         step: "Learn from the result",
@@ -2065,7 +2065,7 @@ export const COMPARISONS: Comparison[] = [
         competitor:
           "A simple A/B test or page edit ships directly in Crazy Egg.",
         beseam:
-          "The commerce object and recommended change remain explicit, with approval where customer-facing content is involved.",
+          "The commerce object and recommended change remain explicit, and the brand owner approves before any customer-facing change is applied.",
       },
       {
         step: "Learn from the result",
@@ -2194,7 +2194,7 @@ export const COMPARISONS: Comparison[] = [
         step: "Change the experience",
         competitor: "The finding is handed to design, product, or engineering.",
         beseam:
-          "The commerce object and recommended change remain explicit, with approval where customer-facing content is involved.",
+          "The commerce object and recommended change remain explicit, and the brand owner approves before any customer-facing change is applied.",
       },
       {
         step: "Learn from the result",
@@ -2324,7 +2324,7 @@ export const COMPARISONS: Comparison[] = [
         competitor:
           "The team moves into a CMS, commerce platform, ad platform, or another Experience Cloud product.",
         beseam:
-          "The affected commerce object, proposed change, owner, and approval boundary remain explicit.",
+          "The affected commerce object and proposed change remain explicit, with brand-owner approval before any customer-facing change is applied.",
       },
       {
         step: "Check again",
@@ -2381,7 +2381,7 @@ const BESEAM_PRACTICAL = {
   setup:
     "Connect the relevant store and evidence sources around the commercial question being investigated.",
   output:
-    "An evidence-backed decision, owned action, approval boundary, and re-check of the original signal.",
+    "An evidence-backed decision, owned action, explicit brand-owner approval, and re-check of the original signal.",
   pricing:
     "No public self-serve price on beseam.com; scope starts with a commerce review.",
 } as const;

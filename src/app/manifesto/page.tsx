@@ -92,7 +92,7 @@ const PRINCIPLES = [
   },
   {
     title: "Keep people in control",
-    body: "Supported customer-facing actions stay behind the approval rules agreed for the store, with the previous state retained when the workflow supports it.",
+    body: "The brand owner approves every customer-facing change before Beseam applies it, with the previous state retained when the workflow supports rollback.",
   },
   {
     title: "Measure after the action",
@@ -119,7 +119,7 @@ const NEVER = [
   "Hide the supporting evidence behind one confident composite score.",
   "Present a likely cause as if it were a confirmed fact.",
   "Optimize one surface while ignoring the rest of the commerce path.",
-  "Publish a material customer-facing change without the agreed approval.",
+  "Publish any customer-facing change without explicit brand-owner approval.",
   "Call an action successful before the relevant signals have been measured again.",
   "Turn a favorable before-and-after result into a guarantee of future traffic, conversion, or revenue.",
 ] as const;
@@ -131,7 +131,7 @@ const NOT_FOR = [
   ],
   [
     "Teams who want an unsupervised agent",
-    "Budget and customer-facing changes stay behind a person. If you want software that spends and publishes on its own, we are the wrong choice.",
+    "Budget and customer-facing changes stay behind a person. Beseam can prepare the work, but the brand owner approves before it spends or publishes. If you want software that does that without approval, we are the wrong choice.",
   ],
   [
     "Teams shopping for a replacement stack",
