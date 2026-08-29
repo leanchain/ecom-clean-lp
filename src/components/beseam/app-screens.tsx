@@ -282,7 +282,7 @@ const LEDGER_ROWS = [
 /** /impact, the outcome ledger with example figures. */
 export function ImpactScreen() {
   return (
-    <div className="border border-white/16 bg-white/[0.02]">
+    <div className="min-w-0 border border-white/16 bg-white/[0.02]">
       <ScreenChrome title="Results" meta="Example figures" tone="dark" />
 
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-white/12 px-4 py-3 sm:px-5">
