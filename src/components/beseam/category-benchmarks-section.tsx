@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Reveal } from "@/components/beseam/reveal";
+import { BENCHMARK_INK } from "@/components/beseam/category-benchmark";
 import { BENCHMARK_RUN, CATEGORY_BENCHMARKS } from "@/data/category-benchmarks";
 
 const SCORED_BENCHMARKS = CATEGORY_BENCHMARKS.map((benchmark) => ({
@@ -30,7 +31,7 @@ const HIGHLIGHTS = Array.from(
     BY_CATEGORY.map((benchmarks) => benchmarks[index]).filter(Boolean),
 )
   .flat()
-  .slice(0, 3)
+  .slice(0, 6)
   .map((benchmark) => ({
     ...benchmark,
     soloShare: benchmark.singleEngineBrands / benchmark.brands.length,
@@ -45,17 +46,17 @@ const AGREEMENT_BANDS = [
   {
     label: "One assistant only",
     value: BENCHMARK_RUN.singleEngineOnly,
-    className: "bg-signal-ink",
+    color: "#cbd5e1",
   },
   {
     label: "Two assistants",
     value: BENCHMARK_RUN.twoEngines,
-    className: "bg-ink-deep/55",
+    color: "#94a3b8",
   },
   {
     label: "Every assistant",
     value: BENCHMARK_RUN.everyEngine,
-    className: "bg-ink-deep/18",
+    color: BENCHMARK_INK.consensus,
   },
 ] as const;
 
@@ -65,21 +66,23 @@ export default function CategoryBenchmarksSection() {
   return (
     <section
       id="benchmarks"
-      className="scroll-mt-24 border-t border-black/14 bg-[var(--ground-2)]"
+      className="scroll-mt-24 border-t border-black/14 bg-white"
     >
       <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
         <Reveal>
-          <div className="grid gap-10 lg:grid-cols-[minmax(17rem,0.72fr)_minmax(0,1.28fr)] lg:items-start lg:gap-16">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-center lg:gap-16">
             <div>
-              <h2 className="max-w-[17ch] text-balance font-display text-[clamp(2.2rem,3.5vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
+                AI Shopping Report
+              </p>
+              <h2 className="mt-6 max-w-[18ch] text-balance font-display text-[clamp(2.2rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
                 Where shoppers ask determines who gets considered.
               </h2>
-              <p className="mt-6 max-w-[45ch] text-[16px] leading-[1.7] text-black/64">
-                We ask the same buying questions across AI assistants and
-                record what comes back. In the latest run,{" "}
+              <p className="mt-6 max-w-[48ch] text-[16px] leading-[1.7] text-black/64">
+                We ask the same buying questions across AI assistants and record
+                what comes back. In the latest run,{" "}
                 <strong className="font-semibold text-ink-deep">
-                  {SOLO_SHARE}% of brand appearances occurred on only one
-                  assistant.
+                  {SOLO_SHARE}% of brand appearances occurred on only one assistant.
                 </strong>
               </p>
               <Link
@@ -94,66 +97,80 @@ export default function CategoryBenchmarksSection() {
               </p>
             </div>
 
-            <div className="border-y-2 border-ink-deep">
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-black/14 py-3 font-mono text-[11px] uppercase tracking-[0.07em] text-black/58">
-                <time dateTime={BENCHMARK_RUN.askedOn}>
-                  Observed {BENCHMARK_RUN.askedOn}
-                </time>
-                <span>{BENCHMARK_RUN.questions} questions</span>
-                <span>{BENCHMARK_RUN.answersCompleted} completed answers</span>
-                <span>{BENCHMARK_RUN.engines.length} assistants</span>
-              </div>
+            <div>
+              <figure className="border-t-2 border-ink-deep pt-4">
+                <figcaption className="flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-black/52">
+                  <span className="font-semibold text-black/62">Overall distribution</span>
+                  <span>{BENCHMARK_RUN.namings} brand namings</span>
+                </figcaption>
 
-              <div className="py-5">
                 <div
-                  className="flex h-3 overflow-hidden"
-                  aria-label={`${BENCHMARK_RUN.singleEngineOnly} of ${BENCHMARK_RUN.namings} brand appearances occurred on only one assistant`}
+                  className="mt-4 flex h-8 gap-[2px] border border-black/18 bg-white p-[3px]"
+                  aria-label={`${BENCHMARK_RUN.singleEngineOnly} brand namings appeared on one assistant only, ${BENCHMARK_RUN.twoEngines} on two assistants, and ${BENCHMARK_RUN.everyEngine} on every assistant`}
                 >
                   {AGREEMENT_BANDS.map((band) => (
                     <span
                       key={band.label}
-                      className={band.className}
-                      style={{ flexGrow: band.value }}
+                      className="h-full"
+                      style={{
+                        flexBasis: `${(band.value / BENCHMARK_RUN.namings) * 100}%`,
+                        backgroundColor: band.color,
+                      }}
+                      aria-hidden="true"
                     />
                   ))}
                 </div>
-                <dl className="mt-3 grid gap-2 sm:grid-cols-3 sm:gap-5">
+
+                <dl className="mt-3 grid gap-3 sm:grid-cols-3">
                   {AGREEMENT_BANDS.map((band) => (
-                    <div key={band.label} className="flex items-baseline gap-2">
-                      <dt className="text-[12px] leading-snug text-black/60">
+                    <div
+                      key={band.label}
+                      className="flex min-w-0 items-center gap-2 font-mono text-[10.5px] tabular-nums"
+                    >
+                      <span
+                        className="h-2 w-2 shrink-0 rounded-[2px]"
+                        style={{ backgroundColor: band.color }}
+                        aria-hidden="true"
+                      />
+                      <dd className="flex shrink-0 items-baseline gap-1 text-ink-deep">
+                        <span className="font-semibold">{band.value}</span>
+                        <span className="text-black/44">
+                          ({Math.round((band.value / BENCHMARK_RUN.namings) * 100)}%)
+                        </span>
+                      </dd>
+                      <dt className="min-w-0 font-semibold uppercase tracking-[0.08em] text-black/56">
                         {band.label}
                       </dt>
-                      <dd className="font-mono text-[12px] font-semibold tabular-nums text-ink-deep">
-                        {band.value}
-                      </dd>
                     </div>
                   ))}
                 </dl>
-              </div>
+              </figure>
 
-              <ol className="border-t border-black/14">
-                {HIGHLIGHTS.map((benchmark) => (
-                  <li key={benchmark.slug} className="border-b border-black/12 last:border-b-0">
-                    <Link
-                      href={`/benchmarks#${benchmark.slug}`}
-                      className="group grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1.5 py-4 transition-colors hover:bg-black/[0.035] sm:px-2"
+              <div className="mt-6 border-t-2 border-ink-deep">
+                <ul>
+                  {HIGHLIGHTS.map((benchmark) => (
+                    <li
+                      key={benchmark.slug}
+                      className="group grid items-center gap-x-2 border-b border-black/12 px-1 py-2.5 transition-colors hover:bg-black/[0.025] sm:gap-x-4"
+                      style={{
+                        gridTemplateColumns: "8.5rem minmax(0, 1fr) 7.5rem",
+                      }}
                     >
-                      <span className="col-span-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-signal-ink">
+                      <span className="min-w-0 truncate whitespace-nowrap font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-signal-ink">
                         {benchmark.category}
                       </span>
-                      <span className="min-w-0 text-[14.5px] leading-snug text-ink-deep underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-black/30">
+
+                      <Link
+                        href={`/benchmarks#${benchmark.slug}`}
+                        className="min-w-0 truncate whitespace-nowrap text-[15px] leading-none text-ink-deep underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-black/30"
+                      >
                         &ldquo;{benchmark.question}&rdquo;
-                      </span>
-                      <span className="flex shrink-0 items-center gap-3">
-                        <span className="font-mono text-[12px] tabular-nums text-black/70">
-                          {benchmark.singleEngineBrands}
-                          <span className="text-black/40">
-                            /{benchmark.brands.length}
-                          </span>
-                        </span>
+                      </Link>
+
+                      <span className="flex items-center justify-end gap-2.5">
                         <span
                           aria-hidden="true"
-                          className="h-1.5 w-14 shrink-0 bg-black/12 sm:w-16"
+                          className="h-2 w-14 shrink-0 bg-black/[0.07] sm:w-16"
                         >
                           <span
                             className="block h-full bg-signal-ink"
@@ -162,11 +179,15 @@ export default function CategoryBenchmarksSection() {
                             }}
                           />
                         </span>
+                        <span className="w-9 shrink-0 text-right font-mono text-[12px] tabular-nums text-ink-deep">
+                          {benchmark.singleEngineBrands}
+                          <span className="text-black/40">/{benchmark.brands.length}</span>
+                        </span>
                       </span>
-                    </Link>
-                  </li>
-                ))}
-              </ol>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </Reveal>

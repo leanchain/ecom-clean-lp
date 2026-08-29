@@ -22,11 +22,16 @@ export default function EvidenceToWork() {
                 Beseam finds what to improve next.
               </h2>
               <p className="mt-5 max-w-[29ch] text-[15px] leading-[1.7] text-black/62">
-                The strongest evidence becomes a supported change with its proof plan still attached.
+                The strongest evidence becomes a supported change with its proof
+                plan still attached.
               </p>
 
               <div className="mt-7 flex gap-3 border-l-2 border-signal-ink pl-4">
-                <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-signal-ink" strokeWidth={1.8} aria-hidden="true" />
+                <ShieldCheck
+                  className="mt-0.5 h-4 w-4 shrink-0 text-signal-ink"
+                  strokeWidth={1.8}
+                  aria-hidden="true"
+                />
                 <div>
                   <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-signal-ink">
                     Approval gate

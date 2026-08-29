@@ -18,30 +18,30 @@ BACKGROUND="#fafafa"
 mkdir -p "$FAVICON_DIR"
 cp "$SOURCE" "$FAVICON_DIR/favicon.svg"
 
-# Browser favicon PNG: transparent canvas, 75% mark footprint.
+# Browser favicon PNG: transparent canvas, ~85% mark footprint.
 magick -background none "$SOURCE" \
-  -resize 72x72 \
+  -resize 82x82 \
   -gravity center \
   -extent 96x96 \
   "$FAVICON_DIR/favicon-96x96.png"
 
 # Apple and installed-app icons use the public-site paper background.
 magick -background none "$SOURCE" \
-  -resize 132x132 \
+  -resize 150x150 \
   -gravity center \
   -background "$BACKGROUND" \
   -extent 180x180 \
   "$FAVICON_DIR/apple-touch-icon.png"
 
 magick -background none "$SOURCE" \
-  -resize 144x144 \
+  -resize 164x164 \
   -gravity center \
   -background "$BACKGROUND" \
   -extent 192x192 \
   "$FAVICON_DIR/web-app-manifest-192x192.png"
 
 magick -background none "$SOURCE" \
-  -resize 384x384 \
+  -resize 436x436 \
   -gravity center \
   -background "$BACKGROUND" \
   -extent 512x512 \
@@ -50,7 +50,7 @@ magick -background none "$SOURCE" \
 TMP_ICON="$(mktemp --suffix=.png)"
 trap 'rm -f "$TMP_ICON"' EXIT
 magick -background none "$SOURCE" \
-  -resize 48x48 \
+  -resize 56x56 \
   -gravity center \
   -extent 64x64 \
   "$TMP_ICON"

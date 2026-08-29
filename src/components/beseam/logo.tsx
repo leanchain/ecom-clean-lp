@@ -21,7 +21,6 @@ const MARK_URLS: Record<LogoVariant, string> = {
   inverted: "/brand/beseam-mark-inverted.svg",
   "secondary-inverted": "/brand/beseam-mark-secondary-inverted.svg",
 };
-
 export default function Logo({
   className,
   markClassName,
@@ -45,7 +44,7 @@ export default function Logo({
         height={696}
         className={cn("block w-auto shrink-0", markClassName)}
         style={{
-          height: "0.78em",
+          height: "0.86em",
           width: "auto",
           transform: "translateY(0.005em)",
         }}

@@ -12,14 +12,13 @@ import { Reveal } from "@/components/beseam/reveal";
 import WhatBeseamDoes from "@/components/beseam/what-beseam-does";
 
 /**
- * Section order is the argument, and it is deliberate:
+ * Section order is the argument:
  *
- * claim → credibility → where Beseam works → one evidence trace → proposed work →
- * measured result → research proof → ways to start
+ * claim → credibility → signature evidence trace → breadth → proposed work →
+ * truthful measurement mechanism → published research → ways to start
  *
- * The merchant sees the commerce path first, then watches one signal become a
- * proposed change and a measured result. The operating loop is already shown
- * in the black rail inside WhatBeseamDoes, so it is not repeated as a section.
+ * The most ownable proof now arrives before the capability catalogue. The hero
+ * and scan contract remain unchanged.
  */
 const SCAN_RETURNS = [
   "Where shoppers may lose you",
@@ -81,8 +80,8 @@ export default function ProductionHomepage() {
       </section>
 
       <CredibilityRail />
-      <WhatBeseamDoes />
       <ConnectedEvidence />
+      <WhatBeseamDoes />
       <EvidenceToWork />
       <MeasureImpact />
       <CategoryBenchmarksSection />
