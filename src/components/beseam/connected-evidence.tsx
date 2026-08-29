@@ -194,117 +194,70 @@ function Tails() {
 }
 
 function MobileTrace() {
+  const issue = MOBILE_FINDINGS.find((item) => item.issue);
+  const ruledOut = MOBILE_FINDINGS.filter((item) => !item.issue);
+
   return (
     <div className="lg:hidden">
-      {/* Mobile shows the result of each diagnostic check directly. Unlike the
-          desktop hypothesis graph, the reader never has to negate a failed
-          hypothesis in their head to understand what Beseam found. */}
-      <div className="border-b border-white/14 pb-6">
-        <div className="flex items-baseline gap-3">
-          <span className="font-mono text-[10px] font-semibold tabular-nums text-signal">
-            01
-          </span>
-          <StepLabel>Shopper signal</StepLabel>
+      <div className="border-y border-white/14">
+        <div className="py-5">
+          <div className="flex items-baseline gap-3">
+            <span className="font-mono text-[10px] font-semibold tabular-nums text-signal">01</span>
+            <StepLabel>Shopper signal</StepLabel>
+          </div>
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-[12px]">
+            <span className="bg-white/[0.06] px-2 py-1 text-white/78">waterproof jacket</span>
+            <ArrowRight className="h-3.5 w-3.5 text-signal" aria-hidden="true" />
+            <span className="bg-signal/[0.08] px-2 py-1 text-signal">+ for commuting</span>
+          </div>
+          <p className="mt-3 text-[15px] leading-[1.5] text-white/88">
+            Same jackets returned. The shopper left without opening one.
+          </p>
         </div>
-        <p className="mt-3 text-[16px] leading-[1.5] text-white/92">
-          Shopper searched {QUERIES[0].value}, added {QUERIES[1].value}, saw the
-          same jackets, then left without opening one.
-        </p>
-      </div>
 
-      <div className="border-b border-white/14 py-6">
-        <div className="flex items-baseline gap-3">
-          <span className="font-mono text-[10px] font-semibold tabular-nums text-signal">
-            02
-          </span>
-          <StepLabel>What Beseam found</StepLabel>
-        </div>
-        <p className="mt-2 text-[13px] leading-[1.55] text-white/52">
-          Beseam checks possible explanations and follows where the evidence
-          points.
-        </p>
-
-        <div className="mt-4 border-y border-white/12">
-          {MOBILE_FINDINGS.map((item, index) => (
-            <article
-              key={item.domain}
-              className={`py-4 ${index > 0 ? "border-t border-white/10" : ""} ${
-                item.issue
-                  ? "-mx-3 border-l-2 border-l-signal bg-signal/[0.07] px-3"
-                  : ""
-              }`}
-            >
-              <div className="flex items-center justify-between gap-3">
-                <p
-                  className={`font-mono text-[10px] font-semibold uppercase tracking-[0.1em] ${item.issue ? "text-white/68" : "text-white/42"}`}
-                >
-                  {item.domain}
-                </p>
-                <span
-                  className={`shrink-0 px-2 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] ${
-                    item.issue
-                      ? "bg-signal text-[#16110e]"
-                      : "bg-white/[0.06] text-white/46"
-                  }`}
-                >
-                  {item.issue ? "Possible issue" : "Less likely"}
-                </span>
-              </div>
-
-              <p
-                className={`mt-2 leading-[1.45] ${
-                  item.issue
-                    ? "text-[16px] font-medium text-white"
-                    : "text-[15px] text-white/72"
-                }`}
-              >
+        <div className="border-t border-white/14 py-5">
+          <div className="flex items-baseline gap-3">
+            <span className="font-mono text-[10px] font-semibold tabular-nums text-signal">02</span>
+            <StepLabel>Strongest evidence</StepLabel>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {ruledOut.map((item) => (
+              <span key={item.domain} className="bg-white/[0.05] px-2 py-1 text-[10px] text-white/48">
                 {item.finding}
-              </p>
-              <p
-                className={`mt-1.5 text-[12px] leading-[1.55] ${
-                  item.issue ? "text-white/68" : "text-white/42"
-                }`}
-              >
-                {item.detail}
-              </p>
-            </article>
-          ))}
+              </span>
+            ))}
+          </div>
+          {issue ? (
+            <div className="mt-3 border-l-2 border-signal bg-signal/[0.07] px-4 py-3.5">
+              <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-signal">{issue.domain}</p>
+              <p className="mt-1.5 text-[16px] font-medium leading-[1.4] text-white">{issue.finding}</p>
+              <p className="mt-1 text-[12px] leading-[1.5] text-white/58">{issue.detail}</p>
+            </div>
+          ) : null}
         </div>
 
-        <p className="mt-4 border-l-2 border-signal pl-3 text-[13px] leading-[1.55] text-white/72">
-          In this trace, the evidence points more strongly to the product pages
-          than to search or stock.
-        </p>
-      </div>
-
-      <div className="py-6">
-        <div className="flex items-baseline gap-3">
-          <span className="font-mono text-[10px] font-semibold tabular-nums text-signal">
-            03
-          </span>
-          <StepLabel>What happens next</StepLabel>
+        <div className="border-t border-white/14 py-5">
+          <div className="flex items-baseline gap-3">
+            <span className="font-mono text-[10px] font-semibold tabular-nums text-signal">03</span>
+            <StepLabel>What happens next</StepLabel>
+          </div>
+          <div className="mt-3 flex items-center gap-2 text-[11px] font-semibold text-white/80">
+            <span>Propose fix</span>
+            <ArrowRight className="h-3 w-3 shrink-0 text-signal" aria-hidden="true" />
+            <span>You approve</span>
+            <ArrowRight className="h-3 w-3 shrink-0 text-signal" aria-hidden="true" />
+            <span>Remeasure</span>
+          </div>
         </div>
-        <p className="mt-3 text-[15px] leading-[1.55] text-white/90">
-          The strongest opportunity becomes a proposed fix, then is measured
-          again after the change.
-        </p>
       </div>
 
-      <div className="border-t border-white/14 pt-6">
-        <p className="text-[12px] leading-[1.65] text-white/54">
-          Beseam keeps the shopper signal, the explanations it checked, the
-          action, and what happened afterward connected. It prepares the supported
-          change for your approval, applies it after approval, and measures what
-          happens next.
-        </p>
-        <Link
-          href="/manifesto"
-          className="mt-4 inline-flex min-h-10 items-center gap-2 text-[13px] font-semibold text-signal underline decoration-white/20 underline-offset-6 hover:decoration-signal"
-        >
-          Why I built Beseam
-          <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-        </Link>
-      </div>
+      <Link
+        href="/manifesto"
+        className="mt-4 inline-flex min-h-10 items-center gap-2 text-[13px] font-semibold text-signal underline decoration-white/20 underline-offset-6 hover:decoration-signal"
+      >
+        Why I built Beseam
+        <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+      </Link>
     </div>
   );
 }
@@ -315,7 +268,7 @@ export default function ConnectedEvidence() {
       id="proof"
       className="scroll-mt-24 border-y border-black/18 bg-ink-deep text-white"
     >
-      <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+      <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
         <Reveal>
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
             <div>
@@ -439,12 +392,7 @@ export default function ConnectedEvidence() {
                   </p>
                 </div>
 
-                <div className="mt-9 flex items-center justify-between gap-8 border-t border-white/14 pt-7">
-                  <p className="max-w-[70ch] text-[13px] leading-[1.7] text-white/62">
-                    Beseam does not stop at the recommendation. It prepares the
-                    supported change for your approval, applies the approved change,
-                    and measures what happens afterward.
-                  </p>
+                <div className="mt-7 flex justify-end border-t border-white/14 pt-5">
                   <Link
                     href="/manifesto"
                     className="inline-flex min-h-10 shrink-0 items-center gap-2 text-[13px] font-semibold text-signal underline decoration-white/20 underline-offset-6 hover:decoration-signal"

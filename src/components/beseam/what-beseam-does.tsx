@@ -60,7 +60,7 @@ function DiscoveryVignette() {
   return (
     <div
       aria-hidden="true"
-      className="relative flex h-[5.75rem] flex-col justify-center gap-2 border border-black/14 bg-white px-3.5"
+      className="relative flex h-[6.75rem] flex-col justify-center gap-2.5 bg-white px-4 ring-1 ring-black/10"
     >
       <span className="absolute right-2 top-1 font-mono text-[8px] uppercase tracking-[0.08em] text-black/38">
         Example
@@ -75,14 +75,14 @@ function DiscoveryVignette() {
         <div key={brand} className="flex items-center gap-2">
           <ChannelIcon
             brand={brand}
-            className={`h-3.5 w-3.5 ${share > 0 ? "text-ink-deep/70" : "text-black/30"}`}
+            className={`h-4 w-4 ${share > 0 ? "text-ink-deep/70" : "text-black/30"}`}
           />
-          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/56">
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.07em] text-black/56">
             {name}
           </span>
           <span className="h-px min-w-4 flex-1 bg-black/10" />
           <span
-            className={`shrink-0 font-mono text-[9px] font-semibold tabular-nums ${
+            className={`shrink-0 font-mono text-[10px] font-semibold tabular-nums ${
               share > 0 ? "text-[#1a6b43]" : "text-signal-ink"
             }`}
           >
@@ -99,9 +99,9 @@ function StoreVignette() {
   return (
     <div
       aria-hidden="true"
-      className="flex h-[5.75rem] items-center gap-3.5 border border-black/14 bg-white px-3.5"
+      className="flex h-[6.75rem] items-center gap-4 bg-white px-4 ring-1 ring-black/10"
     >
-      <ProductArt kind="shell" className="h-14 w-14 shrink-0" />
+      <ProductArt kind="shell" className="h-16 w-16 shrink-0" />
       <div className="flex min-w-0 flex-1 flex-col gap-2">
         {(
           [
@@ -114,11 +114,11 @@ function StoreVignette() {
             key={question}
             className="flex items-center justify-between gap-2"
           >
-            <span className="truncate font-mono text-[9px] uppercase tracking-[0.06em] text-black/48">
+            <span className="truncate font-mono text-[10px] uppercase tracking-[0.05em] text-black/48">
               {question}
             </span>
             <span
-              className={`flex shrink-0 items-center gap-1 font-mono text-[9px] font-semibold ${
+              className={`flex shrink-0 items-center gap-1 font-mono text-[10px] font-semibold ${
                 ok ? "text-black/64" : "text-signal-ink"
               }`}
             >
@@ -141,23 +141,23 @@ function BehaviorVignette() {
   return (
     <div
       aria-hidden="true"
-      className="flex h-[5.75rem] flex-col justify-center gap-2.5 border border-black/14 bg-white px-3.5"
+      className="flex h-[6.75rem] flex-col justify-center gap-3 bg-white px-4 ring-1 ring-black/10"
     >
       <div className="flex min-w-0 items-center gap-1.5">
-        <span className="truncate border border-black/16 bg-ground px-1.5 py-0.5 font-mono text-[9px] text-black/62">
+        <span className="truncate bg-ground px-2 py-1 font-mono text-[10px] text-black/62 ring-1 ring-black/12">
           waterproof jacket
         </span>
         <ArrowRight className="h-3 w-3 shrink-0 text-black/35" />
-        <span className="truncate border border-signal-ink/40 bg-signal-ink/[0.06] px-1.5 py-0.5 font-mono text-[9px] text-signal-ink">
+        <span className="truncate bg-signal-ink/[0.07] px-2 py-1 font-mono text-[10px] text-signal-ink ring-1 ring-signal-ink/30">
           + for commuting
         </span>
       </div>
       <div className="flex items-center gap-2">
-        <span className="font-mono text-[9px] uppercase tracking-[0.08em] text-black/40">
+        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-black/40">
           then
         </span>
         <span className="h-px flex-1 bg-black/12" />
-        <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-signal-ink">
+        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-signal-ink">
           left without opening one
         </span>
       </div>
@@ -173,7 +173,7 @@ function RevenueVignette() {
   return (
     <div
       aria-hidden="true"
-      className="relative flex h-[5.75rem] flex-col justify-center gap-2 border border-black/14 bg-white px-3.5"
+      className="relative flex h-[6.75rem] flex-col justify-center gap-2.5 bg-white px-4 ring-1 ring-black/10"
     >
       <span className="absolute right-2 top-1 font-mono text-[8px] uppercase tracking-[0.08em] text-black/38">
         Example
@@ -190,10 +190,10 @@ function RevenueVignette() {
             {label}
           </span>
           <span className="h-px min-w-3 flex-1 bg-black/10" />
-          <span className="shrink-0 font-mono text-[9px] tabular-nums text-black/56">
+          <span className="shrink-0 font-mono text-[10px] tabular-nums text-black/56">
             {range}
           </span>
-          <span className="w-12 shrink-0 text-right font-mono text-[9px] font-semibold tabular-nums text-signal-ink">
+          <span className="w-14 shrink-0 text-right font-mono text-[10px] font-semibold tabular-nums text-signal-ink">
             {delta}
           </span>
         </div>
@@ -220,7 +220,7 @@ const LOOP = [
 export default function WhatBeseamDoes() {
   return (
     <section id="one-system" className="scroll-mt-24 bg-ground">
-      <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+      <div className="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
         <Reveal>
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end lg:gap-16">
             <div>
@@ -290,28 +290,20 @@ export default function WhatBeseamDoes() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="mt-6 bg-ink-deep px-5 py-5 text-white sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-8">
+          <div className="mt-6 bg-ink-deep px-5 py-4 text-white sm:px-6 lg:px-8">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-8">
               <p className="shrink-0 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-signal">
                 Beseam keeps going
               </p>
-              <ol className="grid flex-1 gap-px bg-white/12 sm:grid-cols-5">
+              <ol className="relative grid flex-1 gap-y-3 sm:grid-cols-5 sm:gap-0 before:absolute before:left-5 before:right-5 before:top-3.5 before:hidden before:h-px before:bg-white/16 sm:before:block">
                 {LOOP.map(({ label, Icon }, index) => (
-                  <li
-                    key={label}
-                    className="relative flex min-h-14 items-center gap-2.5 bg-ink-deep px-3 py-3"
-                  >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-white/18 text-signal">
+                  <li key={label} className="relative z-10 flex items-center gap-2.5 sm:flex-col sm:items-start sm:gap-2 sm:px-3">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-ink-deep text-signal ring-1 ring-white/18">
                       <Icon className="h-3.5 w-3.5" strokeWidth={1.8} aria-hidden="true" />
                     </span>
-                    <span className="text-[11px] font-semibold leading-[1.3] text-white/86">
-                      {label}
-                    </span>
+                    <span className="text-[11px] font-semibold leading-[1.3] text-white/82">{label}</span>
                     {index < LOOP.length - 1 ? (
-                      <ArrowRight
-                        className="absolute -right-2 top-1/2 z-10 hidden h-4 w-4 -translate-y-1/2 bg-ink-deep text-signal sm:block"
-                        aria-hidden="true"
-                      />
+                      <ArrowRight className="ml-auto h-3.5 w-3.5 text-signal sm:hidden" aria-hidden="true" />
                     ) : null}
                   </li>
                 ))}
