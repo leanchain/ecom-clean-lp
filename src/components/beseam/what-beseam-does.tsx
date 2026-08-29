@@ -1,7 +1,6 @@
 import {
   ArrowRight,
   BarChart3,
-  Check,
   CheckCircle2,
   MousePointer2,
   Radar,
@@ -26,7 +25,7 @@ const DOMAINS = [
   {
     title: "Understand the decision",
     scope: "PDP · search · shopper behavior",
-    detail: "See the question or behavior getting in the way of the decision.",
+    detail: "See the unanswered question getting in the way of the decision.",
     Icon: MousePointer2,
   },
   {
@@ -38,7 +37,7 @@ const DOMAINS = [
   {
     title: "Measure & learn",
     scope: "Conversion · orders · revenue",
-    detail: "Measure the outcome, learn what worked, and improve again.",
+    detail: "Remeasure the same journey, learn what worked, and improve again.",
     Icon: BarChart3,
   },
 ] as const;
@@ -47,36 +46,44 @@ function DiscoveryVignette() {
   return (
     <div
       aria-hidden="true"
-      className="relative flex h-[7.25rem] flex-col justify-center gap-2.5 bg-white px-4 ring-1 ring-black/10"
+      className="flex h-[7.25rem] flex-col bg-white p-3 ring-1 ring-black/10"
     >
-      <span className="absolute right-2 top-1 font-mono text-[8px] uppercase tracking-[0.08em] text-black/38">
-        Example
-      </span>
-      {(
-        [
-          ["openai", "ChatGPT", 68],
-          ["gemini", "Gemini", 61],
-          ["perplexity", "Perplexity", 0],
-        ] as const
-      ).map(([brand, name, share]) => (
-        <div key={brand} className="flex items-center gap-2">
-          <ChannelIcon
-            brand={brand}
-            className={`h-4 w-4 ${share > 0 ? "text-ink-deep/70" : "text-black/30"}`}
-          />
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.07em] text-black/56">
-            {name}
-          </span>
-          <span className="h-px min-w-4 flex-1 bg-black/10" />
-          <span
-            className={`shrink-0 font-mono text-[10px] font-semibold tabular-nums ${
-              share > 0 ? "text-[#1a6b43]" : "text-signal-ink"
-            }`}
-          >
-            {share > 0 ? `Named · ${share}%` : "Not named · 0%"}
-          </span>
-        </div>
-      ))}
+      <div className="flex items-center gap-2 border-b border-black/10 pb-2">
+        <span className="shrink-0 font-mono text-[7.5px] font-semibold uppercase tracking-[0.08em] text-black/38">
+          Buying question
+        </span>
+        <span className="min-w-0 truncate text-[9px] font-medium text-ink-deep">
+          best waterproof jacket for commuting
+        </span>
+      </div>
+
+      <div className="flex flex-1 flex-col justify-center gap-2">
+        {(
+          [
+            ["openai", "ChatGPT", true],
+            ["gemini", "Gemini", true],
+            ["perplexity", "Perplexity", false],
+          ] as const
+        ).map(([brand, name, named]) => (
+          <div key={brand} className="flex items-center gap-2">
+            <ChannelIcon
+              brand={brand}
+              className={`h-4 w-4 ${named ? "text-ink-deep/70" : "text-black/30"}`}
+            />
+            <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.06em] text-black/52">
+              {name}
+            </span>
+            <span className="h-px min-w-3 flex-1 bg-black/10" />
+            <span
+              className={`font-mono text-[9px] font-semibold uppercase tracking-[0.06em] ${
+                named ? "text-[#1a6b43]" : "text-signal-ink"
+              }`}
+            >
+              {named ? "Named" : "Not named"}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -85,31 +92,30 @@ function StoreVignette() {
   return (
     <div
       aria-hidden="true"
-      className="flex h-[7.25rem] items-center gap-4 bg-white px-4 ring-1 ring-black/10"
+      className="flex h-[7.25rem] overflow-hidden bg-white ring-1 ring-black/10"
     >
-      <ProductArt kind="shell" className="h-16 w-16 shrink-0" />
-      <div className="flex min-w-0 flex-1 flex-col gap-2">
-        {(
-          [
-            ["Waterproof", "20,000 mm", true],
-            ["Returns", "30 days", true],
-            ["Fits over layers?", "No answer", false],
-          ] as const
-        ).map(([question, answer, ok]) => (
-          <div key={question} className="flex items-center justify-between gap-2">
-            <span className="truncate font-mono text-[10px] uppercase tracking-[0.05em] text-black/48">
-              {question}
-            </span>
-            <span
-              className={`flex shrink-0 items-center gap-1 font-mono text-[10px] font-semibold ${
-                ok ? "text-black/64" : "text-signal-ink"
-              }`}
-            >
-              {ok ? <Check className="h-2.5 w-2.5" /> : <X className="h-2.5 w-2.5" />}
-              {answer}
-            </span>
-          </div>
-        ))}
+      <div className="flex w-[38%] min-w-0 flex-col items-center justify-center bg-ground/60 px-2">
+        <ProductArt kind="shell" className="h-12 w-12" />
+        <span className="mt-1 text-[9px] font-semibold text-ink-deep">City Shell</span>
+        <span className="mt-0.5 font-mono text-[7px] text-black/42">20,000 mm</span>
+      </div>
+
+      <div className="flex min-w-0 flex-1 flex-col justify-center border-l border-black/10 px-3">
+        <span className="font-mono text-[7.5px] font-semibold uppercase tracking-[0.08em] text-black/38">
+          What blocks the choice
+        </span>
+        <p className="mt-2 text-[10px] font-semibold leading-tight text-ink-deep">
+          Fits over layers?
+        </p>
+        <div className="mt-1.5 flex items-center gap-1.5 text-signal-ink">
+          <X className="h-3 w-3 shrink-0" />
+          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.06em]">
+            No answer
+          </span>
+        </div>
+        <p className="mt-2 font-mono text-[7px] leading-[1.35] text-black/38">
+          Same question · missing decision evidence
+        </p>
       </div>
     </div>
   );
@@ -147,7 +153,7 @@ function PersonalizationVignette() {
           </div>
         </div>
 
-        <div className="relative flex min-w-0 flex-1 flex-col justify-center border-l border-black/10 bg-signal-ink/[0.045] px-3">
+        <div className="flex min-w-0 flex-1 flex-col justify-center border-l border-black/10 bg-signal-ink/[0.045] px-3">
           <div className="flex items-center gap-1.5">
             <WandSparkles className="h-3 w-3 shrink-0 text-signal-ink" />
             <span className="font-mono text-[7.5px] font-semibold uppercase tracking-[0.08em] text-signal-ink">
@@ -172,31 +178,39 @@ function RevenueVignette() {
   return (
     <div
       aria-hidden="true"
-      className="relative flex h-[7.25rem] flex-col justify-center gap-2.5 bg-white px-4 ring-1 ring-black/10"
+      className="flex h-[7.25rem] flex-col bg-white p-3 ring-1 ring-black/10"
     >
-      <span className="absolute right-2 top-1 font-mono text-[8px] uppercase tracking-[0.08em] text-black/38">
-        Example
-      </span>
-      {(
-        [
-          ["Named by AI", "9 → 23%", "+14 pts"],
-          ["Search → page", "46 → 57%", "+11 pts"],
-          ["Add to cart", "2.4 → 2.9%", "+0.5 pts"],
-        ] as const
-      ).map(([label, range, delta]) => (
-        <div key={label} className="flex items-center gap-2">
-          <span className="truncate font-mono text-[9px] uppercase tracking-[0.06em] text-black/48">
-            {label}
-          </span>
-          <span className="h-px min-w-3 flex-1 bg-black/10" />
-          <span className="shrink-0 font-mono text-[10px] tabular-nums text-black/56">
-            {range}
-          </span>
-          <span className="w-14 shrink-0 text-right font-mono text-[10px] font-semibold tabular-nums text-signal-ink">
-            {delta}
-          </span>
-        </div>
-      ))}
+      <div className="flex items-center justify-between gap-2 border-b border-black/10 pb-2">
+        <span className="font-mono text-[7.5px] font-semibold uppercase tracking-[0.08em] text-black/38">
+          After the approved change
+        </span>
+        <span className="font-mono text-[7px] text-black/34">
+          same question · same segment
+        </span>
+      </div>
+
+      <div className="flex flex-1 flex-col justify-center gap-2">
+        {(
+          [
+            ["AI consideration", "9 → 23%", "+14 pts"],
+            ["Product visits", "46 → 57%", "+11 pts"],
+            ["Add to cart", "2.4 → 2.9%", "+0.5 pts"],
+          ] as const
+        ).map(([label, range, delta]) => (
+          <div key={label} className="flex items-center gap-2">
+            <span className="truncate font-mono text-[8px] uppercase tracking-[0.05em] text-black/46">
+              {label}
+            </span>
+            <span className="h-px min-w-2 flex-1 bg-black/10" />
+            <span className="shrink-0 font-mono text-[9px] tabular-nums text-black/54">
+              {range}
+            </span>
+            <span className="w-12 shrink-0 text-right font-mono text-[9px] font-semibold tabular-nums text-signal-ink">
+              {delta}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -231,7 +245,7 @@ export default function WhatBeseamDoes() {
               </h2>
             </div>
             <p className="max-w-[50ch] text-[16px] leading-[1.7] text-black/64">
-              Beseam follows the decision end to end: get considered, understand what blocks the choice, help the shopper decide with relevant answers and recommendations, then measure and learn.
+              Beseam follows the same shopper decision end to end: see whether you are considered, find what blocks the choice, add useful context, then remeasure the outcome and learn.
             </p>
           </div>
         </Reveal>
