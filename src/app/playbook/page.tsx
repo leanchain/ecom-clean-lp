@@ -21,6 +21,7 @@ import OperatingLoop from "@/components/beseam/operating-loop";
 import ProductArt, { type ProductArtKind } from "@/components/beseam/product-art";
 import ShopperLoss from "@/components/beseam/shopper-loss";
 import TeamsSection from "@/components/beseam/teams-section";
+import WhatBeseamDoes from "@/components/beseam/what-beseam-does";
 import WhyBeseam from "@/components/beseam/why-beseam";
 
 export const metadata: Metadata = {
@@ -43,7 +44,7 @@ const INVENTORY: readonly InventoryItem[] = [
   { name: "channel-icon", status: "Foundation", note: "AI / commerce channel marks" },
   { name: "connected-evidence", status: "Homepage", note: "Trimmed decision trace — ends at the finding" },
   { name: "credibility-rail", status: "Homepage", note: "Two-register proof band under the hero" },
-  { name: "decision-bridge", status: "Homepage", note: "One-system bridge: Finding / Choosing / Buying / Worth" },
+  { name: "decision-bridge", status: "Used elsewhere", note: "Connected-system architecture on /platform" },
   { name: "evidence-to-work", status: "Homepage", note: "Standalone Actions-queue section" },
   { name: "faq-section", status: "Homepage", note: "Homepage FAQ" },
   { name: "first-month-promise", status: "Homepage", note: "Current final start section" },
@@ -65,6 +66,7 @@ const INVENTORY: readonly InventoryItem[] = [
   { name: "shopper-loss", status: "Unused", note: "Previous three-loss-scenarios section" },
   { name: "teams-section", status: "Used elsewhere", note: "Used on /about" },
   { name: "tracked-link", status: "Foundation", note: "Analytics-aware link wrapper" },
+  { name: "what-beseam-does", status: "Homepage", note: "Concrete discovery-to-purchase capability journey" },
   { name: "why-beseam", status: "Unused", note: "Previous prioritize / work-together section" },
 ] as const;
 
@@ -155,7 +157,7 @@ export default function PlaybookPage() {
 
       <div className="border-b border-black/14 bg-[#faf1eb] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-signal-ink">Current homepage sections</div>
       <MajorPreview name="credibility-rail" status="Homepage" note="Two-register proof band under the hero"><CredibilityRail /></MajorPreview>
-      <MajorPreview name="decision-bridge" status="Homepage" note="One-system bridge: Finding / Choosing / Buying / Worth"><DecisionBridge /></MajorPreview>
+      <MajorPreview name="what-beseam-does" status="Homepage" note="Concrete discovery-to-purchase capability journey"><WhatBeseamDoes /></MajorPreview>
       <MajorPreview name="operating-loop" status="Homepage" note="Bridge from consideration to the connected decision trace"><OperatingLoop /></MajorPreview>
       <MajorPreview name="connected-evidence" status="Homepage" note="Trimmed decision trace — ends at the finding"><ConnectedEvidence /></MajorPreview>
       <MajorPreview name="evidence-to-work" status="Homepage" note="Standalone Actions-queue section"><EvidenceToWork /></MajorPreview>
@@ -165,6 +167,7 @@ export default function PlaybookPage() {
       <MajorPreview name="faq-section" status="Homepage" note="Current homepage FAQ"><FaqSection /></MajorPreview>
 
       <div className="border-b border-black/14 bg-[#faf1eb] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-signal-ink">Used elsewhere</div>
+      <MajorPreview name="decision-bridge" status="Used elsewhere" note="Connected-system architecture on /platform"><DecisionBridge /></MajorPreview>
       <MajorPreview name="teams-section" status="Used elsewhere" note="Currently used on /about"><TeamsSection /></MajorPreview>
 
       <div className="border-b border-black/14 bg-[#fff4ee] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-signal-ink">Currently unused sections</div>
