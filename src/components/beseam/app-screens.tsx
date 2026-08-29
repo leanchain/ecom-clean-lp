@@ -100,48 +100,81 @@ function ScreenChrome({
 export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
   if (compact) {
     return (
-      <div className="border border-black/16 bg-white">
-        <div className="flex items-center justify-between gap-4 border-b border-black/12 bg-ground px-3 py-2.5">
-          <p className="text-[13px] font-semibold text-ink-deep">Growth plan</p>
-          <p className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/46">
+      <div className="min-w-0 overflow-hidden border border-black/16 bg-white">
+        <div className="flex items-center justify-between gap-4 border-b border-black/12 bg-ground px-4 py-3">
+          <p className="text-[14px] font-semibold text-ink-deep">Growth plan</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-black/52">
             3 opportunities
           </p>
         </div>
-        <div className="grid grid-cols-[minmax(0,1fr)_4.25rem_4rem_4.5rem] gap-2 border-b border-black/12 px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/46">
-          <span>Proposed fix</span>
-          <span>Priority</span>
-          <span>Effort</span>
-          <span>Next</span>
-        </div>
-        {QUEUE_ROWS.map((row) => (
-          <div
-            key={row.title}
-            className={`grid grid-cols-[minmax(0,1fr)_4.25rem_4rem_4.5rem] items-center gap-2 border-b border-black/10 px-3 py-2 last:border-b-0 ${
-              row.lead ? "bg-signal-ink/[0.06]" : "bg-white"
-            }`}
-          >
-            <p className="text-[12.5px] font-medium leading-[1.3] text-[#151515]">
-              {row.title}
-            </p>
-            <span
-              className={`inline-flex w-fit shrink-0 rounded-md border px-1.5 py-0.5 text-[9.5px] font-semibold ${PRIORITY_TONE[row.priority]}`}
-            >
-              {row.priority}
-            </span>
-            <span className="inline-flex w-fit shrink-0 rounded-md border border-[#1f7a4d]/35 bg-[#1f7a4d]/[0.08] px-1.5 py-0.5 text-[9.5px] font-semibold text-[#1a6b43]">
-              {row.effort}
-            </span>
-            <span
-              className={`inline-flex w-fit shrink-0 items-center rounded-md px-2 py-1 text-[10px] font-semibold ${
-                row.lead
-                  ? "bg-[var(--secondary)] text-[var(--secondary-foreground)]"
-                  : "border border-black/18 bg-white text-[#3f3f3f]"
+
+        <div className="divide-y divide-black/10">
+          {QUEUE_ROWS.map((row) => (
+            <article
+              key={row.title}
+              className={`min-w-0 px-4 py-4 ${
+                row.lead ? "bg-signal-ink/[0.055]" : "bg-white"
               }`}
             >
-              {row.step}
-            </span>
-          </div>
-        ))}
+              <div className="flex min-w-0 items-start justify-between gap-3">
+                <p className="min-w-0 text-[14px] font-semibold leading-[1.35] text-ink-deep">
+                  {row.title}
+                </p>
+                {row.lead ? (
+                  <span className="shrink-0 bg-ink-deep px-2 py-1 text-[11px] font-semibold text-white">
+                    Next to review
+                  </span>
+                ) : null}
+              </div>
+
+              <p className="mt-2 text-[12.5px] leading-[1.5] text-black/62">
+                {row.why}
+              </p>
+
+              <dl className="mt-3 grid grid-cols-3 gap-3 border-t border-black/10 pt-3">
+                <div>
+                  <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-black/48">
+                    Priority
+                  </dt>
+                  <dd className="mt-1.5">
+                    <span
+                      className={`inline-flex rounded-md border px-2 py-0.5 text-[11.5px] font-semibold ${PRIORITY_TONE[row.priority]}`}
+                    >
+                      {row.priority}
+                    </span>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-black/48">
+                    Effort
+                  </dt>
+                  <dd className="mt-1.5">
+                    <span className="inline-flex rounded-md border border-[#1f7a4d]/35 bg-[#1f7a4d]/[0.08] px-2 py-0.5 text-[11.5px] font-semibold text-[#1a6b43]">
+                      {row.effort}
+                    </span>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-black/48">
+                    Next
+                  </dt>
+                  <dd className="mt-1.5">
+                    <span
+                      className={`inline-flex items-center gap-1 px-2 py-0.5 text-[11.5px] font-semibold ${
+                        row.lead
+                          ? "bg-[var(--secondary)] text-[var(--secondary-foreground)]"
+                          : "border border-black/18 text-black/68"
+                      }`}
+                    >
+                      {row.step}
+                      <ArrowRight aria-hidden="true" className="h-3 w-3" />
+                    </span>
+                  </dd>
+                </div>
+              </dl>
+            </article>
+          ))}
+        </div>
       </div>
     );
   }
@@ -242,22 +275,6 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
     </div>
   );
 }
-
-/**
- * Figures are illustrative and the frame says so. This follows the same standard as the
- * specimens in ShopperLoss, which carry invented brand names under an
- * “Example” stamp. A percentage with no stamp would read as a case study.
- *
- * Every metric here is phrased so that up is the win. An earlier draft had a
- * row reading “Decreased · search exits · −23%”, which is a genuine
- * improvement and still scans as damage: a visitor reads the minus sign, not
- * the metric name. Where a fix reduces something, name the thing that grew
- * instead.
- *
- * The assistant row leads. Being named in an AI answer is the thing this
- * product exists for, and an earlier draft parked it on “No change”, which
- * argued against the entire page from inside the product screenshot.
- */
 const LEDGER_ROWS = [
   {
     metric: "Commuter answers naming Urban Shell",
@@ -279,39 +296,37 @@ const LEDGER_ROWS = [
   },
 ] as const;
 
-/** /impact, the outcome ledger with example figures. */
+/** /impact, rendered as a measured before/after result ledger. */
 export function ImpactScreen() {
   return (
-    <div className="border border-white/16 bg-white/[0.02]">
-      <ScreenChrome title="Results" meta="Example figures" tone="dark" />
+    <div className="min-w-0 overflow-hidden border border-white/16 bg-white/[0.025]">
+      <ScreenChrome title="Results" meta="Illustrative · measured rerun" tone="dark" />
 
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-white/12 px-4 py-3 sm:px-5">
         <span className="inline-flex items-center gap-2 text-[12px] text-white/70">
           <Check aria-hidden="true" className="h-3.5 w-3.5 text-signal" />
-          Verified fixes
-          <span className="font-semibold tabular-nums text-white">3</span>
+          Approved change verified
         </span>
         <span className="text-[12px] text-white/70">
-          Measured window{" "}
-          <span className="font-semibold text-white">28 days</span>
+          Measured window <span className="font-semibold text-white">28 days</span>
         </span>
+        <span className="text-[12px] text-white/50">Same question · same segment</span>
       </div>
 
       {LEDGER_ROWS.map((row) => (
         <div
           key={row.metric}
-          className="flex items-center gap-3 border-b border-white/10 px-4 py-2.5 last:border-b-0 sm:px-5"
+          className="flex items-center gap-3 border-b border-white/10 px-4 py-3 last:border-b-0 sm:px-5"
         >
           <TrendingUp
             aria-hidden="true"
             className="h-3.5 w-3.5 shrink-0 text-signal"
           />
-          <span className="min-w-0 flex-1 truncate text-[13px] text-white/72">
+          <span className="min-w-0 flex-1 text-[13px] leading-[1.35] text-white/72">
             {row.metric}
           </span>
           <span className="shrink-0 whitespace-nowrap text-[13px] tabular-nums text-white/50">
-            {row.before} →{" "}
-            <span className="font-semibold text-white/88">{row.after}</span>
+            {row.before} → <span className="font-semibold text-white/88">{row.after}</span>
           </span>
           <span className="w-[4.75rem] shrink-0 whitespace-nowrap text-right text-[13px] font-semibold tabular-nums text-signal">
             {row.delta}
@@ -320,8 +335,7 @@ export function ImpactScreen() {
       ))}
 
       <p className="border-t border-white/12 px-4 py-2.5 text-[11px] leading-[1.5] text-white/50 sm:px-5">
-        Example figures, not a customer&apos;s. The layout is the product, and the
-        first numbers published here will be a real store&apos;s.
+        Illustrative figures, not a customer claim. Beseam only shows a result after the original signal is measured again.
       </p>
     </div>
   );

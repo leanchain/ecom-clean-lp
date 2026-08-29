@@ -105,7 +105,7 @@ function StoreVignette() {
           What blocks the choice
         </span>
         <p className="mt-2 text-[10px] font-semibold leading-tight text-ink-deep">
-          Fits over layers?
+          Breathable enough for commuting?
         </p>
         <div className="mt-1.5 flex items-center gap-1.5 text-signal-ink">
           <X className="h-3 w-3 shrink-0" />
@@ -165,7 +165,7 @@ function PersonalizationVignette() {
               20,000 mm waterproof
             </span>
             <span className="bg-white px-1.5 py-0.5 font-mono text-[7.5px] font-semibold text-ink-deep ring-1 ring-signal-ink/16">
-              Fits over layers
+              Breathable shell
             </span>
           </div>
         </div>
