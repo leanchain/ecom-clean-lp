@@ -57,7 +57,7 @@ const INVENTORY: readonly InventoryItem[] = [
   { name: "measure-impact", status: "Homepage", note: "Standalone Impact-ledger section" },
   { name: "mobile-sticky-cta", status: "Homepage", note: "Mobile-only conversion control" },
   { name: "navbar", status: "Foundation", note: "Global site navigation" },
-  { name: "operating-loop", status: "Homepage", note: "Current bridge into the decision trace" },
+  { name: "operating-loop", status: "Unused", note: "Superseded on homepage by the compact loop rail in what-beseam-does" },
   { name: "pipeline-graphic", status: "Used elsewhere", note: "Drawn Observe/Understand/Act/Learn pipeline on /platform" },
   { name: "product-art", status: "Foundation", note: "Illustrative product specimen art" },
   { name: "production-homepage", status: "Homepage", note: "Homepage composition" },
@@ -158,8 +158,7 @@ export default function PlaybookPage() {
       <div className="border-b border-black/14 bg-[#faf1eb] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-signal-ink">Current homepage sections</div>
       <MajorPreview name="credibility-rail" status="Homepage" note="Two-register proof band under the hero"><CredibilityRail /></MajorPreview>
       <MajorPreview name="what-beseam-does" status="Homepage" note="Concrete discovery-to-purchase capability journey"><WhatBeseamDoes /></MajorPreview>
-      <MajorPreview name="operating-loop" status="Homepage" note="Bridge from consideration to the connected decision trace"><OperatingLoop /></MajorPreview>
-      <MajorPreview name="connected-evidence" status="Homepage" note="Trimmed decision trace — ends at the finding"><ConnectedEvidence /></MajorPreview>
+      <MajorPreview name="connected-evidence" status="Homepage" note="Worked evidence trace before the product action view"><ConnectedEvidence /></MajorPreview>
       <MajorPreview name="evidence-to-work" status="Homepage" note="Standalone Actions-queue section"><EvidenceToWork /></MajorPreview>
       <MajorPreview name="measure-impact" status="Homepage" note="Standalone Impact-ledger section"><MeasureImpact /></MajorPreview>
       <MajorPreview name="category-benchmarks-section" status="Homepage" note="AI Shopping Report ledger on the homepage"><CategoryBenchmarksSection /></MajorPreview>
@@ -173,6 +172,7 @@ export default function PlaybookPage() {
       <div className="border-b border-black/14 bg-[#fff4ee] px-5 py-3 text-center font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-signal-ink">Currently unused sections</div>
       <MajorPreview name="buying-decision-story" status="Unused" note="Previous stacked end-to-end buying-decision story"><BuyingDecisionStory /></MajorPreview>
       <MajorPreview name="markets-section" status="Unused" note="Previous market-context section"><MarketsSection /></MajorPreview>
+      <MajorPreview name="operating-loop" status="Unused" note="Superseded by the compact loop rail in what-beseam-does"><OperatingLoop /></MajorPreview>
       <MajorPreview name="shopper-loss" status="Unused" note="Previous three example loss scenarios"><ShopperLoss /></MajorPreview>
       <MajorPreview name="why-beseam" status="Unused" note="Previous prioritize / work-together section"><WhyBeseam /></MajorPreview>
 

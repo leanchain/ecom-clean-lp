@@ -8,18 +8,18 @@ import EvidenceToWork from "@/components/beseam/evidence-to-work";
 import FirstMonthPromise from "@/components/beseam/first-month-promise";
 import HeroSurfaceShift from "@/components/beseam/hero-surface-shift";
 import MeasureImpact from "@/components/beseam/measure-impact";
-import OperatingLoop from "@/components/beseam/operating-loop";
 import { Reveal } from "@/components/beseam/reveal";
 import WhatBeseamDoes from "@/components/beseam/what-beseam-does";
 
 /**
  * Section order is the argument, and it is deliberate:
  *
- * claim → credibility → concrete commerce journey → continuous growth loop →
- * proof → measurement → operating model → research → ways to start
+ * claim → credibility → where Beseam works → one evidence trace → proposed work →
+ * measured result → research proof → ways to start
  *
- * The merchant first sees exactly where Beseam acts across discovery, store,
- * behavior, and revenue before the page explains the connected operating model.
+ * The merchant sees the commerce path first, then watches one signal become a
+ * proposed change and a measured result. The operating loop is already shown
+ * in the black rail inside WhatBeseamDoes, so it is not repeated as a section.
  */
 const SCAN_RETURNS = [
   "Where shoppers may lose you",
@@ -82,10 +82,9 @@ export default function ProductionHomepage() {
 
       <CredibilityRail />
       <WhatBeseamDoes />
+      <ConnectedEvidence />
       <EvidenceToWork />
       <MeasureImpact />
-      <OperatingLoop />
-      <ConnectedEvidence />
       <CategoryBenchmarksSection />
       <FirstMonthPromise />
     </div>
