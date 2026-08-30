@@ -6,7 +6,6 @@ import ProductionHomepage from "@/components/beseam/production-homepage";
 import CookieConsent from "@/components/cookie-consent";
 import { HOME_SOCIAL_IMAGE, buildPublicMetadata } from "@/lib/seo";
 import { STORE_HEALTH_FAQS } from "@/lib/store-health-faqs";
-
 export const metadata: Metadata = buildPublicMetadata({
   title: "Beseam | Find, fix, and measure ecommerce growth",
   description:
@@ -45,7 +44,6 @@ export default function Home() {
           "Ask the brand owner to approve before customer-facing changes are applied",
           "Measure what changed with before-and-after evidence",
         ],
-        publisher: { "@id": "https://beseam.com/#organization" },
       },
       {
         "@type": "FAQPage",
