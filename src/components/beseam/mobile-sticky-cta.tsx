@@ -9,6 +9,7 @@ import { APP_REGISTER_URL } from "@/lib/app-urls";
 
 /** Roughly one screen of scroll: the bar appears once the hero copy is behind you. */
 const SHOW_AFTER_SCROLL_Y = 600;
+const MOBILE_CTA_VISIBILITY_EVENT = "beseam:mobile-cta-visibility";
 
 export default function MobileStickyCta() {
   const [visible, setVisible] = useState(false);
@@ -47,10 +48,33 @@ export default function MobileStickyCta() {
     };
   }, []);
 
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent(MOBILE_CTA_VISIBILITY_EVENT, {
+        detail: { visible },
+      }),
+    );
+  }, [visible]);
+
+  useEffect(
+    () => () => {
+      window.dispatchEvent(
+        new CustomEvent(MOBILE_CTA_VISIBILITY_EVENT, {
+          detail: { visible: false },
+        }),
+      );
+    },
+    [],
+  );
+
   if (!visible) return null;
 
   return (
-    <div data-print-hide className="fixed bottom-4 left-4 right-[5.5rem] z-40 md:hidden">
+    <div
+      data-mobile-sticky-cta
+      data-print-hide
+      className="fixed bottom-4 left-4 right-[5.5rem] z-40 md:hidden"
+    >
       <TrackedLink
         href={APP_REGISTER_URL}
         eventName="marketing_primary_cta_clicked"
