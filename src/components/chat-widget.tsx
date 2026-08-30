@@ -5,8 +5,6 @@ import Script from "next/script";
 import { useTheme } from "next-themes";
 
 const CRISP_WEBSITE_ID = "55e053c3-37dc-40cb-a4e8-99fb05ce565b";
-const MOBILE_CTA_VISIBILITY_EVENT = "beseam:mobile-cta-visibility";
-const MOBILE_BREAKPOINT = "(max-width: 767px)";
 
 const ChatWidget = () => {
   const { resolvedTheme } = useTheme();
@@ -22,38 +20,6 @@ const ChatWidget = () => {
     const mode = resolvedTheme === "dark" ? "dark" : "light";
     crisp.push(["config", "color:mode", [mode]]);
   }, [resolvedTheme]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const crispWindow = window as typeof window & { $crisp?: unknown[] };
-    const crisp = (crispWindow.$crisp ??= []);
-    const mobile = window.matchMedia(MOBILE_BREAKPOINT);
-    let mobileCtaVisible = Boolean(
-      document.querySelector("[data-mobile-sticky-cta]"),
-    );
-
-    const syncChatLauncher = () => {
-      const shouldShow = !mobile.matches || mobileCtaVisible;
-      crisp.push(["do", shouldShow ? "chat:show" : "chat:hide"]);
-    };
-
-    const handleCtaVisibility = (event: Event) => {
-      mobileCtaVisible = Boolean(
-        (event as CustomEvent<{ visible?: boolean }>).detail?.visible,
-      );
-      syncChatLauncher();
-    };
-
-    syncChatLauncher();
-    mobile.addEventListener("change", syncChatLauncher);
-    window.addEventListener(MOBILE_CTA_VISIBILITY_EVENT, handleCtaVisibility);
-
-    return () => {
-      mobile.removeEventListener("change", syncChatLauncher);
-      window.removeEventListener(MOBILE_CTA_VISIBILITY_EVENT, handleCtaVisibility);
-    };
-  }, []);
 
   return (
     <Script
