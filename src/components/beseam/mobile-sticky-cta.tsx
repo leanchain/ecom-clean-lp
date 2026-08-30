@@ -50,7 +50,7 @@ export default function MobileStickyCta() {
   if (!visible) return null;
 
   return (
-    <div data-print-hide className="fixed inset-x-4 bottom-4 z-40 md:hidden">
+    <div data-print-hide className="fixed bottom-4 left-4 right-[5.5rem] z-40 md:hidden">
       <TrackedLink
         href={APP_REGISTER_URL}
         eventName="marketing_primary_cta_clicked"
