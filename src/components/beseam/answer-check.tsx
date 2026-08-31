@@ -407,87 +407,68 @@ function ScanProgress({
 }
 
 // ── The real numbers, the moment they exist ─────────────────────────────────
-
 function FoundStrip({ result }: { result: AnswerCheckResult }) {
-  const audits = result.page_audits ?? [];
-  const pageStatus =
-    result.page_audits_status ?? (audits.length ? "complete" : "not_started");
-  const pagesInFlight = pageStatus === "queued" || pageStatus === "running";
   const catalog = result.catalog_inventory;
   const productCount =
     catalog?.products_checked && catalog.products_checked > 0
       ? `${catalog.products_checked}${catalog.products_capped ? "+" : ""}`
       : String(result.products_seen);
-  const findingCount = result.findings.length;
-
-  const pagesFailed = pageStatus === "failed";
+  const findingCount = groupFindings(sortedFindings(result)).length;
+  const scored = result.answers.filter((answer) => answer.mentioned !== null);
+  const named = scored.filter((answer) => answer.mentioned === true).length;
 
   const facts: Array<[string, string, boolean]> = [
     [productCount, "products found", false],
-    pagesFailed
-      ? ["—", "product pages: we could not read them", false]
-      : [
-          pagesInFlight ? String(result.products_seen) : String(audits.length),
-          pagesInFlight ? "product pages being read" : "product pages checked",
-          pagesInFlight,
-        ],
+    [
+      scored.length ? `${named}/${scored.length}` : "—",
+      scored.length ? "assistant answers named you" : "assistant answers pending",
+      !scored.length && isScanInFlight(result),
+    ],
     [
       String(findingCount),
-      findingCount === 1 ? "thing worth looking at" : "things worth looking at",
+      findingCount === 1 ? "opportunity found" : "opportunities found",
       false,
     ],
   ];
 
   return (
-    <>
-      <dl className="grid border-b border-black/14 bg-white sm:grid-cols-3">
-        {facts.map(([value, label, pending], index) => (
-          <div
-            key={label}
-            className={`flex items-baseline gap-2.5 px-5 py-4 sm:px-6 ${
-              index > 0
-                ? "border-t border-black/12 sm:border-l sm:border-t-0"
-                : ""
-            }`}
-          >
-            {/* Colour goes on the number the merchant is here for. The other
-                two are context; painting all three would mean none of them. */}
-            <dd
-              className={`text-[26px] font-semibold leading-none tracking-[-0.03em] tabular-nums ${
-                index === 2 && findingCount > 0
+    <dl className="grid border-b border-black/14 bg-white sm:grid-cols-3">
+      {facts.map(([value, label, pending], index) => (
+        <div
+          key={label}
+          className={`flex items-baseline gap-2.5 px-5 py-4 sm:px-6 ${
+            index > 0
+              ? "border-t border-black/12 sm:border-l sm:border-t-0"
+              : ""
+          }`}
+        >
+          <dd
+            className={`text-[26px] font-semibold leading-none tracking-[-0.03em] tabular-nums ${
+              index === 1 && scored.length && named < scored.length
+                ? "text-signal-ink"
+                : index === 2 && findingCount > 0
                   ? "text-signal-ink"
                   : "text-ink-deep"
-              }`}
-            >
-              {value}
-            </dd>
-            <dt className="flex items-center gap-1.5 text-[12.5px] leading-snug text-black/58">
-              {label}
-              {pending ? (
-                <Loader2
-                  className="h-3 w-3 animate-spin text-signal-ink"
-                  aria-hidden="true"
-                />
-              ) : null}
-            </dt>
-          </div>
-        ))}
-      </dl>
-      {/* A zero with no explanation reads as “your pages are broken”. Say whose
-          side the failure was on, and that the rest still stands. */}
-      {pagesFailed ? (
-        <p className="border-b border-black/14 bg-[#fffaf7] px-5 py-3 text-[13px] leading-relaxed text-black/64 sm:px-6">
-          We could not finish reading your individual product pages on this run.
-          Everything below comes from your public catalog and still holds.
-          Running the scan again usually picks the pages up.
-        </p>
-      ) : null}
-    </>
+            }`}
+          >
+            {value}
+          </dd>
+          <dt className="flex items-center gap-1.5 text-[12.5px] leading-snug text-black/58">
+            {label}
+            {pending ? (
+              <Loader2
+                className="h-3 w-3 animate-spin text-signal-ink"
+                aria-hidden="true"
+              />
+            ) : null}
+          </dt>
+        </div>
+      ))}
+    </dl>
   );
 }
 
 // ── The heart of the result ─────────────────────────────────────────────────
-
 /**
  * Findings that say the same thing to the merchant, collapsed into one row.
  *
@@ -529,124 +510,109 @@ function FindingRow({
   const nextStep = findingNextStep(finding);
 
   return (
-    // Rank marker carries the priority as colour. A filled square for the ones
-    // worth doing first, a hairline outline for the rest: the list reads its own
-    // order at a glance without striping every second row.
-    <li className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3.5 gap-y-0 border-b border-black/12 px-5 py-5 last:border-b-0 sm:gap-x-4 sm:px-6">
-      <span
-        aria-hidden="true"
-        className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center font-mono text-[11px] font-semibold tabular-nums ${
-          priority.urgent
-            ? "bg-signal-ink text-white"
-            : "border border-black/16 text-black/45"
-        }`}
-      >
-        {index + 1}
-      </span>
-
-      <div className="min-w-0">
-        <div className="flex items-baseline gap-2 text-[11px] font-semibold uppercase tracking-[0.08em]">
-          <span
-            className={priority.urgent ? "text-signal-ink" : "text-black/50"}
-          >
-            {priority.label}
+    <li className="border-b border-black/12 last:border-b-0">
+      <details className="group/finding bg-white">
+        <summary className="grid cursor-pointer list-none gap-3 px-5 py-4 transition-colors hover:bg-[#fffaf7] sm:grid-cols-[2.5rem_minmax(0,1fr)_auto] sm:items-center sm:px-6 [&::-webkit-details-marker]:hidden">
+          <span className="font-mono text-[11px] font-semibold tabular-nums text-black/36">
+            {String(index + 1).padStart(2, "0")}
           </span>
-          {/* The grouping is orientation, not information the merchant acts on.
-              On a phone it wrapped the priority onto two lines, so it waits for
-              the room to sit on one. */}
-          <span className="hidden text-black/26 sm:inline" aria-hidden="true">
-            /
-          </span>
-          <span className="hidden font-normal normal-case tracking-normal text-black/50 sm:inline">
-            {findingGroup(finding)}
-          </span>
-        </div>
 
-        <p className="mt-1.5 max-w-[54ch] text-balance text-[17px] font-semibold leading-[1.35] tracking-[-0.015em] text-ink-deep sm:text-[18px]">
-          {findingHeadline(finding)}
-        </p>
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10.5px] font-semibold uppercase tracking-[0.08em]">
+              <span className="text-black/44">{findingGroup(finding)}</span>
+              <span aria-hidden="true" className="text-black/20">·</span>
+              <span className={priority.urgent ? "text-signal-ink" : "text-black/46"}>
+                {priority.label}
+              </span>
+            </div>
+            <p className="mt-1 text-balance text-[16px] font-semibold leading-[1.4] tracking-[-0.012em] text-ink-deep sm:text-[17px]">
+              {findingHeadline(finding)}
+            </p>
+          </div>
 
-        {why ? (
-          <p className="mt-2.5 max-w-[68ch] text-[14px] leading-[1.65] text-black/64">
-            {why}
-          </p>
-        ) : null}
-
-        {nextStep ? (
-          <p className="mt-3 max-w-[68ch] border-l border-signal-ink/35 pl-3.5 text-[14px] leading-[1.6] text-ink-deep">
-            <span className="font-semibold">Improve next: </span>
-            {nextStep}
-          </p>
-        ) : null}
-
-        <details className="group mt-3">
-          <summary className="inline-flex min-h-9 cursor-pointer list-none items-center gap-1.5 text-[12.5px] font-semibold text-black/56 transition-colors hover:text-signal-ink [&::-webkit-details-marker]:hidden">
+          <span className="inline-flex min-h-9 items-center gap-2 justify-self-start text-[12px] font-semibold text-black/52 group-hover/finding:text-signal-ink sm:justify-self-end">
+            <span className="group-open/finding:hidden">See recommendation</span>
+            <span className="hidden group-open/finding:inline">Close</span>
             <ChevronDown
-              className="h-3.5 w-3.5 transition-transform group-open:rotate-180"
+              className="h-3.5 w-3.5 transition-transform group-open/finding:rotate-180"
               aria-hidden="true"
             />
-            <span className="group-open:hidden">
-              What we saw
-              {group.members.length > 1
-                ? ` (${group.members.length} checks)`
-                : ""}
-            </span>
-            <span className="hidden group-open:inline">Hide what we saw</span>
-          </summary>
-          <div className="mt-2.5 space-y-3 border-l border-black/14 pl-4 text-[12.5px] leading-relaxed text-black/62">
-            {group.members.map((member, position) => {
-              const reportId = member.url
-                ? reportIdByUrl.get(member.url)
-                : undefined;
-              return (
-                <div key={`${member.code}-${member.product ?? position}`}>
-                  <p className="font-semibold text-ink-deep">{member.title}</p>
-                  {member.detail ? (
-                    <p className="mt-1">{member.detail}</p>
-                  ) : null}
-                  {member.evidence?.length ? (
-                    <ul className="mt-2 space-y-1">
-                      {member.evidence
-                        .slice(0, 3)
-                        .map((line, evidenceIndex) => (
-                          <li
-                            key={`${line}-${evidenceIndex}`}
-                            className="break-words font-mono text-[11.5px] text-black/54"
+          </span>
+        </summary>
+
+        <div className="border-t border-black/10 bg-[#fffaf7] px-5 py-5 sm:px-6 sm:pl-[5.5rem]">
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,1.25fr)_minmax(16rem,0.75fr)]">
+            <div>
+              {why ? (
+                <p className="max-w-[68ch] text-[14px] leading-[1.65] text-black/64">
+                  {why}
+                </p>
+              ) : null}
+              {nextStep ? (
+                <p className="mt-4 max-w-[68ch] border-l border-signal-ink/35 pl-3.5 text-[14px] leading-[1.6] text-ink-deep">
+                  <span className="font-semibold">Improve next: </span>
+                  {nextStep}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="border-t border-black/10 pt-4 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-black/42">
+                Evidence
+                {group.members.length > 1 ? ` · ${group.members.length} checks` : ""}
+              </p>
+              <div className="mt-3 space-y-4 text-[12px] leading-relaxed text-black/58">
+                {group.members.map((member, position) => {
+                  const reportId = member.url
+                    ? reportIdByUrl.get(member.url)
+                    : undefined;
+                  return (
+                    <div key={`${member.code}-${member.product ?? position}`}>
+                      <p className="font-semibold text-ink-deep">{member.title}</p>
+                      {member.detail ? <p className="mt-1">{member.detail}</p> : null}
+                      {member.evidence?.length ? (
+                        <ul className="mt-2 space-y-1">
+                          {member.evidence.slice(0, 3).map((line, evidenceIndex) => (
+                            <li
+                              key={`${line}-${evidenceIndex}`}
+                              className="break-words font-mono text-[11px] text-black/50"
+                            >
+                              {line}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                      <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-black/42">
+                        {member.product ? <span>{member.product}</span> : null}
+                        <span className="font-mono">{member.code}</span>
+                        {member.url && reportId ? (
+                          <a
+                            href={`${APP_REPORT_URL}/${reportId}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-semibold text-ink-deep underline decoration-black/24 underline-offset-4 hover:decoration-signal-ink"
                           >
-                            {line}
-                          </li>
-                        ))}
-                    </ul>
-                  ) : null}
-                  <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11.5px] text-black/44">
-                    {member.product ? <span>{member.product}</span> : null}
-                    <span className="font-mono">{member.code}</span>
-                    {member.url && reportId ? (
-                      <a
-                        href={`${APP_REPORT_URL}/${reportId}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-ink-deep underline decoration-black/24 underline-offset-4 hover:decoration-signal-ink"
-                      >
-                        Full page report →
-                      </a>
-                    ) : member.url ? (
-                      <a
-                        href={member.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-black/56 underline decoration-black/20 underline-offset-4 hover:text-ink-deep hover:decoration-signal-ink"
-                      >
-                        Open the page →
-                      </a>
-                    ) : null}
-                  </p>
-                </div>
-              );
-            })}
+                            Full page report →
+                          </a>
+                        ) : member.url ? (
+                          <a
+                            href={member.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-semibold text-black/56 underline decoration-black/20 underline-offset-4 hover:text-ink-deep hover:decoration-signal-ink"
+                          >
+                            Open the page →
+                          </a>
+                        ) : null}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        </details>
-      </div>
+        </div>
+      </details>
     </li>
   );
 }
@@ -672,20 +638,17 @@ function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
   // restate the headline directly above it in slightly different words. The
   // headline and the scope note already carry that message.
   if (!findings.length && !pagesInFlight) return null;
-
   return (
     <section className="border-b border-black/14 bg-white">
       <div className="border-b border-black/12 px-5 py-5 sm:px-6">
         <h3 className="text-[19px] font-semibold tracking-[-0.02em] text-ink-deep">
-          Growth opportunities from this scan
+          Fix these first
         </h3>
         <p className="mt-1.5 max-w-[70ch] text-[13.5px] leading-relaxed text-black/60">
           {findings.length
-            ? "Read as possibilities, not verdicts. A short public scan can show what the evidence points toward; it cannot prove what it costs you."
+            ? "The clearest opportunities from this public scan, ordered by what is worth looking at first. Open one for the recommendation and evidence."
             : "Still reading."}
-          {pagesInFlight
-            ? " More may appear as your product pages finish."
-            : ""}
+          {pagesInFlight ? " More may appear as your product pages finish." : ""}
         </p>
       </div>
 
@@ -942,144 +905,79 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
   const rivals = tallyRivals(scored);
   const topRival = rivals[0] ?? null;
   const pct = Math.round((named / scored.length) * 100);
-  const questionCount = new Set(
-    scored.map((answer) => answer.question).filter(Boolean),
-  ).size;
 
   return (
-    <section className="bg-[#fffaf7]">
-      <div className="bg-[#fffaf7]">
-        {/* The card header already reports run state. This one names the
-            sample instead, so the page never announces “complete” twice. */}
-        <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[#e4ded6] bg-white px-5 py-5 sm:px-6">
-          <div>
-            <h4 className="text-[24px] font-semibold tracking-[-0.025em] text-ink-deep">
-              What shoppers are being told
-            </h4>
-            <p className="mt-2 max-w-[66ch] text-[13.5px] leading-relaxed text-[#5f5a55]">
-              What each assistant actually answered, which brands it named
-              instead, and the products it put in front of the shopper.
-            </p>
+    <section className="bg-white">
+      <div className="grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="border-b border-black/12 px-5 py-6 sm:px-6 lg:border-b-0 lg:border-r">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-black/42">
+            Brand appearance
+          </p>
+          <div className="mt-2 flex flex-wrap items-end gap-3">
+            <span className={`text-[52px] font-semibold leading-none tracking-[-0.045em] tabular-nums ${scoreBand(pct).text}`}>
+              {named}/{scored.length}
+            </span>
+            <span className={`mb-1 text-[12px] font-semibold ${scoreBand(pct).text}`}>
+              {scoreBand(pct).label} · {pct}%
+            </span>
           </div>
-          <span className="inline-flex items-center border border-black/18 bg-white px-3 py-1.5 text-[12px] font-semibold text-ink-deep">
-            {scored.length} answers sampled
-          </span>
+          <p className="mt-3 max-w-[42ch] text-[13.5px] leading-relaxed text-black/62">
+            {named === scored.length
+              ? "Your brand appeared in every observed answer."
+              : named === 0
+                ? "Your brand did not appear in any observed answer."
+                : `Your brand was missing from ${scored.length - named} of ${scored.length} observed answers.`}
+          </p>
+          {topRival && named < scored.length ? (
+            <p className="mt-4 border-t border-black/10 pt-3 text-[12.5px] leading-relaxed text-black/58">
+              <span className="font-semibold text-ink-deep">Most frequent alternative: </span>
+              {topRival.label} · {topRival.count}×
+            </p>
+          ) : null}
         </div>
 
-        <div className="grid gap-0 border-t border-black/12 bg-white lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
-          <div className="flex flex-col border-b border-black/12 p-5 sm:px-6 lg:border-b-0 lg:border-r">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.07em] text-[#5f5a55]">
-              Brand appearance
+        <div className="px-5 py-6 sm:px-6">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-black/42">
+              By assistant
             </p>
-            <div className="mt-3 flex flex-wrap items-end gap-3">
-              <span
-                className={`text-[46px] font-semibold leading-none tracking-[-0.04em] tabular-nums ${scoreBand(pct).text}`}
-              >
-                {named}/{scored.length}
-              </span>
-              {/* scoreBand already computes the word; showing only its colour
-                  threw away the one piece of interpretation the code had. */}
-              <span
-                className={`mb-1 border border-black/14 bg-white px-2.5 py-1 font-mono text-[11px] font-semibold ${scoreBand(pct).text}`}
-              >
-                {scoreBand(pct).label} · {pct}% of observed answers
-              </span>
-            </div>
-            <p className="mt-4 max-w-[38ch] text-[12.5px] leading-relaxed text-[#3b3833]">
-              {named === scored.length
-                ? "Your brand appeared in every observed answer in this run."
-                : named === 0
-                  ? "Your brand did not appear in any observed answer in this run."
-                  : `Your brand was absent from ${scored.length - named} of ${scored.length} observed answers.`}
-            </p>
-
-            {topRival && named < scored.length ? (
-              <div className="mt-5 border border-black/14 bg-ground p-4">
-                <div className="flex items-center gap-2">
-                  <span
-                    className="h-2 w-2 rounded-full bg-[#c8891f]"
-                    aria-hidden="true"
-                  />
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#8a5a12]">
-                    Needs attention
-                  </p>
-                </div>
-                <p className="mt-2 text-[12.5px] leading-relaxed text-[#3b3833]">
-                  {topRival.label} was the most frequently named alternative in
-                  this sample ({topRival.count}×).
-                </p>
-              </div>
-            ) : null}
+            <span className="font-mono text-[11px] text-black/42">
+              {channels.length} {channels.length === 1 ? "assistant" : "assistants"}
+            </span>
           </div>
-
-          <div className="p-5 sm:px-6">
-            <div className="flex items-center justify-between gap-3">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.07em] text-[#5f5a55]">
-                By assistant
-              </p>
-              <span className="font-mono text-[11px] text-[#6f6862]">
-                {channels.length}{" "}
-                {channels.length === 1 ? "assistant" : "assistants"}
-              </span>
-            </div>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              {engines.map((engine) => (
-                <div
-                  key={engine.channel}
-                  className="border border-black/14 bg-white p-4"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="flex min-w-0 items-center gap-2.5 text-[13px] font-semibold text-ink-deep">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-black/14 bg-white">
-                        <ChannelIcon
-                          channel={
-                            CHANNEL_BRAND_KEYS[engine.channel.toLowerCase()] ??
-                            engine.channel
-                          }
-                          className="h-4 w-4 opacity-80"
-                        />
-                      </span>
-                      <span className="truncate">{engine.channel}</span>
+          <div className="mt-2 divide-y divide-black/10 border-y border-black/10">
+            {engines.map((engine) => (
+              <div
+                key={engine.channel}
+                className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3"
+              >
+                <div className="min-w-0">
+                  <p className="flex items-center gap-2.5 text-[13px] font-semibold text-ink-deep">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-black/12 bg-white">
+                      <ChannelIcon
+                        channel={CHANNEL_BRAND_KEYS[engine.channel.toLowerCase()] ?? engine.channel}
+                        className="h-3.5 w-3.5 opacity-80"
+                      />
                     </span>
-                    <span className="font-mono text-[12px] text-[#5f5a55]">
-                      {engine.wins}/{engine.total}
-                    </span>
-                  </div>
-                  <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-[#efe9e1]">
+                    <span className="truncate">{engine.channel}</span>
+                  </p>
+                  <div className="ml-9 mt-2 h-1 bg-black/8">
                     <span
-                      className={`block h-full rounded-full ${scoreBand(engine.pct).fill}`}
+                      className={`block h-full ${scoreBand(engine.pct).fill}`}
                       style={{ width: `${Math.max(engine.pct, 1.5)}%` }}
                     />
                   </div>
-                  <div className="mt-3 flex items-center justify-between gap-3 text-[11px] text-[#5f5a55]">
-                    <span>{engine.wins} named you</span>
-                    <span>{engine.total - engine.wins} missed you</span>
-                  </div>
                 </div>
-              ))}
-            </div>
+                <div className="text-right">
+                  <p className="font-mono text-[13px] font-semibold text-ink-deep">
+                    {engine.wins}/{engine.total}
+                  </p>
+                  <p className="mt-0.5 text-[10.5px] text-black/44">named you</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-
-        <dl className="grid border-t border-[#e4ded6] bg-white sm:grid-cols-3">
-          {[
-            ["Observed answers", String(scored.length)],
-            ["Buyer questions", String(questionCount)],
-            ["Rivals named", String(rivals.length)],
-          ].map(([label, value], index) => (
-            <div
-              key={label}
-              className={`px-5 py-4 sm:px-6 ${index > 0 ? "border-t border-[#e4ded6] sm:border-l sm:border-t-0" : ""}`}
-            >
-              <dt className="text-[11px] font-semibold uppercase tracking-[0.06em] text-[#6f6862]">
-                {label}
-              </dt>
-              <dd className="mt-1.5 text-[18px] font-semibold text-ink-deep">
-                {value}
-              </dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );
@@ -1795,7 +1693,6 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
           </div>
         )}
       </Fold>
-
       <Fold
         title="Product pages"
         summary={
@@ -1803,7 +1700,9 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
             ? `${result.products_seen} representative PDPs · inspection in progress`
             : pageAuditStatus === "failed"
               ? `${result.products_seen} representative PDPs · page inspection could not complete`
-              : `${audits.length} representative PDPs · ${evaluatedChecks} measured checks · ${failedChecks} review · ${staticAreas.reduce((sum, area) => sum + area.unevaluated, 0)} not measured`
+              : audits.length === 0
+                ? "Representative product-page inspection was not available in this run"
+                : `${audits.length} representative PDPs · ${evaluatedChecks} measured checks · ${failedChecks} review · ${staticAreas.reduce((sum, area) => sum + area.unevaluated, 0)} not measured`
         }
       >
         {pageAuditsInFlight ? (
@@ -2259,14 +2158,10 @@ function QuestionRow({
     </li>
   );
 }
-
 function VisibilityDisclosure({ result }: { result: AnswerCheckResult }) {
   const scored = result.answers.filter((answer) => answer.mentioned !== null);
   const named = scored.filter((answer) => answer.mentioned === true).length;
   const rivals = tallyRivals(result.answers).slice(0, RIVAL_LIMIT);
-  // Questions in the order they were generated, each carrying every answer it
-  // produced. The bare list of questions used to be its own section above this
-  // one, restating what these rows already say.
   const rows = result.questions
     .map((question) => ({
       question,
@@ -2276,12 +2171,11 @@ function VisibilityDisclosure({ result }: { result: AnswerCheckResult }) {
 
   return (
     <ScanDisclosure
-      // The one section that argues the product's case opens on arrival.
       defaultOpen
-      title="What shoppers ask, and what they are told"
+      title="How you appear when shoppers ask"
       summary={
         scored.length > 0
-          ? `${rows.length} buying ${rows.length === 1 ? "question" : "questions"} · ${named}/${scored.length} observed answers chose your brand`
+          ? `${named}/${scored.length} observed answers named you · ${rows.length} buying ${rows.length === 1 ? "question" : "questions"}`
           : "Checking what shoppers are being shown"
       }
     >
@@ -2629,32 +2523,18 @@ export function ResultCard({
         <RejectedNotice result={result} />
       ) : (
         <>
-          {/* Answer the three questions in order: what did we find, why might
-              you care, what should you do. Everything technical sits below or
-              behind a disclosure. */}
           <ScanHeadline result={result} />
           <FoundStrip result={result} />
           <WorthLookingAt result={result} />
 
-          {/* The holistic read sits directly under the list it explains. Each
-              finding carries its own “What we saw”; this is the whole-store
-              picture those individual verdicts were drawn from, and it is what
-              a merchant opens when they want to know why the list says what it
-              says rather than what one check found. */}
-          <InitialScanSummary result={result} />
-
           {verificationGate ? (
             <DeeperAnalysisPanel result={result} gate={verificationGate} />
           ) : scored.length > 0 || result.questions.length > 0 ? (
-            <>
-              <VisibilityDisclosure result={result} />
-            </>
+            <VisibilityDisclosure result={result} />
           ) : null}
 
-          {/* Both ways forward are offered as soon as the scan has found
-              anything real. They used to require a verified answer probe, which
-              deleted every route into the product from the free scan — the one
-              moment the visitor is most convinced. */}
+          <InitialScanSummary result={result} />
+
           {continueHref ? (
             <ContinuePaths result={result} continueHref={continueHref} />
           ) : null}
