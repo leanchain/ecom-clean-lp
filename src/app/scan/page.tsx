@@ -17,12 +17,12 @@ export default function ScanPage() {
       <div className="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
         <div className="mx-auto max-w-[72rem] text-center">
           <h1 className="mx-auto max-w-[22ch] text-balance font-display text-[clamp(2.8rem,5vw,4.8rem)] font-normal leading-[1] tracking-[-0.025em]">
-            See where shoppers may lose you before they buy.
+            See what may stop shoppers from buying.
           </h1>
           <p className="mx-auto mt-7 max-w-[52ch] text-[17px] leading-[1.7] text-black/64">
-            Enter your domain. We read your public storefront and show where
-            discovery, product choice, or buying friction deserves attention
-            first, in plain words with the evidence attached.
+            Enter your domain. We read your public store and show where shoppers
+            may miss products, struggle to choose, or get stuck before buying.
+            You see what to check first and why.
           </p>
         </div>
 
@@ -46,8 +46,8 @@ export default function ScanPage() {
               </h2>
               <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/66">
                 Bring your store. In twenty minutes, we will use one real
-                finding to show how Beseam connects the evidence, proposes a
-                supported fix, and rechecks what changes.
+                finding to show what Beseam found, what it would change, and
+                what it checks again afterward.
               </p>
             </div>
             <BookReviewCta

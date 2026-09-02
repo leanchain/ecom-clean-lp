@@ -45,41 +45,40 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
   "ai-visibility-monitoring": {
     slug: "ai-visibility-monitoring",
     eyebrow: "AI shopping discovery",
-    headline:
-      "See when AI shopping answers leave your products out, then inspect what may be worth changing.",
+    headline: "See when AI shopping leaves your products out.",
     metaTitle: "AI Shopping Discovery Monitoring for Ecommerce | Beseam",
     description:
-      "Observe real buying questions across AI assistants, connect each answer to product and store evidence, propose supported changes, and recheck what changes.",
+      "Ask real shopping questions across AI assistants, see which products appear, find what you can improve, prepare a change for approval, and ask the same question again.",
     intro:
-      "AI shopping discovery is one signal in Beseam's continuous commerce loop. For each buying question, Beseam keeps the observed answer, products named, competitor context, and relevant product evidence together, then surfaces the strongest opportunity and proposes a supported change for brand-owner approval.",
+      "Beseam asks the same shopping questions across AI assistants and keeps each answer with the products and competitors it mentions. When your product is missing, Beseam checks the product and store details you can change, then prepares the strongest change for your approval.",
     proofLine:
-      "The result is an observed answer with traceable context, not a company-wide visibility score or a claim about hidden ranking logic.",
+      "You see the actual answer and the facts behind it—not a vague visibility score or a guess about how the AI ranks products.",
     observations: [
       {
-        title: "The buying question",
+        title: "The shopping question",
         detail:
-          "Branded, category, comparison, use-case, deal, shipping and where-to-buy questions define the exact decision you are testing.",
+          "Ask the exact question a shopper might ask about a brand, category, comparison, use case, deal, shipping, or where to buy.",
       },
       {
-        title: "The observed answer",
+        title: "Who appeared",
         detail:
-          "Keep the answer itself, the products it named, and whether your product appeared instead of reducing the run to one score.",
+          "See the answer, the products it named, and whether your product appeared instead of hiding everything behind one score.",
       },
       {
         title: "Competitors and sources",
         detail:
-          "See which competing products appeared and which citations or supporting sources were exposed by the assistant when available.",
+          "See which competing products appeared and which sources the assistant showed, when those sources are available.",
       },
       {
-        title: "Product evidence you control",
+        title: "What you can change",
         detail:
-          "Connect the miss to supported product-page, catalog, structured-data, or feed differences Beseam can inspect and prepare for approval.",
+          "Check the product page, catalog, structured data, and feed for things you can improve, then prepare the change for approval.",
       },
     ],
     sections: [
       {
-        title: "Start with the answer, not an index.",
-        body: "A merchant needs to know what happened on a specific buying question: what the assistant said, which products were recommended and whether the merchant's product was represented correctly. Beseam keeps that run-level evidence visible instead of turning the result into a detached visibility grade.",
+        title: "Start with the actual answer.",
+        body: "You need to know what happened on a specific shopping question: what the assistant said, which products it recommended, and whether your product was described correctly. Beseam keeps that answer visible instead of turning it into a single grade.",
         points: [
           "Keep the original question and observed answer together.",
           "Record the products and merchants named in that answer.",
@@ -87,8 +86,8 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
         ],
       },
       {
-        title: "Compare the winner with evidence you can change.",
-        body: "Beseam does not claim access to an assistant's hidden ranking logic. It compares the observed answer with product and storefront evidence and surfaces supported differences or missing facts that are actionable for the merchant.",
+        title: "See what you can change.",
+        body: "Beseam cannot see an assistant's hidden ranking rules. It compares the answer with your product and store data to find missing or different information you can actually change.",
         points: [
           "Inspect titles, descriptions, attributes, availability and structured product evidence.",
           "Keep competitor sightings attached to the exact question where they appeared.",
@@ -96,8 +95,8 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
         ],
       },
       {
-        title: "Make the change, then ask the same question again.",
-        body: "With approval and store access, a supported product-data change can be published while the previous value is retained. Beseam then re-runs the same buying question so the team can compare the new observed answer with the old one.",
+        title: "Change it, then ask again.",
+        body: "After you approve a product-data change, Beseam can apply it where the store connection supports that change. Then it asks the same shopping question again so you can compare the new answer with the old one.",
         points: [
           "Keep approval and the previous product value attached to the change.",
           "Re-run the same question instead of substituting a new prompt.",
@@ -108,7 +107,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
     limits: [
       "AI answers are point-in-time observations and can change between runs.",
       "Beseam cannot see or control an assistant's hidden ranking logic.",
-      "Competitor, citation and product-data differences do not automatically prove causation.",
+      "A competitor appearing, a source being cited, or a product-data difference does not prove why the AI chose one product over another.",
       "No recommendation, ranking, traffic or revenue outcome is guaranteed.",
     ],
     faqs: [
@@ -139,39 +138,38 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
   platform: {
     slug: "platform",
     eyebrow: "Platform",
-    headline:
-      "Everything that helps a shopper choose you, connected.",
+    headline: "See what helps shoppers find, choose, and buy from you.",
     metaTitle: "Beseam Platform | Connected Ecommerce Growth",
     description:
-      "Beseam continuously connects discovery, product evidence, shopper behavior, and revenue, finds what is worth improving, applies supported changes under your rules, and measures what changed.",
+      "Beseam watches AI discovery, your store, shopper behavior, and revenue. It finds what to improve, prepares the change, gets your approval, applies it, and checks what changed.",
     intro:
-      "Beseam connects what shoppers see before the visit, what they find on the store, what they do next, and what happened after a change. It turns that evidence into prioritized changes and keeps improvement moving through one continuous loop instead of leaving another dashboard to manage.",
+      "Beseam watches what shoppers see before they visit, what they find on your store, what they do next, and what happens after a change. It keeps finding what to improve instead of giving you another dashboard to manage.",
     proofLine:
-      "Discovery, products, behavior, changes, and results stay attached to the same buying decision.",
-    observationsHeading: "Follow the shopper's decision",
+      "Discovery, product pages, shopper behavior, changes, and results stay in one place.",
+    observationsHeading: "Follow the shopper from discovery to purchase",
     observationsIntro:
-      "Beseam connects the moments where a product gets considered, chosen, purchased, and measured instead of treating each as a separate dashboard.",
+      "See where shoppers find you, what helps them choose, where they stop, and what changes after you fix something.",
     observations: [
       {
-        title: "Finding",
+        title: "Get found",
         icon: Radar,
         detail:
-          "AI answers, external search, onsite search, marketplaces, and other places that decide which products enter the shopper's consideration set.",
+          "AI answers, external search, onsite search, marketplaces, and other places where shoppers discover products.",
       },
       {
-        title: "Choosing",
+        title: "Help them choose",
         icon: Store,
         detail:
           "Product pages, comparisons, recommendations, fit, reviews, price, and product facts that help a shopper decide which product is right.",
       },
       {
-        title: "Buying",
+        title: "Help them buy",
         icon: Brain,
         detail:
           "Cart, delivery, checkout, payment, and shopper behavior that show where a decided shopper still moves forward or stops.",
       },
       {
-        title: "Learning",
+        title: "See what changed",
         icon: TrendingUp,
         detail:
           "Conversion, orders, revenue, and the original signals checked again after a change so the next decision starts with evidence.",
@@ -179,10 +177,9 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
     ],
     sections: [
       {
-        title:
-          "Understand what may be blocking the choice, not just the symptom.",
+        title: "See what may be getting in the way.",
         icon: RefreshCw,
-        body: "A visibility miss, search exit, product-page hesitation, checkout drop, or revenue change is a symptom. Beseam connects the surrounding product, store, shopper, competitor, and revenue evidence so likely explanations stay grounded without pretending a hypothesis is a fact.",
+        body: "A missed AI recommendation, search exit, product-page hesitation, checkout drop, or sales change tells you something happened. Beseam checks the surrounding product, store, shopper, competitor, and sales data to find the most likely reason without pretending it knows more than it does.",
         points: [
           "Keep the original observation, source, affected scope, and time attached.",
           "Connect evidence from before the visit with what happened on the store and afterward.",
@@ -190,19 +187,19 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
         ],
       },
       {
-        title: "Act on what matters. Learn from what changes.",
+        title: "Make the change. Check what happened.",
         icon: Sparkles,
-        body: "Beseam turns the strongest evidence into a prioritized change to product data, content, merchandising, creative, campaigns, or the store, carries supported changes through approval and application, then checks the relevant discovery, behavior, conversion, order, or revenue signals afterward.",
+        body: "Beseam turns the strongest finding into a specific change to product data, content, merchandising, creative, campaigns, or the store. You approve customer-facing changes. Beseam applies what it can and then checks discovery, behavior, conversion, orders, or revenue again.",
         points: [
-          "Tie each action to the observed opportunity and affected product, page, or journey.",
-          "Keep the evidence, affected scope, approval, and verification plan attached.",
-          "Carry what was learned into the next action.",
+          "Tie each change to the observed opportunity and affected product, page, or journey.",
+          "Keep what Beseam found, what it affects, your approval, and what to check afterward together.",
+          "Carry what was learned into the next cycle.",
         ],
       },
     ],
     limits: [
       "Not every capability or source is enabled for every store.",
-      "Beseam does not claim an exact cause when the evidence only supports a hypothesis or correlation.",
+      "Beseam does not claim an exact cause when the data only shows a possible explanation or a pattern.",
       "No single composite score replaces the underlying evidence and freshness state.",
       "Customer-facing publishing requires explicit brand-owner approval before the change is applied.",
     ],
@@ -210,22 +207,22 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       {
         question: "What do I need to connect first?",
         answer:
-          "Connect the store first. Beseam keeps watching where shoppers overlook you, choose something else, or stop before purchase, and adds connected sources when they improve the evidence.",
+          "Connect the store first. Beseam keeps watching where shoppers overlook you, choose something else, or stop before purchase. Add more data only when it helps explain a problem.",
       },
       {
         question: "How does Beseam work out what may be worth changing?",
         answer:
-          "Beseam keeps the shopper signal and relevant evidence together, separates observed facts from possible explanations, and ranks what deserves action without overstating certainty.",
+          "Beseam looks at what shoppers did, what happened on the store, and what changed in sales. It separates facts from possible explanations and shows what is most worth fixing first.",
       },
       {
         question: "How are changes approved and published?",
         answer:
-          "The brand owner approves every supported customer-facing change before Beseam applies it. Beseam keeps the action and audit trail attached, and retains the previous state where the workflow supports rollback.",
+          "The brand owner approves every customer-facing change before Beseam applies it. Where the connected system supports rollback, Beseam keeps the previous version.",
       },
       {
         question: "How do I know whether a change helped?",
         answer:
-          "Beseam checks the relevant shopper, store, conversion, order, or revenue signals after an action and keeps them connected to the decision that produced it. What changed becomes evidence for the next cycle without turning correlation into certainty.",
+          "Beseam checks shopper behavior, the store, conversion, orders, or revenue again after a change. The result helps decide what to do next without claiming the change caused something the data cannot prove.",
       },
     ],
     related: [

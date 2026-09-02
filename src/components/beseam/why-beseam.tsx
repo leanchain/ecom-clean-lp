@@ -23,7 +23,7 @@ export default function WhyBeseam() {
               Why Beseam
             </p>
             <h2 className="mt-5 max-w-[20ch] text-balance font-display text-[clamp(2rem,3.2vw,3.2rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
-              You don&rsquo;t need another dashboard. You need to know what to do next.
+              You don&rsquo;t need another dashboard. You need to know what to fix next.
             </h2>
           </div>
         </Reveal>
@@ -38,7 +38,7 @@ export default function WhyBeseam() {
                 A list of findings is not a plan.
               </h3>
               <p className="mt-4 max-w-[46ch] text-[15px] leading-[1.7] text-black/64">
-                Beseam ranks what deserves action and keeps the reason attached.
+                Beseam shows what matters most and why.
               </p>
               <ul className="mt-6 border-t border-black/14">
                 {PRIORITY_SIGNALS.map((signal) => (
@@ -63,9 +63,8 @@ export default function WhyBeseam() {
                 Beseam keeps going after the finding.
               </h3>
               <p className="mt-4 max-w-[44ch] text-[15px] leading-[1.7] text-black/64">
-                It keeps finding opportunities, proposing supported changes,
-                and measuring what changed. You step in only when judgment is
-                needed.
+                It keeps finding what to improve, prepares the change, gets your
+                approval when customers will see it, applies it, and checks what happened.
               </p>
               <Link
                 href="/how-we-work"

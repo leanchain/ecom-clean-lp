@@ -17,27 +17,27 @@ import { Reveal } from "@/components/beseam/reveal";
 
 const DOMAINS = [
   {
-    title: "Get considered",
+    title: "Get found",
     scope: "AI · search · feeds",
-    detail: "You can’t be chosen if you’re never considered.",
+    detail: "If shoppers never see you, they cannot choose you.",
     Icon: Radar,
   },
   {
-    title: "Find what blocks the choice",
-    scope: "PDP · search · shopper behavior",
-    detail: "See the unanswered question getting in the way of the decision.",
+    title: "See why shoppers hesitate",
+    scope: "Product pages · search · behavior",
+    detail: "Find the unanswered question that makes the shopper hesitate.",
     Icon: MousePointer2,
   },
   {
     title: "Help shoppers choose",
-    scope: "Adaptive discovery · personalization",
-    detail: "Add the missing context that helps the shopper choose.",
+    scope: "Recommendations · personalization",
+    detail: "Add the missing information that helps the shopper choose.",
     Icon: ShoppingBag,
   },
   {
-    title: "Measure what changed",
+    title: "See what changed",
     scope: "Conversion · orders · revenue",
-    detail: "Remeasure the same journey, learn what worked, and improve again.",
+    detail: "Check the same journey again and see what improved.",
     Icon: BarChart3,
   },
 ] as const;
@@ -114,7 +114,7 @@ function StoreVignette() {
           </span>
         </div>
         <p className="mt-2 font-mono text-[7px] leading-[1.35] text-black/38">
-          Same question · missing decision evidence
+          Question not answered on the page
         </p>
       </div>
     </div>
@@ -129,7 +129,7 @@ function PersonalizationVignette() {
     >
       <div className="flex items-center gap-2">
         <span className="shrink-0 font-mono text-[8px] font-semibold uppercase tracking-[0.09em] text-black/38">
-          Likely intent
+          Shopper wants
         </span>
         <span className="h-px min-w-3 flex-1 bg-black/10" />
         <span className="shrink-0 bg-ground px-1.5 py-0.5 font-mono text-[8px] text-black/58 ring-1 ring-black/8">
@@ -190,7 +190,7 @@ function RevenueVignette() {
       </div>
 
       <div className="flex flex-1 flex-col justify-center gap-2">
-        {(["AI consideration", "Product visits", "Add to cart"] as const).map((label) => (
+        {(["AI appearances", "Product visits", "Add to cart"] as const).map((label) => (
           <div key={label} className="flex items-center gap-2">
             <span className="truncate font-mono text-[8px] uppercase tracking-[0.05em] text-black/46">
               {label}
@@ -200,7 +200,7 @@ function RevenueVignette() {
               before → after
             </span>
             <span className="w-[4.4rem] shrink-0 text-right font-mono text-[8.5px] font-semibold uppercase tracking-[0.04em] text-signal-ink">
-              Remeasured
+              Checked again
             </span>
           </div>
         ))}
@@ -217,11 +217,11 @@ const VIGNETTES = [
 ] as const;
 
 const LOOP = [
-  { label: "Find the opportunity", Icon: Radar },
-  { label: "Prepare the fix", Icon: WandSparkles },
+  { label: "Find what to improve", Icon: Radar },
+  { label: "Prepare the change", Icon: WandSparkles },
   { label: "You approve", Icon: CheckCircle2 },
   { label: "Beseam applies it", Icon: Send },
-  { label: "Measure and repeat", Icon: RefreshCw },
+  { label: "Check and repeat", Icon: RefreshCw },
 ] as const;
 
 export default function WhatBeseamDoes() {

@@ -11,7 +11,7 @@ import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import { Reveal } from "@/components/beseam/reveal";
 import TrackedLink from "@/components/beseam/tracked-link";
 
-const SCAN_STEPS = ["AI discovery", "Product evidence", "Store experience"] as const;
+const SCAN_STEPS = ["AI discovery", "Product pages", "Store issues"] as const;
 const GROWTH_STEPS = [
   { label: "Find", Icon: Radar },
   { label: "Prepare", Icon: WandSparkles },

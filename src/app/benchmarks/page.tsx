@@ -157,15 +157,13 @@ export default function BenchmarksPage() {
               Beseam AI Shopping Report
             </p>
             <h1 className="mt-6 max-w-[20ch] text-balance font-display text-[clamp(2.6rem,5vw,4.5rem)] font-normal leading-[1.02] tracking-[-0.02em] text-ink-deep">
-              AI shopping answers often disagree on which brands belong.
+              AI assistants often recommend different brands.
             </h1>
             <p className="mt-8 max-w-[68ch] text-[17px] leading-[1.7] text-black/68">
-              This report looks at one part of the buying decision: which
-              brands enter the consideration set in AI shopping answers. We
-              asked {BENCHMARK_RUN.questions} real shopper questions across{" "}
-              {categories.join(", ").toLowerCase()} on{" "}
-              {BENCHMARK_RUN.engines.join(", ")}, kept every completed answer,
-              and recorded which engine named which brand.
+              We asked the same {BENCHMARK_RUN.questions} shopping questions to{" "}
+              {BENCHMARK_RUN.engines.join(", ")} across{" "}
+              {categories.join(", ").toLowerCase()}. We kept every completed
+              answer and recorded which brands each assistant named.
             </p>
             <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.12em] text-black/55">
               <span className="tabular-nums">
@@ -187,11 +185,11 @@ export default function BenchmarksPage() {
             <figure className="mt-14 border-t-2 border-ink-deep pt-6">
               <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
                 <h2 className="max-w-[26ch] text-balance font-display text-[clamp(1.7rem,2.6vw,2.4rem)] font-normal leading-[1.1] tracking-[-0.015em] text-ink-deep">
-                  {soloShare}% of brand namings came from a single engine.
+                  {soloShare}% of brand appearances happened on just one assistant.
                 </h2>
                 <span className="font-mono text-[12px] uppercase tracking-[0.1em] text-black/55">
-                  <span className="tabular-nums">{totalNamings}</span> namings,
-                  by engines naming
+                  <span className="tabular-nums">{totalNamings}</span> appearances,
+                  by assistants naming
                 </span>
               </figcaption>
 
@@ -241,7 +239,7 @@ export default function BenchmarksPage() {
           <Reveal>
             <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
               <h2 className="max-w-[18ch] text-balance font-display text-[clamp(2rem,3.1vw,3rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
-                The engines do not answer alike.
+                The assistants do not answer alike.
               </h2>
               <p className="max-w-[62ch] text-[16px] leading-[1.7] text-black/64">
                 Across the same {BENCHMARK_RUN.questions} questions,{" "}

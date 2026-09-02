@@ -41,8 +41,8 @@ const QUEUE_ROWS = [
     lead: false,
   },
   {
-    title: "Recheck commuter queries after the product-page change.",
-    why: "The same buying question should be observed again before claiming that the change helped discovery.",
+    title: "Ask the commuter questions again after the product-page change.",
+    why: "Ask the same shopping question again before saying the change helped discovery.",
     priority: "Low",
     effort: "Quick",
     impact: "$",
@@ -236,8 +236,8 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
       </div>
 
       <p className="border-t border-black/12 bg-ground px-4 py-2.5 text-[11px] leading-[1.5] text-black/54 sm:px-5">
-        Every change keeps its evidence, owner, status, commercial impact tier,
-        and proof plan attached.
+        Every change keeps what Beseam found, the owner, status, expected impact,
+        and what to check afterward together.
       </p>
     </div>
   );

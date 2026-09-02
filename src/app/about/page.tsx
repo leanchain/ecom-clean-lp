@@ -12,7 +12,7 @@ import { SITE_URL, buildPublicMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPublicMetadata({
   title: "About Beseam",
   description:
-    "Why Beseam was founded to help ecommerce teams understand the buying decisions behind finding, choosing, and buying, with the evidence kept attached from signal to result.",
+    "Why Beseam was founded to help ecommerce teams see what makes shoppers find, choose, and buy products, and what changes afterward.",
   path: "/about",
 });
 
@@ -102,10 +102,9 @@ export default function AboutPage() {
               </h1>
             </div>
             <p className="max-w-[64ch] text-[19px] leading-[1.72] text-black/66">
-              Beseam was built around the buying decision: what shoppers wanted,
-              what they saw, what made the choice harder, what the team changed,
-              and what happened afterward. Observe, Understand, Act, and Learn
-              is how we keep that work connected.
+              Beseam follows a simple question: what did shoppers want, what did
+              they see, what made them hesitate, what changed, and what happened
+              next. That is what Observe, Understand, Act, and Learn means.
             </p>
           </Reveal>
         </div>
@@ -118,7 +117,7 @@ export default function AboutPage() {
               The founder
             </p>
             <h2 className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
-              Built with the reliability mindset behind large-scale systems.
+              Built by an engineer from Google and Amazon.
             </h2>
             <div className="mt-8 max-w-[68ch] space-y-6 text-[17px] leading-[1.72] text-black/66">
               <p>
@@ -134,10 +133,9 @@ export default function AboutPage() {
               </p>
               <p>
                 The same problem kept repeating: teams could measure traffic,
-                pages, behavior, and conversion, but not easily connect them to
-                the buying decision between being considered and being chosen.
-                Beseam was founded to keep that evidence, the team's decision,
-                the change, and what happened afterward together.
+                pages, behavior, and conversion, but it was hard to see why a
+                shopper chose one product over another. Beseam was built to keep
+                what happened, what changed, and the result in one place.
               </p>
             </div>
             <Link
@@ -252,12 +250,12 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-[92rem] gap-10 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-[minmax(0,1.15fr)_auto] lg:items-end lg:gap-20 lg:px-10 lg:py-28">
           <Reveal>
             <h2 className="max-w-[18ch] font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-              See how Beseam follows one buying decision end to end.
+              See how Beseam follows one shopper journey from start to finish.
             </h2>
             <p className="mt-7 max-w-[64ch] text-[17px] leading-[1.65] text-white/72">
               In a 20-minute store review, we use one real finding to show how
-              Beseam connects the evidence, proposes a supported change, and
-              rechecks what changes.
+              Beseam shows what it found, what it would change, and what it
+              checks again afterward.
             </p>
             <p className="mt-5 text-[14px] text-white/62">
               Questions first?{" "}

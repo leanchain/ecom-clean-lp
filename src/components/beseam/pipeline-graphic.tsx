@@ -77,9 +77,9 @@ function UnderstandVignette() {
     <Panel>
       {(
         [
-          ["Behavior runs", "Sessions and funnels replayed against the question"],
-          ["Predictions", "Which gaps most likely cost the choice"],
-          ["Recommendations", "Drafted fixes, ranked by evidence"],
+          ["Shopper behavior", "Sessions and funnels checked against the shopping question"],
+          ["Likely causes", "What may be making shoppers hesitate"],
+          ["Proposed changes", "Changes prepared from the strongest findings"],
         ] as const
       ).map(([title, detail], index) => (
         <div
@@ -109,7 +109,7 @@ function ActVignette() {
         [
           ["P0", "Add commuting use case", "Approve", true],
           ["P1", "Explain fit over layers", "In motion", false],
-          ["P2", "Recheck commuter queries", "Measuring", false],
+          ["P2", "Ask commuter questions again", "Measuring", false],
         ] as const
       ).map(([priority, task, step, lead]) => (
         <div key={task} className="flex items-center gap-2">
@@ -141,7 +141,7 @@ function ActVignette() {
       <div className="mt-1 flex items-center gap-2 border-t border-white/10 pt-2.5">
         <Check aria-hidden="true" className="h-3 w-3 shrink-0 text-signal" />
         <span className="font-mono text-[8.5px] uppercase tracking-[0.06em] text-white/50">
-          Approved before it ships · rollback kept
+          Customer-facing changes require approval
         </span>
       </div>
     </Panel>
@@ -191,19 +191,19 @@ const STAGES = [
   {
     number: "01",
     title: "Observe",
-    body: "Every input system a buying decision touches — answers, analytics, sessions, store — watched together.",
+    body: "AI answers, analytics, sessions, and store data watched together.",
     Vignette: ObserveVignette,
   },
   {
     number: "02",
     title: "Understand",
-    body: "Behavior runs, predictions, and recommendations drafted from the evidence.",
+    body: "Use the data to find what may explain the problem and what to change.",
     Vignette: UnderstandVignette,
   },
   {
     number: "03",
     title: "Act",
-    body: "The supported fix is approved by the brand owner before it changes the store.",
+    body: "You approve customer-facing changes before Beseam applies them.",
     Vignette: ActVignette,
   },
   {

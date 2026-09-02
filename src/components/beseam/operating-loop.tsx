@@ -2,9 +2,9 @@ import { Reveal } from "@/components/beseam/reveal";
 
 const STEPS = [
   ["01", "Observe", "See where shoppers are missed or may drop out."],
-  ["02", "Understand", "Connect the evidence that may explain why."],
-  ["03", "Act", "Prepare and make the supported change under your rules."],
-  ["04", "Learn", "Recheck the same signal and measure what changed."],
+  ["02", "Understand", "Check what may explain why."],
+  ["03", "Act", "Prepare the change, get approval, then apply it."],
+  ["04", "Learn", "Check the same thing again and see what changed."],
 ] as const;
 
 /**
@@ -29,8 +29,8 @@ export default function OperatingLoop() {
               </h2>
             </div>
             <p className="max-w-[50ch] text-[16px] leading-[1.75] text-black/64">
-              Beseam keeps finding opportunities, proposing supported fixes,
-              and learning from what changes — continuously.
+              Beseam keeps finding what to improve, prepares the change, gets
+              approval, applies it, and checks what happened — continuously.
             </p>
           </div>
         </Reveal>

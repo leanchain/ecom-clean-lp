@@ -165,26 +165,26 @@ const USE_CASES: readonly {
   },
   {
     name: "Revenue and attribution",
-    detail: "Booked, observed, attributed, and modeled kept separate.",
+    detail: "Actual revenue, observed changes, attribution, and estimates stay separate.",
     uses: ["revenue"],
   },
   {
-    name: "Verified impact",
-    detail: "Before and after, tied to one completed action.",
+    name: "What changed",
+    detail: "Before and after, tied to one completed change.",
     uses: ["discovery", "revenue"],
   },
   {
-    name: "One action queue",
+    name: "One change list",
     detail:
-      "Every recommended fix with owner, approval, and verification state.",
+      "Every proposed change with an owner, approval status, and a check afterward.",
     uses: ["discovery", "store", "behavior", "revenue"],
   },
 ];
 
 const WORK = [
-  ["Evidence", "connected, with the source kept"],
-  ["Action", "approved, served or shipped, tracked"],
-  ["Impact", "the same questions, rerun"],
+  ["What we found", "kept with the source"],
+  ["Change", "approved, applied, tracked"],
+  ["Result", "the same questions, asked again"],
 ] as const;
 
 /** Signal wires: a 3.5rem track as tall as the map row, drawn in real pixels. */
@@ -323,7 +323,7 @@ export default function ConnectedSystemMap({
           </ColumnHead>
           <div
             role="group"
-            aria-label="Signals feeding the buying decision"
+            aria-label="Information across the shopper journey"
             className="grid min-h-0 flex-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-4"
           >
             {SIGNALS.map((signal, index) => {
@@ -448,7 +448,7 @@ export default function ConnectedSystemMap({
         {/* Context and platform */}
         <div className="flex flex-col border-b border-black/12 lg:border-b-0 lg:border-r">
           <ColumnHead>
-            <HeadLabel>One buying decision</HeadLabel>
+            <HeadLabel>One shopper journey</HeadLabel>
             <MonoNote>Coverage</MonoNote>
           </ColumnHead>
           <div

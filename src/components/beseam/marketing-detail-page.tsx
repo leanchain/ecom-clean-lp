@@ -9,7 +9,7 @@ import type { MarketingPageData } from "@/lib/marketing-pages";
 const PLATFORM_SURFACES = [
   {
     stage: "Finding",
-    question: "Can the product enter the consideration set?",
+    question: "Will shoppers see the product?",
     items: [
       "AI shopping discovery",
       "External search",
@@ -39,12 +39,12 @@ const PLATFORM_SURFACES = [
     ],
   },
   {
-    stage: "Act and learn",
+    stage: "Change and check",
     question: "What should change, and did it help?",
     items: [
-      "Prioritized actions",
-      "Approvals and supported changes",
-      "Impact and remeasurement",
+      "What to improve first",
+      "Approval and changes",
+      "What changed afterward",
       "Conversion, orders, and revenue evidence",
     ],
   },
@@ -201,7 +201,7 @@ export default function MarketingDetailPage({
                     What is in the platform
                   </p>
                   <h2 className="editorial-subheading mt-4 text-ink">
-                    One buying decision, several connected surfaces.
+                    Follow the shopper across the whole journey.
                   </h2>
                   <p className="mt-4 max-w-[44ch] text-[15px] leading-relaxed text-foreground">
                     Beseam is not one dashboard for every commerce metric. It
@@ -241,7 +241,7 @@ export default function MarketingDetailPage({
                       Act
                     </p>
                     <h3 className="mt-3 text-[20px] font-semibold text-ink">
-                      Turn evidence into a specific next move.
+                      Turn what Beseam found into a specific change.
                     </h3>
                   </div>
                   <ActionsScreen />
@@ -391,7 +391,7 @@ export default function MarketingDetailPage({
                   Keep exploring
                 </p>
                 <h2 className="editorial-subheading mt-4 text-ink">
-                  Related evidence and workflows
+                  Related pages
                 </h2>
               </div>
               <nav
@@ -423,8 +423,8 @@ export default function MarketingDetailPage({
             Keep the loop moving after the first finding.
           </h2>
           <p className="mt-5 max-w-[68ch] text-[18px] leading-relaxed">
-            Connect your store and Beseam follows the strongest opportunity into
-            a supported change, then rechecks the relevant signals after it ships.
+            Beseam keeps finding what to improve, prepares the change, gets your
+            approval, applies it, and checks the same things again afterward.
           </p>
           <div className="mt-8">
             <TrackedLink

@@ -10,7 +10,7 @@ import { buildPublicMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPublicMetadata({
   title: "Compare Beseam with AI Discovery, Analytics, and Ecommerce Tools",
   description:
-    "Evidence-led comparisons showing which part of the buying decision each tool sees, where specialist tools are stronger, and how Beseam keeps that decision connected from shopper signal to supported change and re-check.",
+    "Compare what each tool does best, where Beseam differs, and how Beseam turns a shopper problem into an approved change and checks the result.",
   path: "/compare",
   image: "/images/social/compare.png",
 });
@@ -106,14 +106,14 @@ export default function ComparePage() {
                 Compare Beseam
               </p>
               <h1 className="mt-7 max-w-[18ch] font-serif text-[clamp(2.8rem,6vw,4.5rem)] font-normal leading-[1] tracking-[-0.02em]">
-                Different tools see different parts of the buying decision.
+                See how Beseam differs from the tools you already use.
               </h1>
             </div>
             <div className="border-t border-black/24 pt-6 lg:pb-2">
               <p className="max-w-xl text-[18px] leading-[1.65] text-black/66">
-                Beseam is not a drop-in replacement for every platform below.
-                These comparisons show where the other product is stronger,
-                where Beseam differs, and when both belong in the same stack.
+                Beseam does not replace every tool below. These pages show what
+                each tool does best, what Beseam does differently, and when it
+                makes sense to use both.
               </p>
               <p className="mt-5 font-mono text-[12px] uppercase tracking-[0.11em] text-black/62">
                 Official product sources · AI discovery set reviewed 22 August
@@ -132,12 +132,12 @@ export default function ComparePage() {
             </p>
             <div className="max-w-2xl">
               <h2 className="font-serif text-[34px] leading-[1.02] tracking-[-0.02em]">
-                Most likely comparisons.
+                Start with these six.
               </h2>
               <p className="mt-4 text-[14px] leading-relaxed text-black/62">
-                Six tools that most clearly show where Beseam fits: which products
-                get considered, what shoppers do next, what breaks before purchase,
-                and what the team can change.
+                These six make the differences easiest to see: where shoppers
+                find products, what they do next, what breaks before purchase,
+                and what your team can change.
               </p>
             </div>
           </div>
@@ -260,11 +260,11 @@ export default function ComparePage() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.6vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Observe, understand, decide, act, and learn.
+                See the problem. Understand it. Change it. Check again.
               </h2>
             </div>
 
-            <div className="grid border-y border-white/22 md:grid-cols-2 lg:grid-cols-5">
+            <div className="grid border-y border-white/22 md:grid-cols-2 lg:grid-cols-4">
               {[
                 [
                   "Observe",
@@ -272,15 +272,11 @@ export default function ComparePage() {
                 ],
                 [
                   "Understand",
-                  "Connect the evidence and identify what may explain the pattern.",
-                ],
-                [
-                  "Decide",
-                  "Choose what deserves intervention and what should stay unchanged.",
+                  "Connect the evidence, identify what may explain the pattern, and decide what deserves attention.",
                 ],
                 [
                   "Act",
-                  "Make the supported change with ownership and control.",
+                  "Prepare the change, get approval, then apply it.",
                 ],
                 [
                   "Learn",
@@ -318,8 +314,8 @@ export default function ComparePage() {
               <div className="flex h-full flex-col justify-center">
                 <p className="text-[14px] leading-relaxed text-black/62">
                   In a 20-minute store review, we use one real finding to show
-                  how Beseam connects the systems already in place, proposes a
-                  supported change, and rechecks what changes.
+                  how Beseam connects the systems already in place, prepares a
+                  change for approval, and checks what happens afterward.
                 </p>
                 <BookReviewCta
                   location="comparison_hub"

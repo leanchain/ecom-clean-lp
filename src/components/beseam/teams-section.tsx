@@ -11,7 +11,7 @@ const ROLES = [
   {
     role: "Ecommerce and operations",
     icon: ShoppingCart,
-    body: "Connect shopper behavior, store friction, approved actions, and measured outcomes around the same commercial question.",
+    body: "Connect shopper behavior, store friction, approved changes, and measured outcomes around the same commercial question.",
   },
   {
     role: "Developers and agencies",
@@ -32,9 +32,8 @@ export default function TeamsSection() {
             Built for the people who own ecommerce growth.
           </h2>
           <p className="max-w-[64ch] self-end text-[17px] leading-[1.65] text-black/66">
-            Finding, choosing, and buying cross team boundaries. Beseam keeps
-            the shopper signal, supporting evidence, team decision, change, and
-            measurement connected in one operating record.
+            Many teams affect whether a shopper buys. Beseam keeps what happened,
+            the proposed change, your decision, and the result in one place.
           </p>
         </Reveal>
 

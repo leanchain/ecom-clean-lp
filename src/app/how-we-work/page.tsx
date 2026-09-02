@@ -11,37 +11,37 @@ import { buildPublicMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPublicMetadata({
   title: "How Beseam Works for Commerce Teams",
   description:
-    "Beseam continuously finds commerce growth opportunities, prepares supported changes for your approval, applies approved changes, and measures what changed.",
+    "Beseam keeps finding what to improve, prepares the change, asks for your approval, applies approved changes, and checks what happened.",
   path: "/how-we-work",
 });
 
 const LOOP = [
-  ["01", "Observe", "Find where shoppers are missed, hesitate, or drop out."],
-  ["02", "Understand", "Connect the evidence that may explain what happened."],
+  ["01", "Observe", "See where shoppers miss you, hesitate, or leave."],
+  ["02", "Understand", "Check what may explain it."],
   [
     "03",
     "Act",
-    "Prepare the supported change, get your approval, then apply it.",
+    "Prepare the change, get your approval, then apply it.",
   ],
   [
     "04",
     "Learn",
-    "Recheck the same signals and measure what changed afterward.",
+    "Check the same thing again and see what changed.",
   ],
 ] as const;
 
 const RESPONSIBILITIES = [
   {
-    yours: "Commercial goals, constraints, and priorities",
-    ours: "Continuously find the strongest opportunities across discovery, store, behavior, and revenue.",
+    yours: "Goals, rules, and priorities",
+    ours: "Keep finding what is worth improving across AI discovery, your store, shopper behavior, and sales.",
   },
   {
-    yours: "Brand and operational judgment Beseam cannot infer",
-    ours: "Use the evidence and your context to prepare supported changes with the reason and proof plan attached.",
+    yours: "Brand choices Beseam cannot make for you",
+    ours: "Show why a change is worth making and what to check afterward.",
   },
   {
-    yours: "Approve every customer-facing change",
-    ours: "Apply approved changes, verify them, and carry what changed into the next cycle.",
+    yours: "Approve customer-facing changes",
+    ours: "Apply approved changes and check what happened.",
   },
 ] as const;
 
@@ -57,14 +57,14 @@ export default function HowWeWorkPage() {
                   How Beseam works for commerce teams
                 </p>
                 <h1 className="mt-6 max-w-[15ch] text-balance font-display text-[clamp(3rem,5.8vw,5rem)] font-normal leading-[0.98] tracking-[-0.025em] text-ink-deep">
-                  A continuous growth loop, not another dashboard.
+                  Beseam keeps finding what to improve.
                 </h1>
               </div>
               <div>
                 <p className="max-w-[52ch] text-[18px] leading-[1.7] text-black/66">
-                  You set the goals and constraints. Beseam continuously finds
-                  what is worth improving, prepares supported changes, applies
-                  approved changes, and measures what changed.
+                  You set the goals and rules. Beseam keeps finding what to
+                  improve, prepares the change, asks for approval, applies it,
+                  and checks what changed.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <BookReviewCta
@@ -105,9 +105,9 @@ export default function HowWeWorkPage() {
               </div>
               <div>
                 <p className="max-w-[64ch] text-[17px] leading-[1.75] text-white/68">
-                  Beseam stays in motion: observe what is happening, understand
-                  the strongest opportunity, prepare the supported change, get
-                  your approval, apply it, then learn from what moved next.
+                  Beseam keeps watching what happens, works out what may be
+                  worth changing, gets your approval, applies the change, and
+                  checks what happened next.
                 </p>
                 <ol className="mt-10 grid border-t border-white/16 md:grid-cols-4">
                   {LOOP.map(([number, title, body], index) => (
@@ -142,12 +142,12 @@ export default function HowWeWorkPage() {
                   The operating relationship
                 </p>
                 <h2 className="mt-5 max-w-[14ch] font-display text-[clamp(2.2rem,3.6vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em] text-ink-deep">
-                  Beseam keeps moving. Nothing changes without your approval.
+                  Beseam keeps moving. You approve customer-facing changes.
                 </h2>
                 <p className="mt-5 max-w-[36ch] text-[15px] leading-[1.7] text-black/60">
-                  Commerce and growth teams provide the goals, constraints, and
-                  judgment Beseam cannot infer. Beseam keeps the loop moving
-                  without becoming another workstream to manage.
+                  Your team sets the goals, rules, and brand choices. Beseam
+                  keeps the improvement loop moving so you do not have another
+                  tool to manage.
                 </p>
               </div>
               <div className="border-t-2 border-ink-deep">
@@ -190,16 +190,15 @@ export default function HowWeWorkPage() {
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
               <article className="border-t-2 border-ink-deep pt-6">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
-                  The operating record
+                  What Beseam is doing
                 </p>
                 <h2 className="mt-4 text-[25px] font-semibold tracking-[-0.02em] text-ink-deep">
                   You can see what Beseam is doing.
                 </h2>
                 <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-black/62">
-                  The Growth plan keeps the evidence, proposed change,
-                  commercial impact tier, approval state, and next move visible.
-                  It is the operating record of what Beseam is doing, not a task
-                  list for your team to manage.
+                  The Growth plan shows what Beseam found, what it wants to
+                  change, the expected impact, whether you approved it, and what
+                  happens next.
                 </p>
                 <Link
                   href="/platform"
@@ -215,13 +214,12 @@ export default function HowWeWorkPage() {
                   The measured outcome
                 </p>
                 <h2 className="mt-4 text-[25px] font-semibold tracking-[-0.02em] text-ink-deep">
-                  You can see whether the outcome moved.
+                  You can see whether the change helped.
                 </h2>
                 <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-black/62">
-                  Beseam rechecks the relevant shopper and store signals after
-                  the work ships. Observed, verified, attributed, and modeled
-                  outcomes stay separate so measurement does not become an
-                  inflated claim.
+                  After a change is applied, Beseam checks the same shopper and
+                  store data again. Directly measured results stay separate from
+                  estimates so the page does not overclaim what happened.
                 </p>
                 <Link
                   href="/platform"

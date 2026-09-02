@@ -118,7 +118,7 @@ const HUBS: readonly Hub[] = [
     metrics: [
       ["Approved claims", "86%", 86],
       ["Identity coverage", "94%", 94],
-      ["Trust evidence", "71%", 71],
+      ["Trust proof", "71%", 71],
     ],
   },
   {
@@ -133,7 +133,7 @@ const HUBS: readonly Hub[] = [
       ["facts", "89%"],
     ],
     metrics: [
-      ["Evidence coverage", "5 / 7", 71],
+      ["Facts covered", "5 / 7", 71],
       ["Shipping facts", "4 / 5", 80],
       ["Structured facts", "89%", 89],
     ],
@@ -218,7 +218,7 @@ const HUBS: readonly Hub[] = [
       ["content", "89%"],
     ],
     metrics: [
-      ["Decision evidence", "5 / 7", 71],
+      ["Questions answered", "5 / 7", 71],
       ["Policy clarity", "82%", 82],
       ["Trust coverage", "60%", 60],
     ],
@@ -464,8 +464,8 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     ],
     [
       "What changed?",
-      "Re-check",
-      "Re-run the same shopper questions and surface meaningful changes.",
+      "Check again",
+      "Ask the same shopper questions again and show what changed.",
     ],
     [
       "Questions you appear for",
@@ -480,14 +480,14 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "What sources support it?",
       "54%",
-      "Track the evidence and sources that support product representation.",
+      "Track the sources that support how the product is described.",
     ],
   ],
   search: [
     [
       "Queries finding you",
       "Observed",
-      "Connect search-performance evidence to the products shoppers are trying to find.",
+      "Connect search results to the products shoppers are trying to find.",
     ],
     [
       "Machine-readable facts",
@@ -497,34 +497,34 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "Can the page be found?",
       "100%",
-      "Whether important product surfaces can be discovered and indexed.",
+      "Whether important product pages can be found and indexed.",
     ],
     [
       "Does the wording match?",
       "74%",
-      "How well product facts line up with commercial shopper queries.",
+      "How well product facts match real shopper searches.",
     ],
     [
       "What search can show",
       "66%",
-      "Visible and structured evidence that can support richer search results.",
+      "Visible and structured product data that can support richer search results.",
     ],
   ],
   catalog: [
     [
       "Products available",
       "Catalog",
-      "The products and variants a shopper can actually consider.",
+      "The products and variants shoppers can actually choose.",
     ],
     [
       "Variants shoppers can choose",
       "Catalog",
-      "Variant-level product facts available for the buying decision.",
+      "Variant-level product facts available when shoppers choose.",
     ],
     [
       "Facts worth adding",
       "Gap",
-      "Supported product facts that may make choosing easier.",
+      "Product facts that may make choosing easier.",
     ],
     [
       "Approved product changes",
@@ -545,23 +545,23 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
   brand: [
     [
       "Who you are",
-      "Evidence",
-      "Brand identity and evidence available when shoppers compare you with alternatives.",
+      "Info",
+      "Brand information available when shoppers compare you with alternatives.",
     ],
     [
-      "Current brand evidence",
+      "Current brand info",
       "Fresh",
-      "Keep the brand evidence used around buying decisions current.",
+      "Keep the brand information shoppers see up to date.",
     ],
     [
       "Claims shoppers can trust",
       "86%",
-      "Claims with enough supporting evidence to reuse safely.",
+      "Claims with enough proof to reuse safely.",
     ],
     [
       "Policies and proof",
       "71%",
-      "Policies, proof and credibility signals attached to the brand.",
+      "Policies, proof, and trust information attached to the brand.",
     ],
     [
       "Same story everywhere",
@@ -583,29 +583,29 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "Delivery answer",
       "80%",
-      "Shipping information available as structured and visible evidence.",
+      "Shipping information available in the data and on the page.",
     ],
     [
       "Review proof",
       "60%",
-      "Whether review evidence is visible where shoppers decide.",
+      "Whether reviews are visible where shoppers decide.",
     ],
     [
       "Facts match the page",
       "89%",
-      "Agreement between structured product data and rendered product evidence.",
+      "Whether structured product data matches what shoppers see on the page.",
     ],
     [
       "Check again after change",
-      "Re-check",
-      "Re-check the same evidence after an approved change is made.",
+      "Check again",
+      "Check the same product information after an approved change.",
     ],
   ],
   creative: [
     [
       "What shoppers see first",
-      "Evidence",
-      "The imagery and content that frame the product before deeper comparison.",
+      "Content",
+      "The images and content shoppers see before they compare in detail.",
     ],
     [
       "Product imagery",
@@ -615,21 +615,21 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "Product video",
       "Available",
-      "Video evidence that can answer questions static product facts cannot.",
+      "Video that can answer questions static product facts cannot.",
     ],
     [
       "Is the proof clear?",
       "Review",
-      "Check whether visual evidence actually supports the product claim.",
+      "Check whether the images or video support the product claim.",
     ],
     [
       "Available product proof",
-      "Evidence",
+      "Content",
       "Reusable assets tied to the product and brand context.",
     ],
     [
       "Use-case content",
-      "Evidence",
+      "Content",
       "Content that helps shoppers understand whether the product fits their need.",
     ],
   ],
@@ -647,12 +647,12 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "Approved campaign change",
       "Approved",
-      "A merchant-approved campaign change tied to the evidence behind it.",
+      "A merchant-approved campaign change tied to the reason behind it.",
     ],
     [
       "Does the landing answer?",
-      "Evidence",
-      "Check whether the landing experience answers the question the ad created.",
+      "Check",
+      "Check whether the landing page answers the question the ad created.",
     ],
     [
       "Creative variants",
@@ -662,7 +662,7 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "What earns the click",
       "Observed",
-      "Evidence about which product message earns shopper attention.",
+      "See which product message gets shopper attention.",
     ],
     [
       "Who clicked and bought?",
@@ -672,7 +672,7 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "What the traffic cost",
       "Measured",
-      "Paid traffic cost kept separate from the purchase evidence that follows.",
+      "Keep paid traffic cost separate from the purchases that follow.",
     ],
   ],
   onsite: [
@@ -698,8 +698,8 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     ],
     [
       "What shapes the ranking",
-      "Evidence",
-      "Rules and product signals that influence which options a shopper sees.",
+      "Rules",
+      "Rules and product data that influence which options a shopper sees.",
     ],
   ],
   recs: [
@@ -711,12 +711,12 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "Why these products?",
       "Rules",
-      "The merchandising rules and signals influencing recommendation output.",
+      "The merchandising rules and product data that shape recommendations.",
     ],
     [
-      "Fit to shopper intent",
+      "Fit to shopper need",
       "73%",
-      "Behavior-derived strength between products and shopper intent.",
+      "How well the product matches what the shopper appears to want.",
     ],
     [
       "Eligible products",
@@ -732,8 +732,8 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
   pdp: [
     [
       "Questions answered",
-      "Evidence",
-      "Product-page evidence available for the questions that influence choosing.",
+      "Page",
+      "Product-page information available for the questions shoppers ask before choosing.",
     ],
     [
       "What is missing?",
@@ -742,8 +742,8 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     ],
     [
       "Check after the change",
-      "Re-check",
-      "Re-check the same product-page evidence after an approved change.",
+      "Check again",
+      "Check the same product-page information after an approved change.",
     ],
     [
       "Facts match the page",
@@ -752,13 +752,13 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     ],
     [
       "Size & fit",
-      "Evidence",
+      "Info",
       "Fit guidance and size recommendations that help shoppers choose the right variant.",
     ],
     [
       "Reviews & trust",
       "60%",
-      "Reviews and trust evidence visible at the decision point.",
+      "Reviews and trust information visible when shoppers decide.",
     ],
     [
       "Returns & delivery",
@@ -775,7 +775,7 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "Where they hesitated",
       "Observed",
-      "Behavioral evidence that may point to uncertainty or friction.",
+      "Shopper behavior that may point to uncertainty or friction.",
     ],
     [
       "What they searched",
@@ -785,7 +785,7 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "What they opened",
       "Observed",
-      "Which products, pages, and evidence the shopper actually viewed.",
+      "Which products, pages, and information the shopper actually viewed.",
     ],
     [
       "Where they left",
@@ -793,14 +793,14 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
       "The point in the journey where a shopper stopped moving forward.",
     ],
     [
-      "Session evidence",
+      "Session replay",
       "Replay",
-      "Replay evidence for understanding shopper friction without treating it as proof of cause.",
+      "Replay to understand shopper friction without pretending it proves the cause.",
     ],
     [
       "Interaction patterns",
       "Heatmap",
-      "Aggregate interaction evidence for the parts of a page shoppers use or ignore.",
+      "See which parts of a page shoppers use or ignore across many sessions.",
     ],
   ],
   checkout: [
@@ -817,7 +817,7 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "Delivery friction",
       "Observed",
-      "Delivery, total-cost, and timing evidence that can change a late buying decision.",
+      "Delivery cost and timing that can change a shopper's final choice.",
     ],
     [
       "Technical errors",
@@ -826,25 +826,25 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     ],
     [
       "Did the fix hold?",
-      "Re-check",
-      "Re-check the relevant checkout evidence after a supported change.",
+      "Check again",
+      "Check the same checkout data after an approved change.",
     ],
   ],
   revenue: [
     [
       "Was there a purchase?",
       "Orders",
-      "Booked orders and revenue used as purchase evidence.",
+      "Booked orders and revenue used as proof of purchase.",
     ],
     [
       "What changed after?",
-      "Re-check",
-      "Before-and-after measurement tied to a completed action.",
+      "Check again",
+      "Before-and-after measurement tied to a completed change.",
     ],
     [
       "Observed vs attributed",
       "Separate",
-      "Keep observed and attributed commercial outcomes distinct.",
+      "Keep directly observed and attributed revenue separate.",
     ],
     [
       "Conversion path",
@@ -854,12 +854,12 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "Which shoppers changed?",
       "Cohort",
-      "Cohort-level evidence for how outcomes differ across shopper groups.",
+      "See how results differ across shopper groups.",
     ],
     [
       "Does revenue reconcile?",
       "Check",
-      "Reconcile tracked and commerce-source revenue evidence.",
+      "Check that tracked revenue matches the store's revenue data.",
     ],
   ],
   marketplaces: [
@@ -886,7 +886,7 @@ const CAPABILITIES: Readonly<Record<string, readonly Capability[]>> = {
     [
       "Is there enough proof?",
       "64%",
-      "Tracked SKUs carrying enough reviews to support a buying decision.",
+      "Tracked products with enough reviews to help shoppers choose.",
     ],
   ],
 };

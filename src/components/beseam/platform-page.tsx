@@ -120,8 +120,8 @@ export default function PlatformPageContent({
 
       <DecisionBridge
         eyebrow="How the platform fits together"
-        heading="One buying decision. Evidence from before, during, and after the visit."
-        body="Discovery, product evidence, shopper behavior, and revenue describe different parts of the same decision. Select a signal to see what Beseam reads, what it feeds, and how that evidence becomes a supported change and measured result."
+        heading="Follow the shopper before, during, and after the visit."
+        body="AI discovery, product pages, shopper behavior, and revenue show different parts of the same journey. Pick one to see what Beseam checks, what it may change, and what it measures afterward."
         exploreHref={null}
       />
 
@@ -134,14 +134,14 @@ export default function PlatformPageContent({
                   From signal to outcome
                 </p>
                 <h2 className="mt-7 max-w-[17ch] text-balance font-display text-[clamp(2.3rem,3.8vw,3.9rem)] font-normal leading-[1.03] tracking-[-0.02em] text-ink-deep">
-                  The loop turns evidence into change, then proof.
+                  Find what to change. Then check what happened.
                 </h2>
               </div>
               <p className="max-w-[52ch] text-[16px] leading-[1.75] text-black/64">
-                Beseam does not ask the merchant to operate every diagnostic
-                surface. It continuously ranks opportunities and prepares supported
-                changes for your approval before anything customer-facing changes.
-                Results keeps what happened attached to the same change.
+                Beseam does not ask you to manage every tool yourself. It keeps
+                finding what is worth improving and prepares customer-facing
+                changes for your approval. Results shows what happened after each
+                change.
               </p>
             </div>
           </Reveal>
@@ -157,8 +157,8 @@ export default function PlatformPageContent({
                     See what Beseam is moving forward.
                   </h3>
                   <p className="mt-2 max-w-[48ch] text-[14px] leading-[1.65] text-black/60">
-                    Ranked opportunities, proposed changes, evidence, approval,
-                    execution, and verification stay connected in one operating record.
+                    What Beseam found, the proposed change, your approval, what
+                    was applied, and the result stay together in one place.
                   </p>
                 </div>
                 <ActionsScreen />
@@ -175,9 +175,8 @@ export default function PlatformPageContent({
                     Keep the result next to the change.
                   </h3>
                   <p className="mt-2 max-w-[48ch] text-[14px] leading-[1.65] text-black/60">
-                    Verified, observed, attributed, and modeled outcomes stay
-                    separate so a useful signal never turns into an inflated
-                    claim.
+                    Directly measured results stay separate from estimates so a
+                    useful result does not turn into an inflated claim.
                   </p>
                 </div>
                 <div className="bg-ink-deep p-1">
@@ -203,9 +202,8 @@ export default function PlatformPageContent({
               </div>
               <p className="max-w-[50ch] text-[16px] leading-[1.75] text-white/68">
                 The same loop runs across discovery, products, behavior,
-                conversion, and revenue. More connected evidence improves the
-                next action instead of creating another place the merchant has
-                to check.
+                conversion, and revenue. Each part helps Beseam decide what to
+                check or change next without giving you another dashboard.
               </p>
             </div>
           </Reveal>
@@ -311,9 +309,9 @@ export default function PlatformPageContent({
             Connect your store. Beseam keeps the loop moving.
           </h2>
           <p className="mt-5 max-w-[58ch] text-[17px] leading-[1.72] text-white/76">
-            Beseam keeps finding the next opportunity, proposing supported
-            changes, and measuring what changes. You step in only where judgment
-            is needed.
+            Beseam keeps finding what to improve, prepares the change, asks for
+            your approval when it affects customers, applies approved changes,
+            and checks what happened.
           </p>
           <div className="mt-8">
             <TrackedLink

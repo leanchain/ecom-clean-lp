@@ -202,7 +202,7 @@ export default async function ComparisonPage({
           <div className="grid gap-8 border-y border-black/24 py-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
             <div>
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
-                Stack boundary
+                What it does not replace
               </p>
               <h2 className="mt-4 font-serif text-[34px] leading-[1.02] tracking-[-0.02em]">
                 What Beseam does not replace
@@ -221,7 +221,7 @@ export default async function ComparisonPage({
             <div className="grid gap-12 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
               <div>
                 <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-signal-ink">
-                  Buying reality
+                  In practice
                 </p>
                 <h2 className="mt-5 max-w-[15ch] font-serif text-[38px] leading-[1.04] tracking-[-0.02em]">
                   What changes in practice.
@@ -285,7 +285,7 @@ export default async function ComparisonPage({
           <div className="grid gap-12 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-16">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[38px] leading-[1.04] tracking-[-0.02em]">
-                Different tools for different decisions.
+                Choose the tool that fits the job.
               </h2>
             </div>
 
@@ -338,13 +338,13 @@ export default async function ComparisonPage({
           <div>
             <div className="max-w-2xl">
               <h2 className="max-w-[18ch] font-serif text-[38px] leading-[1.04] tracking-[-0.02em]">
-                Compare the operating model.
+                Compare how each tool works.
               </h2>
             </div>
 
             <div className="mt-12 border-t border-white/22">
               <div className="hidden grid-cols-[0.72fr_1fr_1fr] border-b border-white/22 py-3 font-mono text-[12px] uppercase tracking-[0.13em] text-white/72 md:grid">
-                <span>Decision</span>
+                <span>Question</span>
                 <span>{comparison.name}</span>
                 <span>Beseam</span>
               </div>

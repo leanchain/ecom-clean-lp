@@ -8,22 +8,22 @@ import { Reveal } from "@/components/beseam/reveal";
 const DESTINATIONS = [
   [
     "See how Beseam works",
-    "How one buying decision moves through Observe, Understand, Act, and Learn.",
+    "See how Beseam finds a problem, prepares a change, gets approval, and checks the result.",
     "/#decision-story",
   ],
   [
     "Run the free AI discovery scan",
-    "Ask real shopper questions, see which products get named, and inspect the evidence behind the result.",
+    "Ask real shopper questions, see which products get named, and see why the result may look that way.",
     "/scan",
   ],
   [
     "AI shopping discovery",
-    "See how Beseam keeps the question, observed answer, competitors, and product evidence together.",
+    "See the shopping question, the AI answer, the competitors, and what you can change on the store.",
     "/ai-visibility-monitoring",
   ],
   [
     "The manifesto",
-    "Why Beseam keeps evidence, decisions, controlled actions, and learning connected.",
+    "Why Beseam keeps what happened, what changed, and the result together.",
     "/manifesto",
   ],
 ] as const;

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     absolute: "Beseam Manifesto | Shopping is moving from finding to choosing",
   },
   description:
-    "Shopping is moving from finding products to choosing products. Beseam continuously watches the buying journey, finds what is worth improving next, proposes supported changes, and measures what changes.",
+    "Shopping is moving from finding products to choosing products. Beseam keeps watching the journey, finds what to improve, prepares the change, asks for approval, applies it, and checks what changed.",
   alternates: { canonical: "/manifesto" },
   authors: [{ name: "Pankaj Kumar", url: "/about" }],
   creator: "Pankaj Kumar",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Beseam Manifesto | Shopping is moving from finding to choosing",
     description:
-      "Being visible is no longer enough. Beseam is built around understanding the buying decision between being considered and being chosen.",
+      "Being visible is no longer enough. The important question is why shoppers choose one product over another.",
     url: "/manifesto",
     siteName: "Beseam",
     type: "article",
@@ -60,31 +60,31 @@ export const metadata: Metadata = {
 
 const PROBLEM = [
   [
-    "Finding, choosing, and buying live in different systems",
-    "AI and search, onsite discovery, product pages, behavior, checkout, and revenue are usually measured separately even when they describe the same buying decision.",
+    "Finding, choosing, and buying happen in different tools",
+    "AI and search, onsite discovery, product pages, behavior, checkout, and revenue are usually measured separately even though they are all part of the same purchase.",
   ],
   [
     "A symptom is not a cause",
-    "A drop in discovery, search exits, or conversion is observable. Why it happened may still be a hypothesis until the supporting evidence is strong enough.",
+    "A drop in visibility, search use, or conversion is a fact. The reason may still be a guess until there is enough proof.",
   ],
   [
     "A finding is not a decision",
-    "A long list of issues is not useful by itself. Beseam should keep surfacing which problem or opportunity is worth acting on first and why.",
+    "A long list of problems does not tell you what to fix first. Beseam should keep showing what matters most and why.",
   ],
   [
     "A change is not proof",
-    "Before-and-after evidence can show what moved after an action. It should not be stretched into an exact causal claim the data cannot support.",
+    "Before-and-after data can show what changed after a fix. It should not be used to claim a cause the data cannot prove.",
   ],
 ] as const;
 
 const PRINCIPLES = [
   {
-    title: "Keep the source evidence",
-    body: "A conclusion should stay connected to the observation, source, affected scope, and time that support it instead of collapsing into one opaque score.",
+    title: "Keep the facts behind every conclusion",
+    body: "A conclusion should stay connected to what was seen, where it came from, what it affected, and when it happened instead of becoming one vague score.",
   },
   {
-    title: "Separate evidence from inference",
-    body: "A missing attribute, failed event, or changed conversion rate can be a fact. The explanation around it should remain a hypothesis until the evidence supports more.",
+    title: "Keep facts and guesses separate",
+    body: "A missing attribute, failed event, or changed conversion rate can be a fact. The reason behind it may still be a guess until there is enough proof.",
   },
   {
     title: "Keep finding what deserves attention",
@@ -95,18 +95,18 @@ const PRINCIPLES = [
     body: "The brand owner approves every customer-facing change before Beseam applies it, with the previous state retained when the workflow supports rollback.",
   },
   {
-    title: "Measure after the action",
-    body: "Beseam compares the relevant discovery, behavior, conversion, or revenue signals before and after a change and keeps uncertainty explicit.",
+    title: "Measure after the change",
+    body: "Beseam checks discovery, behavior, conversion, or revenue before and after a change and is clear about what the data can and cannot prove.",
   },
 ] as const;
 
 const SCOPE_STANCE = [
   [
-    "What we observe",
+    "What we track",
     "External discovery, onsite discovery, product and store evidence, shopper behavior, conversion, orders, and revenue when those signals are available.",
   ],
   [
-    "What we act on",
+    "What we can change",
     "Supported product data, content, merchandising, creative, campaigns, and store experiences that the merchant can review and control.",
   ],
   [
@@ -120,7 +120,7 @@ const NEVER = [
   "Present a likely cause as if it were a confirmed fact.",
   "Optimize one surface while ignoring the rest of the commerce path.",
   "Publish any customer-facing change without explicit brand-owner approval.",
-  "Call an action successful before the relevant signals have been measured again.",
+  "Call a change successful before the relevant signals have been measured again.",
   "Turn a favorable before-and-after result into a guarantee of future traffic, conversion, or revenue.",
 ] as const;
 
@@ -131,7 +131,7 @@ const NOT_FOR = [
   ],
   [
     "Teams who want an unsupervised agent",
-    "Budget and customer-facing changes stay behind a person. Beseam can prepare the work, but the brand owner approves before it spends or publishes. If you want software that does that without approval, we are the wrong choice.",
+    "Budget and customer-facing changes stay behind a person. Beseam can prepare the change, but the brand owner approves before it spends or publishes. If you want software that does that without approval, we are the wrong choice.",
   ],
   [
     "Teams shopping for a replacement stack",
@@ -152,7 +152,7 @@ export default function ManifestoPage() {
         "@id": `${MANIFESTO_URL}#article`,
         headline: "Shopping is moving from finding products to choosing products.",
         description:
-          "Beseam continuously watches the buying decision between being considered and being chosen, follows the strongest opportunities into supported changes, and keeps each conclusion connected to its evidence.",
+          "Beseam keeps watching what shoppers see, choose, and buy, finds what to improve, and keeps each conclusion tied to the facts behind it.",
         image: {
           "@type": "ImageObject",
           url: MANIFESTO_IMAGE,
@@ -274,7 +274,7 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Growth should keep moving without more coordination.
+                Growth should not need more meetings and handoffs.
               </h2>
             </div>
             <div>
@@ -295,7 +295,7 @@ export default function ManifestoPage() {
                   ],
                   [
                     "The same standard for both",
-                    "Connect the evidence, decide with context, act with control, and learn from what changed. The operating model should scale with the business rather than define the size of business it can serve.",
+                    "See what happened, decide what to change, keep control, and learn from the result. The same approach should work for a small team or a large business.",
                   ],
                 ].map(([title, body], index) => (
                   <article
@@ -324,17 +324,17 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                The useful unit is the buying decision.
+                Start with the shopper's choice.
               </h2>
               <p className="mt-7 max-w-md text-[16px] leading-[1.7] text-black/62">
-                More capability only matters if Beseam can use it to understand
-                why a shopper considered one product, chose another, or stopped
-                before purchase without hiding how that conclusion was reached.
+                More features only matter if Beseam can help explain why a
+                shopper saw one product, chose another, or stopped before buying
+                without hiding how it reached that conclusion.
               </p>
             </div>
             <div>
               <p className="max-w-2xl text-[17px] leading-[1.7] text-black/66">
-                For every important buying decision, the questions are simple:
+                For every important shopper choice, the questions are simple:
                 what did the shopper want, which choices did they see, what
                 questions remained, what did they choose or where did they stop,
                 what may explain it, what could Beseam change under the
@@ -408,9 +408,8 @@ export default function ManifestoPage() {
               </p>
               <p>
                 The repeated problem was not a lack of dashboards. It was the
-                weak connection between a shopper signal, the evidence affecting
-                the choice, the decision a team made, and what happened after the
-                action.
+                weak link between what a shopper did, what may have caused it,
+                what the team changed, and what happened next.
               </p>
               <p>
                 Before Beseam, I worked on measurement, reliability, and
@@ -441,7 +440,7 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Evidence first. Approval before change. Measurement after.
+                Facts first. Approval before change. Measure after.
               </h2>
             </div>
             <div className="border-t border-black/22">
@@ -471,7 +470,7 @@ export default function ManifestoPage() {
           <Reveal className="grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-20">
             <div>
               <h2 className="max-w-[18ch] font-serif text-[clamp(2.2rem,4.4vw,3.5rem)] font-normal leading-[1.04] tracking-[-0.02em]">
-                Do not optimize one commerce surface in isolation.
+                Do not fix one part of the journey in isolation.
               </h2>
             </div>
             <div>

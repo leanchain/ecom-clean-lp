@@ -18,9 +18,9 @@ type DecisionBridgeProps = {
  */
 export default function DecisionBridge({
   eyebrow = "Shopping is moving from finding products to choosing products",
-  heading = "One system for the buying decision.",
+  heading = "See the whole shopper journey in one place.",
   body =
-    "Discovery, product evidence, shopper behavior, and revenue should not live in separate dashboards. Beseam connects them around the same decision, follows the strongest opportunity into a supported change, and rechecks what changed. Your team steps in where judgment is needed.",
+    "AI discovery, product pages, shopper behavior, and revenue should not live in separate dashboards. Beseam keeps them together, finds what to improve, prepares the change, and checks what happened afterward. You approve customer-facing changes.",
   exploreHref = "/platform",
   exploreLabel = "Explore the platform",
 }: DecisionBridgeProps) {

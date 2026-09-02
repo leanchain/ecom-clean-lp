@@ -201,7 +201,7 @@ function MobileTrace() {
         <div className="py-5">
           <div className="flex items-baseline gap-3">
             <span className="font-mono text-[10px] font-semibold tabular-nums text-signal">01</span>
-            <StepLabel>Shopper signal</StepLabel>
+            <StepLabel>What the shopper did</StepLabel>
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-2 text-[12px]">
             <span className="bg-white/[0.06] px-2 py-1 text-white/78">waterproof jacket</span>
@@ -247,7 +247,7 @@ function MobileTrace() {
             <ArrowRight className="h-3 w-3 shrink-0 text-signal" aria-hidden="true" />
             <span>Beseam applies it</span>
             <ArrowRight className="h-3 w-3 shrink-0 text-signal" aria-hidden="true" />
-            <span>Remeasure</span>
+            <span>Check again</span>
           </div>
         </div>
       </div>
@@ -274,10 +274,9 @@ export default function ConnectedEvidence() {
             </div>
             <div className="max-w-[50ch] text-[16px] leading-[1.75] text-white/72">
               <p>
-                Beseam connects what the shopper did with product, search, and
-                availability evidence, rules out weaker explanations, then turns
-                the strongest supported finding into a change you can approve
-                and remeasure.
+              Beseam looks at what the shopper did, checks product, search, and
+              stock data, rules out weaker explanations, then turns the strongest
+              finding into a change you can approve and check again.
               </p>
             </div>
           </div>
@@ -383,7 +382,7 @@ export default function ConnectedEvidence() {
                     Add the commuting use case to the returned jacket product pages.
                   </p>
                   <p className="mt-3 font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-white/62">
-                    You approve → Beseam applies it → Remeasure
+                    You approve → Beseam applies it → Check again
                   </p>
                 </div>
               </div>

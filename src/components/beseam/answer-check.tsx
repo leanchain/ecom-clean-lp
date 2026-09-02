@@ -810,9 +810,9 @@ function ContinuePaths({
           Keep Beseam watching after the scan
         </h3>
         <p className="mt-2.5 max-w-[46ch] text-[14px] leading-[1.62] text-white/64">
-          Connect your store and Beseam ranks these against your real catalog,
-          prepares the supported changes, and asks you to approve them before
-          anything customer-facing changes.
+          Connect your store and Beseam checks these against your real catalog,
+          shows what to fix first, prepares the changes, and asks for your approval
+          before anything customer-facing changes.
         </p>
         <div className="mt-5 grid gap-2 text-[12.5px] sm:grid-cols-2">
           <div className="border border-white/16 px-3 py-2.5">
@@ -857,9 +857,8 @@ function ContinuePaths({
         ) : null}
         <p className="mt-2.5 max-w-[44ch] text-[14px] leading-[1.62] text-white/70">
           In a 20-minute store review, we use one real finding to show how
-          Beseam follows it end to end: connect the evidence, propose the
-          change, get your approval, make the change, and remeasure what
-          changed.
+          Beseam works: check what may explain it, prepare the change, get your
+          approval, apply it, and check what happened.
         </p>
         <BookReviewCta
           variant="primary"

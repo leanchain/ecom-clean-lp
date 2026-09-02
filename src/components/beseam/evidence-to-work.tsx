@@ -16,14 +16,14 @@ export default function EvidenceToWork() {
           <div className="grid gap-10 lg:grid-cols-[minmax(14rem,0.32fr)_minmax(0,1.68fr)] lg:items-start lg:gap-12">
             <div className="lg:sticky lg:top-24">
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.14em] text-signal-ink">
-                From evidence to action
+                From finding to change
               </p>
               <h2 className="mt-6 max-w-[11ch] text-balance font-display text-[clamp(2.2rem,3.3vw,3.4rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
                 Find the improvement. Make the change.
               </h2>
               <p className="mt-5 max-w-[31ch] text-[15px] leading-[1.7] text-black/62">
-                Beseam turns the strongest evidence into a specific change,
-                gets your approval, applies it, and checks what changed afterward.
+                Beseam takes the strongest finding, shows the change to make,
+                gets your approval, applies it, and checks what happened afterward.
               </p>
               <div className="mt-7 flex gap-3 border-l-2 border-signal-ink pl-4">
                 <ShieldCheck
@@ -33,7 +33,7 @@ export default function EvidenceToWork() {
                 />
                 <div>
                   <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-signal-ink">
-                    Approval gate
+                    Your approval
                   </p>
                   <p className="mt-1.5 max-w-[25ch] text-[12.5px] font-medium leading-[1.5] text-black/68">
                     Nothing customer-facing changes until you approve it.
@@ -48,7 +48,7 @@ export default function EvidenceToWork() {
                   Merchant view
                 </p>
                 <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-signal-ink">
-                  Evidence → change → apply → measure
+                  Finding → change → apply → check
                 </p>
               </div>
               <div className="sm:hidden">
