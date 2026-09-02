@@ -77,7 +77,10 @@ function UnderstandVignette() {
     <Panel>
       {(
         [
-          ["Shopper behavior", "Sessions and funnels checked against the shopping question"],
+          [
+            "Shopper behavior",
+            "Sessions and funnels checked against the shopping question",
+          ],
           ["Likely causes", "What may be making shoppers hesitate"],
           ["Proposed changes", "Changes prepared from the strongest findings"],
         ] as const
@@ -90,7 +93,10 @@ function UnderstandVignette() {
             <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-white/78">
               {title}
             </span>
-            <Check aria-hidden="true" className="h-3 w-3 shrink-0 text-signal" />
+            <Check
+              aria-hidden="true"
+              className="h-3 w-3 shrink-0 text-signal"
+            />
           </div>
           <p className="mt-1 text-[10.5px] leading-[1.45] text-white/50">
             {detail}
@@ -107,9 +113,13 @@ function ActVignette() {
     <Panel>
       {(
         [
-          ["P0", "Add commuting use case", "Approve", true],
-          ["P1", "Explain fit over layers", "In motion", false],
-          ["P2", "Ask commuter questions again", "Measuring", false],
+          // The band, not a P-number. The queue dropped P0-P3: severity is
+          // normalised inside an issue class, so the same number means a
+          // different thing per class and ranking them against each other was
+          // the inversion the product removed.
+          ["Top 5%", "Add commuting use case", "Approve", true],
+          ["Top 25%", "Explain fit over layers", "In motion", false],
+          ["—", "Ask commuter questions again", "Measuring", false],
         ] as const
       ).map(([priority, task, step, lead]) => (
         <div key={task} className="flex items-center gap-2">
@@ -131,7 +141,9 @@ function ActVignette() {
           </span>
           <span
             className={`shrink-0 px-1.5 py-0.5 font-mono text-[8.5px] font-semibold uppercase tracking-[0.06em] ${
-              lead ? "bg-signal text-[#16110e]" : "border border-white/18 text-white/56"
+              lead
+                ? "bg-signal text-[#16110e]"
+                : "border border-white/18 text-white/56"
             }`}
           >
             {step}
@@ -157,10 +169,14 @@ function LearnVignette() {
       </span>
       {(
         [
+          // AI-answer measurements only. `ImpactRecord.metric_name` records
+          // representation, brand_appearance and first_party_citation[_position];
+          // there is no conversion, behaviour or money member, so a row for one
+          // would be a result the product cannot produce.
           ["Named by AI", "9 → 23%", "+14 pts", true],
-          ["Search → page", "46 → 57%", "+11 pts", true],
-          ["Add to cart", "2.4 → 2.9%", "+0.5 pts", true],
-          ["Returns rate", "unchanged", "No change", false],
+          ["Cites your page", "1 in 12 → 1 in 4", "+3 answers", true],
+          ["Placed at", "5th → 2nd", "+3 places", true],
+          ["Rival answers", "unchanged", "No change", false],
         ] as const
       ).map(([label, range, delta, moved]) => (
         <div key={label} className="flex items-center gap-2">
@@ -187,28 +203,32 @@ function LearnVignette() {
   );
 }
 
+// Four panels, and the loop has five steps -- so these are named with four of
+// the five canonical nouns rather than with a fourth vocabulary of their own.
+// Approve is the panel that carries Apply, because applying is what approval
+// releases and the panel says so.
 const STAGES = [
   {
     number: "01",
-    title: "Observe",
+    title: "Find",
     body: "AI answers, analytics, sessions, and store data watched together.",
     Vignette: ObserveVignette,
   },
   {
     number: "02",
-    title: "Understand",
+    title: "Prepare",
     body: "Use the data to find what may explain the problem and what to change.",
     Vignette: UnderstandVignette,
   },
   {
     number: "03",
-    title: "Act",
+    title: "Approve",
     body: "You approve customer-facing changes before Beseam applies them.",
     Vignette: ActVignette,
   },
   {
     number: "04",
-    title: "Learn",
+    title: "Measure",
     body: "What moved and what did not, kept next to the change.",
     Vignette: LearnVignette,
   },

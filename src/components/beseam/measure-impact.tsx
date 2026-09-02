@@ -19,7 +19,8 @@ export default function MeasureImpact() {
                 It only matters if the outcome moves.
               </h2>
               <p className="mt-5 max-w-[32ch] text-[14.5px] leading-[1.7] text-white/64">
-                After a change, Beseam checks the same shopper behavior, conversion, orders, or revenue to see whether anything improved.
+                After a change, Beseam asks the same shopper questions again —
+                and shows whether the answers now name your store.
               </p>
             </div>
             <ImpactScreen />

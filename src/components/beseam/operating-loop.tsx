@@ -1,15 +1,23 @@
 import { Reveal } from "@/components/beseam/reveal";
 
 const STEPS = [
-  ["01", "Observe", "See where shoppers are missed or may drop out."],
-  ["02", "Understand", "Check what may explain why."],
-  ["03", "Act", "Prepare the change, get approval, then apply it."],
-  ["04", "Learn", "Check the same thing again and see what changed."],
+  ["01", "Find", "See where shoppers are missed or may drop out."],
+  ["02", "Prepare", "Work out what may explain it, and what to change."],
+  ["03", "Approve", "You decide. Nothing customer-facing ships without it."],
+  ["04", "Apply", "The change goes live, with a way back."],
+  ["05", "Measure", "Ask the same question again and see what changed."],
 ] as const;
 
 /**
  * One operating vocabulary across the product and marketing site:
- * Observe → Understand → Act → Learn.
+ * Find → Prepare → Approve → Apply → Measure.
+ *
+ * It used to read Observe → Understand → Act → Learn here, See → Understand →
+ * Fix → Prove in the internal tracker, and Proposals / To do / Waiting / Done
+ * in the app itself. A visitor met three vocabularies for one loop before they
+ * ever signed up. This is the one that survives, for the reason that decided
+ * it: it is the only one with **Approve** in it, and approval before change is
+ * the promise the whole product is built around.
  */
 export default function OperatingLoop() {
   return (
@@ -36,7 +44,7 @@ export default function OperatingLoop() {
         </Reveal>
 
         <Reveal delay={0.05}>
-          <ol className="mt-10 grid border-t-2 border-ink-deep sm:grid-cols-4">
+          <ol className="mt-10 grid border-t-2 border-ink-deep sm:grid-cols-5">
             {STEPS.map(([number, title, body], index) => (
               <li
                 key={title}

@@ -64,9 +64,7 @@ const FEATURED_COMPARISON_SLUGS = [
   "noibu",
 ] as const;
 
-const FEATURED_COMPARISON_SLUG_SET = new Set<string>(
-  FEATURED_COMPARISON_SLUGS,
-);
+const FEATURED_COMPARISON_SLUG_SET = new Set<string>(FEATURED_COMPARISON_SLUGS);
 
 export default function ComparePage() {
   const comparisonIndex = new Map(
@@ -249,7 +247,6 @@ export default function ComparePage() {
                   </div>
                 );
               })}
-
             </div>
           </div>
         </div>
@@ -267,19 +264,20 @@ export default function ComparePage() {
             <div className="grid border-y border-white/22 md:grid-cols-2 lg:grid-cols-4">
               {[
                 [
-                  "Observe",
+                  "Find",
                   "See what is happening across discovery, behavior, commerce, and revenue.",
                 ],
                 [
-                  "Understand",
-                  "Connect the evidence, identify what may explain the pattern, and decide what deserves attention.",
+                  "Prepare",
+                  "Connect the evidence, identify what may explain the pattern, and turn it into a specific change.",
                 ],
                 [
-                  "Act",
-                  "Prepare the change, get approval, then apply it.",
+                  "Approve",
+                  "You decide. Nothing customer-facing ships without your yes.",
                 ],
+                ["Apply", "The change goes live, with a way back."],
                 [
-                  "Learn",
+                  "Measure",
                   "Check the original signal again and carry the result into the next decision.",
                 ],
               ].map(([title, detail], index) => (

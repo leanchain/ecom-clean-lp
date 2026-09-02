@@ -13,39 +13,41 @@ import { ArrowRight, Check, TrendingUp } from "lucide-react";
  * screens; the accent is the landing signal rather than the app's own primary.
  *
  * The real queue is wider. This marketing view keeps only the columns needed to
- * understand the decision: opportunity, priority, effort, estimated impact,
- * and next step.
+ * understand the decision: opportunity, booked sales, effort, and next step.
  *
- * All figures in these reconstructed product views are illustrative. Growth plan
- * impact uses relative $ / $$ / $$$ tiers rather than invented revenue amounts.
- * Results keeps its own example stamp for the same reason.
+ * All figures in these reconstructed product views are illustrative.
+ *
+ * There is no impact column and no priority badge, because the product has
+ * neither. It used to show `$$$$$` and `High / Medium / Low`, and both were
+ * inventions of this file: the app shows one column here, a band of how much of
+ * the store's own booked sales the row touches, and it is deliberately ordinal
+ * -- no currency glyph, because a CHF merchant reading `$$$` is being shown a
+ * currency nobody measured, and no projected lift, because the product refuses
+ * to put a number on a change it has not made yet.
  */
 
 const QUEUE_ROWS = [
   {
     title: "Add the commuting use case to the Urban Shell product page.",
     why: "The shopper asked for a commuting jacket, and the product page never answers whether this one fits that use case.",
-    priority: "High",
+    band: "Top 5% of your booked sales",
     effort: "Quick",
-    impact: "$$$$$",
     step: "Needs approval",
     lead: true,
   },
   {
     title: "Explain how Urban Shell fits over everyday layers.",
     why: "The shopper opened the size guide, and fit over layers is still unanswered at the decision point.",
-    priority: "Medium",
+    band: "Top quarter",
     effort: "Quick",
-    impact: "$$$",
     step: "In motion",
     lead: false,
   },
   {
     title: "Ask the commuter questions again after the product-page change.",
     why: "Ask the same shopping question again before saying the change helped discovery.",
-    priority: "Low",
+    band: "Not measured",
     effort: "Quick",
-    impact: "$",
     step: "Measuring",
     lead: false,
   },
@@ -54,12 +56,6 @@ const QUEUE_ROWS = [
 const EFFORT_TONE: Record<string, string> = {
   Quick: "border-[#1f7a4d]/35 bg-[#1f7a4d]/[0.08] text-[#1a6b43]",
   Hard: "border-black/20 bg-black/[0.04] text-black/62",
-};
-
-const PRIORITY_TONE: Record<string, string> = {
-  High: "border-signal-ink/30 bg-signal-ink/[0.07] text-signal-ink",
-  Medium: "border-black/20 bg-black/[0.05] text-[#3f3f3f]",
-  Low: "border-black/14 bg-black/[0.02] text-black/52",
 };
 
 function ScreenChrome({
@@ -107,26 +103,24 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
             3 changes · 2 moving
           </p>
         </div>
-        <div className="grid grid-cols-[minmax(0,1fr)_4.25rem_4rem_4.5rem] gap-2 border-b border-black/12 px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/46">
+        <div className="grid grid-cols-[minmax(0,1fr)_6.5rem_4rem_4.5rem] gap-2 border-b border-black/12 px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/46">
           <span>Opportunity and change</span>
-          <span>Priority</span>
+          <span>Booked sales</span>
           <span>Effort</span>
           <span>Status</span>
         </div>
         {QUEUE_ROWS.map((row) => (
           <div
             key={row.title}
-            className={`grid grid-cols-[minmax(0,1fr)_4.25rem_4rem_4.5rem] items-center gap-2 border-b border-black/10 px-3 py-2 last:border-b-0 ${
+            className={`grid grid-cols-[minmax(0,1fr)_6.5rem_4rem_4.5rem] items-center gap-2 border-b border-black/10 px-3 py-2 last:border-b-0 ${
               row.lead ? "bg-signal-ink/[0.06]" : "bg-white"
             }`}
           >
             <p className="text-[12.5px] font-medium leading-[1.3] text-[#151515]">
               {row.title}
             </p>
-            <span
-              className={`inline-flex w-fit shrink-0 rounded-md border px-1.5 py-0.5 text-[9.5px] font-semibold ${PRIORITY_TONE[row.priority]}`}
-            >
-              {row.priority}
+            <span className="text-[9.5px] leading-[1.3] text-black/62">
+              {row.band}
             </span>
             <span className="inline-flex w-fit shrink-0 rounded-md border border-[#1f7a4d]/35 bg-[#1f7a4d]/[0.08] px-1.5 py-0.5 text-[9.5px] font-semibold text-[#1a6b43]">
               {row.effort}
@@ -148,28 +142,27 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
 
   return (
     <div className="border border-black/16 bg-white">
-      <ScreenChrome title="Growth plan" meta="Illustrative · changes in progress" />
+      <ScreenChrome
+        title="Growth plan"
+        meta="Illustrative · changes in progress"
+      />
 
       <div className="relative overflow-x-auto">
         <div className="min-w-[58rem]">
           <div
             className="grid gap-4 border-b border-black/12 px-4 py-2 sm:px-5"
             style={{
-              gridTemplateColumns:
-                "minmax(0,1fr) 4rem 4.5rem 6rem 5.5rem",
+              gridTemplateColumns: "minmax(0,1fr) 9rem 4.5rem 5.5rem",
             }}
           >
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
               Opportunity and change
             </p>
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
-              Priority
+              Booked sales
             </p>
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
               Effort
-            </p>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
-              Impact
             </p>
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
               Status
@@ -183,8 +176,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
                 row.lead ? "bg-signal-ink/[0.06]" : ""
               }`}
               style={{
-                gridTemplateColumns:
-                  "minmax(0,1fr) 4rem 4.5rem 6rem 5.5rem",
+                gridTemplateColumns: "minmax(0,1fr) 9rem 4.5rem 5.5rem",
               }}
             >
               <div>
@@ -202,10 +194,8 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
                 </p>
               </div>
 
-              <span
-                className={`inline-flex shrink-0 items-center rounded-md border px-1.5 py-0.5 text-[11px] font-medium ${PRIORITY_TONE[row.priority]}`}
-              >
-                {row.priority}
+              <span className="text-[11px] leading-[1.4] text-black/70">
+                {row.band}
               </span>
 
               <span
@@ -216,10 +206,6 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
                 {row.effort}
               </span>
 
-              <span className="font-mono text-[11px] font-semibold tabular-nums text-ink-deep">
-                {row.impact}
-              </span>
-
               <span
                 className={`inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-1 text-[11px] font-semibold ${
                   row.lead
@@ -228,7 +214,9 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
                 }`}
               >
                 {row.step}
-                {row.lead ? <ArrowRight aria-hidden="true" className="h-3 w-3" /> : null}
+                {row.lead ? (
+                  <ArrowRight aria-hidden="true" className="h-3 w-3" />
+                ) : null}
               </span>
             </div>
           ))}
@@ -236,8 +224,8 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
       </div>
 
       <p className="border-t border-black/12 bg-ground px-4 py-2.5 text-[11px] leading-[1.5] text-black/54 sm:px-5">
-        Every change keeps what Beseam found, the owner, status, expected impact,
-        and what to check afterward together.
+        Every change keeps what Beseam found, the owner, status, and what to
+        check afterward together.
       </p>
     </div>
   );
@@ -258,6 +246,13 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
  * product exists for, and an earlier draft parked it on “No change”, which
  * argued against the entire page from inside the product screenshot.
  */
+// Every row is a question about AI answers, because those are the measurements
+// the product actually records: `ImpactRecord.metric_name` is representation,
+// brand_appearance and first_party_citation[_position], and nothing else. Two
+// earlier rows here read `Store search -> page +11 pts` and `page -> add to
+// cart +0.5 pts`, which are the numbers a merchant would most like to see and
+// the ones we do not measure. A results screen must not show a row the product
+// cannot produce.
 const LEDGER_ROWS = [
   {
     metric: "Commuter answers naming Urban Shell",
@@ -266,16 +261,16 @@ const LEDGER_ROWS = [
     delta: "+14 pts",
   },
   {
-    metric: "Store search → Urban Shell page",
-    before: "46%",
-    after: "57%",
-    delta: "+11 pts",
+    metric: "Answers citing your own product page",
+    before: "1 in 12",
+    after: "1 in 4",
+    delta: "+3 answers",
   },
   {
-    metric: "Urban Shell page → add to cart",
-    before: "2.4%",
-    after: "2.9%",
-    delta: "+0.5 pts",
+    metric: "Where you sit when you are named",
+    before: "5th",
+    after: "2nd",
+    delta: "+3 places",
   },
 ] as const;
 

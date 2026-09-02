@@ -22,6 +22,6 @@ export const STORE_HEALTH_FAQS = [
   {
     question: "How does Beseam measure whether a change helped?",
     answer:
-      "Beseam checks the same shopper behavior, conversion, orders, or revenue again after the change. The before-and-after stays with the change, and Beseam does not claim the change caused something the data cannot prove.",
+      "Beseam asks the same shopper questions again after the change and shows whether the answers now name your store. The before-and-after stays with the change, and Beseam does not claim the change caused something the data cannot prove.",
   },
 ] as const;

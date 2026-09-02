@@ -14,13 +14,15 @@ const CHOICE_EVIDENCE = [
 const EXPLANATIONS = [
   {
     title: "The product is not relevant",
-    detail: "The jacket matches the commuter use case and appears on another AI engine.",
+    detail:
+      "The jacket matches the commuter use case and appears on another AI engine.",
     state: "Ruled out",
     active: false,
   },
   {
     title: "The product is unavailable",
-    detail: "The product and common sizes are in stock when the answers are checked.",
+    detail:
+      "The product and common sizes are in stock when the answers are checked.",
     state: "Ruled out",
     active: false,
   },
@@ -73,7 +75,10 @@ export default function BuyingDecisionStory() {
             </div>
             <div>
               <p className="max-w-[46ch] text-[17px] leading-[1.7] text-black/66">
-                “Which waterproof jacket works for commuting?” Beseam checks which products AI recommends, what the products actually answer, what may explain the gap, what should change, and what happens when the same question is checked again.
+                “Which waterproof jacket works for commuting?” Beseam checks
+                which products AI recommends, what the products actually answer,
+                what may explain the gap, what should change, and what happens
+                when the same question is checked again.
               </p>
               <p className="mt-4 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-signal-ink">
                 Observe → Understand → Act → Learn
@@ -115,7 +120,7 @@ export default function BuyingDecisionStory() {
         <div className="mt-12 border-t-2 border-ink-deep lg:mt-16">
           <Reveal delay={0.04}>
             <article className="grid gap-8 border-b border-black/14 py-10 lg:grid-cols-[minmax(14rem,0.42fr)_minmax(0,1fr)] lg:gap-16 lg:py-14">
-              <StepHeader number="01" title="Observe">
+              <StepHeader number="01" title="Find">
                 <p>See which products AI recommends for the buying question.</p>
               </StepHeader>
 
@@ -123,36 +128,57 @@ export default function BuyingDecisionStory() {
                 <div className="border border-black/16 bg-ground">
                   <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/12 bg-white px-5 py-4">
                     <div>
-                        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/44">
-                          Shopper question · illustrative example
-                        </p>
-                        <p className="mt-1 text-[15px] font-semibold text-ink-deep">
-                          Which waterproof jacket works for commuting?
-                        </p>
-                      </div>
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/44">
+                        Shopper question · illustrative example
+                      </p>
+                      <p className="mt-1 text-[15px] font-semibold text-ink-deep">
+                        Which waterproof jacket works for commuting?
+                      </p>
                     </div>
+                  </div>
                   <div className="grid sm:grid-cols-3">
                     <div className="border-b border-black/12 p-5 sm:border-b-0 sm:border-r">
-                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/44">ChatGPT</p>
-                      <p className="mt-4 text-[14px] font-semibold text-ink-deep">RidgeNorth · Norra · Westpeak</p>
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/44">
+                        ChatGPT
+                      </p>
+                      <p className="mt-4 text-[14px] font-semibold text-ink-deep">
+                        RidgeNorth · Norra · Westpeak
+                      </p>
                       <p className="mt-2 flex items-center gap-2 text-[12px] text-black/58">
-                        <X className="h-3.5 w-3.5 text-signal-ink" aria-hidden="true" />
+                        <X
+                          className="h-3.5 w-3.5 text-signal-ink"
+                          aria-hidden="true"
+                        />
                         Urban Shell was not named
                       </p>
                     </div>
                     <div className="border-b border-black/12 p-5 sm:border-b-0 sm:border-r">
-                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/44">Google AI Mode</p>
-                      <p className="mt-4 text-[14px] font-semibold text-ink-deep">Urban Shell · RidgeNorth · Norra</p>
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/44">
+                        Google AI Mode
+                      </p>
+                      <p className="mt-4 text-[14px] font-semibold text-ink-deep">
+                        Urban Shell · RidgeNorth · Norra
+                      </p>
                       <p className="mt-2 flex items-center gap-2 text-[12px] text-black/58">
-                        <Check className="h-3.5 w-3.5 text-[#1a6b43]" aria-hidden="true" />
+                        <Check
+                          className="h-3.5 w-3.5 text-[#1a6b43]"
+                          aria-hidden="true"
+                        />
                         Urban Shell was named
                       </p>
                     </div>
                     <div className="p-5">
-                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/44">Copilot</p>
-                      <p className="mt-4 text-[14px] font-semibold text-ink-deep">Westpeak · Norra · RidgeNorth</p>
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/44">
+                        Copilot
+                      </p>
+                      <p className="mt-4 text-[14px] font-semibold text-ink-deep">
+                        Westpeak · Norra · RidgeNorth
+                      </p>
                       <p className="mt-2 flex items-center gap-2 text-[12px] text-black/58">
-                        <X className="h-3.5 w-3.5 text-signal-ink" aria-hidden="true" />
+                        <X
+                          className="h-3.5 w-3.5 text-signal-ink"
+                          aria-hidden="true"
+                        />
                         Urban Shell was not named
                       </p>
                     </div>
@@ -175,26 +201,31 @@ export default function BuyingDecisionStory() {
                       </span>
                     </div>
                     <div className="grid sm:grid-cols-2">
-                      {CHOICE_EVIDENCE.map(([question, answer, present], index) => (
-                        <div
-                          key={question}
-                          className={`p-5 ${index % 2 === 0 ? "sm:border-r" : ""} ${index < 2 ? "border-b border-black/12" : ""}`}
-                        >
-                          <p className="text-[13px] leading-[1.5] text-black/60">
-                            {question}
-                          </p>
-                          <p
-                            className={`mt-2 flex items-center gap-2 text-[14px] font-semibold ${present ? "text-ink-deep" : "text-signal-ink"}`}
+                      {CHOICE_EVIDENCE.map(
+                        ([question, answer, present], index) => (
+                          <div
+                            key={question}
+                            className={`p-5 ${index % 2 === 0 ? "sm:border-r" : ""} ${index < 2 ? "border-b border-black/12" : ""}`}
                           >
-                            {present ? (
-                              <Check className="h-3.5 w-3.5" aria-hidden="true" />
-                            ) : (
-                              <X className="h-3.5 w-3.5" aria-hidden="true" />
-                            )}
-                            {answer}
-                          </p>
-                        </div>
-                      ))}
+                            <p className="text-[13px] leading-[1.5] text-black/60">
+                              {question}
+                            </p>
+                            <p
+                              className={`mt-2 flex items-center gap-2 text-[14px] font-semibold ${present ? "text-ink-deep" : "text-signal-ink"}`}
+                            >
+                              {present ? (
+                                <Check
+                                  className="h-3.5 w-3.5"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <X className="h-3.5 w-3.5" aria-hidden="true" />
+                              )}
+                              {answer}
+                            </p>
+                          </div>
+                        ),
+                      )}
                     </div>
                   </div>
                   <div className="border border-black/16 bg-[#faf1eb] p-6">
@@ -202,7 +233,8 @@ export default function BuyingDecisionStory() {
                       The gap
                     </p>
                     <p className="mt-4 text-[17px] font-semibold leading-snug text-ink-deep">
-                      Your product is relevant, but two of three assistants leave it out.
+                      Your product is relevant, but two of three assistants
+                      leave it out.
                     </p>
                     <p className="mt-4 text-[13px] leading-[1.65] text-black/58">
                       Beseam keeps the answer and product evidence together.
@@ -214,7 +246,7 @@ export default function BuyingDecisionStory() {
           </Reveal>
           <Reveal delay={0.04}>
             <article className="grid gap-8 border-b border-black/14 py-10 lg:grid-cols-[minmax(14rem,0.42fr)_minmax(0,1fr)] lg:gap-16 lg:py-14">
-              <StepHeader number="02" title="Understand">
+              <StepHeader number="02" title="Prepare">
                 <p>Test competing explanations before acting.</p>
               </StepHeader>
 
@@ -222,7 +254,9 @@ export default function BuyingDecisionStory() {
                 {EXPLANATIONS.map((item) => (
                   <article
                     key={item.title}
-                    className={item.active ? "bg-[#fff4ee] p-6" : "bg-white p-6"}
+                    className={
+                      item.active ? "bg-[#fff4ee] p-6" : "bg-white p-6"
+                    }
                   >
                     <p
                       className={`font-mono text-[10px] font-semibold uppercase tracking-[0.1em] ${item.active ? "text-signal-ink" : "text-black/42"}`}
@@ -243,8 +277,11 @@ export default function BuyingDecisionStory() {
 
           <Reveal delay={0.04}>
             <article className="grid gap-8 border-b border-black/14 py-10 lg:grid-cols-[minmax(14rem,0.42fr)_minmax(0,1fr)] lg:gap-16 lg:py-14">
-              <StepHeader number="03" title="Act">
-                <p>Choose the next move, then review and approve the exact change.</p>
+              <StepHeader number="03" title="Approve">
+                <p>
+                  Choose the next move, then review and approve the exact
+                  change.
+                </p>
               </StepHeader>
 
               <div className="space-y-6">
@@ -252,7 +289,10 @@ export default function BuyingDecisionStory() {
                 <div className="border border-black/16 bg-white">
                   <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/12 bg-ground px-5 py-4">
                     <div className="flex items-center gap-2">
-                      <ShoppingBag className="h-4 w-4 text-signal-ink" aria-hidden="true" />
+                      <ShoppingBag
+                        className="h-4 w-4 text-signal-ink"
+                        aria-hidden="true"
+                      />
                       <p className="text-[15px] font-semibold text-ink-deep">
                         Shopify changes prepared
                       </p>
@@ -297,7 +337,7 @@ export default function BuyingDecisionStory() {
 
           <Reveal delay={0.04}>
             <article className="grid gap-8 py-10 lg:grid-cols-[minmax(14rem,0.42fr)_minmax(0,1fr)] lg:gap-16 lg:py-14">
-              <StepHeader number="04" title="Learn">
+              <StepHeader number="04" title="Measure">
                 <p>Did more shoppers choose it?</p>
               </StepHeader>
               <div className="bg-ink-deep p-1">

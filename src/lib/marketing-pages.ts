@@ -189,7 +189,7 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       {
         title: "Make the change. Check what happened.",
         icon: Sparkles,
-        body: "Beseam turns the strongest finding into a specific change to product data, content, merchandising, creative, campaigns, or the store. You approve customer-facing changes. Beseam applies what it can and then checks discovery, behavior, conversion, orders, or revenue again.",
+        body: "Beseam turns the strongest finding into a specific change to product data, content, merchandising, creative, campaigns, or the store. You approve customer-facing changes. Beseam applies what it can, hands the rest to whoever does, and then asks the same shopper questions again.",
         points: [
           "Tie each change to the observed opportunity and affected product, page, or journey.",
           "Keep what Beseam found, what it affects, your approval, and what to check afterward together.",

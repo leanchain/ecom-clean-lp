@@ -15,19 +15,19 @@ export const metadata: Metadata = buildPublicMetadata({
   path: "/how-we-work",
 });
 
+// One vocabulary for the loop, everywhere: Find -> Prepare -> Approve -> Apply
+// -> Measure. See `components/beseam/operating-loop.tsx` for why this is the
+// one that survived.
 const LOOP = [
-  ["01", "Observe", "See where shoppers miss you, hesitate, or leave."],
-  ["02", "Understand", "Check what may explain it."],
+  ["01", "Find", "See where shoppers miss you, hesitate, or leave."],
+  ["02", "Prepare", "Work out what may explain it, and what to change."],
   [
     "03",
-    "Act",
-    "Prepare the change, get your approval, then apply it.",
+    "Approve",
+    "You decide. Nothing customer-facing ships without your yes.",
   ],
-  [
-    "04",
-    "Learn",
-    "Check the same thing again and see what changed.",
-  ],
+  ["04", "Apply", "The change goes live, with a way back."],
+  ["05", "Measure", "Ask the same question again and see what changed."],
 ] as const;
 
 const RESPONSIBILITIES = [
