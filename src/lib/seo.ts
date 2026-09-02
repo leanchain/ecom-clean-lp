@@ -4,7 +4,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_BASE_URL || "https://beseam.com";
 
 export const DEFAULT_SOCIAL_IMAGE = "/images/social/default.png";
-export const HOME_SOCIAL_IMAGE = "/images/social/home.png";
+export const HOME_SOCIAL_IMAGE = "/images/social/home-2026-09.png";
 export const FIELDBOOK_SOCIAL_IMAGE = "/images/social/fieldbook.png";
 
 export function buildPublicMetadata({

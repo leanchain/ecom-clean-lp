@@ -1038,6 +1038,10 @@ function journeyPath(
   }, "");
 }
 
+function stableSvgCoordinate(value: number) {
+  return Math.round(value * 1_000_000) / 1_000_000;
+}
+
 function satellitePoint(
   hub: Hub,
   index: number,
@@ -1052,8 +1056,8 @@ function satellitePoint(
   const angle = outwardAngle + (index - 1.5) * 0.78;
   const radius = (78 + (index % 2) * 34) * radiusScale;
   return {
-    x: hub.x + Math.cos(angle) * radius,
-    y: hub.y + Math.sin(angle) * radius,
+    x: stableSvgCoordinate(hub.x + Math.cos(angle) * radius),
+    y: stableSvgCoordinate(hub.y + Math.sin(angle) * radius),
   };
 }
 
@@ -1301,8 +1305,8 @@ export default function HeroSurfaceShift() {
         const radius =
           (48 + ((index * 23 + hubIndex * 11) % 78)) *
           graphLayout.capabilityRadius;
-        let x = hub.x + Math.cos(angle) * radius;
-        let y = hub.y + Math.sin(angle) * radius;
+        let x = stableSvgCoordinate(hub.x + Math.cos(angle) * radius);
+        let y = stableSvgCoordinate(hub.y + Math.sin(angle) * radius);
 
         if (
           heroExclusion &&
