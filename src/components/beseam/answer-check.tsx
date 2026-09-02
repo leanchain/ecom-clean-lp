@@ -421,7 +421,9 @@ function FoundStrip({ result }: { result: AnswerCheckResult }) {
     [productCount, "products found", false],
     [
       scored.length ? `${named}/${scored.length}` : "—",
-      scored.length ? "assistant answers named you" : "assistant answers pending",
+      scored.length
+        ? "assistant answers named you"
+        : "assistant answers pending",
       !scored.length && isScanInFlight(result),
     ],
     [
@@ -520,8 +522,14 @@ function FindingRow({
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10.5px] font-semibold uppercase tracking-[0.08em]">
               <span className="text-black/44">{findingGroup(finding)}</span>
-              <span aria-hidden="true" className="text-black/20">·</span>
-              <span className={priority.urgent ? "text-signal-ink" : "text-black/46"}>
+              <span aria-hidden="true" className="text-black/20">
+                ·
+              </span>
+              <span
+                className={
+                  priority.urgent ? "text-signal-ink" : "text-black/46"
+                }
+              >
                 {priority.label}
               </span>
             </div>
@@ -531,7 +539,9 @@ function FindingRow({
           </div>
 
           <span className="inline-flex min-h-9 items-center gap-2 justify-self-start text-[12px] font-semibold text-black/52 group-hover/finding:text-signal-ink sm:justify-self-end">
-            <span className="group-open/finding:hidden">See recommendation</span>
+            <span className="group-open/finding:hidden">
+              See recommendation
+            </span>
             <span className="hidden group-open/finding:inline">Close</span>
             <ChevronDown
               className="h-3.5 w-3.5 transition-transform group-open/finding:rotate-180"
@@ -559,7 +569,9 @@ function FindingRow({
             <div className="border-t border-black/10 pt-4 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
               <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-black/42">
                 Evidence
-                {group.members.length > 1 ? ` · ${group.members.length} checks` : ""}
+                {group.members.length > 1
+                  ? ` · ${group.members.length} checks`
+                  : ""}
               </p>
               <div className="mt-3 space-y-4 text-[12px] leading-relaxed text-black/58">
                 {group.members.map((member, position) => {
@@ -568,18 +580,24 @@ function FindingRow({
                     : undefined;
                   return (
                     <div key={`${member.code}-${member.product ?? position}`}>
-                      <p className="font-semibold text-ink-deep">{member.title}</p>
-                      {member.detail ? <p className="mt-1">{member.detail}</p> : null}
+                      <p className="font-semibold text-ink-deep">
+                        {member.title}
+                      </p>
+                      {member.detail ? (
+                        <p className="mt-1">{member.detail}</p>
+                      ) : null}
                       {member.evidence?.length ? (
                         <ul className="mt-2 space-y-1">
-                          {member.evidence.slice(0, 3).map((line, evidenceIndex) => (
-                            <li
-                              key={`${line}-${evidenceIndex}`}
-                              className="break-words font-mono text-[11px] text-black/50"
-                            >
-                              {line}
-                            </li>
-                          ))}
+                          {member.evidence
+                            .slice(0, 3)
+                            .map((line, evidenceIndex) => (
+                              <li
+                                key={`${line}-${evidenceIndex}`}
+                                className="break-words font-mono text-[11px] text-black/50"
+                              >
+                                {line}
+                              </li>
+                            ))}
                         </ul>
                       ) : null}
                       <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-black/42">
@@ -648,7 +666,9 @@ function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
           {findings.length
             ? "The clearest opportunities from this public scan, ordered by what is worth looking at first. Open one for the recommendation and evidence."
             : "Still reading."}
-          {pagesInFlight ? " More may appear as your product pages finish." : ""}
+          {pagesInFlight
+            ? " More may appear as your product pages finish."
+            : ""}
         </p>
       </div>
 
@@ -724,7 +744,8 @@ function ContinuePaths({
     >
       <div className="bg-ink-deep px-5 py-7 sm:px-6 sm:py-8">
         <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-white/50">
-          {opportunityCount} {opportunityCount === 1 ? "opportunity" : "opportunities"} found
+          {opportunityCount}{" "}
+          {opportunityCount === 1 ? "opportunity" : "opportunities"} found
         </p>
         <h3 className="mt-2 text-[19px] font-semibold tracking-[-0.02em]">
           Keep Beseam watching after the scan
@@ -737,11 +758,15 @@ function ContinuePaths({
         <div className="mt-5 grid gap-2 text-[12.5px] sm:grid-cols-2">
           <div className="border border-white/16 px-3 py-2.5">
             <span className="block text-white/46">Prepared by Beseam</span>
-            <span className="mt-0.5 block font-semibold text-white">Checked after connection</span>
+            <span className="mt-0.5 block font-semibold text-white">
+              Checked after connection
+            </span>
           </div>
           <div className="border border-white/16 px-3 py-2.5">
             <span className="block text-white/46">Needs your approval</span>
-            <span className="mt-0.5 block font-semibold text-white">Checked after connection</span>
+            <span className="mt-0.5 block font-semibold text-white">
+              Checked after connection
+            </span>
           </div>
         </div>
         <TrackedLink
@@ -773,8 +798,9 @@ function ContinuePaths({
         ) : null}
         <p className="mt-2.5 max-w-[44ch] text-[14px] leading-[1.62] text-white/70">
           In a 20-minute store review, we use one real finding to show how
-          Beseam follows it end to end: connect the evidence, propose the change,
-          get your approval, make the change, and remeasure what changed.
+          Beseam follows it end to end: connect the evidence, propose the
+          change, get your approval, make the change, and remeasure what
+          changed.
         </p>
         <BookReviewCta
           variant="primary"
@@ -914,10 +940,14 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
             Brand appearance
           </p>
           <div className="mt-2 flex flex-wrap items-end gap-3">
-            <span className={`text-[52px] font-semibold leading-none tracking-[-0.045em] tabular-nums ${scoreBand(pct).text}`}>
+            <span
+              className={`text-[52px] font-semibold leading-none tracking-[-0.045em] tabular-nums ${scoreBand(pct).text}`}
+            >
               {named}/{scored.length}
             </span>
-            <span className={`mb-1 text-[12px] font-semibold ${scoreBand(pct).text}`}>
+            <span
+              className={`mb-1 text-[12px] font-semibold ${scoreBand(pct).text}`}
+            >
               {scoreBand(pct).label} · {pct}%
             </span>
           </div>
@@ -930,7 +960,9 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
           </p>
           {topRival && named < scored.length ? (
             <p className="mt-4 border-t border-black/10 pt-3 text-[12.5px] leading-relaxed text-black/58">
-              <span className="font-semibold text-ink-deep">Most frequent alternative: </span>
+              <span className="font-semibold text-ink-deep">
+                Most frequent alternative:{" "}
+              </span>
               {topRival.label} · {topRival.count}×
             </p>
           ) : null}
@@ -942,7 +974,8 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
               By assistant
             </p>
             <span className="font-mono text-[11px] text-black/42">
-              {channels.length} {channels.length === 1 ? "assistant" : "assistants"}
+              {channels.length}{" "}
+              {channels.length === 1 ? "assistant" : "assistants"}
             </span>
           </div>
           <div className="mt-2 divide-y divide-black/10 border-y border-black/10">
@@ -955,7 +988,10 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
                   <p className="flex items-center gap-2.5 text-[13px] font-semibold text-ink-deep">
                     <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-black/12 bg-white">
                       <ChannelIcon
-                        channel={CHANNEL_BRAND_KEYS[engine.channel.toLowerCase()] ?? engine.channel}
+                        channel={
+                          CHANNEL_BRAND_KEYS[engine.channel.toLowerCase()] ??
+                          engine.channel
+                        }
                         className="h-3.5 w-3.5 opacity-80"
                       />
                     </span>
@@ -972,7 +1008,9 @@ function AiVisibilityWorkspace({ result }: { result: AnswerCheckResult }) {
                   <p className="font-mono text-[13px] font-semibold text-ink-deep">
                     {engine.wins}/{engine.total}
                   </p>
-                  <p className="mt-0.5 text-[10.5px] text-black/44">named you</p>
+                  <p className="mt-0.5 text-[10.5px] text-black/44">
+                    named you
+                  </p>
                 </div>
               </div>
             ))}
@@ -1426,13 +1464,21 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
                         : (internalReach?.orphan_products ?? "Not measured"),
                       false,
                     ],
-                    [
-                      "Discovery files",
-                      discoveryFiles.length
-                        ? `${discoveryFilesPresent}/${discoveryFiles.length} found`
-                        : "Not measured",
-                      false,
-                    ],
+                    // Each discovery file gets its own row. Summarising them as
+                    // "2/4 found" and then listing the four as loose chips under
+                    // the table left merchants asking why those boxes were not
+                    // part of the table they were sitting beneath.
+                    ...(discoveryFiles.length
+                      ? discoveryFiles.map(([path, value]) => [
+                          path,
+                          value.present
+                            ? "Found"
+                            : value.present === false
+                              ? "Not found"
+                              : "Not measured",
+                          false,
+                        ])
+                      : [["Discovery files", "Not measured", false]]),
                     [
                       "Sitemap freshness",
                       inventory.sitemap.dated_urls
@@ -1468,21 +1514,14 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
                   </p>
                 ) : null}
                 {discoveryFiles.length ? (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {discoveryFiles.map(([path, value]) => (
-                      <span
-                        key={path}
-                        className={`border px-2 py-1 text-[11px] ${value.present ? "border-[#1f7a4d]/30 text-[#1f7a4d]" : "border-black/12 text-black/44"}`}
-                      >
-                        {path} ·{" "}
-                        {value.present
-                          ? "found"
-                          : value.present === false
-                            ? "not found"
-                            : "not measured"}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="mt-2 text-[11px] leading-relaxed text-black/42">
+                    The files above with a leading slash are optional text files
+                    at the root of your domain that tell crawlers and AI
+                    assistants where to look. {discoveryFilesPresent} of{" "}
+                    {discoveryFiles.length} are published. None is required, and
+                    a missing one is not a fault — publishing them is a way to
+                    be read more reliably by assistants that look for them.
+                  </p>
                 ) : null}
               </div>
             </div>
@@ -1637,7 +1676,7 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
                 {pageAuditsInFlight ? (
                   <div className="mt-2 flex items-center gap-2 text-[11px] text-black/52">
                     <Loader2 className="h-3.5 w-3.5 animate-spin text-signal-ink" />
-                    Comparing representative PDPs…
+                    Comparing sample product pages…
                   </div>
                 ) : (
                   <p className="mt-2 text-[18px] font-semibold text-ink-deep">
@@ -1650,7 +1689,7 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
                 <p className="mt-1 text-[11px] leading-relaxed text-black/48">
                   Catalog ↔ page data for price, availability, product data and
                   buyer attributes on {audits.length || result.products_seen}{" "}
-                  representative PDPs.
+                  sample product pages.
                 </p>
               </div>
             </div>
@@ -1697,12 +1736,12 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
         title="Product pages"
         summary={
           pageAuditsInFlight
-            ? `${result.products_seen} representative PDPs · inspection in progress`
+            ? `${result.products_seen} product pages · reading now`
             : pageAuditStatus === "failed"
-              ? `${result.products_seen} representative PDPs · page inspection could not complete`
+              ? `${result.products_seen} product pages · we could not finish reading them`
               : audits.length === 0
                 ? "Representative product-page inspection was not available in this run"
-                : `${audits.length} representative PDPs · ${evaluatedChecks} measured checks · ${failedChecks} review · ${staticAreas.reduce((sum, area) => sum + area.unevaluated, 0)} not measured`
+                : `${audits.length} product ${audits.length === 1 ? "page" : "pages"} read · ${failedChecks} of ${evaluatedChecks} checks need attention · ${staticAreas.reduce((sum, area) => sum + area.unevaluated, 0)} we could not check`
         }
       >
         {pageAuditsInFlight ? (
@@ -1727,7 +1766,7 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
           <>
             <div className="border-b border-black/12 bg-[#fffaf7] px-5 py-4 sm:px-6">
               <p className="text-[11px] font-semibold text-ink-deep">
-                What the representative pages show
+                What the sample product pages show
               </p>
               <div className="mt-3 grid gap-px border border-black/10 bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
                 {staticAreas.map((area) => (
@@ -1739,12 +1778,12 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
                       <span
                         className={`text-[16px] font-semibold ${area.failed ? "text-signal-ink" : "text-ink-deep"}`}
                       >
-                        {area.failed} review
+                        {area.failed} need attention
                       </span>
                       <span className="text-[11px] text-black/42">
-                        {area.evaluated} measured
+                        of {area.evaluated} checked
                         {area.unevaluated
-                          ? ` · ${area.unevaluated} not measured`
+                          ? ` · ${area.unevaluated} we could not check`
                           : ""}
                       </span>
                     </div>
@@ -1782,7 +1821,8 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
                           : "text-black/48"
                       }
                     >
-                      {audit.checks_failed}/{audit.checks_evaluated} review
+                      {audit.checks_failed} of {audit.checks_evaluated} need
+                      attention
                     </span>
                   </div>
                   {audit.report_id ? (
@@ -1792,7 +1832,7 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
                       rel="noreferrer"
                       className="inline-flex items-center gap-1.5 justify-self-start text-[11.5px] font-semibold text-ink-deep underline decoration-black/18 underline-offset-4 hover:text-signal-ink hover:decoration-signal-ink sm:justify-self-end"
                     >
-                      Inspect PDP{" "}
+                      Open the page report{" "}
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </a>
                   ) : (
