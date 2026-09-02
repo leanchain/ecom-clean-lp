@@ -26,14 +26,14 @@ export default function CookieConsent() {
   return (
     <aside
       aria-label="Cookie choices"
-      className="fixed bottom-20 left-3 z-50 w-[calc(100%-1.5rem)] max-w-[22rem] border border-black/20 bg-white p-3 shadow-[0_8px_28px_rgba(17,19,24,0.12)] sm:bottom-5 sm:left-5"
+      className="fixed bottom-0 left-0 right-0 z-50 w-full border border-white/16 bg-ink-deep p-3 shadow-[0_-6px_24px_rgba(17,19,24,0.18)] sm:bottom-5 sm:left-5 sm:right-auto sm:w-[calc(100%-2.5rem)] sm:max-w-[22rem]"
     >
-      <p className="text-[11.5px] leading-[1.5] text-black/62">
+      <p className="text-[11.5px] leading-[1.5] text-white/68">
         Essential cookies keep the site working. Optional analytics load only
         after you accept.{" "}
         <Link
           href="/privacy-policy"
-          className="font-semibold text-ink-deep underline decoration-black/30 underline-offset-3 hover:decoration-signal-ink"
+          className="font-semibold text-white underline decoration-white/30 underline-offset-3 hover:decoration-signal"
         >
           Privacy policy
         </Link>
@@ -42,7 +42,7 @@ export default function CookieConsent() {
         <button
           type="button"
           onClick={decline}
-          className="min-h-8 border border-black/30 px-3 text-[11.5px] font-semibold text-ink-deep transition-colors hover:border-signal-ink hover:text-signal-ink"
+          className="min-h-8 border border-white/28 px-3 text-[11.5px] font-semibold text-white/88 transition-colors hover:border-signal hover:text-signal"
         >
           Reject analytics
         </button>

@@ -1,7 +1,5 @@
 import type { ReactNode } from "react";
 
-import Link from "next/link";
-
 import { ArrowRight, X } from "lucide-react";
 
 import { Reveal } from "@/components/beseam/reveal";
@@ -239,11 +237,12 @@ function MobileTrace() {
         <div className="border-t border-white/14 py-5">
           <div className="flex items-baseline gap-3">
             <span className="font-mono text-[10px] font-semibold tabular-nums text-signal">03</span>
-            <StepLabel>What happens next</StepLabel>
+            <StepLabel>Proposed change</StepLabel>
           </div>
-          <div className="mt-3 flex items-center gap-2 text-[11px] font-semibold text-white/80">
-            <span>Prepare fix</span>
-            <ArrowRight className="h-3 w-3 shrink-0 text-signal" aria-hidden="true" />
+          <p className="mt-3 text-[15px] font-medium leading-[1.5] text-white/90">
+            Add the commuting use case to the returned jacket product pages.
+          </p>
+          <div className="mt-4 flex items-center gap-2 text-[11px] font-semibold text-white/80">
             <span>You approve</span>
             <ArrowRight className="h-3 w-3 shrink-0 text-signal" aria-hidden="true" />
             <span>Beseam applies it</span>
@@ -252,14 +251,6 @@ function MobileTrace() {
           </div>
         </div>
       </div>
-
-      <Link
-        href="/manifesto"
-        className="mt-4 inline-flex min-h-10 items-center gap-2 text-[13px] font-semibold text-signal underline decoration-white/20 underline-offset-6 hover:decoration-signal"
-      >
-        Why I built Beseam
-        <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-      </Link>
     </div>
   );
 }
@@ -371,7 +362,7 @@ export default function ConnectedEvidence() {
                               : "bg-white/[0.07] text-white/60"
                           }`}
                         >
-                          {item.cause ? "Observed" : "Ruled out"}
+                          {item.cause ? "Strongest evidence" : "Ruled out"}
                         </p>
                         <p
                           className={`mt-auto pt-1 text-[13px] leading-[1.6] ${
@@ -387,21 +378,13 @@ export default function ConnectedEvidence() {
 
                 <Tails />
                 <div className="border border-signal/45 bg-signal/[0.05] px-6 py-5 text-center">
-                  <StepLabel>What happens next</StepLabel>
-                  <p className="mt-2.5 text-[16px] leading-[1.5] text-white/92">
-                    The strongest evidence becomes a proposed fix. You approve
-                    the change; Beseam applies it and remeasures what changed.
+                  <StepLabel>Proposed change</StepLabel>
+                  <p className="mt-2.5 text-[17px] font-medium leading-[1.5] text-white/94">
+                    Add the commuting use case to the returned jacket product pages.
                   </p>
-                </div>
-
-                <div className="mt-7 flex justify-end border-t border-white/14 pt-5">
-                  <Link
-                    href="/manifesto"
-                    className="inline-flex min-h-10 shrink-0 items-center gap-2 text-[13px] font-semibold text-signal underline decoration-white/20 underline-offset-6 hover:decoration-signal"
-                  >
-                    Why I built Beseam
-                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </Link>
+                  <p className="mt-3 font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-white/62">
+                    You approve → Beseam applies it → Remeasure
+                  </p>
                 </div>
               </div>
             </div>

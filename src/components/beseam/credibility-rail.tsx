@@ -13,7 +13,7 @@ import { BENCHMARK_RUN } from "@/data/category-benchmarks";
  */
 const PRODUCT_FACTS = [
   "Live with a real merchant pilot",
-  "Every change approved, with rollback",
+  "Customer-facing changes require approval",
 ] as const;
 
 const SOLO_SHARE = Math.round(

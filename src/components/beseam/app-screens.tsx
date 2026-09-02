@@ -228,7 +228,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
                 }`}
               >
                 {row.step}
-                <ArrowRight aria-hidden="true" className="h-3 w-3" />
+                {row.lead ? <ArrowRight aria-hidden="true" className="h-3 w-3" /> : null}
               </span>
             </div>
           ))}
@@ -263,19 +263,19 @@ const LEDGER_ROWS = [
     metric: "Commuter answers naming Urban Shell",
     before: "9%",
     after: "23%",
-    delta: "+2.6×",
+    delta: "+14 pts",
   },
   {
     metric: "Store search → Urban Shell page",
     before: "46%",
     after: "57%",
-    delta: "+24%",
+    delta: "+11 pts",
   },
   {
     metric: "Urban Shell page → add to cart",
     before: "2.4%",
     after: "2.9%",
-    delta: "+21%",
+    delta: "+0.5 pts",
   },
 ] as const;
 
@@ -288,8 +288,7 @@ export function ImpactScreen() {
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-white/12 px-4 py-3 sm:px-5">
         <span className="inline-flex items-center gap-2 text-[12px] text-white/70">
           <Check aria-hidden="true" className="h-3.5 w-3.5 text-signal" />
-          Verified fixes
-          <span className="font-semibold tabular-nums text-white">3</span>
+          Change verified
         </span>
         <span className="text-[12px] text-white/70">
           Measured window{" "}
@@ -320,8 +319,7 @@ export function ImpactScreen() {
       ))}
 
       <p className="border-t border-white/12 px-4 py-2.5 text-[11px] leading-[1.5] text-white/50 sm:px-5">
-        Example figures, not a customer&apos;s. The layout is the product, and the
-        first numbers published here will be a real store&apos;s.
+        Illustrative example · not customer results.
       </p>
     </div>
   );

@@ -101,13 +101,13 @@ export default function CategoryBenchmarksSection() {
             <div>
               <figure className="border-t-2 border-ink-deep pt-4">
                 <figcaption className="flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-black/52">
-                  <span className="font-semibold text-black/62">Overall distribution</span>
-                  <span>{BENCHMARK_RUN.namings} brand namings</span>
+                  <span className="font-semibold text-black/62">How often assistants agreed</span>
+                  <span>{BENCHMARK_RUN.namings} brand appearances</span>
                 </figcaption>
 
                 <div
                   className="mt-4 flex h-8 gap-[2px] border border-black/18 bg-white p-[3px]"
-                  aria-label={`${BENCHMARK_RUN.singleEngineOnly} brand namings appeared on one assistant only, ${BENCHMARK_RUN.twoEngines} on two assistants, and ${BENCHMARK_RUN.everyEngine} on every assistant`}
+                  aria-label={`${BENCHMARK_RUN.singleEngineOnly} brand appearances occurred on one assistant only, ${BENCHMARK_RUN.twoEngines} on two assistants, and ${BENCHMARK_RUN.everyEngine} on every assistant`}
                 >
                   {AGREEMENT_BANDS.map((band) => (
                     <span
@@ -148,6 +148,16 @@ export default function CategoryBenchmarksSection() {
               </figure>
 
               <div className="mt-6 border-t-2 border-ink-deep">
+                <div
+                  className="grid items-end gap-x-2 border-b border-black/12 px-1 py-2.5 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/46 sm:gap-x-4"
+                  style={{
+                    gridTemplateColumns: "8.5rem minmax(0, 1fr) 7.5rem",
+                  }}
+                >
+                  <span>Category</span>
+                  <span>Where assistants disagreed most</span>
+                  <span className="text-right">Brands on one assistant</span>
+                </div>
                 <ul>
                   {HIGHLIGHTS.map((benchmark) => (
                     <li
@@ -180,9 +190,9 @@ export default function CategoryBenchmarksSection() {
                             }}
                           />
                         </span>
-                        <span className="w-9 shrink-0 text-right font-mono text-[12px] tabular-nums text-ink-deep">
+                        <span className="w-12 shrink-0 whitespace-nowrap text-right font-mono text-[12px] tabular-nums text-ink-deep">
                           {benchmark.singleEngineBrands}
-                          <span className="text-black/40">/{benchmark.brands.length}</span>
+                          <span className="text-black/40"> of {benchmark.brands.length}</span>
                         </span>
                       </span>
                     </li>

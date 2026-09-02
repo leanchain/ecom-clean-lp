@@ -23,7 +23,7 @@ const DOMAINS = [
     Icon: Radar,
   },
   {
-    title: "Understand the decision",
+    title: "Find what blocks the choice",
     scope: "PDP · search · shopper behavior",
     detail: "See the unanswered question getting in the way of the decision.",
     Icon: MousePointer2,
@@ -35,7 +35,7 @@ const DOMAINS = [
     Icon: ShoppingBag,
   },
   {
-    title: "Measure & learn",
+    title: "Measure what changed",
     scope: "Conversion · orders · revenue",
     detail: "Remeasure the same journey, learn what worked, and improve again.",
     Icon: BarChart3,
@@ -162,7 +162,7 @@ function PersonalizationVignette() {
           </div>
           <div className="mt-1.5 flex flex-wrap gap-1.5">
             <span className="bg-white px-1.5 py-0.5 font-mono text-[7.5px] text-black/58 ring-1 ring-black/8">
-              20,000 mm waterproof
+              Commuting use case
             </span>
             <span className="bg-white px-1.5 py-0.5 font-mono text-[7.5px] font-semibold text-ink-deep ring-1 ring-signal-ink/16">
               Breathable shell
@@ -190,23 +190,17 @@ function RevenueVignette() {
       </div>
 
       <div className="flex flex-1 flex-col justify-center gap-2">
-        {(
-          [
-            ["AI consideration", "9 → 23%", "+14 pts"],
-            ["Product visits", "46 → 57%", "+11 pts"],
-            ["Add to cart", "2.4 → 2.9%", "+0.5 pts"],
-          ] as const
-        ).map(([label, range, delta]) => (
+        {(["AI consideration", "Product visits", "Add to cart"] as const).map((label) => (
           <div key={label} className="flex items-center gap-2">
             <span className="truncate font-mono text-[8px] uppercase tracking-[0.05em] text-black/46">
               {label}
             </span>
             <span className="h-px min-w-2 flex-1 bg-black/10" />
-            <span className="shrink-0 font-mono text-[9px] tabular-nums text-black/54">
-              {range}
+            <span className="shrink-0 font-mono text-[8.5px] text-black/42">
+              before → after
             </span>
-            <span className="w-12 shrink-0 text-right font-mono text-[9px] font-semibold tabular-nums text-signal-ink">
-              {delta}
+            <span className="w-[4.4rem] shrink-0 text-right font-mono text-[8.5px] font-semibold uppercase tracking-[0.04em] text-signal-ink">
+              Remeasured
             </span>
           </div>
         ))}
