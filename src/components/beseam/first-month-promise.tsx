@@ -16,7 +16,8 @@ const GROWTH_STEPS = [
   { label: "Find", Icon: Radar },
   { label: "Prepare", Icon: WandSparkles },
   { label: "Approve", Icon: CheckCircle2 },
-  { label: "Repeat", Icon: RefreshCw },
+  { label: "Apply", Icon: Store },
+  { label: "Measure", Icon: RefreshCw },
 ] as const;
 
 export default function FirstMonthPromise({
@@ -40,8 +41,8 @@ export default function FirstMonthPromise({
               </h2>
             </div>
             <p className="max-w-[46ch] text-[15.5px] leading-[1.7] text-black/62">
-              Use Beseam free for 30 days. See what it finds, review the changes
-              it proposes, and decide if it has earned a place in your stack
+              Use Beseam free for 30 days. See what it finds, approve the changes
+              that need your judgment, watch them get applied, and see what moved
               before you pay.
             </p>
           </div>
@@ -112,7 +113,7 @@ export default function FirstMonthPromise({
                 </div>
               </div>
 
-              <ol className="relative mt-7 grid grid-cols-4 gap-2 before:absolute before:left-4 before:right-4 before:top-3.5 before:h-px before:bg-black/12">
+              <ol className="relative mt-7 grid grid-cols-5 gap-2 before:absolute before:left-4 before:right-4 before:top-3.5 before:h-px before:bg-black/12">
                 {GROWTH_STEPS.map(({ label, Icon }) => (
                   <li key={label} className="relative z-10 min-w-0">
                     <span className="flex h-7 w-7 items-center justify-center bg-[#faf1eb] text-signal-ink ring-1 ring-black/12">

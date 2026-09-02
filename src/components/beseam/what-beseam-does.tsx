@@ -224,7 +224,7 @@ const VIGNETTES = [
 
 const LOOP = [
   { label: "Find the opportunity", Icon: Radar },
-  { label: "Propose the fix", Icon: WandSparkles },
+  { label: "Prepare the fix", Icon: WandSparkles },
   { label: "You approve", Icon: CheckCircle2 },
   { label: "Beseam applies it", Icon: Send },
   { label: "Measure and repeat", Icon: RefreshCw },
@@ -241,11 +241,12 @@ export default function WhatBeseamDoes() {
                 From being considered to being chosen
               </p>
               <h2 className="mt-7 max-w-[18ch] text-balance font-display text-[clamp(2.3rem,3.8vw,3.9rem)] font-normal leading-[1.03] tracking-[-0.02em] text-ink-deep">
-                Getting considered is only the start.
+                Being considered doesn’t mean being chosen.
               </h2>
             </div>
             <p className="max-w-[50ch] text-[16px] leading-[1.7] text-black/64">
-              Beseam follows the same shopper decision end to end: see whether you are considered, find what blocks the choice, add useful context, then remeasure the outcome and learn.
+              Beseam follows the shopper from discovery to purchase to find where
+              confidence drops, questions go unanswered, or the journey stops.
             </p>
           </div>
         </Reveal>

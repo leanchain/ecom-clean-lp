@@ -76,11 +76,12 @@ export default function CategoryBenchmarksSection() {
                 AI Shopping Report
               </p>
               <h2 className="mt-6 max-w-[18ch] text-balance font-display text-[clamp(2.2rem,3.6vw,3.6rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
-                Where shoppers ask determines who gets considered.
+                Products can be visible in one place and missed in another.
               </h2>
               <p className="mt-6 max-w-[48ch] text-[16px] leading-[1.7] text-black/64">
-                We ask the same buying questions across AI assistants and record
-                what comes back. In the latest run,{" "}
+                Beseam asks the same buying questions across AI assistants to find
+                where your products appear, where they are missed, and how those
+                results differ. In the latest run,{" "}
                 <strong className="font-semibold text-ink-deep">
                   {SOLO_SHARE}% of brand appearances occurred on only one assistant.
                 </strong>

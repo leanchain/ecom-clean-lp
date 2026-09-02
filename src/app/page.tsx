@@ -9,7 +9,7 @@ import { STORE_HEALTH_FAQS } from "@/lib/store-health-faqs";
 export const metadata: Metadata = buildPublicMetadata({
   title: "Beseam | Find, fix, and measure ecommerce growth",
   description:
-    "Beseam continuously finds the strongest opportunities to improve growth, prepares and executes supported fixes under your rules, and measures what changed.",
+    "Beseam continuously finds the strongest opportunities to improve growth, prepares and applies supported fixes under your rules, and measures what changed.",
   path: "/",
   image: HOME_SOCIAL_IMAGE,
   imageAlt: "Beseam finding, fixing, and measuring ecommerce growth opportunities",
@@ -25,7 +25,7 @@ export default function Home() {
         url: "https://beseam.com/",
         name: "Beseam | Find, fix, and measure ecommerce growth",
         description:
-          "Beseam continuously finds the strongest opportunities to improve growth, prepares and executes supported fixes under your rules, and measures what changed.",
+          "Beseam continuously finds the strongest opportunities to improve growth, prepares and applies supported fixes under your rules, and measures what changed.",
         about: { "@id": "https://beseam.com/#organization" },
         inLanguage: "en",
       },

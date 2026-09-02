@@ -143,11 +143,11 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       "Everything that helps a shopper choose you, connected.",
     metaTitle: "Beseam Platform | Connected Ecommerce Growth",
     description:
-      "Beseam connects discovery, product evidence, shopper behavior, and revenue around the same buying decision, continuously proposing supported changes and measuring what changed.",
+      "Beseam continuously connects discovery, product evidence, shopper behavior, and revenue, finds what is worth improving, applies supported changes under your rules, and measures what changed.",
     intro:
-      "Beseam connects what shoppers see before the visit, what they find on the store, what they do next, and what happened after a change. It keeps that evidence moving through one continuous loop instead of leaving another dashboard to manage.",
+      "Beseam connects what shoppers see before the visit, what they find on the store, what they do next, and what happened after a change. It turns that evidence into prioritized changes and keeps improvement moving through one continuous loop instead of leaving another dashboard to manage.",
     proofLine:
-      "Discovery, products, behavior, actions, and results stay attached to the same buying decision.",
+      "Discovery, products, behavior, changes, and results stay attached to the same buying decision.",
     observationsHeading: "Follow the shopper's decision",
     observationsIntro:
       "Beseam connects the moments where a product gets considered, chosen, purchased, and measured instead of treating each as a separate dashboard.",
@@ -192,10 +192,10 @@ export const MARKETING_PAGES: Record<string, MarketingPageData> = {
       {
         title: "Act on what matters. Learn from what changes.",
         icon: Sparkles,
-        body: "Beseam surfaces the next opportunity and proposes the supported product data, content, merchandising, creative, campaign, or store change. The brand owner approves before a customer-facing change is applied, with the previous state retained. After the action, Beseam checks the relevant discovery, behavior, conversion, order, or revenue signals.",
+        body: "Beseam turns the strongest evidence into a prioritized change to product data, content, merchandising, creative, campaigns, or the store, carries supported changes through approval and application, then checks the relevant discovery, behavior, conversion, order, or revenue signals afterward.",
         points: [
-          "Tie the action to the affected product, page, journey, or opportunity.",
-          "Approve every supported customer-facing store change before it is applied.",
+          "Tie each action to the observed opportunity and affected product, page, or journey.",
+          "Keep the evidence, affected scope, approval, and verification plan attached.",
           "Carry what was learned into the next action.",
         ],
       },

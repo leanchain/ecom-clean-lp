@@ -44,8 +44,9 @@ export default function ProductionHomepage() {
                 <span className="text-signal-ink">choose you</span>.
               </h1>
               <p className="pointer-events-auto mx-auto mt-6 max-w-[64ch] text-[17px] leading-[1.7] text-black/64 sm:text-[18px]">
-                Beseam watches AI discovery, your store, shopper behavior, and
-                revenue to find what is worth improving next.
+                Beseam continuously watches AI discovery, your store, shopper
+                behavior, and revenue to find what is worth improving, make
+                approved changes, and measure what changed.
               </p>
               <div className="pointer-events-auto mx-auto mt-9 w-full">
                 <LiveAnswerCheck
@@ -80,11 +81,11 @@ export default function ProductionHomepage() {
       </section>
 
       <CredibilityRail />
+      <CategoryBenchmarksSection />
       <ConnectedEvidence />
       <WhatBeseamDoes />
       <EvidenceToWork />
       <MeasureImpact />
-      <CategoryBenchmarksSection />
       <FirstMonthPromise />
     </div>
   );

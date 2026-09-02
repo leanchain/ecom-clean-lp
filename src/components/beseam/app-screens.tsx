@@ -28,7 +28,7 @@ const QUEUE_ROWS = [
     priority: "High",
     effort: "Quick",
     impact: "$$$$$",
-    step: "Review",
+    step: "Needs approval",
     lead: true,
   },
   {
@@ -37,7 +37,7 @@ const QUEUE_ROWS = [
     priority: "Medium",
     effort: "Quick",
     impact: "$$$",
-    step: "Review",
+    step: "In motion",
     lead: false,
   },
   {
@@ -46,7 +46,7 @@ const QUEUE_ROWS = [
     priority: "Low",
     effort: "Quick",
     impact: "$",
-    step: "Queue",
+    step: "Measuring",
     lead: false,
   },
 ] as const;
@@ -104,14 +104,14 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
         <div className="flex items-center justify-between gap-4 border-b border-black/12 bg-ground px-3 py-2.5">
           <p className="text-[13px] font-semibold text-ink-deep">Growth plan</p>
           <p className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/46">
-            3 opportunities
+            3 changes · 2 moving
           </p>
         </div>
         <div className="grid grid-cols-[minmax(0,1fr)_4.25rem_4rem_4.5rem] gap-2 border-b border-black/12 px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-black/46">
-          <span>Proposed fix</span>
+          <span>Opportunity and change</span>
           <span>Priority</span>
           <span>Effort</span>
-          <span>Next</span>
+          <span>Status</span>
         </div>
         {QUEUE_ROWS.map((row) => (
           <div
@@ -148,7 +148,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
 
   return (
     <div className="border border-black/16 bg-white">
-      <ScreenChrome title="Growth plan" meta="Illustrative · 3 opportunities" />
+      <ScreenChrome title="Growth plan" meta="Illustrative · changes in progress" />
 
       <div className="relative overflow-x-auto">
         <div className="min-w-[58rem]">
@@ -160,7 +160,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
             }}
           >
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
-              Opportunity and prepared fix
+              Opportunity and change
             </p>
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
               Priority
@@ -172,7 +172,7 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
               Impact
             </p>
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-black/50">
-              Next step
+              Status
             </p>
           </div>
 
@@ -236,8 +236,8 @@ export function ActionsScreen({ compact = false }: { compact?: boolean } = {}) {
       </div>
 
       <p className="border-t border-black/12 bg-ground px-4 py-2.5 text-[11px] leading-[1.5] text-black/54 sm:px-5">
-        Every opportunity keeps its evidence, owner, approval state, commercial
-        impact tier, and proof plan attached.
+        Every change keeps its evidence, owner, status, commercial impact tier,
+        and proof plan attached.
       </p>
     </div>
   );

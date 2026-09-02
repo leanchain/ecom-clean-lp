@@ -19,13 +19,12 @@ export default function EvidenceToWork() {
                 From evidence to action
               </p>
               <h2 className="mt-6 max-w-[11ch] text-balance font-display text-[clamp(2.2rem,3.3vw,3.4rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
-                Beseam finds what to improve next.
+                Find the improvement. Make the change.
               </h2>
-              <p className="mt-5 max-w-[29ch] text-[15px] leading-[1.7] text-black/62">
-                The strongest evidence becomes a supported change with its proof
-                plan still attached.
+              <p className="mt-5 max-w-[31ch] text-[15px] leading-[1.7] text-black/62">
+                Beseam turns the strongest evidence into a specific change,
+                gets your approval, applies it, and checks what changed afterward.
               </p>
-
               <div className="mt-7 flex gap-3 border-l-2 border-signal-ink pl-4">
                 <ShieldCheck
                   className="mt-0.5 h-4 w-4 shrink-0 text-signal-ink"
@@ -49,7 +48,7 @@ export default function EvidenceToWork() {
                   Merchant view
                 </p>
                 <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-signal-ink">
-                  Evidence → approval → verification
+                  Evidence → change → apply → measure
                 </p>
               </div>
               <div className="sm:hidden">

@@ -11,7 +11,7 @@ import { buildPublicMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPublicMetadata({
   title: "How Beseam Works for Commerce Teams",
   description:
-    "Beseam continuously finds commerce growth opportunities, proposes supported fixes for brand-owner approval, makes approved changes, and measures what changes.",
+    "Beseam continuously finds commerce growth opportunities, prepares supported changes for your approval, applies approved changes, and measures what changed.",
   path: "/how-we-work",
 });
 
@@ -32,16 +32,16 @@ const LOOP = [
 
 const RESPONSIBILITIES = [
   {
-    yours: "Commercial context and priorities",
+    yours: "Commercial goals, constraints, and priorities",
     ours: "Continuously find the strongest opportunities across discovery, store, behavior, and revenue.",
   },
   {
     yours: "Brand and operational judgment Beseam cannot infer",
-    ours: "Use that context to propose supported changes instead of generic recommendations.",
+    ours: "Use the evidence and your context to prepare supported changes with the reason and proof plan attached.",
   },
   {
     yours: "Approve every customer-facing change",
-    ours: "Apply the approved change, recheck what changed, and keep the loop moving.",
+    ours: "Apply approved changes, verify them, and carry what changed into the next cycle.",
   },
 ] as const;
 
@@ -62,9 +62,9 @@ export default function HowWeWorkPage() {
               </div>
               <div>
                 <p className="max-w-[52ch] text-[18px] leading-[1.7] text-black/66">
-                  Beseam continuously finds growth opportunities and proposes
-                  supported fixes. You approve before anything customer-facing
-                  changes; Beseam applies it and measures what changed.
+                  You set the goals and constraints. Beseam continuously finds
+                  what is worth improving, prepares supported changes, applies
+                  approved changes, and measures what changed.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-4">
                   <BookReviewCta
@@ -106,8 +106,8 @@ export default function HowWeWorkPage() {
               <div>
                 <p className="max-w-[64ch] text-[17px] leading-[1.75] text-white/68">
                   Beseam stays in motion: observe what is happening, understand
-                  the strongest opportunity, propose the supported change, get
-                  your approval, make it, then learn from what moved next.
+                  the strongest opportunity, prepare the supported change, get
+                  your approval, apply it, then learn from what moved next.
                 </p>
                 <ol className="mt-10 grid border-t border-white/16 md:grid-cols-4">
                   {LOOP.map(([number, title, body], index) => (
@@ -145,8 +145,8 @@ export default function HowWeWorkPage() {
                   Beseam keeps moving. Nothing changes without your approval.
                 </h2>
                 <p className="mt-5 max-w-[36ch] text-[15px] leading-[1.7] text-black/60">
-                  Commerce and growth teams provide the context, constraints,
-                  and judgment Beseam cannot infer. The loop keeps running
+                  Commerce and growth teams provide the goals, constraints, and
+                  judgment Beseam cannot infer. Beseam keeps the loop moving
                   without becoming another workstream to manage.
                 </p>
               </div>
@@ -205,7 +205,7 @@ export default function HowWeWorkPage() {
                   href="/platform"
                   className="mt-6 inline-flex min-h-10 items-center gap-2 text-[14px] font-semibold text-ink-deep underline decoration-black/25 underline-offset-6 hover:decoration-signal-ink"
                 >
-                  See how the work is tracked
+                  See how changes are tracked
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </article>

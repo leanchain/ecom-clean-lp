@@ -242,9 +242,11 @@ function MobileTrace() {
             <StepLabel>What happens next</StepLabel>
           </div>
           <div className="mt-3 flex items-center gap-2 text-[11px] font-semibold text-white/80">
-            <span>Propose fix</span>
+            <span>Prepare fix</span>
             <ArrowRight className="h-3 w-3 shrink-0 text-signal" aria-hidden="true" />
             <span>You approve</span>
+            <ArrowRight className="h-3 w-3 shrink-0 text-signal" aria-hidden="true" />
+            <span>Beseam applies it</span>
             <ArrowRight className="h-3 w-3 shrink-0 text-signal" aria-hidden="true" />
             <span>Remeasure</span>
           </div>
@@ -276,15 +278,15 @@ export default function ConnectedEvidence() {
                 See Beseam work
               </p>
               <h2 className="mt-7 max-w-[16ch] text-balance font-display text-[clamp(2.25rem,3.4vw,3.5rem)] font-normal leading-[1.05] tracking-[-0.02em]">
-                One shopper question, followed end to end.
+                See what gets in the way of the choice.
               </h2>
             </div>
             <div className="max-w-[50ch] text-[16px] leading-[1.75] text-white/72">
               <p>
-                Follow a commuting-jacket question from the shopper signal to
-                the explanations Beseam checks. The strongest evidence then
-                becomes a supported fix, and the same path is measured again
-                after the change ships.
+                Beseam connects what the shopper did with product, search, and
+                availability evidence, rules out weaker explanations, then turns
+                the strongest supported finding into a change you can approve
+                and remeasure.
               </p>
             </div>
           </div>

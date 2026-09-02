@@ -107,9 +107,9 @@ function ActVignette() {
     <Panel>
       {(
         [
-          ["P0", "Add commuting use case", "Review", true],
-          ["P1", "Explain fit over layers", "Review", false],
-          ["P2", "Recheck commuter queries", "Queue", false],
+          ["P0", "Add commuting use case", "Approve", true],
+          ["P1", "Explain fit over layers", "In motion", false],
+          ["P2", "Recheck commuter queries", "Measuring", false],
         ] as const
       ).map(([priority, task, step, lead]) => (
         <div key={task} className="flex items-center gap-2">

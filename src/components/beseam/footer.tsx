@@ -55,8 +55,9 @@ export default function BeseamFooter() {
               <span className="text-signal">find, choose, and buy</span>.
             </p>
             <p className="mt-6 max-w-[54ch] text-[14px] leading-relaxed text-white/62">
-              Beseam runs one continuous growth loop across discovery, product
-              choice, conversion, action, and results.
+              Beseam continuously watches the buying journey, finds what is worth
+              improving, applies approved changes where supported, and measures
+              what changed.
             </p>
           </div>
 

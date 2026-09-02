@@ -19,7 +19,7 @@ export default function MeasureImpact() {
                 It only matters if the outcome moves.
               </h2>
               <p className="mt-5 max-w-[32ch] text-[14.5px] leading-[1.7] text-white/64">
-                Beseam reruns the original signal and keeps the before, after, and commercial result attached to the approved change.
+                After a change, Beseam checks the same shopper signal alongside behavior, conversion, orders, or revenue to see whether anything actually improved.
               </p>
             </div>
             <ImpactScreen />
