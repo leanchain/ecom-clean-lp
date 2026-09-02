@@ -16,7 +16,10 @@ export type Finding = {
   product: string | null;
   severity?: "blocker" | "high" | "medium" | "low" | "info";
   domain?: string;
+  /** The page this was read from. */
   url?: string;
+  /** The catalog record the claim was compared against. */
+  catalog_url?: string;
   evidence?: string[];
   fix_complexity?: string;
   source?: "catalog" | "catalog_sample" | "page_audit";
@@ -214,12 +217,7 @@ export type AnswerCheckResult = {
   brand_evidence?: BrandEvidence;
   page_audits?: PageAudit[];
   page_audits_status?:
-    | "not_started"
-    | "queued"
-    | "running"
-    | "complete"
-    | "failed"
-    | string;
+    "not_started" | "queued" | "running" | "complete" | "failed" | string;
   site_inventory?: SiteInventory;
   catalog_inventory?: CatalogInventory;
 };

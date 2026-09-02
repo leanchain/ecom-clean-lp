@@ -35,6 +35,7 @@ import { ChannelIcon } from "@/components/beseam/channel-icon";
 import TrackedLink from "@/components/beseam/tracked-link";
 import useAnalytics from "@/hooks/useAnalytics";
 import { APP_REGISTER_URL, APP_REPORT_URL } from "@/lib/app-urls";
+import { fixExampleFor } from "@/components/beseam/fix-examples";
 
 export type { AnswerCheckResult };
 
@@ -501,15 +502,21 @@ function FindingRow({
   group,
   index,
   reportIdByUrl,
+  exampleContext,
 }: {
   group: FindingGroupRow;
   index: number;
   reportIdByUrl: Map<string, number>;
+  exampleContext: Parameters<typeof fixExampleFor>[1];
 }) {
   const finding = group.lead;
   const priority = priorityOf(finding);
   const why = findingWhy(finding);
   const nextStep = findingNextStep(finding);
+  const example = fixExampleFor(finding.code, {
+    ...exampleContext,
+    product: finding.product ?? exampleContext.product,
+  });
 
   return (
     <li className="border-b border-black/12 last:border-b-0">
@@ -564,6 +571,19 @@ function FindingRow({
                   {nextStep}
                 </p>
               ) : null}
+              {example ? (
+                <div className="mt-4 max-w-[68ch]">
+                  <p className="text-[12.5px] leading-relaxed text-black/60">
+                    {example.caption}
+                  </p>
+                  <p className="mt-1 text-[11.5px] text-black/44">
+                    {example.placement}
+                  </p>
+                  <pre className="mt-2 overflow-x-auto border border-black/12 bg-white px-3 py-2.5 font-mono text-[11px] leading-[1.55] text-ink-deep">
+                    {example.code}
+                  </pre>
+                </div>
+              ) : null}
             </div>
 
             <div className="border-t border-black/10 pt-4 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
@@ -603,6 +623,29 @@ function FindingRow({
                       <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-black/42">
                         {member.product ? <span>{member.product}</span> : null}
                         <span className="font-mono">{member.code}</span>
+                        {/* Where we saw it. A finding that names a product and
+                            gives nothing to click sends the merchant hunting for
+                            the origin of a claim we already know the source of. */}
+                        {member.url ? (
+                          <a
+                            href={member.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-semibold text-black/56 underline decoration-black/20 underline-offset-4 hover:text-ink-deep hover:decoration-signal-ink"
+                          >
+                            See the page →
+                          </a>
+                        ) : null}
+                        {member.catalog_url ? (
+                          <a
+                            href={member.catalog_url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-semibold text-black/56 underline decoration-black/20 underline-offset-4 hover:text-ink-deep hover:decoration-signal-ink"
+                          >
+                            See the catalog data →
+                          </a>
+                        ) : null}
                         {member.url && reportId ? (
                           <a
                             href={`${APP_REPORT_URL}/${reportId}`}
@@ -611,15 +654,6 @@ function FindingRow({
                             className="font-semibold text-ink-deep underline decoration-black/24 underline-offset-4 hover:decoration-signal-ink"
                           >
                             Full page report →
-                          </a>
-                        ) : member.url ? (
-                          <a
-                            href={member.url}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="font-semibold text-black/56 underline decoration-black/20 underline-offset-4 hover:text-ink-deep hover:decoration-signal-ink"
-                          >
-                            Open the page →
                           </a>
                         ) : null}
                       </p>
@@ -635,12 +669,36 @@ function FindingRow({
   );
 }
 
+// "Why would I publish a /SKILL.md file?" is a fair question and the report never
+// answered it. Each file gets a plain sentence naming who reads it. All four are
+// young conventions; saying so is more useful than implying a gap.
+const DISCOVERY_FILE_NOTES: Record<string, string> = {
+  "/llms.txt":
+    "A short summary of your store for AI assistants that look for one. Optional.",
+  "/agents.md":
+    "Notes for AI agents browsing your store on a shopper's behalf. Optional.",
+  "/SKILL.md":
+    "Describes what an assistant can do on your store, in a format some AI tools read. Very new and optional — skip it unless you already work with AI agents.",
+  "/.well-known/ucp":
+    "A machine-readable card describing your store for commerce agents. Optional.",
+};
+
 const FIRST_SHOWN = 4;
 
 function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
   const [expanded, setExpanded] = useState(false);
   const findings = groupFindings(sortedFindings(result));
   const audits = result.page_audits ?? [];
+  // The store's own details, so a worked example reads as theirs rather than as
+  // documentation they have to translate. Currency is not in this payload, so the
+  // snippet marks it for the merchant to set rather than guessing a wrong one.
+  const exampleContext = {
+    brand: result.brand ?? result.domain,
+    product: (result.page_audits ?? [])[0]?.title ?? null,
+    country: result.brand_evidence?.market ?? null,
+    currency: null,
+    image: null,
+  };
   const pageStatus =
     result.page_audits_status ?? (audits.length ? "complete" : "not_started");
   const pagesInFlight = pageStatus === "queued" || pageStatus === "running";
@@ -681,6 +739,7 @@ function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
                 group={group}
                 index={index}
                 reportIdByUrl={reportIdByUrl}
+                exampleContext={exampleContext}
               />
             ))}
           </ol>
@@ -1498,7 +1557,14 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
                       key={String(label)}
                       className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 px-3 py-2.5"
                     >
-                      <dt className="text-[11px] text-black/50">{label}</dt>
+                      <dt className="text-[11px] text-black/50">
+                        {label}
+                        {DISCOVERY_FILE_NOTES[String(label)] ? (
+                          <span className="mt-0.5 block text-[10.5px] leading-snug text-black/38">
+                            {DISCOVERY_FILE_NOTES[String(label)]}
+                          </span>
+                        ) : null}
+                      </dt>
                       <dd
                         className={`text-right text-[11px] font-semibold ${warn ? "text-signal-ink" : "text-ink-deep"}`}
                       >
@@ -1515,12 +1581,15 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
                 ) : null}
                 {discoveryFiles.length ? (
                   <p className="mt-2 text-[11px] leading-relaxed text-black/42">
-                    The files above with a leading slash are optional text files
-                    at the root of your domain that tell crawlers and AI
-                    assistants where to look. {discoveryFilesPresent} of{" "}
-                    {discoveryFiles.length} are published. None is required, and
-                    a missing one is not a fault — publishing them is a way to
-                    be read more reliably by assistants that look for them.
+                    Those four are emerging conventions for telling AI
+                    assistants what your store is and how to use it.{" "}
+                    {discoveryFilesPresent} of {discoveryFiles.length} are
+                    published. <strong>None of them is required</strong>, none
+                    is known to affect how you rank in search today, and a
+                    missing one is not a fault. We report them because the
+                    stores that publish them are easier for assistants to read
+                    correctly — not because you are doing anything wrong without
+                    them.
                   </p>
                 ) : null}
               </div>
