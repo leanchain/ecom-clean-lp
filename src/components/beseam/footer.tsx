@@ -12,6 +12,14 @@ const FOOTER_GROUPS = [
     ],
   },
   {
+    label: "AI shopping agents",
+    links: [
+      ["AI shopping data", "/data"],
+      ["For shopping agents", "/agents"],
+      ["AI Shopping Report", "/benchmarks"],
+    ],
+  },
+  {
     label: "Company",
     links: [
       ["How we work", "/how-we-work"],
@@ -22,10 +30,7 @@ const FOOTER_GROUPS = [
   },
   {
     label: "Fieldbook",
-    links: [
-      ["Fieldbook", "/resources"],
-      ["AI Shopping Report", "/benchmarks"],
-    ],
+    links: [["Fieldbook", "/resources"]],
   },
 ] as const;
 
@@ -62,8 +67,8 @@ export default function BeseamFooter() {
           </div>
 
           <div
-            className="grid w-full grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3 sm:gap-x-8"
-            style={{ maxWidth: "40rem", marginLeft: "auto" }}
+            className="grid w-full grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-4 sm:gap-x-8"
+            style={{ maxWidth: "48rem", marginLeft: "auto" }}
           >
             {FOOTER_GROUPS.map((group) => (
               <nav key={group.label} aria-label={group.label}>
