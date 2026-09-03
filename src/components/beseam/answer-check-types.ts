@@ -5,6 +5,8 @@ export type Step = {
   label: string;
   state: StepState;
   detail: string | null;
+  /** Countable progress within this step (e.g. product pages checked so far). */
+  progress?: { done: number; total: number } | null;
 };
 
 export type Finding = {
@@ -212,12 +214,16 @@ export type AnswerCheckResult = {
   steps: Step[];
   findings: Finding[];
   questions: string[];
+  /** ISO 639-1 code the questions were written in — "en" for cached rows from
+   *  before this field existed. */
+  questions_language?: string | null;
   answers: Answer[];
   products_seen: number;
   brand_evidence?: BrandEvidence;
   page_audits?: PageAudit[];
   page_audits_status?:
     "not_started" | "queued" | "running" | "complete" | "failed" | string;
+  page_audits_total?: number;
   site_inventory?: SiteInventory;
   catalog_inventory?: CatalogInventory;
 };

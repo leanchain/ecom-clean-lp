@@ -218,9 +218,27 @@ function marketLabel(result: AnswerCheckResult): string | null {
       if (name && !languages.includes(name)) languages.push(name);
     }
   }
+  // Locale-prefixed URLs (/de/, /fr-ch/) are the strongest signal but plenty of
+  // single-language stores (a .ch store that just serves German at the root,
+  // no /de/ prefix) publish none. The language the buying questions were
+  // actually written in is a second, always-available signal for the same
+  // fact, so it fills this in rather than leaving the identity line silent.
+  if (!languages.length && result.questions_language) {
+    const name = LANGUAGE_NAMES[result.questions_language.toLowerCase()];
+    if (name) languages.push(name);
+  }
   const spoken = languages.slice(0, 3).join(" · ");
   if (!market && !spoken) return null;
   return [market, spoken].filter(Boolean).join(" · ");
+}
+
+// English is the unmarked default — only non-English gets a badge, so the
+// common case stays quiet instead of labeling every result "English".
+function questionLanguageBadge(code: string | null | undefined): string | null {
+  if (!code) return null;
+  const lower = code.toLowerCase();
+  if (lower === "en") return null;
+  return LANGUAGE_NAMES[lower] ?? code.toUpperCase();
 }
 
 function countLabel(count: number, noun: string) {
@@ -398,6 +416,29 @@ function ScanProgress({
                 <p className="mt-0.5 text-[12.5px] leading-relaxed text-black/54">
                   {step.detail}
                 </p>
+              ) : null}
+              {step.state === "active" &&
+              step.progress &&
+              step.progress.total > 0 ? (
+                <div
+                  className="mt-1.5 h-1 w-full max-w-[220px] overflow-hidden rounded-full bg-black/10"
+                  role="progressbar"
+                  aria-valuenow={step.progress.done}
+                  aria-valuemin={0}
+                  aria-valuemax={step.progress.total}
+                  aria-label={`${step.progress.done} of ${step.progress.total}`}
+                >
+                  <div
+                    className="h-full rounded-full bg-[#1a6b43] transition-[width] duration-500 ease-out"
+                    style={{
+                      width: `${Math.round(
+                        (Math.min(step.progress.done, step.progress.total) /
+                          step.progress.total) *
+                          100,
+                      )}%`,
+                    }}
+                  />
+                </div>
               ) : null}
             </div>
           </li>
@@ -811,8 +852,8 @@ function ContinuePaths({
         </h3>
         <p className="mt-2.5 max-w-[46ch] text-[14px] leading-[1.62] text-white/64">
           Connect your store and Beseam checks these against your real catalog,
-          shows what to fix first, prepares the changes, and asks for your approval
-          before anything customer-facing changes.
+          shows what to fix first, prepares the changes, and asks for your
+          approval before anything customer-facing changes.
         </p>
         <div className="mt-5 grid gap-2 text-[12.5px] sm:grid-cols-2">
           <div className="border border-white/16 px-3 py-2.5">
@@ -2323,9 +2364,16 @@ function VisibilityDisclosure({ result }: { result: AnswerCheckResult }) {
           ) : null}
 
           <div className="border-t border-black/12">
-            <p className="px-4 pb-1 pt-4 text-[12px] font-semibold text-black/62 sm:px-5">
-              Open a question to see what each assistant answered
-            </p>
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-4 pb-1 pt-4 sm:px-5">
+              <p className="text-[12px] font-semibold text-black/62">
+                Open a question to see what each assistant answered
+              </p>
+              {questionLanguageBadge(result.questions_language) ? (
+                <span className="shrink-0 rounded-full border border-black/16 px-2 py-0.5 text-[10.5px] font-medium text-black/58">
+                  Asked in {questionLanguageBadge(result.questions_language)}
+                </span>
+              ) : null}
+            </div>
             <ul>
               {rows.map((row) => (
                 <QuestionRow
