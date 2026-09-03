@@ -320,10 +320,15 @@ export function FreeScanPromise({ compact = false }: { compact?: boolean }) {
         </h2>
         <p className="text-[13px] text-black/56">Usually about a minute.</p>
       </div>
+      {/* The kind of assessment, and the one it is not. A merchant who types a
+          domain expecting keyword analysis has to be able to correct that here,
+          before the findings arrive and do it for us. */}
       <p className="mt-2 max-w-[62ch] text-[14.5px] leading-[1.65] text-black/68">
-        We read your public storefront and show you where shoppers may lose you,
-        what makes products harder to choose or buy, and what is worth improving
-        first.
+        A technical discoverability read of your public storefront: what search
+        engines and AI assistants can see in your product pages, catalog data
+        and site signals, and what is worth improving first. It is not a keyword
+        report — search demand is not measured, and shopper questions come after
+        this, not in it.
       </p>
 
       <ul className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -435,17 +440,37 @@ function ScanProgress({
   const visible = steps.filter((step) => step.state !== "skipped");
   if (!visible.length) return null;
 
+  // Position inside the very list rendered below — no second progress model.
+  // The active step when there is one; otherwise the next step not yet done, so
+  // a list caught between states still reads as somewhere rather than nowhere.
+  const activeIndex = visible.findIndex((step) => step.state === "active");
+  const doneCount = visible.filter((step) => step.state === "done").length;
+  const position = Math.min(
+    activeIndex >= 0 ? activeIndex + 1 : doneCount + 1,
+    visible.length,
+  );
+
   return (
     <section
       aria-live="polite"
       className="mx-auto w-full max-w-3xl border border-black/18 bg-white px-5 py-5 text-left sm:px-6"
     >
-      <h3 className="text-[15px] font-semibold tracking-[-0.01em] text-ink-deep">
+      {/* The mode, held in place for the whole run. Without it the step labels
+          are the only clue to what kind of assessment this is, and they read
+          equally well as the start of a keyword report. */}
+      <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-black/44">
+        Technical discoverability · step {position} of {visible.length}
+      </p>
+      <h3 className="mt-1.5 text-[15px] font-semibold tracking-[-0.01em] text-ink-deep">
         {domain ? `Reading ${domain}` : "Reading your storefront"}
       </h3>
       <p className="mt-1 text-[13px] leading-relaxed text-black/56">
         Results appear below as soon as each part is done. You do not have to
         wait for all of it.
+      </p>
+      <p className="mt-1.5 text-[12.5px] leading-relaxed text-black/50">
+        Shopper questions come after this, and tracking them over time happens
+        inside Beseam.
       </p>
       <ol className="mt-4 space-y-3">
         {visible.map((step) => (
@@ -869,6 +894,112 @@ function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
 // pages only, no login, no store access) and the standing line above the list
 // — “Read as possibilities, not verdicts … it cannot prove what it costs you.”
 
+// ── Where the scan stops, and what continues ────────────────────────────────
+// Every line here is checkable against what actually ran. The public probe
+// fetches the storefront over plain HTTPS and samples five product pages
+// (`storefront.probe_storefront`); the page checks are deterministic, with the
+// analyzer's AI nodes left unevaluated (`page_audit.py`); one row per domain is
+// overwritten on each submission, so there is no history to compare against.
+// The Beseam column is the product's own behavior: questions a merchant edits
+// in setup, the daily visibility cycle, the raw channel answer kept on the run,
+// the ranked action queue, and the post-publish recheck of the same questions.
+function ScanBoundary({ result }: { result: AnswerCheckResult }) {
+  const sampledPages = (result.page_audits ?? []).length;
+  const asked = result.answers.some((answer) => answer.mentioned !== null);
+
+  const columns: Array<{
+    label: string;
+    tone: "did" | "not" | "next";
+    items: string[];
+  }> = [
+    {
+      label: "What this scan did",
+      tone: "did",
+      items: [
+        "Read your public storefront the way any visitor can — no login, no store access.",
+        sampledPages
+          ? `Ran the page checks over ${countLabel(sampledPages, "product page")}, plus your robots file, sitemap and crawler access.`
+          : "Ran the page checks over a sample of your product pages, plus your robots file, sitemap and crawler access.",
+        "Compared your catalog data against what each page actually renders — names, prices, availability.",
+      ],
+    },
+    {
+      label: "What it did not do",
+      tone: "not",
+      items: [
+        asked
+          ? "Keep asking. The assistant answers above were sampled once, on this run."
+          : "Ask ChatGPT or Google AI Mode anything about your products. Nothing here is a live assistant answer.",
+        "Repeat on its own. A public scan has no schedule behind it.",
+        "Keep a history. There is no earlier run to compare this against.",
+      ],
+    },
+    {
+      label: "What starts in Beseam",
+      tone: "next",
+      items: [
+        "Shopper questions you read and edit before any of them run.",
+        "Those questions asked on a schedule instead of once.",
+        "The answers kept as evidence, with the date they were given.",
+        "Fixes ordered by what is worth doing first.",
+        "The same questions asked again after a change, so you can see what moved.",
+      ],
+    },
+  ];
+
+  return (
+    <section className="border-b border-black/14 bg-white">
+      <div className="border-b border-black/12 px-5 py-5 sm:px-6">
+        <h3 className="text-[19px] font-semibold tracking-[-0.02em] text-ink-deep">
+          Where this scan stops
+        </h3>
+        <p className="mt-1.5 max-w-[70ch] text-[13.5px] leading-relaxed text-black/60">
+          A public scan can only reach so far. This is exactly how far it went,
+          and what continues after it.
+        </p>
+      </div>
+      <div className="grid md:grid-cols-3">
+        {columns.map((column) => (
+          <div
+            key={column.label}
+            className="border-b border-black/12 px-5 py-5 last:border-b-0 sm:px-6 md:border-b-0 md:border-r md:last:border-r-0"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-black/42">
+              {column.label}
+            </p>
+            <ul className="mt-3 space-y-2.5">
+              {column.items.map((item) => (
+                <li
+                  key={item}
+                  className="flex max-w-[46ch] items-start gap-2.5 text-[13px] leading-[1.55] text-black/68"
+                >
+                  {column.tone === "did" ? (
+                    <Check
+                      aria-hidden="true"
+                      className="mt-[3px] h-3.5 w-3.5 shrink-0 text-[#1f7a4d]"
+                    />
+                  ) : column.tone === "not" ? (
+                    <X
+                      aria-hidden="true"
+                      className="mt-[3px] h-3.5 w-3.5 shrink-0 text-black/34"
+                    />
+                  ) : (
+                    <ArrowRight
+                      aria-hidden="true"
+                      className="mt-[3px] h-3.5 w-3.5 shrink-0 text-signal-ink"
+                    />
+                  )}
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // ── Two distinct ways forward ───────────────────────────────────────────────
 
 function ContinuePaths({
@@ -883,10 +1014,10 @@ function ContinuePaths({
   const opportunityCount = groupFindings(sortedFindings(result)).length;
 
   return (
-    // Two offers, two grounds. Self-serve stays on the product's own ink; the
-    // engagement sits on the pigment, which is the only ground the bright
-    // signal is cleared to sit on — so the emphasised path is emphasised by
-    // the palette rather than by a bigger button.
+    // Two offers, two grounds. The upgrade — the same checks kept running — is
+    // the primary path and takes the one solid button; the assisted review keeps
+    // the pigment ground but takes the outlined treatment, so the ranking is
+    // carried by weight instead of by two solid buttons competing.
     <section
       data-print-hide
       className="grid border-t border-black/18 text-white lg:grid-cols-2"
@@ -896,13 +1027,17 @@ function ContinuePaths({
           {opportunityCount}{" "}
           {opportunityCount === 1 ? "opportunity" : "opportunities"} found
         </p>
-        <h3 className="mt-2 text-[19px] font-semibold tracking-[-0.02em]">
-          Keep Beseam watching after the scan
+        {/* The one line the product owner wants carrying this moment. It sits
+            with the primary CTA so the upgrade is read as the reason to start,
+            not as a second offer. */}
+        <h3 className="mt-2 max-w-[28ch] text-[19px] font-semibold leading-[1.3] tracking-[-0.02em]">
+          This scan reads your store once. Beseam keeps checking, and proves
+          what changed.
         </h3>
         <p className="mt-2.5 max-w-[46ch] text-[14px] leading-[1.62] text-white/64">
           Connect your store and Beseam checks these against your real catalog,
-          shows what to fix first, prepares the changes, and asks for your
-          approval before anything customer-facing changes.
+          prepares the changes, and asks for your approval before anything
+          customer-facing changes.
         </p>
         <div className="mt-5 grid gap-2 text-[12.5px] sm:grid-cols-2">
           <div className="border border-white/16 px-3 py-2.5">
@@ -924,9 +1059,9 @@ function ContinuePaths({
           eventCategory="conversion"
           placement="answer_check_result"
           preserveUtm
-          className="group mt-6 inline-flex min-h-12 items-center justify-center gap-2 border border-white/30 px-6 text-[14px] font-semibold text-white transition-colors hover:bg-white hover:text-ink-deep"
+          className="group mt-6 inline-flex min-h-12 items-center justify-center gap-2 bg-white px-6 text-[14px] font-semibold text-ink-deep transition-colors hover:bg-signal hover:text-ink-deep"
         >
-          Connect my store
+          Start ongoing checks
           <ArrowRight
             aria-hidden="true"
             className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
@@ -954,7 +1089,7 @@ function ContinuePaths({
           variant="primary"
           location="scan_result_managed"
           label="See Beseam on my store"
-          className="mt-6 min-h-12 gap-2 bg-white px-6 py-0 text-[14px] font-semibold text-ink-deep hover:bg-signal hover:text-ink-deep"
+          className="mt-6 min-h-12 gap-2 border border-white/45 bg-transparent px-6 py-0 text-[14px] font-semibold text-white hover:bg-white hover:text-ink-deep"
         />
       </div>
     </section>
@@ -2739,6 +2874,10 @@ export function ResultCard({
           ) : null}
 
           <InitialScanSummary result={result} />
+
+          {/* Prints with the report: the scope of a finding list is part of the
+              finding list, not a sales aside. */}
+          <ScanBoundary result={result} />
 
           {continueHref ? (
             <ContinuePaths result={result} continueHref={continueHref} />

@@ -19,11 +19,12 @@ export default function EvidenceToWork() {
                 From finding to change
               </p>
               <h2 className="mt-6 max-w-[11ch] text-balance font-display text-[clamp(2.2rem,3.3vw,3.4rem)] font-normal leading-[1.04] tracking-[-0.02em] text-ink-deep">
-                Find the improvement. Make the change.
+                Beseam finds what to improve next.
               </h2>
               <p className="mt-5 max-w-[31ch] text-[15px] leading-[1.7] text-black/62">
                 Beseam takes the strongest finding, shows the change to make,
-                gets your approval, applies it, and checks what happened afterward.
+                gets your approval, applies it, and checks what happened
+                afterward.
               </p>
               <div className="mt-7 flex gap-3 border-l-2 border-signal-ink pl-4">
                 <ShieldCheck
