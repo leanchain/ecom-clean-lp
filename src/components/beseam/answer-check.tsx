@@ -232,13 +232,16 @@ function marketLabel(result: AnswerCheckResult): string | null {
   return [market, spoken].filter(Boolean).join(" · ");
 }
 
-// English is the unmarked default — only non-English gets a badge, so the
-// common case stays quiet instead of labeling every result "English".
-function questionLanguageBadge(code: string | null | undefined): string | null {
-  if (!code) return null;
-  const lower = code.toLowerCase();
-  if (lower === "en") return null;
-  return LANGUAGE_NAMES[lower] ?? code.toUpperCase();
+// Language and country the questions were actually written for, together —
+// always shown, English included: a quiet default is still a fact the
+// merchant did not have to infer for themselves.
+function questionLanguageBadge(result: AnswerCheckResult): string | null {
+  const code = result.questions_language;
+  const language = code
+    ? (LANGUAGE_NAMES[code.toLowerCase()] ?? code.toUpperCase())
+    : null;
+  const country = result.brand_evidence?.market ?? null;
+  return [language, country].filter(Boolean).join(" · ") || null;
 }
 
 function countLabel(count: number, noun: string) {
@@ -2368,9 +2371,9 @@ function VisibilityDisclosure({ result }: { result: AnswerCheckResult }) {
               <p className="text-[12px] font-semibold text-black/62">
                 Open a question to see what each assistant answered
               </p>
-              {questionLanguageBadge(result.questions_language) ? (
+              {questionLanguageBadge(result) ? (
                 <span className="shrink-0 rounded-full border border-black/16 px-2 py-0.5 text-[10.5px] font-medium text-black/58">
-                  Asked in {questionLanguageBadge(result.questions_language)}
+                  Asked in {questionLanguageBadge(result)}
                 </span>
               ) : null}
             </div>
