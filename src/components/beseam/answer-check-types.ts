@@ -215,8 +215,12 @@ export type AnswerCheckResult = {
   findings: Finding[];
   questions: string[];
   /** ISO 639-1 code the questions were written in — "en" for cached rows from
-   *  before this field existed. */
+   *  before this field existed. Interpreted from the crawled site's own
+   *  locale-prefixed URLs when it has any; the domain's ccTLD otherwise. */
   questions_language?: string | null;
+  /** ISO 3166-1 alpha-2 code for the same market, same source and same
+   *  fallback order as `questions_language`. */
+  questions_country?: string | null;
   answers: Answer[];
   products_seen: number;
   brand_evidence?: BrandEvidence;

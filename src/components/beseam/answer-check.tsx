@@ -209,6 +209,44 @@ const LANGUAGE_NAMES: Record<string, string> = {
   zh: "Chinese",
 };
 
+// ISO 3166-1 alpha-2 -> display name, for `questions_country` (backend:
+// `public_answer_check._COUNTRY_NAMES`). Same idea as `LANGUAGE_NAMES`: a
+// short code the crawl/domain gave us, read out in words.
+const COUNTRY_NAMES: Record<string, string> = {
+  us: "United States",
+  gb: "United Kingdom",
+  ie: "Ireland",
+  ca: "Canada",
+  au: "Australia",
+  nz: "New Zealand",
+  de: "Germany",
+  at: "Austria",
+  ch: "Switzerland",
+  fr: "France",
+  be: "Belgium",
+  it: "Italy",
+  nl: "Netherlands",
+  es: "Spain",
+  mx: "Mexico",
+  pt: "Portugal",
+  br: "Brazil",
+  pl: "Poland",
+  se: "Sweden",
+  dk: "Denmark",
+  no: "Norway",
+  fi: "Finland",
+  cz: "Czechia",
+  ro: "Romania",
+  hu: "Hungary",
+  gr: "Greece",
+  tr: "Turkey",
+  ru: "Russia",
+  ua: "Ukraine",
+  jp: "Japan",
+  kr: "South Korea",
+  cn: "China",
+};
+
 function marketLabel(result: AnswerCheckResult): string | null {
   const market = result.brand_evidence?.market ?? null;
   const languages: string[] = [];
@@ -240,7 +278,15 @@ function questionLanguageBadge(result: AnswerCheckResult): string | null {
   const language = code
     ? (LANGUAGE_NAMES[code.toLowerCase()] ?? code.toUpperCase())
     : null;
-  const country = result.brand_evidence?.market ?? null;
+  // `questions_country` is interpreted from the crawl (which locale-prefixed
+  // URL the store's own site actually used), same source and same fallback
+  // order as `questions_language` — read it first. `brand_evidence.market` is
+  // a ccTLD guess and only fills in when the crawl named nothing.
+  const countryCode = result.questions_country?.toLowerCase();
+  const country =
+    (countryCode ? COUNTRY_NAMES[countryCode] : null) ??
+    result.brand_evidence?.market ??
+    null;
   return [language, country].filter(Boolean).join(" · ") || null;
 }
 
