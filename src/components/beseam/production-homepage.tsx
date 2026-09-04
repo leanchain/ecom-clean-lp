@@ -54,8 +54,13 @@ export default function ProductionHomepage() {
                   handOffTo="/scan"
                   formNote={
                     <div className="mx-auto mt-2 flex flex-col items-center text-center">
+                      {/* One line, read left to right, is the whole arc: what
+                          it costs to begin, what kind of check it is, and what
+                          it is for -- her complaint was a next step that named
+                          nothing. */}
                       <p className="text-[12.5px] leading-snug text-black/54">
-                        Free. No login required.
+                        Start free &middot; SEO, GEO and technical &middot; Sell
+                        more with the app
                       </p>
                       <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
                         {SCAN_RETURNS.map((item) => (

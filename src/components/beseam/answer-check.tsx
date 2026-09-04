@@ -32,10 +32,10 @@ import type {
 } from "@/components/beseam/answer-check-types";
 import { BookReviewCta } from "@/components/beseam/book-review-cta";
 import { ChannelIcon } from "@/components/beseam/channel-icon";
+import { fixExampleFor } from "@/components/beseam/fix-examples";
 import TrackedLink from "@/components/beseam/tracked-link";
 import useAnalytics from "@/hooks/useAnalytics";
 import { APP_REGISTER_URL, APP_REPORT_URL } from "@/lib/app-urls";
-import { fixExampleFor } from "@/components/beseam/fix-examples";
 
 export type { AnswerCheckResult };
 
@@ -618,11 +618,13 @@ function FindingRow({
   index,
   reportIdByUrl,
   exampleContext,
+  fixHref,
 }: {
   group: FindingGroupRow;
   index: number;
   reportIdByUrl: Map<string, number>;
   exampleContext: Parameters<typeof fixExampleFor>[1];
+  fixHref: string;
 }) {
   const finding = group.lead;
   const priority = priorityOf(finding);
@@ -699,6 +701,24 @@ function FindingRow({
                   </pre>
                 </div>
               ) : null}
+
+              {/* Reading a finding and having nowhere to go with it is where
+                  the scan stops being useful. Every finding ends on the same
+                  offer: Beseam does this one against your real catalog. */}
+              <TrackedLink
+                href={`${fixHref}&fix=${encodeURIComponent(finding.code)}`}
+                eventName="finding_fix_clicked"
+                eventCategory="conversion"
+                placement="answer_check_finding"
+                preserveUtm
+                className="group/fix mt-5 inline-flex min-h-10 items-center gap-2 border border-ink-deep px-4 text-[12.5px] font-semibold text-ink-deep transition-colors hover:bg-ink-deep hover:text-white"
+              >
+                Start fixing this in Beseam
+                <ArrowRight
+                  aria-hidden="true"
+                  className="h-3.5 w-3.5 transition-transform group-hover/fix:translate-x-0.5"
+                />
+              </TrackedLink>
             </div>
 
             <div className="border-t border-black/10 pt-4 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
@@ -735,6 +755,35 @@ function FindingRow({
                             ))}
                         </ul>
                       ) : null}
+                      {/* The products the count was made of. "31 products have
+                          an unidentified variant" pointed at products.json and
+                          left the merchant to find out which 31. */}
+                      {member.examples?.length ? (
+                        <div className="mt-2.5 border-l border-signal-ink/30 pl-3">
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.07em] text-black/42">
+                            Products this was seen on
+                          </p>
+                          <ul className="mt-1.5 space-y-1.5">
+                            {member.examples.slice(0, 4).map((sample) => (
+                              <li key={sample.url} className="leading-snug">
+                                <a
+                                  href={sample.url}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="font-semibold text-ink-deep underline decoration-black/24 underline-offset-4 hover:decoration-signal-ink"
+                                >
+                                  {sample.title}
+                                </a>
+                                {sample.note ? (
+                                  <span className="block text-[11px] text-black/50">
+                                    {sample.note}
+                                  </span>
+                                ) : null}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : null}
                       <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-black/42">
                         {member.product ? <span>{member.product}</span> : null}
                         <span className="font-mono">{member.code}</span>
@@ -758,7 +807,7 @@ function FindingRow({
                             rel="noreferrer"
                             className="font-semibold text-black/56 underline decoration-black/20 underline-offset-4 hover:text-ink-deep hover:decoration-signal-ink"
                           >
-                            See the catalog data →
+                            The raw catalog file we read →
                           </a>
                         ) : null}
                         {member.url && reportId ? (
@@ -801,6 +850,7 @@ const DISCOVERY_FILE_NOTES: Record<string, string> = {
 const FIRST_SHOWN = 4;
 
 function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
+  // Every finding, in order, with nothing held back behind a "show the rest".
   const [expanded, setExpanded] = useState(false);
   const findings = groupFindings(sortedFindings(result));
   const audits = result.page_audits ?? [];
@@ -855,6 +905,7 @@ function WorthLookingAt({ result }: { result: AnswerCheckResult }) {
                 index={index}
                 reportIdByUrl={reportIdByUrl}
                 exampleContext={exampleContext}
+                fixHref={`${APP_REGISTER_URL}?scan_domain=${encodeURIComponent(result.domain)}`}
               />
             ))}
           </ol>
@@ -1595,6 +1646,8 @@ function InitialScanSummary({ result }: { result: AnswerCheckResult }) {
     // ground so it reads as a lid, and its contents open onto white. Before
     // this, every section and every row was the same white and the card was one
     // undifferentiated sheet.
+    // Summary first. The merchant can open the catalog/page evidence when it
+    // helps, without making every technical section compete on first render.
     <details className="group/fold border-b border-black/14 bg-[#fffaf7]">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-4 transition-colors hover:bg-[#fdf1e9] sm:px-6 [&::-webkit-details-marker]:hidden">
         <div className="min-w-0">

@@ -22,6 +22,12 @@ export type Finding = {
   url?: string;
   /** The catalog record the claim was compared against. */
   catalog_url?: string;
+  /**
+   * The named products behind a catalog-wide count, each with its public page
+   * and what is missing on it. A number with no product attached leaves the
+   * merchant to reconstruct it from the raw feed.
+   */
+  examples?: { title: string; url: string; note?: string }[];
   evidence?: string[];
   fix_complexity?: string;
   source?: "catalog" | "catalog_sample" | "page_audit";
